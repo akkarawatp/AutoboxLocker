@@ -1,0 +1,624 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{A0BC5FA5-B518-4D4B-BFE6-50B52A369F82}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <StartupObject>AutoboxLocker.My.MyApplication</StartupObject>
+    <RootNamespace>AutoboxLocker</RootNamespace>
+    <AssemblyName>AutoboxLocker</AssemblyName>
+    <FileAlignment>512</FileAlignment>
+    <MyType>WindowsForms</MyType>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <PublishUrl>publish\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <DefineDebug>true</DefineDebug>
+    <DefineTrace>true</DefineTrace>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DocumentationFile>AutoboxLocker.xml</DocumentationFile>
+    <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022</NoWarn>
+    <RegisterForComInterop>true</RegisterForComInterop>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <DefineDebug>false</DefineDebug>
+    <DefineTrace>true</DefineTrace>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DocumentationFile>AutoboxLocker.xml</DocumentationFile>
+    <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022</NoWarn>
+    <RegisterForComInterop>true</RegisterForComInterop>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OptionExplicit>On</OptionExplicit>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OptionCompare>Binary</OptionCompare>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OptionStrict>Off</OptionStrict>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OptionInfer>On</OptionInfer>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationManifest>My Project\app.manifest</ApplicationManifest>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>LogoIcon.ico</ApplicationIcon>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="gxdotnet7, Version=7.2.10.0, Culture=neutral, PublicKeyToken=5785895c728cac85">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>C:\Windows\assembly\GAC\gxdotnet7\7.2.10.0__5785895c728cac85\gxdotnet7.dll</HintPath>
+    </Reference>
+    <Reference Include="Interop.PrinterClassDll, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+      <HintPath>bin\Debug\Interop.PrinterClassDll.dll</HintPath>
+    </Reference>
+    <Reference Include="prdotnet7, Version=2.1.5.25, Culture=neutral, PublicKeyToken=4020ef1cb3f1980b">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\Debug\prdotnet7.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.DirectoryServices.AccountManagement" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.EnterpriseServices" />
+    <Reference Include="System.Management" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="USBClassLibrary, Version=1.0.5.0, Culture=neutral, processorArchitecture=x86">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\Debug\USBClassLibrary.dll</HintPath>
+    </Reference>
+    <Reference Include="Wolf Software.Library NET, Version=1.0.1005.2008, Culture=neutral, PublicKeyToken=3b6031189398578f, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\Debug\Wolf Software.Library NET.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Import Include="Microsoft.VisualBasic" />
+    <Import Include="System" />
+    <Import Include="System.Collections" />
+    <Import Include="System.Collections.Generic" />
+    <Import Include="System.Data" />
+    <Import Include="System.Drawing" />
+    <Import Include="System.Diagnostics" />
+    <Import Include="System.Windows.Forms" />
+    <Import Include="System.Linq" />
+    <Import Include="System.Xml.Linq" />
+    <Import Include="System.Threading.Tasks" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="AutoWakeUP.vb" />
+    <Compile Include="DataSync.vb" />
+    <Compile Include="Data\ConstantsData.vb" />
+    <Compile Include="Data\MSServerRateData.vb" />
+    <Compile Include="Data\CollectTransactionData.vb" />
+    <Compile Include="Data\ServiceTransactionData.vb" />
+    <Compile Include="Data\KioskSettingData.vb" />
+    <Compile Include="Data\KioskSystemData.vb" />
+    <Compile Include="Data\StaffConsoleLogonData.vb" />
+    <Compile Include="frmDepositSelectLocker.Designer.vb">
+      <DependentUpon>frmDepositSelectLocker.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmDepositSelectLocker.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmDepositPrintQRCode.Designer.vb">
+      <DependentUpon>frmDepositPrintQRCode.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmDepositPrintQRCode.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmLoading.Designer.vb">
+      <DependentUpon>frmLoading.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmLoading.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmCollectSelectDocument.Designer.vb">
+      <DependentUpon>frmCollectSelectDocument.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmCollectSelectDocument.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmCollectThankyou.Designer.vb">
+      <DependentUpon>frmCollectThankyou.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmCollectThankyou.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmSC_DialogSettingLocker.Designer.vb">
+      <DependentUpon>frmSC_DialogSettingLocker.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmSC_DialogSettingLocker.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmSC_DeviceSetting.Designer.vb">
+      <DependentUpon>frmSC_DeviceSetting.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmSC_DeviceSetting.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmSC_FillMoney.Designer.vb">
+      <DependentUpon>frmSC_FillMoney.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmSC_FillMoney.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmSC_LayoutAdd.Designer.vb">
+      <DependentUpon>frmSC_LayoutAdd.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmSC_LayoutAdd.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmDepositThankyou.Designer.vb">
+      <DependentUpon>frmDepositThankyou.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmDepositThankyou.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmDepositPayment.Designer.vb">
+      <DependentUpon>frmDepositPayment.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmDepositPayment.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmDialog_TimeOut.Designer.vb">
+      <DependentUpon>frmDialog_TimeOut.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmDialog_TimeOut.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmDialog_YesNo.Designer.vb">
+      <DependentUpon>frmDialog_YesNo.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmDialog_YesNo.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmDialog_OK.Designer.vb">
+      <DependentUpon>frmDialog_OK.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmDialog_OK.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmCollectScanQRCode.Designer.vb">
+      <DependentUpon>frmCollectScanQRCode.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmCollectScanQRCode.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmHome.Designer.vb">
+      <DependentUpon>frmHome.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmHome.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmMain.Designer.vb">
+      <DependentUpon>frmMain.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmMain.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmSC_FillPaper.Designer.vb">
+      <DependentUpon>frmSC_FillPaper.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmSC_FillPaper.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmSC_KioskSetting.Designer.vb">
+      <DependentUpon>frmSC_KioskSetting.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmSC_KioskSetting.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmSC_LockerSetting.Designer.vb">
+      <DependentUpon>frmSC_LockerSetting.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmSC_LockerSetting.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmSC_LogIn.Designer.vb">
+      <DependentUpon>frmSC_LogIn.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmSC_LogIn.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmSC_StockAndHardware.Designer.vb">
+      <DependentUpon>frmSC_StockAndHardware.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmSC_StockAndHardware.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmLockerError.Designer.vb">
+      <DependentUpon>frmLockerError.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmLockerError.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="IniReader.vb" />
+    <Compile Include="KioskModule.vb" />
+    <Compile Include="My Project\AssemblyInfo.vb" />
+    <Compile Include="My Project\Application.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Application.myapp</DependentUpon>
+    </Compile>
+    <Compile Include="My Project\Resources.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="My Project\Settings.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="OnScreenKeyBoardENG.vb" />
+    <Compile Include="ucCabinet.Designer.vb">
+      <DependentUpon>ucCabinet.vb</DependentUpon>
+    </Compile>
+    <Compile Include="ucCabinet.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ucfrmStatus.Designer.vb">
+      <DependentUpon>ucfrmStatus.vb</DependentUpon>
+    </Compile>
+    <Compile Include="ucfrmStatus.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ucLockerInfo.Designer.vb">
+      <DependentUpon>ucLockerInfo.vb</DependentUpon>
+    </Compile>
+    <Compile Include="ucLockerInfo.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Web References\Webservice_Locker\Reference.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.map</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="frmDepositSelectLocker.resx">
+      <DependentUpon>frmDepositSelectLocker.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmDepositPrintQRCode.resx">
+      <DependentUpon>frmDepositPrintQRCode.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmLoading.resx">
+      <DependentUpon>frmLoading.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmCollectSelectDocument.resx">
+      <DependentUpon>frmCollectSelectDocument.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmCollectThankyou.resx">
+      <DependentUpon>frmCollectThankyou.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmSC_DialogSettingLocker.resx">
+      <DependentUpon>frmSC_DialogSettingLocker.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmSC_DeviceSetting.resx">
+      <DependentUpon>frmSC_DeviceSetting.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmSC_FillMoney.resx">
+      <DependentUpon>frmSC_FillMoney.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmSC_LayoutAdd.resx">
+      <DependentUpon>frmSC_LayoutAdd.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmDepositThankyou.resx">
+      <DependentUpon>frmDepositThankyou.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmDepositPayment.resx">
+      <DependentUpon>frmDepositPayment.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmDialog_TimeOut.resx">
+      <DependentUpon>frmDialog_TimeOut.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmDialog_YesNo.resx">
+      <DependentUpon>frmDialog_YesNo.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmDialog_OK.resx">
+      <DependentUpon>frmDialog_OK.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmCollectScanQRCode.resx">
+      <DependentUpon>frmCollectScanQRCode.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmHome.resx">
+      <DependentUpon>frmHome.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmMain.resx">
+      <DependentUpon>frmMain.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmSC_FillPaper.resx">
+      <DependentUpon>frmSC_FillPaper.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmSC_KioskSetting.resx">
+      <DependentUpon>frmSC_KioskSetting.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmSC_LockerSetting.resx">
+      <DependentUpon>frmSC_LockerSetting.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmSC_LogIn.resx">
+      <DependentUpon>frmSC_LogIn.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmSC_StockAndHardware.resx">
+      <DependentUpon>frmSC_StockAndHardware.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmLockerError.resx">
+      <DependentUpon>frmLockerError.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="My Project\Resources.resx">
+      <Generator>VbMyResourcesResXFileCodeGenerator</Generator>
+      <CustomToolNamespace>My.Resources</CustomToolNamespace>
+      <SubType>Designer</SubType>
+      <LastGenOutput>Resources.Designer.vb</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ucCabinet.resx">
+      <DependentUpon>ucCabinet.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ucfrmStatus.resx">
+      <DependentUpon>ucfrmStatus.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ucLockerInfo.resx">
+      <DependentUpon>ucLockerInfo.vb</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="My Project\app.manifest" />
+    <None Include="My Project\Application.myapp">
+      <Generator>MyApplicationCodeGenerator</Generator>
+      <LastGenOutput>Application.Designer.vb</LastGenOutput>
+    </None>
+    <None Include="My Project\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <CustomToolNamespace>My</CustomToolNamespace>
+      <LastGenOutput>Settings.Designer.vb</LastGenOutput>
+    </None>
+    <None Include="App.config">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Web References\Webservice_Locker\ATBLockerWebService.wsdl" />
+    <None Include="Web References\Webservice_Locker\LoginReturnData1.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Webservice_Locker\MasterPromotionData1.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Webservice_Locker\MasterServiceRateData1.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Webservice_Locker\Reference.map">
+      <Generator>MSDiscoCodeGenerator</Generator>
+      <LastGenOutput>Reference.vb</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
+  </ItemGroup>
+  <ItemGroup>
+    <WebReferences Include="Web References\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Logo.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\CompleteDialog.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\IconClose.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\cb_w.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\cb_w_check.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include=".NETFramework,Version=v4.5.2">
+      <Visible>False</Visible>
+      <ProductName>Microsoft .NET Framework 4.5.2 %28x86 and x64%29</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\China_Icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\English_Icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Thai_Icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\HardwareKiosk\BanknoteIn\BanknoteIn.vbproj">
+      <Project>{8dedfda6-c134-4125-8caf-acad71ae933f}</Project>
+      <Name>BanknoteIn</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\HardwareKiosk\BanknoteOut\BanknoteOut.vbproj">
+      <Project>{5a0a70ec-1e1a-46fc-b68d-0bf3afedfd0f}</Project>
+      <Name>BanknoteOut</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\HardwareKiosk\BoardLED\BoardLED.vbproj">
+      <Project>{764b66c4-2d02-4329-b6fe-66cfe265c89e}</Project>
+      <Name>BoardLED</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\HardwareKiosk\BoardSensor\BoardSensor.vbproj">
+      <Project>{cb15a0e5-e396-4b3e-8092-cc8f0694c3ba}</Project>
+      <Name>BoardSensor</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\HardwareKiosk\BoardSolenoid\BoardSolenoid.vbproj">
+      <Project>{88e5d637-4a9d-4b65-90ed-dca806eceb93}</Project>
+      <Name>BoardSolenoid</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\HardwareKiosk\CoinIn\CoinIn.vbproj">
+      <Project>{ac1b5c0a-1384-407f-8291-94e834174221}</Project>
+      <Name>CoinIn</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\HardwareKiosk\CoinOut\CoinOut.vbproj">
+      <Project>{30a32f78-29fb-4828-87ae-5c828f10cfbc}</Project>
+      <Name>CoinOut</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\HardwareKiosk\Printer\Printer.vbproj">
+      <Project>{c967b335-99c5-4c4b-baa5-ed052ff7a15c}</Project>
+      <Name>Printer</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\HardwareKiosk\QRCodeScanner\QRCodeScanner.vbproj">
+      <Project>{0c9f2a78-15a7-4315-8740-34114abf2c94}</Project>
+      <Name>QRCodeScanner</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\SharedObject\Engine\Engine.vbproj">
+      <Project>{8c9564f9-a9a8-414a-b635-2ad6223fad52}</Project>
+      <Name>Engine</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\KioskLinqDB\KioskLinqDB.vbproj">
+      <Project>{631d831b-7e5a-44e4-a947-4cb0cb9f35ad}</Project>
+      <Name>KioskLinqDB</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ServerLinqDB\ServerLinqDB.vbproj">
+      <Project>{b7589d60-a617-477b-be93-b021a227c0ad}</Project>
+      <Name>ServerLinqDB</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icon_cabinet_add.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icon_cabinet_delete.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icon_cabinet_edit.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <WebReferenceUrl Include=" ">
+      <UrlBehavior>Dynamic</UrlBehavior>
+      <RelPath>Web References\AlarmWebReference\</RelPath>
+      <UpdateFromURL>
+      </UpdateFromURL>
+      <ServiceLocationURL>
+      </ServiceLocationURL>
+      <CachedDynamicPropName>
+      </CachedDynamicPropName>
+      <CachedAppSettingsObjectName>MySettings</CachedAppSettingsObjectName>
+      <CachedSettingsPropName>Kiosk_Locker_AlarmWebReference_ApplicationWebservice</CachedSettingsPropName>
+    </WebReferenceUrl>
+    <WebReferenceUrl Include="http://103.253.72.87/ATB-TIT/Webservice_Locker/ATBLockerWebService.asmx%3fWSDL">
+      <UrlBehavior>Dynamic</UrlBehavior>
+      <RelPath>Web References\Webservice_Locker\</RelPath>
+      <UpdateFromURL>http://103.253.72.87/ATB-TIT/Webservice_Locker/ATBLockerWebService.asmx%3fWSDL</UpdateFromURL>
+      <ServiceLocationURL>
+      </ServiceLocationURL>
+      <CachedDynamicPropName>
+      </CachedDynamicPropName>
+      <CachedAppSettingsObjectName>MySettings</CachedAppSettingsObjectName>
+      <CachedSettingsPropName>Kiosk_Locker_Webservice_Locker_ATBLockerWebService</CachedSettingsPropName>
+    </WebReferenceUrl>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\bgMainFooter.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\bgMainHeader.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Japan_icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\IconDeposit.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\IconPickup.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\IconQRCode.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\btnQRCodeLost.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\IconPrintQRCode.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\IconOpenLocker.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\IconDepositTime.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\IconPickupTime.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\IconProcessing.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\btnBG.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\btnColWhite.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="LogoIcon.ico" />
+    <Content Include="Logo.ico" />
+    <None Include="Resources\IconCollectThankYou.png" />
+    <None Include="Resources\IconPickupQRCodeFail.png" />
+    <None Include="Resources\IconPickupIDCardFail.png" />
+    <None Include="Resources\IconRedTriangle.png" />
+    <None Include="Resources\IconPickupIDCard.png" />
+    <None Include="Resources\IconPickupQRCode.png" />
+    <None Include="Resources\IconDepositFull.png" />
+    <None Include="Resources\IconReceiveChange.png" />
+    <None Include="Resources\IconRods.png" />
+    <None Include="Resources\btnPickupOpenLocker.png" />
+    <None Include="Resources\IconPayment.png" />
+    <None Include="Resources\IconScanPassport.png" />
+    <None Include="Resources\IconPickupOpenLocker.png" />
+    <None Include="Resources\IconScanPassport.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="bin\Debug\" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

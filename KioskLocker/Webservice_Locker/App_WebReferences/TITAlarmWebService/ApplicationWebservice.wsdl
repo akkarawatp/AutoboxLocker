@@ -1,0 +1,1360 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://tempuri.org/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:s1="http://microsoft.com/wsdl/types/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://tempuri.org/">
+      <s:import namespace="http://microsoft.com/wsdl/types/" />
+      <s:element name="GetAlarmByServerName">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ServerName" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetAlarmByServerNameResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetAlarmByServerNameResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:any minOccurs="0" maxOccurs="unbounded" namespace="http://www.w3.org/2001/XMLSchema" processContents="lax" />
+                  <s:any minOccurs="1" namespace="urn:schemas-microsoft-com:xml-diffgram-v1" processContents="lax" />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SendAllInfoToDC">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ServerName" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="ServerIP" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="MacAddress" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="CPUPercentage" type="s:double" />
+            <s:element minOccurs="1" maxOccurs="1" name="CPUTemp" type="s:double" />
+            <s:element minOccurs="1" maxOccurs="1" name="RAMPercentage" type="s:double" />
+            <s:element minOccurs="0" maxOccurs="1" name="DriveInfo">
+              <s:complexType>
+                <s:sequence>
+                  <s:any minOccurs="0" maxOccurs="unbounded" namespace="http://www.w3.org/2001/XMLSchema" processContents="lax" />
+                  <s:any minOccurs="1" namespace="urn:schemas-microsoft-com:xml-diffgram-v1" processContents="lax" />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+            <s:element minOccurs="0" maxOccurs="1" name="ServiceDT">
+              <s:complexType>
+                <s:sequence>
+                  <s:any minOccurs="0" maxOccurs="unbounded" namespace="http://www.w3.org/2001/XMLSchema" processContents="lax" />
+                  <s:any minOccurs="1" namespace="urn:schemas-microsoft-com:xml-diffgram-v1" processContents="lax" />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+            <s:element minOccurs="0" maxOccurs="1" name="ProcessDT">
+              <s:complexType>
+                <s:sequence>
+                  <s:any minOccurs="0" maxOccurs="unbounded" namespace="http://www.w3.org/2001/XMLSchema" processContents="lax" />
+                  <s:any minOccurs="1" namespace="urn:schemas-microsoft-com:xml-diffgram-v1" processContents="lax" />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SendAllInfoToDCResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SendAllInfoToDCResult" type="tns:ExecuteDataInfo" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ExecuteDataInfo">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="IsSuccess" type="s:boolean" />
+          <s:element minOccurs="1" maxOccurs="1" name="NewID" type="s:long" />
+          <s:element minOccurs="0" maxOccurs="1" name="SqlStatement" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ErrorMessage" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="InfoMessage" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="RecordEffected" type="s:int" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="SendCPUInfoToDC">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ServerName" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="ServerIP" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="CPUPercentage" type="s:double" />
+            <s:element minOccurs="1" maxOccurs="1" name="CPUTemp" type="s:double" />
+            <s:element minOccurs="0" maxOccurs="1" name="MacAddress" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SendCPUInfoToDCResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SendCPUInfoToDCResult" type="tns:ExecuteDataInfo" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SendRAMInfoToDC">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ServerName" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="ServerIP" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="RAMPercentage" type="s:double" />
+            <s:element minOccurs="0" maxOccurs="1" name="MacAddress" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SendRAMInfoToDCResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SendRAMInfoToDCResult" type="tns:ExecuteDataInfo" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SendDriveInfoToDC">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ServerName" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="ServerIP" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="DriveInfo">
+              <s:complexType>
+                <s:sequence>
+                  <s:any minOccurs="0" maxOccurs="unbounded" namespace="http://www.w3.org/2001/XMLSchema" processContents="lax" />
+                  <s:any minOccurs="1" namespace="urn:schemas-microsoft-com:xml-diffgram-v1" processContents="lax" />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+            <s:element minOccurs="0" maxOccurs="1" name="MacAddress" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SendDriveInfoToDCResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SendDriveInfoToDCResult" type="tns:ExecuteDataInfo" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SendServiceInfoToDC">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ServerName" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="ServerIP" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="ServiceDT">
+              <s:complexType>
+                <s:sequence>
+                  <s:any minOccurs="0" maxOccurs="unbounded" namespace="http://www.w3.org/2001/XMLSchema" processContents="lax" />
+                  <s:any minOccurs="1" namespace="urn:schemas-microsoft-com:xml-diffgram-v1" processContents="lax" />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+            <s:element minOccurs="0" maxOccurs="1" name="MacAddress" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SendServiceInfoToDCResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SendServiceInfoToDCResult" type="tns:ExecuteDataInfo" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SendProcessInfoToDC">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ServerName" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="ServerIP" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="ProcessDT">
+              <s:complexType>
+                <s:sequence>
+                  <s:any minOccurs="0" maxOccurs="unbounded" namespace="http://www.w3.org/2001/XMLSchema" processContents="lax" />
+                  <s:any minOccurs="1" namespace="urn:schemas-microsoft-com:xml-diffgram-v1" processContents="lax" />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+            <s:element minOccurs="0" maxOccurs="1" name="MacAddress" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SendProcessInfoToDCResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SendProcessInfoToDCResult" type="tns:ExecuteDataInfo" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetConfigPortList">
+        <s:complexType />
+      </s:element>
+      <s:element name="GetConfigPortListResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetConfigPortListResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:any minOccurs="0" maxOccurs="unbounded" namespace="http://www.w3.org/2001/XMLSchema" processContents="lax" />
+                  <s:any minOccurs="1" namespace="urn:schemas-microsoft-com:xml-diffgram-v1" processContents="lax" />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetCfConfigPortLinqDB">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="cfPortID" type="s:long" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetCfConfigPortLinqDBResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetCfConfigPortLinqDBResult" type="tns:CfConfigPortLinqDB" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="CfConfigPortLinqDB">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="ID" type="s:long" />
+          <s:element minOccurs="1" maxOccurs="1" name="CREATEDDATE" type="s:dateTime" />
+          <s:element minOccurs="0" maxOccurs="1" name="CREATEDBY" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="UPDATEDDATE" nillable="true" type="s:dateTime" />
+          <s:element minOccurs="0" maxOccurs="1" name="UPDATEDBY" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="SERVERNAME" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="SERVERIP" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="MACADDRESS" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ALARMCODE" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="ACTIVESTATUS" type="s1:char" />
+          <s:element minOccurs="1" maxOccurs="1" name="ALARMSUN" type="s1:char" />
+          <s:element minOccurs="1" maxOccurs="1" name="ALARMMON" type="s1:char" />
+          <s:element minOccurs="1" maxOccurs="1" name="ALARMTUE" type="s1:char" />
+          <s:element minOccurs="1" maxOccurs="1" name="ALARMWED" type="s1:char" />
+          <s:element minOccurs="1" maxOccurs="1" name="ALARMTHU" type="s1:char" />
+          <s:element minOccurs="1" maxOccurs="1" name="ALARMFRI" type="s1:char" />
+          <s:element minOccurs="1" maxOccurs="1" name="ALARMSAT" type="s1:char" />
+          <s:element minOccurs="0" maxOccurs="1" name="ALARMTIMEFROM" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ALARMTIMETO" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="ALLDAYEVENT" type="s1:char" />
+          <s:element minOccurs="1" maxOccurs="1" name="LASTCHECKTIME" type="s:dateTime" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="GetCfConfigPortDetailLinqDB">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="cfPortDetailID" type="s:long" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetCfConfigPortDetailLinqDBResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetCfConfigPortDetailLinqDBResult" type="tns:CfConfigPortDetailLinqDB" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="CfConfigPortDetailLinqDB">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="ID" type="s:long" />
+          <s:element minOccurs="1" maxOccurs="1" name="CREATEDDATE" type="s:dateTime" />
+          <s:element minOccurs="0" maxOccurs="1" name="CREATEDBY" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="UPDATEDDATE" nillable="true" type="s:dateTime" />
+          <s:element minOccurs="0" maxOccurs="1" name="UPDATEDBY" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="CF_CONFIG_PORT_ID" type="s:long" />
+          <s:element minOccurs="1" maxOccurs="1" name="PORTNUMBER" type="s:long" />
+          <s:element minOccurs="1" maxOccurs="1" name="REPEATCHECK" type="s:long" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="GetPortAlarmWaitingClear">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="MacAddress" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="PortNumber" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetPortAlarmWaitingClearResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetPortAlarmWaitingClearResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:any minOccurs="0" maxOccurs="unbounded" namespace="http://www.w3.org/2001/XMLSchema" processContents="lax" />
+                  <s:any minOccurs="1" namespace="urn:schemas-microsoft-com:xml-diffgram-v1" processContents="lax" />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ProcessPortAlarm">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="awDT">
+              <s:complexType>
+                <s:sequence>
+                  <s:any minOccurs="0" maxOccurs="unbounded" namespace="http://www.w3.org/2001/XMLSchema" processContents="lax" />
+                  <s:any minOccurs="1" namespace="urn:schemas-microsoft-com:xml-diffgram-v1" processContents="lax" />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+            <s:element minOccurs="0" maxOccurs="1" name="cf" type="tns:CfConfigPortLinqDB" />
+            <s:element minOccurs="1" maxOccurs="1" name="PortNumber" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="RepeatCheck" type="s:short" />
+            <s:element minOccurs="0" maxOccurs="1" name="AlarmMethod" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ProcessPortAlarmResponse">
+        <s:complexType />
+      </s:element>
+      <s:element name="InsertAlarmWaitingClear">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ServerName" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="IPAddress" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="MacAddress" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Severity" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="AlarmValue" type="s:double" />
+            <s:element minOccurs="0" maxOccurs="1" name="AlarmActivity" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="AlarmMethod" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="SpecificProblem" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="InsertAlarmWaitingClearResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="InsertAlarmWaitingClearResult" type="s:long" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="UpdateAlarmWaitingClear">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ServerName" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="IPAddress" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="MacAddress" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Severity" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="AlarmValue" type="s:double" />
+            <s:element minOccurs="0" maxOccurs="1" name="AlarmActivity" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="AlarmMethod" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="SpecificProblem" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="AlarmWaitingClearID" type="s:long" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="UpdateAlarmWaitingClearResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="UpdateAlarmWaitingClearResult" type="tns:ExecuteDataInfo" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="DeletePendingAlarm">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="AlarmActivity" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="MacAddress" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="DeletePendingAlarmResponse">
+        <s:complexType />
+      </s:element>
+      <s:element name="SendClearAlarm">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ServerName" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="HostIP" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="MacAddress" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Severity" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="AlarmValue" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="AlarmMethod" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="AlarmActivity" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="ClearMessage" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="AlarmWaitingClearID" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SendClearAlarmResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SendClearAlarmResult" type="tns:ExecuteDataInfo" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="UpdateLastCheckTime">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="TbName" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="cfID" type="s:long" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="UpdateLastCheckTimeResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="UpdateLastCheckTimeResult" type="tns:ExecuteDataInfo" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetWindowsServiceCheckList">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="MacAddress" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetWindowsServiceCheckListResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetWindowsServiceCheckListResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:any minOccurs="0" maxOccurs="unbounded" namespace="http://www.w3.org/2001/XMLSchema" processContents="lax" />
+                  <s:any minOccurs="1" namespace="urn:schemas-microsoft-com:xml-diffgram-v1" processContents="lax" />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetWindowsProcessCheckList">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="MacAddress" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetWindowsProcessCheckListResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetWindowsProcessCheckListResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:any minOccurs="0" maxOccurs="unbounded" namespace="http://www.w3.org/2001/XMLSchema" processContents="lax" />
+                  <s:any minOccurs="1" namespace="urn:schemas-microsoft-com:xml-diffgram-v1" processContents="lax" />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SendAlarmOtherApp">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="MacAddress" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="alDt">
+              <s:complexType>
+                <s:sequence>
+                  <s:any minOccurs="0" maxOccurs="unbounded" namespace="http://www.w3.org/2001/XMLSchema" processContents="lax" />
+                  <s:any minOccurs="1" namespace="urn:schemas-microsoft-com:xml-diffgram-v1" processContents="lax" />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+            <s:element minOccurs="1" maxOccurs="1" name="IsProblem" type="s:boolean" />
+            <s:element minOccurs="0" maxOccurs="1" name="LocationName" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="MailAlias" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="MailSubject" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SendAlarmOtherAppResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SendAlarmOtherAppResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SendDTAlarmOtherApp">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="MacAddress" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="alDt">
+              <s:complexType>
+                <s:sequence>
+                  <s:any minOccurs="0" maxOccurs="unbounded" namespace="http://www.w3.org/2001/XMLSchema" processContents="lax" />
+                  <s:any minOccurs="1" namespace="urn:schemas-microsoft-com:xml-diffgram-v1" processContents="lax" />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+            <s:element minOccurs="0" maxOccurs="1" name="dt">
+              <s:complexType>
+                <s:sequence>
+                  <s:any minOccurs="0" maxOccurs="unbounded" namespace="http://www.w3.org/2001/XMLSchema" processContents="lax" />
+                  <s:any minOccurs="1" namespace="urn:schemas-microsoft-com:xml-diffgram-v1" processContents="lax" />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+            <s:element minOccurs="0" maxOccurs="1" name="LocationName" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="MailAlias" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SendDTAlarmOtherAppResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SendDTAlarmOtherAppResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SendMasterAlarmGroup">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SystemCode" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="UserName" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="GroupCode" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="GroupName" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="GroupStatus" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="DT_COMPUTER">
+              <s:complexType>
+                <s:sequence>
+                  <s:any minOccurs="0" maxOccurs="unbounded" namespace="http://www.w3.org/2001/XMLSchema" processContents="lax" />
+                  <s:any minOccurs="1" namespace="urn:schemas-microsoft-com:xml-diffgram-v1" processContents="lax" />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+            <s:element minOccurs="0" maxOccurs="1" name="DT_KIOSK">
+              <s:complexType>
+                <s:sequence>
+                  <s:any minOccurs="0" maxOccurs="unbounded" namespace="http://www.w3.org/2001/XMLSchema" processContents="lax" />
+                  <s:any minOccurs="1" namespace="urn:schemas-microsoft-com:xml-diffgram-v1" processContents="lax" />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+            <s:element minOccurs="0" maxOccurs="1" name="DT_EMAIL">
+              <s:complexType>
+                <s:sequence>
+                  <s:any minOccurs="0" maxOccurs="unbounded" namespace="http://www.w3.org/2001/XMLSchema" processContents="lax" />
+                  <s:any minOccurs="1" namespace="urn:schemas-microsoft-com:xml-diffgram-v1" processContents="lax" />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SendMasterAlarmGroupResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SendMasterAlarmGroupResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="CheckConfigComputerList">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ServerName" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="ServerIP" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="MacAddress" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="CheckConfigComputerListResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="CheckConfigComputerListResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SaveConfigComputerList">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="UserName" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="ServerName" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="ServerIP" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="MacAddress" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="SystemCode" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="ActiveStatus" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="MailAlias" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="MailSubject" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SaveConfigComputerListResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SaveConfigComputerListResult" type="tns:ExecuteDataInfo" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SaveCaptureScreen">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ServerName" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="ServerIP" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="MacAddress" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Screen" type="s:base64Binary" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SaveCaptureScreenResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SaveCaptureScreenResult" type="tns:ExecuteDataInfo" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="CheckDbConnect">
+        <s:complexType />
+      </s:element>
+      <s:element name="CheckDbConnectResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="CheckDbConnectResult" type="s:boolean" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+    </s:schema>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://microsoft.com/wsdl/types/">
+      <s:simpleType name="char">
+        <s:restriction base="s:unsignedShort" />
+      </s:simpleType>
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="GetAlarmByServerNameSoapIn">
+    <wsdl:part name="parameters" element="tns:GetAlarmByServerName" />
+  </wsdl:message>
+  <wsdl:message name="GetAlarmByServerNameSoapOut">
+    <wsdl:part name="parameters" element="tns:GetAlarmByServerNameResponse" />
+  </wsdl:message>
+  <wsdl:message name="SendAllInfoToDCSoapIn">
+    <wsdl:part name="parameters" element="tns:SendAllInfoToDC" />
+  </wsdl:message>
+  <wsdl:message name="SendAllInfoToDCSoapOut">
+    <wsdl:part name="parameters" element="tns:SendAllInfoToDCResponse" />
+  </wsdl:message>
+  <wsdl:message name="SendCPUInfoToDCSoapIn">
+    <wsdl:part name="parameters" element="tns:SendCPUInfoToDC" />
+  </wsdl:message>
+  <wsdl:message name="SendCPUInfoToDCSoapOut">
+    <wsdl:part name="parameters" element="tns:SendCPUInfoToDCResponse" />
+  </wsdl:message>
+  <wsdl:message name="SendRAMInfoToDCSoapIn">
+    <wsdl:part name="parameters" element="tns:SendRAMInfoToDC" />
+  </wsdl:message>
+  <wsdl:message name="SendRAMInfoToDCSoapOut">
+    <wsdl:part name="parameters" element="tns:SendRAMInfoToDCResponse" />
+  </wsdl:message>
+  <wsdl:message name="SendDriveInfoToDCSoapIn">
+    <wsdl:part name="parameters" element="tns:SendDriveInfoToDC" />
+  </wsdl:message>
+  <wsdl:message name="SendDriveInfoToDCSoapOut">
+    <wsdl:part name="parameters" element="tns:SendDriveInfoToDCResponse" />
+  </wsdl:message>
+  <wsdl:message name="SendServiceInfoToDCSoapIn">
+    <wsdl:part name="parameters" element="tns:SendServiceInfoToDC" />
+  </wsdl:message>
+  <wsdl:message name="SendServiceInfoToDCSoapOut">
+    <wsdl:part name="parameters" element="tns:SendServiceInfoToDCResponse" />
+  </wsdl:message>
+  <wsdl:message name="SendProcessInfoToDCSoapIn">
+    <wsdl:part name="parameters" element="tns:SendProcessInfoToDC" />
+  </wsdl:message>
+  <wsdl:message name="SendProcessInfoToDCSoapOut">
+    <wsdl:part name="parameters" element="tns:SendProcessInfoToDCResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetConfigPortListSoapIn">
+    <wsdl:part name="parameters" element="tns:GetConfigPortList" />
+  </wsdl:message>
+  <wsdl:message name="GetConfigPortListSoapOut">
+    <wsdl:part name="parameters" element="tns:GetConfigPortListResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetCfConfigPortLinqDBSoapIn">
+    <wsdl:part name="parameters" element="tns:GetCfConfigPortLinqDB" />
+  </wsdl:message>
+  <wsdl:message name="GetCfConfigPortLinqDBSoapOut">
+    <wsdl:part name="parameters" element="tns:GetCfConfigPortLinqDBResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetCfConfigPortDetailLinqDBSoapIn">
+    <wsdl:part name="parameters" element="tns:GetCfConfigPortDetailLinqDB" />
+  </wsdl:message>
+  <wsdl:message name="GetCfConfigPortDetailLinqDBSoapOut">
+    <wsdl:part name="parameters" element="tns:GetCfConfigPortDetailLinqDBResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetPortAlarmWaitingClearSoapIn">
+    <wsdl:part name="parameters" element="tns:GetPortAlarmWaitingClear" />
+  </wsdl:message>
+  <wsdl:message name="GetPortAlarmWaitingClearSoapOut">
+    <wsdl:part name="parameters" element="tns:GetPortAlarmWaitingClearResponse" />
+  </wsdl:message>
+  <wsdl:message name="ProcessPortAlarmSoapIn">
+    <wsdl:part name="parameters" element="tns:ProcessPortAlarm" />
+  </wsdl:message>
+  <wsdl:message name="ProcessPortAlarmSoapOut">
+    <wsdl:part name="parameters" element="tns:ProcessPortAlarmResponse" />
+  </wsdl:message>
+  <wsdl:message name="InsertAlarmWaitingClearSoapIn">
+    <wsdl:part name="parameters" element="tns:InsertAlarmWaitingClear" />
+  </wsdl:message>
+  <wsdl:message name="InsertAlarmWaitingClearSoapOut">
+    <wsdl:part name="parameters" element="tns:InsertAlarmWaitingClearResponse" />
+  </wsdl:message>
+  <wsdl:message name="UpdateAlarmWaitingClearSoapIn">
+    <wsdl:part name="parameters" element="tns:UpdateAlarmWaitingClear" />
+  </wsdl:message>
+  <wsdl:message name="UpdateAlarmWaitingClearSoapOut">
+    <wsdl:part name="parameters" element="tns:UpdateAlarmWaitingClearResponse" />
+  </wsdl:message>
+  <wsdl:message name="DeletePendingAlarmSoapIn">
+    <wsdl:part name="parameters" element="tns:DeletePendingAlarm" />
+  </wsdl:message>
+  <wsdl:message name="DeletePendingAlarmSoapOut">
+    <wsdl:part name="parameters" element="tns:DeletePendingAlarmResponse" />
+  </wsdl:message>
+  <wsdl:message name="SendClearAlarmSoapIn">
+    <wsdl:part name="parameters" element="tns:SendClearAlarm" />
+  </wsdl:message>
+  <wsdl:message name="SendClearAlarmSoapOut">
+    <wsdl:part name="parameters" element="tns:SendClearAlarmResponse" />
+  </wsdl:message>
+  <wsdl:message name="UpdateLastCheckTimeSoapIn">
+    <wsdl:part name="parameters" element="tns:UpdateLastCheckTime" />
+  </wsdl:message>
+  <wsdl:message name="UpdateLastCheckTimeSoapOut">
+    <wsdl:part name="parameters" element="tns:UpdateLastCheckTimeResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetWindowsServiceCheckListSoapIn">
+    <wsdl:part name="parameters" element="tns:GetWindowsServiceCheckList" />
+  </wsdl:message>
+  <wsdl:message name="GetWindowsServiceCheckListSoapOut">
+    <wsdl:part name="parameters" element="tns:GetWindowsServiceCheckListResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetWindowsProcessCheckListSoapIn">
+    <wsdl:part name="parameters" element="tns:GetWindowsProcessCheckList" />
+  </wsdl:message>
+  <wsdl:message name="GetWindowsProcessCheckListSoapOut">
+    <wsdl:part name="parameters" element="tns:GetWindowsProcessCheckListResponse" />
+  </wsdl:message>
+  <wsdl:message name="SendAlarmOtherAppSoapIn">
+    <wsdl:part name="parameters" element="tns:SendAlarmOtherApp" />
+  </wsdl:message>
+  <wsdl:message name="SendAlarmOtherAppSoapOut">
+    <wsdl:part name="parameters" element="tns:SendAlarmOtherAppResponse" />
+  </wsdl:message>
+  <wsdl:message name="SendDTAlarmOtherAppSoapIn">
+    <wsdl:part name="parameters" element="tns:SendDTAlarmOtherApp" />
+  </wsdl:message>
+  <wsdl:message name="SendDTAlarmOtherAppSoapOut">
+    <wsdl:part name="parameters" element="tns:SendDTAlarmOtherAppResponse" />
+  </wsdl:message>
+  <wsdl:message name="SendMasterAlarmGroupSoapIn">
+    <wsdl:part name="parameters" element="tns:SendMasterAlarmGroup" />
+  </wsdl:message>
+  <wsdl:message name="SendMasterAlarmGroupSoapOut">
+    <wsdl:part name="parameters" element="tns:SendMasterAlarmGroupResponse" />
+  </wsdl:message>
+  <wsdl:message name="CheckConfigComputerListSoapIn">
+    <wsdl:part name="parameters" element="tns:CheckConfigComputerList" />
+  </wsdl:message>
+  <wsdl:message name="CheckConfigComputerListSoapOut">
+    <wsdl:part name="parameters" element="tns:CheckConfigComputerListResponse" />
+  </wsdl:message>
+  <wsdl:message name="SaveConfigComputerListSoapIn">
+    <wsdl:part name="parameters" element="tns:SaveConfigComputerList" />
+  </wsdl:message>
+  <wsdl:message name="SaveConfigComputerListSoapOut">
+    <wsdl:part name="parameters" element="tns:SaveConfigComputerListResponse" />
+  </wsdl:message>
+  <wsdl:message name="SaveCaptureScreenSoapIn">
+    <wsdl:part name="parameters" element="tns:SaveCaptureScreen" />
+  </wsdl:message>
+  <wsdl:message name="SaveCaptureScreenSoapOut">
+    <wsdl:part name="parameters" element="tns:SaveCaptureScreenResponse" />
+  </wsdl:message>
+  <wsdl:message name="CheckDbConnectSoapIn">
+    <wsdl:part name="parameters" element="tns:CheckDbConnect" />
+  </wsdl:message>
+  <wsdl:message name="CheckDbConnectSoapOut">
+    <wsdl:part name="parameters" element="tns:CheckDbConnectResponse" />
+  </wsdl:message>
+  <wsdl:portType name="ApplicationWebserviceSoap">
+    <wsdl:operation name="GetAlarmByServerName">
+      <wsdl:input message="tns:GetAlarmByServerNameSoapIn" />
+      <wsdl:output message="tns:GetAlarmByServerNameSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SendAllInfoToDC">
+      <wsdl:input message="tns:SendAllInfoToDCSoapIn" />
+      <wsdl:output message="tns:SendAllInfoToDCSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SendCPUInfoToDC">
+      <wsdl:input message="tns:SendCPUInfoToDCSoapIn" />
+      <wsdl:output message="tns:SendCPUInfoToDCSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SendRAMInfoToDC">
+      <wsdl:input message="tns:SendRAMInfoToDCSoapIn" />
+      <wsdl:output message="tns:SendRAMInfoToDCSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SendDriveInfoToDC">
+      <wsdl:input message="tns:SendDriveInfoToDCSoapIn" />
+      <wsdl:output message="tns:SendDriveInfoToDCSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SendServiceInfoToDC">
+      <wsdl:input message="tns:SendServiceInfoToDCSoapIn" />
+      <wsdl:output message="tns:SendServiceInfoToDCSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SendProcessInfoToDC">
+      <wsdl:input message="tns:SendProcessInfoToDCSoapIn" />
+      <wsdl:output message="tns:SendProcessInfoToDCSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetConfigPortList">
+      <wsdl:input message="tns:GetConfigPortListSoapIn" />
+      <wsdl:output message="tns:GetConfigPortListSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetCfConfigPortLinqDB">
+      <wsdl:input message="tns:GetCfConfigPortLinqDBSoapIn" />
+      <wsdl:output message="tns:GetCfConfigPortLinqDBSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetCfConfigPortDetailLinqDB">
+      <wsdl:input message="tns:GetCfConfigPortDetailLinqDBSoapIn" />
+      <wsdl:output message="tns:GetCfConfigPortDetailLinqDBSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetPortAlarmWaitingClear">
+      <wsdl:input message="tns:GetPortAlarmWaitingClearSoapIn" />
+      <wsdl:output message="tns:GetPortAlarmWaitingClearSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ProcessPortAlarm">
+      <wsdl:input message="tns:ProcessPortAlarmSoapIn" />
+      <wsdl:output message="tns:ProcessPortAlarmSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="InsertAlarmWaitingClear">
+      <wsdl:input message="tns:InsertAlarmWaitingClearSoapIn" />
+      <wsdl:output message="tns:InsertAlarmWaitingClearSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="UpdateAlarmWaitingClear">
+      <wsdl:input message="tns:UpdateAlarmWaitingClearSoapIn" />
+      <wsdl:output message="tns:UpdateAlarmWaitingClearSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="DeletePendingAlarm">
+      <wsdl:input message="tns:DeletePendingAlarmSoapIn" />
+      <wsdl:output message="tns:DeletePendingAlarmSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SendClearAlarm">
+      <wsdl:input message="tns:SendClearAlarmSoapIn" />
+      <wsdl:output message="tns:SendClearAlarmSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="UpdateLastCheckTime">
+      <wsdl:input message="tns:UpdateLastCheckTimeSoapIn" />
+      <wsdl:output message="tns:UpdateLastCheckTimeSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetWindowsServiceCheckList">
+      <wsdl:input message="tns:GetWindowsServiceCheckListSoapIn" />
+      <wsdl:output message="tns:GetWindowsServiceCheckListSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetWindowsProcessCheckList">
+      <wsdl:input message="tns:GetWindowsProcessCheckListSoapIn" />
+      <wsdl:output message="tns:GetWindowsProcessCheckListSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SendAlarmOtherApp">
+      <wsdl:input message="tns:SendAlarmOtherAppSoapIn" />
+      <wsdl:output message="tns:SendAlarmOtherAppSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SendDTAlarmOtherApp">
+      <wsdl:input message="tns:SendDTAlarmOtherAppSoapIn" />
+      <wsdl:output message="tns:SendDTAlarmOtherAppSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SendMasterAlarmGroup">
+      <wsdl:input message="tns:SendMasterAlarmGroupSoapIn" />
+      <wsdl:output message="tns:SendMasterAlarmGroupSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="CheckConfigComputerList">
+      <wsdl:input message="tns:CheckConfigComputerListSoapIn" />
+      <wsdl:output message="tns:CheckConfigComputerListSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SaveConfigComputerList">
+      <wsdl:input message="tns:SaveConfigComputerListSoapIn" />
+      <wsdl:output message="tns:SaveConfigComputerListSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SaveCaptureScreen">
+      <wsdl:input message="tns:SaveCaptureScreenSoapIn" />
+      <wsdl:output message="tns:SaveCaptureScreenSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="CheckDbConnect">
+      <wsdl:input message="tns:CheckDbConnectSoapIn" />
+      <wsdl:output message="tns:CheckDbConnectSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="ApplicationWebserviceSoap" type="tns:ApplicationWebserviceSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="GetAlarmByServerName">
+      <soap:operation soapAction="http://tempuri.org/GetAlarmByServerName" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SendAllInfoToDC">
+      <soap:operation soapAction="http://tempuri.org/SendAllInfoToDC" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SendCPUInfoToDC">
+      <soap:operation soapAction="http://tempuri.org/SendCPUInfoToDC" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SendRAMInfoToDC">
+      <soap:operation soapAction="http://tempuri.org/SendRAMInfoToDC" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SendDriveInfoToDC">
+      <soap:operation soapAction="http://tempuri.org/SendDriveInfoToDC" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SendServiceInfoToDC">
+      <soap:operation soapAction="http://tempuri.org/SendServiceInfoToDC" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SendProcessInfoToDC">
+      <soap:operation soapAction="http://tempuri.org/SendProcessInfoToDC" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetConfigPortList">
+      <soap:operation soapAction="http://tempuri.org/GetConfigPortList" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetCfConfigPortLinqDB">
+      <soap:operation soapAction="http://tempuri.org/GetCfConfigPortLinqDB" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetCfConfigPortDetailLinqDB">
+      <soap:operation soapAction="http://tempuri.org/GetCfConfigPortDetailLinqDB" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetPortAlarmWaitingClear">
+      <soap:operation soapAction="http://tempuri.org/GetPortAlarmWaitingClear" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ProcessPortAlarm">
+      <soap:operation soapAction="http://tempuri.org/ProcessPortAlarm" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="InsertAlarmWaitingClear">
+      <soap:operation soapAction="http://tempuri.org/InsertAlarmWaitingClear" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateAlarmWaitingClear">
+      <soap:operation soapAction="http://tempuri.org/UpdateAlarmWaitingClear" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DeletePendingAlarm">
+      <soap:operation soapAction="http://tempuri.org/DeletePendingAlarm" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SendClearAlarm">
+      <soap:operation soapAction="http://tempuri.org/SendClearAlarm" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateLastCheckTime">
+      <soap:operation soapAction="http://tempuri.org/UpdateLastCheckTime" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetWindowsServiceCheckList">
+      <soap:operation soapAction="http://tempuri.org/GetWindowsServiceCheckList" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetWindowsProcessCheckList">
+      <soap:operation soapAction="http://tempuri.org/GetWindowsProcessCheckList" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SendAlarmOtherApp">
+      <soap:operation soapAction="http://tempuri.org/SendAlarmOtherApp" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SendDTAlarmOtherApp">
+      <soap:operation soapAction="http://tempuri.org/SendDTAlarmOtherApp" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SendMasterAlarmGroup">
+      <soap:operation soapAction="http://tempuri.org/SendMasterAlarmGroup" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CheckConfigComputerList">
+      <soap:operation soapAction="http://tempuri.org/CheckConfigComputerList" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SaveConfigComputerList">
+      <soap:operation soapAction="http://tempuri.org/SaveConfigComputerList" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SaveCaptureScreen">
+      <soap:operation soapAction="http://tempuri.org/SaveCaptureScreen" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CheckDbConnect">
+      <soap:operation soapAction="http://tempuri.org/CheckDbConnect" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="ApplicationWebserviceSoap12" type="tns:ApplicationWebserviceSoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="GetAlarmByServerName">
+      <soap12:operation soapAction="http://tempuri.org/GetAlarmByServerName" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SendAllInfoToDC">
+      <soap12:operation soapAction="http://tempuri.org/SendAllInfoToDC" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SendCPUInfoToDC">
+      <soap12:operation soapAction="http://tempuri.org/SendCPUInfoToDC" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SendRAMInfoToDC">
+      <soap12:operation soapAction="http://tempuri.org/SendRAMInfoToDC" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SendDriveInfoToDC">
+      <soap12:operation soapAction="http://tempuri.org/SendDriveInfoToDC" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SendServiceInfoToDC">
+      <soap12:operation soapAction="http://tempuri.org/SendServiceInfoToDC" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SendProcessInfoToDC">
+      <soap12:operation soapAction="http://tempuri.org/SendProcessInfoToDC" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetConfigPortList">
+      <soap12:operation soapAction="http://tempuri.org/GetConfigPortList" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetCfConfigPortLinqDB">
+      <soap12:operation soapAction="http://tempuri.org/GetCfConfigPortLinqDB" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetCfConfigPortDetailLinqDB">
+      <soap12:operation soapAction="http://tempuri.org/GetCfConfigPortDetailLinqDB" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetPortAlarmWaitingClear">
+      <soap12:operation soapAction="http://tempuri.org/GetPortAlarmWaitingClear" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ProcessPortAlarm">
+      <soap12:operation soapAction="http://tempuri.org/ProcessPortAlarm" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="InsertAlarmWaitingClear">
+      <soap12:operation soapAction="http://tempuri.org/InsertAlarmWaitingClear" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateAlarmWaitingClear">
+      <soap12:operation soapAction="http://tempuri.org/UpdateAlarmWaitingClear" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DeletePendingAlarm">
+      <soap12:operation soapAction="http://tempuri.org/DeletePendingAlarm" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SendClearAlarm">
+      <soap12:operation soapAction="http://tempuri.org/SendClearAlarm" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateLastCheckTime">
+      <soap12:operation soapAction="http://tempuri.org/UpdateLastCheckTime" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetWindowsServiceCheckList">
+      <soap12:operation soapAction="http://tempuri.org/GetWindowsServiceCheckList" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetWindowsProcessCheckList">
+      <soap12:operation soapAction="http://tempuri.org/GetWindowsProcessCheckList" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SendAlarmOtherApp">
+      <soap12:operation soapAction="http://tempuri.org/SendAlarmOtherApp" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SendDTAlarmOtherApp">
+      <soap12:operation soapAction="http://tempuri.org/SendDTAlarmOtherApp" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SendMasterAlarmGroup">
+      <soap12:operation soapAction="http://tempuri.org/SendMasterAlarmGroup" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CheckConfigComputerList">
+      <soap12:operation soapAction="http://tempuri.org/CheckConfigComputerList" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SaveConfigComputerList">
+      <soap12:operation soapAction="http://tempuri.org/SaveConfigComputerList" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SaveCaptureScreen">
+      <soap12:operation soapAction="http://tempuri.org/SaveCaptureScreen" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CheckDbConnect">
+      <soap12:operation soapAction="http://tempuri.org/CheckDbConnect" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="ApplicationWebservice">
+    <wsdl:port name="ApplicationWebserviceSoap" binding="tns:ApplicationWebserviceSoap">
+      <soap:address location="http://103.253.72.88/TITApp/TIT-MonitorWebservice/ApplicationWebservice.asmx" />
+    </wsdl:port>
+    <wsdl:port name="ApplicationWebserviceSoap12" binding="tns:ApplicationWebserviceSoap12">
+      <soap12:address location="http://103.253.72.88/TITApp/TIT-MonitorWebservice/ApplicationWebservice.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

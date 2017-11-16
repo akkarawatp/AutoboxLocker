@@ -1,0 +1,1753 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://tempuri.org/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://tempuri.org/">
+      <s:element name="LoginTIT">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="vUserName" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="vPassword" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="ModuleName" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="LoginTITResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="LoginTITResult" type="tns:LoginReturnData" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="LoginReturnData">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="LoginStatus" type="s:boolean" />
+          <s:element minOccurs="0" maxOccurs="1" name="Token" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="LoginUsername" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="LoginFirstName" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="LoginLastName" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="LoginCompanyName" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ErrorMessage" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="KioskLoginStaffConsole">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="vUserName" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="vPassword" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="ModuleName" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="MsKioskID" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="KioskLoginStaffConsoleResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="KioskLoginStaffConsoleResult" type="tns:LoginReturnData" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetKioskStaffConsoleAuthorize">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Username" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="MsKioskID" type="s:long" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetKioskStaffConsoleAuthorizeResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetKioskStaffConsoleAuthorizeResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:any minOccurs="0" maxOccurs="unbounded" namespace="http://www.w3.org/2001/XMLSchema" processContents="lax" />
+                  <s:any minOccurs="1" namespace="urn:schemas-microsoft-com:xml-diffgram-v1" processContents="lax" />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ReportKioskCurrentQty">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="KioskComName" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="KioskID" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="DeviceID" type="s:long" />
+            <s:element minOccurs="1" maxOccurs="1" name="CurrentQty" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ReportKioskCurrentQtyResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="ReportKioskCurrentQtyResult" type="s:boolean" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetMasterAppScreen">
+        <s:complexType />
+      </s:element>
+      <s:element name="GetMasterAppScreenResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetMasterAppScreenResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:any minOccurs="0" maxOccurs="unbounded" namespace="http://www.w3.org/2001/XMLSchema" processContents="lax" />
+                  <s:any minOccurs="1" namespace="urn:schemas-microsoft-com:xml-diffgram-v1" processContents="lax" />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetMasterAppStep">
+        <s:complexType />
+      </s:element>
+      <s:element name="GetMasterAppStepResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetMasterAppStepResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:any minOccurs="0" maxOccurs="unbounded" namespace="http://www.w3.org/2001/XMLSchema" processContents="lax" />
+                  <s:any minOccurs="1" namespace="urn:schemas-microsoft-com:xml-diffgram-v1" processContents="lax" />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetMasterKioskScreenControl">
+        <s:complexType />
+      </s:element>
+      <s:element name="GetMasterKioskScreenControlResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetMasterKioskScreenControlResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:any minOccurs="0" maxOccurs="unbounded" namespace="http://www.w3.org/2001/XMLSchema" processContents="lax" />
+                  <s:any minOccurs="1" namespace="urn:schemas-microsoft-com:xml-diffgram-v1" processContents="lax" />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetMasterKioskNotificationText">
+        <s:complexType />
+      </s:element>
+      <s:element name="GetMasterKioskNotificationTextResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetMasterKioskNotificationTextResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:any minOccurs="0" maxOccurs="unbounded" namespace="http://www.w3.org/2001/XMLSchema" processContents="lax" />
+                  <s:any minOccurs="1" namespace="urn:schemas-microsoft-com:xml-diffgram-v1" processContents="lax" />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetMasterCabinetModel">
+        <s:complexType />
+      </s:element>
+      <s:element name="GetMasterCabinetModelResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetMasterCabinetModelResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:any minOccurs="0" maxOccurs="unbounded" namespace="http://www.w3.org/2001/XMLSchema" processContents="lax" />
+                  <s:any minOccurs="1" namespace="urn:schemas-microsoft-com:xml-diffgram-v1" processContents="lax" />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetMasterDeviceType">
+        <s:complexType />
+      </s:element>
+      <s:element name="GetMasterDeviceTypeResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetMasterDeviceTypeResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:any minOccurs="0" maxOccurs="unbounded" namespace="http://www.w3.org/2001/XMLSchema" processContents="lax" />
+                  <s:any minOccurs="1" namespace="urn:schemas-microsoft-com:xml-diffgram-v1" processContents="lax" />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetMasterDeviceStatus">
+        <s:complexType />
+      </s:element>
+      <s:element name="GetMasterDeviceStatusResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetMasterDeviceStatusResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:any minOccurs="0" maxOccurs="unbounded" namespace="http://www.w3.org/2001/XMLSchema" processContents="lax" />
+                  <s:any minOccurs="1" namespace="urn:schemas-microsoft-com:xml-diffgram-v1" processContents="lax" />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetMasterDevice">
+        <s:complexType />
+      </s:element>
+      <s:element name="GetMasterDeviceResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetMasterDeviceResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:any minOccurs="0" maxOccurs="unbounded" namespace="http://www.w3.org/2001/XMLSchema" processContents="lax" />
+                  <s:any minOccurs="1" namespace="urn:schemas-microsoft-com:xml-diffgram-v1" processContents="lax" />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetMasterMonitoringAlarm">
+        <s:complexType />
+      </s:element>
+      <s:element name="GetMasterMonitoringAlarmResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetMasterMonitoringAlarmResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:any minOccurs="0" maxOccurs="unbounded" namespace="http://www.w3.org/2001/XMLSchema" processContents="lax" />
+                  <s:any minOccurs="1" namespace="urn:schemas-microsoft-com:xml-diffgram-v1" processContents="lax" />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetLockerServiceRate">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="MsKioskID" type="s:long" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetLockerServiceRateResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetLockerServiceRateResult" type="tns:MasterServiceRateData" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="MasterServiceRateData">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="ServiceRate">
+            <s:complexType>
+              <s:sequence>
+                <s:any minOccurs="0" maxOccurs="unbounded" namespace="http://www.w3.org/2001/XMLSchema" processContents="lax" />
+                <s:any minOccurs="1" namespace="urn:schemas-microsoft-com:xml-diffgram-v1" processContents="lax" />
+              </s:sequence>
+            </s:complexType>
+          </s:element>
+          <s:element minOccurs="0" maxOccurs="1" name="ServiceRateDeposit">
+            <s:complexType>
+              <s:sequence>
+                <s:any minOccurs="0" maxOccurs="unbounded" namespace="http://www.w3.org/2001/XMLSchema" processContents="lax" />
+                <s:any minOccurs="1" namespace="urn:schemas-microsoft-com:xml-diffgram-v1" processContents="lax" />
+              </s:sequence>
+            </s:complexType>
+          </s:element>
+          <s:element minOccurs="0" maxOccurs="1" name="ServiceRateHour">
+            <s:complexType>
+              <s:sequence>
+                <s:any minOccurs="0" maxOccurs="unbounded" namespace="http://www.w3.org/2001/XMLSchema" processContents="lax" />
+                <s:any minOccurs="1" namespace="urn:schemas-microsoft-com:xml-diffgram-v1" processContents="lax" />
+              </s:sequence>
+            </s:complexType>
+          </s:element>
+          <s:element minOccurs="0" maxOccurs="1" name="ServiceRateOverNight">
+            <s:complexType>
+              <s:sequence>
+                <s:any minOccurs="0" maxOccurs="unbounded" namespace="http://www.w3.org/2001/XMLSchema" processContents="lax" />
+                <s:any minOccurs="1" namespace="urn:schemas-microsoft-com:xml-diffgram-v1" processContents="lax" />
+              </s:sequence>
+            </s:complexType>
+          </s:element>
+        </s:sequence>
+      </s:complexType>
+      <s:element name="SyncKioskSysconfig">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="dt">
+              <s:complexType>
+                <s:sequence>
+                  <s:any minOccurs="0" maxOccurs="unbounded" namespace="http://www.w3.org/2001/XMLSchema" processContents="lax" />
+                  <s:any minOccurs="1" namespace="urn:schemas-microsoft-com:xml-diffgram-v1" processContents="lax" />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+            <s:element minOccurs="0" maxOccurs="1" name="KioskName" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SyncKioskSysconfigResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SyncKioskSysconfigResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SyncMasterKioskCabinet">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="dt">
+              <s:complexType>
+                <s:sequence>
+                  <s:any minOccurs="0" maxOccurs="unbounded" namespace="http://www.w3.org/2001/XMLSchema" processContents="lax" />
+                  <s:any minOccurs="1" namespace="urn:schemas-microsoft-com:xml-diffgram-v1" processContents="lax" />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+            <s:element minOccurs="0" maxOccurs="1" name="KioskName" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SyncMasterKioskCabinetResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SyncMasterKioskCabinetResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SyncMasterKioskDevice">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="dt">
+              <s:complexType>
+                <s:sequence>
+                  <s:any minOccurs="0" maxOccurs="unbounded" namespace="http://www.w3.org/2001/XMLSchema" processContents="lax" />
+                  <s:any minOccurs="1" namespace="urn:schemas-microsoft-com:xml-diffgram-v1" processContents="lax" />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+            <s:element minOccurs="0" maxOccurs="1" name="KioskName" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SyncMasterKioskDeviceResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SyncMasterKioskDeviceResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SyncMasterKioskLocker">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="dt">
+              <s:complexType>
+                <s:sequence>
+                  <s:any minOccurs="0" maxOccurs="unbounded" namespace="http://www.w3.org/2001/XMLSchema" processContents="lax" />
+                  <s:any minOccurs="1" namespace="urn:schemas-microsoft-com:xml-diffgram-v1" processContents="lax" />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+            <s:element minOccurs="0" maxOccurs="1" name="KioskName" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SyncMasterKioskLockerResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SyncMasterKioskLockerResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetServerKioskSysconfig">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="MsKioskID" type="s:long" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetServerKioskSysconfigResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetServerKioskSysconfigResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:any minOccurs="0" maxOccurs="unbounded" namespace="http://www.w3.org/2001/XMLSchema" processContents="lax" />
+                  <s:any minOccurs="1" namespace="urn:schemas-microsoft-com:xml-diffgram-v1" processContents="lax" />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetServerKioskCabinet">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="MsKioskID" type="s:long" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetServerKioskCabinetResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetServerKioskCabinetResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:any minOccurs="0" maxOccurs="unbounded" namespace="http://www.w3.org/2001/XMLSchema" processContents="lax" />
+                  <s:any minOccurs="1" namespace="urn:schemas-microsoft-com:xml-diffgram-v1" processContents="lax" />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetServeKioskDevice">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="MsKioskID" type="s:long" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetServeKioskDeviceResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetServeKioskDeviceResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:any minOccurs="0" maxOccurs="unbounded" namespace="http://www.w3.org/2001/XMLSchema" processContents="lax" />
+                  <s:any minOccurs="1" namespace="urn:schemas-microsoft-com:xml-diffgram-v1" processContents="lax" />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetServerKioskLocker">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="MsKioskID" type="s:long" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetServerKioskLockerResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetServerKioskLockerResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:any minOccurs="0" maxOccurs="unbounded" namespace="http://www.w3.org/2001/XMLSchema" processContents="lax" />
+                  <s:any minOccurs="1" namespace="urn:schemas-microsoft-com:xml-diffgram-v1" processContents="lax" />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="UpdateServerSyncKioskSysconfig">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="dt">
+              <s:complexType>
+                <s:sequence>
+                  <s:any minOccurs="0" maxOccurs="unbounded" namespace="http://www.w3.org/2001/XMLSchema" processContents="lax" />
+                  <s:any minOccurs="1" namespace="urn:schemas-microsoft-com:xml-diffgram-v1" processContents="lax" />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+            <s:element minOccurs="0" maxOccurs="1" name="KioskName" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="UpdateServerSyncKioskSysconfigResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="UpdateServerSyncKioskSysconfigResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="UpdateServerSyncKioskCabinet">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="dt">
+              <s:complexType>
+                <s:sequence>
+                  <s:any minOccurs="0" maxOccurs="unbounded" namespace="http://www.w3.org/2001/XMLSchema" processContents="lax" />
+                  <s:any minOccurs="1" namespace="urn:schemas-microsoft-com:xml-diffgram-v1" processContents="lax" />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+            <s:element minOccurs="0" maxOccurs="1" name="KioskName" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="UpdateServerSyncKioskCabinetResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="UpdateServerSyncKioskCabinetResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="UpdateServerSyncKioskDevice">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="dt">
+              <s:complexType>
+                <s:sequence>
+                  <s:any minOccurs="0" maxOccurs="unbounded" namespace="http://www.w3.org/2001/XMLSchema" processContents="lax" />
+                  <s:any minOccurs="1" namespace="urn:schemas-microsoft-com:xml-diffgram-v1" processContents="lax" />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+            <s:element minOccurs="0" maxOccurs="1" name="KioskName" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="UpdateServerSyncKioskDeviceResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="UpdateServerSyncKioskDeviceResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="UpdateSyncKioskLocker">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="dt">
+              <s:complexType>
+                <s:sequence>
+                  <s:any minOccurs="0" maxOccurs="unbounded" namespace="http://www.w3.org/2001/XMLSchema" processContents="lax" />
+                  <s:any minOccurs="1" namespace="urn:schemas-microsoft-com:xml-diffgram-v1" processContents="lax" />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+            <s:element minOccurs="0" maxOccurs="1" name="KioskName" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="UpdateSyncKioskLockerResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="UpdateSyncKioskLockerResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SyncKioskServiceTransaction">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="dt">
+              <s:complexType>
+                <s:sequence>
+                  <s:any minOccurs="0" maxOccurs="unbounded" namespace="http://www.w3.org/2001/XMLSchema" processContents="lax" />
+                  <s:any minOccurs="1" namespace="urn:schemas-microsoft-com:xml-diffgram-v1" processContents="lax" />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+            <s:element minOccurs="0" maxOccurs="1" name="KioskName" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SyncKioskServiceTransactionResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SyncKioskServiceTransactionResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SyncKioskCollectTransaction">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="dt">
+              <s:complexType>
+                <s:sequence>
+                  <s:any minOccurs="0" maxOccurs="unbounded" namespace="http://www.w3.org/2001/XMLSchema" processContents="lax" />
+                  <s:any minOccurs="1" namespace="urn:schemas-microsoft-com:xml-diffgram-v1" processContents="lax" />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+            <s:element minOccurs="0" maxOccurs="1" name="KioskName" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SyncKioskCollectTransactionResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SyncKioskCollectTransactionResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SyncKioskStaffConsoleTransaction">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="dt">
+              <s:complexType>
+                <s:sequence>
+                  <s:any minOccurs="0" maxOccurs="unbounded" namespace="http://www.w3.org/2001/XMLSchema" processContents="lax" />
+                  <s:any minOccurs="1" namespace="urn:schemas-microsoft-com:xml-diffgram-v1" processContents="lax" />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+            <s:element minOccurs="0" maxOccurs="1" name="KioskName" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SyncKioskStaffConsoleTransactionResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SyncKioskStaffConsoleTransactionResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetLockerPromotion">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="MsKioskID" type="s:long" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetLockerPromotionResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetLockerPromotionResult" type="tns:MasterPromotionData" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="MasterPromotionData">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="Promotion">
+            <s:complexType>
+              <s:sequence>
+                <s:any minOccurs="0" maxOccurs="unbounded" namespace="http://www.w3.org/2001/XMLSchema" processContents="lax" />
+                <s:any minOccurs="1" namespace="urn:schemas-microsoft-com:xml-diffgram-v1" processContents="lax" />
+              </s:sequence>
+            </s:complexType>
+          </s:element>
+          <s:element minOccurs="0" maxOccurs="1" name="PromotionHour">
+            <s:complexType>
+              <s:sequence>
+                <s:any minOccurs="0" maxOccurs="unbounded" namespace="http://www.w3.org/2001/XMLSchema" processContents="lax" />
+                <s:any minOccurs="1" namespace="urn:schemas-microsoft-com:xml-diffgram-v1" processContents="lax" />
+              </s:sequence>
+            </s:complexType>
+          </s:element>
+        </s:sequence>
+      </s:complexType>
+      <s:element name="InsertLocationPromotionSync">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="LocationPromotionID" type="s:long" />
+            <s:element minOccurs="1" maxOccurs="1" name="MsKioskID" type="s:long" />
+            <s:element minOccurs="0" maxOccurs="1" name="KioskName" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="InsertLocationPromotionSyncResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="InsertLocationPromotionSyncResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SyncLogTransactionActivity">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="dt">
+              <s:complexType>
+                <s:sequence>
+                  <s:any minOccurs="0" maxOccurs="unbounded" namespace="http://www.w3.org/2001/XMLSchema" processContents="lax" />
+                  <s:any minOccurs="1" namespace="urn:schemas-microsoft-com:xml-diffgram-v1" processContents="lax" />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+            <s:element minOccurs="0" maxOccurs="1" name="KioskName" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SyncLogTransactionActivityResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SyncLogTransactionActivityResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SyncLogFillMoneyData">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="dt">
+              <s:complexType>
+                <s:sequence>
+                  <s:any minOccurs="0" maxOccurs="unbounded" namespace="http://www.w3.org/2001/XMLSchema" processContents="lax" />
+                  <s:any minOccurs="1" namespace="urn:schemas-microsoft-com:xml-diffgram-v1" processContents="lax" />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+            <s:element minOccurs="0" maxOccurs="1" name="KioskName" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SyncLogFillMoneyDataResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SyncLogFillMoneyDataResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SyncLogErrorData">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="dt">
+              <s:complexType>
+                <s:sequence>
+                  <s:any minOccurs="0" maxOccurs="unbounded" namespace="http://www.w3.org/2001/XMLSchema" processContents="lax" />
+                  <s:any minOccurs="1" namespace="urn:schemas-microsoft-com:xml-diffgram-v1" processContents="lax" />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+            <s:element minOccurs="0" maxOccurs="1" name="KioskName" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SyncLogErrorDataResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SyncLogErrorDataResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SyncLogKioskAgentData">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="dt">
+              <s:complexType>
+                <s:sequence>
+                  <s:any minOccurs="0" maxOccurs="unbounded" namespace="http://www.w3.org/2001/XMLSchema" processContents="lax" />
+                  <s:any minOccurs="1" namespace="urn:schemas-microsoft-com:xml-diffgram-v1" processContents="lax" />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+            <s:element minOccurs="0" maxOccurs="1" name="KioskName" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SyncLogKioskAgentDataResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SyncLogKioskAgentDataResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="LoginTITSoapIn">
+    <wsdl:part name="parameters" element="tns:LoginTIT" />
+  </wsdl:message>
+  <wsdl:message name="LoginTITSoapOut">
+    <wsdl:part name="parameters" element="tns:LoginTITResponse" />
+  </wsdl:message>
+  <wsdl:message name="KioskLoginStaffConsoleSoapIn">
+    <wsdl:part name="parameters" element="tns:KioskLoginStaffConsole" />
+  </wsdl:message>
+  <wsdl:message name="KioskLoginStaffConsoleSoapOut">
+    <wsdl:part name="parameters" element="tns:KioskLoginStaffConsoleResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetKioskStaffConsoleAuthorizeSoapIn">
+    <wsdl:part name="parameters" element="tns:GetKioskStaffConsoleAuthorize" />
+  </wsdl:message>
+  <wsdl:message name="GetKioskStaffConsoleAuthorizeSoapOut">
+    <wsdl:part name="parameters" element="tns:GetKioskStaffConsoleAuthorizeResponse" />
+  </wsdl:message>
+  <wsdl:message name="ReportKioskCurrentQtySoapIn">
+    <wsdl:part name="parameters" element="tns:ReportKioskCurrentQty" />
+  </wsdl:message>
+  <wsdl:message name="ReportKioskCurrentQtySoapOut">
+    <wsdl:part name="parameters" element="tns:ReportKioskCurrentQtyResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetMasterAppScreenSoapIn">
+    <wsdl:part name="parameters" element="tns:GetMasterAppScreen" />
+  </wsdl:message>
+  <wsdl:message name="GetMasterAppScreenSoapOut">
+    <wsdl:part name="parameters" element="tns:GetMasterAppScreenResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetMasterAppStepSoapIn">
+    <wsdl:part name="parameters" element="tns:GetMasterAppStep" />
+  </wsdl:message>
+  <wsdl:message name="GetMasterAppStepSoapOut">
+    <wsdl:part name="parameters" element="tns:GetMasterAppStepResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetMasterKioskScreenControlSoapIn">
+    <wsdl:part name="parameters" element="tns:GetMasterKioskScreenControl" />
+  </wsdl:message>
+  <wsdl:message name="GetMasterKioskScreenControlSoapOut">
+    <wsdl:part name="parameters" element="tns:GetMasterKioskScreenControlResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetMasterKioskNotificationTextSoapIn">
+    <wsdl:part name="parameters" element="tns:GetMasterKioskNotificationText" />
+  </wsdl:message>
+  <wsdl:message name="GetMasterKioskNotificationTextSoapOut">
+    <wsdl:part name="parameters" element="tns:GetMasterKioskNotificationTextResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetMasterCabinetModelSoapIn">
+    <wsdl:part name="parameters" element="tns:GetMasterCabinetModel" />
+  </wsdl:message>
+  <wsdl:message name="GetMasterCabinetModelSoapOut">
+    <wsdl:part name="parameters" element="tns:GetMasterCabinetModelResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetMasterDeviceTypeSoapIn">
+    <wsdl:part name="parameters" element="tns:GetMasterDeviceType" />
+  </wsdl:message>
+  <wsdl:message name="GetMasterDeviceTypeSoapOut">
+    <wsdl:part name="parameters" element="tns:GetMasterDeviceTypeResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetMasterDeviceStatusSoapIn">
+    <wsdl:part name="parameters" element="tns:GetMasterDeviceStatus" />
+  </wsdl:message>
+  <wsdl:message name="GetMasterDeviceStatusSoapOut">
+    <wsdl:part name="parameters" element="tns:GetMasterDeviceStatusResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetMasterDeviceSoapIn">
+    <wsdl:part name="parameters" element="tns:GetMasterDevice" />
+  </wsdl:message>
+  <wsdl:message name="GetMasterDeviceSoapOut">
+    <wsdl:part name="parameters" element="tns:GetMasterDeviceResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetMasterMonitoringAlarmSoapIn">
+    <wsdl:part name="parameters" element="tns:GetMasterMonitoringAlarm" />
+  </wsdl:message>
+  <wsdl:message name="GetMasterMonitoringAlarmSoapOut">
+    <wsdl:part name="parameters" element="tns:GetMasterMonitoringAlarmResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetLockerServiceRateSoapIn">
+    <wsdl:part name="parameters" element="tns:GetLockerServiceRate" />
+  </wsdl:message>
+  <wsdl:message name="GetLockerServiceRateSoapOut">
+    <wsdl:part name="parameters" element="tns:GetLockerServiceRateResponse" />
+  </wsdl:message>
+  <wsdl:message name="SyncKioskSysconfigSoapIn">
+    <wsdl:part name="parameters" element="tns:SyncKioskSysconfig" />
+  </wsdl:message>
+  <wsdl:message name="SyncKioskSysconfigSoapOut">
+    <wsdl:part name="parameters" element="tns:SyncKioskSysconfigResponse" />
+  </wsdl:message>
+  <wsdl:message name="SyncMasterKioskCabinetSoapIn">
+    <wsdl:part name="parameters" element="tns:SyncMasterKioskCabinet" />
+  </wsdl:message>
+  <wsdl:message name="SyncMasterKioskCabinetSoapOut">
+    <wsdl:part name="parameters" element="tns:SyncMasterKioskCabinetResponse" />
+  </wsdl:message>
+  <wsdl:message name="SyncMasterKioskDeviceSoapIn">
+    <wsdl:part name="parameters" element="tns:SyncMasterKioskDevice" />
+  </wsdl:message>
+  <wsdl:message name="SyncMasterKioskDeviceSoapOut">
+    <wsdl:part name="parameters" element="tns:SyncMasterKioskDeviceResponse" />
+  </wsdl:message>
+  <wsdl:message name="SyncMasterKioskLockerSoapIn">
+    <wsdl:part name="parameters" element="tns:SyncMasterKioskLocker" />
+  </wsdl:message>
+  <wsdl:message name="SyncMasterKioskLockerSoapOut">
+    <wsdl:part name="parameters" element="tns:SyncMasterKioskLockerResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetServerKioskSysconfigSoapIn">
+    <wsdl:part name="parameters" element="tns:GetServerKioskSysconfig" />
+  </wsdl:message>
+  <wsdl:message name="GetServerKioskSysconfigSoapOut">
+    <wsdl:part name="parameters" element="tns:GetServerKioskSysconfigResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetServerKioskCabinetSoapIn">
+    <wsdl:part name="parameters" element="tns:GetServerKioskCabinet" />
+  </wsdl:message>
+  <wsdl:message name="GetServerKioskCabinetSoapOut">
+    <wsdl:part name="parameters" element="tns:GetServerKioskCabinetResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetServeKioskDeviceSoapIn">
+    <wsdl:part name="parameters" element="tns:GetServeKioskDevice" />
+  </wsdl:message>
+  <wsdl:message name="GetServeKioskDeviceSoapOut">
+    <wsdl:part name="parameters" element="tns:GetServeKioskDeviceResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetServerKioskLockerSoapIn">
+    <wsdl:part name="parameters" element="tns:GetServerKioskLocker" />
+  </wsdl:message>
+  <wsdl:message name="GetServerKioskLockerSoapOut">
+    <wsdl:part name="parameters" element="tns:GetServerKioskLockerResponse" />
+  </wsdl:message>
+  <wsdl:message name="UpdateServerSyncKioskSysconfigSoapIn">
+    <wsdl:part name="parameters" element="tns:UpdateServerSyncKioskSysconfig" />
+  </wsdl:message>
+  <wsdl:message name="UpdateServerSyncKioskSysconfigSoapOut">
+    <wsdl:part name="parameters" element="tns:UpdateServerSyncKioskSysconfigResponse" />
+  </wsdl:message>
+  <wsdl:message name="UpdateServerSyncKioskCabinetSoapIn">
+    <wsdl:part name="parameters" element="tns:UpdateServerSyncKioskCabinet" />
+  </wsdl:message>
+  <wsdl:message name="UpdateServerSyncKioskCabinetSoapOut">
+    <wsdl:part name="parameters" element="tns:UpdateServerSyncKioskCabinetResponse" />
+  </wsdl:message>
+  <wsdl:message name="UpdateServerSyncKioskDeviceSoapIn">
+    <wsdl:part name="parameters" element="tns:UpdateServerSyncKioskDevice" />
+  </wsdl:message>
+  <wsdl:message name="UpdateServerSyncKioskDeviceSoapOut">
+    <wsdl:part name="parameters" element="tns:UpdateServerSyncKioskDeviceResponse" />
+  </wsdl:message>
+  <wsdl:message name="UpdateSyncKioskLockerSoapIn">
+    <wsdl:part name="parameters" element="tns:UpdateSyncKioskLocker" />
+  </wsdl:message>
+  <wsdl:message name="UpdateSyncKioskLockerSoapOut">
+    <wsdl:part name="parameters" element="tns:UpdateSyncKioskLockerResponse" />
+  </wsdl:message>
+  <wsdl:message name="SyncKioskServiceTransactionSoapIn">
+    <wsdl:part name="parameters" element="tns:SyncKioskServiceTransaction" />
+  </wsdl:message>
+  <wsdl:message name="SyncKioskServiceTransactionSoapOut">
+    <wsdl:part name="parameters" element="tns:SyncKioskServiceTransactionResponse" />
+  </wsdl:message>
+  <wsdl:message name="SyncKioskCollectTransactionSoapIn">
+    <wsdl:part name="parameters" element="tns:SyncKioskCollectTransaction" />
+  </wsdl:message>
+  <wsdl:message name="SyncKioskCollectTransactionSoapOut">
+    <wsdl:part name="parameters" element="tns:SyncKioskCollectTransactionResponse" />
+  </wsdl:message>
+  <wsdl:message name="SyncKioskStaffConsoleTransactionSoapIn">
+    <wsdl:part name="parameters" element="tns:SyncKioskStaffConsoleTransaction" />
+  </wsdl:message>
+  <wsdl:message name="SyncKioskStaffConsoleTransactionSoapOut">
+    <wsdl:part name="parameters" element="tns:SyncKioskStaffConsoleTransactionResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetLockerPromotionSoapIn">
+    <wsdl:part name="parameters" element="tns:GetLockerPromotion" />
+  </wsdl:message>
+  <wsdl:message name="GetLockerPromotionSoapOut">
+    <wsdl:part name="parameters" element="tns:GetLockerPromotionResponse" />
+  </wsdl:message>
+  <wsdl:message name="InsertLocationPromotionSyncSoapIn">
+    <wsdl:part name="parameters" element="tns:InsertLocationPromotionSync" />
+  </wsdl:message>
+  <wsdl:message name="InsertLocationPromotionSyncSoapOut">
+    <wsdl:part name="parameters" element="tns:InsertLocationPromotionSyncResponse" />
+  </wsdl:message>
+  <wsdl:message name="SyncLogTransactionActivitySoapIn">
+    <wsdl:part name="parameters" element="tns:SyncLogTransactionActivity" />
+  </wsdl:message>
+  <wsdl:message name="SyncLogTransactionActivitySoapOut">
+    <wsdl:part name="parameters" element="tns:SyncLogTransactionActivityResponse" />
+  </wsdl:message>
+  <wsdl:message name="SyncLogFillMoneyDataSoapIn">
+    <wsdl:part name="parameters" element="tns:SyncLogFillMoneyData" />
+  </wsdl:message>
+  <wsdl:message name="SyncLogFillMoneyDataSoapOut">
+    <wsdl:part name="parameters" element="tns:SyncLogFillMoneyDataResponse" />
+  </wsdl:message>
+  <wsdl:message name="SyncLogErrorDataSoapIn">
+    <wsdl:part name="parameters" element="tns:SyncLogErrorData" />
+  </wsdl:message>
+  <wsdl:message name="SyncLogErrorDataSoapOut">
+    <wsdl:part name="parameters" element="tns:SyncLogErrorDataResponse" />
+  </wsdl:message>
+  <wsdl:message name="SyncLogKioskAgentDataSoapIn">
+    <wsdl:part name="parameters" element="tns:SyncLogKioskAgentData" />
+  </wsdl:message>
+  <wsdl:message name="SyncLogKioskAgentDataSoapOut">
+    <wsdl:part name="parameters" element="tns:SyncLogKioskAgentDataResponse" />
+  </wsdl:message>
+  <wsdl:portType name="ATBLockerWebServiceSoap">
+    <wsdl:operation name="LoginTIT">
+      <wsdl:input message="tns:LoginTITSoapIn" />
+      <wsdl:output message="tns:LoginTITSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="KioskLoginStaffConsole">
+      <wsdl:input message="tns:KioskLoginStaffConsoleSoapIn" />
+      <wsdl:output message="tns:KioskLoginStaffConsoleSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetKioskStaffConsoleAuthorize">
+      <wsdl:input message="tns:GetKioskStaffConsoleAuthorizeSoapIn" />
+      <wsdl:output message="tns:GetKioskStaffConsoleAuthorizeSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ReportKioskCurrentQty">
+      <wsdl:input message="tns:ReportKioskCurrentQtySoapIn" />
+      <wsdl:output message="tns:ReportKioskCurrentQtySoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetMasterAppScreen">
+      <wsdl:input message="tns:GetMasterAppScreenSoapIn" />
+      <wsdl:output message="tns:GetMasterAppScreenSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetMasterAppStep">
+      <wsdl:input message="tns:GetMasterAppStepSoapIn" />
+      <wsdl:output message="tns:GetMasterAppStepSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetMasterKioskScreenControl">
+      <wsdl:input message="tns:GetMasterKioskScreenControlSoapIn" />
+      <wsdl:output message="tns:GetMasterKioskScreenControlSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetMasterKioskNotificationText">
+      <wsdl:input message="tns:GetMasterKioskNotificationTextSoapIn" />
+      <wsdl:output message="tns:GetMasterKioskNotificationTextSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetMasterCabinetModel">
+      <wsdl:input message="tns:GetMasterCabinetModelSoapIn" />
+      <wsdl:output message="tns:GetMasterCabinetModelSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetMasterDeviceType">
+      <wsdl:input message="tns:GetMasterDeviceTypeSoapIn" />
+      <wsdl:output message="tns:GetMasterDeviceTypeSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetMasterDeviceStatus">
+      <wsdl:input message="tns:GetMasterDeviceStatusSoapIn" />
+      <wsdl:output message="tns:GetMasterDeviceStatusSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetMasterDevice">
+      <wsdl:input message="tns:GetMasterDeviceSoapIn" />
+      <wsdl:output message="tns:GetMasterDeviceSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetMasterMonitoringAlarm">
+      <wsdl:input message="tns:GetMasterMonitoringAlarmSoapIn" />
+      <wsdl:output message="tns:GetMasterMonitoringAlarmSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetLockerServiceRate">
+      <wsdl:input message="tns:GetLockerServiceRateSoapIn" />
+      <wsdl:output message="tns:GetLockerServiceRateSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SyncKioskSysconfig">
+      <wsdl:input message="tns:SyncKioskSysconfigSoapIn" />
+      <wsdl:output message="tns:SyncKioskSysconfigSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SyncMasterKioskCabinet">
+      <wsdl:input message="tns:SyncMasterKioskCabinetSoapIn" />
+      <wsdl:output message="tns:SyncMasterKioskCabinetSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SyncMasterKioskDevice">
+      <wsdl:input message="tns:SyncMasterKioskDeviceSoapIn" />
+      <wsdl:output message="tns:SyncMasterKioskDeviceSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SyncMasterKioskLocker">
+      <wsdl:input message="tns:SyncMasterKioskLockerSoapIn" />
+      <wsdl:output message="tns:SyncMasterKioskLockerSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetServerKioskSysconfig">
+      <wsdl:input message="tns:GetServerKioskSysconfigSoapIn" />
+      <wsdl:output message="tns:GetServerKioskSysconfigSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetServerKioskCabinet">
+      <wsdl:input message="tns:GetServerKioskCabinetSoapIn" />
+      <wsdl:output message="tns:GetServerKioskCabinetSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetServeKioskDevice">
+      <wsdl:input message="tns:GetServeKioskDeviceSoapIn" />
+      <wsdl:output message="tns:GetServeKioskDeviceSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetServerKioskLocker">
+      <wsdl:input message="tns:GetServerKioskLockerSoapIn" />
+      <wsdl:output message="tns:GetServerKioskLockerSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="UpdateServerSyncKioskSysconfig">
+      <wsdl:input message="tns:UpdateServerSyncKioskSysconfigSoapIn" />
+      <wsdl:output message="tns:UpdateServerSyncKioskSysconfigSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="UpdateServerSyncKioskCabinet">
+      <wsdl:input message="tns:UpdateServerSyncKioskCabinetSoapIn" />
+      <wsdl:output message="tns:UpdateServerSyncKioskCabinetSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="UpdateServerSyncKioskDevice">
+      <wsdl:input message="tns:UpdateServerSyncKioskDeviceSoapIn" />
+      <wsdl:output message="tns:UpdateServerSyncKioskDeviceSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="UpdateSyncKioskLocker">
+      <wsdl:input message="tns:UpdateSyncKioskLockerSoapIn" />
+      <wsdl:output message="tns:UpdateSyncKioskLockerSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SyncKioskServiceTransaction">
+      <wsdl:input message="tns:SyncKioskServiceTransactionSoapIn" />
+      <wsdl:output message="tns:SyncKioskServiceTransactionSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SyncKioskCollectTransaction">
+      <wsdl:input message="tns:SyncKioskCollectTransactionSoapIn" />
+      <wsdl:output message="tns:SyncKioskCollectTransactionSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SyncKioskStaffConsoleTransaction">
+      <wsdl:input message="tns:SyncKioskStaffConsoleTransactionSoapIn" />
+      <wsdl:output message="tns:SyncKioskStaffConsoleTransactionSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetLockerPromotion">
+      <wsdl:input message="tns:GetLockerPromotionSoapIn" />
+      <wsdl:output message="tns:GetLockerPromotionSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="InsertLocationPromotionSync">
+      <wsdl:input message="tns:InsertLocationPromotionSyncSoapIn" />
+      <wsdl:output message="tns:InsertLocationPromotionSyncSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SyncLogTransactionActivity">
+      <wsdl:input message="tns:SyncLogTransactionActivitySoapIn" />
+      <wsdl:output message="tns:SyncLogTransactionActivitySoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SyncLogFillMoneyData">
+      <wsdl:input message="tns:SyncLogFillMoneyDataSoapIn" />
+      <wsdl:output message="tns:SyncLogFillMoneyDataSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SyncLogErrorData">
+      <wsdl:input message="tns:SyncLogErrorDataSoapIn" />
+      <wsdl:output message="tns:SyncLogErrorDataSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SyncLogKioskAgentData">
+      <wsdl:input message="tns:SyncLogKioskAgentDataSoapIn" />
+      <wsdl:output message="tns:SyncLogKioskAgentDataSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="ATBLockerWebServiceSoap" type="tns:ATBLockerWebServiceSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="LoginTIT">
+      <soap:operation soapAction="http://tempuri.org/LoginTIT" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="KioskLoginStaffConsole">
+      <soap:operation soapAction="http://tempuri.org/KioskLoginStaffConsole" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetKioskStaffConsoleAuthorize">
+      <soap:operation soapAction="http://tempuri.org/GetKioskStaffConsoleAuthorize" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ReportKioskCurrentQty">
+      <soap:operation soapAction="http://tempuri.org/ReportKioskCurrentQty" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetMasterAppScreen">
+      <soap:operation soapAction="http://tempuri.org/GetMasterAppScreen" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetMasterAppStep">
+      <soap:operation soapAction="http://tempuri.org/GetMasterAppStep" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetMasterKioskScreenControl">
+      <soap:operation soapAction="http://tempuri.org/GetMasterKioskScreenControl" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetMasterKioskNotificationText">
+      <soap:operation soapAction="http://tempuri.org/GetMasterKioskNotificationText" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetMasterCabinetModel">
+      <soap:operation soapAction="http://tempuri.org/GetMasterCabinetModel" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetMasterDeviceType">
+      <soap:operation soapAction="http://tempuri.org/GetMasterDeviceType" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetMasterDeviceStatus">
+      <soap:operation soapAction="http://tempuri.org/GetMasterDeviceStatus" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetMasterDevice">
+      <soap:operation soapAction="http://tempuri.org/GetMasterDevice" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetMasterMonitoringAlarm">
+      <soap:operation soapAction="http://tempuri.org/GetMasterMonitoringAlarm" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetLockerServiceRate">
+      <soap:operation soapAction="http://tempuri.org/GetLockerServiceRate" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SyncKioskSysconfig">
+      <soap:operation soapAction="http://tempuri.org/SyncKioskSysconfig" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SyncMasterKioskCabinet">
+      <soap:operation soapAction="http://tempuri.org/SyncMasterKioskCabinet" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SyncMasterKioskDevice">
+      <soap:operation soapAction="http://tempuri.org/SyncMasterKioskDevice" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SyncMasterKioskLocker">
+      <soap:operation soapAction="http://tempuri.org/SyncMasterKioskLocker" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetServerKioskSysconfig">
+      <soap:operation soapAction="http://tempuri.org/GetServerKioskSysconfig" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetServerKioskCabinet">
+      <soap:operation soapAction="http://tempuri.org/GetServerKioskCabinet" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetServeKioskDevice">
+      <soap:operation soapAction="http://tempuri.org/GetServeKioskDevice" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetServerKioskLocker">
+      <soap:operation soapAction="http://tempuri.org/GetServerKioskLocker" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateServerSyncKioskSysconfig">
+      <soap:operation soapAction="http://tempuri.org/UpdateServerSyncKioskSysconfig" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateServerSyncKioskCabinet">
+      <soap:operation soapAction="http://tempuri.org/UpdateServerSyncKioskCabinet" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateServerSyncKioskDevice">
+      <soap:operation soapAction="http://tempuri.org/UpdateServerSyncKioskDevice" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateSyncKioskLocker">
+      <soap:operation soapAction="http://tempuri.org/UpdateSyncKioskLocker" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SyncKioskServiceTransaction">
+      <soap:operation soapAction="http://tempuri.org/SyncKioskServiceTransaction" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SyncKioskCollectTransaction">
+      <soap:operation soapAction="http://tempuri.org/SyncKioskCollectTransaction" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SyncKioskStaffConsoleTransaction">
+      <soap:operation soapAction="http://tempuri.org/SyncKioskStaffConsoleTransaction" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetLockerPromotion">
+      <soap:operation soapAction="http://tempuri.org/GetLockerPromotion" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="InsertLocationPromotionSync">
+      <soap:operation soapAction="http://tempuri.org/InsertLocationPromotionSync" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SyncLogTransactionActivity">
+      <soap:operation soapAction="http://tempuri.org/SyncLogTransactionActivity" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SyncLogFillMoneyData">
+      <soap:operation soapAction="http://tempuri.org/SyncLogFillMoneyData" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SyncLogErrorData">
+      <soap:operation soapAction="http://tempuri.org/SyncLogErrorData" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SyncLogKioskAgentData">
+      <soap:operation soapAction="http://tempuri.org/SyncLogKioskAgentData" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="ATBLockerWebServiceSoap12" type="tns:ATBLockerWebServiceSoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="LoginTIT">
+      <soap12:operation soapAction="http://tempuri.org/LoginTIT" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="KioskLoginStaffConsole">
+      <soap12:operation soapAction="http://tempuri.org/KioskLoginStaffConsole" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetKioskStaffConsoleAuthorize">
+      <soap12:operation soapAction="http://tempuri.org/GetKioskStaffConsoleAuthorize" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ReportKioskCurrentQty">
+      <soap12:operation soapAction="http://tempuri.org/ReportKioskCurrentQty" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetMasterAppScreen">
+      <soap12:operation soapAction="http://tempuri.org/GetMasterAppScreen" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetMasterAppStep">
+      <soap12:operation soapAction="http://tempuri.org/GetMasterAppStep" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetMasterKioskScreenControl">
+      <soap12:operation soapAction="http://tempuri.org/GetMasterKioskScreenControl" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetMasterKioskNotificationText">
+      <soap12:operation soapAction="http://tempuri.org/GetMasterKioskNotificationText" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetMasterCabinetModel">
+      <soap12:operation soapAction="http://tempuri.org/GetMasterCabinetModel" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetMasterDeviceType">
+      <soap12:operation soapAction="http://tempuri.org/GetMasterDeviceType" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetMasterDeviceStatus">
+      <soap12:operation soapAction="http://tempuri.org/GetMasterDeviceStatus" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetMasterDevice">
+      <soap12:operation soapAction="http://tempuri.org/GetMasterDevice" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetMasterMonitoringAlarm">
+      <soap12:operation soapAction="http://tempuri.org/GetMasterMonitoringAlarm" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetLockerServiceRate">
+      <soap12:operation soapAction="http://tempuri.org/GetLockerServiceRate" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SyncKioskSysconfig">
+      <soap12:operation soapAction="http://tempuri.org/SyncKioskSysconfig" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SyncMasterKioskCabinet">
+      <soap12:operation soapAction="http://tempuri.org/SyncMasterKioskCabinet" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SyncMasterKioskDevice">
+      <soap12:operation soapAction="http://tempuri.org/SyncMasterKioskDevice" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SyncMasterKioskLocker">
+      <soap12:operation soapAction="http://tempuri.org/SyncMasterKioskLocker" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetServerKioskSysconfig">
+      <soap12:operation soapAction="http://tempuri.org/GetServerKioskSysconfig" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetServerKioskCabinet">
+      <soap12:operation soapAction="http://tempuri.org/GetServerKioskCabinet" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetServeKioskDevice">
+      <soap12:operation soapAction="http://tempuri.org/GetServeKioskDevice" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetServerKioskLocker">
+      <soap12:operation soapAction="http://tempuri.org/GetServerKioskLocker" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateServerSyncKioskSysconfig">
+      <soap12:operation soapAction="http://tempuri.org/UpdateServerSyncKioskSysconfig" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateServerSyncKioskCabinet">
+      <soap12:operation soapAction="http://tempuri.org/UpdateServerSyncKioskCabinet" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateServerSyncKioskDevice">
+      <soap12:operation soapAction="http://tempuri.org/UpdateServerSyncKioskDevice" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateSyncKioskLocker">
+      <soap12:operation soapAction="http://tempuri.org/UpdateSyncKioskLocker" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SyncKioskServiceTransaction">
+      <soap12:operation soapAction="http://tempuri.org/SyncKioskServiceTransaction" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SyncKioskCollectTransaction">
+      <soap12:operation soapAction="http://tempuri.org/SyncKioskCollectTransaction" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SyncKioskStaffConsoleTransaction">
+      <soap12:operation soapAction="http://tempuri.org/SyncKioskStaffConsoleTransaction" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetLockerPromotion">
+      <soap12:operation soapAction="http://tempuri.org/GetLockerPromotion" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="InsertLocationPromotionSync">
+      <soap12:operation soapAction="http://tempuri.org/InsertLocationPromotionSync" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SyncLogTransactionActivity">
+      <soap12:operation soapAction="http://tempuri.org/SyncLogTransactionActivity" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SyncLogFillMoneyData">
+      <soap12:operation soapAction="http://tempuri.org/SyncLogFillMoneyData" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SyncLogErrorData">
+      <soap12:operation soapAction="http://tempuri.org/SyncLogErrorData" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SyncLogKioskAgentData">
+      <soap12:operation soapAction="http://tempuri.org/SyncLogKioskAgentData" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="ATBLockerWebService">
+    <wsdl:port name="ATBLockerWebServiceSoap" binding="tns:ATBLockerWebServiceSoap">
+      <soap:address location="http://103.253.72.87/ATB-TIT/Webservice_Locker/ATBLockerWebService.asmx" />
+    </wsdl:port>
+    <wsdl:port name="ATBLockerWebServiceSoap12" binding="tns:ATBLockerWebServiceSoap12">
+      <soap12:address location="http://103.253.72.87/ATB-TIT/Webservice_Locker/ATBLockerWebService.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>
