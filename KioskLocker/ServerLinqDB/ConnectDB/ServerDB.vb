@@ -100,7 +100,7 @@ Namespace ConnectDB
                 'Application.StartupPath = C:\Program Files\Common Files\Microsoft Shared\DevServer\9.0
                 Dim INIFlie As String = "C:\Windows\ATBLockerDB.ini"
                 Dim ini As New IniReader(INIFlie)
-                ini.Section = "ATB-Server"
+                ini.Section = "AutoboxLockerServerDB"
                 Return ini
             End Get
         End Property

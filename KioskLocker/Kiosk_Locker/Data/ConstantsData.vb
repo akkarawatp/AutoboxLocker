@@ -27,7 +27,7 @@
             CoinOut_1 = 5
             CoinOut_5 = 6
             Printer = 7
-            IDCardPassportScanner = 8
+            WebCamera = 8
             BankNoteOut_50 = 9
             CoinOut_2 = 10
             CoinOut_10 = 11

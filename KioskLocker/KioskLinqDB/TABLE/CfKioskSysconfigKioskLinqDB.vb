@@ -8,7 +8,7 @@ Imports KioskLinqDB.ConnectDB
 
 Namespace TABLE
     'Represents a transaction for CF_KIOSK_SYSCONFIG table KioskLinqDB.
-    '[Create by  on November, 17 2017]
+    '[Create by  on November, 18 2017]
     Public Class CfKioskSysconfigKioskLinqDB
         Public sub CfKioskSysconfigKioskLinqDB()
 
@@ -56,8 +56,6 @@ Namespace TABLE
         Dim _TIME_OUT_SEC As Long = 0
         Dim _SHOW_MSG_SEC As Long = 0
         Dim _PAYMENT_EXTEND_SEC As Long = 0
-        Dim _CARD_EXPIRE_MONTH As Long = 0
-        Dim _PASSPORT_EXPIRE_MONTH As Long = 0
         Dim _LOCKER_WEBSERVICE_URL As String = ""
         Dim _LOCKER_PC_POSITION As Long = 0
         Dim _SLEEP_TIME As String = ""
@@ -224,24 +222,6 @@ Namespace TABLE
                _PAYMENT_EXTEND_SEC = value
             End Set
         End Property 
-        <Column(Storage:="_CARD_EXPIRE_MONTH", DbType:="Int NOT NULL ",CanBeNull:=false)>  _
-        Public Property CARD_EXPIRE_MONTH() As Long
-            Get
-                Return _CARD_EXPIRE_MONTH
-            End Get
-            Set(ByVal value As Long)
-               _CARD_EXPIRE_MONTH = value
-            End Set
-        End Property 
-        <Column(Storage:="_PASSPORT_EXPIRE_MONTH", DbType:="Int NOT NULL ",CanBeNull:=false)>  _
-        Public Property PASSPORT_EXPIRE_MONTH() As Long
-            Get
-                Return _PASSPORT_EXPIRE_MONTH
-            End Get
-            Set(ByVal value As Long)
-               _PASSPORT_EXPIRE_MONTH = value
-            End Set
-        End Property 
         <Column(Storage:="_LOCKER_WEBSERVICE_URL", DbType:="VarChar(255) NOT NULL ",CanBeNull:=false)>  _
         Public Property LOCKER_WEBSERVICE_URL() As String
             Get
@@ -362,8 +342,6 @@ Namespace TABLE
             _TIME_OUT_SEC = 0
             _SHOW_MSG_SEC = 0
             _PAYMENT_EXTEND_SEC = 0
-            _CARD_EXPIRE_MONTH = 0
-            _PASSPORT_EXPIRE_MONTH = 0
             _LOCKER_WEBSERVICE_URL = ""
             _LOCKER_PC_POSITION = 7
             _SLEEP_TIME = ""
@@ -651,7 +629,7 @@ Namespace TABLE
         End Function
 
         Private Function SetParameterData() As SqlParameter()
-            Dim cmbParam(29) As SqlParameter
+            Dim cmbParam(27) As SqlParameter
             cmbParam(0) = New SqlParameter("@_ID", SqlDbType.BigInt)
             cmbParam(0).Value = _ID
 
@@ -711,48 +689,42 @@ Namespace TABLE
             cmbParam(16) = New SqlParameter("@_PAYMENT_EXTEND_SEC", SqlDbType.Int)
             cmbParam(16).Value = _PAYMENT_EXTEND_SEC
 
-            cmbParam(17) = New SqlParameter("@_CARD_EXPIRE_MONTH", SqlDbType.Int)
-            cmbParam(17).Value = _CARD_EXPIRE_MONTH
+            cmbParam(17) = New SqlParameter("@_LOCKER_WEBSERVICE_URL", SqlDbType.VarChar)
+            cmbParam(17).Value = _LOCKER_WEBSERVICE_URL
 
-            cmbParam(18) = New SqlParameter("@_PASSPORT_EXPIRE_MONTH", SqlDbType.Int)
-            cmbParam(18).Value = _PASSPORT_EXPIRE_MONTH
+            cmbParam(18) = New SqlParameter("@_LOCKER_PC_POSITION", SqlDbType.Int)
+            cmbParam(18).Value = _LOCKER_PC_POSITION
 
-            cmbParam(19) = New SqlParameter("@_LOCKER_WEBSERVICE_URL", SqlDbType.VarChar)
-            cmbParam(19).Value = _LOCKER_WEBSERVICE_URL
+            cmbParam(19) = New SqlParameter("@_SLEEP_TIME", SqlDbType.VarChar)
+            cmbParam(19).Value = _SLEEP_TIME
 
-            cmbParam(20) = New SqlParameter("@_LOCKER_PC_POSITION", SqlDbType.Int)
-            cmbParam(20).Value = _LOCKER_PC_POSITION
+            cmbParam(20) = New SqlParameter("@_SLEEP_DURATION", SqlDbType.Int)
+            cmbParam(20).Value = _SLEEP_DURATION
 
-            cmbParam(21) = New SqlParameter("@_SLEEP_TIME", SqlDbType.VarChar)
-            cmbParam(21).Value = _SLEEP_TIME
+            cmbParam(21) = New SqlParameter("@_CONTACT_CENTER_TELNO", SqlDbType.VarChar)
+            cmbParam(21).Value = _CONTACT_CENTER_TELNO
 
-            cmbParam(22) = New SqlParameter("@_SLEEP_DURATION", SqlDbType.Int)
-            cmbParam(22).Value = _SLEEP_DURATION
-
-            cmbParam(23) = New SqlParameter("@_CONTACT_CENTER_TELNO", SqlDbType.VarChar)
-            cmbParam(23).Value = _CONTACT_CENTER_TELNO
-
-            cmbParam(24) = New SqlParameter("@_ALARM_WEBSERVICE_URL", SqlDbType.VarChar)
+            cmbParam(22) = New SqlParameter("@_ALARM_WEBSERVICE_URL", SqlDbType.VarChar)
             If _ALARM_WEBSERVICE_URL.Trim <> "" Then 
-                cmbParam(24).Value = _ALARM_WEBSERVICE_URL
+                cmbParam(22).Value = _ALARM_WEBSERVICE_URL
             Else
-                cmbParam(24).Value = DBNull.value
+                cmbParam(22).Value = DBNull.value
             End If
 
-            cmbParam(25) = New SqlParameter("@_INTERVAL_SYNC_TRANSACTION_MIN", SqlDbType.Int)
-            cmbParam(25).Value = _INTERVAL_SYNC_TRANSACTION_MIN
+            cmbParam(23) = New SqlParameter("@_INTERVAL_SYNC_TRANSACTION_MIN", SqlDbType.Int)
+            cmbParam(23).Value = _INTERVAL_SYNC_TRANSACTION_MIN
 
-            cmbParam(26) = New SqlParameter("@_INTERVAL_SYNC_MASTER_MIN", SqlDbType.Int)
-            cmbParam(26).Value = _INTERVAL_SYNC_MASTER_MIN
+            cmbParam(24) = New SqlParameter("@_INTERVAL_SYNC_MASTER_MIN", SqlDbType.Int)
+            cmbParam(24).Value = _INTERVAL_SYNC_MASTER_MIN
 
-            cmbParam(27) = New SqlParameter("@_INTERVAL_SYNC_LOG_MIN", SqlDbType.Int)
-            cmbParam(27).Value = _INTERVAL_SYNC_LOG_MIN
+            cmbParam(25) = New SqlParameter("@_INTERVAL_SYNC_LOG_MIN", SqlDbType.Int)
+            cmbParam(25).Value = _INTERVAL_SYNC_LOG_MIN
 
-            cmbParam(28) = New SqlParameter("@_SYNC_TO_KIOSK", SqlDbType.Char)
-            cmbParam(28).Value = _SYNC_TO_KIOSK
+            cmbParam(26) = New SqlParameter("@_SYNC_TO_KIOSK", SqlDbType.Char)
+            cmbParam(26).Value = _SYNC_TO_KIOSK
 
-            cmbParam(29) = New SqlParameter("@_SYNC_TO_SERVER", SqlDbType.Char)
-            cmbParam(29).Value = _SYNC_TO_SERVER
+            cmbParam(27) = New SqlParameter("@_SYNC_TO_SERVER", SqlDbType.Char)
+            cmbParam(27).Value = _SYNC_TO_SERVER
 
             Return cmbParam
         End Function
@@ -790,8 +762,6 @@ Namespace TABLE
                         If Convert.IsDBNull(Rdr("time_out_sec")) = False Then _time_out_sec = Convert.ToInt32(Rdr("time_out_sec"))
                         If Convert.IsDBNull(Rdr("show_msg_sec")) = False Then _show_msg_sec = Convert.ToInt32(Rdr("show_msg_sec"))
                         If Convert.IsDBNull(Rdr("payment_extend_sec")) = False Then _payment_extend_sec = Convert.ToInt32(Rdr("payment_extend_sec"))
-                        If Convert.IsDBNull(Rdr("card_expire_month")) = False Then _card_expire_month = Convert.ToInt32(Rdr("card_expire_month"))
-                        If Convert.IsDBNull(Rdr("passport_expire_month")) = False Then _passport_expire_month = Convert.ToInt32(Rdr("passport_expire_month"))
                         If Convert.IsDBNull(Rdr("locker_webservice_url")) = False Then _locker_webservice_url = Rdr("locker_webservice_url").ToString()
                         If Convert.IsDBNull(Rdr("locker_pc_position")) = False Then _locker_pc_position = Convert.ToInt32(Rdr("locker_pc_position"))
                         If Convert.IsDBNull(Rdr("sleep_time")) = False Then _sleep_time = Rdr("sleep_time").ToString()
@@ -854,8 +824,6 @@ Namespace TABLE
                         If Convert.IsDBNull(Rdr("time_out_sec")) = False Then _time_out_sec = Convert.ToInt32(Rdr("time_out_sec"))
                         If Convert.IsDBNull(Rdr("show_msg_sec")) = False Then _show_msg_sec = Convert.ToInt32(Rdr("show_msg_sec"))
                         If Convert.IsDBNull(Rdr("payment_extend_sec")) = False Then _payment_extend_sec = Convert.ToInt32(Rdr("payment_extend_sec"))
-                        If Convert.IsDBNull(Rdr("card_expire_month")) = False Then _card_expire_month = Convert.ToInt32(Rdr("card_expire_month"))
-                        If Convert.IsDBNull(Rdr("passport_expire_month")) = False Then _passport_expire_month = Convert.ToInt32(Rdr("passport_expire_month"))
                         If Convert.IsDBNull(Rdr("locker_webservice_url")) = False Then _locker_webservice_url = Rdr("locker_webservice_url").ToString()
                         If Convert.IsDBNull(Rdr("locker_pc_position")) = False Then _locker_pc_position = Convert.ToInt32(Rdr("locker_pc_position"))
                         If Convert.IsDBNull(Rdr("sleep_time")) = False Then _sleep_time = Rdr("sleep_time").ToString()
@@ -891,8 +859,8 @@ Namespace TABLE
         Private ReadOnly Property SqlInsert() As String 
             Get
                 Dim Sql As String=""
-                Sql += "INSERT INTO " & tableName  & " (CREATED_BY, CREATED_DATE, MS_KIOSK_ID, MAC_ADDRESS, IP_ADDRESS, LOCATION_CODE, LOCATION_NAME, LOGIN_SSO, KIOSK_OPEN_TIME, KIOSK_OPEN24, SCREEN_SAVER_SEC, TIME_OUT_SEC, SHOW_MSG_SEC, PAYMENT_EXTEND_SEC, CARD_EXPIRE_MONTH, PASSPORT_EXPIRE_MONTH, LOCKER_WEBSERVICE_URL, LOCKER_PC_POSITION, SLEEP_TIME, SLEEP_DURATION, CONTACT_CENTER_TELNO, ALARM_WEBSERVICE_URL, INTERVAL_SYNC_TRANSACTION_MIN, INTERVAL_SYNC_MASTER_MIN, INTERVAL_SYNC_LOG_MIN, SYNC_TO_KIOSK, SYNC_TO_SERVER)"
-                Sql += " OUTPUT INSERTED.ID, INSERTED.CREATED_BY, INSERTED.CREATED_DATE, INSERTED.UPDATED_BY, INSERTED.UPDATED_DATE, INSERTED.MS_KIOSK_ID, INSERTED.MAC_ADDRESS, INSERTED.IP_ADDRESS, INSERTED.LOCATION_CODE, INSERTED.LOCATION_NAME, INSERTED.LOGIN_SSO, INSERTED.KIOSK_OPEN_TIME, INSERTED.KIOSK_OPEN24, INSERTED.SCREEN_SAVER_SEC, INSERTED.TIME_OUT_SEC, INSERTED.SHOW_MSG_SEC, INSERTED.PAYMENT_EXTEND_SEC, INSERTED.CARD_EXPIRE_MONTH, INSERTED.PASSPORT_EXPIRE_MONTH, INSERTED.LOCKER_WEBSERVICE_URL, INSERTED.LOCKER_PC_POSITION, INSERTED.SLEEP_TIME, INSERTED.SLEEP_DURATION, INSERTED.CONTACT_CENTER_TELNO, INSERTED.ALARM_WEBSERVICE_URL, INSERTED.INTERVAL_SYNC_TRANSACTION_MIN, INSERTED.INTERVAL_SYNC_MASTER_MIN, INSERTED.INTERVAL_SYNC_LOG_MIN, INSERTED.SYNC_TO_KIOSK, INSERTED.SYNC_TO_SERVER"
+                Sql += "INSERT INTO " & tableName  & " (CREATED_BY, CREATED_DATE, MS_KIOSK_ID, MAC_ADDRESS, IP_ADDRESS, LOCATION_CODE, LOCATION_NAME, LOGIN_SSO, KIOSK_OPEN_TIME, KIOSK_OPEN24, SCREEN_SAVER_SEC, TIME_OUT_SEC, SHOW_MSG_SEC, PAYMENT_EXTEND_SEC, LOCKER_WEBSERVICE_URL, LOCKER_PC_POSITION, SLEEP_TIME, SLEEP_DURATION, CONTACT_CENTER_TELNO, ALARM_WEBSERVICE_URL, INTERVAL_SYNC_TRANSACTION_MIN, INTERVAL_SYNC_MASTER_MIN, INTERVAL_SYNC_LOG_MIN, SYNC_TO_KIOSK, SYNC_TO_SERVER)"
+                Sql += " OUTPUT INSERTED.ID, INSERTED.CREATED_BY, INSERTED.CREATED_DATE, INSERTED.UPDATED_BY, INSERTED.UPDATED_DATE, INSERTED.MS_KIOSK_ID, INSERTED.MAC_ADDRESS, INSERTED.IP_ADDRESS, INSERTED.LOCATION_CODE, INSERTED.LOCATION_NAME, INSERTED.LOGIN_SSO, INSERTED.KIOSK_OPEN_TIME, INSERTED.KIOSK_OPEN24, INSERTED.SCREEN_SAVER_SEC, INSERTED.TIME_OUT_SEC, INSERTED.SHOW_MSG_SEC, INSERTED.PAYMENT_EXTEND_SEC, INSERTED.LOCKER_WEBSERVICE_URL, INSERTED.LOCKER_PC_POSITION, INSERTED.SLEEP_TIME, INSERTED.SLEEP_DURATION, INSERTED.CONTACT_CENTER_TELNO, INSERTED.ALARM_WEBSERVICE_URL, INSERTED.INTERVAL_SYNC_TRANSACTION_MIN, INSERTED.INTERVAL_SYNC_MASTER_MIN, INSERTED.INTERVAL_SYNC_LOG_MIN, INSERTED.SYNC_TO_KIOSK, INSERTED.SYNC_TO_SERVER"
                 Sql += " VALUES("
                 sql += "@_CREATED_BY" & ", "
                 sql += "@_CREATED_DATE" & ", "
@@ -908,8 +876,6 @@ Namespace TABLE
                 sql += "@_TIME_OUT_SEC" & ", "
                 sql += "@_SHOW_MSG_SEC" & ", "
                 sql += "@_PAYMENT_EXTEND_SEC" & ", "
-                sql += "@_CARD_EXPIRE_MONTH" & ", "
-                sql += "@_PASSPORT_EXPIRE_MONTH" & ", "
                 sql += "@_LOCKER_WEBSERVICE_URL" & ", "
                 sql += "@_LOCKER_PC_POSITION" & ", "
                 sql += "@_SLEEP_TIME" & ", "
@@ -946,8 +912,6 @@ Namespace TABLE
                 Sql += "TIME_OUT_SEC = " & "@_TIME_OUT_SEC" & ", "
                 Sql += "SHOW_MSG_SEC = " & "@_SHOW_MSG_SEC" & ", "
                 Sql += "PAYMENT_EXTEND_SEC = " & "@_PAYMENT_EXTEND_SEC" & ", "
-                Sql += "CARD_EXPIRE_MONTH = " & "@_CARD_EXPIRE_MONTH" & ", "
-                Sql += "PASSPORT_EXPIRE_MONTH = " & "@_PASSPORT_EXPIRE_MONTH" & ", "
                 Sql += "LOCKER_WEBSERVICE_URL = " & "@_LOCKER_WEBSERVICE_URL" & ", "
                 Sql += "LOCKER_PC_POSITION = " & "@_LOCKER_PC_POSITION" & ", "
                 Sql += "SLEEP_TIME = " & "@_SLEEP_TIME" & ", "
@@ -976,7 +940,7 @@ Namespace TABLE
         'Get Select Statement for table CF_KIOSK_SYSCONFIG
         Private ReadOnly Property SqlSelect() As String
             Get
-                Dim Sql As String = "SELECT ID, CREATED_BY, CREATED_DATE, UPDATED_BY, UPDATED_DATE, MS_KIOSK_ID, MAC_ADDRESS, IP_ADDRESS, LOCATION_CODE, LOCATION_NAME, LOGIN_SSO, KIOSK_OPEN_TIME, KIOSK_OPEN24, SCREEN_SAVER_SEC, TIME_OUT_SEC, SHOW_MSG_SEC, PAYMENT_EXTEND_SEC, CARD_EXPIRE_MONTH, PASSPORT_EXPIRE_MONTH, LOCKER_WEBSERVICE_URL, LOCKER_PC_POSITION, SLEEP_TIME, SLEEP_DURATION, CONTACT_CENTER_TELNO, ALARM_WEBSERVICE_URL, INTERVAL_SYNC_TRANSACTION_MIN, INTERVAL_SYNC_MASTER_MIN, INTERVAL_SYNC_LOG_MIN, SYNC_TO_KIOSK, SYNC_TO_SERVER FROM " & tableName
+                Dim Sql As String = "SELECT ID, CREATED_BY, CREATED_DATE, UPDATED_BY, UPDATED_DATE, MS_KIOSK_ID, MAC_ADDRESS, IP_ADDRESS, LOCATION_CODE, LOCATION_NAME, LOGIN_SSO, KIOSK_OPEN_TIME, KIOSK_OPEN24, SCREEN_SAVER_SEC, TIME_OUT_SEC, SHOW_MSG_SEC, PAYMENT_EXTEND_SEC, LOCKER_WEBSERVICE_URL, LOCKER_PC_POSITION, SLEEP_TIME, SLEEP_DURATION, CONTACT_CENTER_TELNO, ALARM_WEBSERVICE_URL, INTERVAL_SYNC_TRANSACTION_MIN, INTERVAL_SYNC_MASTER_MIN, INTERVAL_SYNC_LOG_MIN, SYNC_TO_KIOSK, SYNC_TO_SERVER FROM " & tableName
                 Return Sql
             End Get
         End Property

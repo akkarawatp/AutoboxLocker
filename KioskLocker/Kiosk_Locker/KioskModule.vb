@@ -1095,11 +1095,11 @@ Module KioskModule
                         Return "Error"
                     End If
 
-                    'ถ้าเครื่องอ่าน Passport กับเครื่องอ่าน QR Code ใช้งานไม่ได้พร้อมกันให้แสดง Error
-                    tmpdr = DTStatus.Select("(device_id = " & DeviceID.IDCardPassportScanner & " or device_id = " & DeviceID.QRCodeReader & ") and ms_device_status_id <> 1")
-                    If tmpdr.Length = 2 Then
-                        Return "Error"
-                    End If
+                    '''''ถ้าเครื่องอ่าน Passport กับเครื่องอ่าน QR Code ใช้งานไม่ได้พร้อมกันให้แสดง Error
+                    ''''tmpdr = DTStatus.Select("(device_id = " & DeviceID.IDCardPassportScanner & " or device_id = " & DeviceID.QRCodeReader & ") and ms_device_status_id <> 1")
+                    ''''If tmpdr.Length = 2 Then
+                    ''''    Return "Error"
+                    ''''End If
 
                     ''ถ้าเครื่องทอนเหรียญ 5 บาท ใช้งานไม่ได้ (ms_device_status<>1) ให้แสดง Error
                     'tmpdr = DTStatus.Select("device_id = " & DeviceID.CoinOut_5 & " and ms_device_status_id <> 1")
@@ -1197,7 +1197,7 @@ Module KioskModule
     Public Function CreateNewDepositTransaction() As ExecuteDataInfo
         Dim ret As New ExecuteDataInfo
         Try
-            Dim lnq As New TbServiceTransactionKioskLinqDB
+            Dim lnq As New TbDepositTransactionKioskLinqDB
             lnq.TRANS_NO = genNewTransectionNo()
             lnq.TRANS_START_TIME = DateTime.Now
             lnq.MS_KIOSK_ID = KioskData.KioskID
@@ -1232,7 +1232,7 @@ Module KioskModule
         Dim MsAppStepID As Int16 = 0
         Try
             Dim vDateNow As DateTime = DateTime.Now
-            Dim lnq As New TbServiceTransactionKioskLinqDB
+            Dim lnq As New TbDepositTransactionKioskLinqDB
             lnq.GetDataByPK(Cust.ServiceTransactionID, Nothing)
             If lnq.ID > 0 Then
                 lnq.TRANS_END_TIME = vDateNow
@@ -1295,7 +1295,7 @@ Module KioskModule
     Public Function UpdateDepositStatus(ServiceTransactionID As Long, TransStatus As DepositTransactionData.TransactionStatus, MsAppStepID As KioskConfigData.KioskLockerStep) As ExecuteDataInfo
         Dim ret As New ExecuteDataInfo
         Try
-            Dim sql As String = " update tb_service_transaction "
+            Dim sql As String = " update TB_DEPOSIT_TRANSACTION "
             sql += " set trans_end_time = getdate()"
             sql += ", trans_status=@_TRANS_STATUS"
             sql += ", ms_app_screen_id=@_MS_APP_SCREEN_ID"
@@ -1482,8 +1482,8 @@ Module KioskModule
 
 
 #Region "Update Service Transaction at Collect "
-    Public Function UpdateServiceTransactionServer(DepositTransNo As String, MsStepID As Long) As ServerLinqDB.TABLE.TbServiceTransactionServerLinqDB
-        Dim lnq As New ServerLinqDB.TABLE.TbServiceTransactionServerLinqDB
+    Public Function UpdateServiceTransactionServer(DepositTransNo As String, MsStepID As Long) As ServerLinqDB.TABLE.TbDepositTransactionServerLinqDB
+        Dim lnq As New ServerLinqDB.TABLE.TbDepositTransactionServerLinqDB
         Try
             lnq.ChkDataByTRANS_NO(DepositTransNo, Nothing)
             If lnq.ID > 0 Then
@@ -1504,13 +1504,13 @@ Module KioskModule
             End If
         Catch ex As Exception
             InsertErrorLog("Exception " & ex.Message & vbNewLine & ex.StackTrace, "", Collect.TransactionNo, "", KioskConfig.SelectForm, MsStepID)
-            lnq = New ServerLinqDB.TABLE.TbServiceTransactionServerLinqDB
+            lnq = New ServerLinqDB.TABLE.TbDepositTransactionServerLinqDB
         End Try
         Return lnq
     End Function
 
-    Public Function UpdateServiceTransactionKiosk(DepositTransNo As String, MsStepID As Long) As TbServiceTransactionKioskLinqDB
-        Dim lnq As New TbServiceTransactionKioskLinqDB
+    Public Function UpdateServiceTransactionKiosk(DepositTransNo As String, MsStepID As Long) As TbDepositTransactionKioskLinqDB
+        Dim lnq As New TbDepositTransactionKioskLinqDB
         Try
             lnq.ChkDataByTRANS_NO(DepositTransNo, Nothing)
             If lnq.ID > 0 Then
@@ -1532,7 +1532,7 @@ Module KioskModule
 
         Catch ex As Exception
             InsertErrorLog("Exception " & ex.Message & vbNewLine & ex.StackTrace, "", Collect.TransactionNo, "", KioskConfig.SelectForm, MsStepID)
-            lnq = New TbServiceTransactionKioskLinqDB
+            lnq = New TbDepositTransactionKioskLinqDB
         End Try
         Return lnq
     End Function
@@ -2101,8 +2101,8 @@ Module KioskModule
                 KioskConfig.ScreenSaverSec = lnq.SCREEN_SAVER_SEC
                 KioskConfig.TimeOutSec = lnq.TIME_OUT_SEC
                 KioskConfig.ShowMsgSec = lnq.SHOW_MSG_SEC
-                KioskConfig.CardExpireMonth = lnq.CARD_EXPIRE_MONTH
-                KioskConfig.PassportExpireMonth = lnq.PASSPORT_EXPIRE_MONTH
+                'KioskConfig.CardExpireMonth = lnq.CARD_EXPIRE_MONTH
+                'KioskConfig.PassportExpireMonth = lnq.PASSPORT_EXPIRE_MONTH
                 KioskConfig.PaymentExtendSec = lnq.PAYMENT_EXTEND_SEC
                 KioskConfig.LockerPCPosition = lnq.LOCKER_PC_POSITION
                 KioskConfig.ContactCenterTelno = lnq.CONTACT_CENTER_TELNO
@@ -2182,17 +2182,17 @@ Module KioskModule
                                     KioskConfig.PrinterDeviceName = dDr("driver_name1")
                                 End If
 
-                            Case DeviceID.IDCardPassportScanner
+                            Case DeviceID.WebCamera
                                 If Convert.IsDBNull(dDr("comport_vid")) = False Then
-                                    KioskConfig.IDCardPassportVID = dDr("comport_vid")
+                                    KioskConfig.WebCameraVID = dDr("comport_vid")
                                 End If
 
                                 If Convert.IsDBNull(dDr("driver_name1")) = False Then
-                                    KioskConfig.IDCardNoDeviceName = dDr("driver_name1")
+                                    KioskConfig.WebCameraDeviceName = dDr("driver_name1")
                                 End If
-                                If Convert.IsDBNull(dDr("driver_name2")) = False Then
-                                    KioskConfig.PassportDeviceName = dDr("driver_name2")
-                                End If
+                                'If Convert.IsDBNull(dDr("driver_name2")) = False Then
+                                '    KioskConfig.PassportDeviceName = dDr("driver_name2")
+                                'End If
 
                             Case DeviceID.NetworkConnection
 
@@ -2233,69 +2233,69 @@ Module KioskModule
 
 
 
-    Public Sub SetChildFormLanguage()
-        Dim fldName As String = ""
-        'Dim fntName As New Font("Thai Sans Lite", FontStyle.Bold)
-        Select Case KioskConfig.Language
-            Case Data.ConstantsData.KioskLanguage.Thai
-                fldName = "TH_Display"
-            Case Data.ConstantsData.KioskLanguage.English
-                fldName = "EN_Display"
-            Case Data.ConstantsData.KioskLanguage.China
-                fldName = "CH_Display"
-            Case Data.KioskLanguage.Japan
-                fldName = "JP_Display"
-        End Select
+    'Public Sub SetChildFormLanguage()
+    '    Dim fldName As String = ""
+    '    'Dim fntName As New Font("Thai Sans Lite", FontStyle.Bold)
+    '    Select Case KioskConfig.Language
+    '        Case Data.ConstantsData.KioskLanguage.Thai
+    '            fldName = "TH_Display"
+    '        Case Data.ConstantsData.KioskLanguage.English
+    '            fldName = "EN_Display"
+    '        Case Data.ConstantsData.KioskLanguage.China
+    '            fldName = "CH_Display"
+    '        Case Data.KioskLanguage.Japan
+    '            fldName = "JP_Display"
+    '    End Select
 
-        Try
-            LangMasterList.DefaultView.RowFilter = "ms_app_screen_id='" & Convert.ToInt16(KioskConfig.SelectForm) & "'"
-            If LangMasterList.DefaultView.Count > 0 Then
-                AppScreenList.DefaultView.RowFilter = "id='" & Convert.ToInt16(KioskConfig.SelectForm) & "'"
-                If AppScreenList.DefaultView.Count > 0 Then
-                    Dim frm As Form = Application.OpenForms(AppScreenList.DefaultView(0)("form_name"))
+    '    Try
+    '        LangMasterList.DefaultView.RowFilter = "ms_app_screen_id='" & Convert.ToInt16(KioskConfig.SelectForm) & "'"
+    '        If LangMasterList.DefaultView.Count > 0 Then
+    '            AppScreenList.DefaultView.RowFilter = "id='" & Convert.ToInt16(KioskConfig.SelectForm) & "'"
+    '            If AppScreenList.DefaultView.Count > 0 Then
+    '                Dim frm As Form = Application.OpenForms(AppScreenList.DefaultView(0)("form_name"))
 
-                    For Each dr As DataRowView In LangMasterList.DefaultView
-                        Dim ControlName As String = dr("Control_Name")
-                        Dim cc() As Control = frm.Controls.Find(ControlName, True)
-                        If cc.Length > 0 Then
-                            cc(0).Text = dr(fldName)
+    '                For Each dr As DataRowView In LangMasterList.DefaultView
+    '                    Dim ControlName As String = dr("Control_Name")
+    '                    Dim cc() As Control = frm.Controls.Find(ControlName, True)
+    '                    If cc.Length > 0 Then
+    '                        cc(0).Text = dr(fldName)
 
-                            Dim FontSize As Int16 = dr("font_size")
-                            Dim FontStyle As FontStyle = Convert.ToInt16(dr("font_style"))
-                            cc(0).Font = New Font("Thai Sans Lite", FontSize, FontStyle)
+    '                        Dim FontSize As Int16 = dr("font_size")
+    '                        Dim FontStyle As FontStyle = Convert.ToInt16(dr("font_style"))
+    '                        cc(0).Font = New Font("Thai Sans Lite", FontSize, FontStyle)
 
-                            If KioskConfig.Language = Data.ConstantsData.KioskLanguage.China Then
-                                FontSize = FontSize * 0.7
-                                cc(0).Font = New Font("Hiragino Sans GB W3", FontSize, FontStyle)
+    '                        If KioskConfig.Language = Data.ConstantsData.KioskLanguage.China Then
+    '                            FontSize = FontSize * 0.7
+    '                            cc(0).Font = New Font("Hiragino Sans GB W3", FontSize, FontStyle)
 
-                                'cc(0).Font = New Font("Songti SC Black", FontSize, FontStyle)
-                            ElseIf KioskConfig.Language = Data.ConstantsData.KioskLanguage.Japan Then
-                                FontSize = FontSize * 0.7
+    '                            'cc(0).Font = New Font("Songti SC Black", FontSize, FontStyle)
+    '                        ElseIf KioskConfig.Language = Data.ConstantsData.KioskLanguage.Japan Then
+    '                            FontSize = FontSize * 0.7
 
-                                cc(0).Font = New Font("MS Gothic", FontSize, FontStyle)
-                                'cc(0).Font = New Font("ＭＳ Ｐゴシック", FontSize, FontStyle)
-                            End If
-                        End If
-                    Next
+    '                            cc(0).Font = New Font("MS Gothic", FontSize, FontStyle)
+    '                            'cc(0).Font = New Font("ＭＳ Ｐゴシック", FontSize, FontStyle)
+    '                        End If
+    '                    End If
+    '                Next
 
-                    If KioskConfig.SelectForm = KioskConfigData.KioskLockerForm.CollectSelectDocument Then
-                        Select Case KioskConfig.Language
-                            Case Data.ConstantsData.KioskLanguage.China, Data.ConstantsData.KioskLanguage.Japan
-                                DirectCast(frm, frmCollectSelectDocument).lblPassport.Top = DirectCast(frm, frmCollectSelectDocument).lblQRCode.Top
-                            Case Else
-                                DirectCast(frm, frmCollectSelectDocument).lblPassport.Top = 210
-                        End Select
-                    End If
-                End If
-                AppScreenList.DefaultView.RowFilter = ""
+    '                If KioskConfig.SelectForm = KioskConfigData.KioskLockerForm.CollectSelectDocument Then
+    '                    Select Case KioskConfig.Language
+    '                        Case Data.ConstantsData.KioskLanguage.China, Data.ConstantsData.KioskLanguage.Japan
+    '                            DirectCast(frm, frmCollectSelectDocument).lblPassport.Top = DirectCast(frm, frmCollectSelectDocument).lblQRCode.Top
+    '                        Case Else
+    '                            DirectCast(frm, frmCollectSelectDocument).lblPassport.Top = 210
+    '                    End Select
+    '                End If
+    '            End If
+    '            AppScreenList.DefaultView.RowFilter = ""
 
 
-            End If
-            LangMasterList.DefaultView.RowFilter = ""
-        Catch ex As Exception
+    '        End If
+    '        LangMasterList.DefaultView.RowFilter = ""
+    '    Catch ex As Exception
 
-        End Try
-    End Sub
+    '    End Try
+    'End Sub
 
     'Public Function GetNotificationText(_id As Long) As String
     '    Dim ret As String = ""

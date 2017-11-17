@@ -15,8 +15,8 @@ Public Class SyncMasterDataENG
         PullMasterDeviceType(MsKioskID)
         PullMasterDeviceStatus(MsKioskID)
         PullMasterDevice(MsKioskID)
-        PullMasterKioskScreenControl(MsKioskID)
-        PullMasterKioskNotificationText(MsKioskID)
+        'PullMasterKioskScreenControl(MsKioskID)
+        'PullMasterKioskNotificationText(MsKioskID)
         PullMasterMonitoringAlarm(MsKioskID)
 
         SyncMasterKioskSysconfig(MsKioskID)
@@ -139,140 +139,140 @@ Public Class SyncMasterDataENG
         End Try
     End Sub
 
-    Public Shared Sub PullMasterKioskScreenControl(MsKioskID As Long)
-        Try
-            Dim ws As New SyncDataWebservice.ATBLockerWebService
-            ws.Timeout = 10000
-            ws.Url = KioskInfoENG.GetLockerSysconfig(MsKioskID).LOCKER_WEBSERVICE_URL
-            Dim dt As DataTable = ws.GetMasterKioskScreenControl()
-            If dt.Rows.Count > 0 Then
-                For Each dr As DataRow In dt.Rows
-                    Dim kLnq As New MsKioskScreenControlKioskLinqDB
-                    kLnq.GetDataByPK(dr("ID"), Nothing)
-                    If kLnq.ID > 0 Then
-                        kLnq.MS_APP_SCREEN_ID = dr("MS_APP_SCREEN_ID")
-                        kLnq.CONTROL_NAME = dr("CONTROL_NAME")
-                        If Convert.IsDBNull(dr("TH_DISPLAY")) = False Then kLnq.TH_DISPLAY = dr("TH_DISPLAY")
-                        If Convert.IsDBNull(dr("EN_DISPLAY")) = False Then kLnq.EN_DISPLAY = dr("EN_DISPLAY")
-                        If Convert.IsDBNull(dr("CH_DISPLAY")) = False Then kLnq.CH_DISPLAY = dr("CH_DISPLAY")
-                        If Convert.IsDBNull(dr("JP_DISPLAY")) = False Then kLnq.JP_DISPLAY = dr("JP_DISPLAY")
-                        kLnq.SYNC_TO_KIOSK = dr("SYNC_TO_KIOSK")
-                        kLnq.SYNC_TO_SERVER = dr("SYNC_TO_SERVER")
-                        kLnq.FONT_SIZE = dr("font_size")
-                        kLnq.FONT_STYLE = dr("font_style")
+    'Public Shared Sub PullMasterKioskScreenControl(MsKioskID As Long)
+    '    Try
+    '        Dim ws As New SyncDataWebservice.ATBLockerWebService
+    '        ws.Timeout = 10000
+    '        ws.Url = KioskInfoENG.GetLockerSysconfig(MsKioskID).LOCKER_WEBSERVICE_URL
+    '        Dim dt As DataTable = ws.GetMasterKioskScreenControl()
+    '        If dt.Rows.Count > 0 Then
+    '            For Each dr As DataRow In dt.Rows
+    '                Dim kLnq As New MsKioskScreenControlKioskLinqDB
+    '                kLnq.GetDataByPK(dr("ID"), Nothing)
+    '                If kLnq.ID > 0 Then
+    '                    kLnq.MS_APP_SCREEN_ID = dr("MS_APP_SCREEN_ID")
+    '                    kLnq.CONTROL_NAME = dr("CONTROL_NAME")
+    '                    If Convert.IsDBNull(dr("TH_DISPLAY")) = False Then kLnq.TH_DISPLAY = dr("TH_DISPLAY")
+    '                    If Convert.IsDBNull(dr("EN_DISPLAY")) = False Then kLnq.EN_DISPLAY = dr("EN_DISPLAY")
+    '                    If Convert.IsDBNull(dr("CH_DISPLAY")) = False Then kLnq.CH_DISPLAY = dr("CH_DISPLAY")
+    '                    If Convert.IsDBNull(dr("JP_DISPLAY")) = False Then kLnq.JP_DISPLAY = dr("JP_DISPLAY")
+    '                    kLnq.SYNC_TO_KIOSK = dr("SYNC_TO_KIOSK")
+    '                    kLnq.SYNC_TO_SERVER = dr("SYNC_TO_SERVER")
+    '                    kLnq.FONT_SIZE = dr("font_size")
+    '                    kLnq.FONT_STYLE = dr("font_style")
 
-                        Dim kTrans As New KioskTransactionDB
-                        Dim ret As KioskLinqDB.ConnectDB.ExecuteDataInfo = kLnq.UpdateData(Environment.MachineName, kTrans.Trans)
-                        If ret.IsSuccess = True Then
-                            kTrans.CommitTransaction()
-                        Else
-                            kTrans.RollbackTransaction()
-                            LogFileENG.CreateErrorLogAgent(MsKioskID, ret.ErrorMessage)
-                        End If
-                    Else
+    '                    Dim kTrans As New KioskTransactionDB
+    '                    Dim ret As KioskLinqDB.ConnectDB.ExecuteDataInfo = kLnq.UpdateData(Environment.MachineName, kTrans.Trans)
+    '                    If ret.IsSuccess = True Then
+    '                        kTrans.CommitTransaction()
+    '                    Else
+    '                        kTrans.RollbackTransaction()
+    '                        LogFileENG.CreateErrorLogAgent(MsKioskID, ret.ErrorMessage)
+    '                    End If
+    '                Else
 
-                        Dim sql As String = "set identity_insert [MS_KIOSK_SCREEN_CONTROL] on; " & vbNewLine
-                        sql += " insert into [MS_KIOSK_SCREEN_CONTROL] (id,created_by,created_date,ms_app_screen_id,control_name," & vbNewLine
-                        sql += " TH_Display,EN_Display, CH_Display, JP_Display, sync_to_kiosk, sync_to_server, font_size, font_style) " & vbNewLine
-                        sql += " values(@_ID,@_CREATED_BY,getdate(),@_MS_APP_SCREEN_ID, @_CONTROL_NAME, " & vbNewLine
-                        sql += " @_TH_DISPLAY, @_EN_DISPLAY, @_CH_DISPLAY, @_JP_DISPLAY, @_SYNC_TO_KIOSK, @_SYNC_TO_SERVER, @_FONT_SIZE, @_FONT_STYPE); " & vbNewLine
-                        sql += " set identity_insert [MS_KIOSK_SCREEN_CONTROL] off;"
+    '                    Dim sql As String = "set identity_insert [MS_KIOSK_SCREEN_CONTROL] on; " & vbNewLine
+    '                    sql += " insert into [MS_KIOSK_SCREEN_CONTROL] (id,created_by,created_date,ms_app_screen_id,control_name," & vbNewLine
+    '                    sql += " TH_Display,EN_Display, CH_Display, JP_Display, sync_to_kiosk, sync_to_server, font_size, font_style) " & vbNewLine
+    '                    sql += " values(@_ID,@_CREATED_BY,getdate(),@_MS_APP_SCREEN_ID, @_CONTROL_NAME, " & vbNewLine
+    '                    sql += " @_TH_DISPLAY, @_EN_DISPLAY, @_CH_DISPLAY, @_JP_DISPLAY, @_SYNC_TO_KIOSK, @_SYNC_TO_SERVER, @_FONT_SIZE, @_FONT_STYPE); " & vbNewLine
+    '                    sql += " set identity_insert [MS_KIOSK_SCREEN_CONTROL] off;"
 
-                        Dim p(12) As SqlParameter
-                        p(0) = KioskDB.SetBigInt("@_ID", dr("ID"))
-                        p(1) = KioskDB.SetText("@_CREATED_BY", Environment.MachineName)
-                        p(2) = KioskDB.SetBigInt("@_MS_APP_SCREEN_ID", dr("MS_APP_SCREEN_ID"))
-                        p(3) = KioskDB.SetText("@_CONTROL_NAME", dr("CONTROL_NAME"))
-                        p(4) = KioskDB.SetText("@_TH_DISPLAY", dr("TH_DISPLAY"))
-                        p(5) = KioskDB.SetText("@_EN_DISPLAY", dr("EN_DISPLAY"))
-                        p(6) = KioskDB.SetNVarchar("@_CH_DISPLAY", dr("CH_DISPLAY"))
-                        p(7) = KioskDB.SetNVarchar("@_JP_DISPLAY", dr("JP_DISPLAY"))
-                        p(8) = KioskDB.SetText("@_SYNC_TO_KIOSK", dr("SYNC_TO_KIOSK"))
-                        p(9) = KioskDB.SetText("@_SYNC_TO_SERVER", dr("SYNC_TO_SERVER"))
-                        p(10) = KioskDB.SetInt("@_FONT_SIZE", dr("font_size"))
-                        p(11) = KioskDB.SetInt("@_FONT_STYPE", dr("font_style"))
+    '                    Dim p(12) As SqlParameter
+    '                    p(0) = KioskDB.SetBigInt("@_ID", dr("ID"))
+    '                    p(1) = KioskDB.SetText("@_CREATED_BY", Environment.MachineName)
+    '                    p(2) = KioskDB.SetBigInt("@_MS_APP_SCREEN_ID", dr("MS_APP_SCREEN_ID"))
+    '                    p(3) = KioskDB.SetText("@_CONTROL_NAME", dr("CONTROL_NAME"))
+    '                    p(4) = KioskDB.SetText("@_TH_DISPLAY", dr("TH_DISPLAY"))
+    '                    p(5) = KioskDB.SetText("@_EN_DISPLAY", dr("EN_DISPLAY"))
+    '                    p(6) = KioskDB.SetNVarchar("@_CH_DISPLAY", dr("CH_DISPLAY"))
+    '                    p(7) = KioskDB.SetNVarchar("@_JP_DISPLAY", dr("JP_DISPLAY"))
+    '                    p(8) = KioskDB.SetText("@_SYNC_TO_KIOSK", dr("SYNC_TO_KIOSK"))
+    '                    p(9) = KioskDB.SetText("@_SYNC_TO_SERVER", dr("SYNC_TO_SERVER"))
+    '                    p(10) = KioskDB.SetInt("@_FONT_SIZE", dr("font_size"))
+    '                    p(11) = KioskDB.SetInt("@_FONT_STYPE", dr("font_style"))
 
-                        Dim kTrans As New KioskTransactionDB
-                        Dim ret As KioskLinqDB.ConnectDB.ExecuteDataInfo = KioskDB.ExecuteNonQuery(sql, kTrans.Trans, p)
-                        If ret.IsSuccess = True Then
-                            kTrans.CommitTransaction()
-                        Else
-                            kTrans.RollbackTransaction()
-                            LogFileENG.CreateErrorLogAgent(MsKioskID, ret.ErrorMessage)
-                        End If
-                    End If
-                    kLnq = Nothing
-                Next
-            End If
-            dt.Dispose()
-            ws.Dispose()
-        Catch ex As Exception
-            LogFileENG.CreateExceptionLogAgent(MsKioskID, ex.Message, ex.StackTrace)
-        End Try
-    End Sub
+    '                    Dim kTrans As New KioskTransactionDB
+    '                    Dim ret As KioskLinqDB.ConnectDB.ExecuteDataInfo = KioskDB.ExecuteNonQuery(sql, kTrans.Trans, p)
+    '                    If ret.IsSuccess = True Then
+    '                        kTrans.CommitTransaction()
+    '                    Else
+    '                        kTrans.RollbackTransaction()
+    '                        LogFileENG.CreateErrorLogAgent(MsKioskID, ret.ErrorMessage)
+    '                    End If
+    '                End If
+    '                kLnq = Nothing
+    '            Next
+    '        End If
+    '        dt.Dispose()
+    '        ws.Dispose()
+    '    Catch ex As Exception
+    '        LogFileENG.CreateExceptionLogAgent(MsKioskID, ex.Message, ex.StackTrace)
+    '    End Try
+    'End Sub
 
-    Public Shared Sub PullMasterKioskNotificationText(MsKioskID As Long)
-        Try
-            Dim ws As New SyncDataWebservice.ATBLockerWebService
-            ws.Timeout = 10000
-            ws.Url = KioskInfoENG.GetLockerSysconfig(MsKioskID).LOCKER_WEBSERVICE_URL
-            Dim dt As DataTable = ws.GetMasterKioskNotificationText()
-            If dt.Rows.Count > 0 Then
-                For Each dr As DataRow In dt.Rows
-                    Dim kLnq As New MsKioskNotificationTextKioskLinqDB
-                    kLnq.GetDataByPK(dr("ID"), Nothing)
-                    If kLnq.ID > 0 Then
-                        kLnq.MS_APP_SCREEN_ID = dr("MS_APP_SCREEN_ID")
-                        kLnq.CONTROL_NAME = dr("CONTROL_NAME")
-                        If Convert.IsDBNull(dr("TH_DISPLAY")) = False Then kLnq.TH_DISPLAY = dr("TH_DISPLAY")
-                        If Convert.IsDBNull(dr("EN_DISPLAY")) = False Then kLnq.EN_DISPLAY = dr("EN_DISPLAY")
-                        If Convert.IsDBNull(dr("CH_DISPLAY")) = False Then kLnq.CH_DISPLAY = dr("CH_DISPLAY")
-                        If Convert.IsDBNull(dr("JP_DISPLAY")) = False Then kLnq.JP_DISPLAY = dr("JP_DISPLAY")
-                        Dim kTrans As New KioskTransactionDB
-                        Dim ret As KioskLinqDB.ConnectDB.ExecuteDataInfo = kLnq.UpdateData(Environment.MachineName, kTrans.Trans)
-                        If ret.IsSuccess = True Then
-                            kTrans.CommitTransaction()
-                        Else
-                            kTrans.RollbackTransaction()
-                            LogFileENG.CreateErrorLogAgent(MsKioskID, ret.ErrorMessage)
-                        End If
-                    Else
+    'Public Shared Sub PullMasterKioskNotificationText(MsKioskID As Long)
+    '    Try
+    '        Dim ws As New SyncDataWebservice.ATBLockerWebService
+    '        ws.Timeout = 10000
+    '        ws.Url = KioskInfoENG.GetLockerSysconfig(MsKioskID).LOCKER_WEBSERVICE_URL
+    '        Dim dt As DataTable = ws.GetMasterKioskNotificationText()
+    '        If dt.Rows.Count > 0 Then
+    '            For Each dr As DataRow In dt.Rows
+    '                Dim kLnq As New MsKioskNotificationTextKioskLinqDB
+    '                kLnq.GetDataByPK(dr("ID"), Nothing)
+    '                If kLnq.ID > 0 Then
+    '                    kLnq.MS_APP_SCREEN_ID = dr("MS_APP_SCREEN_ID")
+    '                    kLnq.CONTROL_NAME = dr("CONTROL_NAME")
+    '                    If Convert.IsDBNull(dr("TH_DISPLAY")) = False Then kLnq.TH_DISPLAY = dr("TH_DISPLAY")
+    '                    If Convert.IsDBNull(dr("EN_DISPLAY")) = False Then kLnq.EN_DISPLAY = dr("EN_DISPLAY")
+    '                    If Convert.IsDBNull(dr("CH_DISPLAY")) = False Then kLnq.CH_DISPLAY = dr("CH_DISPLAY")
+    '                    If Convert.IsDBNull(dr("JP_DISPLAY")) = False Then kLnq.JP_DISPLAY = dr("JP_DISPLAY")
+    '                    Dim kTrans As New KioskTransactionDB
+    '                    Dim ret As KioskLinqDB.ConnectDB.ExecuteDataInfo = kLnq.UpdateData(Environment.MachineName, kTrans.Trans)
+    '                    If ret.IsSuccess = True Then
+    '                        kTrans.CommitTransaction()
+    '                    Else
+    '                        kTrans.RollbackTransaction()
+    '                        LogFileENG.CreateErrorLogAgent(MsKioskID, ret.ErrorMessage)
+    '                    End If
+    '                Else
 
-                        Dim sql As String = "set identity_insert [MS_KIOSK_NOTIFICATION_TEXT] on; " & vbNewLine
-                        sql += " insert into [MS_KIOSK_NOTIFICATION_TEXT] (id,created_by,created_date,ms_app_screen_id,control_name," & vbNewLine
-                        sql += " TH_Display,EN_Display, CH_Display, JP_Display) " & vbNewLine
-                        sql += " values(@_ID,@_CREATED_BY,getdate(),@_MS_APP_SCREEN_ID, @_CONTROL_NAME, " & vbNewLine
-                        sql += " @_TH_DISPLAY, @_EN_DISPLAY, @_CH_DISPLAY, @_JP_DISPLAY); " & vbNewLine
-                        sql += " set identity_insert [MS_KIOSK_NOTIFICATION_TEXT] off;"
+    '                    Dim sql As String = "set identity_insert [MS_KIOSK_NOTIFICATION_TEXT] on; " & vbNewLine
+    '                    sql += " insert into [MS_KIOSK_NOTIFICATION_TEXT] (id,created_by,created_date,ms_app_screen_id,control_name," & vbNewLine
+    '                    sql += " TH_Display,EN_Display, CH_Display, JP_Display) " & vbNewLine
+    '                    sql += " values(@_ID,@_CREATED_BY,getdate(),@_MS_APP_SCREEN_ID, @_CONTROL_NAME, " & vbNewLine
+    '                    sql += " @_TH_DISPLAY, @_EN_DISPLAY, @_CH_DISPLAY, @_JP_DISPLAY); " & vbNewLine
+    '                    sql += " set identity_insert [MS_KIOSK_NOTIFICATION_TEXT] off;"
 
-                        Dim p(8) As SqlParameter
-                        p(0) = KioskDB.SetBigInt("@_ID", dr("ID"))
-                        p(1) = KioskDB.SetText("@_CREATED_BY", Environment.MachineName)
-                        p(2) = KioskDB.SetBigInt("@_MS_APP_SCREEN_ID", dr("MS_APP_SCREEN_ID"))
-                        p(3) = KioskDB.SetText("@_CONTROL_NAME", dr("CONTROL_NAME"))
-                        p(4) = KioskDB.SetText("@_TH_DISPLAY", dr("TH_DISPLAY"))
-                        p(5) = KioskDB.SetText("@_EN_DISPLAY", dr("EN_DISPLAY"))
-                        p(6) = KioskDB.SetNVarchar("@_CH_DISPLAY", dr("CH_DISPLAY"))
-                        p(7) = KioskDB.SetNVarchar("@_JP_DISPLAY", dr("JP_DISPLAY"))
+    '                    Dim p(8) As SqlParameter
+    '                    p(0) = KioskDB.SetBigInt("@_ID", dr("ID"))
+    '                    p(1) = KioskDB.SetText("@_CREATED_BY", Environment.MachineName)
+    '                    p(2) = KioskDB.SetBigInt("@_MS_APP_SCREEN_ID", dr("MS_APP_SCREEN_ID"))
+    '                    p(3) = KioskDB.SetText("@_CONTROL_NAME", dr("CONTROL_NAME"))
+    '                    p(4) = KioskDB.SetText("@_TH_DISPLAY", dr("TH_DISPLAY"))
+    '                    p(5) = KioskDB.SetText("@_EN_DISPLAY", dr("EN_DISPLAY"))
+    '                    p(6) = KioskDB.SetNVarchar("@_CH_DISPLAY", dr("CH_DISPLAY"))
+    '                    p(7) = KioskDB.SetNVarchar("@_JP_DISPLAY", dr("JP_DISPLAY"))
 
-                        Dim kTrans As New KioskTransactionDB
-                        Dim ret As KioskLinqDB.ConnectDB.ExecuteDataInfo = KioskDB.ExecuteNonQuery(sql, kTrans.Trans, p)
-                        If ret.IsSuccess = True Then
-                            kTrans.CommitTransaction()
-                        Else
-                            kTrans.RollbackTransaction()
-                            LogFileENG.CreateErrorLogAgent(MsKioskID, ret.ErrorMessage)
-                        End If
-                    End If
-                    kLnq = Nothing
-                Next
-            End If
-            dt.Dispose()
-            ws.Dispose()
-        Catch ex As Exception
-            LogFileENG.CreateExceptionLogAgent(MsKioskID, ex.Message, ex.StackTrace)
-        End Try
-    End Sub
+    '                    Dim kTrans As New KioskTransactionDB
+    '                    Dim ret As KioskLinqDB.ConnectDB.ExecuteDataInfo = KioskDB.ExecuteNonQuery(sql, kTrans.Trans, p)
+    '                    If ret.IsSuccess = True Then
+    '                        kTrans.CommitTransaction()
+    '                    Else
+    '                        kTrans.RollbackTransaction()
+    '                        LogFileENG.CreateErrorLogAgent(MsKioskID, ret.ErrorMessage)
+    '                    End If
+    '                End If
+    '                kLnq = Nothing
+    '            Next
+    '        End If
+    '        dt.Dispose()
+    '        ws.Dispose()
+    '    Catch ex As Exception
+    '        LogFileENG.CreateExceptionLogAgent(MsKioskID, ex.Message, ex.StackTrace)
+    '    End Try
+    'End Sub
 
     Private Shared Sub PullMasterCabinetModel(MsKioskID As Long)
         Try
@@ -887,8 +887,8 @@ Public Class SyncMasterDataENG
                     kLnq.TIME_OUT_SEC = dr("TIME_OUT_SEC")
                     kLnq.SHOW_MSG_SEC = dr("SHOW_MSG_SEC")
                     kLnq.PAYMENT_EXTEND_SEC = dr("PAYMENT_EXTEND_SEC")
-                    kLnq.CARD_EXPIRE_MONTH = dr("CARD_EXPIRE_MONTH")
-                    kLnq.PASSPORT_EXPIRE_MONTH = dr("PASSPORT_EXPIRE_MONTH")
+                    'kLnq.CARD_EXPIRE_MONTH = dr("CARD_EXPIRE_MONTH")
+                    'kLnq.PASSPORT_EXPIRE_MONTH = dr("PASSPORT_EXPIRE_MONTH")
                     kLnq.LOCKER_WEBSERVICE_URL = dr("LOCKER_WEBSERVICE_URL")
                     kLnq.LOCKER_PC_POSITION = dr("LOCKER_PC_POSITION")
                     kLnq.SLEEP_TIME = dr("SLEEP_TIME")

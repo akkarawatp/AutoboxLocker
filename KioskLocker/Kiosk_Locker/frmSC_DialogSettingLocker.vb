@@ -173,7 +173,7 @@ Public Class frmSC_DialogSettingLocker
         Dim ret As String = ""
         Try
             Dim sql As String = "select t.id, t.trans_no, t.ms_locker_id "
-            sql += " from TB_SERVICE_TRANSACTION t"
+            sql += " from TB_DEPOSIT_TRANSACTION t"
             sql += " inner join MS_LOCKER l on l.id=t.ms_locker_id"
             sql += " where t.ms_locker_id=@_LOCKER_ID "
             sql += " and t.trans_status=@_TRANS_STATUS "
@@ -229,7 +229,7 @@ Public Class frmSC_DialogSettingLocker
             Dim trans As New KioskTransactionDB
 
             If DepositTransNo.Trim <> "" Then
-                Dim dLnq As New TbServiceTransactionKioskLinqDB
+                Dim dLnq As New TbDepositTransactionKioskLinqDB
                 dLnq.ChkDataByTRANS_NO(DepositTransNo, trans.Trans)
                 If dLnq.ID > 0 Then
                     dLnq.TRANS_STATUS = Convert.ToInt16(DepositTransactionData.TransactionStatus.CancelByAdmin).ToString

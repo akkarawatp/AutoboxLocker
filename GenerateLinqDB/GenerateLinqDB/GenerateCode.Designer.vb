@@ -142,7 +142,7 @@ Partial Class GenerateCode
         Me.txtDatabaseName.Name = "txtDatabaseName"
         Me.txtDatabaseName.Size = New System.Drawing.Size(158, 22)
         Me.txtDatabaseName.TabIndex = 14
-        Me.txtDatabaseName.Text = "ATB-TIT_Locker"
+        Me.txtDatabaseName.Text = "AutoboxLockerServerDB"
         '
         'txtUserID
         '
@@ -160,7 +160,7 @@ Partial Class GenerateCode
         Me.txtDataSource.Name = "txtDataSource"
         Me.txtDataSource.Size = New System.Drawing.Size(158, 22)
         Me.txtDataSource.TabIndex = 12
-        Me.txtDataSource.Text = "103.253.72.88"
+        Me.txtDataSource.Text = "103.253.72.223"
         '
         'txtProjectCode
         '
@@ -169,7 +169,7 @@ Partial Class GenerateCode
         Me.txtProjectCode.Name = "txtProjectCode"
         Me.txtProjectCode.Size = New System.Drawing.Size(158, 22)
         Me.txtProjectCode.TabIndex = 11
-        Me.txtProjectCode.Text = "ATB-Locker"
+        Me.txtProjectCode.Text = "Autobox Locker"
         '
         'Label7
         '
@@ -249,7 +249,7 @@ Partial Class GenerateCode
         Me.txtOutputPath.Name = "txtOutputPath"
         Me.txtOutputPath.Size = New System.Drawing.Size(544, 22)
         Me.txtOutputPath.TabIndex = 20
-        Me.txtOutputPath.Text = "D:\MyProject\TIT_Tech\ATB-TIT\SourceCode\Locker\KioskLocker\"
+        Me.txtOutputPath.Text = "D:\MyProject\AutoBox\Locker\SourceCode\KioskLocker\"
         '
         'btnGenAll
         '

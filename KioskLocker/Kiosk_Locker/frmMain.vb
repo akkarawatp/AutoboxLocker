@@ -77,7 +77,7 @@ Public Class frmMain
             fHome.Show()
 
             CheckKioskScreenSaver()
-            GetAdsInfo()
+            'GetAdsInfo()
         Else
             InsertErrorLog("Cannot Load Device Infomation List", 0, 0, 0, KioskConfig.SelectForm, 0)
             ShowFormError("Out of service", "Load Device Fail", KioskConfig.SelectForm, 0, True)
@@ -239,36 +239,36 @@ Public Class frmMain
         SetLockerList()
     End Sub
 
-    Private Sub GetAdsInfo()
-        Try
-            DT_ADS = New DataTable
-            DT_ADS.Columns.Add("Ads_Image", GetType(Image))
-            DT_ADS.Columns.Add("Ads_Sec", GetType(Int16))
+    'Private Sub GetAdsInfo()
+    '    Try
+    '        DT_ADS = New DataTable
+    '        DT_ADS.Columns.Add("Ads_Image", GetType(Image))
+    '        DT_ADS.Columns.Add("Ads_Sec", GetType(Int16))
 
-            For Each f As String In Directory.GetFiles(Application.StartupPath & "\Ads", "*.png")
-                Dim dr As DataRow = DT_ADS.NewRow
-                dr("Ads_Image") = Image.FromFile(f)
-                dr("Ads_Sec") = 5
-                DT_ADS.Rows.Add(dr)
-            Next
+    '        For Each f As String In Directory.GetFiles(Application.StartupPath & "\Ads", "*.png")
+    '            Dim dr As DataRow = DT_ADS.NewRow
+    '            dr("Ads_Image") = Image.FromFile(f)
+    '            dr("Ads_Sec") = 5
+    '            DT_ADS.Rows.Add(dr)
+    '        Next
 
-            If DT_ADS.Rows.Count = 1 Then
-                TimerAds.Enabled = False
-                Dim ImgAds As Image = DirectCast(DT_ADS.Rows(0).Item("Ads_Image"), Image)
-                pnlAds.BackgroundImage = ImgAds
-            ElseIf DT_ADS.Rows.Count > 1 Then
-                TimerAds.Enabled = True
-                Ads_Rec = 0
-            Else
-                TimerAds.Enabled = False
-                Dim ImgAds As Bitmap = New Bitmap(Application.StartupPath & "/Ads_Nothing.png")
-                pnlAds.BackgroundImage = ImgAds
-                pnlAds.BackgroundImageLayout = ImageLayout.Stretch
-            End If
-        Catch ex As Exception
-            InsertErrorLog(ex.Message & vbNewLine & ex.StackTrace, 0, 0, 0, KioskConfig.SelectForm, Data.KioskConfigData.KioskLockerStep.Main_LoadAppScreenList)
-        End Try
-    End Sub
+    '        If DT_ADS.Rows.Count = 1 Then
+    '            TimerAds.Enabled = False
+    '            Dim ImgAds As Image = DirectCast(DT_ADS.Rows(0).Item("Ads_Image"), Image)
+    '            pnlAds.BackgroundImage = ImgAds
+    '        ElseIf DT_ADS.Rows.Count > 1 Then
+    '            TimerAds.Enabled = True
+    '            Ads_Rec = 0
+    '        Else
+    '            TimerAds.Enabled = False
+    '            Dim ImgAds As Bitmap = New Bitmap(Application.StartupPath & "/Ads_Nothing.png")
+    '            pnlAds.BackgroundImage = ImgAds
+    '            pnlAds.BackgroundImageLayout = ImageLayout.Stretch
+    '        End If
+    '    Catch ex As Exception
+    '        InsertErrorLog(ex.Message & vbNewLine & ex.StackTrace, 0, 0, 0, KioskConfig.SelectForm, Data.KioskConfigData.KioskLockerStep.Main_LoadAppScreenList)
+    '    End Try
+    'End Sub
 
     Private Sub SetAppScreenList()
         AppScreenList = New DataTable
@@ -414,18 +414,18 @@ Public Class frmMain
         End Try
     End Sub
 
-    Private Sub TimerAds_Tick(sender As Object, e As EventArgs) Handles TimerAds.Tick
-        Dim ImgAds As Image = DirectCast(DT_ADS.Rows(Ads_Rec).Item("Ads_Image"), Image)
-        Ads_Interval = CInt(DT_ADS.Rows(Ads_Rec).Item("Ads_Sec")) * 1000
-        pnlAds.BackgroundImage = ImgAds
-        TimerAds.Interval = Ads_Interval
+    'Private Sub TimerAds_Tick(sender As Object, e As EventArgs) Handles TimerAds.Tick
+    '    Dim ImgAds As Image = DirectCast(DT_ADS.Rows(Ads_Rec).Item("Ads_Image"), Image)
+    '    Ads_Interval = CInt(DT_ADS.Rows(Ads_Rec).Item("Ads_Sec")) * 1000
+    '    pnlAds.BackgroundImage = ImgAds
+    '    TimerAds.Interval = Ads_Interval
 
-        If Ads_Rec >= DT_ADS.Rows.Count - 1 Then
-            Ads_Rec = 0
-        Else
-            Ads_Rec += 1
-        End If
-    End Sub
+    '    If Ads_Rec >= DT_ADS.Rows.Count - 1 Then
+    '        Ads_Rec = 0
+    '    Else
+    '        Ads_Rec += 1
+    '    End If
+    'End Sub
 
     Sub CloseAllChildForm()
         For i As Integer = My.Application.OpenForms.Count - 1 To 0 Step -1
@@ -610,6 +610,7 @@ Public Class frmMain
         'Move to buttom left
         btnPointer.Location = New Point(0, Me.Height - btnPointer.Height)
         btnPointer.BringToFront()
+        Application.DoEvents()
 
         TimerSetPointer.Enabled = False
     End Sub
@@ -749,7 +750,7 @@ Public Class frmMain
                     f.Show()
 
                     CheckKioskScreenSaver()
-                    GetAdsInfo()
+                    'GetAdsInfo()
                 End If
             End If
         End If

@@ -10,11 +10,10 @@ Public Class frmDepositSelectLocker
         Me.ControlBox = False
         Me.BackColor = bgColor
         KioskConfig.SelectForm = KioskLockerForm.DepositSelectLocker
-        SetChildFormLanguage()
+        'SetChildFormLanguage()
     End Sub
     Private Sub frmDepositSelectLocker_Shown(sender As Object, e As EventArgs) Handles Me.Shown
         Me.WindowState = FormWindowState.Maximized
-        frmMain.pnlAds.Visible = False
         frmMain.pnlFooter.Visible = True
         frmMain.pnlCancel.Visible = True
 

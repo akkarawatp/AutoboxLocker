@@ -21,14 +21,12 @@ Public Class frmDepositThankyou
         Me.WindowState = FormWindowState.Maximized
         'lblTimeOut.Text = TimeOut
         KioskConfig.SelectForm = KioskLockerForm.DepositThankYou
-        SetChildFormLanguage()
+        'SetChildFormLanguage()
     End Sub
 
 
     Private Sub frmDepositThankyou_Shown(sender As Object, e As EventArgs) Handles Me.Shown
         CheckForIllegalCrossThreadCalls = False
-
-        frmMain.pnlAds.Visible = False
         frmMain.pnlFooter.Visible = True
         frmMain.pnlCancel.Visible = False
         'Delete Temp QRCode

@@ -17,7 +17,7 @@ Public Class frmCollectThankyou
         Me.ControlBox = False
         Me.BackColor = bgColor
         KioskConfig.SelectForm = KioskLockerForm.CollectThankYou
-        SetChildFormLanguage()
+        'SetChildFormLanguage()
     End Sub
 
 
@@ -25,7 +25,6 @@ Public Class frmCollectThankyou
     Private Sub frmPickupThankyou_Shown(sender As Object, e As EventArgs) Handles Me.Shown
         InsertLogTransactionActivity(Collect.DepositTransNo, Collect.TransactionNo, "", KioskConfig.SelectForm, KioskLockerStep.PickupThankYou_OpenForm, "", False)
         Me.WindowState = FormWindowState.Maximized
-        frmMain.pnlAds.Visible = False
         frmMain.pnlFooter.Visible = True
         frmMain.pnlCancel.Visible = False
 

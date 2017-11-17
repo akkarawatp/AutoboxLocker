@@ -14,12 +14,11 @@ Public Class frmCollectSelectDocument
         Me.WindowState = FormWindowState.Maximized
 
         KioskConfig.SelectForm = Data.KioskConfigData.KioskLockerForm.CollectSelectDocument
-        SetChildFormLanguage()
+        'SetChildFormLanguage()
         SetLabelNotificationText()
     End Sub
 
     Private Sub frmPickupSelectDocument_Shown(sender As Object, e As EventArgs) Handles Me.Shown
-        frmMain.pnlAds.Visible = False
         frmMain.pnlFooter.Visible = True
         frmMain.pnlCancel.Visible = True
         Application.DoEvents()
@@ -78,32 +77,32 @@ Public Class frmCollectSelectDocument
     End Sub
 
     Public Sub SetLabelNotificationText()
-        'แสดง Status ของเครื่องอ่าน QR Code และ เครื่องอ่านบัตรประชาชน
+        'แสดง Status ของเครื่องอ่าน QR Code
         Dim dvDt As DataTable = GetStatusAllDeviceDT()
         If dvDt.Rows.Count > 0 Then
             dvDt.DefaultView.RowFilter = "device_id=" & DeviceID.QRCodeReader & " and ms_device_status_id<>1"
             If dvDt.DefaultView.Count > 0 Then
-                lblQRCodeNotification.Text = GetNotificationText(5)
+                'lblQRCodeNotification.Text = GetNotificationText(5)
                 pnlQRCode.BackgroundImage = My.Resources.IconPickupQRCodeFail
                 RemoveHandler pnlQRCode.Click, AddressOf lblQRCode_Click
                 RemoveHandler lblQRCode.Click, AddressOf lblQRCode_Click
                 lblQRCode.Enabled = False
-                lblQRCodeNotification.Visible = True
+                'lblQRCodeNotification.Visible = True
             End If
             dvDt.DefaultView.RowFilter = ""
 
-            dvDt.DefaultView.RowFilter = "device_id=" & DeviceID.IDCardPassportScanner & " and ms_device_status_id<>1"
-            If dvDt.DefaultView.Count > 0 Then
-                lblLabelIDCardNotification.Text = GetNotificationText(6)
-                pnlIDCard.BackgroundImage = My.Resources.IconPickupIDCardFail
-                RemoveHandler pnlIDCard.Click, AddressOf lblIDCard_Click
-                RemoveHandler lblIDCard.Click, AddressOf lblIDCard_Click
-                RemoveHandler lblPassport.Click, AddressOf lblIDCard_Click
-                lblIDCard.Enabled = False
-                lblPassport.Enabled = False
-                lblLabelIDCardNotification.Visible = True
-            End If
-            dvDt.DefaultView.RowFilter = ""
+            'dvDt.DefaultView.RowFilter = "device_id=" & DeviceID.IDCardPassportScanner & " and ms_device_status_id<>1"
+            'If dvDt.DefaultView.Count > 0 Then
+            '    ' lblLabelIDCardNotification.Text = GetNotificationText(6)
+            '    pnlIDCard.BackgroundImage = My.Resources.IconPickupIDCardFail
+            '    RemoveHandler pnlIDCard.Click, AddressOf lblIDCard_Click
+            '    RemoveHandler lblIDCard.Click, AddressOf lblIDCard_Click
+            '    RemoveHandler lblPassport.Click, AddressOf lblIDCard_Click
+            '    lblIDCard.Enabled = False
+            '    lblPassport.Enabled = False
+            '    ' lblLabelIDCardNotification.Visible = True
+            'End If
+            'dvDt.DefaultView.RowFilter = ""
 
             Application.DoEvents()
         End If

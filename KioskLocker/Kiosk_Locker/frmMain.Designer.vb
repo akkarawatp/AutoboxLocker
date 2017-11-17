@@ -23,35 +23,20 @@ Partial Class frmMain
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
-        Me.TimerAds = New System.Windows.Forms.Timer(Me.components)
         Me.TimerCheckOpenClose = New System.Windows.Forms.Timer(Me.components)
         Me.TimerSetPointer = New System.Windows.Forms.Timer(Me.components)
         Me.pnlFooter = New System.Windows.Forms.Panel()
         Me.pnlCancel = New System.Windows.Forms.Panel()
         Me.btnCancel = New System.Windows.Forms.Label()
         Me.pnlHead = New System.Windows.Forms.Panel()
-        Me.btnPointer = New System.Windows.Forms.Button()
         Me.pbLogo = New System.Windows.Forms.PictureBox()
-        Me.pnlLang = New System.Windows.Forms.Panel()
-        Me.btnEN = New System.Windows.Forms.PictureBox()
-        Me.btnCH = New System.Windows.Forms.PictureBox()
-        Me.btnTH = New System.Windows.Forms.PictureBox()
-        Me.btnJP = New System.Windows.Forms.PictureBox()
-        Me.pnlAds = New System.Windows.Forms.Panel()
+        Me.btnPointer = New System.Windows.Forms.Button()
         Me.TimerCheckAutoSleep = New System.Windows.Forms.Timer(Me.components)
         Me.pnlFooter.SuspendLayout()
         Me.pnlCancel.SuspendLayout()
         Me.pnlHead.SuspendLayout()
         CType(Me.pbLogo, System.ComponentModel.ISupportInitialize).BeginInit()
-        Me.pnlLang.SuspendLayout()
-        CType(Me.btnEN, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.btnCH, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.btnTH, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.btnJP, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
-        '
-        'TimerAds
-        '
         '
         'TimerCheckOpenClose
         '
@@ -63,16 +48,13 @@ Partial Class frmMain
         '
         'pnlFooter
         '
-        Me.pnlFooter.BackgroundImage = Global.AutoboxLocker.My.Resources.Resources.bgMainFooter
         Me.pnlFooter.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
         Me.pnlFooter.Controls.Add(Me.pnlCancel)
-        'Me.pnlFooter.Controls.Add(Me.btnPointer)
         Me.pnlFooter.Dock = System.Windows.Forms.DockStyle.Bottom
-        Me.pnlFooter.Location = New System.Drawing.Point(0, 562)
+        Me.pnlFooter.Location = New System.Drawing.Point(0, 665)
         Me.pnlFooter.Name = "pnlFooter"
         Me.pnlFooter.Size = New System.Drawing.Size(1024, 103)
         Me.pnlFooter.TabIndex = 11
-        Me.pnlFooter.Visible = False
         '
         'pnlCancel
         '
@@ -83,11 +65,12 @@ Partial Class frmMain
         Me.pnlCancel.Name = "pnlCancel"
         Me.pnlCancel.Size = New System.Drawing.Size(116, 44)
         Me.pnlCancel.TabIndex = 4
+        Me.pnlCancel.Visible = False
         '
         'btnCancel
         '
         Me.btnCancel.BackColor = System.Drawing.Color.Transparent
-        Me.btnCancel.Font = New System.Drawing.Font("Thai Sans Lite", 15.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(222, Byte))
+        Me.btnCancel.Font = New System.Drawing.Font("Microsoft Sans Serif", 15.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(222, Byte))
         Me.btnCancel.ForeColor = System.Drawing.Color.Transparent
         Me.btnCancel.Location = New System.Drawing.Point(3, 9)
         Me.btnCancel.Name = "btnCancel"
@@ -98,31 +81,14 @@ Partial Class frmMain
         '
         'pnlHead
         '
-        Me.pnlHead.BackColor = System.Drawing.SystemColors.Window
+        Me.pnlHead.BackColor = System.Drawing.Color.White
         Me.pnlHead.BackgroundImage = Global.AutoboxLocker.My.Resources.Resources.bgMainHeader
         Me.pnlHead.Controls.Add(Me.pbLogo)
-        Me.pnlHead.Controls.Add(Me.pnlLang)
         Me.pnlHead.Dock = System.Windows.Forms.DockStyle.Top
         Me.pnlHead.Location = New System.Drawing.Point(0, 0)
         Me.pnlHead.Name = "pnlHead"
         Me.pnlHead.Size = New System.Drawing.Size(1024, 108)
         Me.pnlHead.TabIndex = 45
-        '
-        'btnPointer
-        '
-        Me.btnPointer.BackColor = System.Drawing.Color.White
-        Me.btnPointer.FlatAppearance.BorderColor = System.Drawing.Color.White
-        Me.btnPointer.FlatAppearance.BorderSize = 0
-        Me.btnPointer.FlatAppearance.MouseDownBackColor = System.Drawing.Color.White
-        Me.btnPointer.FlatAppearance.MouseOverBackColor = System.Drawing.Color.White
-        Me.btnPointer.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.btnPointer.ForeColor = System.Drawing.Color.Transparent
-        Me.btnPointer.Location = New System.Drawing.Point(0, Me.Height - Me.btnPointer.Height)
-        Me.btnPointer.Name = "btnPointer"
-        Me.btnPointer.Size = New System.Drawing.Size(55, 47)
-        Me.btnPointer.TabIndex = 51
-        Me.btnPointer.Text = "1"
-        Me.btnPointer.UseVisualStyleBackColor = False
         '
         'pbLogo
         '
@@ -134,75 +100,17 @@ Partial Class frmMain
         Me.pbLogo.TabIndex = 50
         Me.pbLogo.TabStop = False
         '
-        'pnlLang
+        'btnPointer
         '
-        Me.pnlLang.BackColor = System.Drawing.Color.Transparent
-        Me.pnlLang.Controls.Add(Me.btnEN)
-        Me.pnlLang.Controls.Add(Me.btnCH)
-        Me.pnlLang.Controls.Add(Me.btnTH)
-        Me.pnlLang.Controls.Add(Me.btnJP)
-        Me.pnlLang.Location = New System.Drawing.Point(725, 27)
-        Me.pnlLang.Name = "pnlLang"
-        Me.pnlLang.Size = New System.Drawing.Size(257, 46)
-        Me.pnlLang.TabIndex = 48
-        '
-        'btnEN
-        '
-        Me.btnEN.BackColor = System.Drawing.Color.Transparent
-        Me.btnEN.Image = Global.AutoboxLocker.My.Resources.Resources.English_Icon
-        Me.btnEN.Location = New System.Drawing.Point(67, 0)
-        Me.btnEN.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
-        Me.btnEN.Name = "btnEN"
-        Me.btnEN.Size = New System.Drawing.Size(59, 46)
-        Me.btnEN.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
-        Me.btnEN.TabIndex = 3
-        Me.btnEN.TabStop = False
-        '
-        'btnCH
-        '
-        Me.btnCH.BackColor = System.Drawing.Color.Transparent
-        Me.btnCH.Image = Global.AutoboxLocker.My.Resources.Resources.China_Icon
-        Me.btnCH.Location = New System.Drawing.Point(133, 0)
-        Me.btnCH.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
-        Me.btnCH.Name = "btnCH"
-        Me.btnCH.Size = New System.Drawing.Size(59, 46)
-        Me.btnCH.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
-        Me.btnCH.TabIndex = 4
-        Me.btnCH.TabStop = False
-        '
-        'btnTH
-        '
-        Me.btnTH.BackColor = System.Drawing.Color.Transparent
-        Me.btnTH.Image = Global.AutoboxLocker.My.Resources.Resources.Thai_Icon
-        Me.btnTH.Location = New System.Drawing.Point(1, 0)
-        Me.btnTH.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
-        Me.btnTH.Name = "btnTH"
-        Me.btnTH.Size = New System.Drawing.Size(59, 46)
-        Me.btnTH.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
-        Me.btnTH.TabIndex = 6
-        Me.btnTH.TabStop = False
-        '
-        'btnJP
-        '
-        Me.btnJP.BackColor = System.Drawing.Color.Transparent
-        Me.btnJP.Image = Global.AutoboxLocker.My.Resources.Resources.Japan_icon
-        Me.btnJP.Location = New System.Drawing.Point(199, 0)
-        Me.btnJP.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
-        Me.btnJP.Name = "btnJP"
-        Me.btnJP.Size = New System.Drawing.Size(59, 46)
-        Me.btnJP.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
-        Me.btnJP.TabIndex = 5
-        Me.btnJP.TabStop = False
-        '
-        'pnlAds
-        '
-        Me.pnlAds.BackgroundImage = Global.AutoboxLocker.My.Resources.Resources.bgMainFooter
-        Me.pnlAds.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
-        Me.pnlAds.Dock = System.Windows.Forms.DockStyle.Bottom
-        Me.pnlAds.Location = New System.Drawing.Point(0, 665)
-        Me.pnlAds.Name = "pnlAds"
-        Me.pnlAds.Size = New System.Drawing.Size(1024, 103)
-        Me.pnlAds.TabIndex = 10
+        Me.btnPointer.BackColor = System.Drawing.Color.White
+        Me.btnPointer.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnPointer.ForeColor = System.Drawing.Color.White
+        Me.btnPointer.Location = New System.Drawing.Point(0, 721)
+        Me.btnPointer.Name = "btnPointer"
+        Me.btnPointer.Size = New System.Drawing.Size(55, 47)
+        Me.btnPointer.TabIndex = 51
+        Me.btnPointer.Text = "1"
+        Me.btnPointer.UseVisualStyleBackColor = False
         '
         'TimerCheckAutoSleep
         '
@@ -214,9 +122,9 @@ Partial Class frmMain
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None
         Me.BackColor = System.Drawing.Color.White
         Me.ClientSize = New System.Drawing.Size(1024, 768)
+        Me.Controls.Add(Me.btnPointer)
         Me.Controls.Add(Me.pnlFooter)
         Me.Controls.Add(Me.pnlHead)
-        Me.Controls.Add(Me.pnlAds)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None
         Me.IsMdiContainer = True
         Me.Name = "frmMain"
@@ -225,21 +133,9 @@ Partial Class frmMain
         Me.pnlCancel.ResumeLayout(False)
         Me.pnlHead.ResumeLayout(False)
         CType(Me.pbLogo, System.ComponentModel.ISupportInitialize).EndInit()
-        Me.pnlLang.ResumeLayout(False)
-        CType(Me.btnEN, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.btnCH, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.btnTH, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.btnJP, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
     End Sub
-    Friend WithEvents TimerAds As Timer
-    Friend WithEvents pnlAds As Panel
-    Friend WithEvents btnTH As PictureBox
-    Friend WithEvents btnEN As PictureBox
-    Friend WithEvents btnJP As PictureBox
-    Friend WithEvents btnCH As PictureBox
-    Friend WithEvents pnlLang As Panel
     Friend WithEvents pnlHead As Panel
     Friend WithEvents TimerCheckOpenClose As Timer
     Friend WithEvents btnPointer As Button

@@ -51,8 +51,8 @@ Public Class frmSC_KioskSetting
         txtTimeOut.Text = KioskConfig.TimeOutSec
         txtMessage.Text = KioskConfig.ShowMsgSec
         txtExtend.Text = KioskConfig.PaymentExtendSec
-        txtIDCardExpire.Text = KioskConfig.CardExpireMonth
-        txtPassportExpire.Text = KioskConfig.PassportExpireMonth
+        'txtIDCardExpire.Text = KioskConfig.CardExpireMonth
+        'txtPassportExpire.Text = KioskConfig.PassportExpireMonth
         txtContactCenter.Text = KioskConfig.ContactCenterTelno
 
         Dim SleepTime() As String = KioskConfig.SleepTime.Split(":")
@@ -277,8 +277,8 @@ Public Class frmSC_KioskSetting
                 lnq.TIME_OUT_SEC = txtTimeOut.Text
                 lnq.SHOW_MSG_SEC = txtMessage.Text
                 lnq.PAYMENT_EXTEND_SEC = txtExtend.Text
-                lnq.CARD_EXPIRE_MONTH = txtIDCardExpire.Text
-                lnq.PASSPORT_EXPIRE_MONTH = txtPassportExpire.Text
+                'lnq.CARD_EXPIRE_MONTH = txtIDCardExpire.Text
+                'lnq.PASSPORT_EXPIRE_MONTH = txtPassportExpire.Text
                 lnq.CONTACT_CENTER_TELNO = txtContactCenter.Text
                 lnq.SLEEP_TIME = txtSleepTimeH.Text.PadLeft(2, "0") & ":" & txtSleepTimeM.Text.PadLeft(2, "0")
                 lnq.SLEEP_DURATION = txtSleepDuration.Text

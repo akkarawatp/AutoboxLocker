@@ -34,7 +34,7 @@ Public Class frmDepositPayment
 
         RestartBanknoteIn = AddressOf ReEnabledBanknoteIn
 
-        SetChildFormLanguage()
+        'SetChildFormLanguage()
         'SetControlLanguage()
         PaidAmt = AddressOf PaidLabel
     End Sub
@@ -50,7 +50,6 @@ Public Class frmDepositPayment
 
     Private Sub frmDepositPayment_Shown(sender As Object, e As EventArgs) Handles Me.Shown
         Me.WindowState = FormWindowState.Maximized
-        frmMain.pnlAds.Visible = False
         frmMain.pnlFooter.Visible = True
         frmMain.pnlCancel.Visible = True
         CheckForIllegalCrossThreadCalls = False

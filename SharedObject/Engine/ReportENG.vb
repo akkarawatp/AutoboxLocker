@@ -36,7 +36,7 @@
         sql += " sum(t.change_coin5) num_change_coin5, sum(t.change_coin5*5) amt_change_coin5,"
         sql += " sum(t.change_banknote20) num_change_banknote20, sum(t.change_banknote20*20) amt_change_banknote20, "
         sql += " sum(t.change_banknote100) num_change_banknote100, sum(t.change_banknote100*100) amt_change_banknote100"
-        sql += " from TB_SERVICE_TRANSACTION t " & Environment.NewLine
+        sql += " from TB_DEPOSIT_TRANSACTION t " & Environment.NewLine
         sql += " inner join MS_KIOSK k On k.id=t.ms_kiosk_id " & Environment.NewLine
         sql += " inner join MS_LOCATION l on l.id=k.ms_location_id " & Environment.NewLine
         sql += " where 1=1 " & wh & Environment.NewLine
@@ -78,7 +78,7 @@
         Sql += " sum(case p.trans_status when '1' then p.service_amt else 0 end) sales_value, " + Environment.NewLine
         'ถ้าการฝากนั้น ยังไม่รับคือ หรือเป็นรายการฝากที่มีการกด Cancel by Admin ให้แสดงค่ามัดจำ
         Sql += " sum(case when (s.trans_status = '1' and (p.trans_status<>'1' or p.id is null)) or (s.trans_status='1' and (p.trans_status='5' or p.id is null)) then s.deposit_amt else 0 end) deposit_amt " + Environment.NewLine
-        Sql += " from TB_SERVICE_TRANSACTION s " + Environment.NewLine
+        Sql += " from TB_DEPOSIT_TRANSACTION s " + Environment.NewLine
         Sql += " left join TB_PICKUP_TRANSACTION p on s.trans_no=p.deposit_trans_no and p.trans_status=1" + Environment.NewLine
         Sql += " inner join MS_LOCKER lo on lo.id=s.ms_locker_id " + Environment.NewLine
         Sql += " inner join MS_CABINET c on c.id=lo.ms_cabinet_id " + Environment.NewLine
@@ -107,7 +107,7 @@
         sql += " sum(Case s.trans_status When '4' then 1 else 0 end) trans_timeout, " + Environment.NewLine
         sql += " sum(case s.trans_status when '5' then 1 else 0 end) trans_cancel_by_admin, " + Environment.NewLine
         sql += " sum(case s.trans_status when '0' then 0 else 1 end) trans_total " + Environment.NewLine
-        sql += " from TB_SERVICE_TRANSACTION s " + Environment.NewLine
+        sql += " from TB_DEPOSIT_TRANSACTION s " + Environment.NewLine
         sql += " inner join MS_KIOSK k on k.id=s.ms_kiosk_id " + Environment.NewLine
         sql += " inner join MS_LOCATION l On l.id=k.ms_location_id " + Environment.NewLine
         sql += " where 1=1 " + Environment.NewLine

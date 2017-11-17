@@ -17,57 +17,10 @@ Public Class frmHome
     End Sub
 
 
-    'Private Sub ClearLockerAvailableStatus()
-    '    Try
-    '        Dim sql As String = "select id from ms_locker "
-    '        sql += " where current_available='N' and active_status='Y'"
-
-    '        Dim dt As DataTable = KioskDB.ExecuteTable(sql)
-    '        If dt.Rows.Count > 0 Then
-    '            For Each dr As DataRow In dt.Rows
-    '                sql = "select top 1 d.id " & vbNewLine
-    '                sql += " from TB_SERVICE_TRANSACTION d " & vbNewLine
-    '                sql += " where d.ms_locker_id=@_LOCKER_ID " & vbNewLine
-    '                sql += " and d.ms_kiosk_id=@_KIOSK_ID " & vbNewLine
-    '                sql += " and d.trans_no not in (select deposit_trans_no from TB_PICKUP_TRANSACTION where trans_status='" & DepositTransactionData.TransactionStatus.Success & "') "
-
-    '                Dim p(2) As SqlClient.SqlParameter
-    '                p(0) = KioskDB.SetBigInt("@_LOCKER_ID", Convert.ToInt64(dr("id")))
-    '                p(1) = KioskDB.SetBigInt("@_KIOSK_ID", KioskData.KioskID)
-
-    '                Dim dDt As DataTable = KioskDB.ExecuteTable(sql)
-    '                If dDt.Rows.Count = 0 Then
-    '                    sql = "update ms_locker "
-    '                    sql += " set open_close_status='C'"
-    '                    sql += " , current_available = 'Y'"
-    '                    sql += " , sync_to_server = 'N'"
-    '                    sql += " where id=@_LOCKER_ID"
-
-    '                    ReDim p(1)
-    '                    p(0) = KioskDB.SetBigInt("@_LOCKER_ID", Convert.ToInt64(dr("id")))
-
-    '                    Dim trans As New KioskTransactionDB
-    '                    Dim ret As ExecuteDataInfo = KioskDB.ExecuteNonQuery(sql, trans.Trans, p)
-    '                    If ret.IsSuccess = True Then
-    '                        trans.CommitTransaction()
-    '                    Else
-    '                        trans.RollbackTransaction()
-    '                    End If
-    '                End If
-    '                dDt.Dispose()
-    '            Next
-    '        End If
-    '        dt.Dispose()
-    '    Catch ex As Exception
-
-    '    End Try
-    'End Sub
-
 
     Private Sub frmHome_Shown(sender As Object, e As EventArgs) Handles Me.Shown
         Me.WindowState = FormWindowState.Maximized
         CheckForIllegalCrossThreadCalls = False
-        frmMain.pnlAds.Visible = True
         frmMain.pnlFooter.Visible = False
         frmMain.btnPointer.Visible = True
         frmMain.TimerCheckOpenClose.Enabled = True
@@ -133,17 +86,17 @@ Public Class frmHome
 
             Dim dvDt As DataTable = GetStatusAllDeviceDT()
             If dvDt.Rows.Count > 0 Then
-                'แสดง Status ของเครื่องอ่่านบัตรประชาชนและ Passport
-                dvDt.DefaultView.RowFilter = "device_id=" & DeviceID.IDCardPassportScanner & " and ms_device_status_id<>1"
-                If dvDt.DefaultView.Count > 0 Then
-                    'lblLabelNotification.Text = GetNotificationText(6)
-                    pnlDeposit.BackgroundImage = My.Resources.IconDepositFull
-                    RemoveHandler pnlDeposit.Click, AddressOf btnDeposit_Click
-                    RemoveHandler lblDeposit.Click, AddressOf btnDeposit_Click
-                    lblDeposit.Enabled = False
-                    'lblLabelNotification.Visible = True
-                End If
-                dvDt.DefaultView.RowFilter = ""
+                ''แสดง Status ของเครื่องอ่่านบัตรประชาชนและ Passport
+                'dvDt.DefaultView.RowFilter = "device_id=" & DeviceID.IDCardPassportScanner & " and ms_device_status_id<>1"
+                'If dvDt.DefaultView.Count > 0 Then
+                '    'lblLabelNotification.Text = GetNotificationText(6)
+                '    pnlDeposit.BackgroundImage = My.Resources.IconDepositFull
+                '    RemoveHandler pnlDeposit.Click, AddressOf btnDeposit_Click
+                '    RemoveHandler lblDeposit.Click, AddressOf btnDeposit_Click
+                '    lblDeposit.Enabled = False
+                '    'lblLabelNotification.Visible = True
+                'End If
+                'dvDt.DefaultView.RowFilter = ""
 
 
 

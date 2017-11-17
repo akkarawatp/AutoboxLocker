@@ -21,12 +21,10 @@ Public Class frmDepositPrintQRCode
         CheckForIllegalCrossThreadCalls = False
         lblTimeOut.Text = TimeOut
         KioskConfig.SelectForm = KioskLockerForm.DepositPrintQRCode
-        SetChildFormLanguage()
+        'SetChildFormLanguage()
     End Sub
 
     Private Sub frmDepositPrintQRCode_Shown(sender As Object, e As EventArgs) Handles Me.Shown
-        '
-        frmMain.pnlAds.Visible = False
         frmMain.pnlFooter.Visible = True
         frmMain.pnlCancel.Visible = False
         '

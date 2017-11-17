@@ -26,7 +26,7 @@ Public Class SyncTransactionDataENG
         _KioskID = MsKioskID
         Try
             Dim sql As String = "select id, trans_no, cust_image "
-            sql += " from tb_service_transaction "
+            sql += " from tb_deposit_transaction "
             sql += " where cust_image is not null "
             sql += " and ms_kiosk_id=@_KIOSK_ID"
 
@@ -55,7 +55,7 @@ Public Class SyncTransactionDataENG
                         File.WriteAllBytes(FileName, CustImage)
 
                         If File.Exists(FileName) = True Then
-                            Dim tLnq As New TbServiceTransactionKioskLinqDB
+                            Dim tLnq As New TbDepositTransactionKioskLinqDB
                             tLnq.GetDataByPK(dr("id"), kTrans.Trans)
                             If tLnq.ID > 0 Then
                                 tLnq.CUST_IMAGE = Nothing
@@ -90,7 +90,7 @@ Public Class SyncTransactionDataENG
 
         Try
             Dim sql As String = " select  s.ID,  l.ms_locker_id "
-            sql += " from tb_service_transaction s "
+            sql += " from tb_deposit_transaction s "
             sql += " left join ms_locker l on l.id=s.ms_locker_id"
             sql += " where s.ms_kiosk_id=@_KIOSK_ID "
             sql += " And s.sync_to_server='N'"
@@ -111,7 +111,7 @@ Public Class SyncTransactionDataENG
                     Dim kTrans As New KioskTransactionDB
                     Dim kRet As New KioskLinqDB.ConnectDB.ExecuteDataInfo
 
-                    Dim kLnq As New TbServiceTransactionKioskLinqDB
+                    Dim kLnq As New TbDepositTransactionKioskLinqDB
                     kLnq.GetDataByPK(dr("id"), kTrans.Trans)
                     If kLnq.ID > 0 Then
                         Dim ServiceLockerID As Long = 0
@@ -187,76 +187,11 @@ Public Class SyncTransactionDataENG
         End Try
     End Sub
 
-    'Private Shared sTransDT As New DataTable
-    'Private Shared Sub SyncServiceTransactionComplete(sender As Object, e As SyncDataWebservice.SyncKioskServiceTransactionCompletedEventArgs)
-    '    If e.Result.ToString = "true" Then
-    '        ' If ret = "true" Then
-    '        Dim kTrans As New KioskTransactionDB
-    '        Dim kRet As New KioskLinqDB.ConnectDB.ExecuteDataInfo
-    '        For Each dr As DataRow In sTransDT.Rows
-    '            Dim Sql As String = "update TB_SERVICE_TRANSACTION "
-    '            Sql += " set sync_to_server='Y'"
-    '            Sql += " where id=@_ID"
-    '            Dim p(1) As SqlParameter
-    '            p(0) = KioskDB.SetBigInt("@_ID", dr("id"))
-
-    '            kRet = KioskDB.ExecuteNonQuery(Sql, kTrans.Trans, p)
-    '            If kRet.IsSuccess = False Then
-    '                Exit For
-    '            End If
-    '        Next
-
-    '        If kRet.IsSuccess = True Then
-    '            kTrans.CommitTransaction()
-    '        Else
-    '            kTrans.RollbackTransaction()
-    '            LogFileENG.CreateErrorLogAgent(_KioskID, kRet.ErrorMessage)
-    '        End If
-    '        'End If
-    '        sTransDT.Dispose()
-    '    End If
-    'End Sub
-
-    'Public Shared Sub SyncServiceTransaction(MsKioskID As Long)
-    '    _KioskID = MsKioskID
-
-    '    Try
-    '        Dim sql As String = " select  s.ID,  s.TRANS_NO, s.TRANS_START_TIME, s.TRANS_END_TIME, s.MS_KIOSK_ID, s.MS_LOCKER_ID, s.PASSPORT_NO, s.IDCARD_NO,"
-    '        sql += " s.NATION_CODE, s.FIRST_NAME, s.LAST_NAME, ASCII(s.gender) gender, s.BIRTH_DATE, s.PASSPORT_EXPIRE_DATE, s.IDCARD_EXPIRE_DATE, s.CUST_IMAGE, "
-    '        sql += " s.SERVICE_RATE, s.SERVICE_RATE_LIMIT_DAY, s.DEPOSIT_AMT, s.PAID_TIME, s.RECEIVE_COIN1, s.RECEIVE_COIN2, s.RECEIVE_COIN5, "
-    '        sql += " s.RECEIVE_COIN10, s.RECEIVE_BANKNOTE20, s.RECEIVE_BANKNOTE50, s.RECEIVE_BANKNOTE100, s.RECEIVE_BANKNOTE500, s.RECEIVE_BANKNOTE1000, "
-    '        sql += " s.CHANGE_COIN1, s.CHANGE_COIN2, s.CHANGE_COIN5, s.CHANGE_COIN10, s.CHANGE_BANKNOTE20, s.CHANGE_BANKNOTE50, s.CHANGE_BANKNOTE100, "
-    '        sql += " s.CHANGE_BANKNOTE500, s.TRANS_STATUS, s.MS_APP_SCREEN_ID, s.MS_APP_STEP_ID, s.SYNC_TO_SERVER , l.locker_name "
-    '        sql += " from tb_service_transaction s "
-    '        sql += " left join ms_locker l on l.id=s.ms_locker_id"
-    '        sql += " where s.ms_kiosk_id=@_KIOSK_ID "
-    '        sql += " And s.sync_to_server='N'"
-
-    '        'Dim sql As String = "select ASCII(gender) a from tb_service_transaction where ms_kiosk_id=@_KIOSK_ID"
-    '        Dim p(1) As SqlParameter
-    '        p(0) = KioskDB.SetBigInt("@_KIOSK_ID", MsKioskID)
-
-    '        sTransDT = KioskDB.ExecuteTable(sql, p)
-    '        If sTransDT.Rows.Count > 0 Then
-    '            sTransDT.TableName = "SyncServiceTransaction"
-    '            Dim ws As New SyncDataWebservice.ATBLockerWebService
-    '            ws.Timeout = 200000
-    '            ws.Url = KioskInfoENG.GetLockerSysconfig(MsKioskID).LOCKER_WEBSERVICE_URL
-
-    '            AddHandler ws.SyncKioskServiceTransactionCompleted, AddressOf SyncServiceTransactionComplete
-    '            ws.SyncKioskServiceTransactionAsync(sTransDT, Environment.MachineName)
-    '            ws.Dispose()
-    '        End If
-    '        'sTransDT.Dispose()
-    '    Catch ex As Exception
-    '        LogFileENG.CreateExceptionLogAgent(MsKioskID, ex.Message, ex.StackTrace)
-    '    End Try
-    'End Sub
 #End Region
     Private Shared Function GetServerServiceTransID(MsKioskID As Long, ServiceTransNo As String) As Long
         Dim ret As Long = 0
         Try
-            Dim lnq As New TbServiceTransactionServerLinqDB
+            Dim lnq As New TbDepositTransactionServerLinqDB
             lnq.ChkDataByTRANS_NO(ServiceTransNo, Nothing)
             ret = lnq.ID
             lnq = Nothing
@@ -382,7 +317,7 @@ Public Class SyncTransactionDataENG
         '#################################
         Try
             Dim sql As String = "select id "
-            sql += " from TB_SERVICE_TRANSACTION "
+            sql += " from TB_DEPOSIT_TRANSACTION "
             sql += " where ms_kiosk_id=@_KIOSK_ID"
             sql += " and trans_status  in ('1','2','3','4','5')"
             'sql += " and trans_status  in ('5')"
@@ -395,7 +330,7 @@ Public Class SyncTransactionDataENG
             Dim sDt As DataTable = KioskDB.ExecuteTable(sql, p)
             If sDt.Rows.Count > 0 Then
                 For Each sDr As DataRow In sDt.Rows
-                    Dim ServiceLnq As New TbServiceTransactionKioskLinqDB
+                    Dim ServiceLnq As New TbDepositTransactionKioskLinqDB
                     ServiceLnq.GetDataByPK(sDr("id"), Nothing)
                     If ServiceLnq.ID > 0 Then
 
@@ -547,7 +482,7 @@ Public Class SyncTransactionDataENG
         '#################################
         Try
             Dim sql As String = "select id "
-            sql += " from TB_SERVICE_TRANSACTION "
+            sql += " from TB_DEPOSIT_TRANSACTION "
             sql += " where ms_kiosk_id=@_KIOSK_ID"
             sql += " and trans_status  in ('0')"
             sql += " and sync_to_server='Y'"
@@ -559,7 +494,7 @@ Public Class SyncTransactionDataENG
             Dim sDt As DataTable = KioskDB.ExecuteTable(sql, p)
             If sDt.Rows.Count > 0 Then
                 For Each dr As DataRow In sDt.Rows
-                    Dim lnq As New TbServiceTransactionKioskLinqDB
+                    Dim lnq As New TbDepositTransactionKioskLinqDB
                     Dim trans As New KioskTransactionDB
                     If lnq.DeleteByPK(dr("id"), trans.Trans).IsSuccess = True Then
                         trans.CommitTransaction()

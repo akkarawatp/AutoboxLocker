@@ -13,12 +13,10 @@ Public Class frmCollectScanQRCode
         Me.BackColor = bgColor
 
         KioskConfig.SelectForm = Data.KioskConfigData.KioskLockerForm.CollectScanQRCode
-        SetChildFormLanguage()
+        'SetChildFormLanguage()
     End Sub
 
     Private Sub frmPickupScanQRCode_Shown(sender As Object, e As EventArgs) Handles Me.Shown
-        'Me.WindowState = FormWindowState.Maximized
-        frmMain.pnlAds.Visible = False
         frmMain.pnlFooter.Visible = True
         frmMain.pnlCancel.Visible = True
 
@@ -79,7 +77,7 @@ Public Class frmCollectScanQRCode
 
                 Dim sql As String = "select t.id, t.trans_no, t.ms_locker_id, l.locker_name, l.pin_solenoid, l.pin_led, l.pin_sensor,  "
                 sql += " t.service_rate, t.service_rate_limit_day, t.deposit_amt, t.paid_time, c.ms_cabinet_model_id "
-                sql += " from TB_SERVICE_TRANSACTION t"
+                sql += " from TB_DEPOSIT_TRANSACTION t"
                 sql += " inner join MS_LOCKER l on l.id=t.ms_locker_id"
                 sql += " inner join MS_CABINET c on c.id=l.ms_cabinet_id"
                 sql += " where t.id=@_ID and t.trans_no=@_TRANSACTION_NO "
@@ -117,7 +115,7 @@ Public Class frmCollectScanQRCode
                     '#################################################################################
                     sql = "select t.id, t.trans_no, t.ms_locker_id, l.locker_name, l.pin_solenoid, l.pin_led, l.pin_sensor,  "
                     sql += " t.service_rate, t.service_rate_limit_day, t.deposit_amt, t.paid_time, c.ms_cabinet_model_id "
-                    sql += " from TB_SERVICE_TRANSACTION t"
+                    sql += " from TB_DEPOSIT_TRANSACTION t"
                     sql += " inner join MS_LOCKER l on l.id=t.ms_locker_id"
                     sql += " inner join MS_CABINET c on c.id=l.ms_cabinet_id"
                     sql += " where t.id=@_ID and t.trans_no=@_TRANSACTION_NO "
@@ -133,7 +131,7 @@ Public Class frmCollectScanQRCode
                         Dim dr As DataRow = dt.Rows(0)
                         ret = SetPickupInitialInformation(dr)
                         If ret = True Then
-                            Dim lnq As TbServiceTransactionKioskLinqDB = UpdateServiceTransactionKiosk(TransactionNo, KioskLockerStep.PickupScanQRCode_CheckDataQRCode)
+                            Dim lnq As TbDepositTransactionKioskLinqDB = UpdateServiceTransactionKiosk(TransactionNo, KioskLockerStep.PickupScanQRCode_CheckDataQRCode)
                             If lnq.ID > 0 Then
                                 If lnq.PAID_TIME.Value.Year <> 1 Then
                                     Collect.DepositPaidTime = lnq.PAID_TIME
@@ -158,7 +156,7 @@ Public Class frmCollectScanQRCode
                             Dim dr As DataRow = dt.Rows(0)
                             ret = SetPickupInitialInformation(dr)
                             If ret = True Then
-                                Dim lnq As ServerLinqDB.TABLE.TbServiceTransactionServerLinqDB = UpdateServiceTransactionServer(TransactionNo, KioskLockerStep.PickupScanQRCode_CheckDataQRCode)
+                                Dim lnq As ServerLinqDB.TABLE.TbDepositTransactionServerLinqDB = UpdateServiceTransactionServer(TransactionNo, KioskLockerStep.PickupScanQRCode_CheckDataQRCode)
                                 If lnq.ID > 0 Then
                                     If lnq.PAID_TIME.Value.Year <> 1 Then
                                         Collect.DepositPaidTime = lnq.PAID_TIME

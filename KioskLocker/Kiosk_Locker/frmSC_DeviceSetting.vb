@@ -137,17 +137,17 @@ Public Class frmSC_DeviceSetting
                                     cbPrinterName.SelectedIndex = cbPrinterName.FindStringExact(dDr("driver_name1"))
                                 End If
 
-                            Case DeviceID.IDCardPassportScanner
-                                If Convert.IsDBNull(dDr("comport_vid")) = False Then
-                                    txtIDCardPassportVID.Text = dDr("comport_vid")
-                                End If
+                            'Case DeviceID.IDCardPassportScanner
+                            '    If Convert.IsDBNull(dDr("comport_vid")) = False Then
+                            '        txtIDCardPassportVID.Text = dDr("comport_vid")
+                            '    End If
 
-                                If Convert.IsDBNull(dDr("driver_name1")) = False Then
-                                    cbIDCard.SelectedIndex = cbIDCard.FindStringExact(dDr("driver_name1"))
-                                End If
-                                If Convert.IsDBNull(dDr("driver_name2")) = False Then
-                                    cbPassport.SelectedIndex = cbPassport.FindStringExact(dDr("driver_name2"))
-                                End If
+                            '    If Convert.IsDBNull(dDr("driver_name1")) = False Then
+                            '        cbIDCard.SelectedIndex = cbIDCard.FindStringExact(dDr("driver_name1"))
+                            '    End If
+                            '    If Convert.IsDBNull(dDr("driver_name2")) = False Then
+                            '        cbPassport.SelectedIndex = cbPassport.FindStringExact(dDr("driver_name2"))
+                            '    End If
 
                             Case DeviceID.NetworkConnection
 
@@ -381,7 +381,7 @@ Public Class frmSC_DeviceSetting
 
         UpdateDeviceByDeviceID(DeviceID.QRCodeReader, txtQRCodeVID.Text, "", "")
         UpdateDeviceByDeviceID(DeviceID.Printer, "", cbPrinterName.Text, "")
-        UpdateDeviceByDeviceID(DeviceID.IDCardPassportScanner, txtIDCardPassportVID.Text, cbIDCard.Text, cbPassport.Text)
+        'UpdateDeviceByDeviceID(DeviceID.IDCardPassportScanner, txtIDCardPassportVID.Text, cbIDCard.Text, cbPassport.Text)
 
         SetListDeviceInfo()  'โหลดข้อมูลใหม่เก็บเข้าตัวแปร
 

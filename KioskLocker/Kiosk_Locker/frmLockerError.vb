@@ -9,11 +9,11 @@
     Private Sub frmLockerError_Shown(sender As Object, e As EventArgs) Handles Me.Shown
         Me.WindowState = FormWindowState.Maximized
         lblDetail.Focus()
-        frmMain.pnlAds.Visible = True
         frmMain.pnlFooter.Visible = False
+        frmMain.pnlCancel.Visible = False
 
         'lblDetail.Top = (Me.Height / 2) - (Me.Top / 2)
-        SetChildFormLanguage()
+        'SetChildFormLanguage()
         Application.DoEvents()
 
     End Sub

@@ -371,6 +371,30 @@ Namespace TABLE
         End Function
 
 
+        '/// Returns an indication whether the record of MS_CABINET by specified MS_KIOSK_ID_ORDER_LAYOUT key is retrieved successfully.
+        '/// <param name=cMS_KIOSK_ID_ORDER_LAYOUT>The MS_KIOSK_ID_ORDER_LAYOUT key.</param>
+        '/// <param name=trans>The System.Data.SQLClient.SQLTransaction used by this System.Data.SQLClient.SQLCommand.</param>
+        '/// <returns>true if data is retrieved successfully; otherwise, false.</returns>
+        Public Function ChkDataByMS_KIOSK_ID_ORDER_LAYOUT(cMS_KIOSK_ID As Long, cORDER_LAYOUT As Integer, trans As SQLTransaction) As Boolean
+            Dim cmdPara(3)  As SQLParameter
+            cmdPara(0) = DB.SetText("@_MS_KIOSK_ID", cMS_KIOSK_ID) 
+            cmdPara(1) = DB.SetText("@_ORDER_LAYOUT", cORDER_LAYOUT) 
+            Return doChkData("MS_KIOSK_ID = @_MS_KIOSK_ID AND ORDER_LAYOUT = @_ORDER_LAYOUT", trans, cmdPara)
+        End Function
+
+        '/// Returns an duplicate data record of MS_CABINET by specified MS_KIOSK_ID_ORDER_LAYOUT key is retrieved successfully.
+        '/// <param name=cMS_KIOSK_ID_ORDER_LAYOUT>The MS_KIOSK_ID_ORDER_LAYOUT key.</param>
+        '/// <param name=trans>The System.Data.SQLClient.SQLTransaction used by this System.Data.SQLClient.SQLCommand.</param>
+        '/// <returns>true if data is retrieved successfully; otherwise, false.</returns>
+        Public Function ChkDuplicateByMS_KIOSK_ID_ORDER_LAYOUT(cMS_KIOSK_ID As Long, cORDER_LAYOUT As Integer, cID As Long, trans As SQLTransaction) As Boolean
+            Dim cmdPara(3)  As SQLParameter
+            cmdPara(0) = DB.SetText("@_MS_KIOSK_ID", cMS_KIOSK_ID) 
+            cmdPara(1) = DB.SetText("@_ORDER_LAYOUT", cORDER_LAYOUT) 
+            cmdPara(2) = DB.SetBigInt("@_ID", cID) 
+            Return doChkData("MS_KIOSK_ID = @_MS_KIOSK_ID AND ORDER_LAYOUT = @_ORDER_LAYOUT And ID <> @_ID", trans, cmdPara)
+        End Function
+
+
         '/// Returns an indication whether the record of MS_CABINET by specified condition is retrieved successfully.
         '/// <param name=whText>The condition specify the deleting record(s).</param>
         '/// <param name=trans>The System.Data.SQLClient.SQLTransaction used by this System.Data.SQLClient.SQLCommand.</param>

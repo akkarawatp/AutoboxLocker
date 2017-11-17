@@ -16,8 +16,8 @@ Namespace Data
         Dim _TimeOutSec As Integer = 0
         Dim _ShowMsgSec As Integer = 0
         Dim _PaymentExtendSec As Integer = 0
-        Dim _CardExpireMonth As Integer = 0
-        Dim _PassportExpireMonth As Integer = 0
+        'Dim _CardExpireMonth As Integer = 0
+        'Dim _PassportExpireMonth As Integer = 0
         Dim _ContactCenterTelno As String = ""
         Dim _SleepTime As String = ""
         Dim _SleepDuration As Integer = 0
@@ -42,9 +42,9 @@ Namespace Data
         Dim _CoinOut5Comport As String = ""
         Dim _CoinOut10Comport As String = ""
 
-        Dim _IDCardPassportVID As String = ""
-        Dim _IDCardNoDeviceName As String = ""
-        Dim _PassportDeviceName As String = ""
+        Dim _WebCameraVID As String = ""
+        Dim _WebCameraDeviceName As String = ""
+        'Dim _PassportDeviceName As String = ""
 
         Dim _QRCodeVID As String = ""
         Dim _PrinterDeviceName As String = ""
@@ -159,22 +159,22 @@ Namespace Data
                 _PaymentExtendSec = value
             End Set
         End Property
-        Public Property CardExpireMonth As Integer
-            Get
-                Return _CardExpireMonth
-            End Get
-            Set(value As Integer)
-                _CardExpireMonth = value
-            End Set
-        End Property
-        Public Property PassportExpireMonth As Integer
-            Get
-                Return _PassportExpireMonth
-            End Get
-            Set(value As Integer)
-                _PassportExpireMonth = value
-            End Set
-        End Property
+        'Public Property CardExpireMonth As Integer
+        '    Get
+        '        Return _CardExpireMonth
+        '    End Get
+        '    Set(value As Integer)
+        '        _CardExpireMonth = value
+        '    End Set
+        'End Property
+        'Public Property PassportExpireMonth As Integer
+        '    Get
+        '        Return _PassportExpireMonth
+        '    End Get
+        '    Set(value As Integer)
+        '        _PassportExpireMonth = value
+        '    End Set
+        'End Property
         Public Property ContactCenterTelno As String
             Get
                 Return _ContactCenterTelno.Trim
@@ -331,30 +331,30 @@ Namespace Data
             End Set
         End Property
 
-        Public Property IDCardPassportVID As String
+        Public Property WebCameraVID As String
             Get
-                Return _IDCardPassportVID.Trim
+                Return _WebCameraVID.Trim
             End Get
             Set(value As String)
-                _IDCardPassportVID = value
+                _WebCameraVID = value
             End Set
         End Property
-        Public Property IDCardNoDeviceName As String
+        Public Property WebCameraDeviceName As String
             Get
-                Return _IDCardNoDeviceName.Trim
+                Return _WebCameraDeviceName.Trim
             End Get
             Set(value As String)
-                _IDCardNoDeviceName = value
+                _WebCameraDeviceName = value
             End Set
         End Property
-        Public Property PassportDeviceName As String
-            Get
-                Return _PassportDeviceName.Trim
-            End Get
-            Set(value As String)
-                _PassportDeviceName = value
-            End Set
-        End Property
+        'Public Property PassportDeviceName As String
+        '    Get
+        '        Return _PassportDeviceName.Trim
+        '    End Get
+        '    Set(value As String)
+        '        _PassportDeviceName = value
+        '    End Set
+        'End Property
         Public Property QRCodeVID As String
             Get
                 Return _QRCodeVID.Trim
@@ -436,17 +436,17 @@ Namespace Data
             DepositSelectLocker_SelectLocker = 302
             DepositSelectLocker_LoadLockerList = 303
 
-            DepositScanPersonInfo_OpenForm = 401
-            DepositScanPersonInfo_CheckPassportDevice = 402
-            DepositScanPersonInfo_CheckIDCardDevice = 403
-            DepositScanPersonInfo_ScanIDCard = 404
-            DepositScanPersonInfo_ScanPassport = 405
-            DepositScanPersonInfo_CheckIDCardExpire = 406
-            DepositScanPersonInfo_CheckPassportExpire = 407
-            DepositScanPersonInfo_RemoveIdCard = 408
-            DepositScanPersonInfo_InsertIdCard = 409
-            DepositScanPersonInfo_InsertPassport = 410
-            DepositScanPersonInfo_Timeout = 411
+            'DepositScanPersonInfo_OpenForm = 401
+            'DepositScanPersonInfo_CheckPassportDevice = 402
+            'DepositScanPersonInfo_CheckIDCardDevice = 403
+            'DepositScanPersonInfo_ScanIDCard = 404
+            'DepositScanPersonInfo_ScanPassport = 405
+            'DepositScanPersonInfo_CheckIDCardExpire = 406
+            'DepositScanPersonInfo_CheckPassportExpire = 407
+            'DepositScanPersonInfo_RemoveIdCard = 408
+            'DepositScanPersonInfo_InsertIdCard = 409
+            'DepositScanPersonInfo_InsertPassport = 410
+            'DepositScanPersonInfo_Timeout = 411
 
             DepositPayment_OpenForm = 501
             DepositPayment_CheckHardwareStatus = 502
@@ -506,22 +506,22 @@ Namespace Data
             PickupPayment_LEDBlinkOn = 1116
             PickupPayment_OpenLockerFailReturnMoney = 1117    'OpenLockerFail
 
-            PickupScanPersonInfo_OpenForm = 1001
-            PickupScanPersonInfo_CheckPassportDevice = 1002
-            PickupScanPersonInfo_CheckIDCardDevice = 1003
-            PickupScanPersonInfo_ScanIDCard = 1004
-            PickupScanPersonInfo_ScanPassport = 1005
-            PickupScanPersonInfo_CheckIDCardExpire = 1006
-            PickupScanPersonInfo_CheckPassportExpire = 1007
-            PickupScanPersonInfo_GetPickupWithScanIDCard = 1008
-            PickupScanPersonInfo_GetPickupWithScanPassport = 1009
-            PickupScanPersonInfo_HaveData = 1010
-            PickupScanPersonInfo_NoPersonData = 1011
-            PickupScanPersonInfo_GetPickupDataFail = 1012
-            PickupScanPersonInfo_RemoveIdCard = 1013
-            PickupScanPersonInfo_InsertIdCard = 1014
-            PickupScanPersonInfo_InsertPassport = 1015
-            PickupScanPersonInfo_Timeout = 1016
+            'PickupScanPersonInfo_OpenForm = 1001
+            'PickupScanPersonInfo_CheckPassportDevice = 1002
+            'PickupScanPersonInfo_CheckIDCardDevice = 1003
+            'PickupScanPersonInfo_ScanIDCard = 1004
+            'PickupScanPersonInfo_ScanPassport = 1005
+            'PickupScanPersonInfo_CheckIDCardExpire = 1006
+            'PickupScanPersonInfo_CheckPassportExpire = 1007
+            'PickupScanPersonInfo_GetPickupWithScanIDCard = 1008
+            'PickupScanPersonInfo_GetPickupWithScanPassport = 1009
+            'PickupScanPersonInfo_HaveData = 1010
+            'PickupScanPersonInfo_NoPersonData = 1011
+            'PickupScanPersonInfo_GetPickupDataFail = 1012
+            'PickupScanPersonInfo_RemoveIdCard = 1013
+            'PickupScanPersonInfo_InsertIdCard = 1014
+            'PickupScanPersonInfo_InsertPassport = 1015
+            'PickupScanPersonInfo_Timeout = 1016
 
             PickupThankYou_OpenForm = 1201
             PickupThankYou_StartSensor = 1202
