@@ -8,7 +8,7 @@ Imports ServerLinqDB.ConnectDB
 
 Namespace TABLE
     'Represents a transaction for TB_ALARM_GROUP_COMPUTER table ServerLinqDB.
-    '[Create by  on June, 12 2016]
+    '[Create by  on November, 17 2017]
     Public Class TbAlarmGroupComputerServerLinqDB
         Public sub TbAlarmGroupComputerServerLinqDB()
 

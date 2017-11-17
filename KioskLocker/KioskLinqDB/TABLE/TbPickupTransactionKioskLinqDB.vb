@@ -8,7 +8,7 @@ Imports KioskLinqDB.ConnectDB
 
 Namespace TABLE
     'Represents a transaction for TB_PICKUP_TRANSACTION table KioskLinqDB.
-    '[Create by  on July, 15 2016]
+    '[Create by  on November, 17 2017]
     Public Class TbPickupTransactionKioskLinqDB
         Public sub TbPickupTransactionKioskLinqDB()
 
@@ -50,7 +50,7 @@ Namespace TABLE
         Dim _MS_KIOSK_ID As Long = 0
         Dim _MS_LOCKER_ID As  System.Nullable(Of Long) 
         Dim _DEPOSIT_TRANS_NO As  String  = ""
-        Dim _LOST_QR_CODE As  System.Nullable(Of Char)  = "Z"
+        Dim _LOST_QR_CODE As Char = "Z"
         Dim _SERVICE_AMT As Long = 0
         Dim _PICKUP_TIME As  System.Nullable(Of DateTime)  = New DateTime(1,1,1)
         Dim _PAID_TIME As  System.Nullable(Of DateTime)  = New DateTime(1,1,1)
@@ -72,7 +72,7 @@ Namespace TABLE
         Dim _CHANGE_BANKNOTE100 As Long = 0
         Dim _CHANGE_BANKNOTE500 As Long = 0
         Dim _TRANS_STATUS As Char = "0"
-        Dim _MS_APP_SCREEN_ID As Long = 0
+        Dim _MS_APP_SCREEN_ID As  System.Nullable(Of Long) 
         Dim _MS_APP_STEP_ID As Long = 0
         Dim _SYNC_TO_SERVER As Char = "N"
 
@@ -176,12 +176,12 @@ Namespace TABLE
                _DEPOSIT_TRANS_NO = value
             End Set
         End Property 
-        <Column(Storage:="_LOST_QR_CODE", DbType:="Char(1)")>  _
-        Public Property LOST_QR_CODE() As  System.Nullable(Of Char) 
+        <Column(Storage:="_LOST_QR_CODE", DbType:="Char(1) NOT NULL ",CanBeNull:=false)>  _
+        Public Property LOST_QR_CODE() As Char
             Get
                 Return _LOST_QR_CODE
             End Get
-            Set(ByVal value As  System.Nullable(Of Char) )
+            Set(ByVal value As Char)
                _LOST_QR_CODE = value
             End Set
         End Property 
@@ -374,12 +374,12 @@ Namespace TABLE
                _TRANS_STATUS = value
             End Set
         End Property 
-        <Column(Storage:="_MS_APP_SCREEN_ID", DbType:="BigInt NOT NULL ",CanBeNull:=false)>  _
-        Public Property MS_APP_SCREEN_ID() As Long
+        <Column(Storage:="_MS_APP_SCREEN_ID", DbType:="BigInt")>  _
+        Public Property MS_APP_SCREEN_ID() As  System.Nullable(Of Long) 
             Get
                 Return _MS_APP_SCREEN_ID
             End Get
-            Set(ByVal value As Long)
+            Set(ByVal value As  System.Nullable(Of Long) )
                _MS_APP_SCREEN_ID = value
             End Set
         End Property 
@@ -438,7 +438,7 @@ Namespace TABLE
             _CHANGE_BANKNOTE100 = 0
             _CHANGE_BANKNOTE500 = 0
             _TRANS_STATUS = "0"
-            _MS_APP_SCREEN_ID = 0
+            _MS_APP_SCREEN_ID = Nothing
             _MS_APP_STEP_ID = 0
             _SYNC_TO_SERVER = "N"
         End Sub
@@ -566,6 +566,28 @@ Namespace TABLE
             Dim p(1) As SQLParameter
             p(0) = DB.SetBigInt("@_ID", cID)
             Return doGetData("ID = @_ID", trans, p)
+        End Function
+
+
+        '/// Returns an indication whether the record of TB_PICKUP_TRANSACTION by specified DEPOSIT_TRANS_NO key is retrieved successfully.
+        '/// <param name=cDEPOSIT_TRANS_NO>The DEPOSIT_TRANS_NO key.</param>
+        '/// <param name=trans>The System.Data.SQLClient.SQLTransaction used by this System.Data.SQLClient.SQLCommand.</param>
+        '/// <returns>true if data is retrieved successfully; otherwise, false.</returns>
+        Public Function ChkDataByDEPOSIT_TRANS_NO(cDEPOSIT_TRANS_NO As String, trans As SQLTransaction) As Boolean
+            Dim cmdPara(2)  As SQLParameter
+            cmdPara(0) = DB.SetText("@_DEPOSIT_TRANS_NO", cDEPOSIT_TRANS_NO) 
+            Return doChkData("DEPOSIT_TRANS_NO = @_DEPOSIT_TRANS_NO", trans, cmdPara)
+        End Function
+
+        '/// Returns an duplicate data record of TB_PICKUP_TRANSACTION by specified DEPOSIT_TRANS_NO key is retrieved successfully.
+        '/// <param name=cDEPOSIT_TRANS_NO>The DEPOSIT_TRANS_NO key.</param>
+        '/// <param name=trans>The System.Data.SQLClient.SQLTransaction used by this System.Data.SQLClient.SQLCommand.</param>
+        '/// <returns>true if data is retrieved successfully; otherwise, false.</returns>
+        Public Function ChkDuplicateByDEPOSIT_TRANS_NO(cDEPOSIT_TRANS_NO As String, cID As Long, trans As SQLTransaction) As Boolean
+            Dim cmdPara(2)  As SQLParameter
+            cmdPara(0) = DB.SetText("@_DEPOSIT_TRANS_NO", cDEPOSIT_TRANS_NO) 
+            cmdPara(1) = DB.SetBigInt("@_ID", cID) 
+            Return doChkData("DEPOSIT_TRANS_NO = @_DEPOSIT_TRANS_NO And ID <> @_ID", trans, cmdPara)
         End Function
 
 
@@ -824,11 +846,7 @@ Namespace TABLE
             End If
 
             cmbParam(11) = New SqlParameter("@_LOST_QR_CODE", SqlDbType.Char)
-            If _LOST_QR_CODE.Value <> "" Then 
-                cmbParam(11).Value = _LOST_QR_CODE.Value
-            Else
-                cmbParam(11).Value = DBNull.value
-            End IF
+            cmbParam(11).Value = _LOST_QR_CODE
 
             cmbParam(12) = New SqlParameter("@_SERVICE_AMT", SqlDbType.Int)
             cmbParam(12).Value = _SERVICE_AMT
@@ -902,7 +920,11 @@ Namespace TABLE
             cmbParam(32).Value = _TRANS_STATUS
 
             cmbParam(33) = New SqlParameter("@_MS_APP_SCREEN_ID", SqlDbType.BigInt)
-            cmbParam(33).Value = _MS_APP_SCREEN_ID
+            If _MS_APP_SCREEN_ID IsNot Nothing Then 
+                cmbParam(33).Value = _MS_APP_SCREEN_ID.Value
+            Else
+                cmbParam(33).Value = DBNull.value
+            End IF
 
             cmbParam(34) = New SqlParameter("@_MS_APP_STEP_ID", SqlDbType.BigInt)
             cmbParam(34).Value = _MS_APP_STEP_ID

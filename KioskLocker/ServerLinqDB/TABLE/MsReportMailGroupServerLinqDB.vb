@@ -8,7 +8,7 @@ Imports ServerLinqDB.ConnectDB
 
 Namespace TABLE
     'Represents a transaction for MS_REPORT_MAIL_GROUP table ServerLinqDB.
-    '[Create by  on June, 28 2016]
+    '[Create by  on November, 17 2017]
     Public Class MsReportMailGroupServerLinqDB
         Public sub MsReportMailGroupServerLinqDB()
 

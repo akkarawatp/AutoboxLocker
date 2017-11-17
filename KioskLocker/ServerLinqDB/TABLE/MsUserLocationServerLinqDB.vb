@@ -8,7 +8,7 @@ Imports ServerLinqDB.ConnectDB
 
 Namespace TABLE
     'Represents a transaction for MS_USER_LOCATION table ServerLinqDB.
-    '[Create by  on June, 9 2016]
+    '[Create by  on November, 17 2017]
     Public Class MsUserLocationServerLinqDB
         Public sub MsUserLocationServerLinqDB()
 

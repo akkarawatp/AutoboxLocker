@@ -8,7 +8,7 @@ Imports KioskLinqDB.ConnectDB
 
 Namespace TABLE
     'Represents a transaction for MS_SERVICE_RATE_OVERNIGHT table KioskLinqDB.
-    '[Create by  on October, 17 2016]
+    '[Create by  on November, 17 2017]
     Public Class MsServiceRateOvernightKioskLinqDB
         Public sub MsServiceRateOvernightKioskLinqDB()
 

@@ -8,7 +8,7 @@ Imports ServerLinqDB.ConnectDB
 
 Namespace TABLE
     'Represents a transaction for MS_FUNCTIONAL table ServerLinqDB.
-    '[Create by  on June, 9 2016]
+    '[Create by  on November, 17 2017]
     Public Class MsFunctionalServerLinqDB
         Public sub MsFunctionalServerLinqDB()
 
@@ -48,6 +48,7 @@ Namespace TABLE
         Dim _FUNCTIONAL_NAME As String = ""
         Dim _CAN_EDIT As Char = ""
         Dim _FUNCTIONAL_ORDER As Long = 0
+        Dim _ACTIVE_STATUS As Char = "Y"
 
         'Generate Field Property 
         <Column(Storage:="_ID", DbType:="BigInt NOT NULL ",CanBeNull:=false)>  _
@@ -131,6 +132,15 @@ Namespace TABLE
                _FUNCTIONAL_ORDER = value
             End Set
         End Property 
+        <Column(Storage:="_ACTIVE_STATUS", DbType:="Char(1) NOT NULL ",CanBeNull:=false)>  _
+        Public Property ACTIVE_STATUS() As Char
+            Get
+                Return _ACTIVE_STATUS
+            End Get
+            Set(ByVal value As Char)
+               _ACTIVE_STATUS = value
+            End Set
+        End Property 
 
 
         'Clear All Data
@@ -144,6 +154,7 @@ Namespace TABLE
             _FUNCTIONAL_NAME = ""
             _CAN_EDIT = ""
             _FUNCTIONAL_ORDER = 0
+            _ACTIVE_STATUS = "Y"
         End Sub
 
        'Define Public Method 
@@ -444,7 +455,7 @@ Namespace TABLE
         End Function
 
         Private Function SetParameterData() As SqlParameter()
-            Dim cmbParam(8) As SqlParameter
+            Dim cmbParam(9) As SqlParameter
             cmbParam(0) = New SqlParameter("@_ID", SqlDbType.BigInt)
             cmbParam(0).Value = _ID
 
@@ -484,6 +495,9 @@ Namespace TABLE
             cmbParam(8) = New SqlParameter("@_FUNCTIONAL_ORDER", SqlDbType.Int)
             cmbParam(8).Value = _FUNCTIONAL_ORDER
 
+            cmbParam(9) = New SqlParameter("@_ACTIVE_STATUS", SqlDbType.Char)
+            cmbParam(9).Value = _ACTIVE_STATUS
+
             Return cmbParam
         End Function
 
@@ -512,6 +526,7 @@ Namespace TABLE
                         If Convert.IsDBNull(Rdr("functional_name")) = False Then _functional_name = Rdr("functional_name").ToString()
                         If Convert.IsDBNull(Rdr("can_edit")) = False Then _can_edit = Rdr("can_edit").ToString()
                         If Convert.IsDBNull(Rdr("functional_order")) = False Then _functional_order = Convert.ToInt32(Rdr("functional_order"))
+                        If Convert.IsDBNull(Rdr("active_status")) = False Then _active_status = Rdr("active_status").ToString()
                     Else
                         ret = False
                         _error = MessageResources.MSGEV002
@@ -555,6 +570,7 @@ Namespace TABLE
                         If Convert.IsDBNull(Rdr("functional_name")) = False Then _functional_name = Rdr("functional_name").ToString()
                         If Convert.IsDBNull(Rdr("can_edit")) = False Then _can_edit = Rdr("can_edit").ToString()
                         If Convert.IsDBNull(Rdr("functional_order")) = False Then _functional_order = Convert.ToInt32(Rdr("functional_order"))
+                        If Convert.IsDBNull(Rdr("active_status")) = False Then _active_status = Rdr("active_status").ToString()
                     Else
                         _error = MessageResources.MSGEV002
                     End If
@@ -579,15 +595,16 @@ Namespace TABLE
         Private ReadOnly Property SqlInsert() As String 
             Get
                 Dim Sql As String=""
-                Sql += "INSERT INTO " & tableName  & " (CREATED_BY, CREATED_DATE, MS_FUNCTIONAL_ZONE_ID, FUNCTIONAL_NAME, CAN_EDIT, FUNCTIONAL_ORDER)"
-                Sql += " OUTPUT INSERTED.ID, INSERTED.CREATED_BY, INSERTED.CREATED_DATE, INSERTED.UPDATED_BY, INSERTED.UPDATED_DATE, INSERTED.MS_FUNCTIONAL_ZONE_ID, INSERTED.FUNCTIONAL_NAME, INSERTED.CAN_EDIT, INSERTED.FUNCTIONAL_ORDER"
+                Sql += "INSERT INTO " & tableName  & " (CREATED_BY, CREATED_DATE, MS_FUNCTIONAL_ZONE_ID, FUNCTIONAL_NAME, CAN_EDIT, FUNCTIONAL_ORDER, ACTIVE_STATUS)"
+                Sql += " OUTPUT INSERTED.ID, INSERTED.CREATED_BY, INSERTED.CREATED_DATE, INSERTED.UPDATED_BY, INSERTED.UPDATED_DATE, INSERTED.MS_FUNCTIONAL_ZONE_ID, INSERTED.FUNCTIONAL_NAME, INSERTED.CAN_EDIT, INSERTED.FUNCTIONAL_ORDER, INSERTED.ACTIVE_STATUS"
                 Sql += " VALUES("
                 sql += "@_CREATED_BY" & ", "
                 sql += "@_CREATED_DATE" & ", "
                 sql += "@_MS_FUNCTIONAL_ZONE_ID" & ", "
                 sql += "@_FUNCTIONAL_NAME" & ", "
                 sql += "@_CAN_EDIT" & ", "
-                sql += "@_FUNCTIONAL_ORDER"
+                sql += "@_FUNCTIONAL_ORDER" & ", "
+                sql += "@_ACTIVE_STATUS"
                 sql += ")"
                 Return sql
             End Get
@@ -604,7 +621,8 @@ Namespace TABLE
                 Sql += "MS_FUNCTIONAL_ZONE_ID = " & "@_MS_FUNCTIONAL_ZONE_ID" & ", "
                 Sql += "FUNCTIONAL_NAME = " & "@_FUNCTIONAL_NAME" & ", "
                 Sql += "CAN_EDIT = " & "@_CAN_EDIT" & ", "
-                Sql += "FUNCTIONAL_ORDER = " & "@_FUNCTIONAL_ORDER" + ""
+                Sql += "FUNCTIONAL_ORDER = " & "@_FUNCTIONAL_ORDER" & ", "
+                Sql += "ACTIVE_STATUS = " & "@_ACTIVE_STATUS" + ""
                 Return Sql
             End Get
         End Property
@@ -622,7 +640,7 @@ Namespace TABLE
         'Get Select Statement for table MS_FUNCTIONAL
         Private ReadOnly Property SqlSelect() As String
             Get
-                Dim Sql As String = "SELECT ID, CREATED_BY, CREATED_DATE, UPDATED_BY, UPDATED_DATE, MS_FUNCTIONAL_ZONE_ID, FUNCTIONAL_NAME, CAN_EDIT, FUNCTIONAL_ORDER FROM " & tableName
+                Dim Sql As String = "SELECT ID, CREATED_BY, CREATED_DATE, UPDATED_BY, UPDATED_DATE, MS_FUNCTIONAL_ZONE_ID, FUNCTIONAL_NAME, CAN_EDIT, FUNCTIONAL_ORDER, ACTIVE_STATUS FROM " & tableName
                 Return Sql
             End Get
         End Property

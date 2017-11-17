@@ -8,7 +8,7 @@ Imports KioskLinqDB.ConnectDB
 
 Namespace TABLE
     'Represents a transaction for TB_LOG_ERROR table KioskLinqDB.
-    '[Create by  on July, 15 2016]
+    '[Create by  on November, 17 2017]
     Public Class TbLogErrorKioskLinqDB
         Public sub TbLogErrorKioskLinqDB()
 

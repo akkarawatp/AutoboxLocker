@@ -5,7 +5,7 @@ Namespace Data
         Dim _KioskID As String = ""
         Dim _SelectForm As KioskLockerForm
 
-        Dim _Language As String = Data.ConstantsData.KioskLanguage.Thai
+        'Dim _Language As String = Data.ConstantsData.KioskLanguage.Thai
         Dim _LocationCode As String = ""
         Dim _LocationName As String = ""
         Dim _KioskOpenTime As String = ""
@@ -86,14 +86,14 @@ Namespace Data
             End Set
         End Property
 
-        Public Property Language As String
-            Get
-                Return _Language.Trim
-            End Get
-            Set(value As String)
-                _Language = value
-            End Set
-        End Property
+        'Public Property Language As String
+        '    Get
+        '        Return _Language.Trim
+        '    End Get
+        '    Set(value As String)
+        '        _Language = value
+        '    End Set
+        'End Property
 
         Public Property KioskOpenTime As String
             Get

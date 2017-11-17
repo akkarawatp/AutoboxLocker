@@ -8,7 +8,7 @@ Imports ServerLinqDB.ConnectDB
 
 Namespace TABLE
     'Represents a transaction for TB_FILL_MONEY table ServerLinqDB.
-    '[Create by  on June, 9 2016]
+    '[Create by  on November, 17 2017]
     Public Class TbFillMoneyServerLinqDB
         Public sub TbFillMoneyServerLinqDB()
 

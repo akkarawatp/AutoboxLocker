@@ -8,7 +8,7 @@ Imports ServerLinqDB.ConnectDB
 
 Namespace TABLE
     'Represents a transaction for MS_MASTER_MONITORING_TYPE table ServerLinqDB.
-    '[Create by  on June, 12 2016]
+    '[Create by  on November, 17 2017]
     Public Class MsMasterMonitoringTypeServerLinqDB
         Public sub MsMasterMonitoringTypeServerLinqDB()
 

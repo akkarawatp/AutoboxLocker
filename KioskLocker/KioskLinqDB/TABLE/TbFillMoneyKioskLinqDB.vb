@@ -8,7 +8,7 @@ Imports KioskLinqDB.ConnectDB
 
 Namespace TABLE
     'Represents a transaction for TB_FILL_MONEY table KioskLinqDB.
-    '[Create by  on June, 9 2016]
+    '[Create by  on November, 17 2017]
     Public Class TbFillMoneyKioskLinqDB
         Public sub TbFillMoneyKioskLinqDB()
 

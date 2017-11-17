@@ -52,8 +52,8 @@ Public Class frmMain
 
         GetKioskConfig()
         SetAppScreenList()
-        SetLangMasterList()
-        SetLangNotificationList()
+        'SetLangMasterList()
+        'SetLangNotificationList()
         SetAlarmMasterList()
         ServiceRateData.SetServiceRateData(KioskData.KioskID)
 
@@ -89,7 +89,6 @@ Public Class frmMain
     Private Sub StartInitialDevice()
         StartMoneyDevice()
         StartBoardDevice()
-        'StartPassportDevice()
     End Sub
 
     Private Sub StartBoardDevice()
@@ -283,17 +282,17 @@ Public Class frmMain
         InsertLogTransactionActivity("", "", "", KioskConfigData.KioskLockerForm.Main, KioskConfigData.KioskLockerStep.Main_LoadAppScreenList, "", False)
     End Sub
 
-    Private Sub SetLangMasterList()
-        LangMasterList = New DataTable
-        Dim lnq As New MsKioskScreenControlKioskLinqDB
-        LangMasterList = lnq.GetDataList("", "", Nothing, Nothing)
-    End Sub
+    'Private Sub SetLangMasterList()
+    '    LangMasterList = New DataTable
+    '    Dim lnq As New MsKioskScreenControlKioskLinqDB
+    '    LangMasterList = lnq.GetDataList("", "", Nothing, Nothing)
+    'End Sub
 
-    Private Sub SetLangNotificationList()
-        LangNotificationList = New DataTable
-        Dim lnq As New MsKioskNotificationTextKioskLinqDB
-        LangNotificationList = lnq.GetDataList("", "", Nothing, Nothing)
-    End Sub
+    'Private Sub SetLangNotificationList()
+    '    LangNotificationList = New DataTable
+    '    Dim lnq As New MsKioskNotificationTextKioskLinqDB
+    '    LangNotificationList = lnq.GetDataList("", "", Nothing, Nothing)
+    'End Sub
 
     Private Sub SetAlarmMasterList()
         Try
@@ -446,109 +445,109 @@ Public Class frmMain
         Next i
     End Sub
 
-#Region "Change Language"
-    Private Sub btnJP_Click(sender As Object, e As EventArgs) Handles btnJP.Click
-        InsertLogTransactionActivity(Customer.DepositTransNo, Collect.TransactionNo, "", KioskConfig.KioskLockerForm.Main, KioskConfig.KioskLockerStep.Main_ChangeLangJP, "", False)
-        KioskConfig.Language = Data.ConstantsData.KioskLanguage.Japan
-        ChangeFormMainLanguage()
-        SetChildFormLanguage()
+    '#Region "Change Language"
+    '    Private Sub btnJP_Click(sender As Object, e As EventArgs) Handles btnJP.Click
+    '        InsertLogTransactionActivity(Customer.DepositTransNo, Collect.TransactionNo, "", KioskConfig.KioskLockerForm.Main, KioskConfig.KioskLockerStep.Main_ChangeLangJP, "", False)
+    '        KioskConfig.Language = Data.ConstantsData.KioskLanguage.Japan
+    '        ChangeFormMainLanguage()
+    '        SetChildFormLanguage()
 
-        Dim frm As Form = Me.ActiveMdiChild
-        If frm.Name = "frmHome" Then
-            DirectCast(frm, frmHome).SetLabelNotificationText()
-        ElseIf frm.Name = "frmCollectSelectDocument" Then
-            DirectCast(frm, frmCollectSelectDocument).SetLabelNotificationText()
-        End If
-    End Sub
+    '        Dim frm As Form = Me.ActiveMdiChild
+    '        If frm.Name = "frmHome" Then
+    '            DirectCast(frm, frmHome).SetLabelNotificationText()
+    '        ElseIf frm.Name = "frmCollectSelectDocument" Then
+    '            DirectCast(frm, frmCollectSelectDocument).SetLabelNotificationText()
+    '        End If
+    '    End Sub
 
-    Private Sub btnEN_Click(sender As Object, e As EventArgs) Handles btnEN.Click
-        InsertLogTransactionActivity(Customer.DepositTransNo, Collect.TransactionNo, "", KioskConfig.KioskLockerForm.Main, KioskConfig.KioskLockerStep.Main_ChangeLangEN, "", False)
-        KioskConfig.Language = Data.ConstantsData.KioskLanguage.English
-        ChangeFormMainLanguage()
-        SetChildFormLanguage()
+    '    Private Sub btnEN_Click(sender As Object, e As EventArgs) Handles btnEN.Click
+    '        InsertLogTransactionActivity(Customer.DepositTransNo, Collect.TransactionNo, "", KioskConfig.KioskLockerForm.Main, KioskConfig.KioskLockerStep.Main_ChangeLangEN, "", False)
+    '        KioskConfig.Language = Data.ConstantsData.KioskLanguage.English
+    '        ChangeFormMainLanguage()
+    '        SetChildFormLanguage()
 
-        Dim frm As Form = Me.ActiveMdiChild
-        If frm.Name = "frmHome" Then
-            DirectCast(frm, frmHome).SetLabelNotificationText()
-        ElseIf frm.Name = "frmCollectSelectDocument" Then
-            DirectCast(frm, frmCollectSelectDocument).SetLabelNotificationText()
-        End If
+    '        Dim frm As Form = Me.ActiveMdiChild
+    '        If frm.Name = "frmHome" Then
+    '            DirectCast(frm, frmHome).SetLabelNotificationText()
+    '        ElseIf frm.Name = "frmCollectSelectDocument" Then
+    '            DirectCast(frm, frmCollectSelectDocument).SetLabelNotificationText()
+    '        End If
 
-    End Sub
+    '    End Sub
 
-    Private Sub btnCH_Click(sender As Object, e As EventArgs) Handles btnCH.Click
-        InsertLogTransactionActivity(Customer.DepositTransNo, Collect.TransactionNo, "", KioskConfig.KioskLockerForm.Main, KioskConfig.KioskLockerStep.Main_ChangeLangCH, "", False)
-        KioskConfig.Language = Data.ConstantsData.KioskLanguage.China
-        ChangeFormMainLanguage()
-        SetChildFormLanguage()
+    '    Private Sub btnCH_Click(sender As Object, e As EventArgs) Handles btnCH.Click
+    '        InsertLogTransactionActivity(Customer.DepositTransNo, Collect.TransactionNo, "", KioskConfig.KioskLockerForm.Main, KioskConfig.KioskLockerStep.Main_ChangeLangCH, "", False)
+    '        KioskConfig.Language = Data.ConstantsData.KioskLanguage.China
+    '        ChangeFormMainLanguage()
+    '        SetChildFormLanguage()
 
-        Dim frm As Form = Me.ActiveMdiChild
-        If frm.Name = "frmHome" Then
-            DirectCast(frm, frmHome).SetLabelNotificationText()
-        ElseIf frm.Name = "frmCollectSelectDocument" Then
-            DirectCast(frm, frmCollectSelectDocument).SetLabelNotificationText()
-        End If
-    End Sub
+    '        Dim frm As Form = Me.ActiveMdiChild
+    '        If frm.Name = "frmHome" Then
+    '            DirectCast(frm, frmHome).SetLabelNotificationText()
+    '        ElseIf frm.Name = "frmCollectSelectDocument" Then
+    '            DirectCast(frm, frmCollectSelectDocument).SetLabelNotificationText()
+    '        End If
+    '    End Sub
 
-    Private Sub btnTH_Click(sender As Object, e As EventArgs) Handles btnTH.Click
-        InsertLogTransactionActivity(Customer.DepositTransNo, Collect.TransactionNo, "", KioskConfig.KioskLockerForm.Main, KioskConfig.KioskLockerStep.Main_ChangeLangTH, "", False)
-        KioskConfig.Language = Data.ConstantsData.KioskLanguage.Thai
-        ChangeFormMainLanguage()
-        SetChildFormLanguage()
+    '    Private Sub btnTH_Click(sender As Object, e As EventArgs) Handles btnTH.Click
+    '        InsertLogTransactionActivity(Customer.DepositTransNo, Collect.TransactionNo, "", KioskConfig.KioskLockerForm.Main, KioskConfig.KioskLockerStep.Main_ChangeLangTH, "", False)
+    '        KioskConfig.Language = Data.ConstantsData.KioskLanguage.Thai
+    '        ChangeFormMainLanguage()
+    '        SetChildFormLanguage()
 
-        Dim frm As Form = Me.ActiveMdiChild
-        If frm.Name = "frmHome" Then
-            DirectCast(frm, frmHome).SetLabelNotificationText()
-        ElseIf frm.Name = "frmCollectSelectDocument" Then
-            DirectCast(frm, frmCollectSelectDocument).SetLabelNotificationText()
-        End If
-    End Sub
+    '        Dim frm As Form = Me.ActiveMdiChild
+    '        If frm.Name = "frmHome" Then
+    '            DirectCast(frm, frmHome).SetLabelNotificationText()
+    '        ElseIf frm.Name = "frmCollectSelectDocument" Then
+    '            DirectCast(frm, frmCollectSelectDocument).SetLabelNotificationText()
+    '        End If
+    '    End Sub
 
-    Public Sub ChangeFormMainLanguage()
-        Dim fldName As String = ""
-        Select Case KioskConfig.Language
-            Case Data.ConstantsData.KioskLanguage.Thai
-                fldName = "TH_Display"
-            Case Data.ConstantsData.KioskLanguage.English
-                fldName = "EN_Display"
-            Case Data.ConstantsData.KioskLanguage.China
-                fldName = "CH_Display"
-            Case Data.KioskLanguage.Japan
-                fldName = "JP_Display"
-        End Select
+    '    Public Sub ChangeFormMainLanguage()
+    '        Dim fldName As String = ""
+    '        Select Case KioskConfig.Language
+    '            Case Data.ConstantsData.KioskLanguage.Thai
+    '                fldName = "TH_Display"
+    '            Case Data.ConstantsData.KioskLanguage.English
+    '                fldName = "EN_Display"
+    '            Case Data.ConstantsData.KioskLanguage.China
+    '                fldName = "CH_Display"
+    '            Case Data.KioskLanguage.Japan
+    '                fldName = "JP_Display"
+    '        End Select
 
-        LangMasterList.DefaultView.RowFilter = "ms_app_screen_id='" & Convert.ToInt16(Data.KioskConfigData.KioskLockerForm.Main) & "'"
-        If LangMasterList.DefaultView.Count > 0 Then
-            For Each dr As DataRowView In LangMasterList.DefaultView
-                Dim ControlName As String = dr("Control_Name")
-                Dim cc() As Control = Me.Controls.Find(ControlName, True)
-                If cc.Length > 0 Then
-                    cc(0).Text = dr(fldName)
+    '        LangMasterList.DefaultView.RowFilter = "ms_app_screen_id='" & Convert.ToInt16(Data.KioskConfigData.KioskLockerForm.Main) & "'"
+    '        If LangMasterList.DefaultView.Count > 0 Then
+    '            For Each dr As DataRowView In LangMasterList.DefaultView
+    '                Dim ControlName As String = dr("Control_Name")
+    '                Dim cc() As Control = Me.Controls.Find(ControlName, True)
+    '                If cc.Length > 0 Then
+    '                    cc(0).Text = dr(fldName)
 
-                    Dim FontSize As Int16 = dr("font_size")
-                    Dim FontStyle As FontStyle = Convert.ToInt16(dr("font_style"))
-                    cc(0).Font = New Font("Thai Sans Lite", FontSize, FontStyle)
+    '                    Dim FontSize As Int16 = dr("font_size")
+    '                    Dim FontStyle As FontStyle = Convert.ToInt16(dr("font_style"))
+    '                    cc(0).Font = New Font("Thai Sans Lite", FontSize, FontStyle)
 
-                    If KioskConfig.Language = Data.ConstantsData.KioskLanguage.China Then
-                        FontSize = FontSize * 0.7
-                        cc(0).Font = New Font("Hiragino GB W3", FontSize, FontStyle)
+    '                    If KioskConfig.Language = Data.ConstantsData.KioskLanguage.China Then
+    '                        FontSize = FontSize * 0.7
+    '                        cc(0).Font = New Font("Hiragino GB W3", FontSize, FontStyle)
 
-                        'cc(0).Font = New Font("Songti SC Black", FontSize, FontStyle)
-                    ElseIf KioskConfig.Language = Data.ConstantsData.KioskLanguage.Japan Then
-                        FontSize = FontSize * 0.7
+    '                        'cc(0).Font = New Font("Songti SC Black", FontSize, FontStyle)
+    '                    ElseIf KioskConfig.Language = Data.ConstantsData.KioskLanguage.Japan Then
+    '                        FontSize = FontSize * 0.7
 
-                        cc(0).Font = New Font("MS Gothic", FontSize, FontStyle)
-                        'cc(0).Font = New Font("ＭＳ Ｐゴシック", FontSize, FontStyle)
-                    End If
-                End If
-            Next
-        End If
-        LangMasterList.DefaultView.RowFilter = ""
-        Application.DoEvents()
-    End Sub
+    '                        cc(0).Font = New Font("MS Gothic", FontSize, FontStyle)
+    '                        'cc(0).Font = New Font("ＭＳ Ｐゴシック", FontSize, FontStyle)
+    '                    End If
+    '                End If
+    '            Next
+    '        End If
+    '        LangMasterList.DefaultView.RowFilter = ""
+    '        Application.DoEvents()
+    '    End Sub
 
 
-#End Region
+    '#End Region
 
 #Region "Download Screen Saver"
     Private Sub CheckKioskScreenSaver()
@@ -605,8 +604,13 @@ Public Class frmMain
     Private Sub TimerSetPointer_Tick(sender As Object, e As EventArgs) Handles TimerSetPointer.Tick
         btnPointer.Parent = Me
         btnPointer.Text = "1"
-        btnPointer.Left = 0
-        btnPointer.Top = 0
+        'btnPointer.Left = 0
+        'btnPointer.Top = 0
+
+        'Move to buttom left
+        btnPointer.Location = New Point(0, Me.Height - btnPointer.Height)
+        btnPointer.BringToFront()
+
         TimerSetPointer.Enabled = False
     End Sub
 
@@ -616,14 +620,14 @@ Public Class frmMain
         If btnPointer.Text = "1" Then
             btnPointer.Text = "2"
 
-            'Move to top right
-            btnPointer.Location = New Point(Me.Width - btnPointer.Width, 0)
+            'Move to buttom right
+            btnPointer.Location = New Point(Me.Width - btnPointer.Width, Me.Height - btnPointer.Height)
             btnPointer.BringToFront()
         ElseIf btnPointer.Text = "2" Then
             btnPointer.Text = "3"
 
-            'Move to buttom left
-            btnPointer.Location = New Point(0, Me.Height - btnPointer.Height)
+            'Move to top right
+            btnPointer.Location = New Point(Me.Width - btnPointer.Width, 0)
             btnPointer.BringToFront()
         ElseIf btnPointer.Text = "3" Then
             btnPointer.Text = "4"

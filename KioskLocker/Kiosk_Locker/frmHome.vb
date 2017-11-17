@@ -93,9 +93,9 @@ Public Class frmHome
         SetLockerHomeData()
 
 
-        KioskConfig.Language = Data.ConstantsData.KioskLanguage.Thai
-        frmMain.ChangeFormMainLanguage()
-        SetChildFormLanguage()
+        'KioskConfig.Language = Data.ConstantsData.KioskLanguage.Thai
+        'frmMain.ChangeFormMainLanguage()
+        'SetChildFormLanguage()
         SetLabelNotificationText()
 
         pnlDeposit.Enabled = True
@@ -120,10 +120,10 @@ Public Class frmHome
             RemoveHandler lblDeposit.Click, AddressOf btnDeposit_Click
             lblDeposit.Enabled = False
 
-            lblLabelNotification.Width = pnlDeposit.Width
-            lblLabelNotification.Left = pnlDeposit.Left
-            lblLabelNotification.Text = GetNotificationText(1)
-            lblLabelNotification.Visible = True
+            'lblLabelNotification.Width = pnlDeposit.Width
+            'lblLabelNotification.Left = pnlDeposit.Left
+            'lblLabelNotification.Text = GetNotificationText(1)
+            'lblLabelNotification.Visible = True
             IsStorageFull = True
             Application.DoEvents()
         End If
@@ -136,12 +136,12 @@ Public Class frmHome
                 'แสดง Status ของเครื่องอ่่านบัตรประชาชนและ Passport
                 dvDt.DefaultView.RowFilter = "device_id=" & DeviceID.IDCardPassportScanner & " and ms_device_status_id<>1"
                 If dvDt.DefaultView.Count > 0 Then
-                    lblLabelNotification.Text = GetNotificationText(6)
+                    'lblLabelNotification.Text = GetNotificationText(6)
                     pnlDeposit.BackgroundImage = My.Resources.IconDepositFull
                     RemoveHandler pnlDeposit.Click, AddressOf btnDeposit_Click
                     RemoveHandler lblDeposit.Click, AddressOf btnDeposit_Click
                     lblDeposit.Enabled = False
-                    lblLabelNotification.Visible = True
+                    'lblLabelNotification.Visible = True
                 End If
                 dvDt.DefaultView.RowFilter = ""
 
@@ -151,32 +151,32 @@ Public Class frmHome
                 'แสดง Notification เมื่อเหรียญ5หมด
                 dvDt.DefaultView.RowFilter = "device_id=" & DeviceID.CoinOut_5 & " and stock_status='Critical'"
                 If dvDt.DefaultView.Count > 0 Then
-                    lblLabelNotification.Text = GetNotificationText(2)
-                    lblLabelNotification.Visible = True
+                    'lblLabelNotification.Text = GetNotificationText(2)
+                    'lblLabelNotification.Visible = True
                 End If
                 dvDt.DefaultView.RowFilter = ""
 
                 'แสดง Notification เมื่อแบงค์ 20 หมด
                 dvDt.DefaultView.RowFilter = "device_id=" & DeviceID.BankNoteOut_20 & " and stock_status='Critical'"
                 If dvDt.DefaultView.Count > 0 Then
-                    lblLabelNotification.Text = GetNotificationText(3)
-                    lblLabelNotification.Visible = True
+                    'lblLabelNotification.Text = GetNotificationText(3)
+                    'lblLabelNotification.Visible = True
                 End If
                 dvDt.DefaultView.RowFilter = ""
 
                 'แสดง Notification เมื่อแบงค์ 100 หมด
                 dvDt.DefaultView.RowFilter = "device_id=" & DeviceID.BankNoteOut_100 & " and stock_status='Critical'"
                 If dvDt.DefaultView.Count > 0 Then
-                    lblLabelNotification.Text = GetNotificationText(4)
-                    lblLabelNotification.Visible = True
+                    'lblLabelNotification.Text = GetNotificationText(4)
+                    'lblLabelNotification.Visible = True
                 End If
                 dvDt.DefaultView.RowFilter = ""
 
                 'แสดง Notification เมื่อแบงค์ 20 และ แบงค์ 100 หมดพร้อมกัน
                 dvDt.DefaultView.RowFilter = " (device_id=" & DeviceID.BankNoteOut_20 & " and stock_status='Critical') or (device_id=" & DeviceID.BankNoteOut_100 & " and stock_status='Critical')"
                 If dvDt.DefaultView.Count = 2 Then
-                    lblLabelNotification.Text = GetNotificationText(7)
-                    lblLabelNotification.Visible = True
+                    'lblLabelNotification.Text = GetNotificationText(7)
+                    'lblLabelNotification.Visible = True
                 End If
                 dvDt.DefaultView.RowFilter = ""
 

@@ -8,7 +8,7 @@ Imports ServerLinqDB.ConnectDB
 
 Namespace TABLE
     'Represents a transaction for MS_MASTER_MONITORING_ALARM table ServerLinqDB.
-    '[Create by  on June, 12 2016]
+    '[Create by  on November, 17 2017]
     Public Class MsMasterMonitoringAlarmServerLinqDB
         Public sub MsMasterMonitoringAlarmServerLinqDB()
 
@@ -195,7 +195,6 @@ Namespace TABLE
         '/// <returns>true if insert data successfully; otherwise, false.</returns>
         Public Function InsertData(CreatedBy As String,trans As SQLTransaction) As ExecuteDataInfo
             If trans IsNot Nothing Then 
-                _ID = DB.GetNextID("ID",tableName, trans)
                 _created_by = CreatedBy
                 _created_date = DateTime.Now
                 Return doInsert(trans)
@@ -339,6 +338,28 @@ Namespace TABLE
         End Function
 
 
+        '/// Returns an indication whether the record of MS_MASTER_MONITORING_ALARM by specified ALARM_CODE key is retrieved successfully.
+        '/// <param name=cALARM_CODE>The ALARM_CODE key.</param>
+        '/// <param name=trans>The System.Data.SQLClient.SQLTransaction used by this System.Data.SQLClient.SQLCommand.</param>
+        '/// <returns>true if data is retrieved successfully; otherwise, false.</returns>
+        Public Function ChkDataByALARM_CODE(cALARM_CODE As String, trans As SQLTransaction) As Boolean
+            Dim cmdPara(2)  As SQLParameter
+            cmdPara(0) = DB.SetText("@_ALARM_CODE", cALARM_CODE) 
+            Return doChkData("ALARM_CODE = @_ALARM_CODE", trans, cmdPara)
+        End Function
+
+        '/// Returns an duplicate data record of MS_MASTER_MONITORING_ALARM by specified ALARM_CODE key is retrieved successfully.
+        '/// <param name=cALARM_CODE>The ALARM_CODE key.</param>
+        '/// <param name=trans>The System.Data.SQLClient.SQLTransaction used by this System.Data.SQLClient.SQLCommand.</param>
+        '/// <returns>true if data is retrieved successfully; otherwise, false.</returns>
+        Public Function ChkDuplicateByALARM_CODE(cALARM_CODE As String, cID As Long, trans As SQLTransaction) As Boolean
+            Dim cmdPara(2)  As SQLParameter
+            cmdPara(0) = DB.SetText("@_ALARM_CODE", cALARM_CODE) 
+            cmdPara(1) = DB.SetBigInt("@_ID", cID) 
+            Return doChkData("ALARM_CODE = @_ALARM_CODE And ID <> @_ID", trans, cmdPara)
+        End Function
+
+
         '/// Returns an indication whether the record of MS_MASTER_MONITORING_ALARM by specified condition is retrieved successfully.
         '/// <param name=whText>The condition specify the deleting record(s).</param>
         '/// <param name=trans>The System.Data.SQLClient.SQLTransaction used by this System.Data.SQLClient.SQLCommand.</param>
@@ -361,6 +382,7 @@ Namespace TABLE
                         ret.IsSuccess = False
                         ret.ErrorMessage = DB.ErrorMessage
                     Else
+                        _ID = dt.Rows(0)("ID")
                         _haveData = True
                         ret.IsSuccess = True
                         _information = MessageResources.MSGIN001
@@ -629,10 +651,9 @@ Namespace TABLE
         Private ReadOnly Property SqlInsert() As String 
             Get
                 Dim Sql As String=""
-                Sql += "INSERT INTO " & tableName  & " (ID, CREATED_BY, CREATED_DATE, MS_MASTER_MONITORING_TYPE_ID, ALARM_CODE, ALARM_PROBLEM, ENG_DESC, THA_DESC, SMS_MESSAGE)"
+                Sql += "INSERT INTO " & tableName  & " (CREATED_BY, CREATED_DATE, MS_MASTER_MONITORING_TYPE_ID, ALARM_CODE, ALARM_PROBLEM, ENG_DESC, THA_DESC, SMS_MESSAGE)"
                 Sql += " OUTPUT INSERTED.ID, INSERTED.CREATED_BY, INSERTED.CREATED_DATE, INSERTED.UPDATED_BY, INSERTED.UPDATED_DATE, INSERTED.MS_MASTER_MONITORING_TYPE_ID, INSERTED.ALARM_CODE, INSERTED.ALARM_PROBLEM, INSERTED.ENG_DESC, INSERTED.THA_DESC, INSERTED.SMS_MESSAGE"
                 Sql += " VALUES("
-                sql += "@_ID" & ", "
                 sql += "@_CREATED_BY" & ", "
                 sql += "@_CREATED_DATE" & ", "
                 sql += "@_MS_MASTER_MONITORING_TYPE_ID" & ", "

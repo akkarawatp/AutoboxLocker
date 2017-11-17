@@ -8,7 +8,7 @@ Imports KioskLinqDB.ConnectDB
 
 Namespace TABLE
     'Represents a transaction for MS_DEVICE_TYPE table KioskLinqDB.
-    '[Create by  on October, 18 2016]
+    '[Create by  on November, 17 2017]
     Public Class MsDeviceTypeKioskLinqDB
         Public sub MsDeviceTypeKioskLinqDB()
 

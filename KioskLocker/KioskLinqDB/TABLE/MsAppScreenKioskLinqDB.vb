@@ -8,7 +8,7 @@ Imports KioskLinqDB.ConnectDB
 
 Namespace TABLE
     'Represents a transaction for MS_APP_SCREEN table KioskLinqDB.
-    '[Create by  on October, 16 2016]
+    '[Create by  on November, 17 2017]
     Public Class MsAppScreenKioskLinqDB
         Public sub MsAppScreenKioskLinqDB()
 

@@ -98,22 +98,20 @@
     <Compile Include="TABLE\MsDeviceTypeKioskLinqDB.vb" />
     <Compile Include="TABLE\MsKioskAlarmKioskLinqDB.vb" />
     <Compile Include="TABLE\MsKioskDeviceKioskLinqDB.vb" />
-    <Compile Include="TABLE\MsKioskNotificationTextKioskLinqDB.vb" />
     <Compile Include="TABLE\MsKioskPromotionHourKioskLinqDB.vb" />
     <Compile Include="TABLE\MsKioskPromotionKioskLinqDB.vb" />
-    <Compile Include="TABLE\MsKioskScreenControlKioskLinqDB.vb" />
     <Compile Include="TABLE\MsLockerKioskLinqDB.vb" />
     <Compile Include="TABLE\MsMasterMonitoringAlarmKioskLinqDB.vb" />
     <Compile Include="TABLE\MsServiceRateDepositKioskLinqDB.vb" />
     <Compile Include="TABLE\MsServiceRateHourKioskLinqDB.vb" />
     <Compile Include="TABLE\MsServiceRateKioskLinqDB.vb" />
     <Compile Include="TABLE\MsServiceRateOvernightKioskLinqDB.vb" />
+    <Compile Include="TABLE\TbDepositTransactionKioskLinqDB.vb" />
     <Compile Include="TABLE\TbFillMoneyKioskLinqDB.vb" />
     <Compile Include="TABLE\TbLogErrorKioskLinqDB.vb" />
     <Compile Include="TABLE\TbLogKioskAgentKioskLinqDB.vb" />
     <Compile Include="TABLE\TbLogTransactionActivityKioskLinqDB.vb" />
     <Compile Include="TABLE\TbPickupTransactionKioskLinqDB.vb" />
-    <Compile Include="TABLE\TbServiceTransactionKioskLinqDB.vb" />
     <Compile Include="TABLE\TbStaffConsoleTransactionKioskLinqDB.vb" />
   </ItemGroup>
   <ItemGroup>

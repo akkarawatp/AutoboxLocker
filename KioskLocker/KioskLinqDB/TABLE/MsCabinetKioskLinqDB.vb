@@ -8,7 +8,7 @@ Imports KioskLinqDB.ConnectDB
 
 Namespace TABLE
     'Represents a transaction for MS_CABINET table KioskLinqDB.
-    '[Create by  on October, 10 2016]
+    '[Create by  on November, 17 2017]
     Public Class MsCabinetKioskLinqDB
         Public sub MsCabinetKioskLinqDB()
 
@@ -346,54 +346,6 @@ Namespace TABLE
             Dim p(1) As SQLParameter
             p(0) = DB.SetBigInt("@_ID", cID)
             Return doGetData("ID = @_ID", trans, p)
-        End Function
-
-
-        '/// Returns an indication whether the record of MS_CABINET by specified MS_KIOSK_ID_ORDER_LAYOUT key is retrieved successfully.
-        '/// <param name=cMS_KIOSK_ID_ORDER_LAYOUT>The MS_KIOSK_ID_ORDER_LAYOUT key.</param>
-        '/// <param name=trans>The System.Data.SQLClient.SQLTransaction used by this System.Data.SQLClient.SQLCommand.</param>
-        '/// <returns>true if data is retrieved successfully; otherwise, false.</returns>
-        Public Function ChkDataByMS_KIOSK_ID_ORDER_LAYOUT(cMS_KIOSK_ID As Long, cORDER_LAYOUT As Integer, trans As SQLTransaction) As Boolean
-            Dim cmdPara(3)  As SQLParameter
-            cmdPara(0) = DB.SetText("@_MS_KIOSK_ID", cMS_KIOSK_ID) 
-            cmdPara(1) = DB.SetText("@_ORDER_LAYOUT", cORDER_LAYOUT) 
-            Return doChkData("MS_KIOSK_ID = @_MS_KIOSK_ID AND ORDER_LAYOUT = @_ORDER_LAYOUT", trans, cmdPara)
-        End Function
-
-        '/// Returns an duplicate data record of MS_CABINET by specified MS_KIOSK_ID_ORDER_LAYOUT key is retrieved successfully.
-        '/// <param name=cMS_KIOSK_ID_ORDER_LAYOUT>The MS_KIOSK_ID_ORDER_LAYOUT key.</param>
-        '/// <param name=trans>The System.Data.SQLClient.SQLTransaction used by this System.Data.SQLClient.SQLCommand.</param>
-        '/// <returns>true if data is retrieved successfully; otherwise, false.</returns>
-        Public Function ChkDuplicateByMS_KIOSK_ID_ORDER_LAYOUT(cMS_KIOSK_ID As Long, cORDER_LAYOUT As Integer, cID As Long, trans As SQLTransaction) As Boolean
-            Dim cmdPara(3)  As SQLParameter
-            cmdPara(0) = DB.SetText("@_MS_KIOSK_ID", cMS_KIOSK_ID) 
-            cmdPara(1) = DB.SetText("@_ORDER_LAYOUT", cORDER_LAYOUT) 
-            cmdPara(2) = DB.SetBigInt("@_ID", cID) 
-            Return doChkData("MS_KIOSK_ID = @_MS_KIOSK_ID AND ORDER_LAYOUT = @_ORDER_LAYOUT And ID <> @_ID", trans, cmdPara)
-        End Function
-
-
-        '/// Returns an indication whether the record of MS_CABINET by specified CABINET_NO_MS_KIOSK_ID key is retrieved successfully.
-        '/// <param name=cCABINET_NO_MS_KIOSK_ID>The CABINET_NO_MS_KIOSK_ID key.</param>
-        '/// <param name=trans>The System.Data.SQLClient.SQLTransaction used by this System.Data.SQLClient.SQLCommand.</param>
-        '/// <returns>true if data is retrieved successfully; otherwise, false.</returns>
-        Public Function ChkDataByCABINET_NO_MS_KIOSK_ID(cCABINET_NO As String, cMS_KIOSK_ID As Long, trans As SQLTransaction) As Boolean
-            Dim cmdPara(3)  As SQLParameter
-            cmdPara(0) = DB.SetText("@_CABINET_NO", cCABINET_NO) 
-            cmdPara(1) = DB.SetText("@_MS_KIOSK_ID", cMS_KIOSK_ID) 
-            Return doChkData("CABINET_NO = @_CABINET_NO AND MS_KIOSK_ID = @_MS_KIOSK_ID", trans, cmdPara)
-        End Function
-
-        '/// Returns an duplicate data record of MS_CABINET by specified CABINET_NO_MS_KIOSK_ID key is retrieved successfully.
-        '/// <param name=cCABINET_NO_MS_KIOSK_ID>The CABINET_NO_MS_KIOSK_ID key.</param>
-        '/// <param name=trans>The System.Data.SQLClient.SQLTransaction used by this System.Data.SQLClient.SQLCommand.</param>
-        '/// <returns>true if data is retrieved successfully; otherwise, false.</returns>
-        Public Function ChkDuplicateByCABINET_NO_MS_KIOSK_ID(cCABINET_NO As String, cMS_KIOSK_ID As Long, cID As Long, trans As SQLTransaction) As Boolean
-            Dim cmdPara(3)  As SQLParameter
-            cmdPara(0) = DB.SetText("@_CABINET_NO", cCABINET_NO) 
-            cmdPara(1) = DB.SetText("@_MS_KIOSK_ID", cMS_KIOSK_ID) 
-            cmdPara(2) = DB.SetBigInt("@_ID", cID) 
-            Return doChkData("CABINET_NO = @_CABINET_NO AND MS_KIOSK_ID = @_MS_KIOSK_ID And ID <> @_ID", trans, cmdPara)
         End Function
 
 

@@ -102,8 +102,6 @@
     <Compile Include="TABLE\MsFunctionalServerLinqDB.vb" />
     <Compile Include="TABLE\MsFunctionalZoneServerLinqDB.vb" />
     <Compile Include="TABLE\MsKioskDeviceServerLinqDB.vb" />
-    <Compile Include="TABLE\MsKioskNotificationTextServerLinqDB.vb" />
-    <Compile Include="TABLE\MsKioskScreenControlServerLinqDB.vb" />
     <Compile Include="TABLE\MsKioskServerLinqDB.vb" />
     <Compile Include="TABLE\MsLocationPromotionHourServerLinqDB.vb" />
     <Compile Include="TABLE\MsLocationPromotionServerLinqDB.vb" />
@@ -133,6 +131,7 @@
     <Compile Include="TABLE\TbAlarmGroupEmailServerLinqDB.vb" />
     <Compile Include="TABLE\TbAlarmGroupMonitoringServerLinqDB.vb" />
     <Compile Include="TABLE\TbAlarmGroupServerLinqDB.vb" />
+    <Compile Include="TABLE\TbDepositTransactionServerLinqDB.vb" />
     <Compile Include="TABLE\TbFillMoneyServerLinqDB.vb" />
     <Compile Include="TABLE\TbLogErrorServerLinqDB.vb" />
     <Compile Include="TABLE\TbLoginHistoryServerLinqDB.vb" />
@@ -140,7 +139,6 @@
     <Compile Include="TABLE\TbLogServerAgentServerLinqDB.vb" />
     <Compile Include="TABLE\TbLogTransactionActivityServerLinqDB.vb" />
     <Compile Include="TABLE\TbPickupTransactionServerLinqDB.vb" />
-    <Compile Include="TABLE\TbServiceTransactionServerLinqDB.vb" />
     <Compile Include="TABLE\TbStaffConsoleTransactionServerLinqDB.vb" />
   </ItemGroup>
   <ItemGroup>

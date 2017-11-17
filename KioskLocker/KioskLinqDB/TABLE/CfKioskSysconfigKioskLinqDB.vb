@@ -8,7 +8,7 @@ Imports KioskLinqDB.ConnectDB
 
 Namespace TABLE
     'Represents a transaction for CF_KIOSK_SYSCONFIG table KioskLinqDB.
-    '[Create by  on November, 17 2016]
+    '[Create by  on November, 17 2017]
     Public Class CfKioskSysconfigKioskLinqDB
         Public sub CfKioskSysconfigKioskLinqDB()
 

@@ -8,7 +8,7 @@ Imports ServerLinqDB.ConnectDB
 
 Namespace TABLE
     'Represents a transaction for TB_STAFF_CONSOLE_TRANSACTION table ServerLinqDB.
-    '[Create by  on June, 9 2016]
+    '[Create by  on November, 17 2017]
     Public Class TbStaffConsoleTransactionServerLinqDB
         Public sub TbStaffConsoleTransactionServerLinqDB()
 

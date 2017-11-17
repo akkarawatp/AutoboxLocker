@@ -18,7 +18,6 @@ Public Class frmSC_DeviceSetting
         CheckForIllegalCrossThreadCalls = False
         BindDDLComport()
         BindDDLPrinter()
-        'BindDDLIdCardPassport()
 
         InsertLogTransactionActivity(StaffConsole.TransNo, KioskConfig.SelectForm, KioskLockerStep.StaffConsoleDeviceSetting_SetDefaultSetting, "", False)
         SetDefaultSetting()

@@ -8,7 +8,7 @@ Imports KioskLinqDB.ConnectDB
 
 Namespace TABLE
     'Represents a transaction for MS_APP_STEP table KioskLinqDB.
-    '[Create by  on October, 16 2016]
+    '[Create by  on November, 17 2017]
     Public Class MsAppStepKioskLinqDB
         Public sub MsAppStepKioskLinqDB()
 

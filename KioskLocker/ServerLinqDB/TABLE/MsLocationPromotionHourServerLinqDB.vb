@@ -8,7 +8,7 @@ Imports ServerLinqDB.ConnectDB
 
 Namespace TABLE
     'Represents a transaction for MS_LOCATION_PROMOTION_HOUR table ServerLinqDB.
-    '[Create by  on August, 11 2016]
+    '[Create by  on November, 17 2017]
     Public Class MsLocationPromotionHourServerLinqDB
         Public sub MsLocationPromotionHourServerLinqDB()
 

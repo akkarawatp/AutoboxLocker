@@ -8,7 +8,7 @@ Imports ServerLinqDB.ConnectDB
 
 Namespace TABLE
     'Represents a transaction for MS_USER_ACCOUNT table ServerLinqDB.
-    '[Create by  on November, 2 2017]
+    '[Create by  on November, 17 2017]
     Public Class MsUserAccountServerLinqDB
         Public sub MsUserAccountServerLinqDB()
 

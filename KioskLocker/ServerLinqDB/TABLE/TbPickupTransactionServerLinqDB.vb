@@ -8,7 +8,7 @@ Imports ServerLinqDB.ConnectDB
 
 Namespace TABLE
     'Represents a transaction for TB_PICKUP_TRANSACTION table ServerLinqDB.
-    '[Create by  on July, 15 2016]
+    '[Create by  on November, 17 2017]
     Public Class TbPickupTransactionServerLinqDB
         Public sub TbPickupTransactionServerLinqDB()
 
@@ -51,9 +51,9 @@ Namespace TABLE
         Dim _MS_LOCKER_ID As  System.Nullable(Of Long) 
         Dim _DEPOSIT_TRANS_NO As  String  = ""
         Dim _LOST_QR_CODE As  System.Nullable(Of Char)  = "Z"
-        Dim _SERVICE_AMT As Long = 0
         Dim _PICKUP_TIME As  System.Nullable(Of DateTime)  = New DateTime(1,1,1)
         Dim _PAID_TIME As  System.Nullable(Of DateTime)  = New DateTime(1,1,1)
+        Dim _SERVICE_AMT As Long = 0
         Dim _RECEIVE_COIN1 As Long = 0
         Dim _RECEIVE_COIN2 As Long = 0
         Dim _RECEIVE_COIN5 As Long = 0
@@ -72,7 +72,7 @@ Namespace TABLE
         Dim _CHANGE_BANKNOTE100 As Long = 0
         Dim _CHANGE_BANKNOTE500 As Long = 0
         Dim _TRANS_STATUS As Char = "0"
-        Dim _MS_APP_SCREEN_ID As Long = 0
+        Dim _MS_APP_SCREEN_ID As  System.Nullable(Of Long) 
         Dim _MS_APP_STEP_ID As Long = 0
         Dim _SYNC_TO_SERVER As Char = "N"
 
@@ -185,15 +185,6 @@ Namespace TABLE
                _LOST_QR_CODE = value
             End Set
         End Property 
-        <Column(Storage:="_SERVICE_AMT", DbType:="Int NOT NULL ",CanBeNull:=false)>  _
-        Public Property SERVICE_AMT() As Long
-            Get
-                Return _SERVICE_AMT
-            End Get
-            Set(ByVal value As Long)
-               _SERVICE_AMT = value
-            End Set
-        End Property 
         <Column(Storage:="_PICKUP_TIME", DbType:="DateTime")>  _
         Public Property PICKUP_TIME() As  System.Nullable(Of DateTime) 
             Get
@@ -210,6 +201,15 @@ Namespace TABLE
             End Get
             Set(ByVal value As  System.Nullable(Of DateTime) )
                _PAID_TIME = value
+            End Set
+        End Property 
+        <Column(Storage:="_SERVICE_AMT", DbType:="Int NOT NULL ",CanBeNull:=false)>  _
+        Public Property SERVICE_AMT() As Long
+            Get
+                Return _SERVICE_AMT
+            End Get
+            Set(ByVal value As Long)
+               _SERVICE_AMT = value
             End Set
         End Property 
         <Column(Storage:="_RECEIVE_COIN1", DbType:="Int NOT NULL ",CanBeNull:=false)>  _
@@ -374,12 +374,12 @@ Namespace TABLE
                _TRANS_STATUS = value
             End Set
         End Property 
-        <Column(Storage:="_MS_APP_SCREEN_ID", DbType:="BigInt NOT NULL ",CanBeNull:=false)>  _
-        Public Property MS_APP_SCREEN_ID() As Long
+        <Column(Storage:="_MS_APP_SCREEN_ID", DbType:="BigInt")>  _
+        Public Property MS_APP_SCREEN_ID() As  System.Nullable(Of Long) 
             Get
                 Return _MS_APP_SCREEN_ID
             End Get
-            Set(ByVal value As Long)
+            Set(ByVal value As  System.Nullable(Of Long) )
                _MS_APP_SCREEN_ID = value
             End Set
         End Property 
@@ -417,9 +417,9 @@ Namespace TABLE
             _MS_LOCKER_ID = Nothing
             _DEPOSIT_TRANS_NO = ""
             _LOST_QR_CODE = "Z"
-            _SERVICE_AMT = 0
             _PICKUP_TIME = New DateTime(1,1,1)
             _PAID_TIME = New DateTime(1,1,1)
+            _SERVICE_AMT = 0
             _RECEIVE_COIN1 = 0
             _RECEIVE_COIN2 = 0
             _RECEIVE_COIN5 = 0
@@ -438,7 +438,7 @@ Namespace TABLE
             _CHANGE_BANKNOTE100 = 0
             _CHANGE_BANKNOTE500 = 0
             _TRANS_STATUS = "0"
-            _MS_APP_SCREEN_ID = 0
+            _MS_APP_SCREEN_ID = Nothing
             _MS_APP_STEP_ID = 0
             _SYNC_TO_SERVER = "N"
         End Sub
@@ -566,6 +566,28 @@ Namespace TABLE
             Dim p(1) As SQLParameter
             p(0) = DB.SetBigInt("@_ID", cID)
             Return doGetData("ID = @_ID", trans, p)
+        End Function
+
+
+        '/// Returns an indication whether the record of TB_PICKUP_TRANSACTION by specified DEPOSIT_TRANS_NO key is retrieved successfully.
+        '/// <param name=cDEPOSIT_TRANS_NO>The DEPOSIT_TRANS_NO key.</param>
+        '/// <param name=trans>The System.Data.SQLClient.SQLTransaction used by this System.Data.SQLClient.SQLCommand.</param>
+        '/// <returns>true if data is retrieved successfully; otherwise, false.</returns>
+        Public Function ChkDataByDEPOSIT_TRANS_NO(cDEPOSIT_TRANS_NO As String, trans As SQLTransaction) As Boolean
+            Dim cmdPara(2)  As SQLParameter
+            cmdPara(0) = DB.SetText("@_DEPOSIT_TRANS_NO", cDEPOSIT_TRANS_NO) 
+            Return doChkData("DEPOSIT_TRANS_NO = @_DEPOSIT_TRANS_NO", trans, cmdPara)
+        End Function
+
+        '/// Returns an duplicate data record of TB_PICKUP_TRANSACTION by specified DEPOSIT_TRANS_NO key is retrieved successfully.
+        '/// <param name=cDEPOSIT_TRANS_NO>The DEPOSIT_TRANS_NO key.</param>
+        '/// <param name=trans>The System.Data.SQLClient.SQLTransaction used by this System.Data.SQLClient.SQLCommand.</param>
+        '/// <returns>true if data is retrieved successfully; otherwise, false.</returns>
+        Public Function ChkDuplicateByDEPOSIT_TRANS_NO(cDEPOSIT_TRANS_NO As String, cID As Long, trans As SQLTransaction) As Boolean
+            Dim cmdPara(2)  As SQLParameter
+            cmdPara(0) = DB.SetText("@_DEPOSIT_TRANS_NO", cDEPOSIT_TRANS_NO) 
+            cmdPara(1) = DB.SetBigInt("@_ID", cID) 
+            Return doChkData("DEPOSIT_TRANS_NO = @_DEPOSIT_TRANS_NO And ID <> @_ID", trans, cmdPara)
         End Function
 
 
@@ -830,22 +852,22 @@ Namespace TABLE
                 cmbParam(11).Value = DBNull.value
             End IF
 
-            cmbParam(12) = New SqlParameter("@_SERVICE_AMT", SqlDbType.Int)
-            cmbParam(12).Value = _SERVICE_AMT
-
-            cmbParam(13) = New SqlParameter("@_PICKUP_TIME", SqlDbType.DateTime)
+            cmbParam(12) = New SqlParameter("@_PICKUP_TIME", SqlDbType.DateTime)
             If _PICKUP_TIME.Value.Year > 1 Then 
-                cmbParam(13).Value = _PICKUP_TIME.Value
+                cmbParam(12).Value = _PICKUP_TIME.Value
+            Else
+                cmbParam(12).Value = DBNull.value
+            End If
+
+            cmbParam(13) = New SqlParameter("@_PAID_TIME", SqlDbType.DateTime)
+            If _PAID_TIME.Value.Year > 1 Then 
+                cmbParam(13).Value = _PAID_TIME.Value
             Else
                 cmbParam(13).Value = DBNull.value
             End If
 
-            cmbParam(14) = New SqlParameter("@_PAID_TIME", SqlDbType.DateTime)
-            If _PAID_TIME.Value.Year > 1 Then 
-                cmbParam(14).Value = _PAID_TIME.Value
-            Else
-                cmbParam(14).Value = DBNull.value
-            End If
+            cmbParam(14) = New SqlParameter("@_SERVICE_AMT", SqlDbType.Int)
+            cmbParam(14).Value = _SERVICE_AMT
 
             cmbParam(15) = New SqlParameter("@_RECEIVE_COIN1", SqlDbType.Int)
             cmbParam(15).Value = _RECEIVE_COIN1
@@ -902,7 +924,11 @@ Namespace TABLE
             cmbParam(32).Value = _TRANS_STATUS
 
             cmbParam(33) = New SqlParameter("@_MS_APP_SCREEN_ID", SqlDbType.BigInt)
-            cmbParam(33).Value = _MS_APP_SCREEN_ID
+            If _MS_APP_SCREEN_ID IsNot Nothing Then 
+                cmbParam(33).Value = _MS_APP_SCREEN_ID.Value
+            Else
+                cmbParam(33).Value = DBNull.value
+            End IF
 
             cmbParam(34) = New SqlParameter("@_MS_APP_STEP_ID", SqlDbType.BigInt)
             cmbParam(34).Value = _MS_APP_STEP_ID
@@ -941,9 +967,9 @@ Namespace TABLE
                         If Convert.IsDBNull(Rdr("ms_locker_id")) = False Then _ms_locker_id = Convert.ToInt64(Rdr("ms_locker_id"))
                         If Convert.IsDBNull(Rdr("deposit_trans_no")) = False Then _deposit_trans_no = Rdr("deposit_trans_no").ToString()
                         If Convert.IsDBNull(Rdr("lost_qr_code")) = False Then _lost_qr_code = Rdr("lost_qr_code").ToString()
-                        If Convert.IsDBNull(Rdr("service_amt")) = False Then _service_amt = Convert.ToInt32(Rdr("service_amt"))
                         If Convert.IsDBNull(Rdr("pickup_time")) = False Then _pickup_time = Convert.ToDateTime(Rdr("pickup_time"))
                         If Convert.IsDBNull(Rdr("paid_time")) = False Then _paid_time = Convert.ToDateTime(Rdr("paid_time"))
+                        If Convert.IsDBNull(Rdr("service_amt")) = False Then _service_amt = Convert.ToInt32(Rdr("service_amt"))
                         If Convert.IsDBNull(Rdr("receive_coin1")) = False Then _receive_coin1 = Convert.ToInt32(Rdr("receive_coin1"))
                         If Convert.IsDBNull(Rdr("receive_coin2")) = False Then _receive_coin2 = Convert.ToInt32(Rdr("receive_coin2"))
                         If Convert.IsDBNull(Rdr("receive_coin5")) = False Then _receive_coin5 = Convert.ToInt32(Rdr("receive_coin5"))
@@ -1011,9 +1037,9 @@ Namespace TABLE
                         If Convert.IsDBNull(Rdr("ms_locker_id")) = False Then _ms_locker_id = Convert.ToInt64(Rdr("ms_locker_id"))
                         If Convert.IsDBNull(Rdr("deposit_trans_no")) = False Then _deposit_trans_no = Rdr("deposit_trans_no").ToString()
                         If Convert.IsDBNull(Rdr("lost_qr_code")) = False Then _lost_qr_code = Rdr("lost_qr_code").ToString()
-                        If Convert.IsDBNull(Rdr("service_amt")) = False Then _service_amt = Convert.ToInt32(Rdr("service_amt"))
                         If Convert.IsDBNull(Rdr("pickup_time")) = False Then _pickup_time = Convert.ToDateTime(Rdr("pickup_time"))
                         If Convert.IsDBNull(Rdr("paid_time")) = False Then _paid_time = Convert.ToDateTime(Rdr("paid_time"))
+                        If Convert.IsDBNull(Rdr("service_amt")) = False Then _service_amt = Convert.ToInt32(Rdr("service_amt"))
                         If Convert.IsDBNull(Rdr("receive_coin1")) = False Then _receive_coin1 = Convert.ToInt32(Rdr("receive_coin1"))
                         If Convert.IsDBNull(Rdr("receive_coin2")) = False Then _receive_coin2 = Convert.ToInt32(Rdr("receive_coin2"))
                         If Convert.IsDBNull(Rdr("receive_coin5")) = False Then _receive_coin5 = Convert.ToInt32(Rdr("receive_coin5"))
@@ -1059,8 +1085,8 @@ Namespace TABLE
         Private ReadOnly Property SqlInsert() As String 
             Get
                 Dim Sql As String=""
-                Sql += "INSERT INTO " & tableName  & " (CREATED_BY, CREATED_DATE, TRANSACTION_NO, TRANS_START_TIME, TRANS_END_TIME, MS_KIOSK_ID, MS_LOCKER_ID, DEPOSIT_TRANS_NO, LOST_QR_CODE, SERVICE_AMT, PICKUP_TIME, PAID_TIME, RECEIVE_COIN1, RECEIVE_COIN2, RECEIVE_COIN5, RECEIVE_COIN10, RECEIVE_BANKNOTE20, RECEIVE_BANKNOTE50, RECEIVE_BANKNOTE100, RECEIVE_BANKNOTE500, RECEIVE_BANKNOTE1000, CHANGE_COIN1, CHANGE_COIN2, CHANGE_COIN5, CHANGE_COIN10, CHANGE_BANKNOTE20, CHANGE_BANKNOTE50, CHANGE_BANKNOTE100, CHANGE_BANKNOTE500, TRANS_STATUS, MS_APP_SCREEN_ID, MS_APP_STEP_ID, SYNC_TO_SERVER)"
-                Sql += " OUTPUT INSERTED.ID, INSERTED.CREATED_BY, INSERTED.CREATED_DATE, INSERTED.UPDATED_BY, INSERTED.UPDATED_DATE, INSERTED.TRANSACTION_NO, INSERTED.TRANS_START_TIME, INSERTED.TRANS_END_TIME, INSERTED.MS_KIOSK_ID, INSERTED.MS_LOCKER_ID, INSERTED.DEPOSIT_TRANS_NO, INSERTED.LOST_QR_CODE, INSERTED.SERVICE_AMT, INSERTED.PICKUP_TIME, INSERTED.PAID_TIME, INSERTED.RECEIVE_COIN1, INSERTED.RECEIVE_COIN2, INSERTED.RECEIVE_COIN5, INSERTED.RECEIVE_COIN10, INSERTED.RECEIVE_BANKNOTE20, INSERTED.RECEIVE_BANKNOTE50, INSERTED.RECEIVE_BANKNOTE100, INSERTED.RECEIVE_BANKNOTE500, INSERTED.RECEIVE_BANKNOTE1000, INSERTED.CHANGE_COIN1, INSERTED.CHANGE_COIN2, INSERTED.CHANGE_COIN5, INSERTED.CHANGE_COIN10, INSERTED.CHANGE_BANKNOTE20, INSERTED.CHANGE_BANKNOTE50, INSERTED.CHANGE_BANKNOTE100, INSERTED.CHANGE_BANKNOTE500, INSERTED.TRANS_STATUS, INSERTED.MS_APP_SCREEN_ID, INSERTED.MS_APP_STEP_ID, INSERTED.SYNC_TO_SERVER"
+                Sql += "INSERT INTO " & tableName  & " (CREATED_BY, CREATED_DATE, TRANSACTION_NO, TRANS_START_TIME, TRANS_END_TIME, MS_KIOSK_ID, MS_LOCKER_ID, DEPOSIT_TRANS_NO, LOST_QR_CODE, PICKUP_TIME, PAID_TIME, SERVICE_AMT, RECEIVE_COIN1, RECEIVE_COIN2, RECEIVE_COIN5, RECEIVE_COIN10, RECEIVE_BANKNOTE20, RECEIVE_BANKNOTE50, RECEIVE_BANKNOTE100, RECEIVE_BANKNOTE500, RECEIVE_BANKNOTE1000, CHANGE_COIN1, CHANGE_COIN2, CHANGE_COIN5, CHANGE_COIN10, CHANGE_BANKNOTE20, CHANGE_BANKNOTE50, CHANGE_BANKNOTE100, CHANGE_BANKNOTE500, TRANS_STATUS, MS_APP_SCREEN_ID, MS_APP_STEP_ID, SYNC_TO_SERVER)"
+                Sql += " OUTPUT INSERTED.ID, INSERTED.CREATED_BY, INSERTED.CREATED_DATE, INSERTED.UPDATED_BY, INSERTED.UPDATED_DATE, INSERTED.TRANSACTION_NO, INSERTED.TRANS_START_TIME, INSERTED.TRANS_END_TIME, INSERTED.MS_KIOSK_ID, INSERTED.MS_LOCKER_ID, INSERTED.DEPOSIT_TRANS_NO, INSERTED.LOST_QR_CODE, INSERTED.PICKUP_TIME, INSERTED.PAID_TIME, INSERTED.SERVICE_AMT, INSERTED.RECEIVE_COIN1, INSERTED.RECEIVE_COIN2, INSERTED.RECEIVE_COIN5, INSERTED.RECEIVE_COIN10, INSERTED.RECEIVE_BANKNOTE20, INSERTED.RECEIVE_BANKNOTE50, INSERTED.RECEIVE_BANKNOTE100, INSERTED.RECEIVE_BANKNOTE500, INSERTED.RECEIVE_BANKNOTE1000, INSERTED.CHANGE_COIN1, INSERTED.CHANGE_COIN2, INSERTED.CHANGE_COIN5, INSERTED.CHANGE_COIN10, INSERTED.CHANGE_BANKNOTE20, INSERTED.CHANGE_BANKNOTE50, INSERTED.CHANGE_BANKNOTE100, INSERTED.CHANGE_BANKNOTE500, INSERTED.TRANS_STATUS, INSERTED.MS_APP_SCREEN_ID, INSERTED.MS_APP_STEP_ID, INSERTED.SYNC_TO_SERVER"
                 Sql += " VALUES("
                 sql += "@_CREATED_BY" & ", "
                 sql += "@_CREATED_DATE" & ", "
@@ -1071,9 +1097,9 @@ Namespace TABLE
                 sql += "@_MS_LOCKER_ID" & ", "
                 sql += "@_DEPOSIT_TRANS_NO" & ", "
                 sql += "@_LOST_QR_CODE" & ", "
-                sql += "@_SERVICE_AMT" & ", "
                 sql += "@_PICKUP_TIME" & ", "
                 sql += "@_PAID_TIME" & ", "
+                sql += "@_SERVICE_AMT" & ", "
                 sql += "@_RECEIVE_COIN1" & ", "
                 sql += "@_RECEIVE_COIN2" & ", "
                 sql += "@_RECEIVE_COIN5" & ", "
@@ -1115,9 +1141,9 @@ Namespace TABLE
                 Sql += "MS_LOCKER_ID = " & "@_MS_LOCKER_ID" & ", "
                 Sql += "DEPOSIT_TRANS_NO = " & "@_DEPOSIT_TRANS_NO" & ", "
                 Sql += "LOST_QR_CODE = " & "@_LOST_QR_CODE" & ", "
-                Sql += "SERVICE_AMT = " & "@_SERVICE_AMT" & ", "
                 Sql += "PICKUP_TIME = " & "@_PICKUP_TIME" & ", "
                 Sql += "PAID_TIME = " & "@_PAID_TIME" & ", "
+                Sql += "SERVICE_AMT = " & "@_SERVICE_AMT" & ", "
                 Sql += "RECEIVE_COIN1 = " & "@_RECEIVE_COIN1" & ", "
                 Sql += "RECEIVE_COIN2 = " & "@_RECEIVE_COIN2" & ", "
                 Sql += "RECEIVE_COIN5 = " & "@_RECEIVE_COIN5" & ", "
@@ -1156,7 +1182,7 @@ Namespace TABLE
         'Get Select Statement for table TB_PICKUP_TRANSACTION
         Private ReadOnly Property SqlSelect() As String
             Get
-                Dim Sql As String = "SELECT ID, CREATED_BY, CREATED_DATE, UPDATED_BY, UPDATED_DATE, TRANSACTION_NO, TRANS_START_TIME, TRANS_END_TIME, MS_KIOSK_ID, MS_LOCKER_ID, DEPOSIT_TRANS_NO, LOST_QR_CODE, SERVICE_AMT, PICKUP_TIME, PAID_TIME, RECEIVE_COIN1, RECEIVE_COIN2, RECEIVE_COIN5, RECEIVE_COIN10, RECEIVE_BANKNOTE20, RECEIVE_BANKNOTE50, RECEIVE_BANKNOTE100, RECEIVE_BANKNOTE500, RECEIVE_BANKNOTE1000, CHANGE_COIN1, CHANGE_COIN2, CHANGE_COIN5, CHANGE_COIN10, CHANGE_BANKNOTE20, CHANGE_BANKNOTE50, CHANGE_BANKNOTE100, CHANGE_BANKNOTE500, TRANS_STATUS, MS_APP_SCREEN_ID, MS_APP_STEP_ID, SYNC_TO_SERVER FROM " & tableName
+                Dim Sql As String = "SELECT ID, CREATED_BY, CREATED_DATE, UPDATED_BY, UPDATED_DATE, TRANSACTION_NO, TRANS_START_TIME, TRANS_END_TIME, MS_KIOSK_ID, MS_LOCKER_ID, DEPOSIT_TRANS_NO, LOST_QR_CODE, PICKUP_TIME, PAID_TIME, SERVICE_AMT, RECEIVE_COIN1, RECEIVE_COIN2, RECEIVE_COIN5, RECEIVE_COIN10, RECEIVE_BANKNOTE20, RECEIVE_BANKNOTE50, RECEIVE_BANKNOTE100, RECEIVE_BANKNOTE500, RECEIVE_BANKNOTE1000, CHANGE_COIN1, CHANGE_COIN2, CHANGE_COIN5, CHANGE_COIN10, CHANGE_BANKNOTE20, CHANGE_BANKNOTE50, CHANGE_BANKNOTE100, CHANGE_BANKNOTE500, TRANS_STATUS, MS_APP_SCREEN_ID, MS_APP_STEP_ID, SYNC_TO_SERVER FROM " & tableName
                 Return Sql
             End Get
         End Property

@@ -8,7 +8,7 @@ Imports ServerLinqDB.ConnectDB
 
 Namespace TABLE
     'Represents a transaction for CF_KIOSK_SYSCONFIG table ServerLinqDB.
-    '[Create by  on November, 17 2016]
+    '[Create by  on November, 17 2017]
     Public Class CfKioskSysconfigServerLinqDB
         Public sub CfKioskSysconfigServerLinqDB()
 

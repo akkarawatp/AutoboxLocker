@@ -8,7 +8,7 @@ Imports ServerLinqDB.ConnectDB
 
 Namespace TABLE
     'Represents a transaction for TB_LOG_KIOSK_AGENT table ServerLinqDB.
-    '[Create by  on Febuary, 13 2017]
+    '[Create by  on November, 17 2017]
     Public Class TbLogKioskAgentServerLinqDB
         Public sub TbLogKioskAgentServerLinqDB()
 

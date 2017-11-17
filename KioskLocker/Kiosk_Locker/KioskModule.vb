@@ -27,8 +27,8 @@ Module KioskModule
     Public AppScreenList As New DataTable
     Public AppStepList As New DataTable
     Public AlarmMasterList As New DataTable
-    Public LangMasterList As New DataTable
-    Public LangNotificationList As New DataTable
+    'Public LangMasterList As New DataTable
+    'Public LangNotificationList As New DataTable
     Public ServiceRateData As New MSServerRateData
     Public THB_CH As String = "泰铢"
     Public THB_JP As String = "THB"
@@ -1938,53 +1938,53 @@ Module KioskModule
 
 #End Region
 
-#Region "Change Language"
-    Public Sub SetLanguage(MsStepID As Long)
-        'Language
-        Dim sql As String = " update tb_Kiosk_Screen_Control "
-        If KioskConfig.Language = KioskLanguage.China Then
-            sql += " set Current_Display = isnull(CH_Display,Default_Display)"
-        ElseIf KioskConfig.Language = KioskLanguage.English Then
-            sql += " set Current_Display = isnull(EN_Display,Default_Display)"
-            'ElseIf Kiosk.Language = KioskLanguage.Russia Then
-            '    sql += " set Current_Display = isnull(RU_Display,Default_Display)"
-        ElseIf KioskConfig.Language = KioskLanguage.Thai Then
-            sql += " set Current_Display = isnull(TH_Display,Default_Display)"
-        ElseIf KioskConfig.Language = KioskLanguage.Japan Then
+    '#Region "Change Language"
+    '    Public Sub SetLanguage(MsStepID As Long)
+    '        'Language
+    '        Dim sql As String = " update tb_Kiosk_Screen_Control "
+    '        If KioskConfig.Language = KioskLanguage.China Then
+    '            sql += " set Current_Display = isnull(CH_Display,Default_Display)"
+    '        ElseIf KioskConfig.Language = KioskLanguage.English Then
+    '            sql += " set Current_Display = isnull(EN_Display,Default_Display)"
+    '            'ElseIf Kiosk.Language = KioskLanguage.Russia Then
+    '            '    sql += " set Current_Display = isnull(RU_Display,Default_Display)"
+    '        ElseIf KioskConfig.Language = KioskLanguage.Thai Then
+    '            sql += " set Current_Display = isnull(TH_Display,Default_Display)"
+    '        ElseIf KioskConfig.Language = KioskLanguage.Japan Then
 
-        End If
+    '        End If
 
-        Try
-            Dim trans As New KioskTransactionDB
-            Dim ret As ExecuteDataInfo = KioskDB.ExecuteNonQuery(sql, trans.Trans)
-            If ret.IsSuccess = True Then
-                trans.CommitTransaction()
-            Else
-                trans.RollbackTransaction()
-                InsertErrorLog(ret.ErrorMessage, Customer.DepositTransNo, Collect.TransactionNo, 0, KioskConfig.SelectForm, MsStepID)
-            End If
-        Catch ex As Exception
+    '        Try
+    '            Dim trans As New KioskTransactionDB
+    '            Dim ret As ExecuteDataInfo = KioskDB.ExecuteNonQuery(sql, trans.Trans)
+    '            If ret.IsSuccess = True Then
+    '                trans.CommitTransaction()
+    '            Else
+    '                trans.RollbackTransaction()
+    '                InsertErrorLog(ret.ErrorMessage, Customer.DepositTransNo, Collect.TransactionNo, 0, KioskConfig.SelectForm, MsStepID)
+    '            End If
+    '        Catch ex As Exception
 
-        End Try
-    End Sub
+    '        End Try
+    '    End Sub
 
-    Public Function GetControlLanguage(KOS_ID As Int32) As DataTable
-        Dim dt As DataTable
-        Try
-            Dim sql As String = "select Control_Name, Current_Display, Display_Type "
-            sql += " from tb_Kiosk_Screen_Control"
-            sql += " where kos_id=@_KOS_ID"
-            Dim param(1) As SqlParameter
-            param(0) = KioskDB.SetInt("@_KOS_ID", KOS_ID)
+    '    Public Function GetControlLanguage(KOS_ID As Int32) As DataTable
+    '        Dim dt As DataTable
+    '        Try
+    '            Dim sql As String = "select Control_Name, Current_Display, Display_Type "
+    '            sql += " from tb_Kiosk_Screen_Control"
+    '            sql += " where kos_id=@_KOS_ID"
+    '            Dim param(1) As SqlParameter
+    '            param(0) = KioskDB.SetInt("@_KOS_ID", KOS_ID)
 
-            dt = KioskDB.ExecuteTable(sql, param)
+    '            dt = KioskDB.ExecuteTable(sql, param)
 
-        Catch ex As Exception
-            dt = New DataTable
-        End Try
-        Return dt
-    End Function
-#End Region
+    '        Catch ex As Exception
+    '            dt = New DataTable
+    '        End Try
+    '        Return dt
+    '    End Function
+    '#End Region
 
 #Region "Font Setting"
     'PRIVATE FONT COLLECTION TO HOLD THE DYNAMIC FONT
@@ -2297,31 +2297,31 @@ Module KioskModule
         End Try
     End Sub
 
-    Public Function GetNotificationText(_id As Long) As String
-        Dim ret As String = ""
+    'Public Function GetNotificationText(_id As Long) As String
+    '    Dim ret As String = ""
 
-        Dim fldName As String = ""
-        Select Case KioskConfig.Language
-            Case Data.ConstantsData.KioskLanguage.Thai
-                fldName = "TH_Display"
-            Case Data.ConstantsData.KioskLanguage.English
-                fldName = "EN_Display"
-            Case Data.ConstantsData.KioskLanguage.China
-                fldName = "CH_Display"
-            Case Data.KioskLanguage.Japan
-                fldName = "JP_Display"
-        End Select
-        Try
-            LangNotificationList.DefaultView.RowFilter = "id=" & _id
-            If LangNotificationList.DefaultView.Count > 0 Then
-                ret = LangNotificationList.DefaultView(0)(fldName)
-            End If
-            LangNotificationList.DefaultView.RowFilter = ""
-        Catch ex As Exception
+    '    Dim fldName As String = ""
+    '    Select Case KioskConfig.Language
+    '        Case Data.ConstantsData.KioskLanguage.Thai
+    '            fldName = "TH_Display"
+    '        Case Data.ConstantsData.KioskLanguage.English
+    '            fldName = "EN_Display"
+    '        Case Data.ConstantsData.KioskLanguage.China
+    '            fldName = "CH_Display"
+    '        Case Data.KioskLanguage.Japan
+    '            fldName = "JP_Display"
+    '    End Select
+    '    Try
+    '        LangNotificationList.DefaultView.RowFilter = "id=" & _id
+    '        If LangNotificationList.DefaultView.Count > 0 Then
+    '            ret = LangNotificationList.DefaultView(0)(fldName)
+    '        End If
+    '        LangNotificationList.DefaultView.RowFilter = ""
+    '    Catch ex As Exception
 
-        End Try
-        Return ret
-    End Function
+    '    End Try
+    '    Return ret
+    'End Function
 
 
 

@@ -8,7 +8,7 @@ Imports KioskLinqDB.ConnectDB
 
 Namespace TABLE
     'Represents a transaction for MS_MASTER_MONITORING_ALARM table KioskLinqDB.
-    '[Create by  on October, 17 2016]
+    '[Create by  on November, 17 2017]
     Public Class MsMasterMonitoringAlarmKioskLinqDB
         Public sub MsMasterMonitoringAlarmKioskLinqDB()
 

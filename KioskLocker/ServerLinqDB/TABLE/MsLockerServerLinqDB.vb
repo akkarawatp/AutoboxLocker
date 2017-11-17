@@ -8,7 +8,7 @@ Imports ServerLinqDB.ConnectDB
 
 Namespace TABLE
     'Represents a transaction for MS_LOCKER table ServerLinqDB.
-    '[Create by  on January, 11 2017]
+    '[Create by  on November, 17 2017]
     Public Class MsLockerServerLinqDB
         Public sub MsLockerServerLinqDB()
 

@@ -66,6 +66,7 @@ Partial Class frmMain
         Me.pnlFooter.BackgroundImage = Global.AutoboxLocker.My.Resources.Resources.bgMainFooter
         Me.pnlFooter.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
         Me.pnlFooter.Controls.Add(Me.pnlCancel)
+        'Me.pnlFooter.Controls.Add(Me.btnPointer)
         Me.pnlFooter.Dock = System.Windows.Forms.DockStyle.Bottom
         Me.pnlFooter.Location = New System.Drawing.Point(0, 562)
         Me.pnlFooter.Name = "pnlFooter"
@@ -99,7 +100,6 @@ Partial Class frmMain
         '
         Me.pnlHead.BackColor = System.Drawing.SystemColors.Window
         Me.pnlHead.BackgroundImage = Global.AutoboxLocker.My.Resources.Resources.bgMainHeader
-        Me.pnlHead.Controls.Add(Me.btnPointer)
         Me.pnlHead.Controls.Add(Me.pbLogo)
         Me.pnlHead.Controls.Add(Me.pnlLang)
         Me.pnlHead.Dock = System.Windows.Forms.DockStyle.Top
@@ -117,7 +117,7 @@ Partial Class frmMain
         Me.btnPointer.FlatAppearance.MouseOverBackColor = System.Drawing.Color.White
         Me.btnPointer.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnPointer.ForeColor = System.Drawing.Color.Transparent
-        Me.btnPointer.Location = New System.Drawing.Point(0, 0)
+        Me.btnPointer.Location = New System.Drawing.Point(0, Me.Height - Me.btnPointer.Height)
         Me.btnPointer.Name = "btnPointer"
         Me.btnPointer.Size = New System.Drawing.Size(55, 47)
         Me.btnPointer.TabIndex = 51

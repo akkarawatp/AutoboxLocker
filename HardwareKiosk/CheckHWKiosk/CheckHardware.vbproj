@@ -1,0 +1,226 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{C2A8E375-08C0-4B98-9078-0611950B3E96}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <StartupObject>CheckHardware.My.MyApplication</StartupObject>
+    <RootNamespace>CheckHardware</RootNamespace>
+    <AssemblyName>CheckHardware</AssemblyName>
+    <FileAlignment>512</FileAlignment>
+    <MyType>WindowsForms</MyType>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <DefineDebug>true</DefineDebug>
+    <DefineTrace>true</DefineTrace>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DocumentationFile>CheckHardware.xml</DocumentationFile>
+    <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022</NoWarn>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <DefineDebug>false</DefineDebug>
+    <DefineTrace>true</DefineTrace>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DocumentationFile>CheckHardware.xml</DocumentationFile>
+    <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022</NoWarn>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OptionExplicit>On</OptionExplicit>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OptionCompare>Binary</OptionCompare>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OptionStrict>Off</OptionStrict>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OptionInfer>On</OptionInfer>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>VM.ico</ApplicationIcon>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="DirectShowLib-2005, Version=2.0.0.0, Culture=neutral, PublicKeyToken=67e7b740cdfc2d3f, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\Debug\DirectShowLib-2005.dll</HintPath>
+    </Reference>
+    <Reference Include="gxdotnet7, Version=7.2.10.0, Culture=neutral, PublicKeyToken=5785895c728cac85">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>C:\Windows\assembly\GAC\gxdotnet7\7.2.10.0__5785895c728cac85\gxdotnet7.dll</HintPath>
+    </Reference>
+    <Reference Include="Interop.PrinterClassDll, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+      <HintPath>bin\Debug\Interop.PrinterClassDll.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Management" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="USBClassLibrary, Version=1.0.5.0, Culture=neutral, processorArchitecture=x86">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\AIS_Kiosk\bin\Debug\USBClassLibrary.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Import Include="Microsoft.VisualBasic" />
+    <Import Include="System" />
+    <Import Include="System.Collections" />
+    <Import Include="System.Collections.Generic" />
+    <Import Include="System.Data" />
+    <Import Include="System.Drawing" />
+    <Import Include="System.Diagnostics" />
+    <Import Include="System.Windows.Forms" />
+    <Import Include="System.Linq" />
+    <Import Include="System.Xml.Linq" />
+    <Import Include="System.Threading.Tasks" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="ControlMover.vb" />
+    <Compile Include="CPUId.vb" />
+    <Compile Include="DSCamCapture.vb" />
+    <Compile Include="frmTest.Designer.vb">
+      <DependentUpon>frmTest.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmTest.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="IniReader.vb" />
+    <Compile Include="Monitoring.Designer.vb">
+      <DependentUpon>Monitoring.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Monitoring.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="My Project\AssemblyInfo.vb" />
+    <Compile Include="My Project\Application.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Application.myapp</DependentUpon>
+    </Compile>
+    <Compile Include="My Project\Resources.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="My Project\Settings.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="VM_Module.vb" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="frmTest.resx">
+      <DependentUpon>frmTest.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Monitoring.resx">
+      <DependentUpon>Monitoring.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="My Project\Resources.resx">
+      <Generator>VbMyResourcesResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.vb</LastGenOutput>
+      <CustomToolNamespace>My.Resources</CustomToolNamespace>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="ConfigDevice.ini">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="My Project\Application.myapp">
+      <Generator>MyApplicationCodeGenerator</Generator>
+      <LastGenOutput>Application.Designer.vb</LastGenOutput>
+    </None>
+    <None Include="My Project\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <CustomToolNamespace>My</CustomToolNamespace>
+      <LastGenOutput>Settings.Designer.vb</LastGenOutput>
+    </None>
+    <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\KioskLocker\KioskLinqDB\KioskLinqDB.vbproj">
+      <Project>{631d831b-7e5a-44e4-a947-4cb0cb9f35ad}</Project>
+      <Name>KioskLinqDB</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\KioskLocker\ServerLinqDB\ServerLinqDB.vbproj">
+      <Project>{b7589d60-a617-477b-be93-b021a227c0ad}</Project>
+      <Name>ServerLinqDB</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\SharedObject\Engine\Engine.vbproj">
+      <Project>{8c9564f9-a9a8-414a-b635-2ad6223fad52}</Project>
+      <Name>Engine</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\BanknoteIn\BanknoteIn.vbproj">
+      <Project>{8dedfda6-c134-4125-8caf-acad71ae933f}</Project>
+      <Name>BanknoteIn</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\BanknoteOut\BanknoteOut.vbproj">
+      <Project>{5a0a70ec-1e1a-46fc-b68d-0bf3afedfd0f}</Project>
+      <Name>BanknoteOut</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\BoardLED\BoardLED.vbproj">
+      <Project>{764b66c4-2d02-4329-b6fe-66cfe265c89e}</Project>
+      <Name>BoardLED</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\BoardSensor\BoardSensor.vbproj">
+      <Project>{cb15a0e5-e396-4b3e-8092-cc8f0694c3ba}</Project>
+      <Name>BoardSensor</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\BoardSolenoid\BoardSolenoid.vbproj">
+      <Project>{88e5d637-4a9d-4b65-90ed-dca806eceb93}</Project>
+      <Name>BoardSolenoid</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\CoinIn\CoinIn.vbproj">
+      <Project>{ac1b5c0a-1384-407f-8291-94e834174221}</Project>
+      <Name>CoinIn</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\CoinOut\CoinOut.vbproj">
+      <Project>{30a32f78-29fb-4828-87ae-5c828f10cfbc}</Project>
+      <Name>CoinOut</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Printer\Printer.vbproj">
+      <Project>{c967b335-99c5-4c4b-baa5-ed052ff7a15c}</Project>
+      <Name>Printer</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\QRCodeScanner\QRCodeScanner.vbproj">
+      <Project>{0c9f2a78-15a7-4315-8740-34114abf2c94}</Project>
+      <Name>QRCodeScanner</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="IconProcessing.gif">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <None Include="Setting.png" />
+    <Content Include="VM.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

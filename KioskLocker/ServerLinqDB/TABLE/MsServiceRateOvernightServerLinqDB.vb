@@ -8,7 +8,7 @@ Imports ServerLinqDB.ConnectDB
 
 Namespace TABLE
     'Represents a transaction for MS_SERVICE_RATE_OVERNIGHT table ServerLinqDB.
-    '[Create by  on August, 14 2016]
+    '[Create by  on November, 17 2017]
     Public Class MsServiceRateOvernightServerLinqDB
         Public sub MsServiceRateOvernightServerLinqDB()
 
