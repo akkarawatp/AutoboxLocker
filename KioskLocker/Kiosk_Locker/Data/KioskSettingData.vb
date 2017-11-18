@@ -16,8 +16,7 @@ Namespace Data
         Dim _TimeOutSec As Integer = 0
         Dim _ShowMsgSec As Integer = 0
         Dim _PaymentExtendSec As Integer = 0
-        'Dim _CardExpireMonth As Integer = 0
-        'Dim _PassportExpireMonth As Integer = 0
+        Dim _PincodeLen As Integer = 0
         Dim _ContactCenterTelno As String = ""
         Dim _SleepTime As String = ""
         Dim _SleepDuration As Integer = 0
@@ -44,10 +43,14 @@ Namespace Data
 
         Dim _WebCameraVID As String = ""
         Dim _WebCameraDeviceName As String = ""
-        'Dim _PassportDeviceName As String = ""
+        Dim _WebCameraIndex As Integer = -1
 
         Dim _QRCodeVID As String = ""
         Dim _PrinterDeviceName As String = ""
+
+        Dim _SyncMasterInterval As Integer = 0
+        Dim _SyncTransInterval As Integer = 0
+        Dim _SyncLogInterval As Integer = 0
 
 
 
@@ -159,22 +162,14 @@ Namespace Data
                 _PaymentExtendSec = value
             End Set
         End Property
-        'Public Property CardExpireMonth As Integer
-        '    Get
-        '        Return _CardExpireMonth
-        '    End Get
-        '    Set(value As Integer)
-        '        _CardExpireMonth = value
-        '    End Set
-        'End Property
-        'Public Property PassportExpireMonth As Integer
-        '    Get
-        '        Return _PassportExpireMonth
-        '    End Get
-        '    Set(value As Integer)
-        '        _PassportExpireMonth = value
-        '    End Set
-        'End Property
+        Public Property PincodeLen As Integer
+            Get
+                Return _PincodeLen
+            End Get
+            Set(value As Integer)
+                _PincodeLen = value
+            End Set
+        End Property
         Public Property ContactCenterTelno As String
             Get
                 Return _ContactCenterTelno.Trim
@@ -347,14 +342,15 @@ Namespace Data
                 _WebCameraDeviceName = value
             End Set
         End Property
-        'Public Property PassportDeviceName As String
-        '    Get
-        '        Return _PassportDeviceName.Trim
-        '    End Get
-        '    Set(value As String)
-        '        _PassportDeviceName = value
-        '    End Set
-        'End Property
+        Public Property WebCameraIndex As Integer
+            Get
+                Return _WebCameraIndex
+            End Get
+            Set(value As Integer)
+                _WebCameraIndex = value
+            End Set
+        End Property
+
         Public Property QRCodeVID As String
             Get
                 Return _QRCodeVID.Trim
@@ -371,12 +367,36 @@ Namespace Data
                 _PrinterDeviceName = value
             End Set
         End Property
+        Public Property SyncMasterInterval As Integer
+            Get
+                Return _SyncMasterInterval
+            End Get
+            Set(value As Integer)
+                _SyncMasterInterval = value
+            End Set
+        End Property
+        Public Property SyncTransInterval As Integer
+            Get
+                Return _SyncTransInterval
+            End Get
+            Set(value As Integer)
+                _SyncTransInterval = value
+            End Set
+        End Property
+        Public Property SyncLogInterval As Integer
+            Get
+                Return _SyncLogInterval
+            End Get
+            Set(value As Integer)
+                _SyncLogInterval = value
+            End Set
+        End Property
 
         Public Enum KioskLockerForm
             Main = 1
             Home = 2
             DepositSelectLocker = 3
-            DepositScanPersonInfo = 4
+            DepositSetPinCode = 4
             DepositPayment = 5
             DepositPrintQRCode = 6
             DepositThankYou = 7
@@ -436,17 +456,17 @@ Namespace Data
             DepositSelectLocker_SelectLocker = 302
             DepositSelectLocker_LoadLockerList = 303
 
-            'DepositScanPersonInfo_OpenForm = 401
-            'DepositScanPersonInfo_CheckPassportDevice = 402
-            'DepositScanPersonInfo_CheckIDCardDevice = 403
-            'DepositScanPersonInfo_ScanIDCard = 404
-            'DepositScanPersonInfo_ScanPassport = 405
-            'DepositScanPersonInfo_CheckIDCardExpire = 406
+            DepositSetPinCode_OpenForm = 401
+            DepositSetPinCode_ConfirmPinCodeSuccess = 402
+            DepositSetPinCode_ConfirmPinCodeFail = 403
+            DepositSetPinCode_ConnectWebcamSuccess = 404
+            DepositSetPinCode_ConnectWebcamFail = 405
+            DepositSetPinCode_CaptureImageSuccess = 406
             'DepositScanPersonInfo_CheckPassportExpire = 407
             'DepositScanPersonInfo_RemoveIdCard = 408
             'DepositScanPersonInfo_InsertIdCard = 409
             'DepositScanPersonInfo_InsertPassport = 410
-            'DepositScanPersonInfo_Timeout = 411
+            DepositSetPinCode_Timeout = 411
 
             DepositPayment_OpenForm = 501
             DepositPayment_CheckHardwareStatus = 502

@@ -129,6 +129,12 @@
     <Compile Include="Data\KioskSettingData.vb" />
     <Compile Include="Data\KioskSystemData.vb" />
     <Compile Include="Data\StaffConsoleLogonData.vb" />
+    <Compile Include="frmDepositSetPINCode.Designer.vb">
+      <DependentUpon>frmDepositSetPINCode.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmDepositSetPINCode.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="frmDepositSelectLocker.Designer.vb">
       <DependentUpon>frmDepositSelectLocker.vb</DependentUpon>
     </Compile>
@@ -310,6 +316,9 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="frmDepositSetPINCode.resx">
+      <DependentUpon>frmDepositSetPINCode.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="frmDepositSelectLocker.resx">
       <DependentUpon>frmDepositSelectLocker.vb</DependentUpon>
     </EmbeddedResource>
@@ -506,6 +515,10 @@
       <Project>{0c9f2a78-15a7-4315-8740-34114abf2c94}</Project>
       <Name>QRCodeScanner</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\HardwareKiosk\WebCamera\WebCamera.vbproj">
+      <Project>{592c4b29-5a62-4560-bc10-9dfe4f7cd5b0}</Project>
+      <Name>WebCamera</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\SharedObject\Engine\Engine.vbproj">
       <Project>{8c9564f9-a9a8-414a-b635-2ad6223fad52}</Project>
       <Name>Engine</Name>
@@ -541,10 +554,10 @@
       <CachedAppSettingsObjectName>MySettings</CachedAppSettingsObjectName>
       <CachedSettingsPropName>Kiosk_Locker_AlarmWebReference_ApplicationWebservice</CachedSettingsPropName>
     </WebReferenceUrl>
-    <WebReferenceUrl Include="http://103.253.72.87/ATB-TIT/Webservice_Locker/ATBLockerWebService.asmx%3fWSDL">
+    <WebReferenceUrl Include="http://103.253.72.223/AutoboxLocker/LockerWebservice/ATBLockerWebService.asmx%3fWSDL">
       <UrlBehavior>Dynamic</UrlBehavior>
       <RelPath>Web References\Webservice_Locker\</RelPath>
-      <UpdateFromURL>http://103.253.72.87/ATB-TIT/Webservice_Locker/ATBLockerWebService.asmx%3fWSDL</UpdateFromURL>
+      <UpdateFromURL>http://103.253.72.223/AutoboxLocker/LockerWebservice/ATBLockerWebService.asmx%3fWSDL</UpdateFromURL>
       <ServiceLocationURL>
       </ServiceLocationURL>
       <CachedDynamicPropName>
@@ -598,6 +611,18 @@
   <ItemGroup>
     <Content Include="LogoIcon.ico" />
     <Content Include="Logo.ico" />
+    <None Include="Resources\imgButtonNumber8.jpg" />
+    <None Include="Resources\imgButtonNumber7.jpg" />
+    <None Include="Resources\imgButtonNumber6.jpg" />
+    <None Include="Resources\imgButtonNumber5.jpg" />
+    <None Include="Resources\imgButtonNumber4.jpg" />
+    <None Include="Resources\imgButtonNumber3.jpg" />
+    <None Include="Resources\imgButtonNumber2.jpg" />
+    <None Include="Resources\imgButtonNumber1.jpg" />
+    <None Include="Resources\imgButtonNumber0.jpg" />
+    <None Include="Resources\imgButtonClear.jpg" />
+    <None Include="Resources\imgButtonBackSpace.jpg" />
+    <None Include="Resources\imgButtonNumber9.jpg" />
     <None Include="Resources\IconCollectThankYou.png" />
     <None Include="Resources\IconPickupQRCodeFail.png" />
     <None Include="Resources\IconPickupIDCardFail.png" />

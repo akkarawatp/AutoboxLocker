@@ -76,7 +76,7 @@ Partial Class frmMain
         Me.btnCancel.Name = "btnCancel"
         Me.btnCancel.Size = New System.Drawing.Size(110, 27)
         Me.btnCancel.TabIndex = 3
-        Me.btnCancel.Text = "取消"
+        Me.btnCancel.Text = "ยกเลิก"
         Me.btnCancel.TextAlign = System.Drawing.ContentAlignment.BottomCenter
         '
         'pnlHead

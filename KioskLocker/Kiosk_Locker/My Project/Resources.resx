@@ -235,4 +235,40 @@
   <data name="IconCollectThankYou" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\IconCollectThankYou.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="imgButtonBackSpace" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\imgButtonBackSpace.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="imgButtonClear" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\imgButtonClear.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="imgButtonNumber0" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\imgButtonNumber0.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="imgButtonNumber1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\imgButtonNumber1.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="imgButtonNumber2" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\imgButtonNumber2.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="imgButtonNumber3" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\imgButtonNumber3.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="imgButtonNumber4" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\imgButtonNumber4.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="imgButtonNumber5" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\imgButtonNumber5.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="imgButtonNumber6" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\imgButtonNumber6.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="imgButtonNumber7" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\imgButtonNumber7.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="imgButtonNumber8" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\imgButtonNumber8.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="imgButtonNumber9" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\imgButtonNumber9.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
 </root>

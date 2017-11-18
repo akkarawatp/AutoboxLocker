@@ -30,9 +30,10 @@ Public Class frmHome
         Application.DoEvents()
 
         'ต้อง Clear Transaction ทุกครั้งที่เข้าหน้า Home
-        Customer = New DepositTransactionData(KioskData.KioskID)
+        Deposit = New DepositTransactionData(KioskData.KioskID)
         Collect = New CollectTransactionData(KioskData.KioskID)
         StaffConsole = New StaffConsoleLogonData(KioskData.KioskID)
+        WebCam = New WebCamera.DSCamCapture
 
         KioskConfig.SelectForm = KioskLockerForm.Home
         frmDepositSelectLocker.MdiParent = frmMain
@@ -189,7 +190,7 @@ Public Class frmHome
         'Create New Deposit Service Transaction
         Dim ret As ExecuteDataInfo = CreateNewDepositTransaction()
         If ret.IsSuccess = True Then
-            InsertLogTransactionActivity(Customer.DepositTransNo, "", "", KioskLockerForm.Home, KioskLockerStep.Home_ClickDeposit, "", False)
+            InsertLogTransactionActivity(Deposit.DepositTransNo, "", "", KioskLockerForm.Home, KioskLockerStep.Home_ClickDeposit, "", False)
             frmDepositSelectLocker.Show()
             frmMain.btnPointer.Visible = False
             frmMain.TimerCheckOpenClose.Enabled = False

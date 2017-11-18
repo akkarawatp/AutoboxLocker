@@ -259,6 +259,7 @@ Public Class frmSC_StockAndHardware
 
     Private Sub lblExit_Click(sender As Object, e As EventArgs) Handles lblExit.Click, btnExit.Click
         InsertLogTransactionActivity(StaffConsole.TransNo, KioskConfig.SelectForm, KioskLockerStep.StaffConsoleStockAndHardware_ClickExitProgram, "", False)
+        WebCam.Dispose()
         Application.Exit()
     End Sub
 

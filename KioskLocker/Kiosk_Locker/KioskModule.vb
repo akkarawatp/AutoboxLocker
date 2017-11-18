@@ -7,6 +7,7 @@ Imports AutoboxLocker.Data
 Imports KioskLinqDB.ConnectDB
 Imports KioskLinqDB.TABLE
 Imports System.Net
+Imports WebCamera
 
 Module KioskModule
 
@@ -14,7 +15,7 @@ Module KioskModule
     Public KioskData As New KioskSystemData
     Public KioskConfig As New KioskConfigData(KioskData.KioskID)
     Public ServiceID As TransactionType
-    Public Customer As New DepositTransactionData(KioskData.KioskID)
+    Public Deposit As New DepositTransactionData(KioskData.KioskID)
     Public Collect As New CollectTransactionData(KioskData.KioskID)
     Public StaffConsole As New StaffConsoleLogonData(KioskData.KioskID)
     Public bgColor As Color = Color.FromName("White") 'Color.FromArgb(140, 198, 62)
@@ -55,6 +56,8 @@ Module KioskModule
     Public BoardSolenoid As New BoardSolenoid.SolenoidClass
     Public BoardLED As New BoardLED.LEDClass
     Public BoardSensor As New BoardSensor.SensorClass
+
+    Public WithEvents WebCam As New WebCamera.DSCamCapture
 
     Private tmKioskHeartbeat As System.Timers.Timer
     Public Sub tmKioskHeartbeat_Tick(sender As Object, e As System.Timers.ElapsedEventArgs)
@@ -210,7 +213,7 @@ Module KioskModule
 
             Return True
         Catch ex As Exception
-            InsertErrorLog("Exception : " & ex.Message & vbNewLine & ex.StackTrace, Customer.DepositTransNo, Collect.TransactionNo, 0, KioskConfig.SelectForm, 0)
+            InsertErrorLog("Exception : " & ex.Message & vbNewLine & ex.StackTrace, Deposit.DepositTransNo, Collect.TransactionNo, 0, KioskConfig.SelectForm, 0)
         End Try
         Return False
     End Function
@@ -426,8 +429,8 @@ Module KioskModule
         p(0) = KioskDB.SetBigInt("@_KIOSK_ID", KioskData.KioskID)
         LockerList = lnq.GetDataList(wh, "", Nothing, p)
 
-        Dim DepositTransNo As String = Customer.DepositTransNo
-        If Customer.DepositTransNo = "" Then
+        Dim DepositTransNo As String = Deposit.DepositTransNo
+        If Deposit.DepositTransNo = "" Then
             DepositTransNo = Collect.DepositTransNo
         End If
 
@@ -482,6 +485,7 @@ Module KioskModule
     Public Sub ShowDialogErrorMessage(ByVal Message As String)
         Dim f As New frmDialog_OK
         f.lblMessage.Text = Message
+        f.lblMessage.ForeColor = Color.Black
         f.pnlDialog.BackColor = bgColor
         Plexiglass(f, frmMain)
     End Sub
@@ -504,15 +508,6 @@ Module KioskModule
 
         InsertLogTransactionActivity("", "", "", KioskConfig.KioskLockerForm.Main, KioskConfig.KioskLockerStep.Main_GetDeviceInfo, "", False)
     End Sub
-
-    'Public Function AddAlarmDt(AlarmProblem As String, IsAlarm As Boolean, AlarmDt As DataTable) As DataTable
-    '    Dim dr As DataRow = AlarmDt.NewRow
-    '    dr("AlarmProblem") = AlarmProblem
-    '    dr("IsAlarm") = IsAlarm
-    '    AlarmDt.Rows.Add(dr)
-
-    '    Return AlarmDt
-    'End Function
 
     Function UpdateAllDeviceStatusByComPort() As String
         Dim Msg As String = ""
@@ -714,6 +709,18 @@ Module KioskModule
                         '        UpdateDeviceStatus(DeviceID.ToString, PassportScanerStatus.Disconnected)
                         '        SendKioskAlarm("PASSPORT_SCANNER_DISCONNECTED", True)
                         '    End If
+                        Case DeviceType.WebCamera
+                            If Convert.IsDBNull(dr("driver_name1")) = False Then
+                                Dim CamIndex As Integer = Convert.ToInt16(dr("driver_name2"))
+                                Dim pbImage As New PictureBox
+                                Dim si As Integer = DSCamCapture.FrameSizes.s640x480
+                                Dim SelectedSize As DSCamCapture.FrameSizes = CType(si, DSCamCapture.FrameSizes)
+
+                                Dim camSts As Boolean = WebCam.ConnectToDevice(CamIndex, 15, pbImage.ClientSize, SelectedSize, pbImage.Handle)
+                                UpdateDeviceStatus(DeviceID.ToString, IIf(camSts = True, WebCameraStatus.Ready, WebCameraStatus.Disconnected))
+                                SendKioskAlarm("WEBCAMERA_DISCONNECTED", Not camSts)
+                            End If
+
                         Case DeviceType.Printer
                             If Convert.IsDBNull(dr("driver_name1")) = False Then
                                 Dim pntSts As String = Printer.CheckPrinterStatus(dr("driver_name1"))
@@ -770,12 +777,12 @@ Module KioskModule
                     trans.CommitTransaction()
                 Else
                     trans.RollbackTransaction()
-                    InsertErrorLog(ret.ErrorMessage & vbNewLine & "&DeviceID=" & DeviceID & "&StatusID=" & StatusID, Customer.DepositTransNo, Collect.TransactionNo, StaffConsole.TransactionID, KioskConfig.SelectForm, 0)
+                    InsertErrorLog(ret.ErrorMessage & vbNewLine & "&DeviceID=" & DeviceID & "&StatusID=" & StatusID, Deposit.DepositTransNo, Collect.TransactionNo, StaffConsole.TransactionID, KioskConfig.SelectForm, 0)
                 End If
             End If
             lnq = Nothing
         Catch ex As Exception
-            InsertErrorLog("Exception : " & ex.Message & vbNewLine & ex.StackTrace & vbNewLine & "&DeviceID=" & DeviceID & "&StatusID=" & StatusID, Customer.DepositTransNo, Collect.TransactionNo, StaffConsole.TransactionID, KioskConfig.SelectForm, 0)
+            InsertErrorLog("Exception : " & ex.Message & vbNewLine & ex.StackTrace & vbNewLine & "&DeviceID=" & DeviceID & "&StatusID=" & StatusID, Deposit.DepositTransNo, Collect.TransactionNo, StaffConsole.TransactionID, KioskConfig.SelectForm, 0)
         End Try
     End Sub
 
@@ -994,8 +1001,8 @@ Module KioskModule
             Dim dt As DataTable = KioskDB.ExecuteTable(sql, Nothing, p)
             If dt.Rows.Count > 0 Then
                 'ตรวจสอบการทำงานเพื่อส่ง Alarm
-                InsertLogTransactionActivity(Customer.DepositTransNo, Collect.TransactionNo, StaffConsole.TransNo, KioskConfigData.KioskLockerForm.Home, KioskConfigData.KioskLockerStep.Home_CheckHardwareStatus, "Start Check Hardware", False)
-                InsertLogTransactionActivity(Customer.DepositTransNo, Collect.TransactionNo, StaffConsole.TransNo, KioskConfigData.KioskLockerForm.Home, KioskConfigData.KioskLockerStep.Home_CheckStockQty, "Start Check Stock", False)
+                InsertLogTransactionActivity(Deposit.DepositTransNo, Collect.TransactionNo, StaffConsole.TransNo, KioskConfigData.KioskLockerForm.Home, KioskConfigData.KioskLockerStep.Home_CheckHardwareStatus, "Start Check Hardware", False)
+                InsertLogTransactionActivity(Deposit.DepositTransNo, Collect.TransactionNo, StaffConsole.TransNo, KioskConfigData.KioskLockerForm.Home, KioskConfigData.KioskLockerStep.Home_CheckStockQty, "Start Check Stock", False)
                 For i As Integer = 0 To dt.Rows.Count - 1
                     Dim dr As DataRow = dt.Rows(i)
                     Dim StatusName As String = ""
@@ -1072,10 +1079,10 @@ Module KioskModule
                 Next
 
                 If DeviceMsg.Trim <> "" Then
-                    InsertLogTransactionActivity(Customer.DepositTransNo, Collect.TransactionNo, StaffConsole.TransNo, KioskConfigData.KioskLockerForm.Home, KioskConfigData.KioskLockerStep.Home_CheckHardwareStatus, DeviceMsg, True)
+                    InsertLogTransactionActivity(Deposit.DepositTransNo, Collect.TransactionNo, StaffConsole.TransNo, KioskConfigData.KioskLockerForm.Home, KioskConfigData.KioskLockerStep.Home_CheckHardwareStatus, DeviceMsg, True)
                 End If
                 If StockMsg.Trim <> "" Then
-                    InsertLogTransactionActivity(Customer.DepositTransNo, Collect.TransactionNo, StaffConsole.TransNo, KioskConfigData.KioskLockerForm.Home, KioskConfigData.KioskLockerStep.Home_CheckStockQty, StockMsg, True)
+                    InsertLogTransactionActivity(Deposit.DepositTransNo, Collect.TransactionNo, StaffConsole.TransNo, KioskConfigData.KioskLockerForm.Home, KioskConfigData.KioskLockerStep.Home_CheckStockQty, StockMsg, True)
                 End If
 
 
@@ -1125,7 +1132,7 @@ Module KioskModule
 
             dt.Dispose()
         Catch ex As Exception
-            InsertErrorLog("Exceptin : " & ex.Message & vbNewLine & ex.StackTrace, Customer.DepositTransNo, Collect.TransactionNo, StaffConsole.TransactionID, KioskConfig.SelectForm, 0)
+            InsertErrorLog("Exceptin : " & ex.Message & vbNewLine & ex.StackTrace, Deposit.DepositTransNo, Collect.TransactionNo, StaffConsole.TransactionID, KioskConfig.SelectForm, 0)
             ret += "Check Device Status Fail"
         End Try
 
@@ -1176,7 +1183,7 @@ Module KioskModule
     Public Sub ShowFormError(ByVal Header As String, ByVal Detail As String, ByVal MsAppScreenID As Long, MsAppStepID As Long, Optional ByVal ApplicationOutOfService As Boolean = False)
         Try
             If ApplicationOutOfService = True Then
-                InsertLogTransactionActivity(Customer.DepositTransNo, Collect.TransactionNo, StaffConsole.TransNo, MsAppScreenID, MsAppStepID, Header & vbNewLine & Detail, True)
+                InsertLogTransactionActivity(Deposit.DepositTransNo, Collect.TransactionNo, StaffConsole.TransNo, MsAppScreenID, MsAppStepID, Header & vbNewLine & Detail, True)
             End If
             OutOfService = ApplicationOutOfService
 
@@ -1209,9 +1216,9 @@ Module KioskModule
                 trans.CommitTransaction()
 
                 ServiceID = ConstantsData.TransactionType.DepositBelonging
-                Customer.ServiceTransactionID = lnq.ID
-                Customer.DepositTransNo = lnq.TRANS_NO
-                Customer.TransStatus = DepositTransactionData.TransactionStatus.Inprogress
+                Deposit.DepositTransactionID = lnq.ID
+                Deposit.DepositTransNo = lnq.TRANS_NO
+                Deposit.TransStatus = DepositTransactionData.TransactionStatus.Inprogress
             Else
                 trans.RollbackTransaction()
             End If
@@ -1227,25 +1234,26 @@ Module KioskModule
 
     Public Function UpdateServiceTransaction(Cust As DepositTransactionData) As ExecuteDataInfo
         Dim ret As New ExecuteDataInfo
-        If Cust.ServiceTransactionID = 0 Then Return ret
+        If Cust.DepositTransactionID = 0 Then Return ret
 
         Dim MsAppStepID As Int16 = 0
         Try
             Dim vDateNow As DateTime = DateTime.Now
             Dim lnq As New TbDepositTransactionKioskLinqDB
-            lnq.GetDataByPK(Cust.ServiceTransactionID, Nothing)
+            lnq.GetDataByPK(Cust.DepositTransactionID, Nothing)
             If lnq.ID > 0 Then
                 lnq.TRANS_END_TIME = vDateNow
                 If Cust.LockerID > 0 Then lnq.MS_LOCKER_ID = Cust.LockerID
-                lnq.PASSPORT_NO = Cust.PassportNo
-                lnq.IDCARD_NO = Cust.IDCardNo
-                lnq.NATION_CODE = Cust.NationCode
-                lnq.FIRST_NAME = Cust.FirstName
-                lnq.LAST_NAME = Cust.LastName
-                lnq.GENDER = Cust.Gender
-                lnq.BIRTH_DATE = Cust.BirthDate
-                lnq.PASSPORT_EXPIRE_DATE = Cust.PassportExpireDate
-                lnq.IDCARD_EXPIRE_DATE = Cust.IDCardExpireDate
+                'lnq.PASSPORT_NO = Cust.PassportNo
+                'lnq.IDCARD_NO = Cust.IDCardNo
+                'lnq.NATION_CODE = Cust.NationCode
+                'lnq.FIRST_NAME = Cust.FirstName
+                'lnq.LAST_NAME = Cust.LastName
+                'lnq.GENDER = Cust.Gender
+                'lnq.BIRTH_DATE = Cust.BirthDate
+                'lnq.PASSPORT_EXPIRE_DATE = Cust.PassportExpireDate
+                'lnq.IDCARD_EXPIRE_DATE = Cust.IDCardExpireDate
+                lnq.PIN_CODE = Cust.PinCode
                 lnq.CUST_IMAGE = Cust.CustomerImage
                 lnq.SERVICE_RATE = Cust.ServiceRate
                 lnq.SERVICE_RATE_LIMIT_DAY = Cust.ServiceRateLimitDay
@@ -1281,12 +1289,12 @@ Module KioskModule
                     trans.CommitTransaction()
                 Else
                     trans.RollbackTransaction()
-                    InsertErrorLog(ret.ErrorMessage, Customer.DepositTransNo, Collect.TransactionNo, StaffConsole.TransactionID, KioskConfig.SelectForm, MsAppStepID)
+                    InsertErrorLog(ret.ErrorMessage, Deposit.DepositTransNo, Collect.TransactionNo, StaffConsole.TransactionID, KioskConfig.SelectForm, MsAppStepID)
                 End If
             End If
             lnq = Nothing
         Catch ex As Exception
-            InsertErrorLog("Exception : " & ex.Message & vbNewLine & ex.StackTrace, Customer.DepositTransNo, Collect.TransactionNo, StaffConsole.TransactionID, KioskConfig.SelectForm, MsAppStepID)
+            InsertErrorLog("Exception : " & ex.Message & vbNewLine & ex.StackTrace, Deposit.DepositTransNo, Collect.TransactionNo, StaffConsole.TransactionID, KioskConfig.SelectForm, MsAppStepID)
         End Try
 
         Return ret
@@ -1315,15 +1323,15 @@ Module KioskModule
             ret = KioskDB.ExecuteNonQuery(sql, trans.Trans, p)
             If ret.IsSuccess = True Then
                 trans.CommitTransaction()
-                Customer.TransStatus = TransStatus
+                Deposit.TransStatus = TransStatus
             Else
                 trans.RollbackTransaction()
-                InsertErrorLog(ret.ErrorMessage, Customer.DepositTransNo, "", "", KioskConfig.SelectForm, MsAppStepID)
+                InsertErrorLog(ret.ErrorMessage, Deposit.DepositTransNo, "", "", KioskConfig.SelectForm, MsAppStepID)
             End If
         Catch ex As Exception
             ret.IsSuccess = False
             ret.ErrorMessage = "Exception " & ex.Message & vbNewLine & ex.StackTrace
-            InsertErrorLog("Exception : " & ex.Message & vbNewLine & ex.StackTrace, Customer.DepositTransNo, "", "", KioskConfig.SelectForm, MsAppStepID)
+            InsertErrorLog("Exception : " & ex.Message & vbNewLine & ex.StackTrace, Deposit.DepositTransNo, "", "", KioskConfig.SelectForm, MsAppStepID)
         End Try
         Return ret
     End Function
@@ -1433,7 +1441,7 @@ Module KioskModule
                     trans.CommitTransaction()
                 Else
                     trans.RollbackTransaction()
-                    InsertErrorLog(ret.ErrorMessage, Customer.DepositTransNo, Collect.TransactionNo, StaffConsole.TransactionID, KioskConfig.SelectForm, lnq.MS_APP_STEP_ID)
+                    InsertErrorLog(ret.ErrorMessage, Deposit.DepositTransNo, Collect.TransactionNo, StaffConsole.TransactionID, KioskConfig.SelectForm, lnq.MS_APP_STEP_ID)
                 End If
             End If
             lnq = Nothing
@@ -1574,7 +1582,7 @@ Module KioskModule
             ret = New ExecuteDataInfo
             ret.IsSuccess = False
             ret.ErrorMessage = "Exception | " & ex.Message & vbNewLine & ex.StackTrace
-            InsertErrorLog("Exception | " & ex.Message & vbNewLine & ex.StackTrace, Customer.DepositTransNo, Collect.TransactionNo, StaffConsole.TransactionID, KioskConfig.SelectForm, 0)
+            InsertErrorLog("Exception | " & ex.Message & vbNewLine & ex.StackTrace, Deposit.DepositTransNo, Collect.TransactionNo, StaffConsole.TransactionID, KioskConfig.SelectForm, 0)
         End Try
         Return ret
     End Function
@@ -1653,15 +1661,15 @@ Module KioskModule
                 Else
                     trans.RollbackTransaction()
                     ret = False
-                    InsertErrorLog(re.ErrorMessage, Customer.DepositTransNo, Collect.TransactionNo, StaffConsole.TransactionID, KioskConfig.SelectForm, 0)
+                    InsertErrorLog(re.ErrorMessage, Deposit.DepositTransNo, Collect.TransactionNo, StaffConsole.TransactionID, KioskConfig.SelectForm, 0)
                 End If
             Else
                 ret = False
-                InsertErrorLog(dLnq.ErrorMessage, Customer.DepositTransNo, Collect.TransactionNo, StaffConsole.TransactionID, KioskConfig.SelectForm, 0)
+                InsertErrorLog(dLnq.ErrorMessage, Deposit.DepositTransNo, Collect.TransactionNo, StaffConsole.TransactionID, KioskConfig.SelectForm, 0)
             End If
         Catch ex As Exception
             ret = False
-            InsertErrorLog("Exception : " & ex.Message & vbNewLine & ex.StackTrace, Customer.DepositTransNo, Collect.TransactionNo, StaffConsole.TransactionID, KioskConfig.SelectForm, 0)
+            InsertErrorLog("Exception : " & ex.Message & vbNewLine & ex.StackTrace, Deposit.DepositTransNo, Collect.TransactionNo, StaffConsole.TransactionID, KioskConfig.SelectForm, 0)
         End Try
 
         Return ret
@@ -1856,7 +1864,7 @@ Module KioskModule
 
 #Region "Call Webservice Alarm"
     Public Sub SendKioskAlarm(AlarmProblem As String, IsProblem As Boolean)
-        Dim DepositTransNo As String = Customer.DepositTransNo
+        Dim DepositTransNo As String = Deposit.DepositTransNo
         If DepositTransNo = "" Then
             DepositTransNo = Collect.DepositTransNo
         End If
@@ -2029,8 +2037,8 @@ Module KioskModule
     Public Function OpenLocker(LockerID As Long, PinSolenoid As Integer, PinSensor As String, MsAppStepID As Long) As Boolean
         Dim ret As Boolean = False
 
-        Dim DepositTransNo As String = Customer.DepositTransNo
-        If Customer.DepositTransNo = "" Then
+        Dim DepositTransNo As String = Deposit.DepositTransNo
+        If Deposit.DepositTransNo = "" Then
             DepositTransNo = Collect.DepositTransNo
         End If
 
@@ -2101,19 +2109,21 @@ Module KioskModule
                 KioskConfig.ScreenSaverSec = lnq.SCREEN_SAVER_SEC
                 KioskConfig.TimeOutSec = lnq.TIME_OUT_SEC
                 KioskConfig.ShowMsgSec = lnq.SHOW_MSG_SEC
-                'KioskConfig.CardExpireMonth = lnq.CARD_EXPIRE_MONTH
-                'KioskConfig.PassportExpireMonth = lnq.PASSPORT_EXPIRE_MONTH
                 KioskConfig.PaymentExtendSec = lnq.PAYMENT_EXTEND_SEC
+                KioskConfig.PincodeLen = lnq.PINCODE_LEN
                 KioskConfig.LockerPCPosition = lnq.LOCKER_PC_POSITION
                 KioskConfig.ContactCenterTelno = lnq.CONTACT_CENTER_TELNO
                 KioskConfig.SleepTime = lnq.SLEEP_TIME
                 KioskConfig.SleepDuration = lnq.SLEEP_DURATION
+                KioskConfig.SyncMasterInterval = lnq.INTERVAL_SYNC_MASTER_MIN
+                KioskConfig.SyncTransInterval = lnq.INTERVAL_SYNC_TRANSACTION_MIN
+                KioskConfig.SyncLogInterval = lnq.INTERVAL_SYNC_LOG_MIN
             End If
             lnq = Nothing
 
             InsertLogTransactionActivity("", "", "", KioskConfigData.KioskLockerForm.Main, KioskConfigData.KioskLockerStep.Main_GetKioskConfig, "", False)
         Catch ex As Exception
-            InsertErrorLog("Exception : " & ex.Message & vbNewLine & ex.StackTrace & vbNewLine & "Cannot get Kiosk config information", Customer.DepositTransNo, Collect.TransactionNo, "", KioskConfig.SelectForm, KioskConfigData.KioskLockerStep.Main_GetKioskConfig)
+            InsertErrorLog("Exception : " & ex.Message & vbNewLine & ex.StackTrace & vbNewLine & "Cannot get Kiosk config information", Deposit.DepositTransNo, Collect.TransactionNo, "", KioskConfig.SelectForm, KioskConfigData.KioskLockerStep.Main_GetKioskConfig)
             ShowFormError("", "", KioskConfigData.KioskLockerForm.Main, KioskConfigData.KioskLockerStep.Main_GetKioskConfig, True)
         End Try
     End Sub
@@ -2190,9 +2200,9 @@ Module KioskModule
                                 If Convert.IsDBNull(dDr("driver_name1")) = False Then
                                     KioskConfig.WebCameraDeviceName = dDr("driver_name1")
                                 End If
-                                'If Convert.IsDBNull(dDr("driver_name2")) = False Then
-                                '    KioskConfig.PassportDeviceName = dDr("driver_name2")
-                                'End If
+                                If Convert.IsDBNull(dDr("driver_name2")) = False Then
+                                    KioskConfig.WebCameraIndex = dDr("driver_name2")
+                                End If
 
                             Case DeviceID.NetworkConnection
 
@@ -2221,7 +2231,7 @@ Module KioskModule
                 Next
                 InsertLogTransactionActivity("", "", "", KioskConfigData.KioskLockerForm.Main, KioskConfigData.KioskLockerStep.Main_GetDeviceInfo, "", False)
             Else
-                InsertErrorLog("Cannot get Kiosk config information", Customer.DepositTransNo, Collect.DepositTransNo, "", KioskConfig.SelectForm, KioskConfigData.KioskLockerStep.Main_GetDeviceInfo)
+                InsertErrorLog("Cannot get Kiosk config information", Deposit.DepositTransNo, Collect.DepositTransNo, "", KioskConfig.SelectForm, KioskConfigData.KioskLockerStep.Main_GetDeviceInfo)
                 ShowDialogErrorMessage("Cannot get Kiosk setting information")
             End If
             dDt.Dispose()

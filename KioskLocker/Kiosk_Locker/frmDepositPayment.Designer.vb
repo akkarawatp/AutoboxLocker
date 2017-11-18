@@ -111,7 +111,6 @@ Partial Class frmDepositPayment
         Me.btn50.TabIndex = 71
         Me.btn50.Text = "50"
         Me.btn50.UseVisualStyleBackColor = True
-        Me.btn50.Visible = False
         '
         'btn20
         '

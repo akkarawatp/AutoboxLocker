@@ -25,7 +25,7 @@ Imports System.Xml.Serialization
 Namespace SyncDataWebservice
     
     '''<remarks/>
-    <System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1586.0"),  _
+    <System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1055.0"),  _
      System.Diagnostics.DebuggerStepThroughAttribute(),  _
      System.ComponentModel.DesignerCategoryAttribute("code"),  _
      System.Web.Services.WebServiceBindingAttribute(Name:="ATBLockerWebServiceSoap", [Namespace]:="http://tempuri.org/")>  _
@@ -45,10 +45,6 @@ Namespace SyncDataWebservice
         Private GetMasterAppScreenOperationCompleted As System.Threading.SendOrPostCallback
         
         Private GetMasterAppStepOperationCompleted As System.Threading.SendOrPostCallback
-        
-        Private GetMasterKioskScreenControlOperationCompleted As System.Threading.SendOrPostCallback
-        
-        Private GetMasterKioskNotificationTextOperationCompleted As System.Threading.SendOrPostCallback
         
         Private GetMasterCabinetModelOperationCompleted As System.Threading.SendOrPostCallback
         
@@ -166,12 +162,6 @@ Namespace SyncDataWebservice
         
         '''<remarks/>
         Public Event GetMasterAppStepCompleted As GetMasterAppStepCompletedEventHandler
-        
-        '''<remarks/>
-        Public Event GetMasterKioskScreenControlCompleted As GetMasterKioskScreenControlCompletedEventHandler
-        
-        '''<remarks/>
-        Public Event GetMasterKioskNotificationTextCompleted As GetMasterKioskNotificationTextCompletedEventHandler
         
         '''<remarks/>
         Public Event GetMasterCabinetModelCompleted As GetMasterCabinetModelCompletedEventHandler
@@ -446,60 +436,6 @@ Namespace SyncDataWebservice
             If (Not (Me.GetMasterAppStepCompletedEvent) Is Nothing) Then
                 Dim invokeArgs As System.Web.Services.Protocols.InvokeCompletedEventArgs = CType(arg,System.Web.Services.Protocols.InvokeCompletedEventArgs)
                 RaiseEvent GetMasterAppStepCompleted(Me, New GetMasterAppStepCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState))
-            End If
-        End Sub
-        
-        '''<remarks/>
-        <System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/GetMasterKioskScreenControl", RequestNamespace:="http://tempuri.org/", ResponseNamespace:="http://tempuri.org/", Use:=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle:=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)>  _
-        Public Function GetMasterKioskScreenControl() As System.Data.DataTable
-            Dim results() As Object = Me.Invoke("GetMasterKioskScreenControl", New Object(-1) {})
-            Return CType(results(0),System.Data.DataTable)
-        End Function
-        
-        '''<remarks/>
-        Public Overloads Sub GetMasterKioskScreenControlAsync()
-            Me.GetMasterKioskScreenControlAsync(Nothing)
-        End Sub
-        
-        '''<remarks/>
-        Public Overloads Sub GetMasterKioskScreenControlAsync(ByVal userState As Object)
-            If (Me.GetMasterKioskScreenControlOperationCompleted Is Nothing) Then
-                Me.GetMasterKioskScreenControlOperationCompleted = AddressOf Me.OnGetMasterKioskScreenControlOperationCompleted
-            End If
-            Me.InvokeAsync("GetMasterKioskScreenControl", New Object(-1) {}, Me.GetMasterKioskScreenControlOperationCompleted, userState)
-        End Sub
-        
-        Private Sub OnGetMasterKioskScreenControlOperationCompleted(ByVal arg As Object)
-            If (Not (Me.GetMasterKioskScreenControlCompletedEvent) Is Nothing) Then
-                Dim invokeArgs As System.Web.Services.Protocols.InvokeCompletedEventArgs = CType(arg,System.Web.Services.Protocols.InvokeCompletedEventArgs)
-                RaiseEvent GetMasterKioskScreenControlCompleted(Me, New GetMasterKioskScreenControlCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState))
-            End If
-        End Sub
-        
-        '''<remarks/>
-        <System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/GetMasterKioskNotificationText", RequestNamespace:="http://tempuri.org/", ResponseNamespace:="http://tempuri.org/", Use:=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle:=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)>  _
-        Public Function GetMasterKioskNotificationText() As System.Data.DataTable
-            Dim results() As Object = Me.Invoke("GetMasterKioskNotificationText", New Object(-1) {})
-            Return CType(results(0),System.Data.DataTable)
-        End Function
-        
-        '''<remarks/>
-        Public Overloads Sub GetMasterKioskNotificationTextAsync()
-            Me.GetMasterKioskNotificationTextAsync(Nothing)
-        End Sub
-        
-        '''<remarks/>
-        Public Overloads Sub GetMasterKioskNotificationTextAsync(ByVal userState As Object)
-            If (Me.GetMasterKioskNotificationTextOperationCompleted Is Nothing) Then
-                Me.GetMasterKioskNotificationTextOperationCompleted = AddressOf Me.OnGetMasterKioskNotificationTextOperationCompleted
-            End If
-            Me.InvokeAsync("GetMasterKioskNotificationText", New Object(-1) {}, Me.GetMasterKioskNotificationTextOperationCompleted, userState)
-        End Sub
-        
-        Private Sub OnGetMasterKioskNotificationTextOperationCompleted(ByVal arg As Object)
-            If (Not (Me.GetMasterKioskNotificationTextCompletedEvent) Is Nothing) Then
-                Dim invokeArgs As System.Web.Services.Protocols.InvokeCompletedEventArgs = CType(arg,System.Web.Services.Protocols.InvokeCompletedEventArgs)
-                RaiseEvent GetMasterKioskNotificationTextCompleted(Me, New GetMasterKioskNotificationTextCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState))
             End If
         End Sub
         
@@ -1025,15 +961,7 @@ Namespace SyncDataWebservice
                     ByVal TransEndTime As Date,  _
                     ByVal MsKioskID As Long,  _
                     ByVal ServerLockerID As Long,  _
-                    ByVal PassportNo As String,  _
-                    ByVal IDCardNo As String,  _
-                    ByVal NationCode As String,  _
-                    ByVal FirstName As String,  _
-                    ByVal LastName As String,  _
-                    ByVal Gender As String,  _
-                    ByVal BirthDate As Date,  _
-                    ByVal PassportExpireDate As Date,  _
-                    ByVal IDCardExpireDate As Date,  _
+                    ByVal PinCode As String,  _
                     ByVal ServiceRate As Double,  _
                     ByVal ServiceRateLimitDay As Double,  _
                     ByVal DepositAmt As Double,  _
@@ -1058,7 +986,7 @@ Namespace SyncDataWebservice
                     ByVal TransStatus As String,  _
                     ByVal MsAppScreenID As Long,  _
                     ByVal MsAppStepID As Long) As String
-            Dim results() As Object = Me.Invoke("SyncKioskServiceTransactionByRecord", New Object() {KioskName, TransNo, TransStartTime, TransEndTime, MsKioskID, ServerLockerID, PassportNo, IDCardNo, NationCode, FirstName, LastName, Gender, BirthDate, PassportExpireDate, IDCardExpireDate, ServiceRate, ServiceRateLimitDay, DepositAmt, PaidTime, ReceiveCoin1, ReceiveCoin2, ReceiveCoin5, ReceiveCoin10, ReceiveBanknote20, ReceiveBanknote50, ReceiveBanknote100, ReceiveBanknote500, ReceiveBanknote1000, ChangeCoin1, ChangeCoin2, ChangeCoin5, ChangeCoin10, ChangeBankNote20, ChangeBanknote50, ChangeBanknote100, ChangeBanknote500, TransStatus, MsAppScreenID, MsAppStepID})
+            Dim results() As Object = Me.Invoke("SyncKioskServiceTransactionByRecord", New Object() {KioskName, TransNo, TransStartTime, TransEndTime, MsKioskID, ServerLockerID, PinCode, ServiceRate, ServiceRateLimitDay, DepositAmt, PaidTime, ReceiveCoin1, ReceiveCoin2, ReceiveCoin5, ReceiveCoin10, ReceiveBanknote20, ReceiveBanknote50, ReceiveBanknote100, ReceiveBanknote500, ReceiveBanknote1000, ChangeCoin1, ChangeCoin2, ChangeCoin5, ChangeCoin10, ChangeBankNote20, ChangeBanknote50, ChangeBanknote100, ChangeBanknote500, TransStatus, MsAppScreenID, MsAppStepID})
             Return CType(results(0),String)
         End Function
         
@@ -1070,15 +998,7 @@ Namespace SyncDataWebservice
                     ByVal TransEndTime As Date,  _
                     ByVal MsKioskID As Long,  _
                     ByVal ServerLockerID As Long,  _
-                    ByVal PassportNo As String,  _
-                    ByVal IDCardNo As String,  _
-                    ByVal NationCode As String,  _
-                    ByVal FirstName As String,  _
-                    ByVal LastName As String,  _
-                    ByVal Gender As String,  _
-                    ByVal BirthDate As Date,  _
-                    ByVal PassportExpireDate As Date,  _
-                    ByVal IDCardExpireDate As Date,  _
+                    ByVal PinCode As String,  _
                     ByVal ServiceRate As Double,  _
                     ByVal ServiceRateLimitDay As Double,  _
                     ByVal DepositAmt As Double,  _
@@ -1103,7 +1023,7 @@ Namespace SyncDataWebservice
                     ByVal TransStatus As String,  _
                     ByVal MsAppScreenID As Long,  _
                     ByVal MsAppStepID As Long)
-            Me.SyncKioskServiceTransactionByRecordAsync(KioskName, TransNo, TransStartTime, TransEndTime, MsKioskID, ServerLockerID, PassportNo, IDCardNo, NationCode, FirstName, LastName, Gender, BirthDate, PassportExpireDate, IDCardExpireDate, ServiceRate, ServiceRateLimitDay, DepositAmt, PaidTime, ReceiveCoin1, ReceiveCoin2, ReceiveCoin5, ReceiveCoin10, ReceiveBanknote20, ReceiveBanknote50, ReceiveBanknote100, ReceiveBanknote500, ReceiveBanknote1000, ChangeCoin1, ChangeCoin2, ChangeCoin5, ChangeCoin10, ChangeBankNote20, ChangeBanknote50, ChangeBanknote100, ChangeBanknote500, TransStatus, MsAppScreenID, MsAppStepID, Nothing)
+            Me.SyncKioskServiceTransactionByRecordAsync(KioskName, TransNo, TransStartTime, TransEndTime, MsKioskID, ServerLockerID, PinCode, ServiceRate, ServiceRateLimitDay, DepositAmt, PaidTime, ReceiveCoin1, ReceiveCoin2, ReceiveCoin5, ReceiveCoin10, ReceiveBanknote20, ReceiveBanknote50, ReceiveBanknote100, ReceiveBanknote500, ReceiveBanknote1000, ChangeCoin1, ChangeCoin2, ChangeCoin5, ChangeCoin10, ChangeBankNote20, ChangeBanknote50, ChangeBanknote100, ChangeBanknote500, TransStatus, MsAppScreenID, MsAppStepID, Nothing)
         End Sub
         
         '''<remarks/>
@@ -1114,15 +1034,7 @@ Namespace SyncDataWebservice
                     ByVal TransEndTime As Date,  _
                     ByVal MsKioskID As Long,  _
                     ByVal ServerLockerID As Long,  _
-                    ByVal PassportNo As String,  _
-                    ByVal IDCardNo As String,  _
-                    ByVal NationCode As String,  _
-                    ByVal FirstName As String,  _
-                    ByVal LastName As String,  _
-                    ByVal Gender As String,  _
-                    ByVal BirthDate As Date,  _
-                    ByVal PassportExpireDate As Date,  _
-                    ByVal IDCardExpireDate As Date,  _
+                    ByVal PinCode As String,  _
                     ByVal ServiceRate As Double,  _
                     ByVal ServiceRateLimitDay As Double,  _
                     ByVal DepositAmt As Double,  _
@@ -1151,7 +1063,7 @@ Namespace SyncDataWebservice
             If (Me.SyncKioskServiceTransactionByRecordOperationCompleted Is Nothing) Then
                 Me.SyncKioskServiceTransactionByRecordOperationCompleted = AddressOf Me.OnSyncKioskServiceTransactionByRecordOperationCompleted
             End If
-            Me.InvokeAsync("SyncKioskServiceTransactionByRecord", New Object() {KioskName, TransNo, TransStartTime, TransEndTime, MsKioskID, ServerLockerID, PassportNo, IDCardNo, NationCode, FirstName, LastName, Gender, BirthDate, PassportExpireDate, IDCardExpireDate, ServiceRate, ServiceRateLimitDay, DepositAmt, PaidTime, ReceiveCoin1, ReceiveCoin2, ReceiveCoin5, ReceiveCoin10, ReceiveBanknote20, ReceiveBanknote50, ReceiveBanknote100, ReceiveBanknote500, ReceiveBanknote1000, ChangeCoin1, ChangeCoin2, ChangeCoin5, ChangeCoin10, ChangeBankNote20, ChangeBanknote50, ChangeBanknote100, ChangeBanknote500, TransStatus, MsAppScreenID, MsAppStepID}, Me.SyncKioskServiceTransactionByRecordOperationCompleted, userState)
+            Me.InvokeAsync("SyncKioskServiceTransactionByRecord", New Object() {KioskName, TransNo, TransStartTime, TransEndTime, MsKioskID, ServerLockerID, PinCode, ServiceRate, ServiceRateLimitDay, DepositAmt, PaidTime, ReceiveCoin1, ReceiveCoin2, ReceiveCoin5, ReceiveCoin10, ReceiveBanknote20, ReceiveBanknote50, ReceiveBanknote100, ReceiveBanknote500, ReceiveBanknote1000, ChangeCoin1, ChangeCoin2, ChangeCoin5, ChangeCoin10, ChangeBankNote20, ChangeBanknote50, ChangeBanknote100, ChangeBanknote500, TransStatus, MsAppScreenID, MsAppStepID}, Me.SyncKioskServiceTransactionByRecordOperationCompleted, userState)
         End Sub
         
         Private Sub OnSyncKioskServiceTransactionByRecordOperationCompleted(ByVal arg As Object)
@@ -1424,7 +1336,7 @@ Namespace SyncDataWebservice
     End Class
     
     '''<remarks/>
-    <System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.6.1586.0"),  _
+    <System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.6.1055.0"),  _
      System.SerializableAttribute(),  _
      System.Diagnostics.DebuggerStepThroughAttribute(),  _
      System.ComponentModel.DesignerCategoryAttribute("code"),  _
@@ -1442,6 +1354,8 @@ Namespace SyncDataWebservice
         Private loginLastNameField As String
         
         Private loginCompanyNameField As String
+        
+        Private forceChangePwdField As String
         
         Private errorMessageField As String
         
@@ -1506,6 +1420,16 @@ Namespace SyncDataWebservice
         End Property
         
         '''<remarks/>
+        Public Property ForceChangePwd() As String
+            Get
+                Return Me.forceChangePwdField
+            End Get
+            Set
+                Me.forceChangePwdField = value
+            End Set
+        End Property
+        
+        '''<remarks/>
         Public Property ErrorMessage() As String
             Get
                 Return Me.errorMessageField
@@ -1517,7 +1441,7 @@ Namespace SyncDataWebservice
     End Class
     
     '''<remarks/>
-    <System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.6.1586.0"),  _
+    <System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.6.1055.0"),  _
      System.SerializableAttribute(),  _
      System.Diagnostics.DebuggerStepThroughAttribute(),  _
      System.ComponentModel.DesignerCategoryAttribute("code"),  _
@@ -1550,7 +1474,7 @@ Namespace SyncDataWebservice
     End Class
     
     '''<remarks/>
-    <System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.6.1586.0"),  _
+    <System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.6.1055.0"),  _
      System.SerializableAttribute(),  _
      System.Diagnostics.DebuggerStepThroughAttribute(),  _
      System.ComponentModel.DesignerCategoryAttribute("code"),  _
@@ -1607,11 +1531,11 @@ Namespace SyncDataWebservice
     End Class
     
     '''<remarks/>
-    <System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1586.0")>  _
+    <System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1055.0")>  _
     Public Delegate Sub LoginTITCompletedEventHandler(ByVal sender As Object, ByVal e As LoginTITCompletedEventArgs)
     
     '''<remarks/>
-    <System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1586.0"),  _
+    <System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1055.0"),  _
      System.Diagnostics.DebuggerStepThroughAttribute(),  _
      System.ComponentModel.DesignerCategoryAttribute("code")>  _
     Partial Public Class LoginTITCompletedEventArgs
@@ -1634,11 +1558,11 @@ Namespace SyncDataWebservice
     End Class
     
     '''<remarks/>
-    <System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1586.0")>  _
+    <System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1055.0")>  _
     Public Delegate Sub SendKiskAlarmCompletedEventHandler(ByVal sender As Object, ByVal e As SendKiskAlarmCompletedEventArgs)
     
     '''<remarks/>
-    <System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1586.0"),  _
+    <System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1055.0"),  _
      System.Diagnostics.DebuggerStepThroughAttribute(),  _
      System.ComponentModel.DesignerCategoryAttribute("code")>  _
     Partial Public Class SendKiskAlarmCompletedEventArgs
@@ -1661,11 +1585,11 @@ Namespace SyncDataWebservice
     End Class
     
     '''<remarks/>
-    <System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1586.0")>  _
+    <System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1055.0")>  _
     Public Delegate Sub KioskLoginStaffConsoleCompletedEventHandler(ByVal sender As Object, ByVal e As KioskLoginStaffConsoleCompletedEventArgs)
     
     '''<remarks/>
-    <System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1586.0"),  _
+    <System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1055.0"),  _
      System.Diagnostics.DebuggerStepThroughAttribute(),  _
      System.ComponentModel.DesignerCategoryAttribute("code")>  _
     Partial Public Class KioskLoginStaffConsoleCompletedEventArgs
@@ -1688,11 +1612,11 @@ Namespace SyncDataWebservice
     End Class
     
     '''<remarks/>
-    <System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1586.0")>  _
+    <System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1055.0")>  _
     Public Delegate Sub GetKioskStaffConsoleAuthorizeCompletedEventHandler(ByVal sender As Object, ByVal e As GetKioskStaffConsoleAuthorizeCompletedEventArgs)
     
     '''<remarks/>
-    <System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1586.0"),  _
+    <System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1055.0"),  _
      System.Diagnostics.DebuggerStepThroughAttribute(),  _
      System.ComponentModel.DesignerCategoryAttribute("code")>  _
     Partial Public Class GetKioskStaffConsoleAuthorizeCompletedEventArgs
@@ -1715,11 +1639,11 @@ Namespace SyncDataWebservice
     End Class
     
     '''<remarks/>
-    <System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1586.0")>  _
+    <System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1055.0")>  _
     Public Delegate Sub ReportKioskCurrentQtyCompletedEventHandler(ByVal sender As Object, ByVal e As ReportKioskCurrentQtyCompletedEventArgs)
     
     '''<remarks/>
-    <System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1586.0"),  _
+    <System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1055.0"),  _
      System.Diagnostics.DebuggerStepThroughAttribute(),  _
      System.ComponentModel.DesignerCategoryAttribute("code")>  _
     Partial Public Class ReportKioskCurrentQtyCompletedEventArgs
@@ -1742,11 +1666,11 @@ Namespace SyncDataWebservice
     End Class
     
     '''<remarks/>
-    <System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1586.0")>  _
+    <System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1055.0")>  _
     Public Delegate Sub GetMasterAppScreenCompletedEventHandler(ByVal sender As Object, ByVal e As GetMasterAppScreenCompletedEventArgs)
     
     '''<remarks/>
-    <System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1586.0"),  _
+    <System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1055.0"),  _
      System.Diagnostics.DebuggerStepThroughAttribute(),  _
      System.ComponentModel.DesignerCategoryAttribute("code")>  _
     Partial Public Class GetMasterAppScreenCompletedEventArgs
@@ -1769,11 +1693,11 @@ Namespace SyncDataWebservice
     End Class
     
     '''<remarks/>
-    <System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1586.0")>  _
+    <System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1055.0")>  _
     Public Delegate Sub GetMasterAppStepCompletedEventHandler(ByVal sender As Object, ByVal e As GetMasterAppStepCompletedEventArgs)
     
     '''<remarks/>
-    <System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1586.0"),  _
+    <System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1055.0"),  _
      System.Diagnostics.DebuggerStepThroughAttribute(),  _
      System.ComponentModel.DesignerCategoryAttribute("code")>  _
     Partial Public Class GetMasterAppStepCompletedEventArgs
@@ -1796,65 +1720,11 @@ Namespace SyncDataWebservice
     End Class
     
     '''<remarks/>
-    <System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1586.0")>  _
-    Public Delegate Sub GetMasterKioskScreenControlCompletedEventHandler(ByVal sender As Object, ByVal e As GetMasterKioskScreenControlCompletedEventArgs)
-    
-    '''<remarks/>
-    <System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1586.0"),  _
-     System.Diagnostics.DebuggerStepThroughAttribute(),  _
-     System.ComponentModel.DesignerCategoryAttribute("code")>  _
-    Partial Public Class GetMasterKioskScreenControlCompletedEventArgs
-        Inherits System.ComponentModel.AsyncCompletedEventArgs
-        
-        Private results() As Object
-        
-        Friend Sub New(ByVal results() As Object, ByVal exception As System.Exception, ByVal cancelled As Boolean, ByVal userState As Object)
-            MyBase.New(exception, cancelled, userState)
-            Me.results = results
-        End Sub
-        
-        '''<remarks/>
-        Public ReadOnly Property Result() As System.Data.DataTable
-            Get
-                Me.RaiseExceptionIfNecessary
-                Return CType(Me.results(0),System.Data.DataTable)
-            End Get
-        End Property
-    End Class
-    
-    '''<remarks/>
-    <System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1586.0")>  _
-    Public Delegate Sub GetMasterKioskNotificationTextCompletedEventHandler(ByVal sender As Object, ByVal e As GetMasterKioskNotificationTextCompletedEventArgs)
-    
-    '''<remarks/>
-    <System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1586.0"),  _
-     System.Diagnostics.DebuggerStepThroughAttribute(),  _
-     System.ComponentModel.DesignerCategoryAttribute("code")>  _
-    Partial Public Class GetMasterKioskNotificationTextCompletedEventArgs
-        Inherits System.ComponentModel.AsyncCompletedEventArgs
-        
-        Private results() As Object
-        
-        Friend Sub New(ByVal results() As Object, ByVal exception As System.Exception, ByVal cancelled As Boolean, ByVal userState As Object)
-            MyBase.New(exception, cancelled, userState)
-            Me.results = results
-        End Sub
-        
-        '''<remarks/>
-        Public ReadOnly Property Result() As System.Data.DataTable
-            Get
-                Me.RaiseExceptionIfNecessary
-                Return CType(Me.results(0),System.Data.DataTable)
-            End Get
-        End Property
-    End Class
-    
-    '''<remarks/>
-    <System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1586.0")>  _
+    <System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1055.0")>  _
     Public Delegate Sub GetMasterCabinetModelCompletedEventHandler(ByVal sender As Object, ByVal e As GetMasterCabinetModelCompletedEventArgs)
     
     '''<remarks/>
-    <System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1586.0"),  _
+    <System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1055.0"),  _
      System.Diagnostics.DebuggerStepThroughAttribute(),  _
      System.ComponentModel.DesignerCategoryAttribute("code")>  _
     Partial Public Class GetMasterCabinetModelCompletedEventArgs
@@ -1877,11 +1747,11 @@ Namespace SyncDataWebservice
     End Class
     
     '''<remarks/>
-    <System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1586.0")>  _
+    <System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1055.0")>  _
     Public Delegate Sub GetMasterDeviceTypeCompletedEventHandler(ByVal sender As Object, ByVal e As GetMasterDeviceTypeCompletedEventArgs)
     
     '''<remarks/>
-    <System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1586.0"),  _
+    <System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1055.0"),  _
      System.Diagnostics.DebuggerStepThroughAttribute(),  _
      System.ComponentModel.DesignerCategoryAttribute("code")>  _
     Partial Public Class GetMasterDeviceTypeCompletedEventArgs
@@ -1904,11 +1774,11 @@ Namespace SyncDataWebservice
     End Class
     
     '''<remarks/>
-    <System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1586.0")>  _
+    <System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1055.0")>  _
     Public Delegate Sub GetMasterDeviceStatusCompletedEventHandler(ByVal sender As Object, ByVal e As GetMasterDeviceStatusCompletedEventArgs)
     
     '''<remarks/>
-    <System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1586.0"),  _
+    <System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1055.0"),  _
      System.Diagnostics.DebuggerStepThroughAttribute(),  _
      System.ComponentModel.DesignerCategoryAttribute("code")>  _
     Partial Public Class GetMasterDeviceStatusCompletedEventArgs
@@ -1931,11 +1801,11 @@ Namespace SyncDataWebservice
     End Class
     
     '''<remarks/>
-    <System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1586.0")>  _
+    <System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1055.0")>  _
     Public Delegate Sub GetMasterDeviceCompletedEventHandler(ByVal sender As Object, ByVal e As GetMasterDeviceCompletedEventArgs)
     
     '''<remarks/>
-    <System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1586.0"),  _
+    <System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1055.0"),  _
      System.Diagnostics.DebuggerStepThroughAttribute(),  _
      System.ComponentModel.DesignerCategoryAttribute("code")>  _
     Partial Public Class GetMasterDeviceCompletedEventArgs
@@ -1958,11 +1828,11 @@ Namespace SyncDataWebservice
     End Class
     
     '''<remarks/>
-    <System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1586.0")>  _
+    <System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1055.0")>  _
     Public Delegate Sub GetMasterMonitoringAlarmCompletedEventHandler(ByVal sender As Object, ByVal e As GetMasterMonitoringAlarmCompletedEventArgs)
     
     '''<remarks/>
-    <System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1586.0"),  _
+    <System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1055.0"),  _
      System.Diagnostics.DebuggerStepThroughAttribute(),  _
      System.ComponentModel.DesignerCategoryAttribute("code")>  _
     Partial Public Class GetMasterMonitoringAlarmCompletedEventArgs
@@ -1985,11 +1855,11 @@ Namespace SyncDataWebservice
     End Class
     
     '''<remarks/>
-    <System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1586.0")>  _
+    <System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1055.0")>  _
     Public Delegate Sub GetLockerServiceRateCompletedEventHandler(ByVal sender As Object, ByVal e As GetLockerServiceRateCompletedEventArgs)
     
     '''<remarks/>
-    <System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1586.0"),  _
+    <System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1055.0"),  _
      System.Diagnostics.DebuggerStepThroughAttribute(),  _
      System.ComponentModel.DesignerCategoryAttribute("code")>  _
     Partial Public Class GetLockerServiceRateCompletedEventArgs
@@ -2012,11 +1882,11 @@ Namespace SyncDataWebservice
     End Class
     
     '''<remarks/>
-    <System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1586.0")>  _
+    <System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1055.0")>  _
     Public Delegate Sub SyncKioskSysconfigCompletedEventHandler(ByVal sender As Object, ByVal e As SyncKioskSysconfigCompletedEventArgs)
     
     '''<remarks/>
-    <System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1586.0"),  _
+    <System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1055.0"),  _
      System.Diagnostics.DebuggerStepThroughAttribute(),  _
      System.ComponentModel.DesignerCategoryAttribute("code")>  _
     Partial Public Class SyncKioskSysconfigCompletedEventArgs
@@ -2039,11 +1909,11 @@ Namespace SyncDataWebservice
     End Class
     
     '''<remarks/>
-    <System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1586.0")>  _
+    <System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1055.0")>  _
     Public Delegate Sub SyncMasterKioskCabinetCompletedEventHandler(ByVal sender As Object, ByVal e As SyncMasterKioskCabinetCompletedEventArgs)
     
     '''<remarks/>
-    <System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1586.0"),  _
+    <System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1055.0"),  _
      System.Diagnostics.DebuggerStepThroughAttribute(),  _
      System.ComponentModel.DesignerCategoryAttribute("code")>  _
     Partial Public Class SyncMasterKioskCabinetCompletedEventArgs
@@ -2066,11 +1936,11 @@ Namespace SyncDataWebservice
     End Class
     
     '''<remarks/>
-    <System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1586.0")>  _
+    <System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1055.0")>  _
     Public Delegate Sub SyncMasterKioskDeviceCompletedEventHandler(ByVal sender As Object, ByVal e As SyncMasterKioskDeviceCompletedEventArgs)
     
     '''<remarks/>
-    <System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1586.0"),  _
+    <System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1055.0"),  _
      System.Diagnostics.DebuggerStepThroughAttribute(),  _
      System.ComponentModel.DesignerCategoryAttribute("code")>  _
     Partial Public Class SyncMasterKioskDeviceCompletedEventArgs
@@ -2093,11 +1963,11 @@ Namespace SyncDataWebservice
     End Class
     
     '''<remarks/>
-    <System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1586.0")>  _
+    <System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1055.0")>  _
     Public Delegate Sub SyncMasterKioskLockerCompletedEventHandler(ByVal sender As Object, ByVal e As SyncMasterKioskLockerCompletedEventArgs)
     
     '''<remarks/>
-    <System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1586.0"),  _
+    <System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1055.0"),  _
      System.Diagnostics.DebuggerStepThroughAttribute(),  _
      System.ComponentModel.DesignerCategoryAttribute("code")>  _
     Partial Public Class SyncMasterKioskLockerCompletedEventArgs
@@ -2120,11 +1990,11 @@ Namespace SyncDataWebservice
     End Class
     
     '''<remarks/>
-    <System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1586.0")>  _
+    <System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1055.0")>  _
     Public Delegate Sub GetServerKioskSysconfigCompletedEventHandler(ByVal sender As Object, ByVal e As GetServerKioskSysconfigCompletedEventArgs)
     
     '''<remarks/>
-    <System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1586.0"),  _
+    <System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1055.0"),  _
      System.Diagnostics.DebuggerStepThroughAttribute(),  _
      System.ComponentModel.DesignerCategoryAttribute("code")>  _
     Partial Public Class GetServerKioskSysconfigCompletedEventArgs
@@ -2147,11 +2017,11 @@ Namespace SyncDataWebservice
     End Class
     
     '''<remarks/>
-    <System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1586.0")>  _
+    <System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1055.0")>  _
     Public Delegate Sub GetServerKioskCabinetCompletedEventHandler(ByVal sender As Object, ByVal e As GetServerKioskCabinetCompletedEventArgs)
     
     '''<remarks/>
-    <System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1586.0"),  _
+    <System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1055.0"),  _
      System.Diagnostics.DebuggerStepThroughAttribute(),  _
      System.ComponentModel.DesignerCategoryAttribute("code")>  _
     Partial Public Class GetServerKioskCabinetCompletedEventArgs
@@ -2174,11 +2044,11 @@ Namespace SyncDataWebservice
     End Class
     
     '''<remarks/>
-    <System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1586.0")>  _
+    <System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1055.0")>  _
     Public Delegate Sub GetServeKioskDeviceCompletedEventHandler(ByVal sender As Object, ByVal e As GetServeKioskDeviceCompletedEventArgs)
     
     '''<remarks/>
-    <System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1586.0"),  _
+    <System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1055.0"),  _
      System.Diagnostics.DebuggerStepThroughAttribute(),  _
      System.ComponentModel.DesignerCategoryAttribute("code")>  _
     Partial Public Class GetServeKioskDeviceCompletedEventArgs
@@ -2201,11 +2071,11 @@ Namespace SyncDataWebservice
     End Class
     
     '''<remarks/>
-    <System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1586.0")>  _
+    <System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1055.0")>  _
     Public Delegate Sub GetServerKioskLockerCompletedEventHandler(ByVal sender As Object, ByVal e As GetServerKioskLockerCompletedEventArgs)
     
     '''<remarks/>
-    <System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1586.0"),  _
+    <System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1055.0"),  _
      System.Diagnostics.DebuggerStepThroughAttribute(),  _
      System.ComponentModel.DesignerCategoryAttribute("code")>  _
     Partial Public Class GetServerKioskLockerCompletedEventArgs
@@ -2228,11 +2098,11 @@ Namespace SyncDataWebservice
     End Class
     
     '''<remarks/>
-    <System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1586.0")>  _
+    <System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1055.0")>  _
     Public Delegate Sub UpdateServerSyncKioskSysconfigCompletedEventHandler(ByVal sender As Object, ByVal e As UpdateServerSyncKioskSysconfigCompletedEventArgs)
     
     '''<remarks/>
-    <System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1586.0"),  _
+    <System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1055.0"),  _
      System.Diagnostics.DebuggerStepThroughAttribute(),  _
      System.ComponentModel.DesignerCategoryAttribute("code")>  _
     Partial Public Class UpdateServerSyncKioskSysconfigCompletedEventArgs
@@ -2255,11 +2125,11 @@ Namespace SyncDataWebservice
     End Class
     
     '''<remarks/>
-    <System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1586.0")>  _
+    <System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1055.0")>  _
     Public Delegate Sub UpdateServerSyncKioskCabinetCompletedEventHandler(ByVal sender As Object, ByVal e As UpdateServerSyncKioskCabinetCompletedEventArgs)
     
     '''<remarks/>
-    <System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1586.0"),  _
+    <System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1055.0"),  _
      System.Diagnostics.DebuggerStepThroughAttribute(),  _
      System.ComponentModel.DesignerCategoryAttribute("code")>  _
     Partial Public Class UpdateServerSyncKioskCabinetCompletedEventArgs
@@ -2282,11 +2152,11 @@ Namespace SyncDataWebservice
     End Class
     
     '''<remarks/>
-    <System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1586.0")>  _
+    <System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1055.0")>  _
     Public Delegate Sub UpdateServerSyncKioskDeviceCompletedEventHandler(ByVal sender As Object, ByVal e As UpdateServerSyncKioskDeviceCompletedEventArgs)
     
     '''<remarks/>
-    <System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1586.0"),  _
+    <System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1055.0"),  _
      System.Diagnostics.DebuggerStepThroughAttribute(),  _
      System.ComponentModel.DesignerCategoryAttribute("code")>  _
     Partial Public Class UpdateServerSyncKioskDeviceCompletedEventArgs
@@ -2309,11 +2179,11 @@ Namespace SyncDataWebservice
     End Class
     
     '''<remarks/>
-    <System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1586.0")>  _
+    <System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1055.0")>  _
     Public Delegate Sub UpdateSyncKioskLockerCompletedEventHandler(ByVal sender As Object, ByVal e As UpdateSyncKioskLockerCompletedEventArgs)
     
     '''<remarks/>
-    <System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1586.0"),  _
+    <System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1055.0"),  _
      System.Diagnostics.DebuggerStepThroughAttribute(),  _
      System.ComponentModel.DesignerCategoryAttribute("code")>  _
     Partial Public Class UpdateSyncKioskLockerCompletedEventArgs
@@ -2336,11 +2206,11 @@ Namespace SyncDataWebservice
     End Class
     
     '''<remarks/>
-    <System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1586.0")>  _
+    <System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1055.0")>  _
     Public Delegate Sub SysnKioskTransactionCustomerImageCompletedEventHandler(ByVal sender As Object, ByVal e As SysnKioskTransactionCustomerImageCompletedEventArgs)
     
     '''<remarks/>
-    <System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1586.0"),  _
+    <System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1055.0"),  _
      System.Diagnostics.DebuggerStepThroughAttribute(),  _
      System.ComponentModel.DesignerCategoryAttribute("code")>  _
     Partial Public Class SysnKioskTransactionCustomerImageCompletedEventArgs
@@ -2363,11 +2233,11 @@ Namespace SyncDataWebservice
     End Class
     
     '''<remarks/>
-    <System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1586.0")>  _
+    <System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1055.0")>  _
     Public Delegate Sub SyncKioskServiceTransactionByRecordCompletedEventHandler(ByVal sender As Object, ByVal e As SyncKioskServiceTransactionByRecordCompletedEventArgs)
     
     '''<remarks/>
-    <System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1586.0"),  _
+    <System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1055.0"),  _
      System.Diagnostics.DebuggerStepThroughAttribute(),  _
      System.ComponentModel.DesignerCategoryAttribute("code")>  _
     Partial Public Class SyncKioskServiceTransactionByRecordCompletedEventArgs
@@ -2390,11 +2260,11 @@ Namespace SyncDataWebservice
     End Class
     
     '''<remarks/>
-    <System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1586.0")>  _
+    <System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1055.0")>  _
     Public Delegate Sub SyncKioskServiceTransactionCompletedEventHandler(ByVal sender As Object, ByVal e As SyncKioskServiceTransactionCompletedEventArgs)
     
     '''<remarks/>
-    <System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1586.0"),  _
+    <System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1055.0"),  _
      System.Diagnostics.DebuggerStepThroughAttribute(),  _
      System.ComponentModel.DesignerCategoryAttribute("code")>  _
     Partial Public Class SyncKioskServiceTransactionCompletedEventArgs
@@ -2417,11 +2287,11 @@ Namespace SyncDataWebservice
     End Class
     
     '''<remarks/>
-    <System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1586.0")>  _
+    <System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1055.0")>  _
     Public Delegate Sub SyncKioskCollectTransactionCompletedEventHandler(ByVal sender As Object, ByVal e As SyncKioskCollectTransactionCompletedEventArgs)
     
     '''<remarks/>
-    <System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1586.0"),  _
+    <System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1055.0"),  _
      System.Diagnostics.DebuggerStepThroughAttribute(),  _
      System.ComponentModel.DesignerCategoryAttribute("code")>  _
     Partial Public Class SyncKioskCollectTransactionCompletedEventArgs
@@ -2444,11 +2314,11 @@ Namespace SyncDataWebservice
     End Class
     
     '''<remarks/>
-    <System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1586.0")>  _
+    <System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1055.0")>  _
     Public Delegate Sub SyncKioskStaffConsoleTransactionCompletedEventHandler(ByVal sender As Object, ByVal e As SyncKioskStaffConsoleTransactionCompletedEventArgs)
     
     '''<remarks/>
-    <System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1586.0"),  _
+    <System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1055.0"),  _
      System.Diagnostics.DebuggerStepThroughAttribute(),  _
      System.ComponentModel.DesignerCategoryAttribute("code")>  _
     Partial Public Class SyncKioskStaffConsoleTransactionCompletedEventArgs
@@ -2471,11 +2341,11 @@ Namespace SyncDataWebservice
     End Class
     
     '''<remarks/>
-    <System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1586.0")>  _
+    <System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1055.0")>  _
     Public Delegate Sub GetLockerPromotionCompletedEventHandler(ByVal sender As Object, ByVal e As GetLockerPromotionCompletedEventArgs)
     
     '''<remarks/>
-    <System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1586.0"),  _
+    <System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1055.0"),  _
      System.Diagnostics.DebuggerStepThroughAttribute(),  _
      System.ComponentModel.DesignerCategoryAttribute("code")>  _
     Partial Public Class GetLockerPromotionCompletedEventArgs
@@ -2498,11 +2368,11 @@ Namespace SyncDataWebservice
     End Class
     
     '''<remarks/>
-    <System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1586.0")>  _
+    <System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1055.0")>  _
     Public Delegate Sub InsertLocationPromotionSyncCompletedEventHandler(ByVal sender As Object, ByVal e As InsertLocationPromotionSyncCompletedEventArgs)
     
     '''<remarks/>
-    <System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1586.0"),  _
+    <System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1055.0"),  _
      System.Diagnostics.DebuggerStepThroughAttribute(),  _
      System.ComponentModel.DesignerCategoryAttribute("code")>  _
     Partial Public Class InsertLocationPromotionSyncCompletedEventArgs
@@ -2525,11 +2395,11 @@ Namespace SyncDataWebservice
     End Class
     
     '''<remarks/>
-    <System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1586.0")>  _
+    <System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1055.0")>  _
     Public Delegate Sub SyncLogTransactionActivityCompletedEventHandler(ByVal sender As Object, ByVal e As SyncLogTransactionActivityCompletedEventArgs)
     
     '''<remarks/>
-    <System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1586.0"),  _
+    <System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1055.0"),  _
      System.Diagnostics.DebuggerStepThroughAttribute(),  _
      System.ComponentModel.DesignerCategoryAttribute("code")>  _
     Partial Public Class SyncLogTransactionActivityCompletedEventArgs
@@ -2552,11 +2422,11 @@ Namespace SyncDataWebservice
     End Class
     
     '''<remarks/>
-    <System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1586.0")>  _
+    <System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1055.0")>  _
     Public Delegate Sub SyncLogFillMoneyDataCompletedEventHandler(ByVal sender As Object, ByVal e As SyncLogFillMoneyDataCompletedEventArgs)
     
     '''<remarks/>
-    <System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1586.0"),  _
+    <System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1055.0"),  _
      System.Diagnostics.DebuggerStepThroughAttribute(),  _
      System.ComponentModel.DesignerCategoryAttribute("code")>  _
     Partial Public Class SyncLogFillMoneyDataCompletedEventArgs
@@ -2579,11 +2449,11 @@ Namespace SyncDataWebservice
     End Class
     
     '''<remarks/>
-    <System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1586.0")>  _
+    <System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1055.0")>  _
     Public Delegate Sub SyncLogErrorDataCompletedEventHandler(ByVal sender As Object, ByVal e As SyncLogErrorDataCompletedEventArgs)
     
     '''<remarks/>
-    <System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1586.0"),  _
+    <System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1055.0"),  _
      System.Diagnostics.DebuggerStepThroughAttribute(),  _
      System.ComponentModel.DesignerCategoryAttribute("code")>  _
     Partial Public Class SyncLogErrorDataCompletedEventArgs
@@ -2606,11 +2476,11 @@ Namespace SyncDataWebservice
     End Class
     
     '''<remarks/>
-    <System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1586.0")>  _
+    <System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1055.0")>  _
     Public Delegate Sub SyncLogKioskAgentDataCompletedEventHandler(ByVal sender As Object, ByVal e As SyncLogKioskAgentDataCompletedEventArgs)
     
     '''<remarks/>
-    <System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1586.0"),  _
+    <System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1055.0"),  _
      System.Diagnostics.DebuggerStepThroughAttribute(),  _
      System.ComponentModel.DesignerCategoryAttribute("code")>  _
     Partial Public Class SyncLogKioskAgentDataCompletedEventArgs

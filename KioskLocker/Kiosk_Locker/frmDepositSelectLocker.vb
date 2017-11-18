@@ -18,7 +18,7 @@ Public Class frmDepositSelectLocker
         frmMain.pnlCancel.Visible = True
 
         Application.DoEvents()
-        InsertLogTransactionActivity(Customer.DepositTransNo, "", "", KioskConfig.SelectForm, KioskLockerStep.DepositSelectLocker_OpenForm, "", False)
+        InsertLogTransactionActivity(Deposit.DepositTransNo, "", "", KioskConfig.SelectForm, KioskLockerStep.DepositSelectLocker_OpenForm, "", False)
         TimeOutCheckTime = DateTime.Now
         TimerTimeOut.Enabled = True
 
@@ -29,7 +29,7 @@ Public Class frmDepositSelectLocker
 
     Public Sub LoadLockerList()
         Try
-            InsertLogTransactionActivity(Customer.DepositTransNo, "", "", KioskConfig.SelectForm, KioskLockerStep.DepositSelectLocker_LoadLockerList, "", False)
+            InsertLogTransactionActivity(Deposit.DepositTransNo, "", "", KioskConfig.SelectForm, KioskLockerStep.DepositSelectLocker_LoadLockerList, "", False)
             Dim cbWith As Integer = 0
 
             UcCabinet1.LoadCabinetData(False, CabinetList)
@@ -101,7 +101,7 @@ Public Class frmDepositSelectLocker
             pLeft = SetCabinetPosition(UcCabinet9, pLeft, 9)
             pLeft = SetCabinetPosition(UcCabinet10, pLeft, 10)
         Catch ex As Exception
-            InsertErrorLog("Exception : " & ex.Message & vbNewLine & ex.StackTrace, Customer.DepositTransNo, 0, 0, KioskConfig.SelectForm, KioskLockerStep.DepositSelectLocker_LoadLockerList)
+            InsertErrorLog("Exception : " & ex.Message & vbNewLine & ex.StackTrace, Deposit.DepositTransNo, 0, 0, KioskConfig.SelectForm, KioskLockerStep.DepositSelectLocker_LoadLockerList)
         End Try
 
     End Sub
@@ -133,20 +133,23 @@ Public Class frmDepositSelectLocker
             TimerTimeOut.Stop()
 
             frmLoading.Show(frmMain)
-            InsertLogTransactionActivity(Customer.DepositTransNo, "", "", KioskConfig.SelectForm, KioskLockerStep.DepositSelectLocker_SelectLocker, " " & f.txtLockerName.Text, False)
+            InsertLogTransactionActivity(Deposit.DepositTransNo, "", "", KioskConfig.SelectForm, KioskLockerStep.DepositSelectLocker_SelectLocker, " " & f.txtLockerName.Text, False)
 
             Application.DoEvents()
 
-            Customer.LockerID = f.LockerID
-            Customer.LockerName = f.txtLockerName.Text
-            Customer.CabinetID = f.CabinetID
-            Customer.CabinetModelID = f.CabinetModelID
-            Customer.LockerPinSolenoid = f.cbSolenoidPin.SelectedValue
-            Customer.LockerPinLED = f.cbLEDPin.SelectedValue
-            Customer.LockerPinSendor = f.cbSensorPin.SelectedValue
+            Deposit.LockerID = f.LockerID
+            Deposit.LockerName = f.txtLockerName.Text
+            Deposit.CabinetID = f.CabinetID
+            Deposit.CabinetModelID = f.CabinetModelID
+            Deposit.LockerPinSolenoid = f.cbSolenoidPin.SelectedValue
+            Deposit.LockerPinLED = f.cbLEDPin.SelectedValue
+            Deposit.LockerPinSendor = f.cbSensorPin.SelectedValue
 
             'เลือกช่องฝากแล้วก็ Update Transaction โลด
-            If UpdateServiceTransaction(Customer).IsSuccess = True Then
+            If UpdateServiceTransaction(Deposit).IsSuccess = True Then
+                frmDepositSetPINCode.MdiParent = frmMain
+                frmDepositSetPINCode.Show()
+
                 'frmDepositScanPassport.MdiParent = frmMain
                 'frmDepositScanPassport.pnlProcessing.Left = (frmDepositScanPassport.Width / 2) - (frmDepositScanPassport.pnlProcessing.Width / 2)
                 'frmDepositScanPassport.pnlProcessing.Top = 35
@@ -174,8 +177,8 @@ Public Class frmDepositSelectLocker
                 TimerTimeOut.Enabled = False
                 TimerTimeOut.Stop()
 
-                UpdateDepositStatus(Customer.ServiceTransactionID, DepositTransactionData.TransactionStatus.TimeOut, KioskLockerStep.DepositSelectLocker_SelectLocker)
-                InsertLogTransactionActivity(Customer.DepositTransNo, "", "", KioskConfig.SelectForm, KioskLockerStep.DepositSelectLocker_SelectLocker, " ลูกค้าไม่ทำรายการภายในเวลาที่กำหนด", False)
+                UpdateDepositStatus(Deposit.DepositTransactionID, DepositTransactionData.TransactionStatus.TimeOut, KioskLockerStep.DepositSelectLocker_SelectLocker)
+                InsertLogTransactionActivity(Deposit.DepositTransNo, "", "", KioskConfig.SelectForm, KioskLockerStep.DepositSelectLocker_SelectLocker, " ลูกค้าไม่ทำรายการภายในเวลาที่กำหนด", False)
 
                 frmMain.CloseAllChildForm()
                 Dim f As New frmHome

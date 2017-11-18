@@ -298,7 +298,7 @@ Public Class frmSC_LockerSetting
     Private Function MoveCabinetPosition(FromPosition As Integer, ToPosition As Integer, ucCb As ucCabinet) As ExecuteDataInfo
         Dim ret As New ExecuteDataInfo
 
-        Dim TempPosition As Integer = -1
+        Dim TempPosition As Integer = -9999
         Dim trans As New KioskTransactionDB
         '1. ต้องเปลี่ยน layout_order ของตำแหน่งปลายทาง ให้เป็นตำแหน่ง Temp ก่อน
         Dim cLnq As New MsCabinetKioskLinqDB

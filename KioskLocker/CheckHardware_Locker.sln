@@ -29,7 +29,7 @@ Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "KioskLinqDB", "KioskLinqDB\
 EndProject
 Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "ServerLinqDB", "ServerLinqDB\ServerLinqDB.vbproj", "{B7589D60-A617-477B-BE93-B021A227C0AD}"
 EndProject
-Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "ImageCapture", "..\HardwareKiosk\ImageCapture\ImageCapture.vbproj", "{592C4B29-5A62-4560-BC10-9DFE4F7CD5B0}"
+Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "WebCamera", "..\HardwareKiosk\WebCamera\WebCamera.vbproj", "{592C4B29-5A62-4560-BC10-9DFE4F7CD5B0}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

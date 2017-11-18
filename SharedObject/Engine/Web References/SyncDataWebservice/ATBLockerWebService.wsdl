@@ -26,6 +26,7 @@
           <s:element minOccurs="0" maxOccurs="1" name="LoginFirstName" type="s:string" />
           <s:element minOccurs="0" maxOccurs="1" name="LoginLastName" type="s:string" />
           <s:element minOccurs="0" maxOccurs="1" name="LoginCompanyName" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ForceChangePwd" type="s:string" />
           <s:element minOccurs="0" maxOccurs="1" name="ErrorMessage" type="s:string" />
         </s:sequence>
       </s:complexType>
@@ -132,40 +133,6 @@
         <s:complexType>
           <s:sequence>
             <s:element minOccurs="0" maxOccurs="1" name="GetMasterAppStepResult">
-              <s:complexType>
-                <s:sequence>
-                  <s:any minOccurs="0" maxOccurs="unbounded" namespace="http://www.w3.org/2001/XMLSchema" processContents="lax" />
-                  <s:any minOccurs="1" namespace="urn:schemas-microsoft-com:xml-diffgram-v1" processContents="lax" />
-                </s:sequence>
-              </s:complexType>
-            </s:element>
-          </s:sequence>
-        </s:complexType>
-      </s:element>
-      <s:element name="GetMasterKioskScreenControl">
-        <s:complexType />
-      </s:element>
-      <s:element name="GetMasterKioskScreenControlResponse">
-        <s:complexType>
-          <s:sequence>
-            <s:element minOccurs="0" maxOccurs="1" name="GetMasterKioskScreenControlResult">
-              <s:complexType>
-                <s:sequence>
-                  <s:any minOccurs="0" maxOccurs="unbounded" namespace="http://www.w3.org/2001/XMLSchema" processContents="lax" />
-                  <s:any minOccurs="1" namespace="urn:schemas-microsoft-com:xml-diffgram-v1" processContents="lax" />
-                </s:sequence>
-              </s:complexType>
-            </s:element>
-          </s:sequence>
-        </s:complexType>
-      </s:element>
-      <s:element name="GetMasterKioskNotificationText">
-        <s:complexType />
-      </s:element>
-      <s:element name="GetMasterKioskNotificationTextResponse">
-        <s:complexType>
-          <s:sequence>
-            <s:element minOccurs="0" maxOccurs="1" name="GetMasterKioskNotificationTextResult">
               <s:complexType>
                 <s:sequence>
                   <s:any minOccurs="0" maxOccurs="unbounded" namespace="http://www.w3.org/2001/XMLSchema" processContents="lax" />
@@ -596,15 +563,7 @@
             <s:element minOccurs="1" maxOccurs="1" name="TransEndTime" type="s:dateTime" />
             <s:element minOccurs="1" maxOccurs="1" name="MsKioskID" type="s:long" />
             <s:element minOccurs="1" maxOccurs="1" name="ServerLockerID" type="s:long" />
-            <s:element minOccurs="0" maxOccurs="1" name="PassportNo" type="s:string" />
-            <s:element minOccurs="0" maxOccurs="1" name="IDCardNo" type="s:string" />
-            <s:element minOccurs="0" maxOccurs="1" name="NationCode" type="s:string" />
-            <s:element minOccurs="0" maxOccurs="1" name="FirstName" type="s:string" />
-            <s:element minOccurs="0" maxOccurs="1" name="LastName" type="s:string" />
-            <s:element minOccurs="0" maxOccurs="1" name="Gender" type="s:string" />
-            <s:element minOccurs="1" maxOccurs="1" name="BirthDate" type="s:dateTime" />
-            <s:element minOccurs="1" maxOccurs="1" name="PassportExpireDate" type="s:dateTime" />
-            <s:element minOccurs="1" maxOccurs="1" name="IDCardExpireDate" type="s:dateTime" />
+            <s:element minOccurs="0" maxOccurs="1" name="PinCode" type="s:string" />
             <s:element minOccurs="1" maxOccurs="1" name="ServiceRate" type="s:double" />
             <s:element minOccurs="1" maxOccurs="1" name="ServiceRateLimitDay" type="s:double" />
             <s:element minOccurs="1" maxOccurs="1" name="DepositAmt" type="s:double" />
@@ -887,18 +846,6 @@
   <wsdl:message name="GetMasterAppStepSoapOut">
     <wsdl:part name="parameters" element="tns:GetMasterAppStepResponse" />
   </wsdl:message>
-  <wsdl:message name="GetMasterKioskScreenControlSoapIn">
-    <wsdl:part name="parameters" element="tns:GetMasterKioskScreenControl" />
-  </wsdl:message>
-  <wsdl:message name="GetMasterKioskScreenControlSoapOut">
-    <wsdl:part name="parameters" element="tns:GetMasterKioskScreenControlResponse" />
-  </wsdl:message>
-  <wsdl:message name="GetMasterKioskNotificationTextSoapIn">
-    <wsdl:part name="parameters" element="tns:GetMasterKioskNotificationText" />
-  </wsdl:message>
-  <wsdl:message name="GetMasterKioskNotificationTextSoapOut">
-    <wsdl:part name="parameters" element="tns:GetMasterKioskNotificationTextResponse" />
-  </wsdl:message>
   <wsdl:message name="GetMasterCabinetModelSoapIn">
     <wsdl:part name="parameters" element="tns:GetMasterCabinetModel" />
   </wsdl:message>
@@ -1102,14 +1049,6 @@
       <wsdl:input message="tns:GetMasterAppStepSoapIn" />
       <wsdl:output message="tns:GetMasterAppStepSoapOut" />
     </wsdl:operation>
-    <wsdl:operation name="GetMasterKioskScreenControl">
-      <wsdl:input message="tns:GetMasterKioskScreenControlSoapIn" />
-      <wsdl:output message="tns:GetMasterKioskScreenControlSoapOut" />
-    </wsdl:operation>
-    <wsdl:operation name="GetMasterKioskNotificationText">
-      <wsdl:input message="tns:GetMasterKioskNotificationTextSoapIn" />
-      <wsdl:output message="tns:GetMasterKioskNotificationTextSoapOut" />
-    </wsdl:operation>
     <wsdl:operation name="GetMasterCabinetModel">
       <wsdl:input message="tns:GetMasterCabinetModelSoapIn" />
       <wsdl:output message="tns:GetMasterCabinetModelSoapOut" />
@@ -1285,24 +1224,6 @@
     </wsdl:operation>
     <wsdl:operation name="GetMasterAppStep">
       <soap:operation soapAction="http://tempuri.org/GetMasterAppStep" style="document" />
-      <wsdl:input>
-        <soap:body use="literal" />
-      </wsdl:input>
-      <wsdl:output>
-        <soap:body use="literal" />
-      </wsdl:output>
-    </wsdl:operation>
-    <wsdl:operation name="GetMasterKioskScreenControl">
-      <soap:operation soapAction="http://tempuri.org/GetMasterKioskScreenControl" style="document" />
-      <wsdl:input>
-        <soap:body use="literal" />
-      </wsdl:input>
-      <wsdl:output>
-        <soap:body use="literal" />
-      </wsdl:output>
-    </wsdl:operation>
-    <wsdl:operation name="GetMasterKioskNotificationText">
-      <soap:operation soapAction="http://tempuri.org/GetMasterKioskNotificationText" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
@@ -1637,24 +1558,6 @@
         <soap12:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="GetMasterKioskScreenControl">
-      <soap12:operation soapAction="http://tempuri.org/GetMasterKioskScreenControl" style="document" />
-      <wsdl:input>
-        <soap12:body use="literal" />
-      </wsdl:input>
-      <wsdl:output>
-        <soap12:body use="literal" />
-      </wsdl:output>
-    </wsdl:operation>
-    <wsdl:operation name="GetMasterKioskNotificationText">
-      <soap12:operation soapAction="http://tempuri.org/GetMasterKioskNotificationText" style="document" />
-      <wsdl:input>
-        <soap12:body use="literal" />
-      </wsdl:input>
-      <wsdl:output>
-        <soap12:body use="literal" />
-      </wsdl:output>
-    </wsdl:operation>
     <wsdl:operation name="GetMasterCabinetModel">
       <soap12:operation soapAction="http://tempuri.org/GetMasterCabinetModel" style="document" />
       <wsdl:input>
@@ -1919,10 +1822,10 @@
   </wsdl:binding>
   <wsdl:service name="ATBLockerWebService">
     <wsdl:port name="ATBLockerWebServiceSoap" binding="tns:ATBLockerWebServiceSoap">
-      <soap:address location="http://103.253.72.88/ATB-TIT/Webservice_Locker/ATBLockerWebService.asmx" />
+      <soap:address location="http://103.253.72.223/AutoboxLocker/LockerWebservice/ATBLockerWebService.asmx" />
     </wsdl:port>
     <wsdl:port name="ATBLockerWebServiceSoap12" binding="tns:ATBLockerWebServiceSoap12">
-      <soap12:address location="http://103.253.72.88/ATB-TIT/Webservice_Locker/ATBLockerWebService.asmx" />
+      <soap12:address location="http://103.253.72.223/AutoboxLocker/LockerWebservice/ATBLockerWebService.asmx" />
     </wsdl:port>
   </wsdl:service>
 </wsdl:definitions>

@@ -1,5 +1,7 @@
 ﻿Imports System.Globalization
 Imports System.Text
+Imports System.Drawing
+Imports System.IO
 
 Public Class ConverterENG
     Public Enum EncodeType
@@ -20,6 +22,17 @@ Public Class ConverterENG
 
     Public Shared Function ByteToStream(ByVal Buffer() As Byte) As System.IO.MemoryStream ' Convert Byte To Stream
         ByteToStream = New System.IO.MemoryStream(Buffer)
+    End Function
+
+    Public Shared Function BitmapToByte(bmp As Bitmap) As Byte()
+        Dim result() As Byte
+        If bmp IsNot Nothing Then
+            Dim stream As New MemoryStream
+            bmp.Save(stream, Imaging.ImageFormat.Jpeg)
+            result = stream.ToArray()
+        End If
+
+        Return result
     End Function
 
     Public Shared Function StringToByte(ByVal Str As String, Optional ByVal Encoding As Integer = EncodeType._DEFAULT) As Byte()

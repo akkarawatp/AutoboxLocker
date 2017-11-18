@@ -29,6 +29,8 @@ Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "BoardSolenoid", "..\Hardwar
 EndProject
 Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "ServerLinqDB", "ServerLinqDB\ServerLinqDB.vbproj", "{B7589D60-A617-477B-BE93-B021A227C0AD}"
 EndProject
+Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "WebCamera", "..\HardwareKiosk\WebCamera\WebCamera.vbproj", "{592C4B29-5A62-4560-BC10-9DFE4F7CD5B0}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -87,6 +89,10 @@ Global
 		{B7589D60-A617-477B-BE93-B021A227C0AD}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B7589D60-A617-477B-BE93-B021A227C0AD}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B7589D60-A617-477B-BE93-B021A227C0AD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{592C4B29-5A62-4560-BC10-9DFE4F7CD5B0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{592C4B29-5A62-4560-BC10-9DFE4F7CD5B0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{592C4B29-5A62-4560-BC10-9DFE4F7CD5B0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{592C4B29-5A62-4560-BC10-9DFE4F7CD5B0}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

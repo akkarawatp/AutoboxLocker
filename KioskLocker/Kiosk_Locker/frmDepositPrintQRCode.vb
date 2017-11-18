@@ -29,33 +29,33 @@ Public Class frmDepositPrintQRCode
         frmMain.pnlCancel.Visible = False
         '
 
-        InsertLogTransactionActivity(Customer.DepositTransNo, "", "", KioskConfig.SelectForm, KioskLockerStep.DepositPrintQRCode_OpenForm, "", False)
+        InsertLogTransactionActivity(Deposit.DepositTransNo, "", "", KioskConfig.SelectForm, KioskLockerStep.DepositPrintQRCode_OpenForm, "", False)
     End Sub
 
     Public Sub PaymentCompletePrintQRCode()
         Try
             'เวลาที่พิมพ์ Slip เสร็จ
-            Customer.PaidTime = DateTime.Now
-            lblChangeAmt.Text = Customer.ChangeAmount
+            Deposit.PaidTime = DateTime.Now
+            lblChangeAmt.Text = Deposit.ChangeAmount
             Application.DoEvents()
             PrintSlip()
-            If Customer.ChangeAmount > 0 Then
-                InsertLogTransactionActivity(Customer.DepositTransNo, "", "", KioskConfig.SelectForm, KioskLockerStep.DepositPrintQRCode_ChangeMoney, Customer.ChangeAmount & " บาท", False)
-                ChangeMoney(Customer.ChangeAmount, Customer, Collect)
+            If Deposit.ChangeAmount > 0 Then
+                InsertLogTransactionActivity(Deposit.DepositTransNo, "", "", KioskConfig.SelectForm, KioskLockerStep.DepositPrintQRCode_ChangeMoney, Deposit.ChangeAmount & " บาท", False)
+                ChangeMoney(Deposit.ChangeAmount, Deposit, Collect)
             End If
 
 
-            InsertLogTransactionActivity(Customer.DepositTransNo, "", "", KioskConfig.SelectForm, KioskLockerStep.DepositPrintQRCode_LEDBlinkOn, Customer.LockerName, False)
-            BoardLED.LEDBlinkOn(Customer.LockerPinLED)
+            InsertLogTransactionActivity(Deposit.DepositTransNo, "", "", KioskConfig.SelectForm, KioskLockerStep.DepositPrintQRCode_LEDBlinkOn, Deposit.LockerName, False)
+            BoardLED.LEDBlinkOn(Deposit.LockerPinLED)
 
             Application.DoEvents()
             CheckTimeOpenLocker()
 
         Catch ex As Exception
-            InsertLogTransactionActivity(Customer.DepositTransNo, "", "", KioskConfig.SelectForm, KioskLockerStep.DepositPrintQRCode_PrintSlip, "Update Status ไม่สำเร็จ คืนเงินให้ลูกค้า " & (Customer.PaidAmount - Customer.ChangeAmount) & " บาท", True)
-            UpdateDepositStatus(Customer.ServiceTransactionID, DepositTransactionData.TransactionStatus.Problem, KioskLockerStep.DepositPrintQRCode_ChangeMoney)
-            ReturnMoney(Customer.PaidAmount - Customer.ChangeAmount, Customer, Collect)
-            BoardLED.LEDStop(Customer.LockerPinLED)
+            InsertLogTransactionActivity(Deposit.DepositTransNo, "", "", KioskConfig.SelectForm, KioskLockerStep.DepositPrintQRCode_PrintSlip, "Update Status ไม่สำเร็จ คืนเงินให้ลูกค้า " & (Deposit.PaidAmount - Deposit.ChangeAmount) & " บาท", True)
+            UpdateDepositStatus(Deposit.DepositTransactionID, DepositTransactionData.TransactionStatus.Problem, KioskLockerStep.DepositPrintQRCode_ChangeMoney)
+            ReturnMoney(Deposit.PaidAmount - Deposit.ChangeAmount, Deposit, Collect)
+            BoardLED.LEDStop(Deposit.LockerPinLED)
             ShowFormError("Out of Service", "Cannot change money", KioskConfig.SelectForm, KioskLockerStep.DepositPrintQRCode_ChangeMoney, True)
         End Try
     End Sub
@@ -72,7 +72,7 @@ Public Class frmDepositPrintQRCode
 #Region "Print With PrintDocument"
     Private Sub PrintSlip()
         Try
-            InsertLogTransactionActivity(Customer.DepositTransNo, "", "", KioskConfig.SelectForm, KioskLockerStep.DepositPrintQRCode_PrintSlip, "", False)
+            InsertLogTransactionActivity(Deposit.DepositTransNo, "", "", KioskConfig.SelectForm, KioskLockerStep.DepositPrintQRCode_PrintSlip, "", False)
 
             Dim p As New PrintDocument
             p.PrintController = New Printing.StandardPrintController
@@ -85,7 +85,7 @@ Public Class frmDepositPrintQRCode
 
             UpdateKioskCurrentQty(Data.ConstantsData.DeviceID.Printer, -1, 0, False)
         Catch ex As Exception
-            InsertErrorLog("Exception : " & ex.Message & " " & ex.StackTrace, Customer.DepositTransNo, 0, 0, KioskConfig.SelectForm, KioskLockerStep.DepositPrintQRCode_PrintSlip)
+            InsertErrorLog("Exception : " & ex.Message & " " & ex.StackTrace, Deposit.DepositTransNo, 0, 0, KioskConfig.SelectForm, KioskLockerStep.DepositPrintQRCode_PrintSlip)
         End Try
 
     End Sub
@@ -106,12 +106,12 @@ Public Class frmDepositPrintQRCode
         PrintImage(imgLogo, Align.Center, e)
         PrintText(" ", fn5, Align.Left, e)
 
-        Dim DepositTime As String = Customer.PaidTime.ToString("dd-MMM-yy, HH:mm", New Globalization.CultureInfo("en-US"))
+        Dim DepositTime As String = Deposit.PaidTime.ToString("dd-MMM-yy, HH:mm", New Globalization.CultureInfo("en-US"))
         PrintText("Document No :", fn8, Align.Left, e, False)
-        PrintText(Customer.DepositTransNo & " ", fn8, Align.Right, e)
+        PrintText(Deposit.DepositTransNo & " ", fn8, Align.Right, e)
 
         PrintText("Locker Number :", fn15b, Align.Left, e, False)
-        PrintText(Customer.LockerName & " ", fn15b, Align.Right, e)
+        PrintText(Deposit.LockerName & " ", fn15b, Align.Right, e)
 
         PrintText("Location :", fn8, Align.Left, e, False)
         PrintText(KioskConfig.LocationName & " ", fn8, Align.Right, e)
@@ -218,7 +218,7 @@ Public Class frmDepositPrintQRCode
     Private Function GenerateQRCode() As String
         Dim ret As String = ""
         '## QRCode Format TransactionID + TransactionNo + ID + Len(TransactionID)
-        Dim QRCode As String = Customer.ServiceTransactionID & Customer.DepositTransNo & "ID" & Customer.ServiceTransactionID.ToString.Length
+        Dim QRCode As String = Deposit.DepositTransactionID & Deposit.DepositTransNo & "ID" & Deposit.DepositTransactionID.ToString.Length
 
         Dim obj As New WolfSoftware.Library_NET.BarcodeControl
         obj.Unlock("Phantom 2008", "WSFCX-0100-100883561")

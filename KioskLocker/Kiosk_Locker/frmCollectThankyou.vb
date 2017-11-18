@@ -47,7 +47,7 @@ Public Class frmCollectThankyou
             'ถ้า Sensor ไม่ทำงาน ให้ทอนเงิน และคืนมัดจำเลย เพราะตู้ได้เปิดออกแล้ว
             If Collect.ChangeAmount > 0 Then
                 InsertLogTransactionActivity(Collect.DepositTransNo, Collect.TransactionNo, "", KioskConfig.SelectForm, KioskLockerStep.PickupThankYou_StartSensor, "Sensor ไม่สามารถใช้งานได้ ทอนเงินและคืนมัดจำ " & Collect.ChangeAmount & " บาท", False)
-                ChangeMoney(Collect.ChangeAmount, Customer, Collect)
+                ChangeMoney(Collect.ChangeAmount, Deposit, Collect)
             End If
 
             BoardLED.LEDStop(Collect.LockerPinLED)
@@ -124,7 +124,7 @@ Public Class frmCollectThankyou
             'ทอนเงิน และคืนมัดจำ
             If Collect.ChangeAmount > 0 Then
                 InsertLogTransactionActivity(Collect.DepositTransNo, Collect.TransactionNo, "", KioskConfig.SelectForm, KioskLockerStep.PickupThankYou_ChangeMoney, Collect.ChangeAmount & " บาท", False)
-                ChangeMoney(Collect.ChangeAmount, Customer, Collect)
+                ChangeMoney(Collect.ChangeAmount, Deposit, Collect)
             End If
 
 

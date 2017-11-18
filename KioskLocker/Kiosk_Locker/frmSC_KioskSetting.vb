@@ -51,8 +51,10 @@ Public Class frmSC_KioskSetting
         txtTimeOut.Text = KioskConfig.TimeOutSec
         txtMessage.Text = KioskConfig.ShowMsgSec
         txtExtend.Text = KioskConfig.PaymentExtendSec
-        'txtIDCardExpire.Text = KioskConfig.CardExpireMonth
-        'txtPassportExpire.Text = KioskConfig.PassportExpireMonth
+        txtPincodeLenght.Text = KioskConfig.PincodeLen
+        txtSyncMasterInterval.Text = KioskConfig.SyncMasterInterval
+        txtSyncTransInterval.Text = KioskConfig.SyncTransInterval
+        txtSyncLogInterval.Text = KioskConfig.SyncLogInterval
         txtContactCenter.Text = KioskConfig.ContactCenterTelno
 
         Dim SleepTime() As String = KioskConfig.SleepTime.Split(":")
@@ -61,9 +63,6 @@ Public Class frmSC_KioskSetting
             txtSleepTimeM.Text = SleepTime(1)
             txtSleepDuration.Text = KioskConfig.SleepDuration
         End If
-
-        txtWebserviceURL.Text = KioskConfig.WebserviceLockerURL
-
 
         InsertLogTransactionActivity(StaffConsole.TransNo, KioskConfig.SelectForm, KioskLockerStep.StaffConsoleKioskSetting_CheckAuthorize, "", False)
         SetStaffConsoleAuthorize()
@@ -84,9 +83,9 @@ Public Class frmSC_KioskSetting
                 txtTimeOut.Enabled = False
                 txtMessage.Enabled = False
                 txtExtend.Enabled = False
-                txtIDCardExpire.Enabled = False
-                txtPassportExpire.Enabled = False
-                txtWebserviceURL.Enabled = False
+                txtSyncMasterInterval.Enabled = False
+                txtSyncTransInterval.Enabled = False
+                txtSyncLogInterval.Enabled = False
                 btnSave.Visible = False
 
                 StaffConsole.AuthorizeInfo.DefaultView.RowFilter = "ms_functional_id=18 and authorization_name='Edit'"
@@ -104,9 +103,9 @@ Public Class frmSC_KioskSetting
                     txtTimeOut.Enabled = True
                     txtMessage.Enabled = True
                     txtExtend.Enabled = True
-                    txtIDCardExpire.Enabled = True
-                    txtPassportExpire.Enabled = True
-                    txtWebserviceURL.Enabled = True
+                    txtSyncMasterInterval.Enabled = True
+                    txtSyncTransInterval.Enabled = True
+                    txtSyncLogInterval.Enabled = True
                     btnSave.Visible = True
                 End If
                 StaffConsole.AuthorizeInfo.DefaultView.RowFilter = ""
@@ -220,13 +219,20 @@ Public Class frmSC_KioskSetting
             ShowDialogErrorMessageSC("Please enter Payment Extend")
             Exit Sub
         End If
-
-        If txtIDCardExpire.Text = "" Then
-            ShowDialogErrorMessageSC("Please enter ID Card Expire Month")
+        If txtPincodeLenght.Text = "" Then
+            ShowDialogErrorMessageSC("Please enter Pin Code Lenght")
             Exit Sub
         End If
-        If txtPassportExpire.Text = "" Then
-            ShowDialogErrorMessageSC("Please enter Passport Expire Month")
+        If txtSyncMasterInterval.Text = "" Then
+            ShowDialogErrorMessageSC("Please enter Sync Master Interval Minute")
+            Exit Sub
+        End If
+        If txtSyncTransInterval.Text = "" Then
+            ShowDialogErrorMessageSC("Please enter Sync Transaction Interval Minute")
+            Exit Sub
+        End If
+        If txtSyncLogInterval.Text = "" Then
+            ShowDialogErrorMessageSC("Please enter Sync Log Interval Minute")
             Exit Sub
         End If
         If txtContactCenter.Text = "" Then
@@ -247,11 +253,6 @@ Public Class frmSC_KioskSetting
         If txtSleepDuration.Text = "" Then
             ShowDialogErrorMessageSC("Please enter Sleep Duration")
             txtSleepDuration.Focus()
-            Exit Sub
-        End If
-
-        If txtWebserviceURL.Text = "" Then
-            ShowDialogErrorMessageSC("Please enter Webservice URL")
             Exit Sub
         End If
 
@@ -277,12 +278,13 @@ Public Class frmSC_KioskSetting
                 lnq.TIME_OUT_SEC = txtTimeOut.Text
                 lnq.SHOW_MSG_SEC = txtMessage.Text
                 lnq.PAYMENT_EXTEND_SEC = txtExtend.Text
-                'lnq.CARD_EXPIRE_MONTH = txtIDCardExpire.Text
-                'lnq.PASSPORT_EXPIRE_MONTH = txtPassportExpire.Text
+                lnq.PINCODE_LEN = txtPincodeLenght.Text
                 lnq.CONTACT_CENTER_TELNO = txtContactCenter.Text
                 lnq.SLEEP_TIME = txtSleepTimeH.Text.PadLeft(2, "0") & ":" & txtSleepTimeM.Text.PadLeft(2, "0")
                 lnq.SLEEP_DURATION = txtSleepDuration.Text
-                lnq.LOCKER_WEBSERVICE_URL = txtWebserviceURL.Text
+                lnq.INTERVAL_SYNC_MASTER_MIN = txtSyncMasterInterval.Text
+                lnq.INTERVAL_SYNC_TRANSACTION_MIN = txtSyncTransInterval.Text
+                lnq.INTERVAL_SYNC_LOG_MIN = txtSyncLogInterval.Text
                 lnq.SYNC_TO_KIOSK = "Y"
                 lnq.SYNC_TO_SERVER = "N"
 

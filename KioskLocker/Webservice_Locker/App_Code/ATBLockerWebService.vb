@@ -192,39 +192,39 @@ Public Class ATBLockerWebService
         Return dt
     End Function
 
-    <WebMethod()>
-    Public Function GetMasterKioskScreenControl() As DataTable
-        Dim dt As DataTable
-        Try
-            Engine.LogFileENG.CreateServerLogAgent("GetMasterKioskScreenControl from " & HttpContext.Current.Request.UserHostAddress)
+    '<WebMethod()>
+    'Public Function GetMasterKioskScreenControl() As DataTable
+    '    Dim dt As DataTable
+    '    Try
+    '        Engine.LogFileENG.CreateServerLogAgent("GetMasterKioskScreenControl from " & HttpContext.Current.Request.UserHostAddress)
 
-            Dim lnq As New MsKioskScreenControlServerLinqDB
-            dt = lnq.GetDataList("", "", Nothing, Nothing)
-            lnq = Nothing
-        Catch ex As Exception
-            dt = New DataTable
-        End Try
+    '        Dim lnq As New MsKioskScreenControlServerLinqDB
+    '        dt = lnq.GetDataList("", "", Nothing, Nothing)
+    '        lnq = Nothing
+    '    Catch ex As Exception
+    '        dt = New DataTable
+    '    End Try
 
-        dt.TableName = "GetMasterKioskScreenControl"
-        Return dt
-    End Function
+    '    dt.TableName = "GetMasterKioskScreenControl"
+    '    Return dt
+    'End Function
 
-    <WebMethod()>
-    Public Function GetMasterKioskNotificationText() As DataTable
-        Dim dt As DataTable
-        Try
-            Engine.LogFileENG.CreateServerLogAgent("GetMasterKioskNotificationText from " & HttpContext.Current.Request.UserHostAddress)
+    '<WebMethod()>
+    'Public Function GetMasterKioskNotificationText() As DataTable
+    '    Dim dt As DataTable
+    '    Try
+    '        Engine.LogFileENG.CreateServerLogAgent("GetMasterKioskNotificationText from " & HttpContext.Current.Request.UserHostAddress)
 
-            Dim lnq As New MsKioskNotificationTextServerLinqDB
-            dt = lnq.GetDataList("", "", Nothing, Nothing)
-            lnq = Nothing
-        Catch ex As Exception
-            dt = New DataTable
-        End Try
+    '        Dim lnq As New MsKioskNotificationTextServerLinqDB
+    '        dt = lnq.GetDataList("", "", Nothing, Nothing)
+    '        lnq = Nothing
+    '    Catch ex As Exception
+    '        dt = New DataTable
+    '    End Try
 
-        dt.TableName = "GetMasterCabinetModel"
-        Return dt
-    End Function
+    '    dt.TableName = "GetMasterCabinetModel"
+    '    Return dt
+    'End Function
 
     <WebMethod()>
     Public Function GetMasterCabinetModel() As DataTable
@@ -390,8 +390,7 @@ Public Class ATBLockerWebService
                     sLnq.TIME_OUT_SEC = dr("TIME_OUT_SEC")
                     sLnq.SHOW_MSG_SEC = dr("SHOW_MSG_SEC")
                     sLnq.PAYMENT_EXTEND_SEC = dr("PAYMENT_EXTEND_SEC")
-                    sLnq.CARD_EXPIRE_MONTH = dr("CARD_EXPIRE_MONTH")
-                    sLnq.PASSPORT_EXPIRE_MONTH = dr("PASSPORT_EXPIRE_MONTH")
+                    sLnq.PINCODE_LEN = dr("PINCODE_LEN")
                     sLnq.LOCKER_WEBSERVICE_URL = dr("LOCKER_WEBSERVICE_URL")
                     sLnq.LOCKER_PC_POSITION = dr("LOCKER_PC_POSITION")
                     sLnq.SLEEP_TIME = dr("SLEEP_TIME")
@@ -857,7 +856,7 @@ Public Class ATBLockerWebService
 
             Dim sTrans As New ServerTransactionDB
             Dim sRet As New ExecuteDataInfo
-            Dim sLnq As New TbServiceTransactionServerLinqDB
+            Dim sLnq As New TbDepositTransactionServerLinqDB
             sLnq.ChkDataByTRANS_NO(TransNo, sTrans.Trans)
             If sLnq.ID > 0 Then
                 sLnq.CUST_IMAGE = CustImage
@@ -886,9 +885,7 @@ Public Class ATBLockerWebService
 
     <WebMethod()>
     Public Function SyncKioskServiceTransactionByRecord(KioskName As String, TransNo As String, TransStartTime As DateTime, TransEndTime As DateTime, MsKioskID As Long, ServerLockerID As Long,
-                                                PassportNo As String, IDCardNo As String, NationCode As String, FirstName As String, LastName As String, Gender As String,
-                                                BirthDate As DateTime, PassportExpireDate As DateTime, IDCardExpireDate As DateTime,
-                                                ServiceRate As Double, ServiceRateLimitDay As Double, DepositAmt As Double, PaidTime As DateTime,
+                                                PinCode As String, ServiceRate As Double, ServiceRateLimitDay As Double, DepositAmt As Double, PaidTime As DateTime,
                                                 ReceiveCoin1 As Long, ReceiveCoin2 As Long, ReceiveCoin5 As Long, ReceiveCoin10 As Long, ReceiveBanknote20 As Long, ReceiveBanknote50 As Long, ReceiveBanknote100 As Long, ReceiveBanknote500 As Long, ReceiveBanknote1000 As Long,
                                                 ChangeCoin1 As Long, ChangeCoin2 As Long, ChangeCoin5 As Long, ChangeCoin10 As Long, ChangeBankNote20 As Long, ChangeBanknote50 As Long, ChangeBanknote100 As Long, ChangeBanknote500 As Long,
                                                 TransStatus As String, MsAppScreenID As Long, MsAppStepID As Long) As String
@@ -899,7 +896,7 @@ Public Class ATBLockerWebService
             Dim sTrans As New ServerLinqDB.ConnectDB.ServerTransactionDB
             Dim sRet As New ExecuteDataInfo
 
-            Dim sLnq As New TbServiceTransactionServerLinqDB
+            Dim sLnq As New TbDepositTransactionServerLinqDB
             sLnq.ChkDataByTRANS_NO(TransNo, sTrans.Trans)
             sLnq.TRANS_NO = TransNo
             sLnq.TRANS_START_TIME = TransStartTime
@@ -907,16 +904,17 @@ Public Class ATBLockerWebService
             sLnq.MS_KIOSK_ID = MsKioskID
             If ServerLockerID > 0 Then sLnq.MS_LOCKER_ID = ServerLockerID
 
-            If PassportNo.Trim <> "" Then sLnq.PASSPORT_NO = PassportNo
-            If IDCardNo.Trim <> "" Then sLnq.IDCARD_NO = IDCardNo
-            If NationCode.Trim <> "" Then sLnq.NATION_CODE = NationCode
-            If FirstName.Trim <> "" Then sLnq.FIRST_NAME = FirstName
-            If LastName.Trim <> "" Then sLnq.LAST_NAME = LastName
-            If Gender.Trim <> "" Then sLnq.GENDER = Gender
-            If BirthDate.Year <> 1 Then sLnq.BIRTH_DATE = BirthDate
-            If PassportExpireDate.Year <> 1 Then sLnq.PASSPORT_EXPIRE_DATE = PassportExpireDate
-            If IDCardExpireDate.Year <> 1 Then sLnq.IDCARD_EXPIRE_DATE = IDCardExpireDate
-            'If CustImage IsNot Nothing Then sLnq.CUST_IMAGE = CustImage
+            'If PassportNo.Trim <> "" Then sLnq.PASSPORT_NO = PassportNo
+            'If IDCardNo.Trim <> "" Then sLnq.IDCARD_NO = IDCardNo
+            'If NationCode.Trim <> "" Then sLnq.NATION_CODE = NationCode
+            'If FirstName.Trim <> "" Then sLnq.FIRST_NAME = FirstName
+            'If LastName.Trim <> "" Then sLnq.LAST_NAME = LastName
+            'If Gender.Trim <> "" Then sLnq.GENDER = Gender
+            'If BirthDate.Year <> 1 Then sLnq.BIRTH_DATE = BirthDate
+            'If PassportExpireDate.Year <> 1 Then sLnq.PASSPORT_EXPIRE_DATE = PassportExpireDate
+            'If IDCardExpireDate.Year <> 1 Then sLnq.IDCARD_EXPIRE_DATE = IDCardExpireDate
+            ''If CustImage IsNot Nothing Then sLnq.CUST_IMAGE = CustImage
+            If PinCode.Trim <> "" Then sLnq.PIN_CODE = PinCode
             sLnq.SERVICE_RATE = ServiceRate
             sLnq.SERVICE_RATE_LIMIT_DAY = ServiceRateLimitDay
             sLnq.DEPOSIT_AMT = DepositAmt
@@ -979,7 +977,7 @@ Public Class ATBLockerWebService
                 Dim sRet As New ExecuteDataInfo
 
                 For Each dr As DataRow In dt.Rows
-                    Dim sLnq As New TbServiceTransactionServerLinqDB
+                    Dim sLnq As New TbDepositTransactionServerLinqDB
                     sLnq.ChkDataByTRANS_NO(dr("TRANS_NO"), sTrans.Trans)
                     sLnq.TRANS_NO = dr("TRANS_NO")
                     sLnq.TRANS_START_TIME = Convert.ToDateTime(dr("TRANS_START_TIME"))

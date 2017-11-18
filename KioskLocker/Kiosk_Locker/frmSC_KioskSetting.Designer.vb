@@ -31,8 +31,6 @@ Partial Class frmSC_KioskSetting
         Me.Label4 = New System.Windows.Forms.Label()
         Me.txtMessage = New System.Windows.Forms.TextBox()
         Me.Label5 = New System.Windows.Forms.Label()
-        Me.txtWebserviceURL = New System.Windows.Forms.TextBox()
-        Me.Label6 = New System.Windows.Forms.Label()
         Me.Label8 = New System.Windows.Forms.Label()
         Me.txtScreenServer = New System.Windows.Forms.TextBox()
         Me.Label9 = New System.Windows.Forms.Label()
@@ -51,9 +49,6 @@ Partial Class frmSC_KioskSetting
         Me.Label14 = New System.Windows.Forms.Label()
         Me.Label15 = New System.Windows.Forms.Label()
         Me.chkLoginSSO = New System.Windows.Forms.CheckBox()
-        Me.txtIDCardExpire = New System.Windows.Forms.TextBox()
-        Me.Label7 = New System.Windows.Forms.Label()
-        Me.Label16 = New System.Windows.Forms.Label()
         Me.txtOpenTimeH = New System.Windows.Forms.TextBox()
         Me.Label17 = New System.Windows.Forms.Label()
         Me.txtOpenTimeM = New System.Windows.Forms.TextBox()
@@ -64,9 +59,6 @@ Partial Class frmSC_KioskSetting
         Me.Label20 = New System.Windows.Forms.Label()
         Me.chkKioskOpen24 = New System.Windows.Forms.CheckBox()
         Me.Label21 = New System.Windows.Forms.Label()
-        Me.Label22 = New System.Windows.Forms.Label()
-        Me.txtPassportExpire = New System.Windows.Forms.TextBox()
-        Me.Label23 = New System.Windows.Forms.Label()
         Me.txtContactCenter = New System.Windows.Forms.TextBox()
         Me.Label24 = New System.Windows.Forms.Label()
         Me.Label25 = New System.Windows.Forms.Label()
@@ -76,6 +68,18 @@ Partial Class frmSC_KioskSetting
         Me.txtSleepDuration = New System.Windows.Forms.TextBox()
         Me.Label27 = New System.Windows.Forms.Label()
         Me.Label28 = New System.Windows.Forms.Label()
+        Me.txtSyncLogInterval = New System.Windows.Forms.TextBox()
+        Me.Label6 = New System.Windows.Forms.Label()
+        Me.Label23 = New System.Windows.Forms.Label()
+        Me.txtSyncTransInterval = New System.Windows.Forms.TextBox()
+        Me.Label22 = New System.Windows.Forms.Label()
+        Me.Label16 = New System.Windows.Forms.Label()
+        Me.txtSyncMasterInterval = New System.Windows.Forms.TextBox()
+        Me.Label7 = New System.Windows.Forms.Label()
+        Me.Label29 = New System.Windows.Forms.Label()
+        Me.Label30 = New System.Windows.Forms.Label()
+        Me.txtPincodeLenght = New System.Windows.Forms.TextBox()
+        Me.Label31 = New System.Windows.Forms.Label()
         Me.btnCancel.SuspendLayout()
         Me.btnSave.SuspendLayout()
         Me.SuspendLayout()
@@ -200,32 +204,6 @@ Partial Class frmSC_KioskSetting
         Me.Label5.TabIndex = 52
         Me.Label5.Text = "Kiosk Message"
         Me.Label5.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
-        '
-        'txtWebserviceURL
-        '
-        Me.txtWebserviceURL.Anchor = System.Windows.Forms.AnchorStyles.Top
-        Me.txtWebserviceURL.BorderStyle = System.Windows.Forms.BorderStyle.None
-        Me.txtWebserviceURL.Font = New System.Drawing.Font("Microsoft Sans Serif", 18.0!)
-        Me.txtWebserviceURL.Location = New System.Drawing.Point(327, 570)
-        Me.txtWebserviceURL.MaxLength = 15
-        Me.txtWebserviceURL.Name = "txtWebserviceURL"
-        Me.txtWebserviceURL.Size = New System.Drawing.Size(626, 28)
-        Me.txtWebserviceURL.TabIndex = 6
-        Me.txtWebserviceURL.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
-        '
-        'Label6
-        '
-        Me.Label6.Anchor = System.Windows.Forms.AnchorStyles.Top
-        Me.Label6.AutoSize = True
-        Me.Label6.BackColor = System.Drawing.Color.Transparent
-        Me.Label6.Font = New System.Drawing.Font("Microsoft Sans Serif", 18.0!)
-        Me.Label6.ForeColor = System.Drawing.Color.White
-        Me.Label6.Location = New System.Drawing.Point(71, 568)
-        Me.Label6.Name = "Label6"
-        Me.Label6.Size = New System.Drawing.Size(193, 29)
-        Me.Label6.TabIndex = 55
-        Me.Label6.Text = "Webservice URL"
-        Me.Label6.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
         '
         'Label8
         '
@@ -464,46 +442,6 @@ Partial Class frmSC_KioskSetting
         Me.chkLoginSSO.UseVisualStyleBackColor = True
         Me.chkLoginSSO.Visible = False
         '
-        'txtIDCardExpire
-        '
-        Me.txtIDCardExpire.Anchor = System.Windows.Forms.AnchorStyles.Top
-        Me.txtIDCardExpire.BorderStyle = System.Windows.Forms.BorderStyle.None
-        Me.txtIDCardExpire.Font = New System.Drawing.Font("Microsoft Sans Serif", 18.0!)
-        Me.txtIDCardExpire.Location = New System.Drawing.Point(327, 414)
-        Me.txtIDCardExpire.MaxLength = 15
-        Me.txtIDCardExpire.Name = "txtIDCardExpire"
-        Me.txtIDCardExpire.Size = New System.Drawing.Size(207, 28)
-        Me.txtIDCardExpire.TabIndex = 76
-        Me.txtIDCardExpire.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
-        '
-        'Label7
-        '
-        Me.Label7.Anchor = System.Windows.Forms.AnchorStyles.Top
-        Me.Label7.AutoSize = True
-        Me.Label7.BackColor = System.Drawing.Color.Transparent
-        Me.Label7.Font = New System.Drawing.Font("Microsoft Sans Serif", 18.0!)
-        Me.Label7.ForeColor = System.Drawing.Color.White
-        Me.Label7.Location = New System.Drawing.Point(71, 412)
-        Me.Label7.Name = "Label7"
-        Me.Label7.Size = New System.Drawing.Size(169, 29)
-        Me.Label7.TabIndex = 77
-        Me.Label7.Text = "ID Card Expire"
-        Me.Label7.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
-        '
-        'Label16
-        '
-        Me.Label16.Anchor = System.Windows.Forms.AnchorStyles.Top
-        Me.Label16.AutoSize = True
-        Me.Label16.BackColor = System.Drawing.Color.Transparent
-        Me.Label16.Font = New System.Drawing.Font("Microsoft Sans Serif", 18.0!)
-        Me.Label16.ForeColor = System.Drawing.Color.White
-        Me.Label16.Location = New System.Drawing.Point(574, 414)
-        Me.Label16.Name = "Label16"
-        Me.Label16.Size = New System.Drawing.Size(79, 29)
-        Me.Label16.TabIndex = 78
-        Me.Label16.Text = "Month"
-        Me.Label16.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
-        '
         'txtOpenTimeH
         '
         Me.txtOpenTimeH.Anchor = System.Windows.Forms.AnchorStyles.Top
@@ -633,52 +571,12 @@ Partial Class frmSC_KioskSetting
         Me.Label21.Text = "Open 24 Hours"
         Me.Label21.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
         '
-        'Label22
-        '
-        Me.Label22.Anchor = System.Windows.Forms.AnchorStyles.Top
-        Me.Label22.AutoSize = True
-        Me.Label22.BackColor = System.Drawing.Color.Transparent
-        Me.Label22.Font = New System.Drawing.Font("Microsoft Sans Serif", 18.0!)
-        Me.Label22.ForeColor = System.Drawing.Color.White
-        Me.Label22.Location = New System.Drawing.Point(574, 446)
-        Me.Label22.Name = "Label22"
-        Me.Label22.Size = New System.Drawing.Size(79, 29)
-        Me.Label22.TabIndex = 91
-        Me.Label22.Text = "Month"
-        Me.Label22.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
-        '
-        'txtPassportExpire
-        '
-        Me.txtPassportExpire.Anchor = System.Windows.Forms.AnchorStyles.Top
-        Me.txtPassportExpire.BorderStyle = System.Windows.Forms.BorderStyle.None
-        Me.txtPassportExpire.Font = New System.Drawing.Font("Microsoft Sans Serif", 18.0!)
-        Me.txtPassportExpire.Location = New System.Drawing.Point(327, 446)
-        Me.txtPassportExpire.MaxLength = 15
-        Me.txtPassportExpire.Name = "txtPassportExpire"
-        Me.txtPassportExpire.Size = New System.Drawing.Size(207, 28)
-        Me.txtPassportExpire.TabIndex = 89
-        Me.txtPassportExpire.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
-        '
-        'Label23
-        '
-        Me.Label23.Anchor = System.Windows.Forms.AnchorStyles.Top
-        Me.Label23.AutoSize = True
-        Me.Label23.BackColor = System.Drawing.Color.Transparent
-        Me.Label23.Font = New System.Drawing.Font("Microsoft Sans Serif", 18.0!)
-        Me.Label23.ForeColor = System.Drawing.Color.White
-        Me.Label23.Location = New System.Drawing.Point(71, 444)
-        Me.Label23.Name = "Label23"
-        Me.Label23.Size = New System.Drawing.Size(183, 29)
-        Me.Label23.TabIndex = 90
-        Me.Label23.Text = "Passport Expire"
-        Me.Label23.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
-        '
         'txtContactCenter
         '
         Me.txtContactCenter.Anchor = System.Windows.Forms.AnchorStyles.Top
         Me.txtContactCenter.BorderStyle = System.Windows.Forms.BorderStyle.None
         Me.txtContactCenter.Font = New System.Drawing.Font("Microsoft Sans Serif", 18.0!)
-        Me.txtContactCenter.Location = New System.Drawing.Point(327, 477)
+        Me.txtContactCenter.Location = New System.Drawing.Point(327, 542)
         Me.txtContactCenter.MaxLength = 15
         Me.txtContactCenter.Name = "txtContactCenter"
         Me.txtContactCenter.Size = New System.Drawing.Size(207, 28)
@@ -692,7 +590,7 @@ Partial Class frmSC_KioskSetting
         Me.Label24.BackColor = System.Drawing.Color.Transparent
         Me.Label24.Font = New System.Drawing.Font("Microsoft Sans Serif", 18.0!)
         Me.Label24.ForeColor = System.Drawing.Color.White
-        Me.Label24.Location = New System.Drawing.Point(71, 475)
+        Me.Label24.Location = New System.Drawing.Point(71, 540)
         Me.Label24.Name = "Label24"
         Me.Label24.Size = New System.Drawing.Size(172, 29)
         Me.Label24.TabIndex = 93
@@ -706,7 +604,7 @@ Partial Class frmSC_KioskSetting
         Me.Label25.BackColor = System.Drawing.Color.Transparent
         Me.Label25.Font = New System.Drawing.Font("Microsoft Sans Serif", 18.0!)
         Me.Label25.ForeColor = System.Drawing.Color.White
-        Me.Label25.Location = New System.Drawing.Point(378, 508)
+        Me.Label25.Location = New System.Drawing.Point(378, 573)
         Me.Label25.Name = "Label25"
         Me.Label25.Size = New System.Drawing.Size(19, 29)
         Me.Label25.TabIndex = 97
@@ -718,7 +616,7 @@ Partial Class frmSC_KioskSetting
         Me.txtSleepTimeM.Anchor = System.Windows.Forms.AnchorStyles.Top
         Me.txtSleepTimeM.BorderStyle = System.Windows.Forms.BorderStyle.None
         Me.txtSleepTimeM.Font = New System.Drawing.Font("Microsoft Sans Serif", 18.0!)
-        Me.txtSleepTimeM.Location = New System.Drawing.Point(400, 508)
+        Me.txtSleepTimeM.Location = New System.Drawing.Point(400, 573)
         Me.txtSleepTimeM.MaxLength = 2
         Me.txtSleepTimeM.Name = "txtSleepTimeM"
         Me.txtSleepTimeM.Size = New System.Drawing.Size(52, 28)
@@ -730,7 +628,7 @@ Partial Class frmSC_KioskSetting
         Me.txtSleepTimeH.Anchor = System.Windows.Forms.AnchorStyles.Top
         Me.txtSleepTimeH.BorderStyle = System.Windows.Forms.BorderStyle.None
         Me.txtSleepTimeH.Font = New System.Drawing.Font("Microsoft Sans Serif", 18.0!)
-        Me.txtSleepTimeH.Location = New System.Drawing.Point(327, 508)
+        Me.txtSleepTimeH.Location = New System.Drawing.Point(327, 573)
         Me.txtSleepTimeH.MaxLength = 2
         Me.txtSleepTimeH.Name = "txtSleepTimeH"
         Me.txtSleepTimeH.Size = New System.Drawing.Size(52, 28)
@@ -744,7 +642,7 @@ Partial Class frmSC_KioskSetting
         Me.Label26.BackColor = System.Drawing.Color.Transparent
         Me.Label26.Font = New System.Drawing.Font("Microsoft Sans Serif", 18.0!)
         Me.Label26.ForeColor = System.Drawing.Color.White
-        Me.Label26.Location = New System.Drawing.Point(69, 508)
+        Me.Label26.Location = New System.Drawing.Point(69, 573)
         Me.Label26.Name = "Label26"
         Me.Label26.Size = New System.Drawing.Size(139, 29)
         Me.Label26.TabIndex = 95
@@ -756,7 +654,7 @@ Partial Class frmSC_KioskSetting
         Me.txtSleepDuration.Anchor = System.Windows.Forms.AnchorStyles.Top
         Me.txtSleepDuration.BorderStyle = System.Windows.Forms.BorderStyle.None
         Me.txtSleepDuration.Font = New System.Drawing.Font("Microsoft Sans Serif", 18.0!)
-        Me.txtSleepDuration.Location = New System.Drawing.Point(327, 539)
+        Me.txtSleepDuration.Location = New System.Drawing.Point(327, 604)
         Me.txtSleepDuration.MaxLength = 15
         Me.txtSleepDuration.Name = "txtSleepDuration"
         Me.txtSleepDuration.Size = New System.Drawing.Size(207, 28)
@@ -770,7 +668,7 @@ Partial Class frmSC_KioskSetting
         Me.Label27.BackColor = System.Drawing.Color.Transparent
         Me.Label27.Font = New System.Drawing.Font("Microsoft Sans Serif", 18.0!)
         Me.Label27.ForeColor = System.Drawing.Color.White
-        Me.Label27.Location = New System.Drawing.Point(71, 537)
+        Me.Label27.Location = New System.Drawing.Point(71, 602)
         Me.Label27.Name = "Label27"
         Me.Label27.Size = New System.Drawing.Size(173, 29)
         Me.Label27.TabIndex = 99
@@ -784,12 +682,172 @@ Partial Class frmSC_KioskSetting
         Me.Label28.BackColor = System.Drawing.Color.Transparent
         Me.Label28.Font = New System.Drawing.Font("Microsoft Sans Serif", 18.0!)
         Me.Label28.ForeColor = System.Drawing.Color.White
-        Me.Label28.Location = New System.Drawing.Point(576, 537)
+        Me.Label28.Location = New System.Drawing.Point(576, 602)
         Me.Label28.Name = "Label28"
         Me.Label28.Size = New System.Drawing.Size(85, 29)
         Me.Label28.TabIndex = 100
         Me.Label28.Text = "Minute"
         Me.Label28.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+        '
+        'txtSyncLogInterval
+        '
+        Me.txtSyncLogInterval.Anchor = System.Windows.Forms.AnchorStyles.Top
+        Me.txtSyncLogInterval.BorderStyle = System.Windows.Forms.BorderStyle.None
+        Me.txtSyncLogInterval.Font = New System.Drawing.Font("Microsoft Sans Serif", 18.0!)
+        Me.txtSyncLogInterval.Location = New System.Drawing.Point(327, 510)
+        Me.txtSyncLogInterval.MaxLength = 15
+        Me.txtSyncLogInterval.Name = "txtSyncLogInterval"
+        Me.txtSyncLogInterval.Size = New System.Drawing.Size(207, 28)
+        Me.txtSyncLogInterval.TabIndex = 6
+        Me.txtSyncLogInterval.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
+        '
+        'Label6
+        '
+        Me.Label6.Anchor = System.Windows.Forms.AnchorStyles.Top
+        Me.Label6.AutoSize = True
+        Me.Label6.BackColor = System.Drawing.Color.Transparent
+        Me.Label6.Font = New System.Drawing.Font("Microsoft Sans Serif", 18.0!)
+        Me.Label6.ForeColor = System.Drawing.Color.White
+        Me.Label6.Location = New System.Drawing.Point(71, 508)
+        Me.Label6.Name = "Label6"
+        Me.Label6.Size = New System.Drawing.Size(195, 29)
+        Me.Label6.TabIndex = 55
+        Me.Label6.Text = "Sync Log Interval"
+        Me.Label6.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+        '
+        'Label23
+        '
+        Me.Label23.Anchor = System.Windows.Forms.AnchorStyles.Top
+        Me.Label23.AutoSize = True
+        Me.Label23.BackColor = System.Drawing.Color.Transparent
+        Me.Label23.Font = New System.Drawing.Font("Microsoft Sans Serif", 18.0!)
+        Me.Label23.ForeColor = System.Drawing.Color.White
+        Me.Label23.Location = New System.Drawing.Point(71, 476)
+        Me.Label23.Name = "Label23"
+        Me.Label23.Size = New System.Drawing.Size(216, 29)
+        Me.Label23.TabIndex = 90
+        Me.Label23.Text = "Sync Trans Interval"
+        Me.Label23.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+        '
+        'txtSyncTransInterval
+        '
+        Me.txtSyncTransInterval.Anchor = System.Windows.Forms.AnchorStyles.Top
+        Me.txtSyncTransInterval.BorderStyle = System.Windows.Forms.BorderStyle.None
+        Me.txtSyncTransInterval.Font = New System.Drawing.Font("Microsoft Sans Serif", 18.0!)
+        Me.txtSyncTransInterval.Location = New System.Drawing.Point(327, 478)
+        Me.txtSyncTransInterval.MaxLength = 15
+        Me.txtSyncTransInterval.Name = "txtSyncTransInterval"
+        Me.txtSyncTransInterval.Size = New System.Drawing.Size(207, 28)
+        Me.txtSyncTransInterval.TabIndex = 89
+        Me.txtSyncTransInterval.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
+        '
+        'Label22
+        '
+        Me.Label22.Anchor = System.Windows.Forms.AnchorStyles.Top
+        Me.Label22.AutoSize = True
+        Me.Label22.BackColor = System.Drawing.Color.Transparent
+        Me.Label22.Font = New System.Drawing.Font("Microsoft Sans Serif", 18.0!)
+        Me.Label22.ForeColor = System.Drawing.Color.White
+        Me.Label22.Location = New System.Drawing.Point(574, 478)
+        Me.Label22.Name = "Label22"
+        Me.Label22.Size = New System.Drawing.Size(52, 29)
+        Me.Label22.TabIndex = 91
+        Me.Label22.Text = "Min"
+        Me.Label22.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+        '
+        'Label16
+        '
+        Me.Label16.Anchor = System.Windows.Forms.AnchorStyles.Top
+        Me.Label16.AutoSize = True
+        Me.Label16.BackColor = System.Drawing.Color.Transparent
+        Me.Label16.Font = New System.Drawing.Font("Microsoft Sans Serif", 18.0!)
+        Me.Label16.ForeColor = System.Drawing.Color.White
+        Me.Label16.Location = New System.Drawing.Point(574, 446)
+        Me.Label16.Name = "Label16"
+        Me.Label16.Size = New System.Drawing.Size(52, 29)
+        Me.Label16.TabIndex = 78
+        Me.Label16.Text = "Min"
+        Me.Label16.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+        '
+        'txtSyncMasterInterval
+        '
+        Me.txtSyncMasterInterval.Anchor = System.Windows.Forms.AnchorStyles.Top
+        Me.txtSyncMasterInterval.BorderStyle = System.Windows.Forms.BorderStyle.None
+        Me.txtSyncMasterInterval.Font = New System.Drawing.Font("Microsoft Sans Serif", 18.0!)
+        Me.txtSyncMasterInterval.Location = New System.Drawing.Point(327, 446)
+        Me.txtSyncMasterInterval.MaxLength = 15
+        Me.txtSyncMasterInterval.Name = "txtSyncMasterInterval"
+        Me.txtSyncMasterInterval.Size = New System.Drawing.Size(207, 28)
+        Me.txtSyncMasterInterval.TabIndex = 76
+        Me.txtSyncMasterInterval.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
+        '
+        'Label7
+        '
+        Me.Label7.Anchor = System.Windows.Forms.AnchorStyles.Top
+        Me.Label7.AutoSize = True
+        Me.Label7.BackColor = System.Drawing.Color.Transparent
+        Me.Label7.Font = New System.Drawing.Font("Microsoft Sans Serif", 18.0!)
+        Me.Label7.ForeColor = System.Drawing.Color.White
+        Me.Label7.Location = New System.Drawing.Point(71, 444)
+        Me.Label7.Name = "Label7"
+        Me.Label7.Size = New System.Drawing.Size(227, 29)
+        Me.Label7.TabIndex = 77
+        Me.Label7.Text = "Sync Master Interval"
+        Me.Label7.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+        '
+        'Label29
+        '
+        Me.Label29.Anchor = System.Windows.Forms.AnchorStyles.Top
+        Me.Label29.AutoSize = True
+        Me.Label29.BackColor = System.Drawing.Color.Transparent
+        Me.Label29.Font = New System.Drawing.Font("Microsoft Sans Serif", 18.0!)
+        Me.Label29.ForeColor = System.Drawing.Color.White
+        Me.Label29.Location = New System.Drawing.Point(574, 510)
+        Me.Label29.Name = "Label29"
+        Me.Label29.Size = New System.Drawing.Size(52, 29)
+        Me.Label29.TabIndex = 101
+        Me.Label29.Text = "Min"
+        Me.Label29.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+        '
+        'Label30
+        '
+        Me.Label30.Anchor = System.Windows.Forms.AnchorStyles.Top
+        Me.Label30.AutoSize = True
+        Me.Label30.BackColor = System.Drawing.Color.Transparent
+        Me.Label30.Font = New System.Drawing.Font("Microsoft Sans Serif", 18.0!)
+        Me.Label30.ForeColor = System.Drawing.Color.White
+        Me.Label30.Location = New System.Drawing.Point(574, 412)
+        Me.Label30.Name = "Label30"
+        Me.Label30.Size = New System.Drawing.Size(62, 29)
+        Me.Label30.TabIndex = 104
+        Me.Label30.Text = "Digit"
+        Me.Label30.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+        '
+        'txtPincodeLenght
+        '
+        Me.txtPincodeLenght.Anchor = System.Windows.Forms.AnchorStyles.Top
+        Me.txtPincodeLenght.BorderStyle = System.Windows.Forms.BorderStyle.None
+        Me.txtPincodeLenght.Font = New System.Drawing.Font("Microsoft Sans Serif", 18.0!)
+        Me.txtPincodeLenght.Location = New System.Drawing.Point(327, 414)
+        Me.txtPincodeLenght.MaxLength = 15
+        Me.txtPincodeLenght.Name = "txtPincodeLenght"
+        Me.txtPincodeLenght.Size = New System.Drawing.Size(207, 28)
+        Me.txtPincodeLenght.TabIndex = 102
+        Me.txtPincodeLenght.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
+        '
+        'Label31
+        '
+        Me.Label31.Anchor = System.Windows.Forms.AnchorStyles.Top
+        Me.Label31.AutoSize = True
+        Me.Label31.BackColor = System.Drawing.Color.Transparent
+        Me.Label31.Font = New System.Drawing.Font("Microsoft Sans Serif", 18.0!)
+        Me.Label31.ForeColor = System.Drawing.Color.White
+        Me.Label31.Location = New System.Drawing.Point(71, 412)
+        Me.Label31.Name = "Label31"
+        Me.Label31.Size = New System.Drawing.Size(181, 29)
+        Me.Label31.TabIndex = 103
+        Me.Label31.Text = "Pincode Lenght"
+        Me.Label31.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
         '
         'frmSC_KioskSetting
         '
@@ -798,6 +856,10 @@ Partial Class frmSC_KioskSetting
         Me.AutoScroll = True
         Me.BackColor = System.Drawing.Color.FromArgb(CType(CType(97, Byte), Integer), CType(CType(78, Byte), Integer), CType(CType(72, Byte), Integer))
         Me.ClientSize = New System.Drawing.Size(1024, 764)
+        Me.Controls.Add(Me.Label30)
+        Me.Controls.Add(Me.txtPincodeLenght)
+        Me.Controls.Add(Me.Label31)
+        Me.Controls.Add(Me.Label29)
         Me.Controls.Add(Me.Label28)
         Me.Controls.Add(Me.txtSleepDuration)
         Me.Controls.Add(Me.Label27)
@@ -809,7 +871,7 @@ Partial Class frmSC_KioskSetting
         Me.Controls.Add(Me.Label24)
         Me.Controls.Add(Me.Label9)
         Me.Controls.Add(Me.Label22)
-        Me.Controls.Add(Me.txtPassportExpire)
+        Me.Controls.Add(Me.txtSyncTransInterval)
         Me.Controls.Add(Me.Label23)
         Me.Controls.Add(Me.Label21)
         Me.Controls.Add(Me.chkKioskOpen24)
@@ -822,7 +884,7 @@ Partial Class frmSC_KioskSetting
         Me.Controls.Add(Me.txtOpenTimeH)
         Me.Controls.Add(Me.Label17)
         Me.Controls.Add(Me.Label16)
-        Me.Controls.Add(Me.txtIDCardExpire)
+        Me.Controls.Add(Me.txtSyncMasterInterval)
         Me.Controls.Add(Me.Label7)
         Me.Controls.Add(Me.chkLoginSSO)
         Me.Controls.Add(Me.Label15)
@@ -839,7 +901,7 @@ Partial Class frmSC_KioskSetting
         Me.Controls.Add(Me.btnSave)
         Me.Controls.Add(Me.Label8)
         Me.Controls.Add(Me.txtScreenServer)
-        Me.Controls.Add(Me.txtWebserviceURL)
+        Me.Controls.Add(Me.txtSyncLogInterval)
         Me.Controls.Add(Me.Label6)
         Me.Controls.Add(Me.Label4)
         Me.Controls.Add(Me.txtMessage)
@@ -869,8 +931,6 @@ Partial Class frmSC_KioskSetting
     Friend WithEvents Label4 As Label
     Friend WithEvents txtMessage As TextBox
     Friend WithEvents Label5 As Label
-    Friend WithEvents txtWebserviceURL As TextBox
-    Friend WithEvents Label6 As Label
     Friend WithEvents Label8 As Label
     Friend WithEvents txtScreenServer As TextBox
     Friend WithEvents Label9 As Label
@@ -889,9 +949,6 @@ Partial Class frmSC_KioskSetting
     Friend WithEvents Label14 As Label
     Friend WithEvents Label15 As Label
     Friend WithEvents chkLoginSSO As CheckBox
-    Friend WithEvents txtIDCardExpire As TextBox
-    Friend WithEvents Label7 As Label
-    Friend WithEvents Label16 As Label
     Friend WithEvents txtOpenTimeH As TextBox
     Friend WithEvents Label17 As Label
     Friend WithEvents txtOpenTimeM As TextBox
@@ -902,9 +959,6 @@ Partial Class frmSC_KioskSetting
     Friend WithEvents Label20 As Label
     Friend WithEvents chkKioskOpen24 As CheckBox
     Friend WithEvents Label21 As Label
-    Friend WithEvents Label22 As Label
-    Friend WithEvents txtPassportExpire As TextBox
-    Friend WithEvents Label23 As Label
     Friend WithEvents txtContactCenter As TextBox
     Friend WithEvents Label24 As Label
     Friend WithEvents Label25 As Label
@@ -914,4 +968,16 @@ Partial Class frmSC_KioskSetting
     Friend WithEvents txtSleepDuration As TextBox
     Friend WithEvents Label27 As Label
     Friend WithEvents Label28 As Label
+    Friend WithEvents txtSyncLogInterval As TextBox
+    Friend WithEvents Label6 As Label
+    Friend WithEvents Label23 As Label
+    Friend WithEvents txtSyncTransInterval As TextBox
+    Friend WithEvents Label22 As Label
+    Friend WithEvents Label16 As Label
+    Friend WithEvents txtSyncMasterInterval As TextBox
+    Friend WithEvents Label7 As Label
+    Friend WithEvents Label29 As Label
+    Friend WithEvents Label30 As Label
+    Friend WithEvents txtPincodeLenght As TextBox
+    Friend WithEvents Label31 As Label
 End Class

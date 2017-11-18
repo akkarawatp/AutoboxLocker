@@ -1,7 +1,7 @@
 ﻿Imports System.IO
 Imports System.Drawing
 Imports System.Windows.Forms
-Imports ImageCapture.Org.Mentalis.Files
+Imports WebCamera.Org.Mentalis.Files
 
 Public Class frmImageCapture
     Private WithEvents cam As New DSCamCapture

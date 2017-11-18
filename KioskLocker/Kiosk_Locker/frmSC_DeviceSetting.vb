@@ -2,7 +2,6 @@
 Imports KioskLinqDB.ConnectDB
 Imports KioskLinqDB.TABLE
 Imports AutoboxLocker.Data
-Imports ThaiNationalIDCard
 Imports System.Data.SqlClient
 Imports AutoboxLocker.Data.KioskConfigData
 
@@ -18,6 +17,7 @@ Public Class frmSC_DeviceSetting
         CheckForIllegalCrossThreadCalls = False
         BindDDLComport()
         BindDDLPrinter()
+        BindDDLWebCamera()
 
         InsertLogTransactionActivity(StaffConsole.TransNo, KioskConfig.SelectForm, KioskLockerStep.StaffConsoleDeviceSetting_SetDefaultSetting, "", False)
         SetDefaultSetting()
@@ -40,9 +40,7 @@ Public Class frmSC_DeviceSetting
                 cbBoardLED.Enabled = False
                 txtQRCodeVID.Enabled = False
                 cbPrinterName.Enabled = False
-                txtIDCardPassportVID.Enabled = False
-                cbIDCard.Enabled = False
-                cbPassport.Enabled = False
+                cbWebCamera.Enabled = False
                 btnSave.Visible = False
 
                 StaffConsole.AuthorizeInfo.DefaultView.RowFilter = "ms_functional_id=19 and authorization_name='Edit'"
@@ -57,9 +55,7 @@ Public Class frmSC_DeviceSetting
                     cbBoardLED.Enabled = True
                     txtQRCodeVID.Enabled = True
                     cbPrinterName.Enabled = True
-                    txtIDCardPassportVID.Enabled = True
-                    cbIDCard.Enabled = True
-                    cbPassport.Enabled = True
+                    cbWebCamera.Enabled = True
                     btnSave.Visible = True
                 End If
                 StaffConsole.AuthorizeInfo.DefaultView.RowFilter = ""
@@ -137,17 +133,10 @@ Public Class frmSC_DeviceSetting
                                     cbPrinterName.SelectedIndex = cbPrinterName.FindStringExact(dDr("driver_name1"))
                                 End If
 
-                            'Case DeviceID.IDCardPassportScanner
-                            '    If Convert.IsDBNull(dDr("comport_vid")) = False Then
-                            '        txtIDCardPassportVID.Text = dDr("comport_vid")
-                            '    End If
-
-                            '    If Convert.IsDBNull(dDr("driver_name1")) = False Then
-                            '        cbIDCard.SelectedIndex = cbIDCard.FindStringExact(dDr("driver_name1"))
-                            '    End If
-                            '    If Convert.IsDBNull(dDr("driver_name2")) = False Then
-                            '        cbPassport.SelectedIndex = cbPassport.FindStringExact(dDr("driver_name2"))
-                            '    End If
+                            Case DeviceID.WebCamera
+                                If Convert.IsDBNull(dDr("driver_name1")) = False Then
+                                    cbWebCamera.SelectedIndex = cbWebCamera.FindStringExact(dDr("driver_name1"))
+                                End If
 
                             Case DeviceID.NetworkConnection
 
@@ -170,7 +159,6 @@ Public Class frmSC_DeviceSetting
                                 If Convert.IsDBNull(dDr("comport_vid")) = False Then
                                     cbBoardSensor.SelectedIndex = cbBoardSensor.FindStringExact(dDr("comport_vid"))
                                 End If
-
                         End Select
                     End If
                 Next
@@ -231,27 +219,9 @@ Public Class frmSC_DeviceSetting
         Next
     End Sub
 
-    'Private Sub BindDDLIdCardPassport()
-    '    'ID Card Scanner
-    '    cbIDCard.Items.Clear()
-    '    cbIDCard.Items.Add("")
-    '    Dim idcard As New ThaiIDCard
-    '    Dim idDeviceList() As String = idcard.GetReaders()
-    '    If idDeviceList IsNot Nothing Then
-    '        For i As Int32 = 0 To idDeviceList.Length - 1
-    '            Dim r As String = idDeviceList(i)
-    '            cbIDCard.Items.Add(r)
-    '        Next
-    '    End If
-
-    '    'Passport Scanner
-    '    cbPassport.Items.Clear()
-    '    cbPassport.Items.Add("")
-    '    Dim pDeviceList() As String = PassportScanner.Scanner.GetDeviceList
-    '    For i As Int32 = 0 To pDeviceList.Length - 1
-    '        cbPassport.Items.Add(pDeviceList(i).ToString)
-    '    Next
-    'End Sub
+    Private Sub BindDDLWebCamera()
+        cbWebCamera.Items.AddRange(WebCam.GetCaptureDevices)
+    End Sub
 
     Private Sub lblCancel_Click(sender As Object, e As EventArgs) Handles lblCancel.Click, btnCancel.Click
         InsertLogTransactionActivity(StaffConsole.TransNo, KioskConfig.SelectForm, KioskLockerStep.StaffConsoleDeviceSetting_ClickCancel, "", False)
@@ -357,16 +327,6 @@ Public Class frmSC_DeviceSetting
         '    Exit Sub
         'End If
 
-        'If cbIDCard.Text.Trim = "" Then
-        '    ShowDialogErrorMessageSC("กรุณาเลือกเครื่องอ่านบัตรประชาชน")
-        '    Exit Sub
-        'End If
-
-        'If cbIDCard.Text.Trim = "" Then
-        '    ShowDialogErrorMessageSC("กรุณาเลือกเครื่องอ่านหนังสือเดินทาง")
-        '    Exit Sub
-        'End If
-
         InsertLogTransactionActivity(StaffConsole.TransNo, KioskConfig.SelectForm, KioskLockerStep.StaffConsoleDeviceSetting_ClickSave, "", False)
 
         UpdateDeviceByDeviceID(DeviceID.BankNoteIn, cbBanknoteIn.Text, "", "")
@@ -381,7 +341,7 @@ Public Class frmSC_DeviceSetting
 
         UpdateDeviceByDeviceID(DeviceID.QRCodeReader, txtQRCodeVID.Text, "", "")
         UpdateDeviceByDeviceID(DeviceID.Printer, "", cbPrinterName.Text, "")
-        'UpdateDeviceByDeviceID(DeviceID.IDCardPassportScanner, txtIDCardPassportVID.Text, cbIDCard.Text, cbPassport.Text)
+        UpdateDeviceByDeviceID(DeviceID.WebCamera, "", cbWebCamera.Text, cbWebCamera.SelectedIndex)
 
         SetListDeviceInfo()  'โหลดข้อมูลใหม่เก็บเข้าตัวแปร
 

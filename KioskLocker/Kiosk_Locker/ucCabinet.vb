@@ -291,18 +291,25 @@ Public Class ucCabinet
                 Dim sRet As ServerLinqDB.ConnectDB.ExecuteDataInfo = ServerLinqDB.ConnectDB.ServerDB.ExecuteNonQuery(sql, sTrans.Trans, p)
                 If sRet.IsSuccess = True And sRet.RecordEffected > 0 Then
                     sql = "update ms_cabinet "
-                    sql += " set active_status='N' "
-                    sql += " where id=@_SERVER_CABINET_ID"
-                    ReDim p(1)
-                    p(0) = ServerLinqDB.ConnectDB.ServerDB.SetBigInt("@_SERVER_CABINET_ID", lnq.MS_CABINET_ID)
+                    sql += " set active_status='N', "
+                    sql += " cabinet_no = (select min(cabinet_no)-1 from MS_CABINET where ms_kiosk_id=@_KIOSK_ID), "
+                    sql += " order_layout = (Select min(order_layout)-1 from MS_CABINET where ms_kiosk_id=@_KIOSK_ID) "
+                    sql += " where id=@_SERVER_CABINET_ID;" & Environment.NewLine
+                    sql += " update ms_cabinet "
+                    sql += " set cabinet_no=cabinet_no-1, order_layout=order_layout-1"
+                    sql += " where order_layout > @_ORDER_LAYOUT_NO and  ms_kiosk_id=@_KIOSK_ID;"
 
+                    ReDim p(3)
+                    p(0) = ServerLinqDB.ConnectDB.ServerDB.SetBigInt("@_KIOSK_ID", KioskData.KioskID)
+                    p(1) = ServerLinqDB.ConnectDB.ServerDB.SetBigInt("@_SERVER_CABINET_ID", lnq.MS_CABINET_ID)
+                    p(2) = ServerLinqDB.ConnectDB.ServerDB.SetInt("@_ORDER_LAYOUT_NO", _OrderLayoutNo)
                     sRet = ServerLinqDB.ConnectDB.ServerDB.ExecuteNonQuery(sql, sTrans.Trans, p)
                 End If
 
                 If sRet.IsSuccess = True Then
                     'Update ข้อมูลที่ Kiosk
                     sql = "update ms_locker "
-                    sql += " set active_status='N'"
+                    sql += " Set active_status='N'"
                     sql += " where ms_cabinet_id=@_KIOSK_CABINET_ID"
                     ReDim p(1)
                     p(0) = KioskDB.SetBigInt("@_KIOSK_CABINET_ID", lnq.ID)
@@ -310,10 +317,16 @@ Public Class ucCabinet
                     Dim ret As ExecuteDataInfo = KioskDB.ExecuteNonQuery(sql, trans.Trans, p)
                     If ret.IsSuccess = True And ret.RecordEffected > 0 Then
                         sql = "update ms_cabinet "
-                        sql += " set active_status='N'"
-                        sql += " where id=@_KIOSK_CABINET_ID"
-                        ReDim p(1)
+                        sql += " set active_status='N', "
+                        sql += " cabinet_no = (select min(cabinet_no)-1 from MS_CABINET),"
+                        sql += " order_layout = (Select min(order_layout)-1 from MS_CABINET) "
+                        sql += " where id=@_KIOSK_CABINET_ID;" & Environment.NewLine
+                        sql += " update ms_cabinet "
+                        sql += " set cabinet_no=cabinet_no-1, order_layout=order_layout-1"
+                        sql += " where order_layout > @_ORDER_LAYOUT_NO; "
+                        ReDim p(2)
                         p(0) = KioskDB.SetBigInt("@_KIOSK_CABINET_ID", lnq.ID)
+                        p(1) = KioskDB.SetInt("@_ORDER_LAYOUT_NO", _OrderLayoutNo)
                         ret = KioskDB.ExecuteNonQuery(sql, trans.Trans, p)
                     End If
 

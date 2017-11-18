@@ -3,7 +3,7 @@ Public Class TestFunctionWindowService
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
         'Engine.LogFileENG.TestNLog()
 
-        'KioskInfoENG.SetKioskInfo()
+        KioskInfoENG.SetKioskInfo()
 
         'Engine.SyncMasterDataENG.SyncMasterKioskSysconfig(1)
         'Engine.SyncMasterDataENG.SyncMasterKioskSysconfig(23)
@@ -11,19 +11,19 @@ Public Class TestFunctionWindowService
         'Engine.SyncMasterDataENG.SyncMasterKioskDevice(30)
         'Engine.SyncMasterDataENG.SyncMasterKioskLocker(23)
 
-        'Engine.SyncMasterDataENG.SyncAllKioskMaster(2)
+        Engine.SyncMasterDataENG.SyncAllKioskMaster(34)
         'Engine.SyncMasterDataENG.SyncMasterPromotion(23)
         'Engine.SyncMasterDataENG.UpdateKioskPromotionExpired(1)
 
         'Engine.SyncMasterDataENG.TestTraceFrame("123")
 
         'Engine.SyncTransactionDataENG.SyncAllTransaction(1)
-        Engine.SyncTransactionDataENG.SyncServiceTransaction(34)
+        'Engine.SyncTransactionDataENG.SyncServiceTransaction(34)
         'Engine.SyncTransactionDataENG.SyncPickupTransaction(23)
         'Engine.SyncTransactionDataENG.SyncStaffConsoleTransaction(23)
         'Engine.SyncTransactionDataENG.SyncDeleteCompleteTransaction(23)
         'Engine.SyncTransactionDataENG.ConvertServiceTransationCustImage(34)
-        Engine.SyncTransactionDataENG.SyncServiceTransactionCustImage(34)
+        'Engine.SyncTransactionDataENG.SyncServiceTransactionCustImage(34)
 
         'Engine.SyncLogDataENG.SyncLogTransactionActivity(23)
         'Engine.SyncLogDataENG.SyncFillMoneyData(23)
@@ -41,7 +41,7 @@ Public Class TestFunctionWindowService
         'Engine.SyncMasterDataENG.PullMasterKioskScreenControl(23)
         'Engine.SyncMasterDataENG.PullMasterKioskNotificationText(23)
         'Engine.SyncMasterDataENG.PullMasterMonitoringAlarm(2)
-        'Engine.SyncMasterDataENG.PullMasterServiceRate(2)
+        Engine.SyncMasterDataENG.PullMasterServiceRate(34)
 
 
     End Sub

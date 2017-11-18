@@ -26,7 +26,6 @@ Partial Class frmSC_DeviceSetting
         Me.Label1 = New System.Windows.Forms.Label()
         Me.Label2 = New System.Windows.Forms.Label()
         Me.Label5 = New System.Windows.Forms.Label()
-        Me.Label6 = New System.Windows.Forms.Label()
         Me.Label9 = New System.Windows.Forms.Label()
         Me.btnCancel = New System.Windows.Forms.Panel()
         Me.lblCancel = New System.Windows.Forms.Label()
@@ -48,16 +47,10 @@ Partial Class frmSC_DeviceSetting
         Me.cbBoardLED = New System.Windows.Forms.ComboBox()
         Me.cbPrinterName = New System.Windows.Forms.ComboBox()
         Me.txtQRCodeVID = New System.Windows.Forms.TextBox()
-        Me.Panel1 = New System.Windows.Forms.Panel()
-        Me.txtIDCardPassportVID = New System.Windows.Forms.TextBox()
-        Me.Label3 = New System.Windows.Forms.Label()
-        Me.cbIDCard = New System.Windows.Forms.ComboBox()
+        Me.cbWebCamera = New System.Windows.Forms.ComboBox()
         Me.Label4 = New System.Windows.Forms.Label()
-        Me.cbPassport = New System.Windows.Forms.ComboBox()
-        Me.Label8 = New System.Windows.Forms.Label()
         Me.btnCancel.SuspendLayout()
         Me.btnSave.SuspendLayout()
-        Me.Panel1.SuspendLayout()
         Me.SuspendLayout()
         '
         'lblHeader
@@ -114,19 +107,6 @@ Partial Class frmSC_DeviceSetting
         Me.Label5.TabIndex = 52
         Me.Label5.Text = "แผงควบคุม LED"
         Me.Label5.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
-        '
-        'Label6
-        '
-        Me.Label6.AutoSize = True
-        Me.Label6.BackColor = System.Drawing.Color.Transparent
-        Me.Label6.Font = New System.Drawing.Font("Microsoft Sans Serif", 21.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(222, Byte))
-        Me.Label6.ForeColor = System.Drawing.Color.White
-        Me.Label6.Location = New System.Drawing.Point(3, 0)
-        Me.Label6.Name = "Label6"
-        Me.Label6.Size = New System.Drawing.Size(485, 33)
-        Me.Label6.TabIndex = 55
-        Me.Label6.Text = "เครื่องอ่านบัตรประชาชนและหนังสือเดินทาง"
-        Me.Label6.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
         '
         'Label9
         '
@@ -385,57 +365,16 @@ Partial Class frmSC_DeviceSetting
         Me.txtQRCodeVID.TabIndex = 87
         Me.txtQRCodeVID.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
         '
-        'Panel1
+        'cbWebCamera
         '
-        Me.Panel1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
-        Me.Panel1.Controls.Add(Me.cbPassport)
-        Me.Panel1.Controls.Add(Me.Label8)
-        Me.Panel1.Controls.Add(Me.cbIDCard)
-        Me.Panel1.Controls.Add(Me.txtIDCardPassportVID)
-        Me.Panel1.Controls.Add(Me.Label4)
-        Me.Panel1.Controls.Add(Me.Label3)
-        Me.Panel1.Controls.Add(Me.Label6)
-        Me.Panel1.Location = New System.Drawing.Point(77, 500)
-        Me.Panel1.Name = "Panel1"
-        Me.Panel1.Size = New System.Drawing.Size(770, 155)
-        Me.Panel1.TabIndex = 88
-        '
-        'txtIDCardPassportVID
-        '
-        Me.txtIDCardPassportVID.Anchor = System.Windows.Forms.AnchorStyles.Top
-        Me.txtIDCardPassportVID.BorderStyle = System.Windows.Forms.BorderStyle.None
-        Me.txtIDCardPassportVID.Font = New System.Drawing.Font("Microsoft Sans Serif", 21.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtIDCardPassportVID.Location = New System.Drawing.Point(315, 33)
-        Me.txtIDCardPassportVID.MaxLength = 15
-        Me.txtIDCardPassportVID.Name = "txtIDCardPassportVID"
-        Me.txtIDCardPassportVID.Size = New System.Drawing.Size(198, 33)
-        Me.txtIDCardPassportVID.TabIndex = 89
-        Me.txtIDCardPassportVID.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
-        '
-        'Label3
-        '
-        Me.Label3.Anchor = System.Windows.Forms.AnchorStyles.Top
-        Me.Label3.AutoSize = True
-        Me.Label3.BackColor = System.Drawing.Color.Transparent
-        Me.Label3.Font = New System.Drawing.Font("Microsoft Sans Serif", 21.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(222, Byte))
-        Me.Label3.ForeColor = System.Drawing.Color.White
-        Me.Label3.Location = New System.Drawing.Point(30, 33)
-        Me.Label3.Name = "Label3"
-        Me.Label3.Size = New System.Drawing.Size(63, 33)
-        Me.Label3.TabIndex = 88
-        Me.Label3.Text = "VID"
-        Me.Label3.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
-        '
-        'cbIDCard
-        '
-        Me.cbIDCard.Anchor = System.Windows.Forms.AnchorStyles.Top
-        Me.cbIDCard.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-        Me.cbIDCard.Font = New System.Drawing.Font("Microsoft Sans Serif", 18.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(222, Byte))
-        Me.cbIDCard.FormattingEnabled = True
-        Me.cbIDCard.Location = New System.Drawing.Point(315, 70)
-        Me.cbIDCard.Name = "cbIDCard"
-        Me.cbIDCard.Size = New System.Drawing.Size(338, 37)
-        Me.cbIDCard.TabIndex = 90
+        Me.cbWebCamera.Anchor = System.Windows.Forms.AnchorStyles.Top
+        Me.cbWebCamera.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.cbWebCamera.Font = New System.Drawing.Font("Microsoft Sans Serif", 18.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(222, Byte))
+        Me.cbWebCamera.FormattingEnabled = True
+        Me.cbWebCamera.Location = New System.Drawing.Point(394, 498)
+        Me.cbWebCamera.Name = "cbWebCamera"
+        Me.cbWebCamera.Size = New System.Drawing.Size(453, 37)
+        Me.cbWebCamera.TabIndex = 90
         '
         'Label4
         '
@@ -444,37 +383,12 @@ Partial Class frmSC_DeviceSetting
         Me.Label4.BackColor = System.Drawing.Color.Transparent
         Me.Label4.Font = New System.Drawing.Font("Microsoft Sans Serif", 21.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(222, Byte))
         Me.Label4.ForeColor = System.Drawing.Color.White
-        Me.Label4.Location = New System.Drawing.Point(30, 69)
+        Me.Label4.Location = New System.Drawing.Point(72, 497)
         Me.Label4.Name = "Label4"
-        Me.Label4.Size = New System.Drawing.Size(280, 33)
+        Me.Label4.Size = New System.Drawing.Size(195, 33)
         Me.Label4.TabIndex = 89
-        Me.Label4.Text = "เครื่องอ่านบัตรประชาชน"
+        Me.Label4.Text = "กล้อง Webcam"
         Me.Label4.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
-        '
-        'cbPassport
-        '
-        Me.cbPassport.Anchor = System.Windows.Forms.AnchorStyles.Top
-        Me.cbPassport.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-        Me.cbPassport.Font = New System.Drawing.Font("Microsoft Sans Serif", 18.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(222, Byte))
-        Me.cbPassport.FormattingEnabled = True
-        Me.cbPassport.Location = New System.Drawing.Point(316, 111)
-        Me.cbPassport.Name = "cbPassport"
-        Me.cbPassport.Size = New System.Drawing.Size(338, 37)
-        Me.cbPassport.TabIndex = 92
-        '
-        'Label8
-        '
-        Me.Label8.Anchor = System.Windows.Forms.AnchorStyles.Top
-        Me.Label8.AutoSize = True
-        Me.Label8.BackColor = System.Drawing.Color.Transparent
-        Me.Label8.Font = New System.Drawing.Font("Microsoft Sans Serif", 21.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(222, Byte))
-        Me.Label8.ForeColor = System.Drawing.Color.White
-        Me.Label8.Location = New System.Drawing.Point(31, 110)
-        Me.Label8.Name = "Label8"
-        Me.Label8.Size = New System.Drawing.Size(286, 33)
-        Me.Label8.TabIndex = 91
-        Me.Label8.Text = "เครื่องอ่านหนังสือเดินทาง"
-        Me.Label8.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
         '
         'frmSC_DeviceSetting
         '
@@ -483,9 +397,10 @@ Partial Class frmSC_DeviceSetting
         Me.AutoScroll = True
         Me.BackColor = System.Drawing.Color.FromArgb(CType(CType(97, Byte), Integer), CType(CType(78, Byte), Integer), CType(CType(72, Byte), Integer))
         Me.ClientSize = New System.Drawing.Size(1024, 764)
-        Me.Controls.Add(Me.Panel1)
         Me.Controls.Add(Me.txtQRCodeVID)
+        Me.Controls.Add(Me.cbWebCamera)
         Me.Controls.Add(Me.cbPrinterName)
+        Me.Controls.Add(Me.Label4)
         Me.Controls.Add(Me.cbBoardLED)
         Me.Controls.Add(Me.cbBoardSensor)
         Me.Controls.Add(Me.cbBoardSolenoid)
@@ -512,8 +427,6 @@ Partial Class frmSC_DeviceSetting
         Me.Text = "frmSC_KioskSetting"
         Me.btnCancel.ResumeLayout(False)
         Me.btnSave.ResumeLayout(False)
-        Me.Panel1.ResumeLayout(False)
-        Me.Panel1.PerformLayout()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -523,7 +436,6 @@ Partial Class frmSC_DeviceSetting
     Friend WithEvents Label1 As Label
     Friend WithEvents Label2 As Label
     Friend WithEvents Label5 As Label
-    Friend WithEvents Label6 As Label
     Friend WithEvents Label9 As Label
     Friend WithEvents btnCancel As Panel
     Friend WithEvents lblCancel As Label
@@ -545,11 +457,6 @@ Partial Class frmSC_DeviceSetting
     Friend WithEvents cbBoardLED As ComboBox
     Friend WithEvents cbPrinterName As ComboBox
     Friend WithEvents txtQRCodeVID As TextBox
-    Friend WithEvents Panel1 As Panel
-    Friend WithEvents cbPassport As ComboBox
-    Friend WithEvents Label8 As Label
-    Friend WithEvents cbIDCard As ComboBox
-    Friend WithEvents txtIDCardPassportVID As TextBox
+    Friend WithEvents cbWebCamera As ComboBox
     Friend WithEvents Label4 As Label
-    Friend WithEvents Label3 As Label
 End Class

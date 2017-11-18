@@ -1,7 +1,7 @@
 ﻿Imports CoinIn.Org.Mentalis.Files
 
 Public Class Monitoring
-    Private WithEvents cam As New DSCamCapture
+    Private WithEvents cam As New WebCamera.DSCamCapture
     Public INIFileName As String = Application.StartupPath & "\ConfigDevice.ini"
 
     Private Sub Monitoring_Shown(sender As Object, e As EventArgs) Handles Me.Shown
@@ -19,14 +19,19 @@ Public Class Monitoring
     End Sub
 
     Private Sub btnTest_Click(sender As Object, e As EventArgs) Handles btnTest.Click
-        Dim CaptureApp As String = Application.StartupPath & "\ImageCapture\ImageCapture.exe"
+        Dim CaptureApp As String = Application.StartupPath & "\WebCamera.exe"
 
         If IO.File.Exists(CaptureApp) = True Then
             pbCaptureImage.Image = Nothing
 
             Dim ini As New IniReader(INIFileName)
             ini.Section = "CaptureSetting"
-            For Each f As String In IO.Directory.GetFiles(ini.ReadString("ImageCapturePath"))
+            Dim ImageCapturePath As String = ini.ReadString("ImageCapturePath")
+            If IO.Directory.Exists(ImageCapturePath) = False Then
+                IO.Directory.CreateDirectory(ImageCapturePath)
+            End If
+
+            For Each f As String In IO.Directory.GetFiles(ImageCapturePath)
                 Try
                     IO.File.Delete(f)
                 Catch ex As Exception

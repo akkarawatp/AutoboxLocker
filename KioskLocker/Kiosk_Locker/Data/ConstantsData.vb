@@ -46,7 +46,7 @@
             CoinIn = 3
             CoinOut = 4
             Printer = 5
-            'IdCardAndPassportScanner = 6
+            WebCamera = 6
             NetworkConnection = 7
             QRCodeScanner = 8
             SolenoidBoard = 9
@@ -114,7 +114,7 @@
 
 
 
-        Public Enum PassportScanerStatus
+        Public Enum WebCameraStatus
             Ready = 1
             Disconnected = 2
         End Enum

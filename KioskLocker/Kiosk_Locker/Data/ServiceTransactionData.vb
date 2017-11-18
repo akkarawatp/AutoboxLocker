@@ -1,7 +1,7 @@
 ﻿Imports AutoboxLocker.Data
 Public Class DepositTransactionData
     Dim _KioskID As String = ""
-    Dim _ServiceTransactionID As Long = 0
+    Dim _DepositTransactionID As Long = 0
     Dim _DepositTransNo As String = ""
     Dim _TransStatus As TransactionStatus = TransactionStatus.Inprogress
 
@@ -13,15 +13,17 @@ Public Class DepositTransactionData
     Dim _LockerPinLED As Integer = 0
     Dim _LockerPinSensor As String = "0"
 
-    Dim _PassportNo As String = ""
-    Dim _IDCardNo As String = ""
-    Dim _NationCode As String = ""
-    Dim _FirstName As String = ""
-    Dim _LastName As String = ""
-    Dim _Birthdate As New DateTime(1, 1, 1)
-    Dim _Gender As String = ""
-    Dim _PassportExpireDate As New DateTime(1, 1, 1)
-    Dim _IDCardExpireDate As New DateTime(1, 1, 1)
+    Dim _PinCode As String = ""
+
+    'Dim _PassportNo As String = ""
+    'Dim _IDCardNo As String = ""
+    'Dim _NationCode As String = ""
+    'Dim _FirstName As String = ""
+    'Dim _LastName As String = ""
+    'Dim _Birthdate As New DateTime(1, 1, 1)
+    'Dim _Gender As String = ""
+    'Dim _PassportExpireDate As New DateTime(1, 1, 1)
+    'Dim _IDCardExpireDate As New DateTime(1, 1, 1)
     Dim _CustomerImage As Byte()
 
     Dim _ServiceRate As Integer = 0
@@ -54,12 +56,12 @@ Public Class DepositTransactionData
         _KioskID = KioskID
     End Sub
 
-    Public Property ServiceTransactionID As Long
+    Public Property DepositTransactionID As Long
         Get
-            Return _ServiceTransactionID
+            Return _DepositTransactionID
         End Get
         Set(value As Long)
-            _ServiceTransactionID = value
+            _DepositTransactionID = value
         End Set
     End Property
 
@@ -138,80 +140,88 @@ Public Class DepositTransactionData
             _LockerPinSensor = value
         End Set
     End Property
+    Public Property PinCode As String
+        Get
+            Return _PinCode.Trim
+        End Get
+        Set(value As String)
+            _PinCode = value
+        End Set
+    End Property
 
-    Public Property PassportNo As String
-        Get
-            Return _PassportNo.Trim
-        End Get
-        Set(value As String)
-            _PassportNo = value
-        End Set
-    End Property
+    'Public Property PassportNo As String
+    '    Get
+    '        Return _PassportNo.Trim
+    '    End Get
+    '    Set(value As String)
+    '        _PassportNo = value
+    '    End Set
+    'End Property
 
-    Public Property IDCardNo As String
-        Get
-            Return _IDCardNo.Trim()
-        End Get
-        Set(value As String)
-            _IDCardNo = value
-        End Set
-    End Property
-    Public Property NationCode As String
-        Get
-            Return _NationCode.Trim
-        End Get
-        Set(value As String)
-            _NationCode = value
-        End Set
-    End Property
-    Public Property FirstName As String
-        Get
-            Return _FirstName.Trim
-        End Get
-        Set(value As String)
-            _FirstName = value
-        End Set
-    End Property
-    Public Property LastName As String
-        Get
-            Return _LastName.Trim
-        End Get
-        Set(value As String)
-            _LastName = value
-        End Set
-    End Property
-    Public Property BirthDate As DateTime
-        Get
-            Return _Birthdate
-        End Get
-        Set(value As DateTime)
-            _Birthdate = value
-        End Set
-    End Property
-    Public Property Gender As String
-        Get
-            Return _Gender.Trim
-        End Get
-        Set(value As String)
-            _Gender = value
-        End Set
-    End Property
-    Public Property PassportExpireDate As DateTime
-        Get
-            Return _PassportExpireDate
-        End Get
-        Set(value As DateTime)
-            _PassportExpireDate = value
-        End Set
-    End Property
-    Public Property IDCardExpireDate As DateTime
-        Get
-            Return _IDCardExpireDate
-        End Get
-        Set(value As DateTime)
-            _IDCardExpireDate = value
-        End Set
-    End Property
+    'Public Property IDCardNo As String
+    '    Get
+    '        Return _IDCardNo.Trim()
+    '    End Get
+    '    Set(value As String)
+    '        _IDCardNo = value
+    '    End Set
+    'End Property
+    'Public Property NationCode As String
+    '    Get
+    '        Return _NationCode.Trim
+    '    End Get
+    '    Set(value As String)
+    '        _NationCode = value
+    '    End Set
+    'End Property
+    'Public Property FirstName As String
+    '    Get
+    '        Return _FirstName.Trim
+    '    End Get
+    '    Set(value As String)
+    '        _FirstName = value
+    '    End Set
+    'End Property
+    'Public Property LastName As String
+    '    Get
+    '        Return _LastName.Trim
+    '    End Get
+    '    Set(value As String)
+    '        _LastName = value
+    '    End Set
+    'End Property
+    'Public Property BirthDate As DateTime
+    '    Get
+    '        Return _Birthdate
+    '    End Get
+    '    Set(value As DateTime)
+    '        _Birthdate = value
+    '    End Set
+    'End Property
+    'Public Property Gender As String
+    '    Get
+    '        Return _Gender.Trim
+    '    End Get
+    '    Set(value As String)
+    '        _Gender = value
+    '    End Set
+    'End Property
+    'Public Property PassportExpireDate As DateTime
+    '    Get
+    '        Return _PassportExpireDate
+    '    End Get
+    '    Set(value As DateTime)
+    '        _PassportExpireDate = value
+    '    End Set
+    'End Property
+    'Public Property IDCardExpireDate As DateTime
+    '    Get
+    '        Return _IDCardExpireDate
+    '    End Get
+    '    Set(value As DateTime)
+    '        _IDCardExpireDate = value
+    '    End Set
+    'End Property
 
     Public Property CustomerImage As Byte()
         Get

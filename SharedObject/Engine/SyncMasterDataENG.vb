@@ -15,8 +15,6 @@ Public Class SyncMasterDataENG
         PullMasterDeviceType(MsKioskID)
         PullMasterDeviceStatus(MsKioskID)
         PullMasterDevice(MsKioskID)
-        'PullMasterKioskScreenControl(MsKioskID)
-        'PullMasterKioskNotificationText(MsKioskID)
         PullMasterMonitoringAlarm(MsKioskID)
 
         SyncMasterKioskSysconfig(MsKioskID)
@@ -887,8 +885,7 @@ Public Class SyncMasterDataENG
                     kLnq.TIME_OUT_SEC = dr("TIME_OUT_SEC")
                     kLnq.SHOW_MSG_SEC = dr("SHOW_MSG_SEC")
                     kLnq.PAYMENT_EXTEND_SEC = dr("PAYMENT_EXTEND_SEC")
-                    'kLnq.CARD_EXPIRE_MONTH = dr("CARD_EXPIRE_MONTH")
-                    'kLnq.PASSPORT_EXPIRE_MONTH = dr("PASSPORT_EXPIRE_MONTH")
+                    kLnq.PINCODE_LEN = dr("PINCODE_LEN")
                     kLnq.LOCKER_WEBSERVICE_URL = dr("LOCKER_WEBSERVICE_URL")
                     kLnq.LOCKER_PC_POSITION = dr("LOCKER_PC_POSITION")
                     kLnq.SLEEP_TIME = dr("SLEEP_TIME")

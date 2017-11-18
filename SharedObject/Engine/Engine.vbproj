@@ -158,10 +158,10 @@
     <WebReferences Include="Web References\" />
   </ItemGroup>
   <ItemGroup>
-    <WebReferenceUrl Include="http://103.253.72.88/ATB-TIT/Webservice_Locker/ATBLockerWebService.asmx%3fWSDL">
+    <WebReferenceUrl Include="http://103.253.72.223/AutoboxLocker/LockerWebservice/ATBLockerWebService.asmx%3fWSDL">
       <UrlBehavior>Dynamic</UrlBehavior>
       <RelPath>Web References\SyncDataWebservice\</RelPath>
-      <UpdateFromURL>http://103.253.72.88/ATB-TIT/Webservice_Locker/ATBLockerWebService.asmx%3fWSDL</UpdateFromURL>
+      <UpdateFromURL>http://103.253.72.223/AutoboxLocker/LockerWebservice/ATBLockerWebService.asmx%3fWSDL</UpdateFromURL>
       <ServiceLocationURL>
       </ServiceLocationURL>
       <CachedDynamicPropName>

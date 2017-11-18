@@ -11,7 +11,7 @@
         Public Const Coin5 As Integer = 6
         Public Const Coin10 As Integer = 11
         Public Const Printer As Integer = 7
-        Public Const IDCardAndPassportScanner As Integer = 8
+        Public Const WebCamera As Integer = 8
         Public Const NetworkConnection As Integer = 13
         Public Const QRCodeScanner As Integer = 14
         Public Const SolenoidBoard As Integer = 15

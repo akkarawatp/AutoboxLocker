@@ -95,7 +95,6 @@
   <ItemGroup>
     <Compile Include="ControlMover.vb" />
     <Compile Include="CPUId.vb" />
-    <Compile Include="DSCamCapture.vb" />
     <Compile Include="frmTest.Designer.vb">
       <DependentUpon>frmTest.vb</DependentUpon>
     </Compile>
@@ -203,6 +202,10 @@
     <ProjectReference Include="..\QRCodeScanner\QRCodeScanner.vbproj">
       <Project>{0c9f2a78-15a7-4315-8740-34114abf2c94}</Project>
       <Name>QRCodeScanner</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\WebCamera\WebCamera.vbproj">
+      <Project>{592c4b29-5a62-4560-bc10-9dfe4f7cd5b0}</Project>
+      <Name>WebCamera</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

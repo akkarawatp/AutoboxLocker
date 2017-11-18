@@ -1,5 +1,4 @@
 ﻿Imports System.Data.SqlClient
-Imports System.IO
 Imports AutoboxLocker.Data
 Imports System.Management
 Imports KioskLinqDB.ConnectDB
@@ -12,6 +11,7 @@ Public Class frmMain
     Dim Ads_Interval As Integer
 
     Private Sub frmMain_FormClosing(sender As Object, e As FormClosingEventArgs) Handles Me.FormClosing
+        WebCam.Dispose()
         Application.Exit()
     End Sub
 
@@ -52,8 +52,6 @@ Public Class frmMain
 
         GetKioskConfig()
         SetAppScreenList()
-        'SetLangMasterList()
-        'SetLangNotificationList()
         SetAlarmMasterList()
         ServiceRateData.SetServiceRateData(KioskData.KioskID)
 
@@ -68,7 +66,6 @@ Public Class frmMain
 
             StartInitialDevice()
 
-            'ตอน SetLEDStatus จะมีการ SetLockerLit อยู่แล้ว
             SetLEDStatus()
 
             Application.DoEvents()
@@ -651,30 +648,30 @@ Public Class frmMain
     End Sub
 
     Private Sub btnCancel_Click(sender As Object, e As EventArgs) Handles btnCancel.Click, pnlCancel.Click
-        InsertLogTransactionActivity(Customer.DepositTransNo, Collect.TransactionNo, "", KioskConfig.SelectForm, KioskConfig.KioskLockerStep.Main_Cancel, "", False)
+        InsertLogTransactionActivity(Deposit.DepositTransNo, Collect.TransactionNo, "", KioskConfig.SelectForm, KioskConfig.KioskLockerStep.Main_Cancel, "", False)
         If ServiceID = Data.ConstantsData.TransactionType.DepositBelonging Then
             'กรณีฝาก
             If KioskConfig.SelectForm = Data.KioskConfigData.KioskLockerForm.DepositSelectLocker Then
                 'เมื่อกดปุ่มยกเลิกในหน้าจอเลือกช่องฝาก
-                Customer.TransStatus = DepositTransactionData.TransactionStatus.Inprogress
-            ElseIf KioskConfig.SelectForm = Data.KioskConfigData.KioskLockerForm.DepositScanPersonInfo Then
-                'เมื่อกดปุ่มยกเลิกในหน้าจอสแกน Passport
-                Customer.TransStatus = DepositTransactionData.TransactionStatus.Inprogress
+                Deposit.TransStatus = DepositTransactionData.TransactionStatus.Inprogress
+            ElseIf KioskConfig.SelectForm = Data.KioskConfigData.KioskLockerForm.DepositSetPinCode Then
+                'เมื่อกดปุ่มยกเลิกในหน้าจอกำหนดรหัสส่วนตัว
+                Deposit.TransStatus = DepositTransactionData.TransactionStatus.Inprogress
             Else
-                Customer.TransStatus = DepositTransactionData.TransactionStatus.Cancel
+                Deposit.TransStatus = DepositTransactionData.TransactionStatus.Cancel
             End If
 
-            Dim ret As ExecuteDataInfo = UpdateDepositStatus(Customer.ServiceTransactionID, Customer.TransStatus, KioskConfig.KioskLockerStep.Main_Cancel)
+            Dim ret As ExecuteDataInfo = UpdateDepositStatus(Deposit.DepositTransactionID, Deposit.TransStatus, KioskConfig.KioskLockerStep.Main_Cancel)
             If ret.IsSuccess = True Then
                 If KioskConfig.SelectForm = Data.KioskConfigData.KioskLockerForm.DepositPayment Then
-                    If Customer.PaidAmount > 0 Then
-                        InsertLogTransactionActivity(Customer.DepositTransNo, Collect.TransactionNo, "", KioskConfig.SelectForm, KioskConfig.KioskLockerStep.DepositPayment_ReturnMoney, Customer.PaidAmount & " บาท", False)
-                        ReturnMoney(Customer.PaidAmount, Customer, Collect)
+                    If Deposit.PaidAmount > 0 Then
+                        InsertLogTransactionActivity(Deposit.DepositTransNo, Collect.TransactionNo, "", KioskConfig.SelectForm, KioskConfig.KioskLockerStep.DepositPayment_ReturnMoney, Deposit.PaidAmount & " บาท", False)
+                        ReturnMoney(Deposit.PaidAmount, Deposit, Collect)
                     End If
                 End If
             Else
                 ShowFormError("Attention", "Out of service", KioskConfig.SelectForm, True)
-                InsertErrorLog(ret.ErrorMessage, Customer.DepositTransNo, "", "", KioskConfig.SelectForm, KioskConfig.KioskLockerStep.Main_Cancel)
+                InsertErrorLog(ret.ErrorMessage, Deposit.DepositTransNo, "", "", KioskConfig.SelectForm, KioskConfig.KioskLockerStep.Main_Cancel)
             End If
             ret = Nothing
         ElseIf ServiceID = Data.ConstantsData.TransactionType.CollectBelonging Then
@@ -696,8 +693,8 @@ Public Class frmMain
             If ret.IsSuccess = True Then
                 If KioskConfig.SelectForm = Data.KioskConfigData.KioskLockerForm.CollectPayment Then
                     If Collect.PaidAmount > 0 Then
-                        InsertLogTransactionActivity(Customer.DepositTransNo, Collect.TransactionNo, "", KioskConfig.SelectForm, KioskConfig.KioskLockerStep.PickupPayment_ReturnMoney, Collect.PaidAmount & " บาท", False)
-                        ReturnMoney(Collect.PaidAmount, Customer, Collect)
+                        InsertLogTransactionActivity(Deposit.DepositTransNo, Collect.TransactionNo, "", KioskConfig.SelectForm, KioskConfig.KioskLockerStep.PickupPayment_ReturnMoney, Collect.PaidAmount & " บาท", False)
+                        ReturnMoney(Collect.PaidAmount, Deposit, Collect)
                     End If
                 End If
             Else
@@ -710,14 +707,14 @@ Public Class frmMain
             CloseAllChildForm()
 
             'ไม่ว่าจะยกเลิกที่หน้าจอไหน ก็แค่ Update Transaction เป็น Cancel แล้วก็กลับหน้าแรก
-            InsertLogTransactionActivity(Customer.DepositTransNo, Collect.TransactionNo, "", KioskConfig.SelectForm, KioskConfig.KioskLockerStep.Main_BackToHome, "", False)
+            InsertLogTransactionActivity(Deposit.DepositTransNo, Collect.TransactionNo, "", KioskConfig.SelectForm, KioskConfig.KioskLockerStep.Main_BackToHome, "", False)
             Dim f As New frmHome
             f.MdiParent = Me
             f.Show()
 
             Application.DoEvents()
         Catch ex As Exception
-            InsertLogTransactionActivity(Customer.DepositTransNo, Collect.TransactionNo, "", KioskConfig.SelectForm, KioskConfig.KioskLockerStep.Main_Cancel, "Exception : " & ex.Message & vbNewLine & ex.StackTrace, False)
+            InsertLogTransactionActivity(Deposit.DepositTransNo, Collect.TransactionNo, "", KioskConfig.SelectForm, KioskConfig.KioskLockerStep.Main_Cancel, "Exception : " & ex.Message & vbNewLine & ex.StackTrace, False)
         End Try
 
     End Sub
