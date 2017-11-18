@@ -8,7 +8,7 @@ Imports ServerLinqDB.ConnectDB
 
 Namespace TABLE
     'Represents a transaction for CF_SERVER_SYSCONFIG table ServerLinqDB.
-    '[Create by  on November, 17 2017]
+    '[Create by  on November, 18 2017]
     Public Class CfServerSysconfigServerLinqDB
         Public sub CfServerSysconfigServerLinqDB()
 
@@ -46,7 +46,6 @@ Namespace TABLE
         Dim _UPDATED_DATE As  System.Nullable(Of DateTime)  = New DateTime(1,1,1)
         Dim _MONITOR_WEBSERVICE_URL As  String  = ""
         Dim _ALARM_WEBSERVICE_URL As  String  = ""
-        Dim _TITADMIN_WEBSERVICE_URL As  String  = ""
         Dim _MAIL_SERVER As  String  = ""
         Dim _MAIL_SENDER As  String  = ""
         Dim _MAIL_PASSWD As  String  = ""
@@ -117,15 +116,6 @@ Namespace TABLE
                _ALARM_WEBSERVICE_URL = value
             End Set
         End Property 
-        <Column(Storage:="_TITADMIN_WEBSERVICE_URL", DbType:="VarChar(255)")>  _
-        Public Property TITADMIN_WEBSERVICE_URL() As  String 
-            Get
-                Return _TITADMIN_WEBSERVICE_URL
-            End Get
-            Set(ByVal value As  String )
-               _TITADMIN_WEBSERVICE_URL = value
-            End Set
-        End Property 
         <Column(Storage:="_MAIL_SERVER", DbType:="VarChar(50)")>  _
         Public Property MAIL_SERVER() As  String 
             Get
@@ -182,7 +172,6 @@ Namespace TABLE
             _UPDATED_DATE = New DateTime(1,1,1)
             _MONITOR_WEBSERVICE_URL = ""
             _ALARM_WEBSERVICE_URL = ""
-            _TITADMIN_WEBSERVICE_URL = ""
             _MAIL_SERVER = ""
             _MAIL_SENDER = ""
             _MAIL_PASSWD = ""
@@ -442,7 +431,7 @@ Namespace TABLE
         End Function
 
         Private Function SetParameterData() As SqlParameter()
-            Dim cmbParam(12) As SqlParameter
+            Dim cmbParam(11) As SqlParameter
             cmbParam(0) = New SqlParameter("@_ID", SqlDbType.BigInt)
             cmbParam(0).Value = _ID
 
@@ -480,46 +469,39 @@ Namespace TABLE
                 cmbParam(6).Value = DBNull.value
             End If
 
-            cmbParam(7) = New SqlParameter("@_TITADMIN_WEBSERVICE_URL", SqlDbType.VarChar)
-            If _TITADMIN_WEBSERVICE_URL.Trim <> "" Then 
-                cmbParam(7).Value = _TITADMIN_WEBSERVICE_URL
+            cmbParam(7) = New SqlParameter("@_MAIL_SERVER", SqlDbType.VarChar)
+            If _MAIL_SERVER.Trim <> "" Then 
+                cmbParam(7).Value = _MAIL_SERVER
             Else
                 cmbParam(7).Value = DBNull.value
             End If
 
-            cmbParam(8) = New SqlParameter("@_MAIL_SERVER", SqlDbType.VarChar)
-            If _MAIL_SERVER.Trim <> "" Then 
-                cmbParam(8).Value = _MAIL_SERVER
+            cmbParam(8) = New SqlParameter("@_MAIL_SENDER", SqlDbType.VarChar)
+            If _MAIL_SENDER.Trim <> "" Then 
+                cmbParam(8).Value = _MAIL_SENDER
             Else
                 cmbParam(8).Value = DBNull.value
             End If
 
-            cmbParam(9) = New SqlParameter("@_MAIL_SENDER", SqlDbType.VarChar)
-            If _MAIL_SENDER.Trim <> "" Then 
-                cmbParam(9).Value = _MAIL_SENDER
+            cmbParam(9) = New SqlParameter("@_MAIL_PASSWD", SqlDbType.VarChar)
+            If _MAIL_PASSWD.Trim <> "" Then 
+                cmbParam(9).Value = _MAIL_PASSWD
             Else
                 cmbParam(9).Value = DBNull.value
             End If
 
-            cmbParam(10) = New SqlParameter("@_MAIL_PASSWD", SqlDbType.VarChar)
-            If _MAIL_PASSWD.Trim <> "" Then 
-                cmbParam(10).Value = _MAIL_PASSWD
+            cmbParam(10) = New SqlParameter("@_MAIL_PORT", SqlDbType.Int)
+            If _MAIL_PORT IsNot Nothing Then 
+                cmbParam(10).Value = _MAIL_PORT.Value
             Else
                 cmbParam(10).Value = DBNull.value
-            End If
-
-            cmbParam(11) = New SqlParameter("@_MAIL_PORT", SqlDbType.Int)
-            If _MAIL_PORT IsNot Nothing Then 
-                cmbParam(11).Value = _MAIL_PORT.Value
-            Else
-                cmbParam(11).Value = DBNull.value
             End IF
 
-            cmbParam(12) = New SqlParameter("@_MAIL_SSL", SqlDbType.Char)
+            cmbParam(11) = New SqlParameter("@_MAIL_SSL", SqlDbType.Char)
             If _MAIL_SSL.Value <> "" Then 
-                cmbParam(12).Value = _MAIL_SSL.Value
+                cmbParam(11).Value = _MAIL_SSL.Value
             Else
-                cmbParam(12).Value = DBNull.value
+                cmbParam(11).Value = DBNull.value
             End IF
 
             Return cmbParam
@@ -548,7 +530,6 @@ Namespace TABLE
                         If Convert.IsDBNull(Rdr("updated_date")) = False Then _updated_date = Convert.ToDateTime(Rdr("updated_date"))
                         If Convert.IsDBNull(Rdr("monitor_webservice_url")) = False Then _monitor_webservice_url = Rdr("monitor_webservice_url").ToString()
                         If Convert.IsDBNull(Rdr("alarm_webservice_url")) = False Then _alarm_webservice_url = Rdr("alarm_webservice_url").ToString()
-                        If Convert.IsDBNull(Rdr("TITAdmin_webservice_url")) = False Then _TITAdmin_webservice_url = Rdr("TITAdmin_webservice_url").ToString()
                         If Convert.IsDBNull(Rdr("mail_server")) = False Then _mail_server = Rdr("mail_server").ToString()
                         If Convert.IsDBNull(Rdr("mail_sender")) = False Then _mail_sender = Rdr("mail_sender").ToString()
                         If Convert.IsDBNull(Rdr("mail_passwd")) = False Then _mail_passwd = Rdr("mail_passwd").ToString()
@@ -595,7 +576,6 @@ Namespace TABLE
                         If Convert.IsDBNull(Rdr("updated_date")) = False Then _updated_date = Convert.ToDateTime(Rdr("updated_date"))
                         If Convert.IsDBNull(Rdr("monitor_webservice_url")) = False Then _monitor_webservice_url = Rdr("monitor_webservice_url").ToString()
                         If Convert.IsDBNull(Rdr("alarm_webservice_url")) = False Then _alarm_webservice_url = Rdr("alarm_webservice_url").ToString()
-                        If Convert.IsDBNull(Rdr("TITAdmin_webservice_url")) = False Then _TITAdmin_webservice_url = Rdr("TITAdmin_webservice_url").ToString()
                         If Convert.IsDBNull(Rdr("mail_server")) = False Then _mail_server = Rdr("mail_server").ToString()
                         If Convert.IsDBNull(Rdr("mail_sender")) = False Then _mail_sender = Rdr("mail_sender").ToString()
                         If Convert.IsDBNull(Rdr("mail_passwd")) = False Then _mail_passwd = Rdr("mail_passwd").ToString()
@@ -625,14 +605,13 @@ Namespace TABLE
         Private ReadOnly Property SqlInsert() As String 
             Get
                 Dim Sql As String=""
-                Sql += "INSERT INTO " & tableName  & " (CREATED_BY, CREATED_DATE, MONITOR_WEBSERVICE_URL, ALARM_WEBSERVICE_URL, TITADMIN_WEBSERVICE_URL, MAIL_SERVER, MAIL_SENDER, MAIL_PASSWD, MAIL_PORT, MAIL_SSL)"
-                Sql += " OUTPUT INSERTED.ID, INSERTED.CREATED_BY, INSERTED.CREATED_DATE, INSERTED.UPDATED_BY, INSERTED.UPDATED_DATE, INSERTED.MONITOR_WEBSERVICE_URL, INSERTED.ALARM_WEBSERVICE_URL, INSERTED.TITADMIN_WEBSERVICE_URL, INSERTED.MAIL_SERVER, INSERTED.MAIL_SENDER, INSERTED.MAIL_PASSWD, INSERTED.MAIL_PORT, INSERTED.MAIL_SSL"
+                Sql += "INSERT INTO " & tableName  & " (CREATED_BY, CREATED_DATE, MONITOR_WEBSERVICE_URL, ALARM_WEBSERVICE_URL, MAIL_SERVER, MAIL_SENDER, MAIL_PASSWD, MAIL_PORT, MAIL_SSL)"
+                Sql += " OUTPUT INSERTED.ID, INSERTED.CREATED_BY, INSERTED.CREATED_DATE, INSERTED.UPDATED_BY, INSERTED.UPDATED_DATE, INSERTED.MONITOR_WEBSERVICE_URL, INSERTED.ALARM_WEBSERVICE_URL, INSERTED.MAIL_SERVER, INSERTED.MAIL_SENDER, INSERTED.MAIL_PASSWD, INSERTED.MAIL_PORT, INSERTED.MAIL_SSL"
                 Sql += " VALUES("
                 sql += "@_CREATED_BY" & ", "
                 sql += "@_CREATED_DATE" & ", "
                 sql += "@_MONITOR_WEBSERVICE_URL" & ", "
                 sql += "@_ALARM_WEBSERVICE_URL" & ", "
-                sql += "@_TITADMIN_WEBSERVICE_URL" & ", "
                 sql += "@_MAIL_SERVER" & ", "
                 sql += "@_MAIL_SENDER" & ", "
                 sql += "@_MAIL_PASSWD" & ", "
@@ -653,7 +632,6 @@ Namespace TABLE
                 Sql += "UPDATED_DATE = " & "@_UPDATED_DATE" & ", "
                 Sql += "MONITOR_WEBSERVICE_URL = " & "@_MONITOR_WEBSERVICE_URL" & ", "
                 Sql += "ALARM_WEBSERVICE_URL = " & "@_ALARM_WEBSERVICE_URL" & ", "
-                Sql += "TITADMIN_WEBSERVICE_URL = " & "@_TITADMIN_WEBSERVICE_URL" & ", "
                 Sql += "MAIL_SERVER = " & "@_MAIL_SERVER" & ", "
                 Sql += "MAIL_SENDER = " & "@_MAIL_SENDER" & ", "
                 Sql += "MAIL_PASSWD = " & "@_MAIL_PASSWD" & ", "
@@ -676,7 +654,7 @@ Namespace TABLE
         'Get Select Statement for table CF_SERVER_SYSCONFIG
         Private ReadOnly Property SqlSelect() As String
             Get
-                Dim Sql As String = "SELECT ID, CREATED_BY, CREATED_DATE, UPDATED_BY, UPDATED_DATE, MONITOR_WEBSERVICE_URL, ALARM_WEBSERVICE_URL, TITADMIN_WEBSERVICE_URL, MAIL_SERVER, MAIL_SENDER, MAIL_PASSWD, MAIL_PORT, MAIL_SSL FROM " & tableName
+                Dim Sql As String = "SELECT ID, CREATED_BY, CREATED_DATE, UPDATED_BY, UPDATED_DATE, MONITOR_WEBSERVICE_URL, ALARM_WEBSERVICE_URL, MAIL_SERVER, MAIL_SENDER, MAIL_PASSWD, MAIL_PORT, MAIL_SSL FROM " & tableName
                 Return Sql
             End Get
         End Property

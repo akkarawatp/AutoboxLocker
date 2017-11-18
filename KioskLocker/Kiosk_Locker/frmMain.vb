@@ -363,7 +363,7 @@ Public Class frmMain
                     KioskData.IpAddress = dr("ip_address")
                     KioskData.MacAddress = dr("mac_address")
                 Else
-                    'Update Network Information
+                    'Update KIOSK SYSCONFIG
                     sql = " update CF_KIOSK_SYSCONFIG "
                     sql += " set mac_address=@_MAC_ADDRESS "
                     sql += " , ip_address=@_IP_ADDRESS "
