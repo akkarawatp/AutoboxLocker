@@ -1,7 +1,4 @@
-﻿Imports System.IO
-Imports System.Data.SqlClient
-Imports WebCamera
-Imports AutoboxLocker.Data
+﻿Imports System.Data.SqlClient
 Imports AutoboxLocker.Data.KioskConfigData
 Imports KioskLinqDB.ConnectDB
 Public Class frmDepositSetPINCode
@@ -48,44 +45,6 @@ Public Class frmDepositSetPINCode
         End If
     End Sub
 
-#Region "Capture Image"
-    Private Sub CaptureImage()
-        Dim CamIndex As Integer = KioskConfig.WebCameraIndex
-        Dim ImageCapturePath As String = "D:\ImageCapture\"
-        If Directory.Exists(ImageCapturePath) = False Then
-            Directory.CreateDirectory(ImageCapturePath)
-        End If
-
-        Dim pbImage As New PictureBox
-        Dim si As Integer = DSCamCapture.FrameSizes.s640x480
-        Dim SelectedSize As DSCamCapture.FrameSizes = CType(si, DSCamCapture.FrameSizes)
-        If WebCam.ConnectToDevice(CamIndex, 15, pbImage.ClientSize, SelectedSize, pbImage.Handle) = True Then
-            InsertLogTransactionActivity(Deposit.DepositTransNo, "", "", KioskConfig.SelectForm, KioskLockerStep.DepositSetPinCode_ConnectWebcamSuccess, "", False)
-
-            'AddHandler WebCam.FrameSaved, AddressOf WebcamFrameSaved
-            AddHandler WebCam.FrameCaptured, AddressOf WebcamFrameCaptured
-            WebCam.Start()
-            WebCam.GetCurrentFrame()
-        Else
-            UpdateDepositStatus(Deposit.DepositTransactionID, DepositTransactionData.TransactionStatus.Problem, KioskLockerStep.DepositSetPinCode_ConnectWebcamFail)
-            InsertErrorLog("ไม่สามารถเชื่อมต่อกับกล้อง Webcam ได้", Deposit.DepositTransNo, "", "", KioskConfig.SelectForm, KioskLockerStep.DepositSetPinCode_ConnectWebcamFail)
-            InsertLogTransactionActivity(Deposit.DepositTransNo, "", "", KioskConfig.SelectForm, KioskLockerStep.DepositSetPinCode_ConnectWebcamFail, "", True)
-
-            UpdateDeviceStatus(DeviceID.WebCamera, WebCameraStatus.Disconnected)
-            SendKioskAlarm("WEBCAMERA_DISCONNECTED", True)
-        End If
-
-    End Sub
-
-    Private Sub WebcamFrameCaptured(capImage As Bitmap)
-        InsertLogTransactionActivity(Deposit.DepositTransNo, "", "", KioskConfig.SelectForm, KioskLockerStep.DepositSetPinCode_CaptureImageSuccess, "", False)
-        Deposit.CustomerImage = Engine.ConverterENG.BitmapToByte(capImage)
-        UpdateServiceTransaction(Deposit)
-        WebCam.Dispose()
-    End Sub
-#End Region
-
-
     Private Sub ClearAndConfirmPin()
         If Deposit.PinCode = "" Then
             Deposit.PinCode = txtPinCode.Text
@@ -93,8 +52,6 @@ Public Class frmDepositSetPINCode
             lblLabelNotification.Text = "กรุณายืนยันรหัสส่วนตัว"
         Else
             If Deposit.PinCode = txtPinCode.Text Then
-                CaptureImage()
-
                 'เช็ค PIN CODE ซ้ำ
                 If CheckDuplicatePinCode(Deposit.PinCode) = False Then
                     frmLoading.Show(frmMain)
@@ -109,6 +66,7 @@ Public Class frmDepositSetPINCode
 
                     Me.Close()
                 Else
+                    TimeOutCheckTime = DateTime.Now
                     InsertLogTransactionActivity(Deposit.DepositTransNo, "", "", KioskConfig.SelectForm, KioskLockerStep.DepositSetPinCode_ConfirmPinCodeFail, " รหัสส่วนตัวซ้ำ", False)
                     ShowDialogErrorMessage(String.Format("รหัสส่วนตัวซ้ำ กรุณากำหนดรหัสส่วนตัว {0} หลัก", KioskConfig.PincodeLen))
 
@@ -118,6 +76,8 @@ Public Class frmDepositSetPINCode
                 End If
             Else
                 'ยืนยันรหัสส่วนตัวไม่ตรงกัน ให้เริ่มขั้นตอนใหม่
+                TimeOutCheckTime = DateTime.Now
+
                 lblLabelNotification.Text = String.Format(DefaultNotictText, KioskConfig.PincodeLen)
                 Deposit.PinCode = ""
                 txtPinCode.Text = ""

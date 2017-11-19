@@ -64,8 +64,9 @@ Public Class frmMain
             GetKioskDeviceConfig()   'ข้อมูลการตั้งค่า Comport ของ HW
             InitCabinetInfo()
 
+#If DEBUG = False Then
             StartInitialDevice()
-
+#End If
             SetLEDStatus()
 
             Application.DoEvents()
@@ -682,8 +683,8 @@ Public Class frmMain
             ElseIf KioskConfig.SelectForm = Data.KioskConfigData.KioskLockerForm.CollectScanQRCode Then
                 'เมื่อกดปุ่มยกเลิกในหน้าจอสแกน QR Code
                 Collect.TransStatus = CollectTransactionData.TransactionStatus.Inprogress
-            ElseIf KioskConfig.SelectForm = Data.KioskConfigData.KioskLockerForm.CollectScanPersonInfo Then
-                'เมื่อกดปุ่มยกเลิกในหน้าจอสแกน Passport
+            ElseIf KioskConfig.SelectForm = Data.KioskConfigData.KioskLockerForm.CollectByPincode Then
+                'เมื่อกดปุ่มยกเลิกในหน้าจอใส่รหัสส่วนตัว
                 Collect.TransStatus = CollectTransactionData.TransactionStatus.Inprogress
             Else
                 Collect.TransStatus = CollectTransactionData.TransactionStatus.Cancel

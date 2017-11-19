@@ -147,12 +147,13 @@ Public Class frmHome
     Private Sub SetLockerHomeData()
         Try
             Dim chk As String = ""
-
+#If DEBUG = False Then
             'Update Current Status ลง DB
             UpdateAllDeviceStatusByComPort()
             UpdateAllDeviceStatusByUsbPort()
             'ตรวจสอบ Status จาก DB
             chk += CheckStockAndStatusAllDevice()
+#End If
             If chk.Trim <> "" Then
                 'Out Of Service
                 InsertErrorLog(chk, "", "", "", KioskConfig.SelectForm, KioskLockerStep.Home_CheckHardwareStatus)

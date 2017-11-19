@@ -84,7 +84,8 @@ Public Class KioskSyncWindowService
     Private Sub tmConvertCustImage_Tick(sender As Object, e As System.Timers.ElapsedEventArgs)
         tmConvertCustImage.Enabled = False
         LogFileENG.CreateHartbeat("tmConvertCustImage")
-        SyncTransactionDataENG.ConvertServiceTransationCustImage(KioskInfoENG.KioskID)
+        SyncTransactionDataENG.ConvertDepositTransationCustImage(KioskInfoENG.KioskID)
+        SyncTransactionDataENG.ConvertCollectTransationCustImage(KioskInfoENG.KioskID)
         tmConvertCustImage.Enabled = True
     End Sub
 

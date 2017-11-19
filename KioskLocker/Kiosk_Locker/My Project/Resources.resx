@@ -121,23 +121,14 @@
   <data name="IconDeposit" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\IconDeposit.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="English_Icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\English_Icon.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
   <data name="CompleteDialog" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\CompleteDialog.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="Thai_Icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Thai_Icon.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="icon_cabinet_add" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\icon_cabinet_add.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="IconPickupOpenLocker" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\IconPickupOpenLocker.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="btnQRCodeLost" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\btnQRCodeLost.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="IconPrintQRCode" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\IconPrintQRCode.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -151,9 +142,6 @@
   <data name="icon_cabinet_delete" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\icon_cabinet_delete.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="IconPickupIDCard" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\IconPickupIDCard.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
   <data name="icon_cabinet_edit" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\icon_cabinet_edit.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -163,17 +151,11 @@
   <data name="bgMainHeader" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\bgMainHeader.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="IconScanPassport2" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\IconScanPassport.gif;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
   <data name="bgMainFooter" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\bgMainFooter.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="IconRedTriangle" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\IconRedTriangle.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="IconScanPassport" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\IconScanPassport.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="btnBG" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\btnBG.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -196,29 +178,17 @@
   <data name="btnColWhite" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\btnColWhite.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="Japan_icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Japan_icon.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="IconPickupIDCardFail" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\IconPickupIDCardFail.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
   <data name="IconQRCode" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\IconQRCode.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="IconOpenLocker" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\IconOpenLocker.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="cb_w" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\cb_w.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
   <data name="IconPickupQRCodeFail" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\IconPickupQRCodeFail.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="IconProcessing" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\IconProcessing.gif;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="China_Icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\China_Icon.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="IconReceiveChange" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\IconReceiveChange.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -228,9 +198,6 @@
   </data>
   <data name="IconClose" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\IconClose.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="cb_w_check" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\cb_w_check.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="IconCollectThankYou" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\IconCollectThankYou.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>

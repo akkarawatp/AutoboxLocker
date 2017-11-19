@@ -10,9 +10,6 @@ Public Class frmCollectThankyou
     Dim _IsCloseLocker As Boolean = False
     Dim _CallOpenLocker As Boolean = False
 
-    'Private Delegate Sub myDelegate(data As String)
-    'Private myForm As myDelegate
-
     Private Sub frmPickupThankyou_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         Me.ControlBox = False
         Me.BackColor = bgColor
@@ -169,5 +166,9 @@ Public Class frmCollectThankyou
         Else
             TimerCheckCloseLocker.Enabled = True
         End If
+    End Sub
+
+    Private Sub btnOpenLocker_Click(sender As Object, e As EventArgs) Handles btnOpenLocker.Click
+        _IsCloseLocker = True
     End Sub
 End Class

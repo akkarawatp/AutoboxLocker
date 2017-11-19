@@ -12,17 +12,19 @@ Public Class SyncTransactionDataENG
 
     Public Shared Sub SyncAllTransaction(MsKioskID As Long)
         _KioskID = MsKioskID
-        SyncServiceTransaction(MsKioskID)
-        SyncPickupTransaction(MsKioskID)
-        SyncServiceTransactionCustImage(MsKioskID)
+        SyncDepositTransaction(MsKioskID)
+        SyncCollectTransaction(MsKioskID)
+
+        SyncDepositTransactionCustImage(MsKioskID)
+        SyncCollectTransactionCustImage(MsKioskID)
 
         SyncStaffConsoleTransaction(MsKioskID)
         SyncDeleteCompleteTransaction(MsKioskID)
     End Sub
 
 
-#Region "Sync Service Transaction Data"
-    Public Shared Sub ConvertServiceTransationCustImage(MsKioskID As Long)
+#Region "Sync Deposit Transaction Data"
+    Public Shared Sub ConvertDepositTransationCustImage(MsKioskID As Long)
         _KioskID = MsKioskID
         Try
             Dim sql As String = "select id, trans_no, cust_image "
@@ -37,7 +39,7 @@ Public Class SyncTransactionDataENG
             If dt.Rows.Count > 0 Then
                 dt.TableName = "ConvertServiceTransationCustImage"
 
-                Dim CustImagePath As String = Application.StartupPath & "\TempCustImage\"
+                Dim CustImagePath As String = Application.StartupPath & "\TempCustImage\Deposit\"
                 If Directory.Exists(CustImagePath) = False Then
                     Directory.CreateDirectory(CustImagePath)
                 End If
@@ -84,8 +86,7 @@ Public Class SyncTransactionDataENG
         End Try
     End Sub
 
-
-    Public Shared Sub SyncServiceTransaction(MsKioskID As Long)
+    Public Shared Sub SyncDepositTransaction(MsKioskID As Long)
         _KioskID = MsKioskID
 
         Try
@@ -120,7 +121,7 @@ Public Class SyncTransactionDataENG
                         If kLnq.GENDER <> vbNullChar Then vGender = kLnq.GENDER.ToString
 
                         Try
-                            ret = ws.SyncKioskServiceTransactionByRecord(cf.LOCATION_NAME, kLnq.TRANS_NO, kLnq.TRANS_START_TIME, kLnq.TRANS_END_TIME.Value, kLnq.MS_KIOSK_ID, ServiceLockerID, kLnq.PIN_CODE, kLnq.SERVICE_RATE, kLnq.SERVICE_RATE_LIMIT_DAY, kLnq.DEPOSIT_AMT, kLnq.PAID_TIME, kLnq.RECEIVE_COIN1, kLnq.RECEIVE_COIN2, kLnq.RECEIVE_COIN5, kLnq.RECEIVE_COIN10, kLnq.RECEIVE_BANKNOTE20, kLnq.RECEIVE_BANKNOTE50, kLnq.RECEIVE_BANKNOTE100, kLnq.RECEIVE_BANKNOTE500, kLnq.RECEIVE_BANKNOTE1000, kLnq.CHANGE_COIN1, kLnq.CHANGE_COIN2, kLnq.CHANGE_COIN5, kLnq.CHANGE_COIN10, kLnq.CHANGE_BANKNOTE20, kLnq.CHANGE_BANKNOTE50, kLnq.CHANGE_BANKNOTE100, kLnq.CHANGE_BANKNOTE500, kLnq.TRANS_STATUS, kLnq.MS_APP_SCREEN_ID, kLnq.MS_APP_STEP_ID)
+                            ret = ws.SyncKioskDepositTransactionByRecord(cf.LOCATION_NAME, kLnq.TRANS_NO, kLnq.TRANS_START_TIME, kLnq.TRANS_END_TIME.Value, kLnq.MS_KIOSK_ID, ServiceLockerID, kLnq.PIN_CODE, kLnq.SERVICE_RATE, kLnq.SERVICE_RATE_LIMIT_DAY, kLnq.DEPOSIT_AMT, kLnq.PAID_TIME, kLnq.RECEIVE_COIN1, kLnq.RECEIVE_COIN2, kLnq.RECEIVE_COIN5, kLnq.RECEIVE_COIN10, kLnq.RECEIVE_BANKNOTE20, kLnq.RECEIVE_BANKNOTE50, kLnq.RECEIVE_BANKNOTE100, kLnq.RECEIVE_BANKNOTE500, kLnq.RECEIVE_BANKNOTE1000, kLnq.CHANGE_COIN1, kLnq.CHANGE_COIN2, kLnq.CHANGE_COIN5, kLnq.CHANGE_COIN10, kLnq.CHANGE_BANKNOTE20, kLnq.CHANGE_BANKNOTE50, kLnq.CHANGE_BANKNOTE100, kLnq.CHANGE_BANKNOTE500, kLnq.TRANS_STATUS, kLnq.MS_APP_SCREEN_ID, kLnq.MS_APP_STEP_ID)
                             If ret = "true" Then
                                 kLnq.SYNC_TO_SERVER = "Y"
                                 kRet = kLnq.UpdateData(cf.LOCATION_NAME, kTrans.Trans)
@@ -150,10 +151,10 @@ Public Class SyncTransactionDataENG
         End Try
     End Sub
 
-    Public Shared Sub SyncServiceTransactionCustImage(MsKioskID As Long)
+    Public Shared Sub SyncDepositTransactionCustImage(MsKioskID As Long)
         _KioskID = MsKioskID
         Try
-            Dim CustImagePath As String = Application.StartupPath & "\TempCustImage\"
+            Dim CustImagePath As String = Application.StartupPath & "\TempCustImage\Deposit\"
             If Directory.Exists(CustImagePath) = True Then
                 Dim cf As CfKioskSysconfigKioskLinqDB = KioskInfoENG.GetLockerSysconfig(MsKioskID)
                 Dim ws As New SyncDataWebservice.ATBLockerWebService
@@ -166,7 +167,7 @@ Public Class SyncTransactionDataENG
                     Dim CustImage As Byte() = File.ReadAllBytes(f)
 
                     Try
-                        Dim ret As String = ws.SysnKioskTransactionCustomerImage(cf.LOCATION_NAME, TransNo, CustImage)
+                        Dim ret As String = ws.SyncKioskDepositTransactionCustomerImage(cf.LOCATION_NAME, TransNo, CustImage)
                         If ret = "true" Then
                             File.SetAttributes(f, FileAttributes.Normal)
                             File.Delete(f)
@@ -188,21 +189,71 @@ Public Class SyncTransactionDataENG
     End Sub
 
 #End Region
-    Private Shared Function GetServerServiceTransID(MsKioskID As Long, ServiceTransNo As String) As Long
-        Dim ret As Long = 0
+
+#Region "Sync Collect Transaction Data"
+    Public Shared Sub ConvertCollectTransationCustImage(MsKioskID As Long)
+        _KioskID = MsKioskID
         Try
-            Dim lnq As New TbDepositTransactionServerLinqDB
-            lnq.ChkDataByTRANS_NO(ServiceTransNo, Nothing)
-            ret = lnq.ID
-            lnq = Nothing
+            Dim sql As String = "select id, transaction_no, cust_image "
+            sql += " from TB_PICKUP_TRANSACTION "
+            sql += " where cust_image is not null and sync_to_server='Y' "
+            sql += " and ms_kiosk_id=@_KIOSK_ID"
+
+            Dim p(1) As SqlParameter
+            p(0) = KioskDB.SetBigInt("@_KIOSK_ID", MsKioskID)
+
+            Dim dt As DataTable = KioskDB.ExecuteTable(sql, p)
+            If dt.Rows.Count > 0 Then
+                dt.TableName = "ConvertCollectTransationCustImage"
+
+                Dim CustImagePath As String = Application.StartupPath & "\TempCustImage\Collect\"
+                If Directory.Exists(CustImagePath) = False Then
+                    Directory.CreateDirectory(CustImagePath)
+                End If
+
+                Dim cf As CfKioskSysconfigKioskLinqDB = KioskInfoENG.GetLockerSysconfig(MsKioskID)
+                Dim kTrans As New KioskTransactionDB
+                Dim kRet As New KioskLinqDB.ConnectDB.ExecuteDataInfo
+
+                For Each dr As DataRow In dt.Rows
+                    Try
+                        Dim ret As String = "false"
+                        Dim TransNo As String = dr("transaction_no")
+                        Dim CustImage As Byte() = CType(dr("cust_image"), Byte())
+                        Dim FileName As String = CustImagePath & TransNo & ".png"
+                        File.WriteAllBytes(FileName, CustImage)
+
+                        If File.Exists(FileName) = True Then
+                            Dim tLnq As New TbPickupTransactionKioskLinqDB
+                            tLnq.GetDataByPK(dr("id"), kTrans.Trans)
+                            If tLnq.ID > 0 Then
+                                tLnq.CUST_IMAGE = Nothing
+                                kRet = tLnq.UpdateData(cf.LOCATION_NAME, kTrans.Trans)
+                                If kRet.IsSuccess = False Then
+                                    Exit For
+                                End If
+                            End If
+                            tLnq = Nothing
+                        End If
+                    Catch ex As Exception
+                        LogFileENG.CreateExceptionLogAgent(MsKioskID, ex.Message, ex.StackTrace)
+                    End Try
+                Next
+
+                If kRet.IsSuccess = True Then
+                    kTrans.CommitTransaction()
+                Else
+                    kTrans.RollbackTransaction()
+                    LogFileENG.CreateErrorLogAgent(MsKioskID, kRet.ErrorMessage)
+                End If
+            End If
+            dt.Dispose()
         Catch ex As Exception
-            ret = 0
             LogFileENG.CreateExceptionLogAgent(MsKioskID, ex.Message, ex.StackTrace)
         End Try
-        Return ret
-    End Function
+    End Sub
 
-    Private Shared Sub SyncPickupTransaction(MsKioskID As Long)
+    Public Shared Sub SyncCollectTransaction(MsKioskID As Long)
         Try
             Dim sql As String = "SELECT p.ID, p.TRANSACTION_NO, p.TRANS_START_TIME, p.TRANS_END_TIME, p.MS_KIOSK_ID, p.MS_LOCKER_ID, p.DEPOSIT_TRANS_NO, "
             sql += " p.LOST_QR_CODE, p.SERVICE_AMT, p.PICKUP_TIME, p.PAID_TIME, p.RECEIVE_COIN1, p.RECEIVE_COIN2, p.RECEIVE_COIN5, p.RECEIVE_COIN10, "
@@ -267,6 +318,46 @@ Public Class SyncTransactionDataENG
             LogFileENG.CreateExceptionLogAgent(MsKioskID, ex.Message, ex.StackTrace)
         End Try
     End Sub
+
+    Private Shared Sub SyncCollectTransactionCustImage(MsKioskID As Long)
+        _KioskID = MsKioskID
+        Try
+            Dim CustImagePath As String = Application.StartupPath & "\TempCustImage\Collect\"
+            If Directory.Exists(CustImagePath) = True Then
+                Dim cf As CfKioskSysconfigKioskLinqDB = KioskInfoENG.GetLockerSysconfig(MsKioskID)
+                Dim ws As New SyncDataWebservice.ATBLockerWebService
+                ws.Timeout = 200000
+                ws.Url = cf.LOCKER_WEBSERVICE_URL
+
+                For Each f As String In Directory.GetFiles(CustImagePath, "*.png")
+                    Dim fInfo As New FileInfo(f)
+                    Dim TransNo As String = fInfo.Name.Replace(".png", "")
+                    Dim CustImage As Byte() = File.ReadAllBytes(f)
+
+                    Try
+                        Dim ret As String = ws.SyncKioskCollectTransactionCustomerImage(cf.LOCATION_NAME, TransNo, CustImage)
+                        If ret = "true" Then
+                            File.SetAttributes(f, FileAttributes.Normal)
+                            File.Delete(f)
+                        Else
+                            LogFileENG.CreateErrorLogAgent(MsKioskID, ret)
+                        End If
+
+                        fInfo = Nothing
+                    Catch ex As Exception
+                        LogFileENG.CreateExceptionLogAgent(MsKioskID, ex.Message & vbNewLine & " TransNo:" & TransNo, ex.StackTrace)
+                    End Try
+                Next
+                ws.Dispose()
+            End If
+
+        Catch ex As Exception
+            LogFileENG.CreateExceptionLogAgent(MsKioskID, ex.Message, ex.StackTrace)
+        End Try
+    End Sub
+#End Region
+
+
 
     Private Shared Sub SyncStaffConsoleTransaction(MsKioskID As Long)
         Try
@@ -354,7 +445,7 @@ Public Class SyncTransactionDataENG
 
                                             Case CInt(TransactionStatus.Cancel).ToString, CInt(TransactionStatus.Problem).ToString, CInt(TransactionStatus.TimeOut).ToString
                                                 'ถ้าเป็น Transaction ที่ Sync แล้ว
-                                                If PickupLnq.SYNC_TO_SERVER = "Y" Then
+                                                If PickupLnq.SYNC_TO_SERVER = "Y" And PickupLnq.CUST_IMAGE Is Nothing Then
                                                     'Delete Pickup Transaction ได้เลย
 
                                                     Dim trans As New KioskTransactionDB
@@ -375,7 +466,7 @@ Public Class SyncTransactionDataENG
 
                                             Case CInt(TransactionStatus.Cancel).ToString, CInt(TransactionStatus.Problem).ToString, CInt(TransactionStatus.TimeOut).ToString
                                                 'ถ้าเป็น Transaction ที่ Sync แล้ว
-                                                If PickupLnq.SYNC_TO_SERVER = "Y" Then
+                                                If PickupLnq.SYNC_TO_SERVER = "Y" And PickupLnq.CUST_IMAGE Is Nothing Then
                                                     'Delete Pickup Transaction ได้เลย
 
                                                     Dim trans As New KioskTransactionDB
@@ -392,7 +483,7 @@ Public Class SyncTransactionDataENG
                                         Select Case PickupLnq.TRANS_STATUS
                                             Case CInt(TransactionStatus.Cancel).ToString, CInt(TransactionStatus.Problem).ToString, CInt(TransactionStatus.TimeOut).ToString
                                                 'ถ้าเป็น Transaction ที่ Sync แล้ว
-                                                If PickupLnq.SYNC_TO_SERVER = "Y" Then
+                                                If PickupLnq.SYNC_TO_SERVER = "Y" And PickupLnq.CUST_IMAGE Is Nothing Then
                                                     'Delete Pickup Transaction ได้เลย
 
                                                     Dim trans As New KioskTransactionDB
@@ -424,7 +515,7 @@ Public Class SyncTransactionDataENG
                                     Dim trans As New KioskTransactionDB
 
                                     For Each pDr As DataRow In pDt.Rows
-                                        If pDr("sync_to_server") = "Y" Then  'ถาเป็นรายการที่ถูก Sync แล้วถึงจะลบได้
+                                        If pDr("sync_to_server") = "Y" And Convert.IsDBNull(pDr("cust_image")) = True Then  'ถาเป็นรายการที่ถูก Sync แล้วถึงจะลบได้
                                             Dim pLnq As New TbPickupTransactionKioskLinqDB
                                             ret = pLnq.DeleteByPK(pDr("id"), trans.Trans)
                                             If ret.IsSuccess = False Then
@@ -532,7 +623,7 @@ Public Class SyncTransactionDataENG
     Private Shared Function GetPickupTransaction(MsKioskID As Long, DepositTransNo As String) As DataTable
         Dim dt As New DataTable
         Try
-            Dim pSql As String = "select id, trans_status, sync_to_server"
+            Dim pSql As String = "select id, trans_status, cust_image, sync_to_server"
             pSql += " from TB_PICKUP_TRANSACTION "
             pSql += " where deposit_trans_no=@_DEPOSIT_TRANS_NO"
 

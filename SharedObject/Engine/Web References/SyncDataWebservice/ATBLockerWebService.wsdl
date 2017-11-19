@@ -538,7 +538,7 @@
           </s:sequence>
         </s:complexType>
       </s:element>
-      <s:element name="SysnKioskTransactionCustomerImage">
+      <s:element name="SyncKioskDepositTransactionCustomerImage">
         <s:complexType>
           <s:sequence>
             <s:element minOccurs="0" maxOccurs="1" name="KioskName" type="s:string" />
@@ -547,14 +547,14 @@
           </s:sequence>
         </s:complexType>
       </s:element>
-      <s:element name="SysnKioskTransactionCustomerImageResponse">
+      <s:element name="SyncKioskDepositTransactionCustomerImageResponse">
         <s:complexType>
           <s:sequence>
-            <s:element minOccurs="0" maxOccurs="1" name="SysnKioskTransactionCustomerImageResult" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="SyncKioskDepositTransactionCustomerImageResult" type="s:string" />
           </s:sequence>
         </s:complexType>
       </s:element>
-      <s:element name="SyncKioskServiceTransactionByRecord">
+      <s:element name="SyncKioskDepositTransactionByRecord">
         <s:complexType>
           <s:sequence>
             <s:element minOccurs="0" maxOccurs="1" name="KioskName" type="s:string" />
@@ -591,14 +591,14 @@
           </s:sequence>
         </s:complexType>
       </s:element>
-      <s:element name="SyncKioskServiceTransactionByRecordResponse">
+      <s:element name="SyncKioskDepositTransactionByRecordResponse">
         <s:complexType>
           <s:sequence>
-            <s:element minOccurs="0" maxOccurs="1" name="SyncKioskServiceTransactionByRecordResult" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="SyncKioskDepositTransactionByRecordResult" type="s:string" />
           </s:sequence>
         </s:complexType>
       </s:element>
-      <s:element name="SyncKioskServiceTransaction">
+      <s:element name="SyncKioskDepositTransaction">
         <s:complexType>
           <s:sequence>
             <s:element minOccurs="0" maxOccurs="1" name="dt">
@@ -613,10 +613,26 @@
           </s:sequence>
         </s:complexType>
       </s:element>
-      <s:element name="SyncKioskServiceTransactionResponse">
+      <s:element name="SyncKioskDepositTransactionResponse">
         <s:complexType>
           <s:sequence>
-            <s:element minOccurs="0" maxOccurs="1" name="SyncKioskServiceTransactionResult" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="SyncKioskDepositTransactionResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SyncKioskCollectTransactionCustomerImage">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="KioskName" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="TransactionNo" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="CustImage" type="s:base64Binary" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SyncKioskCollectTransactionCustomerImageResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SyncKioskCollectTransactionCustomerImageResult" type="s:string" />
           </s:sequence>
         </s:complexType>
       </s:element>
@@ -954,23 +970,29 @@
   <wsdl:message name="UpdateSyncKioskLockerSoapOut">
     <wsdl:part name="parameters" element="tns:UpdateSyncKioskLockerResponse" />
   </wsdl:message>
-  <wsdl:message name="SysnKioskTransactionCustomerImageSoapIn">
-    <wsdl:part name="parameters" element="tns:SysnKioskTransactionCustomerImage" />
+  <wsdl:message name="SyncKioskDepositTransactionCustomerImageSoapIn">
+    <wsdl:part name="parameters" element="tns:SyncKioskDepositTransactionCustomerImage" />
   </wsdl:message>
-  <wsdl:message name="SysnKioskTransactionCustomerImageSoapOut">
-    <wsdl:part name="parameters" element="tns:SysnKioskTransactionCustomerImageResponse" />
+  <wsdl:message name="SyncKioskDepositTransactionCustomerImageSoapOut">
+    <wsdl:part name="parameters" element="tns:SyncKioskDepositTransactionCustomerImageResponse" />
   </wsdl:message>
-  <wsdl:message name="SyncKioskServiceTransactionByRecordSoapIn">
-    <wsdl:part name="parameters" element="tns:SyncKioskServiceTransactionByRecord" />
+  <wsdl:message name="SyncKioskDepositTransactionByRecordSoapIn">
+    <wsdl:part name="parameters" element="tns:SyncKioskDepositTransactionByRecord" />
   </wsdl:message>
-  <wsdl:message name="SyncKioskServiceTransactionByRecordSoapOut">
-    <wsdl:part name="parameters" element="tns:SyncKioskServiceTransactionByRecordResponse" />
+  <wsdl:message name="SyncKioskDepositTransactionByRecordSoapOut">
+    <wsdl:part name="parameters" element="tns:SyncKioskDepositTransactionByRecordResponse" />
   </wsdl:message>
-  <wsdl:message name="SyncKioskServiceTransactionSoapIn">
-    <wsdl:part name="parameters" element="tns:SyncKioskServiceTransaction" />
+  <wsdl:message name="SyncKioskDepositTransactionSoapIn">
+    <wsdl:part name="parameters" element="tns:SyncKioskDepositTransaction" />
   </wsdl:message>
-  <wsdl:message name="SyncKioskServiceTransactionSoapOut">
-    <wsdl:part name="parameters" element="tns:SyncKioskServiceTransactionResponse" />
+  <wsdl:message name="SyncKioskDepositTransactionSoapOut">
+    <wsdl:part name="parameters" element="tns:SyncKioskDepositTransactionResponse" />
+  </wsdl:message>
+  <wsdl:message name="SyncKioskCollectTransactionCustomerImageSoapIn">
+    <wsdl:part name="parameters" element="tns:SyncKioskCollectTransactionCustomerImage" />
+  </wsdl:message>
+  <wsdl:message name="SyncKioskCollectTransactionCustomerImageSoapOut">
+    <wsdl:part name="parameters" element="tns:SyncKioskCollectTransactionCustomerImageResponse" />
   </wsdl:message>
   <wsdl:message name="SyncKioskCollectTransactionSoapIn">
     <wsdl:part name="parameters" element="tns:SyncKioskCollectTransaction" />
@@ -1121,17 +1143,21 @@
       <wsdl:input message="tns:UpdateSyncKioskLockerSoapIn" />
       <wsdl:output message="tns:UpdateSyncKioskLockerSoapOut" />
     </wsdl:operation>
-    <wsdl:operation name="SysnKioskTransactionCustomerImage">
-      <wsdl:input message="tns:SysnKioskTransactionCustomerImageSoapIn" />
-      <wsdl:output message="tns:SysnKioskTransactionCustomerImageSoapOut" />
+    <wsdl:operation name="SyncKioskDepositTransactionCustomerImage">
+      <wsdl:input message="tns:SyncKioskDepositTransactionCustomerImageSoapIn" />
+      <wsdl:output message="tns:SyncKioskDepositTransactionCustomerImageSoapOut" />
     </wsdl:operation>
-    <wsdl:operation name="SyncKioskServiceTransactionByRecord">
-      <wsdl:input message="tns:SyncKioskServiceTransactionByRecordSoapIn" />
-      <wsdl:output message="tns:SyncKioskServiceTransactionByRecordSoapOut" />
+    <wsdl:operation name="SyncKioskDepositTransactionByRecord">
+      <wsdl:input message="tns:SyncKioskDepositTransactionByRecordSoapIn" />
+      <wsdl:output message="tns:SyncKioskDepositTransactionByRecordSoapOut" />
     </wsdl:operation>
-    <wsdl:operation name="SyncKioskServiceTransaction">
-      <wsdl:input message="tns:SyncKioskServiceTransactionSoapIn" />
-      <wsdl:output message="tns:SyncKioskServiceTransactionSoapOut" />
+    <wsdl:operation name="SyncKioskDepositTransaction">
+      <wsdl:input message="tns:SyncKioskDepositTransactionSoapIn" />
+      <wsdl:output message="tns:SyncKioskDepositTransactionSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SyncKioskCollectTransactionCustomerImage">
+      <wsdl:input message="tns:SyncKioskCollectTransactionCustomerImageSoapIn" />
+      <wsdl:output message="tns:SyncKioskCollectTransactionCustomerImageSoapOut" />
     </wsdl:operation>
     <wsdl:operation name="SyncKioskCollectTransaction">
       <wsdl:input message="tns:SyncKioskCollectTransactionSoapIn" />
@@ -1393,8 +1419,8 @@
         <soap:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="SysnKioskTransactionCustomerImage">
-      <soap:operation soapAction="http://tempuri.org/SysnKioskTransactionCustomerImage" style="document" />
+    <wsdl:operation name="SyncKioskDepositTransactionCustomerImage">
+      <soap:operation soapAction="http://tempuri.org/SyncKioskDepositTransactionCustomerImage" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
@@ -1402,8 +1428,8 @@
         <soap:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="SyncKioskServiceTransactionByRecord">
-      <soap:operation soapAction="http://tempuri.org/SyncKioskServiceTransactionByRecord" style="document" />
+    <wsdl:operation name="SyncKioskDepositTransactionByRecord">
+      <soap:operation soapAction="http://tempuri.org/SyncKioskDepositTransactionByRecord" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
@@ -1411,8 +1437,17 @@
         <soap:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="SyncKioskServiceTransaction">
-      <soap:operation soapAction="http://tempuri.org/SyncKioskServiceTransaction" style="document" />
+    <wsdl:operation name="SyncKioskDepositTransaction">
+      <soap:operation soapAction="http://tempuri.org/SyncKioskDepositTransaction" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SyncKioskCollectTransactionCustomerImage">
+      <soap:operation soapAction="http://tempuri.org/SyncKioskCollectTransactionCustomerImage" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
@@ -1720,8 +1755,8 @@
         <soap12:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="SysnKioskTransactionCustomerImage">
-      <soap12:operation soapAction="http://tempuri.org/SysnKioskTransactionCustomerImage" style="document" />
+    <wsdl:operation name="SyncKioskDepositTransactionCustomerImage">
+      <soap12:operation soapAction="http://tempuri.org/SyncKioskDepositTransactionCustomerImage" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
@@ -1729,8 +1764,8 @@
         <soap12:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="SyncKioskServiceTransactionByRecord">
-      <soap12:operation soapAction="http://tempuri.org/SyncKioskServiceTransactionByRecord" style="document" />
+    <wsdl:operation name="SyncKioskDepositTransactionByRecord">
+      <soap12:operation soapAction="http://tempuri.org/SyncKioskDepositTransactionByRecord" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
@@ -1738,8 +1773,17 @@
         <soap12:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="SyncKioskServiceTransaction">
-      <soap12:operation soapAction="http://tempuri.org/SyncKioskServiceTransaction" style="document" />
+    <wsdl:operation name="SyncKioskDepositTransaction">
+      <soap12:operation soapAction="http://tempuri.org/SyncKioskDepositTransaction" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SyncKioskCollectTransactionCustomerImage">
+      <soap12:operation soapAction="http://tempuri.org/SyncKioskCollectTransactionCustomerImage" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>

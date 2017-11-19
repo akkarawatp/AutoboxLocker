@@ -82,11 +82,13 @@ Namespace SyncDataWebservice
         
         Private UpdateSyncKioskLockerOperationCompleted As System.Threading.SendOrPostCallback
         
-        Private SysnKioskTransactionCustomerImageOperationCompleted As System.Threading.SendOrPostCallback
+        Private SyncKioskDepositTransactionCustomerImageOperationCompleted As System.Threading.SendOrPostCallback
         
-        Private SyncKioskServiceTransactionByRecordOperationCompleted As System.Threading.SendOrPostCallback
+        Private SyncKioskDepositTransactionByRecordOperationCompleted As System.Threading.SendOrPostCallback
         
-        Private SyncKioskServiceTransactionOperationCompleted As System.Threading.SendOrPostCallback
+        Private SyncKioskDepositTransactionOperationCompleted As System.Threading.SendOrPostCallback
+        
+        Private SyncKioskCollectTransactionCustomerImageOperationCompleted As System.Threading.SendOrPostCallback
         
         Private SyncKioskCollectTransactionOperationCompleted As System.Threading.SendOrPostCallback
         
@@ -218,13 +220,16 @@ Namespace SyncDataWebservice
         Public Event UpdateSyncKioskLockerCompleted As UpdateSyncKioskLockerCompletedEventHandler
         
         '''<remarks/>
-        Public Event SysnKioskTransactionCustomerImageCompleted As SysnKioskTransactionCustomerImageCompletedEventHandler
+        Public Event SyncKioskDepositTransactionCustomerImageCompleted As SyncKioskDepositTransactionCustomerImageCompletedEventHandler
         
         '''<remarks/>
-        Public Event SyncKioskServiceTransactionByRecordCompleted As SyncKioskServiceTransactionByRecordCompletedEventHandler
+        Public Event SyncKioskDepositTransactionByRecordCompleted As SyncKioskDepositTransactionByRecordCompletedEventHandler
         
         '''<remarks/>
-        Public Event SyncKioskServiceTransactionCompleted As SyncKioskServiceTransactionCompletedEventHandler
+        Public Event SyncKioskDepositTransactionCompleted As SyncKioskDepositTransactionCompletedEventHandler
+        
+        '''<remarks/>
+        Public Event SyncKioskCollectTransactionCustomerImageCompleted As SyncKioskCollectTransactionCustomerImageCompletedEventHandler
         
         '''<remarks/>
         Public Event SyncKioskCollectTransactionCompleted As SyncKioskCollectTransactionCompletedEventHandler
@@ -926,35 +931,35 @@ Namespace SyncDataWebservice
         End Sub
         
         '''<remarks/>
-        <System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/SysnKioskTransactionCustomerImage", RequestNamespace:="http://tempuri.org/", ResponseNamespace:="http://tempuri.org/", Use:=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle:=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)>  _
-        Public Function SysnKioskTransactionCustomerImage(ByVal KioskName As String, ByVal TransNo As String, <System.Xml.Serialization.XmlElementAttribute(DataType:="base64Binary")> ByVal CustImage() As Byte) As String
-            Dim results() As Object = Me.Invoke("SysnKioskTransactionCustomerImage", New Object() {KioskName, TransNo, CustImage})
+        <System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/SyncKioskDepositTransactionCustomerImage", RequestNamespace:="http://tempuri.org/", ResponseNamespace:="http://tempuri.org/", Use:=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle:=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)>  _
+        Public Function SyncKioskDepositTransactionCustomerImage(ByVal KioskName As String, ByVal TransNo As String, <System.Xml.Serialization.XmlElementAttribute(DataType:="base64Binary")> ByVal CustImage() As Byte) As String
+            Dim results() As Object = Me.Invoke("SyncKioskDepositTransactionCustomerImage", New Object() {KioskName, TransNo, CustImage})
             Return CType(results(0),String)
         End Function
         
         '''<remarks/>
-        Public Overloads Sub SysnKioskTransactionCustomerImageAsync(ByVal KioskName As String, ByVal TransNo As String, ByVal CustImage() As Byte)
-            Me.SysnKioskTransactionCustomerImageAsync(KioskName, TransNo, CustImage, Nothing)
+        Public Overloads Sub SyncKioskDepositTransactionCustomerImageAsync(ByVal KioskName As String, ByVal TransNo As String, ByVal CustImage() As Byte)
+            Me.SyncKioskDepositTransactionCustomerImageAsync(KioskName, TransNo, CustImage, Nothing)
         End Sub
         
         '''<remarks/>
-        Public Overloads Sub SysnKioskTransactionCustomerImageAsync(ByVal KioskName As String, ByVal TransNo As String, ByVal CustImage() As Byte, ByVal userState As Object)
-            If (Me.SysnKioskTransactionCustomerImageOperationCompleted Is Nothing) Then
-                Me.SysnKioskTransactionCustomerImageOperationCompleted = AddressOf Me.OnSysnKioskTransactionCustomerImageOperationCompleted
+        Public Overloads Sub SyncKioskDepositTransactionCustomerImageAsync(ByVal KioskName As String, ByVal TransNo As String, ByVal CustImage() As Byte, ByVal userState As Object)
+            If (Me.SyncKioskDepositTransactionCustomerImageOperationCompleted Is Nothing) Then
+                Me.SyncKioskDepositTransactionCustomerImageOperationCompleted = AddressOf Me.OnSyncKioskDepositTransactionCustomerImageOperationCompleted
             End If
-            Me.InvokeAsync("SysnKioskTransactionCustomerImage", New Object() {KioskName, TransNo, CustImage}, Me.SysnKioskTransactionCustomerImageOperationCompleted, userState)
+            Me.InvokeAsync("SyncKioskDepositTransactionCustomerImage", New Object() {KioskName, TransNo, CustImage}, Me.SyncKioskDepositTransactionCustomerImageOperationCompleted, userState)
         End Sub
         
-        Private Sub OnSysnKioskTransactionCustomerImageOperationCompleted(ByVal arg As Object)
-            If (Not (Me.SysnKioskTransactionCustomerImageCompletedEvent) Is Nothing) Then
+        Private Sub OnSyncKioskDepositTransactionCustomerImageOperationCompleted(ByVal arg As Object)
+            If (Not (Me.SyncKioskDepositTransactionCustomerImageCompletedEvent) Is Nothing) Then
                 Dim invokeArgs As System.Web.Services.Protocols.InvokeCompletedEventArgs = CType(arg,System.Web.Services.Protocols.InvokeCompletedEventArgs)
-                RaiseEvent SysnKioskTransactionCustomerImageCompleted(Me, New SysnKioskTransactionCustomerImageCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState))
+                RaiseEvent SyncKioskDepositTransactionCustomerImageCompleted(Me, New SyncKioskDepositTransactionCustomerImageCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState))
             End If
         End Sub
         
         '''<remarks/>
-        <System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/SyncKioskServiceTransactionByRecord", RequestNamespace:="http://tempuri.org/", ResponseNamespace:="http://tempuri.org/", Use:=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle:=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)>  _
-        Public Function SyncKioskServiceTransactionByRecord( _
+        <System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/SyncKioskDepositTransactionByRecord", RequestNamespace:="http://tempuri.org/", ResponseNamespace:="http://tempuri.org/", Use:=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle:=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)>  _
+        Public Function SyncKioskDepositTransactionByRecord( _
                     ByVal KioskName As String,  _
                     ByVal TransNo As String,  _
                     ByVal TransStartTime As Date,  _
@@ -986,12 +991,12 @@ Namespace SyncDataWebservice
                     ByVal TransStatus As String,  _
                     ByVal MsAppScreenID As Long,  _
                     ByVal MsAppStepID As Long) As String
-            Dim results() As Object = Me.Invoke("SyncKioskServiceTransactionByRecord", New Object() {KioskName, TransNo, TransStartTime, TransEndTime, MsKioskID, ServerLockerID, PinCode, ServiceRate, ServiceRateLimitDay, DepositAmt, PaidTime, ReceiveCoin1, ReceiveCoin2, ReceiveCoin5, ReceiveCoin10, ReceiveBanknote20, ReceiveBanknote50, ReceiveBanknote100, ReceiveBanknote500, ReceiveBanknote1000, ChangeCoin1, ChangeCoin2, ChangeCoin5, ChangeCoin10, ChangeBankNote20, ChangeBanknote50, ChangeBanknote100, ChangeBanknote500, TransStatus, MsAppScreenID, MsAppStepID})
+            Dim results() As Object = Me.Invoke("SyncKioskDepositTransactionByRecord", New Object() {KioskName, TransNo, TransStartTime, TransEndTime, MsKioskID, ServerLockerID, PinCode, ServiceRate, ServiceRateLimitDay, DepositAmt, PaidTime, ReceiveCoin1, ReceiveCoin2, ReceiveCoin5, ReceiveCoin10, ReceiveBanknote20, ReceiveBanknote50, ReceiveBanknote100, ReceiveBanknote500, ReceiveBanknote1000, ChangeCoin1, ChangeCoin2, ChangeCoin5, ChangeCoin10, ChangeBankNote20, ChangeBanknote50, ChangeBanknote100, ChangeBanknote500, TransStatus, MsAppScreenID, MsAppStepID})
             Return CType(results(0),String)
         End Function
         
         '''<remarks/>
-        Public Overloads Sub SyncKioskServiceTransactionByRecordAsync( _
+        Public Overloads Sub SyncKioskDepositTransactionByRecordAsync( _
                     ByVal KioskName As String,  _
                     ByVal TransNo As String,  _
                     ByVal TransStartTime As Date,  _
@@ -1023,11 +1028,11 @@ Namespace SyncDataWebservice
                     ByVal TransStatus As String,  _
                     ByVal MsAppScreenID As Long,  _
                     ByVal MsAppStepID As Long)
-            Me.SyncKioskServiceTransactionByRecordAsync(KioskName, TransNo, TransStartTime, TransEndTime, MsKioskID, ServerLockerID, PinCode, ServiceRate, ServiceRateLimitDay, DepositAmt, PaidTime, ReceiveCoin1, ReceiveCoin2, ReceiveCoin5, ReceiveCoin10, ReceiveBanknote20, ReceiveBanknote50, ReceiveBanknote100, ReceiveBanknote500, ReceiveBanknote1000, ChangeCoin1, ChangeCoin2, ChangeCoin5, ChangeCoin10, ChangeBankNote20, ChangeBanknote50, ChangeBanknote100, ChangeBanknote500, TransStatus, MsAppScreenID, MsAppStepID, Nothing)
+            Me.SyncKioskDepositTransactionByRecordAsync(KioskName, TransNo, TransStartTime, TransEndTime, MsKioskID, ServerLockerID, PinCode, ServiceRate, ServiceRateLimitDay, DepositAmt, PaidTime, ReceiveCoin1, ReceiveCoin2, ReceiveCoin5, ReceiveCoin10, ReceiveBanknote20, ReceiveBanknote50, ReceiveBanknote100, ReceiveBanknote500, ReceiveBanknote1000, ChangeCoin1, ChangeCoin2, ChangeCoin5, ChangeCoin10, ChangeBankNote20, ChangeBanknote50, ChangeBanknote100, ChangeBanknote500, TransStatus, MsAppScreenID, MsAppStepID, Nothing)
         End Sub
         
         '''<remarks/>
-        Public Overloads Sub SyncKioskServiceTransactionByRecordAsync( _
+        Public Overloads Sub SyncKioskDepositTransactionByRecordAsync( _
                     ByVal KioskName As String,  _
                     ByVal TransNo As String,  _
                     ByVal TransStartTime As Date,  _
@@ -1060,43 +1065,70 @@ Namespace SyncDataWebservice
                     ByVal MsAppScreenID As Long,  _
                     ByVal MsAppStepID As Long,  _
                     ByVal userState As Object)
-            If (Me.SyncKioskServiceTransactionByRecordOperationCompleted Is Nothing) Then
-                Me.SyncKioskServiceTransactionByRecordOperationCompleted = AddressOf Me.OnSyncKioskServiceTransactionByRecordOperationCompleted
+            If (Me.SyncKioskDepositTransactionByRecordOperationCompleted Is Nothing) Then
+                Me.SyncKioskDepositTransactionByRecordOperationCompleted = AddressOf Me.OnSyncKioskDepositTransactionByRecordOperationCompleted
             End If
-            Me.InvokeAsync("SyncKioskServiceTransactionByRecord", New Object() {KioskName, TransNo, TransStartTime, TransEndTime, MsKioskID, ServerLockerID, PinCode, ServiceRate, ServiceRateLimitDay, DepositAmt, PaidTime, ReceiveCoin1, ReceiveCoin2, ReceiveCoin5, ReceiveCoin10, ReceiveBanknote20, ReceiveBanknote50, ReceiveBanknote100, ReceiveBanknote500, ReceiveBanknote1000, ChangeCoin1, ChangeCoin2, ChangeCoin5, ChangeCoin10, ChangeBankNote20, ChangeBanknote50, ChangeBanknote100, ChangeBanknote500, TransStatus, MsAppScreenID, MsAppStepID}, Me.SyncKioskServiceTransactionByRecordOperationCompleted, userState)
+            Me.InvokeAsync("SyncKioskDepositTransactionByRecord", New Object() {KioskName, TransNo, TransStartTime, TransEndTime, MsKioskID, ServerLockerID, PinCode, ServiceRate, ServiceRateLimitDay, DepositAmt, PaidTime, ReceiveCoin1, ReceiveCoin2, ReceiveCoin5, ReceiveCoin10, ReceiveBanknote20, ReceiveBanknote50, ReceiveBanknote100, ReceiveBanknote500, ReceiveBanknote1000, ChangeCoin1, ChangeCoin2, ChangeCoin5, ChangeCoin10, ChangeBankNote20, ChangeBanknote50, ChangeBanknote100, ChangeBanknote500, TransStatus, MsAppScreenID, MsAppStepID}, Me.SyncKioskDepositTransactionByRecordOperationCompleted, userState)
         End Sub
         
-        Private Sub OnSyncKioskServiceTransactionByRecordOperationCompleted(ByVal arg As Object)
-            If (Not (Me.SyncKioskServiceTransactionByRecordCompletedEvent) Is Nothing) Then
+        Private Sub OnSyncKioskDepositTransactionByRecordOperationCompleted(ByVal arg As Object)
+            If (Not (Me.SyncKioskDepositTransactionByRecordCompletedEvent) Is Nothing) Then
                 Dim invokeArgs As System.Web.Services.Protocols.InvokeCompletedEventArgs = CType(arg,System.Web.Services.Protocols.InvokeCompletedEventArgs)
-                RaiseEvent SyncKioskServiceTransactionByRecordCompleted(Me, New SyncKioskServiceTransactionByRecordCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState))
+                RaiseEvent SyncKioskDepositTransactionByRecordCompleted(Me, New SyncKioskDepositTransactionByRecordCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState))
             End If
         End Sub
         
         '''<remarks/>
-        <System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/SyncKioskServiceTransaction", RequestNamespace:="http://tempuri.org/", ResponseNamespace:="http://tempuri.org/", Use:=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle:=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)>  _
-        Public Function SyncKioskServiceTransaction(ByVal dt As System.Data.DataTable, ByVal KioskName As String) As String
-            Dim results() As Object = Me.Invoke("SyncKioskServiceTransaction", New Object() {dt, KioskName})
+        <System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/SyncKioskDepositTransaction", RequestNamespace:="http://tempuri.org/", ResponseNamespace:="http://tempuri.org/", Use:=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle:=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)>  _
+        Public Function SyncKioskDepositTransaction(ByVal dt As System.Data.DataTable, ByVal KioskName As String) As String
+            Dim results() As Object = Me.Invoke("SyncKioskDepositTransaction", New Object() {dt, KioskName})
             Return CType(results(0),String)
         End Function
         
         '''<remarks/>
-        Public Overloads Sub SyncKioskServiceTransactionAsync(ByVal dt As System.Data.DataTable, ByVal KioskName As String)
-            Me.SyncKioskServiceTransactionAsync(dt, KioskName, Nothing)
+        Public Overloads Sub SyncKioskDepositTransactionAsync(ByVal dt As System.Data.DataTable, ByVal KioskName As String)
+            Me.SyncKioskDepositTransactionAsync(dt, KioskName, Nothing)
         End Sub
         
         '''<remarks/>
-        Public Overloads Sub SyncKioskServiceTransactionAsync(ByVal dt As System.Data.DataTable, ByVal KioskName As String, ByVal userState As Object)
-            If (Me.SyncKioskServiceTransactionOperationCompleted Is Nothing) Then
-                Me.SyncKioskServiceTransactionOperationCompleted = AddressOf Me.OnSyncKioskServiceTransactionOperationCompleted
+        Public Overloads Sub SyncKioskDepositTransactionAsync(ByVal dt As System.Data.DataTable, ByVal KioskName As String, ByVal userState As Object)
+            If (Me.SyncKioskDepositTransactionOperationCompleted Is Nothing) Then
+                Me.SyncKioskDepositTransactionOperationCompleted = AddressOf Me.OnSyncKioskDepositTransactionOperationCompleted
             End If
-            Me.InvokeAsync("SyncKioskServiceTransaction", New Object() {dt, KioskName}, Me.SyncKioskServiceTransactionOperationCompleted, userState)
+            Me.InvokeAsync("SyncKioskDepositTransaction", New Object() {dt, KioskName}, Me.SyncKioskDepositTransactionOperationCompleted, userState)
         End Sub
         
-        Private Sub OnSyncKioskServiceTransactionOperationCompleted(ByVal arg As Object)
-            If (Not (Me.SyncKioskServiceTransactionCompletedEvent) Is Nothing) Then
+        Private Sub OnSyncKioskDepositTransactionOperationCompleted(ByVal arg As Object)
+            If (Not (Me.SyncKioskDepositTransactionCompletedEvent) Is Nothing) Then
                 Dim invokeArgs As System.Web.Services.Protocols.InvokeCompletedEventArgs = CType(arg,System.Web.Services.Protocols.InvokeCompletedEventArgs)
-                RaiseEvent SyncKioskServiceTransactionCompleted(Me, New SyncKioskServiceTransactionCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState))
+                RaiseEvent SyncKioskDepositTransactionCompleted(Me, New SyncKioskDepositTransactionCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState))
+            End If
+        End Sub
+        
+        '''<remarks/>
+        <System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/SyncKioskCollectTransactionCustomerImage", RequestNamespace:="http://tempuri.org/", ResponseNamespace:="http://tempuri.org/", Use:=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle:=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)>  _
+        Public Function SyncKioskCollectTransactionCustomerImage(ByVal KioskName As String, ByVal TransactionNo As String, <System.Xml.Serialization.XmlElementAttribute(DataType:="base64Binary")> ByVal CustImage() As Byte) As String
+            Dim results() As Object = Me.Invoke("SyncKioskCollectTransactionCustomerImage", New Object() {KioskName, TransactionNo, CustImage})
+            Return CType(results(0),String)
+        End Function
+        
+        '''<remarks/>
+        Public Overloads Sub SyncKioskCollectTransactionCustomerImageAsync(ByVal KioskName As String, ByVal TransactionNo As String, ByVal CustImage() As Byte)
+            Me.SyncKioskCollectTransactionCustomerImageAsync(KioskName, TransactionNo, CustImage, Nothing)
+        End Sub
+        
+        '''<remarks/>
+        Public Overloads Sub SyncKioskCollectTransactionCustomerImageAsync(ByVal KioskName As String, ByVal TransactionNo As String, ByVal CustImage() As Byte, ByVal userState As Object)
+            If (Me.SyncKioskCollectTransactionCustomerImageOperationCompleted Is Nothing) Then
+                Me.SyncKioskCollectTransactionCustomerImageOperationCompleted = AddressOf Me.OnSyncKioskCollectTransactionCustomerImageOperationCompleted
+            End If
+            Me.InvokeAsync("SyncKioskCollectTransactionCustomerImage", New Object() {KioskName, TransactionNo, CustImage}, Me.SyncKioskCollectTransactionCustomerImageOperationCompleted, userState)
+        End Sub
+        
+        Private Sub OnSyncKioskCollectTransactionCustomerImageOperationCompleted(ByVal arg As Object)
+            If (Not (Me.SyncKioskCollectTransactionCustomerImageCompletedEvent) Is Nothing) Then
+                Dim invokeArgs As System.Web.Services.Protocols.InvokeCompletedEventArgs = CType(arg,System.Web.Services.Protocols.InvokeCompletedEventArgs)
+                RaiseEvent SyncKioskCollectTransactionCustomerImageCompleted(Me, New SyncKioskCollectTransactionCustomerImageCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState))
             End If
         End Sub
         
@@ -2207,13 +2239,13 @@ Namespace SyncDataWebservice
     
     '''<remarks/>
     <System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1055.0")>  _
-    Public Delegate Sub SysnKioskTransactionCustomerImageCompletedEventHandler(ByVal sender As Object, ByVal e As SysnKioskTransactionCustomerImageCompletedEventArgs)
+    Public Delegate Sub SyncKioskDepositTransactionCustomerImageCompletedEventHandler(ByVal sender As Object, ByVal e As SyncKioskDepositTransactionCustomerImageCompletedEventArgs)
     
     '''<remarks/>
     <System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1055.0"),  _
      System.Diagnostics.DebuggerStepThroughAttribute(),  _
      System.ComponentModel.DesignerCategoryAttribute("code")>  _
-    Partial Public Class SysnKioskTransactionCustomerImageCompletedEventArgs
+    Partial Public Class SyncKioskDepositTransactionCustomerImageCompletedEventArgs
         Inherits System.ComponentModel.AsyncCompletedEventArgs
         
         Private results() As Object
@@ -2234,13 +2266,13 @@ Namespace SyncDataWebservice
     
     '''<remarks/>
     <System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1055.0")>  _
-    Public Delegate Sub SyncKioskServiceTransactionByRecordCompletedEventHandler(ByVal sender As Object, ByVal e As SyncKioskServiceTransactionByRecordCompletedEventArgs)
+    Public Delegate Sub SyncKioskDepositTransactionByRecordCompletedEventHandler(ByVal sender As Object, ByVal e As SyncKioskDepositTransactionByRecordCompletedEventArgs)
     
     '''<remarks/>
     <System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1055.0"),  _
      System.Diagnostics.DebuggerStepThroughAttribute(),  _
      System.ComponentModel.DesignerCategoryAttribute("code")>  _
-    Partial Public Class SyncKioskServiceTransactionByRecordCompletedEventArgs
+    Partial Public Class SyncKioskDepositTransactionByRecordCompletedEventArgs
         Inherits System.ComponentModel.AsyncCompletedEventArgs
         
         Private results() As Object
@@ -2261,13 +2293,40 @@ Namespace SyncDataWebservice
     
     '''<remarks/>
     <System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1055.0")>  _
-    Public Delegate Sub SyncKioskServiceTransactionCompletedEventHandler(ByVal sender As Object, ByVal e As SyncKioskServiceTransactionCompletedEventArgs)
+    Public Delegate Sub SyncKioskDepositTransactionCompletedEventHandler(ByVal sender As Object, ByVal e As SyncKioskDepositTransactionCompletedEventArgs)
     
     '''<remarks/>
     <System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1055.0"),  _
      System.Diagnostics.DebuggerStepThroughAttribute(),  _
      System.ComponentModel.DesignerCategoryAttribute("code")>  _
-    Partial Public Class SyncKioskServiceTransactionCompletedEventArgs
+    Partial Public Class SyncKioskDepositTransactionCompletedEventArgs
+        Inherits System.ComponentModel.AsyncCompletedEventArgs
+        
+        Private results() As Object
+        
+        Friend Sub New(ByVal results() As Object, ByVal exception As System.Exception, ByVal cancelled As Boolean, ByVal userState As Object)
+            MyBase.New(exception, cancelled, userState)
+            Me.results = results
+        End Sub
+        
+        '''<remarks/>
+        Public ReadOnly Property Result() As String
+            Get
+                Me.RaiseExceptionIfNecessary
+                Return CType(Me.results(0),String)
+            End Get
+        End Property
+    End Class
+    
+    '''<remarks/>
+    <System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1055.0")>  _
+    Public Delegate Sub SyncKioskCollectTransactionCustomerImageCompletedEventHandler(ByVal sender As Object, ByVal e As SyncKioskCollectTransactionCustomerImageCompletedEventArgs)
+    
+    '''<remarks/>
+    <System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1055.0"),  _
+     System.Diagnostics.DebuggerStepThroughAttribute(),  _
+     System.ComponentModel.DesignerCategoryAttribute("code")>  _
+    Partial Public Class SyncKioskCollectTransactionCustomerImageCompletedEventArgs
         Inherits System.ComponentModel.AsyncCompletedEventArgs
         
         Private results() As Object

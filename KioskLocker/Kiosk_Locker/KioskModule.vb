@@ -1413,6 +1413,7 @@ Module KioskModule
                 lnq.SERVICE_AMT = pick.ServiceAmount
                 lnq.PICKUP_TIME = pick.PickupTime
                 lnq.PAID_TIME = pick.PaidTime
+                lnq.CUST_IMAGE = pick.CustomerImage
                 lnq.RECEIVE_COIN1 = pick.ReceiveCoin1
                 lnq.RECEIVE_COIN2 = pick.ReceiveCoin2
                 lnq.RECEIVE_COIN5 = pick.ReceiveCoin5

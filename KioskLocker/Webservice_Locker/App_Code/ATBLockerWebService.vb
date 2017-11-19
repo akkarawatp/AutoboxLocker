@@ -849,10 +849,10 @@ Public Class ATBLockerWebService
 
 #Region "Sync Transaction Data"
     <WebMethod()>
-    Public Function SysnKioskTransactionCustomerImage(KioskName As String, TransNo As String, CustImage As Byte()) As String
+    Public Function SyncKioskDepositTransactionCustomerImage(KioskName As String, TransNo As String, CustImage As Byte()) As String
         Dim ret As String = "false"
         Try
-            Engine.LogFileENG.CreateServerLogAgent("SysnKioskTransactionCustomerImage " & KioskName)
+            Engine.LogFileENG.CreateServerLogAgent("SysnKioskDepositTransactionCustomerImage " & KioskName)
 
             Dim sTrans As New ServerTransactionDB
             Dim sRet As New ExecuteDataInfo
@@ -867,7 +867,7 @@ Public Class ATBLockerWebService
             If sRet.IsSuccess = True Then
                 sTrans.CommitTransaction()
                 ret = "true"
-                Engine.LogFileENG.CreateServerLogAgent("SysnKioskTransactionCustomerImage from " & KioskName & " TransactionNo " & TransNo)
+                Engine.LogFileENG.CreateServerLogAgent("SysnKioskDepositTransactionCustomerImage from " & KioskName & " TransactionNo " & TransNo)
             Else
                 sTrans.RollbackTransaction()
                 ret = "false|" & sRet.ErrorMessage
@@ -884,14 +884,14 @@ Public Class ATBLockerWebService
     End Function
 
     <WebMethod()>
-    Public Function SyncKioskServiceTransactionByRecord(KioskName As String, TransNo As String, TransStartTime As DateTime, TransEndTime As DateTime, MsKioskID As Long, ServerLockerID As Long,
+    Public Function SyncKioskDepositTransactionByRecord(KioskName As String, TransNo As String, TransStartTime As DateTime, TransEndTime As DateTime, MsKioskID As Long, ServerLockerID As Long,
                                                 PinCode As String, ServiceRate As Double, ServiceRateLimitDay As Double, DepositAmt As Double, PaidTime As DateTime,
                                                 ReceiveCoin1 As Long, ReceiveCoin2 As Long, ReceiveCoin5 As Long, ReceiveCoin10 As Long, ReceiveBanknote20 As Long, ReceiveBanknote50 As Long, ReceiveBanknote100 As Long, ReceiveBanknote500 As Long, ReceiveBanknote1000 As Long,
                                                 ChangeCoin1 As Long, ChangeCoin2 As Long, ChangeCoin5 As Long, ChangeCoin10 As Long, ChangeBankNote20 As Long, ChangeBanknote50 As Long, ChangeBanknote100 As Long, ChangeBanknote500 As Long,
                                                 TransStatus As String, MsAppScreenID As Long, MsAppStepID As Long) As String
         Dim ret As String = "false"
         Try
-            Engine.LogFileENG.CreateServerLogAgent("SyncKioskServiceTransaction By Record from " & KioskName)
+            Engine.LogFileENG.CreateServerLogAgent("SyncKioskDepositTransactionByRecord By Record from " & KioskName)
 
             Dim sTrans As New ServerLinqDB.ConnectDB.ServerTransactionDB
             Dim sRet As New ExecuteDataInfo
@@ -950,7 +950,7 @@ Public Class ATBLockerWebService
             If sRet.IsSuccess = True Then
                 sTrans.CommitTransaction()
                 ret = "true"
-                Engine.LogFileENG.CreateServerLogAgent("SyncKioskServiceTransactionByRecord from " & KioskName & " TransactionNo " & TransNo)
+                Engine.LogFileENG.CreateServerLogAgent("SyncKioskDepositTransactionByRecord from " & KioskName & " TransactionNo " & TransNo)
             Else
                 sTrans.RollbackTransaction()
                 ret = "false|" & sRet.ErrorMessage
@@ -967,10 +967,10 @@ Public Class ATBLockerWebService
 
 
     <WebMethod()>
-    Public Function SyncKioskServiceTransaction(dt As DataTable, KioskName As String) As String
+    Public Function SyncKioskDepositTransaction(dt As DataTable, KioskName As String) As String
         Dim ret As String = "false"
         Try
-            Engine.LogFileENG.CreateServerLogAgent("SyncKioskServiceTransaction from " & KioskName & " " & dt.Rows.Count & " Records")
+            Engine.LogFileENG.CreateServerLogAgent("SyncKioskDepositTransaction from " & KioskName & " " & dt.Rows.Count & " Records")
 
             If dt.Rows.Count > 0 Then
                 Dim sTrans As New ServerLinqDB.ConnectDB.ServerTransactionDB
@@ -1037,7 +1037,7 @@ Public Class ATBLockerWebService
                 If sRet.IsSuccess = True Then
                     sTrans.CommitTransaction()
                     ret = "true"
-                    Engine.LogFileENG.CreateServerLogAgent("SyncKioskServiceTransaction from " & KioskName & " Success " & dt.Rows.Count & " Records")
+                    Engine.LogFileENG.CreateServerLogAgent("SyncKioskDepositTransaction from " & KioskName & " Success " & dt.Rows.Count & " Records")
                 Else
                     sTrans.RollbackTransaction()
                     ret = "false|" & sRet.ErrorMessage
@@ -1045,6 +1045,42 @@ Public Class ATBLockerWebService
                 End If
             End If
             dt.Dispose()
+        Catch ex As Exception
+            ret = "false|" & ex.Message
+            Engine.LogFileENG.CreateServerExceptionLogAgent(ex.Message, ex.StackTrace)
+        End Try
+
+        Return ret
+    End Function
+
+
+    <WebMethod()>
+    Public Function SyncKioskCollectTransactionCustomerImage(KioskName As String, TransactionNo As String, CustImage As Byte()) As String
+        Dim ret As String = "false"
+        Try
+            Engine.LogFileENG.CreateServerLogAgent("SyncKioskCollectTransactionCustomerImage " & KioskName)
+
+            Dim sTrans As New ServerTransactionDB
+            Dim sRet As New ExecuteDataInfo
+            Dim sLnq As New TbPickupTransactionServerLinqDB
+            sLnq.ChkDataByTRANSACTION_NO(TransactionNo, sTrans.Trans)
+            If sLnq.ID > 0 Then
+                sLnq.CUST_IMAGE = CustImage
+
+                sRet = sLnq.UpdateData(KioskName, sTrans.Trans)
+            End If
+
+            If sRet.IsSuccess = True Then
+                sTrans.CommitTransaction()
+                ret = "true"
+                Engine.LogFileENG.CreateServerLogAgent("SyncKioskCollectTransactionCustomerImage from " & KioskName & " TransactionNo " & TransactionNo)
+            Else
+                sTrans.RollbackTransaction()
+                ret = "false|" & sRet.ErrorMessage
+                Engine.LogFileENG.CreateServerErrorLogAgent(ret)
+            End If
+
+            sLnq = Nothing
         Catch ex As Exception
             ret = "false|" & ex.Message
             Engine.LogFileENG.CreateServerExceptionLogAgent(ex.Message, ex.StackTrace)

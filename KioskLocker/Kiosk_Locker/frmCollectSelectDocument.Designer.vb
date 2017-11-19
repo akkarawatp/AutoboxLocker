@@ -25,14 +25,14 @@ Partial Class frmCollectSelectDocument
         Me.components = New System.ComponentModel.Container()
         Me.lblTitle = New System.Windows.Forms.Label()
         Me.TimerTimeOut = New System.Windows.Forms.Timer(Me.components)
-        Me.pnlIDCard = New System.Windows.Forms.Panel()
-        Me.lblPassport = New System.Windows.Forms.Label()
-        Me.lblIDCard = New System.Windows.Forms.Label()
+        Me.pnlPinCode = New System.Windows.Forms.Panel()
+        Me.lblCaptionPinCode = New System.Windows.Forms.Label()
         Me.pnlQRCode = New System.Windows.Forms.Panel()
         Me.lblQRCode = New System.Windows.Forms.Label()
         Me.lblQRCodeNotification = New System.Windows.Forms.Label()
         Me.lblLabelIDCardNotification = New System.Windows.Forms.Label()
-        Me.pnlIDCard.SuspendLayout()
+        Me.lblImagePinCode = New System.Windows.Forms.Label()
+        Me.pnlPinCode.SuspendLayout()
         Me.pnlQRCode.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -52,40 +52,28 @@ Partial Class frmCollectSelectDocument
         Me.TimerTimeOut.Enabled = True
         Me.TimerTimeOut.Interval = 1000
         '
-        'pnlIDCard
+        'pnlPinCode
         '
-        Me.pnlIDCard.BackgroundImage = Global.AutoboxLocker.My.Resources.Resources.IconPickupIDCard
-        Me.pnlIDCard.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
-        Me.pnlIDCard.Controls.Add(Me.lblPassport)
-        Me.pnlIDCard.Controls.Add(Me.lblIDCard)
-        Me.pnlIDCard.Location = New System.Drawing.Point(548, 166)
-        Me.pnlIDCard.Name = "pnlIDCard"
-        Me.pnlIDCard.Size = New System.Drawing.Size(280, 280)
-        Me.pnlIDCard.TabIndex = 15
+        Me.pnlPinCode.BackgroundImage = Global.AutoboxLocker.My.Resources.Resources.btnPickupOpenLocker
+        Me.pnlPinCode.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
+        Me.pnlPinCode.Controls.Add(Me.lblImagePinCode)
+        Me.pnlPinCode.Controls.Add(Me.lblCaptionPinCode)
+        Me.pnlPinCode.Location = New System.Drawing.Point(548, 166)
+        Me.pnlPinCode.Name = "pnlPinCode"
+        Me.pnlPinCode.Size = New System.Drawing.Size(280, 280)
+        Me.pnlPinCode.TabIndex = 15
         '
-        'lblPassport
+        'lblCaptionPinCode
         '
-        Me.lblPassport.BackColor = System.Drawing.Color.Transparent
-        Me.lblPassport.Font = New System.Drawing.Font("Thai Sans Lite", 32.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(222, Byte))
-        Me.lblPassport.Location = New System.Drawing.Point(0, 210)
-        Me.lblPassport.Margin = New System.Windows.Forms.Padding(0)
-        Me.lblPassport.Name = "lblPassport"
-        Me.lblPassport.Size = New System.Drawing.Size(280, 50)
-        Me.lblPassport.TabIndex = 20
-        Me.lblPassport.Text = "หนังสือเดินทาง"
-        Me.lblPassport.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        '
-        'lblIDCard
-        '
-        Me.lblIDCard.BackColor = System.Drawing.Color.Transparent
-        Me.lblIDCard.Font = New System.Drawing.Font("Thai Sans Lite", 32.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(222, Byte))
-        Me.lblIDCard.Location = New System.Drawing.Point(0, 167)
-        Me.lblIDCard.Margin = New System.Windows.Forms.Padding(0)
-        Me.lblIDCard.Name = "lblIDCard"
-        Me.lblIDCard.Size = New System.Drawing.Size(280, 53)
-        Me.lblIDCard.TabIndex = 19
-        Me.lblIDCard.Text = "บัตรประชาชน /"
-        Me.lblIDCard.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        Me.lblCaptionPinCode.BackColor = System.Drawing.Color.Transparent
+        Me.lblCaptionPinCode.Font = New System.Drawing.Font("Thai Sans Lite", 32.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(222, Byte))
+        Me.lblCaptionPinCode.Location = New System.Drawing.Point(0, 198)
+        Me.lblCaptionPinCode.Margin = New System.Windows.Forms.Padding(0)
+        Me.lblCaptionPinCode.Name = "lblCaptionPinCode"
+        Me.lblCaptionPinCode.Size = New System.Drawing.Size(280, 53)
+        Me.lblCaptionPinCode.TabIndex = 19
+        Me.lblCaptionPinCode.Text = "รหัสส่วนตัว"
+        Me.lblCaptionPinCode.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
         'pnlQRCode
         '
@@ -135,6 +123,18 @@ Partial Class frmCollectSelectDocument
         Me.lblLabelIDCardNotification.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         Me.lblLabelIDCardNotification.Visible = False
         '
+        'lblImagePinCode
+        '
+        Me.lblImagePinCode.BackColor = System.Drawing.Color.Transparent
+        Me.lblImagePinCode.Font = New System.Drawing.Font("Tahoma", 15.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(222, Byte))
+        Me.lblImagePinCode.Location = New System.Drawing.Point(0, 66)
+        Me.lblImagePinCode.Margin = New System.Windows.Forms.Padding(0)
+        Me.lblImagePinCode.Name = "lblImagePinCode"
+        Me.lblImagePinCode.Size = New System.Drawing.Size(280, 53)
+        Me.lblImagePinCode.TabIndex = 20
+        Me.lblImagePinCode.Text = "******"
+        Me.lblImagePinCode.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
         'frmCollectSelectDocument
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
@@ -143,14 +143,14 @@ Partial Class frmCollectSelectDocument
         Me.ClientSize = New System.Drawing.Size(1024, 553)
         Me.Controls.Add(Me.lblLabelIDCardNotification)
         Me.Controls.Add(Me.lblQRCodeNotification)
-        Me.Controls.Add(Me.pnlIDCard)
+        Me.Controls.Add(Me.pnlPinCode)
         Me.Controls.Add(Me.pnlQRCode)
         Me.Controls.Add(Me.lblTitle)
         Me.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(222, Byte))
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None
         Me.Margin = New System.Windows.Forms.Padding(4)
         Me.Name = "frmCollectSelectDocument"
-        Me.pnlIDCard.ResumeLayout(False)
+        Me.pnlPinCode.ResumeLayout(False)
         Me.pnlQRCode.ResumeLayout(False)
         Me.ResumeLayout(False)
 
@@ -158,10 +158,10 @@ Partial Class frmCollectSelectDocument
     Friend WithEvents lblTitle As Label
     Friend WithEvents TimerTimeOut As Timer
     Friend WithEvents pnlQRCode As Panel
-    Friend WithEvents pnlIDCard As Panel
-    Friend WithEvents lblPassport As Label
-    Friend WithEvents lblIDCard As Label
+    Friend WithEvents pnlPinCode As Panel
+    Friend WithEvents lblCaptionPinCode As Label
     Friend WithEvents lblQRCode As Label
     Friend WithEvents lblQRCodeNotification As Label
     Friend WithEvents lblLabelIDCardNotification As Label
+    Friend WithEvents lblImagePinCode As Label
 End Class

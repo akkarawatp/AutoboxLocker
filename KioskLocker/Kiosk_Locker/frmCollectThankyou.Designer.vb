@@ -28,6 +28,7 @@ Partial Class frmCollectThankyou
         Me.TimerCheckCloseLocker = New System.Windows.Forms.Timer(Me.components)
         Me.Label1 = New System.Windows.Forms.Label()
         Me.lblChangeAmt = New System.Windows.Forms.Label()
+        Me.btnOpenLocker = New System.Windows.Forms.Button()
         Me.pbIconOpenLocker = New System.Windows.Forms.PictureBox()
         CType(Me.pbIconOpenLocker, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
@@ -83,6 +84,15 @@ Partial Class frmCollectThankyou
         Me.lblChangeAmt.Text = "8888"
         Me.lblChangeAmt.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
+        'btnOpenLocker
+        '
+        Me.btnOpenLocker.Location = New System.Drawing.Point(38, 477)
+        Me.btnOpenLocker.Name = "btnOpenLocker"
+        Me.btnOpenLocker.Size = New System.Drawing.Size(75, 23)
+        Me.btnOpenLocker.TabIndex = 99
+        Me.btnOpenLocker.Text = "ปิดตู้"
+        Me.btnOpenLocker.UseVisualStyleBackColor = True
+        '
         'pbIconOpenLocker
         '
         Me.pbIconOpenLocker.Anchor = System.Windows.Forms.AnchorStyles.Top
@@ -101,6 +111,7 @@ Partial Class frmCollectThankyou
         Me.AutoScroll = True
         Me.BackColor = System.Drawing.Color.White
         Me.ClientSize = New System.Drawing.Size(1024, 553)
+        Me.Controls.Add(Me.btnOpenLocker)
         Me.Controls.Add(Me.Label1)
         Me.Controls.Add(Me.lblChangeAmt)
         Me.Controls.Add(Me.pbIconOpenLocker)
@@ -120,4 +131,5 @@ Partial Class frmCollectThankyou
     Friend WithEvents pbIconOpenLocker As PictureBox
     Friend WithEvents Label1 As Label
     Friend WithEvents lblChangeAmt As Label
+    Friend WithEvents btnOpenLocker As Button
 End Class

@@ -404,7 +404,7 @@ Namespace Data
             CollectSelectDocument = 23
             CollectScanQRCode = 8
             CollectConformOpenLocker = 9
-            CollectScanPersonInfo = 10
+            CollectByPincode = 10
             CollectPayment = 11
             CollectThankYou = 12
 
@@ -459,9 +459,6 @@ Namespace Data
             DepositSetPinCode_OpenForm = 401
             DepositSetPinCode_ConfirmPinCodeSuccess = 402
             DepositSetPinCode_ConfirmPinCodeFail = 403
-            DepositSetPinCode_ConnectWebcamSuccess = 404
-            DepositSetPinCode_ConnectWebcamFail = 405
-            DepositSetPinCode_CaptureImageSuccess = 406
             'DepositScanPersonInfo_CheckPassportExpire = 407
             'DepositScanPersonInfo_RemoveIdCard = 408
             'DepositScanPersonInfo_InsertIdCard = 409
@@ -481,6 +478,9 @@ Namespace Data
             DepositPayment_CancelExtend = 511
             DepositPayment_PaidTimeOut = 512
             DepositPayment_ReturnMoney = 513
+            DepositPayment_ConnectWebcamSuccess = 514
+            DepositPayment_ConnectWebcamFail = 515
+            DepositPayment_CaptureImageSuccess = 516
 
             DepositPrintQRCode_OpenForm = 601
             DepositPrintQRCode_OpenLocker = 602
@@ -519,6 +519,9 @@ Namespace Data
             PickupPayment_CancelExtend = 1111
             PickupPayment_PaidTimeOut = 1112
             PickupPayment_ReturnMoney = 1113
+            PickupPayment_ConnectWebcamSuccess = 1114
+            PickupPayment_ConnectWebcamFail = 1115
+            PickupPayment_CaptureImageSuccess = 1116
 
             'New Requirement
             PickupPayment_ClickConfirmOpenLocker = 1114
@@ -526,22 +529,22 @@ Namespace Data
             PickupPayment_LEDBlinkOn = 1116
             PickupPayment_OpenLockerFailReturnMoney = 1117    'OpenLockerFail
 
-            'PickupScanPersonInfo_OpenForm = 1001
+            PickupByPinCode_OpenForm = 1001
             'PickupScanPersonInfo_CheckPassportDevice = 1002
             'PickupScanPersonInfo_CheckIDCardDevice = 1003
             'PickupScanPersonInfo_ScanIDCard = 1004
             'PickupScanPersonInfo_ScanPassport = 1005
             'PickupScanPersonInfo_CheckIDCardExpire = 1006
             'PickupScanPersonInfo_CheckPassportExpire = 1007
-            'PickupScanPersonInfo_GetPickupWithScanIDCard = 1008
+            PickupByPinCode_GetPickupWithPinCode = 1008
             'PickupScanPersonInfo_GetPickupWithScanPassport = 1009
-            'PickupScanPersonInfo_HaveData = 1010
-            'PickupScanPersonInfo_NoPersonData = 1011
-            'PickupScanPersonInfo_GetPickupDataFail = 1012
+            PickupByPinCode_HaveData = 1010
+            PickupByPinCode_NoDataFound = 1011
+            PickupByPinCode_GetPickupDataFail = 1012
             'PickupScanPersonInfo_RemoveIdCard = 1013
             'PickupScanPersonInfo_InsertIdCard = 1014
             'PickupScanPersonInfo_InsertPassport = 1015
-            'PickupScanPersonInfo_Timeout = 1016
+            PickupByPinCode_Timeout = 1016
 
             PickupThankYou_OpenForm = 1201
             PickupThankYou_StartSensor = 1202

@@ -129,6 +129,12 @@
     <Compile Include="Data\KioskSettingData.vb" />
     <Compile Include="Data\KioskSystemData.vb" />
     <Compile Include="Data\StaffConsoleLogonData.vb" />
+    <Compile Include="frmCollectByPINCode.Designer.vb">
+      <DependentUpon>frmCollectByPINCode.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmCollectByPINCode.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="frmDepositSetPINCode.Designer.vb">
       <DependentUpon>frmDepositSetPINCode.vb</DependentUpon>
     </Compile>
@@ -316,6 +322,9 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="frmCollectByPINCode.resx">
+      <DependentUpon>frmCollectByPINCode.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="frmDepositSetPINCode.resx">
       <DependentUpon>frmDepositSetPINCode.vb</DependentUpon>
     </EmbeddedResource>
@@ -470,15 +479,6 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\China_Icon.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\English_Icon.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\Thai_Icon.png" />
-  </ItemGroup>
-  <ItemGroup>
     <ProjectReference Include="..\..\HardwareKiosk\BanknoteIn\BanknoteIn.vbproj">
       <Project>{8dedfda6-c134-4125-8caf-acad71ae933f}</Project>
       <Name>BanknoteIn</Name>
@@ -573,9 +573,6 @@
     <None Include="Resources\bgMainHeader.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\Japan_icon.png" />
-  </ItemGroup>
-  <ItemGroup>
     <None Include="Resources\IconDeposit.png" />
   </ItemGroup>
   <ItemGroup>
@@ -583,9 +580,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\IconQRCode.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\btnQRCodeLost.png" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\IconPrintQRCode.png" />
@@ -625,18 +619,14 @@
     <None Include="Resources\imgButtonNumber9.jpg" />
     <None Include="Resources\IconCollectThankYou.png" />
     <None Include="Resources\IconPickupQRCodeFail.png" />
-    <None Include="Resources\IconPickupIDCardFail.png" />
     <None Include="Resources\IconRedTriangle.png" />
-    <None Include="Resources\IconPickupIDCard.png" />
     <None Include="Resources\IconPickupQRCode.png" />
     <None Include="Resources\IconDepositFull.png" />
     <None Include="Resources\IconReceiveChange.png" />
     <None Include="Resources\IconRods.png" />
     <None Include="Resources\btnPickupOpenLocker.png" />
     <None Include="Resources\IconPayment.png" />
-    <None Include="Resources\IconScanPassport.png" />
     <None Include="Resources\IconPickupOpenLocker.png" />
-    <None Include="Resources\IconScanPassport.gif" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="bin\Debug\" />

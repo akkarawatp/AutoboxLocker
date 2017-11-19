@@ -39,7 +39,7 @@ Public Class frmCollectSelectDocument
         SendKioskAlarm("KIOSK_OUT_OF_SERVICE", False)
     End Sub
 
-    Private Sub lblIDCard_Click(sender As Object, e As EventArgs) Handles lblIDCard.Click, lblPassport.Click, pnlIDCard.Click
+    Private Sub lblCaptionPinCode_Click(sender As Object, e As EventArgs) Handles lblCaptionPinCode.Click, pnlPinCode.Click, lblImagePinCode.Click
         InsertLogTransactionActivity("", Collect.TransactionNo, "", KioskConfig.SelectForm, KioskLockerStep.PickupSelectDoc_ClickIDCard, "", False)
         Collect.LostQRCode = "Y"
         Dim ret As ExecuteDataInfo = UpdateCollectTransaction(Collect)
@@ -47,6 +47,8 @@ Public Class frmCollectSelectDocument
             frmLoading.Show(frmMain)
             Application.DoEvents()
 
+            frmCollectByPINCode.MdiParent = frmMain
+            frmCollectByPINCode.Show()
             'frmDepositScanPassport.MdiParent = frmMain
             'frmDepositScanPassport.Show()
             'frmDepositScanPassport.lblTitle.Visible = True

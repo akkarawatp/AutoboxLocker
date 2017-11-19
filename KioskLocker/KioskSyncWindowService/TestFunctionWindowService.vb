@@ -11,19 +11,20 @@ Public Class TestFunctionWindowService
         'Engine.SyncMasterDataENG.SyncMasterKioskDevice(30)
         'Engine.SyncMasterDataENG.SyncMasterKioskLocker(23)
 
-        Engine.SyncMasterDataENG.SyncAllKioskMaster(34)
+        'Engine.SyncMasterDataENG.SyncAllKioskMaster(34)
         'Engine.SyncMasterDataENG.SyncMasterPromotion(23)
         'Engine.SyncMasterDataENG.UpdateKioskPromotionExpired(1)
 
         'Engine.SyncMasterDataENG.TestTraceFrame("123")
 
-        'Engine.SyncTransactionDataENG.SyncAllTransaction(1)
-        'Engine.SyncTransactionDataENG.SyncServiceTransaction(34)
-        'Engine.SyncTransactionDataENG.SyncPickupTransaction(23)
+        'Engine.SyncTransactionDataENG.SyncAllTransaction(KioskInfoENG.KioskID)
+        'Engine.SyncTransactionDataENG.SyncDepositTransaction(KioskInfoENG.KioskID)
+        'Engine.SyncTransactionDataENG.SyncCollectTransaction(KioskInfoENG.KioskID)
         'Engine.SyncTransactionDataENG.SyncStaffConsoleTransaction(23)
         'Engine.SyncTransactionDataENG.SyncDeleteCompleteTransaction(23)
-        'Engine.SyncTransactionDataENG.ConvertServiceTransationCustImage(34)
-        'Engine.SyncTransactionDataENG.SyncServiceTransactionCustImage(34)
+        'Engine.SyncTransactionDataENG.ConvertDepositTransationCustImage(KioskInfoENG.KioskID)
+        'Engine.SyncTransactionDataENG.SyncDepositTransactionCustImage(KioskInfoENG.KioskID)
+        'Engine.SyncTransactionDataENG.SyncDeleteCompleteTransaction(KioskInfoENG.KioskID)
 
         'Engine.SyncLogDataENG.SyncLogTransactionActivity(23)
         'Engine.SyncLogDataENG.SyncFillMoneyData(23)
@@ -41,7 +42,10 @@ Public Class TestFunctionWindowService
         'Engine.SyncMasterDataENG.PullMasterKioskScreenControl(23)
         'Engine.SyncMasterDataENG.PullMasterKioskNotificationText(23)
         'Engine.SyncMasterDataENG.PullMasterMonitoringAlarm(2)
-        Engine.SyncMasterDataENG.PullMasterServiceRate(34)
+        'Engine.SyncMasterDataENG.PullMasterServiceRate(34)
+
+        'SyncTransactionDataENG.ConvertCollectTransationCustImage(KioskInfoENG.KioskID)
+        'SyncTransactionDataENG.SyncCollectTransactionCustImage(KioskInfoENG.KioskID)
 
 
     End Sub

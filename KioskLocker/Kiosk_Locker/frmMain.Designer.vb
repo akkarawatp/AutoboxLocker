@@ -26,12 +26,12 @@ Partial Class frmMain
         Me.TimerCheckOpenClose = New System.Windows.Forms.Timer(Me.components)
         Me.TimerSetPointer = New System.Windows.Forms.Timer(Me.components)
         Me.pnlFooter = New System.Windows.Forms.Panel()
+        Me.btnPointer = New System.Windows.Forms.Button()
+        Me.TimerCheckAutoSleep = New System.Windows.Forms.Timer(Me.components)
         Me.pnlCancel = New System.Windows.Forms.Panel()
         Me.btnCancel = New System.Windows.Forms.Label()
         Me.pnlHead = New System.Windows.Forms.Panel()
         Me.pbLogo = New System.Windows.Forms.PictureBox()
-        Me.btnPointer = New System.Windows.Forms.Button()
-        Me.TimerCheckAutoSleep = New System.Windows.Forms.Timer(Me.components)
         Me.pnlFooter.SuspendLayout()
         Me.pnlCancel.SuspendLayout()
         Me.pnlHead.SuspendLayout()
@@ -55,6 +55,23 @@ Partial Class frmMain
         Me.pnlFooter.Name = "pnlFooter"
         Me.pnlFooter.Size = New System.Drawing.Size(1024, 103)
         Me.pnlFooter.TabIndex = 11
+        '
+        'btnPointer
+        '
+        Me.btnPointer.BackColor = System.Drawing.Color.White
+        Me.btnPointer.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnPointer.ForeColor = System.Drawing.Color.White
+        Me.btnPointer.Location = New System.Drawing.Point(0, 721)
+        Me.btnPointer.Name = "btnPointer"
+        Me.btnPointer.Size = New System.Drawing.Size(55, 47)
+        Me.btnPointer.TabIndex = 51
+        Me.btnPointer.Text = "1"
+        Me.btnPointer.UseVisualStyleBackColor = False
+        '
+        'TimerCheckAutoSleep
+        '
+        Me.TimerCheckAutoSleep.Enabled = True
+        Me.TimerCheckAutoSleep.Interval = 60000
         '
         'pnlCancel
         '
@@ -94,28 +111,11 @@ Partial Class frmMain
         '
         Me.pbLogo.BackgroundImage = Global.AutoboxLocker.My.Resources.Resources.logo
         Me.pbLogo.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
-        Me.pbLogo.Location = New System.Drawing.Point(56, 10)
+        Me.pbLogo.Location = New System.Drawing.Point(28, 10)
         Me.pbLogo.Name = "pbLogo"
-        Me.pbLogo.Size = New System.Drawing.Size(140, 80)
+        Me.pbLogo.Size = New System.Drawing.Size(66, 80)
         Me.pbLogo.TabIndex = 50
         Me.pbLogo.TabStop = False
-        '
-        'btnPointer
-        '
-        Me.btnPointer.BackColor = System.Drawing.Color.White
-        Me.btnPointer.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.btnPointer.ForeColor = System.Drawing.Color.White
-        Me.btnPointer.Location = New System.Drawing.Point(0, 721)
-        Me.btnPointer.Name = "btnPointer"
-        Me.btnPointer.Size = New System.Drawing.Size(55, 47)
-        Me.btnPointer.TabIndex = 51
-        Me.btnPointer.Text = "1"
-        Me.btnPointer.UseVisualStyleBackColor = False
-        '
-        'TimerCheckAutoSleep
-        '
-        Me.TimerCheckAutoSleep.Enabled = True
-        Me.TimerCheckAutoSleep.Interval = 60000
         '
         'frmMain
         '

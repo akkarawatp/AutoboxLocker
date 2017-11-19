@@ -1,12 +1,7 @@
-﻿Imports System.ComponentModel
-Imports System.Data.SqlClient
-Imports System.IO
+﻿Imports System.IO
 Imports AutoboxLocker.Data
 Imports AutoboxLocker.Data.KioskConfigData
-Imports KioskLinqDB.ConnectDB
-Imports KioskLinqDB.TABLE
-
-
+Imports WebCamera
 
 Public Class frmDepositPayment
 
@@ -57,17 +52,21 @@ Public Class frmDepositPayment
         SetPaymentInformation()
         Application.DoEvents()
 
+#If DEBUG = False Then
         If IsInitialDevice = True Then
             StartPaymentInitialDevice()
             TimeOutCheckTime = DateTime.Now
         End If
-
+#End If
 
         If ServiceID = TransactionType.DepositBelonging Then
             InsertLogTransactionActivity(Deposit.DepositTransNo, "", "", KioskConfig.SelectForm, KioskLockerStep.DepositPayment_OpenForm, "ค่ามัดจำ " & Deposit.DepositAmount & " บาท", False)
+            DepositCaptureImage()
         ElseIf ServiceID = TransactionType.CollectBelonging Then
             InsertLogTransactionActivity(Collect.DepositTransNo, Collect.TransactionNo, "", KioskConfig.SelectForm, KioskLockerStep.PickupPayment_OpenForm, "ค่าบริการ " & Collect.ServiceAmount & " บาท ค่ามัดจำ " & Collect.DepositAmount & " บาท", False)
+            CollectCaptureImage()
         End If
+
 
     End Sub
 
@@ -251,6 +250,70 @@ Public Class frmDepositPayment
         End Try
     End Sub
 
+#End Region
+
+
+#Region "Capture Image"
+    Private Sub DepositCaptureImage()
+        Dim CamIndex As Integer = KioskConfig.WebCameraIndex
+        Dim pbImage As New PictureBox
+        Dim si As Integer = DSCamCapture.FrameSizes.s640x480
+        Dim SelectedSize As DSCamCapture.FrameSizes = CType(si, DSCamCapture.FrameSizes)
+        If WebCam.ConnectToDevice(CamIndex, 15, pbImage.ClientSize, SelectedSize, pbImage.Handle) = True Then
+            InsertLogTransactionActivity(Deposit.DepositTransNo, "", "", KioskConfig.SelectForm, KioskLockerStep.DepositPayment_ConnectWebcamSuccess, "", False)
+
+            'AddHandler WebCam.FrameSaved, AddressOf WebcamFrameSaved
+            AddHandler WebCam.FrameCaptured, AddressOf WebcamFrameCaptured
+            WebCam.Start()
+            WebCam.GetCurrentFrame()
+        Else
+            UpdateDepositStatus(Deposit.DepositTransactionID, DepositTransactionData.TransactionStatus.Problem, KioskLockerStep.DepositPayment_ConnectWebcamFail)
+            InsertErrorLog("ไม่สามารถเชื่อมต่อกับกล้อง Webcam ได้", Deposit.DepositTransNo, "", "", KioskConfig.SelectForm, KioskLockerStep.DepositPayment_ConnectWebcamFail)
+            InsertLogTransactionActivity(Deposit.DepositTransNo, "", "", KioskConfig.SelectForm, KioskLockerStep.DepositPayment_ConnectWebcamFail, "", True)
+
+            UpdateDeviceStatus(DeviceID.WebCamera, WebCameraStatus.Disconnected)
+            SendKioskAlarm("WEBCAMERA_DISCONNECTED", True)
+        End If
+
+    End Sub
+
+
+    Private Sub CollectCaptureImage()
+        Dim CamIndex As Integer = KioskConfig.WebCameraIndex
+        Dim pbImage As New PictureBox
+        Dim si As Integer = DSCamCapture.FrameSizes.s640x480
+        Dim SelectedSize As DSCamCapture.FrameSizes = CType(si, DSCamCapture.FrameSizes)
+        If WebCam.ConnectToDevice(CamIndex, 15, pbImage.ClientSize, SelectedSize, pbImage.Handle) = True Then
+            InsertLogTransactionActivity(Deposit.DepositTransNo, Collect.TransactionNo, "", KioskConfig.SelectForm, KioskLockerStep.PickupPayment_ConnectWebcamSuccess, "", False)
+
+            'AddHandler WebCam.FrameSaved, AddressOf WebcamFrameSaved
+            AddHandler WebCam.FrameCaptured, AddressOf WebcamFrameCaptured
+            WebCam.Start()
+            WebCam.GetCurrentFrame()
+        Else
+            UpdateDepositStatus(Deposit.DepositTransactionID, CollectTransactionData.TransactionStatus.Problem, KioskLockerStep.PickupPayment_ConnectWebcamFail)
+            InsertErrorLog("ไม่สามารถเชื่อมต่อกับกล้อง Webcam ได้", Deposit.DepositTransNo, Collect.TransactionNo, "", KioskConfig.SelectForm, KioskLockerStep.PickupPayment_ConnectWebcamFail)
+            InsertLogTransactionActivity(Deposit.DepositTransNo, Collect.TransactionNo, "", KioskConfig.SelectForm, KioskLockerStep.PickupPayment_ConnectWebcamFail, "", True)
+
+            UpdateDeviceStatus(DeviceID.WebCamera, WebCameraStatus.Disconnected)
+            SendKioskAlarm("WEBCAMERA_DISCONNECTED", True)
+        End If
+
+    End Sub
+
+    Private Sub WebcamFrameCaptured(capImage As Bitmap)
+        InsertLogTransactionActivity(Deposit.DepositTransNo, Collect.TransactionNo, "", KioskConfig.SelectForm, KioskLockerStep.DepositPayment_CaptureImageSuccess, "", False)
+
+        If ServiceID = TransactionType.DepositBelonging Then
+            Deposit.CustomerImage = Engine.ConverterENG.BitmapToByte(capImage)
+            UpdateServiceTransaction(Deposit)
+        ElseIf ServiceID = TransactionType.CollectBelonging Then
+            Collect.CustomerImage = Engine.ConverterENG.BitmapToByte(capImage)
+            UpdateCollectTransaction(Collect)
+        End If
+
+        WebCam.Dispose()
+    End Sub
 #End Region
 
     Private Sub BackgroundPayment()
