@@ -140,7 +140,7 @@ Public Class LockerBL
 
     Public Function Get_Report_Sales_Date_Range(ByVal KO_ID As Integer, ByVal OnlyCompleted As Boolean) As DataTable
         Dim SQL As String = "SELECT MIN(trans_start_time) TXN_Start,MAX(trans_end_time) TXN_End" & vbLf
-        SQL &= " FROM TB_SERVICE_TRANSACTION" & vbLf
+        SQL &= " FROM TB_DEPOSIT_TRANSACTION" & vbLf
 
 
         Dim DT As DataTable = ServerDB.ExecuteTable(SQL)

@@ -50,7 +50,7 @@ Partial Class frmDashboardOverview
     Private Function GetRemain(MsLocationID As Long) As Integer
         Dim ret As Integer = 0
         Dim sql As String = "select count(s.id) deposit_remain "
-        sql += " from TB_SERVICE_TRANSACTION s " & Environment.NewLine
+        sql += " from TB_DEPOSIT_TRANSACTION s " & Environment.NewLine
         sql += " left join TB_PICKUP_TRANSACTION p on p.deposit_trans_no=s.trans_no And p.trans_status = 1 " & Environment.NewLine
         sql += " inner join MS_KIOSK k On k.id=s.ms_kiosk_id " & Environment.NewLine
         sql += " where s.trans_status=1 " & Environment.NewLine
@@ -71,7 +71,7 @@ Partial Class frmDashboardOverview
     Private Function GetDepositToday(MsLocationID As Long) As Integer
         Dim ret As Integer = 0
         Dim sql As String = "select count(s.id) deposit_success "
-        sql += " from TB_SERVICE_TRANSACTION s " & Environment.NewLine
+        sql += " from TB_DEPOSIT_TRANSACTION s " & Environment.NewLine
         sql += " inner join MS_KIOSK k On k.id=s.ms_kiosk_id " & Environment.NewLine
         sql += " where s.trans_status=1 " & Environment.NewLine
         sql += " And k.ms_location_id=@_LOCATION_ID " & Environment.NewLine
@@ -93,7 +93,7 @@ Partial Class frmDashboardOverview
         Dim ret() As Integer = {0, 0}
         Dim sql As String = " Select sum(isnull(p.service_amt,0)) daily_sales," & vbNewLine
         sql += " count(p.id) collect_success" & vbNewLine
-        sql += " From TB_SERVICE_TRANSACTION s" & vbNewLine
+        sql += " From TB_DEPOSIT_TRANSACTION s" & vbNewLine
         sql += " inner Join TB_PICKUP_TRANSACTION p On s.trans_no=p.deposit_trans_no And p.trans_status = 1" & vbNewLine
         sql += " inner Join MS_KIOSK k on k.id=s.ms_kiosk_id" & vbNewLine
         sql += " inner Join MS_LOCATION l On l.id=k.ms_location_id " & vbNewLine

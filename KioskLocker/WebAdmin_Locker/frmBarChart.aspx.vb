@@ -22,7 +22,7 @@ Partial Class frmBarChart
         sql += "	convert(varchar(6), isnull(s.trans_start_time,s.paid_time),112) TXN_MONTH, " & vbNewLine
         sql += "	case when s.trans_status = '1' then 'SUCCESS' else 'LOST' end trans_status, 'DEPOSIT' trans_type, " & vbNewLine
         sql += "	s.ms_kiosk_id, count(s.id) trans_qty " & vbNewLine
-        sql += "	from TB_SERVICE_TRANSACTION s " & vbNewLine
+        sql += "	from TB_DEPOSIT_TRANSACTION s " & vbNewLine
         sql += "	group by s.ms_kiosk_id, datename(HOUR,isnull(s.trans_start_time,s.paid_time)) , " & vbNewLine
         sql += "	convert(varchar(6), isnull(s.trans_start_time,s.paid_time),112), " & vbNewLine
         sql += "	Case When s.trans_status = '1' then 'SUCCESS' else 'LOST' end " & vbNewLine

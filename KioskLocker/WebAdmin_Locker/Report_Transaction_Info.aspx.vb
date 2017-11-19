@@ -33,7 +33,7 @@ Public Class Report_Transaction_Info
         Dim sql As String = "select deposit_status_name, deposit_status, deposit_transaction_no, locker_name,location_name,com_name kiosk_name, " & Environment.NewLine
         sql += " card_type, nation_code, trans_start_time, deposit_paid_time, " & Environment.NewLine
         sql += " collect_transaction_no,collect_time, collect_paid_time,lost_qr_code, service_amt, service_time_str, " & Environment.NewLine
-        sql += " first_name + ' ' + last_name customer_name, birth_date, cust_image " & Environment.NewLine
+        sql += " first_name + ' ' + last_name customer_name, birth_date, cust_image deposit_cust_image, collect_cust_image " & Environment.NewLine
         sql += " from v_transaction_log" & Environment.NewLine
         sql += " where deposit_transaction_no=@_DEPOSIT_TRANS_NO" & Environment.NewLine
         sql += " order by isnull(collect_time,trans_start_time) desc" & Environment.NewLine
@@ -63,16 +63,16 @@ Public Class Report_Transaction_Info
 
         lblLocation.Text = hDr("location_name").ToString
         lblKioskName.Text = hDr("kiosk_name").ToString
-        lblCustomerName.Text = hDr("customer_name")  'ชื่อตามสกุล ไม่เป็นค่า Null แน่ๆ
-        If Convert.IsDBNull(hDr("birth_date")) = False Then
-            Dim vBirthDate As String = Convert.ToDateTime(hDr("birth_date")).ToString("MMM dd yyyy", New Globalization.CultureInfo("en-US"))
-            Dim vAge As String = DateTime.Now.Year - Convert.ToDateTime(hDr("birth_date")).Year
-            lblBirthDate.Text = vBirthDate & " (" & vAge & ")"
-        End If
-        If Convert.IsDBNull(hDr("card_type")) = False Then lblCardType.Text = hDr("card_type").ToString
-        If Convert.IsDBNull(hDr("nation_code")) = False Then lblNationCode.Text = hDr("nation_code").ToString
-        If Convert.IsDBNull(hDr("cust_image")) = False Then
-            imgCusImage.ImageUrl = "data:image/jpg;base64," & Convert.ToBase64String(hDr("cust_image"))
+        'lblCustomerName.Text = hDr("customer_name")  'ชื่อตามสกุล ไม่เป็นค่า Null แน่ๆ
+        'If Convert.IsDBNull(hDr("birth_date")) = False Then
+        '    Dim vBirthDate As String = Convert.ToDateTime(hDr("birth_date")).ToString("MMM dd yyyy", New Globalization.CultureInfo("en-US"))
+        '    Dim vAge As String = DateTime.Now.Year - Convert.ToDateTime(hDr("birth_date")).Year
+        '    lblBirthDate.Text = vBirthDate & " (" & vAge & ")"
+        'End If
+        'If Convert.IsDBNull(hDr("card_type")) = False Then lblCardType.Text = hDr("card_type").ToString
+        'If Convert.IsDBNull(hDr("nation_code")) = False Then lblNationCode.Text = hDr("nation_code").ToString
+        If Convert.IsDBNull(hDr("deposit_cust_image")) = False Then
+            imgCusImage.ImageUrl = "data:image/jpg;base64," & Convert.ToBase64String(hDr("deposit_cust_image"))
         Else
             imgCusImage.ImageUrl = "images/Person.png"
         End If
@@ -91,6 +91,11 @@ Public Class Report_Transaction_Info
         End If
         If Convert.IsDBNull(hDr("service_amt")) = False Then lblServiceAmt.Text = Convert.ToInt64(hDr("service_amt")).ToString("#,##0.00")
         If Convert.IsDBNull(hDr("service_time_str")) = False Then lblServiceTime.Text = hDr("service_time_str")
+        If Convert.IsDBNull(hDr("collect_cust_image")) = False Then
+            imgCollectCustImage.ImageUrl = "data:image/jpg;base64," & Convert.ToBase64String(hDr("collect_cust_image"))
+        Else
+            imgCollectCustImage.ImageUrl = "images/Person.png"
+        End If
 
         'LIST Deposit Activity
         sql = "select distinct trans_date, log_desc , is_problem " & Environment.NewLine

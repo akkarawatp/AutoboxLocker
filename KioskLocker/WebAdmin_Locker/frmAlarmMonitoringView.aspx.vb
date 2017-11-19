@@ -56,8 +56,6 @@ Public Class frmAlarmMonitoringView
         BindPeripheral()
         BindStock()
         BindLockerInformation()
-
-        'initFormPlugin()
     End Sub
 
     Private Sub initFormPlugin()
@@ -270,7 +268,7 @@ Public Class frmAlarmMonitoringView
         If dt.Rows.Count > 0 Then
             Dim sql As String = "select t.ms_locker_id, t.trans_start_time, t.passport_no, t.idcard_no, t.nation_code, " & vbNewLine
             sql += " t.first_name, t.last_name, t.cust_image, l.locker_name " & vbNewLine
-            sql += " from TB_SERVICE_TRANSACTION t " & vbNewLine
+            sql += " from TB_DEPOSIT_TRANSACTION t " & vbNewLine
             sql += " inner join MS_LOCKER l On l.id=t.ms_locker_id " & vbNewLine
             sql += " left join TB_PICKUP_TRANSACTION p On p.deposit_trans_no=t.trans_no and p.trans_status='1' " & vbNewLine
             sql += " where t.trans_status=1 And p.id Is null " & vbNewLine

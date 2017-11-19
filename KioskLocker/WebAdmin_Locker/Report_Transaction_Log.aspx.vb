@@ -78,7 +78,7 @@ Public Class Report_Transaction_Log
     Private Sub BindList()
         lblHeader.Text = "Customer Transaction Log "
 
-        Dim parm(10) As SqlParameter
+        Dim parm(9) As SqlParameter
         Dim wh As String = " deposit_status <> '0' "
 
         If ddlKiosk.SelectedValue <> "" Then
@@ -121,19 +121,19 @@ Public Class Report_Transaction_Log
             parm(5) = ServerDB.SetText("@_COLLECT_STATUS", ddlCollectStatus.SelectedValue)
             lblHeader.Text &= " Collect Status " & ddlCollectStatus.Items(ddlCollectStatus.SelectedIndex).Text & " "
         End If
-        If txtCustomer.Text.Trim <> "" Then
-            wh += " and (first_name like '%' + @_CUSTOMER + '%' "
-            wh += " or last_name like '%' + @_CUSTOMER + '%' "
-            wh += " or nation_code like '%' + @_CUSTOMER + '%' "
-            wh += " or idcard_no like '%' + @_CUSTOMER + '%' "
-            wh += " or passport_no like '%' + @_CUSTOMER + '%' )"
-            parm(6) = ServerDB.SetText("@_CUSTOMER", txtCustomer.Text.Trim)
-            lblHeader.Text &= " ลูกค้า " & txtCustomer.Text.Trim & " "
+        'If txtCustomer.Text.Trim <> "" Then
+        '    wh += " and (first_name like '%' + @_CUSTOMER + '%' "
+        '    wh += " or last_name like '%' + @_CUSTOMER + '%' "
+        '    wh += " or nation_code like '%' + @_CUSTOMER + '%' "
+        '    wh += " or idcard_no like '%' + @_CUSTOMER + '%' "
+        '    wh += " or passport_no like '%' + @_CUSTOMER + '%' )"
+        '    parm(6) = ServerDB.SetText("@_CUSTOMER", txtCustomer.Text.Trim)
+        '    lblHeader.Text &= " ลูกค้า " & txtCustomer.Text.Trim & " "
 
-        End If
+        'End If
         If ddlCabinetModel.SelectedValue <> "" Then
             wh += " and ms_cabinet_model_id=@_CABINET_MODEL_ID"
-            parm(7) = ServerDB.SetBigInt("@_CABINET_MODEL_ID", ddlCabinetModel.SelectedValue)
+            parm(6) = ServerDB.SetBigInt("@_CABINET_MODEL_ID", ddlCabinetModel.SelectedValue)
             lblHeader.Text &= " ขนาด " & ddlCabinetModel.Items(ddlCabinetModel.SelectedIndex).Text & " "
         End If
 
@@ -147,7 +147,7 @@ Public Class Report_Transaction_Log
             End If
 
             wh += " and trans_start_time  >= @_TIME_START"
-            parm(8) = ServerDB.SetText("@_TIME_START", TimeStart)
+            parm(7) = ServerDB.SetText("@_TIME_START", TimeStart)
         End If
 
         If txtEndDate.Text.Trim <> "" Then
@@ -160,7 +160,7 @@ Public Class Report_Transaction_Log
             End If
 
             wh += " and  trans_start_time <= @_TIME_END"
-            parm(9) = ServerDB.SetText("@_TIME_END", TimeEnd)
+            parm(8) = ServerDB.SetText("@_TIME_END", TimeEnd)
         End If
 
         Dim sql As String = " select * from v_transaction_log"
@@ -191,11 +191,11 @@ Public Class Report_Transaction_Log
         Dim lblKiosk As Label = e.Item.FindControl("lblKiosk")
         Dim lblLockerName As Label = e.Item.FindControl("lblLockerName")
         Dim lblDepositAmt As Label = e.Item.FindControl("lblDepositAmt")
-        Dim lblCustomerName As Label = e.Item.FindControl("lblCustomerName")
-        Dim lblBirthDate As Label = e.Item.FindControl("lblBirthDate")
-        Dim lblAge As Label = e.Item.FindControl("lblAge")
-        Dim lblCardType As Label = e.Item.FindControl("lblCardType")
-        Dim lblNationality As Label = e.Item.FindControl("lblNationality")
+        'Dim lblCustomerName As Label = e.Item.FindControl("lblCustomerName")
+        'Dim lblBirthDate As Label = e.Item.FindControl("lblBirthDate")
+        'Dim lblAge As Label = e.Item.FindControl("lblAge")
+        'Dim lblCardType As Label = e.Item.FindControl("lblCardType")
+        'Dim lblNationality As Label = e.Item.FindControl("lblNationality")
         Dim lblDepositPaidTime As Label = e.Item.FindControl("lblDepositPaidTime")
         Dim lblLastActivity As Label = e.Item.FindControl("lblLastActivity")
         Dim lblDepositPaymentCoin5 As Label = e.Item.FindControl("lblDepositPaymentCoin5")
@@ -214,7 +214,7 @@ Public Class Report_Transaction_Log
         Dim lblCollectPaidTime As Label = e.Item.FindControl("lblCollectPaidTime")
         Dim lblCollectStatus As Label = e.Item.FindControl("lblCollectStatus")
 
-        Dim lblCollectCardType As Label = e.Item.FindControl("lblCollectCardType")
+        Dim lblCollectBy As Label = e.Item.FindControl("lblCollectBy")
         Dim lblServiceTime As Label = e.Item.FindControl("lblServiceTime")
         Dim lblServiceAmt As Label = e.Item.FindControl("lblServiceAmt")
         Dim lblCollectPaymentCoin5 As Label = e.Item.FindControl("lblCollectPaymentCoin5")
@@ -248,14 +248,14 @@ Public Class Report_Transaction_Log
             lblKiosk.Text = .DataItem("com_name").ToString
             If Convert.IsDBNull(.DataItem("locker_name")) = False Then lblLockerName.Text = .DataItem("locker_name").ToString
             If .DataItem("deposit_status").ToString = "1" Or .DataItem("deposit_status").ToString = "5" Then lblDepositAmt.Text = .DataItem("deposit_amt").ToString  'Success แล้วถึงจะแสดง
-            lblCustomerName.Text = .DataItem("first_name").ToString & " " & .DataItem("last_name").ToString
-            If Convert.IsDBNull(.DataItem("birth_date")) = False Then
-                lblBirthDate.Text = Convert.ToDateTime(.DataItem("birth_date")).ToString("MMM dd yyyy", New Globalization.CultureInfo("en-US"))
-                lblAge.Text = DateTime.Now.Year - Convert.ToDateTime(.DataItem("birth_date")).Year
-            End If
+            'lblCustomerName.Text = .DataItem("first_name").ToString & " " & .DataItem("last_name").ToString
+            'If Convert.IsDBNull(.DataItem("birth_date")) = False Then
+            '    lblBirthDate.Text = Convert.ToDateTime(.DataItem("birth_date")).ToString("MMM dd yyyy", New Globalization.CultureInfo("en-US"))
+            '    lblAge.Text = DateTime.Now.Year - Convert.ToDateTime(.DataItem("birth_date")).Year
+            'End If
 
-            If Convert.IsDBNull(.DataItem("card_type")) = False Then lblCardType.Text = .DataItem("card_type").ToString
-            If Convert.IsDBNull(.DataItem("nation_code")) = False Then lblNationality.Text = .DataItem("nation_code").ToString
+            'If Convert.IsDBNull(.DataItem("card_type")) = False Then lblCardType.Text = .DataItem("card_type").ToString
+            'If Convert.IsDBNull(.DataItem("nation_code")) = False Then lblNationality.Text = .DataItem("nation_code").ToString
             If Convert.IsDBNull(.DataItem("deposit_paid_time")) = False Then lblDepositPaidTime.Text = Convert.ToDateTime(.DataItem("deposit_paid_time")).ToString("MMM dd yyyy HH:mm:ss", en_US)
             If Convert.IsDBNull(.DataItem("step_name_th")) = False Then lblLastActivity.Text = .DataItem("step_name_th")
             If .DataItem("deposit_payment_coin5") > 0 Then lblDepositPaymentCoin5.Text = .DataItem("deposit_payment_coin5")
@@ -289,18 +289,17 @@ Public Class Report_Transaction_Log
 
             If Convert.IsDBNull(.DataItem("lost_qr_code")) = False Then
                 If .DataItem("lost_qr_code") <> "Z" Then
-                    'lblCollectCardType.Text = IIf(.DataItem("lost_qr_code") = "Y", "YES", "NO")
                     If .DataItem("lost_qr_code") = "Y" Then
-                        If Convert.IsDBNull(.DataItem("card_type")) = False Then lblCollectCardType.Text = .DataItem("card_type")
+                        lblCollectBy.Text = "PIN Code"
                     Else
-                        lblCollectCardType.Text = "QR Code"
+                        lblCollectBy.Text = "QR Code"
                     End If
                 End If
             End If
 
             If Convert.IsDBNull(.DataItem("deposit_status")) = False And Convert.IsDBNull(.DataItem("collect_status")) = False Then
                 If .DataItem("deposit_status") = "1" And .DataItem("collect_status") = "1" Then
-                    lblServiceTime.Text = .DataItem("service_time_str").ToString 'CalTransactionServiceTime(Convert.ToDateTime(.DataItem("deposit_paid_time")), Convert.ToDateTime(.DataItem("collect_time")))
+                    lblServiceTime.Text = .DataItem("service_time_str").ToString
                     If Convert.IsDBNull(.DataItem("service_amt")) = False Then lblServiceAmt.Text = Convert.ToDouble(.DataItem("service_amt")).ToString("#,##0")
                 End If
             End If
@@ -316,7 +315,7 @@ Public Class Report_Transaction_Log
             If .DataItem("collect_change_banknote20") > 0 Then lblCollectChangeBanknote20.Text = .DataItem("collect_change_banknote20")
             If .DataItem("collect_change_banknote100") > 0 Then lblCollectChangeBanknote100.Text = .DataItem("collect_change_banknote100")
 
-            For i As Integer = 1 To 41
+            For i As Integer = 1 To 36
                 Dim td As HtmlTableCell = .FindControl("td" & i)
                 td.Attributes("onclick") = "openPrintWindow('Report_Transaction_Info.aspx?T=" & e.Item.DataItem("deposit_transaction_no").ToString & "',1000,800);"
             Next

@@ -72,18 +72,6 @@
                                 <td>Kiosk :</td>
                                 <td class="h5"><asp:Label ID="lblKioskName" runat="server"></asp:Label></td>
                             </tr>
-                            <tr>
-                                <td>Customer Name :</td>
-                                <td class="h5"><asp:Label ID="lblCustomerName" runat="server"></asp:Label></td>
-                                <td>Birth Date :</td>
-                                <td class="h5"><asp:Label ID="lblBirthDate" runat="server"></asp:Label></td>
-                            </tr>
-                            <tr>
-                                <td>Card Type :</td>
-                                <td class="h5"><asp:Label ID="lblCardType" runat="server"></asp:Label></td>                    
-                                <td>Nationality :</td>
-                                <td class="h5"><asp:Label ID="lblNationCode" runat="server"></asp:Label></td>
-                            </tr>
                             
                             <tr>
                                 <td>Deposit Start Time :</td>
@@ -92,11 +80,16 @@
                                 <td class="h5"><asp:Label ID="lblDepositPaidTime" runat="server"></asp:Label></td>                    
                             </tr>
                             <tr><th colspan="4">&nbsp;</th></tr>
+                            <tr><th colspan="4">&nbsp;</th></tr>
+                            <tr><th colspan="4">&nbsp;</th></tr>
                             <tr>
                                 <td>Collect Transaction :</td>
                                 <td class="h5"><asp:Label ID="lblCollectTransNo" runat="server"></asp:Label></td> 
                                 <td>Collect Time :</td> 
-                                <td class="h5"><asp:Label ID="lblCollectTime" runat="server"></asp:Label></td>                  
+                                <td class="h5"><asp:Label ID="lblCollectTime" runat="server"></asp:Label></td>
+                                <td rowspan="5">
+                                    <asp:Image ID="imgCollectCustImage" runat="server"  Width="148px" Height="177px" BorderWidth="1" />
+                                </td>              
                             </tr>  
                             <tr>
                                 <td>Lost QR Code :</td>
@@ -109,7 +102,9 @@
                                 <td class="h5"><asp:Label ID="lblServiceAmt" runat="server"></asp:Label></td> 
                                 <td>Service Time :</td> 
                                 <td class="h5"><asp:Label ID="lblServiceTime" runat="server"></asp:Label></td>                  
-                            </tr>                
+                            </tr>
+                            <tr><th colspan="4">&nbsp;</th></tr>
+                            <tr><th colspan="4">&nbsp;</th></tr>              
                       </tbody>
                     </table>  
                 </div>

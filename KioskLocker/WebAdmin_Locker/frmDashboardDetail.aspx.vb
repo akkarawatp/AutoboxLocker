@@ -45,7 +45,7 @@ Partial Class frmDashboardDetail
     Private Sub BindLinePoint(UserName As String, LocationID As Long)
         Dim sql As String = "select s.ms_kiosk_id, convert(date, p.pickup_time) TXN_DATE, convert(varchar(8),p.pickup_time,112) wh_date," & vbNewLine
         sql += " sum(p.service_amt) net_income" & vbNewLine
-        sql += " from TB_SERVICE_TRANSACTION s" & vbNewLine
+        sql += " from TB_DEPOSIT_TRANSACTION s" & vbNewLine
         sql += " inner join tb_pickup_transaction p On s.trans_no=p.deposit_trans_no" & vbNewLine
         sql += " inner join MS_KIOSK k on k.id=s.ms_kiosk_id" & vbNewLine
         sql += " where s.trans_status=1 and p.trans_status=1 " & vbNewLine
@@ -101,7 +101,7 @@ Partial Class frmDashboardDetail
     Private Sub BindLine(UserName As String, LocationID As Long)
         Dim sql As String = "select s.ms_kiosk_id, convert(date, p.pickup_time) TXN_DATE, convert(varchar(8),p.pickup_time,112) wh_date," & vbNewLine
         sql += " sum(p.service_amt) net_income" & vbNewLine
-        sql += " from TB_SERVICE_TRANSACTION s" & vbNewLine
+        sql += " from TB_DEPOSIT_TRANSACTION s" & vbNewLine
         sql += " inner join tb_pickup_transaction p On s.trans_no=p.deposit_trans_no" & vbNewLine
         sql += " inner join MS_KIOSK k on k.id=s.ms_kiosk_id" & vbNewLine
         sql += " where s.trans_status=1 and p.trans_status=1 " & vbNewLine
@@ -200,7 +200,7 @@ Partial Class frmDashboardDetail
         sql += " 	convert(varchar(6),isnull(s.trans_start_time,s.paid_time),112) TXN_MONTH, "
         sql += " 	Case When s.trans_status = '1' then 'SUCCESS' else 'LOST' end trans_status, 'DEPOSIT' trans_type, "
         sql += " 	count(s.id) trans_qty, s.ms_kiosk_id "
-        sql += " 	from TB_SERVICE_TRANSACTION s "
+        sql += " 	from TB_DEPOSIT_TRANSACTION s "
         sql += " 	group by datename(YEAR,isnull(s.trans_start_time,s.paid_time)) , "
         sql += " 	datename(MONTH,isnull(s.trans_start_time,s.paid_time)) , "
         sql += " 	convert(varchar(6),isnull(s.trans_start_time,s.paid_time),112) , "
@@ -344,7 +344,7 @@ Partial Class frmDashboardDetail
         sql += "	convert(varchar(6), isnull(s.trans_start_time,s.paid_time),112) TXN_MONTH, " & vbNewLine
         sql += "	case when s.trans_status = '1' then 'SUCCESS' else 'LOST' end trans_status, 'DEPOSIT' trans_type, " & vbNewLine
         sql += "	s.ms_kiosk_id, count(s.id) trans_qty " & vbNewLine
-        sql += "	from TB_SERVICE_TRANSACTION s " & vbNewLine
+        sql += "	from TB_DEPOSIT_TRANSACTION s " & vbNewLine
         sql += "	group by s.ms_kiosk_id, datename(HOUR,isnull(s.trans_start_time,s.paid_time)) , " & vbNewLine
         sql += "	convert(varchar(6), isnull(s.trans_start_time,s.paid_time),112), " & vbNewLine
         sql += "	Case When s.trans_status = '1' then 'SUCCESS' else 'LOST' end " & vbNewLine

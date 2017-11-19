@@ -150,16 +150,6 @@
                         </div>
                     </div>                    
                 </div> 
-
-                <div class="col-lg-6 m-t">
-                    <div class="form-group">
-                        <label class="col-sm-4 control-label-right">Customer</label>
-                        <div class="col-sm-8">                      
-                            <asp:TextBox CssClass="form-control" ID="txtCustomer" PlaceHolder="Customer Name, Nationality, ID Card No, Passport No" runat="server" />
-                        </div>
-                    </div>                    
-                </div>
-
                 <div class="col-lg-6 m-t">
                     <div class="form-group">
                         <label class="col-sm-4 control-label-right">Locker Size</label>
@@ -168,6 +158,17 @@
                         </div>
                     </div>                    
                 </div> 
+
+                <div class="col-lg-6 m-t">
+                    <div class="form-group">
+                        <label class="col-sm-4 control-label-right"></label>
+                        <div class="col-sm-8">                      
+                            
+                        </div>
+                    </div>                    
+                </div>
+
+                
             </div>
             <div class="row">
                 <div class="col-lg-6 m-t">
@@ -243,11 +244,12 @@
                             <th rowspan="3">KIOSK</th>
                             <th rowspan="3">LOCKER</th>
                             <th rowspan="3">DEPOSIT AMOUNT</th>
-                            <th rowspan="3">CUSTOMER NAME</th>
+                            
+                            <%--<th rowspan="3">CUSTOMER NAME</th>
                             <th rowspan="3">BIRTH DATE</th>
                             <th rowspan="3">AGE</th>
                             <th rowspan="3">CARD TYPE</th>
-                            <th rowspan="3">NATIONALITY</th>
+                            <th rowspan="3">NATIONALITY</th>--%>
 
                             <th rowspan="3">PAID TIME</th>
                             <th rowspan="3">LAST ACTIVITY</th>
@@ -313,41 +315,36 @@
                                     <td data-title="Kiosk" id="td5" runat="server"><asp:Label ID="lblKiosk" runat="server"></asp:Label></td>
                                     <td data-title="Locker" id="td6" runat="server"><asp:Label ID="lblLockerName" runat="server"></asp:Label></td>
                                     <td data-title="Deposit Amount" id="td7" runat="server"><asp:Label ID="lblDepositAmt" runat="server"></asp:Label></td>
-                                    <td data-title="Customer Name" id="td8" runat="server"><asp:Label ID="lblCustomerName" runat="server"></asp:Label></td>
-                                    <td data-title="Birth Date" id="td40" runat="server"><asp:Label ID="lblBirthDate" runat="server"></asp:Label></td>
-                                    <td data-title="Age" id="td41" runat="server"><asp:Label ID="lblAge" runat="server"></asp:Label></td>
-                                    <td data-title="Card Type" id="td9" runat="server"><asp:Label ID="lblCardType" runat="server"></asp:Label></td>
-                                    <td data-title="Nationality" id="td10" runat="server"><asp:Label ID="lblNationality" runat="server"></asp:Label></td>
-                                    <td data-title="Deposit Paid Time" id="td11" runat="server"><asp:Label ID="lblDepositPaidTime" runat="server"></asp:Label></td>                          
-                                    <td data-title="Last Activity" id="td12" runat="server"><asp:Label ID="lblLastActivity" runat="server"></asp:Label></td>
-                                    <td data-title="Deposit Payment Coin5" id="td13" runat="server"><asp:Label ID="lblDepositPaymentCoin5" runat="server"></asp:Label></td>
-                                    <td data-title="Deposit Payment Coin10" id="td14" runat="server"><asp:Label ID="lblDepositPaymentCoin10" runat="server"></asp:Label></td>
-                                    <td data-title="Deposit Payment Banknote20" id="td15" runat="server"><asp:Label ID="lblDepositPaymentBanknote20" runat="server"></asp:Label></td>
-                                    <td data-title="Deposit Payment Banknote50" id="td16" runat="server"><asp:Label ID="lblDepositPaymentBanknote50" runat="server"></asp:Label></td>
-                                    <td data-title="Deposit Payment Banknote100" id="td17" runat="server"><asp:Label ID="lblDepositPaymentBanknote100" runat="server"></asp:Label></td>
-                                    <td data-title="Deposit Payment Banknote500" id="td18" runat="server"><asp:Label ID="lblDepositPaymentBanknote500" runat="server"></asp:Label></td>
-                                    <td data-title="Deposit Payment Banknote1000" id="td19" runat="server"><asp:Label ID="lblDepositPaymentBanknote1000" runat="server"></asp:Label></td>
-                                    <td data-title="Deposit Change Coin5" id="td20" runat="server"><asp:Label ID="lblDepositChangeCoin5" runat="server"></asp:Label></td>
-                                    <td data-title="Deposit Change Banknote20" id="td21" runat="server"><asp:Label ID="lblDepositChangeBanknote20" runat="server"></asp:Label></td>
-                                    <td data-title="Deposit Change Banknote100" id="td22" runat="server"><asp:Label ID="lblDepositChangeBanknote100" runat="server"></asp:Label></td>
+                                    <td data-title="Deposit Paid Time" id="td8" runat="server"><asp:Label ID="lblDepositPaidTime" runat="server"></asp:Label></td>                          
+                                    <td data-title="Last Activity" id="td9" runat="server"><asp:Label ID="lblLastActivity" runat="server"></asp:Label></td>
+                                    <td data-title="Deposit Payment Coin5" id="td10" runat="server"><asp:Label ID="lblDepositPaymentCoin5" runat="server"></asp:Label></td>
+                                    <td data-title="Deposit Payment Coin10" id="td11" runat="server"><asp:Label ID="lblDepositPaymentCoin10" runat="server"></asp:Label></td>
+                                    <td data-title="Deposit Payment Banknote20" id="td12" runat="server"><asp:Label ID="lblDepositPaymentBanknote20" runat="server"></asp:Label></td>
+                                    <td data-title="Deposit Payment Banknote50" id="td13" runat="server"><asp:Label ID="lblDepositPaymentBanknote50" runat="server"></asp:Label></td>
+                                    <td data-title="Deposit Payment Banknote100" id="td14" runat="server"><asp:Label ID="lblDepositPaymentBanknote100" runat="server"></asp:Label></td>
+                                    <td data-title="Deposit Payment Banknote500" id="td15" runat="server"><asp:Label ID="lblDepositPaymentBanknote500" runat="server"></asp:Label></td>
+                                    <td data-title="Deposit Payment Banknote1000" id="td16" runat="server"><asp:Label ID="lblDepositPaymentBanknote1000" runat="server"></asp:Label></td>
+                                    <td data-title="Deposit Change Coin5" id="td17" runat="server"><asp:Label ID="lblDepositChangeCoin5" runat="server"></asp:Label></td>
+                                    <td data-title="Deposit Change Banknote20" id="td18" runat="server"><asp:Label ID="lblDepositChangeBanknote20" runat="server"></asp:Label></td>
+                                    <td data-title="Deposit Change Banknote100" id="td19" runat="server"><asp:Label ID="lblDepositChangeBanknote100" runat="server"></asp:Label></td>
                                     
-                                    <td data-title="Collect Transaction No" id="td23" runat="server"><asp:Label ID="lblCollectTransactionNo" runat="server"></asp:Label></td>
-                                    <td data-title="Collect Time" id="td24" runat="server"><asp:Label ID="lblCollectTime" runat="server"></asp:Label></td>
-                                    <td data-title="Paid Time" id="td25" runat="server"><asp:Label ID="lblCollectPaidTime" runat="server"></asp:Label></td>
-                                    <td data-title="Collect Status" id="td26" runat="server"><asp:Label ID="lblCollectStatus" runat="server"></asp:Label></td>
-                                    <td data-title="Collect Card Type" id="td27" runat="server"><asp:Label ID="lblCollectCardType" runat="server"></asp:Label></td>
-                                    <td data-title="Service Time" id="td28" runat="server"><asp:Label ID="lblServiceTime" runat="server"></asp:Label></td>
-                                    <td data-title="Service Amount" id="td29" runat="server"><asp:Label ID="lblServiceAmt" runat="server"></asp:Label></td>
-                                    <td data-title="Collect Payment Coin5" id="td30" runat="server"><asp:Label ID="lblCollectPaymentCoin5" runat="server"></asp:Label></td>
-                                    <td data-title="Collect Payment Coin10" id="td31" runat="server"><asp:Label ID="lblCollectPaymentCoin10" runat="server"></asp:Label></td>
-                                    <td data-title="Collect Payment Banknote20" id="td32" runat="server"><asp:Label ID="lblCollectPaymentBanknote20" runat="server"></asp:Label></td>
-                                    <td data-title="Collect Payment Banknote50" id="td33" runat="server"><asp:Label ID="lblCollectPaymentBanknote50" runat="server"></asp:Label></td>
-                                    <td data-title="Collect Payment Banknote100" id="td34" runat="server"><asp:Label ID="lblCollectPaymentBanknote100" runat="server"></asp:Label></td>
-                                    <td data-title="Collect Payment Banknote500" id="td35" runat="server"><asp:Label ID="lblCollectPaymentBanknote500" runat="server"></asp:Label></td>
-                                    <td data-title="Collect Payment Banknote1000" id="td36" runat="server"><asp:Label ID="lblCollectPaymentBanknote1000" runat="server"></asp:Label></td>
-                                    <td data-title="Collect Change Coin5" id="td37" runat="server"><asp:Label ID="lblCollectChangeCoin5" runat="server"></asp:Label></td>
-                                    <td data-title="Collect Change Banknote20" id="td38" runat="server"><asp:Label ID="lblCollectChangeBanknote20" runat="server"></asp:Label></td>
-                                    <td data-title="Collect Change Banknote100" id="td39" runat="server"><asp:Label ID="lblCollectChangeBanknote100" runat="server"></asp:Label></td>
+                                    <td data-title="Collect Transaction No" id="td20" runat="server"><asp:Label ID="lblCollectTransactionNo" runat="server"></asp:Label></td>
+                                    <td data-title="Collect Time" id="td21" runat="server"><asp:Label ID="lblCollectTime" runat="server"></asp:Label></td>
+                                    <td data-title="Paid Time" id="td22" runat="server"><asp:Label ID="lblCollectPaidTime" runat="server"></asp:Label></td>
+                                    <td data-title="Collect Status" id="td23" runat="server"><asp:Label ID="lblCollectStatus" runat="server"></asp:Label></td>
+                                    <td data-title="Collect By" id="td24" runat="server"><asp:Label ID="lblCollectBy" runat="server"></asp:Label></td>
+                                    <td data-title="Service Time" id="td25" runat="server"><asp:Label ID="lblServiceTime" runat="server"></asp:Label></td>
+                                    <td data-title="Service Amount" id="td26" runat="server"><asp:Label ID="lblServiceAmt" runat="server"></asp:Label></td>
+                                    <td data-title="Collect Payment Coin5" id="td27" runat="server"><asp:Label ID="lblCollectPaymentCoin5" runat="server"></asp:Label></td>
+                                    <td data-title="Collect Payment Coin10" id="td28" runat="server"><asp:Label ID="lblCollectPaymentCoin10" runat="server"></asp:Label></td>
+                                    <td data-title="Collect Payment Banknote20" id="td29" runat="server"><asp:Label ID="lblCollectPaymentBanknote20" runat="server"></asp:Label></td>
+                                    <td data-title="Collect Payment Banknote50" id="td30" runat="server"><asp:Label ID="lblCollectPaymentBanknote50" runat="server"></asp:Label></td>
+                                    <td data-title="Collect Payment Banknote100" id="td31" runat="server"><asp:Label ID="lblCollectPaymentBanknote100" runat="server"></asp:Label></td>
+                                    <td data-title="Collect Payment Banknote500" id="td32" runat="server"><asp:Label ID="lblCollectPaymentBanknote500" runat="server"></asp:Label></td>
+                                    <td data-title="Collect Payment Banknote1000" id="td33" runat="server"><asp:Label ID="lblCollectPaymentBanknote1000" runat="server"></asp:Label></td>
+                                    <td data-title="Collect Change Coin5" id="td34" runat="server"><asp:Label ID="lblCollectChangeCoin5" runat="server"></asp:Label></td>
+                                    <td data-title="Collect Change Banknote20" id="td35" runat="server"><asp:Label ID="lblCollectChangeBanknote20" runat="server"></asp:Label></td>
+                                    <td data-title="Collect Change Banknote100" id="td36" runat="server"><asp:Label ID="lblCollectChangeBanknote100" runat="server"></asp:Label></td>
                                 </tr>      
                             </ItemTemplate>
                         </asp:Repeater>                        
