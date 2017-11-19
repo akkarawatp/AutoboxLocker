@@ -63,7 +63,7 @@
         <!-- /toggle offscreen menu -->
         <!-- logo -->
         <a class="brand-logo">
-          <img src="Images/Logo.png" class="LogoBig" width="583" height="216" />
+          <img src="Images/Logo.png" class="LogoBig"  />
         </a>
         <a href="#" class="small-menu-visible brand-logo">
           <img src="Images/Logo_Small.png" class="LogoSmall"  />

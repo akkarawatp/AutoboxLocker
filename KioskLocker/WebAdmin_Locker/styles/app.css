@@ -1874,7 +1874,7 @@ figure:hover:before {
 .brand {
     position: relative;
     width: 100%;
-    height: 3.438rem;
+    height: 10rem;
     display: block;
 }
 
@@ -1898,9 +1898,10 @@ figure:hover:before {
     }
 
         .brand .brand-logo img.LogoBig {
-            height: 60px;
+            height: 155px;
             width: auto;
-            padding: 0 5rem;
+            padding: 0 2rem;
+            
         }
 
         .brand .brand-logo img.LogoSmall {
@@ -3428,7 +3429,7 @@ footer.session-footer {
     .layout-fixed-header.layout-small-menu .sidebar-panel > nav,
     .layout-fixed-header.layout-boxed .sidebar-panel > nav,
     .layout-fixed-header.layout-static-sidebar .sidebar-panel > nav {
-        margin-top: 3.438rem;
+        margin-top: 6.438rem;
     }
     /* Footer */
     footer.content-footer {
