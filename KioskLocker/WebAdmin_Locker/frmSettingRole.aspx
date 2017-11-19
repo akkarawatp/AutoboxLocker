@@ -177,19 +177,19 @@
                                         <li class="" id="liTabAdminWeb" runat="server">
                                             <asp:LinkButton ID="btnTabAdminWeb" runat="server">
                                                 <div class="iti-flag gb" style="float:left; margin-top:3px; margin-right:3px; cursor:pointer;"></div> <span>Admin Web</span>
-                                                <span class="badge pull-right text-white bg-green"><asp:Label ID="lblBadgeAdmin" runat="server"></asp:Label></span>
+                                                <span class="badge pull-right text-white bg-blue"><asp:Label ID="lblBadgeAdmin" runat="server"></asp:Label></span>
                                             </asp:LinkButton>
                                         </li>
                                         <li class="" id="liTabStaffConsole" runat="server">
                                             <asp:LinkButton ID="btnTabStaffConsole" runat="server">
                                                 <div class="iti-flag ru" style="float:left; margin-top:0px; margin-right:3px; cursor:pointer;"></div> <span>Kiosk' Staff Console</span>
-                                                <span class="badge pull-right text-white bg-green"><asp:Label ID="lblBadgeStaffConsole" runat="server"></asp:Label></span>
+                                                <span class="badge pull-right text-white bg-blue"><asp:Label ID="lblBadgeStaffConsole" runat="server"></asp:Label></span>
                                             </asp:LinkButton>
                                         </li>                                    
                                         <li class="" id="liTabMembers" runat="server">
                                             <asp:LinkButton ID="btnTabMembers" runat="server">
                                                 <div class="iti-flag cn" style="float:left; margin-top:3px; margin-right:3px; cursor:pointer;"></div> <span>Members List</span>
-                                                <span class="badge pull-right text-white bg-green"><asp:Label ID="lblBadgeMember" runat="server"></asp:Label></span>
+                                                <span class="badge pull-right text-white bg-blue"><asp:Label ID="lblBadgeMember" runat="server"></asp:Label></span>
                                             </asp:LinkButton>
                                         </li>                            
                                       </ul>
@@ -241,7 +241,7 @@
                                                 <div class="row demo-button3">
                                                   <asp:Repeater ID="rptUser" runat="server">
                                                       <ItemTemplate>
-                                                        <span class="card-block bg-green-lighter text-white h5 user-item">
+                                                        <span class="card-block bg-blue-lighter text-white h5 user-item">
                                                             <i class="fa fa-user"></i>  
                                                             <asp:Label ID="lblUser" runat="server"></asp:Label> 
                                                             <asp:LinkButton ID="btnDelete" runat="server" CommandName="Delete">x</asp:LinkButton>

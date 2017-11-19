@@ -1484,8 +1484,8 @@ figure:hover:before {
     }
 
     .sidebar-panel > nav li.open.menu-accordion > a::before {
-        background: #36C3F2;
-        box-shadow: 0 0 0 0.0625rem #36C3F2;
+        background: #0000FF;
+        box-shadow: 0 0 0 0.0625rem #0000FF;
     }
 
     .sidebar-panel > nav > ul > li > ul {
@@ -1817,7 +1817,7 @@ figure:hover:before {
 
 /* default header skin */
 .main-panel > .header {
-    background-color: #36C3F2;
+    background-color: #0082f0;
 }
 
     .main-panel > .header .navbar-text {
@@ -3882,8 +3882,8 @@ footer.session-footer {
 
 /* Default Button Style */
 .btn-default {
-    color: #59595A;
-    background-color: #36C3F2;
+    color: #FFFFFF;
+    background-color:#6EC7E6;
     border-color: rgba(0, 0, 0, 0.04);
 }
 
@@ -3894,8 +3894,8 @@ footer.session-footer {
     }
 
     .btn-default:hover {
-        color: #59595A;
-        background-color: #36C309;
+        color: #FFFFFF;
+        background-color: #1115ea;
         border-color: rgba(0, 0, 0, 0.04);
     }
 
@@ -3998,9 +3998,9 @@ footer.session-footer {
 
 /* Warning Button Style */
 .btn-warning {
-    color: white;
-    background-color: #F2B776;
-    border-color: #F2B776;
+    color: #59595A;
+    background-color: #e2e2e2;
+    border-color: #e2e2e2;
 }
 
     .btn-warning:focus, .btn-warning.focus {
@@ -4010,9 +4010,9 @@ footer.session-footer {
     }
 
     .btn-warning:hover {
-        color: white;
-        background-color: #ee9f47;
-        border-color: #ed9a3e;
+        color: #59595A;
+        background-color: #c9c9c9;
+        border-color: #c9c9c9;
     }
 
     .btn-warning:active, .btn-warning.active,
@@ -4055,27 +4055,27 @@ footer.session-footer {
 /* Success Button Style */
 .btn-success {
     color: white;
-    background-color: #36C3F2;
-    border-color: #36C3F2;
+    background-color: #0082f0;
+    border-color: #0082f0;
 }
 
     .btn-success:focus, .btn-success.focus {
         color: white;
-        background-color: #36C3F1;
-        border-color: #36C3F1;
+        background-color: #0000FF;
+        border-color: #0000FF;
     }
 
     .btn-success:hover {
         color: white;
-        background-color: #36C3F1;
-        border-color: #36C3F1;
+        background-color: #0000FF;
+        border-color: #0000FF;
     }
 
     .btn-success:active, .btn-success.active,
     .open > .btn-success.dropdown-toggle {
         color: white;
-        background-color: #36C3F1;
-        border-color: #36C3F1;
+        background-color: #0000FF;
+        border-color: #0000FF;
     }
 
         .btn-success:active:hover, .btn-success:active:focus, .btn-success:active.focus, .btn-success.active:hover, .btn-success.active:focus, .btn-success.active.focus,
@@ -4083,8 +4083,8 @@ footer.session-footer {
         .open > .btn-success.dropdown-toggle:focus,
         .open > .btn-success.dropdown-toggle.focus {
             color: white;
-            background-color: #36C3F1;
-            border-color: #36C3F1;
+            background-color: #0000FF;
+            border-color: #0000FF;
         }
 
     .btn-success:active, .btn-success.active,
@@ -4099,8 +4099,8 @@ footer.session-footer {
     fieldset[disabled] .btn-success.focus,
     fieldset[disabled] .btn-success:active,
     fieldset[disabled] .btn-success.active {
-        background-color: #6FC080;
-        border-color: #6FC080;
+        background-color: #9499f6;
+        border-color: #9499f6;
     }
 
     .btn-success .badge {
@@ -5015,7 +5015,7 @@ button.list-group-item-danger {
             bottom: 0;
             left: 0;
             position: absolute;
-            background: #009900;
+            background: #0000FF;
             -webkit-animation: border-expand 0.2s cubic-bezier(0.4, 0, 0.4, 1) 0.01s alternate forwards;
             animation: border-expand 0.2s cubic-bezier(0.4, 0, 0.4, 1) 0.01s alternate forwards;
             -webkit-transition: all 1s cubic-bezier(0.4, 0, 1, 1);
@@ -9584,8 +9584,8 @@ ul.wysihtml5-toolbar {
 }
 
 .cb-checkbox.checked .cb-inner {
-    border-color: #009900;
-    background-color: #009900;
+    border-color: #0082f0;
+    background-color: #0082f0;
 }
 
 .cb-checkbox:hover .cb-inner {
@@ -12077,7 +12077,7 @@ li.app-noty {
 }
 
     .sk-wave .sk-rect {
-        background-color: #009900;
+        background-color: #0000FF;
         height: 100%;
         width: 6px;
         display: inline-block;

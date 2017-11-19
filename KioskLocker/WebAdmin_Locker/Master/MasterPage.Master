@@ -175,7 +175,7 @@
               <li id="mnu_Setting_Kiosk" runat="server">
                 <a href="frmMasterKiosk.aspx">
                   <i class="icon-screen-desktop"></i>
-                  <span>Kiosk</span>
+                  <span>Locker</span>
                 </a>
               </li>              
               <li id="mnu_Setting_Authorize" runat="server">

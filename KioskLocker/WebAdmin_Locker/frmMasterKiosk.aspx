@@ -72,7 +72,7 @@
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
     <div class="page-title">
-        <div class="title">Master Data > Kiosk</div>
+        <div class="title">Master Data > Locker</div>
         <div class="sub-title"></div>
     </div>
 <asp:UpdatePanel ID="udpList" runat="server">
@@ -90,7 +90,7 @@
                              <div class="card card-block no-border bg-white row-equal align-middle">
                                  <div class="col-sm-3">
                                      <div class="col-sm-12">
-                                         <h3 class="m-a-0 text-green" id="h3" runat="server">
+                                         <h3 class="m-a-0 text-blue" id="h3" runat="server">
                                              <asp:Label ID="lblComName" runat="server"></asp:Label>
 
                                          </h3>
@@ -149,19 +149,19 @@
     <ContentTemplate>
          <asp:Panel ID="pnlEdit" runat="server" Visible="false"  CssClass="card bg-white">
               <div class="card-header">
-                <asp:Label ID="lblEditMode" runat="server"></asp:Label> Kiosk
+                <asp:Label ID="lblEditMode" runat="server"></asp:Label> Locker
               </div>
               <div class="card-block">
                 <div class="row m-a-0">
                   <div class="col-lg-12 form-horizontal">
                   <div class="row m-b">
-                      <h4 class="card-title">Kiosk Info  : &nbsp; &nbsp; <span class="h3 m-a-0 text-green m-l" id="lblKioskCode" runat="server"></span></h4> 
+                      <h4 class="card-title">Locker Info  : &nbsp; &nbsp; <span class="h3 m-a-0 text-blue m-l" id="lblKioskCode" runat="server"></span></h4> 
                       <div class="form-group">
                         <label class="col-sm-2 control-label">Location</label>
                         <div class="col-sm-4">
                               <asp:DropDownList ID="ddlLocation" runat="server" data-placeholder="Select location" AutoPostBack="true" CssClass="chosen form-control" Width="100%">
                               </asp:DropDownList>
-                        </div>                 
+                        </div>
                       </div>
                       <h4 class="card-title m-t">Network Information</h4>
 

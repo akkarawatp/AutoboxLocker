@@ -4,20 +4,9 @@
 
 <!-- page stylesheets -->
   <link rel="stylesheet" href="vendor/chosen_v1.4.0/chosen.min.css">
-  <%--<link rel="stylesheet" href="vendor/jquery.tagsinput/src/jquery.tagsinput.css">--%>
   <link rel="stylesheet" href="vendor/checkbo/src/0.1.4/css/checkBo.min.css" />
   <link rel="stylesheet" href="vendor/intl-tel-input/build/css/intlTelInput.css">
-  <%--<link rel="stylesheet" href="vendor/bootstrap-daterangepicker/daterangepicker-bs3.css">
-  <link rel="stylesheet" href="vendor/bootstrap-datepicker/dist/css/bootstrap-datepicker3.css">
-  <link rel="stylesheet" href="vendor/bootstrap-timepicker/css/bootstrap-timepicker.min.css">
-  <link rel="stylesheet" href="vendor/clockpicker/dist/bootstrap-clockpicker.min.css">
-  <link rel="stylesheet" href="vendor/mjolnic-bootstrap-colorpicker/dist/css/bootstrap-colorpicker.min.css">
-  <link rel="stylesheet" href="vendor/bootstrap-touchspin/dist/jquery.bootstrap-touchspin.min.css">
-  <link rel="stylesheet" href="vendor/jquery-labelauty/source/jquery-labelauty.css" />
-  <link rel="stylesheet" href="vendor/multiselect/css/multi-select.css">
-  <link rel="stylesheet" href="vendor/ui-select/dist/select.css">
-  <link rel="stylesheet" href="vendor/select2/dist/css/select2.css">
-  <link rel="stylesheet" href="vendor/selectize/dist/css/selectize.css">--%>
+  
   <!-- end page stylesheets -->
   <style type="text/css">
         table.table-bordered tbody tr td

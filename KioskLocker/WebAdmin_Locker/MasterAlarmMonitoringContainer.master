@@ -56,7 +56,7 @@
         <ContentTemplate>
             <div class="card-header bg-white h3">
                 <i class="icon-target"></i>Monitoring :
-                <asp:Label ID="lblKO_Alias" runat="server" CssClass="text-green"></asp:Label>
+                <asp:Label ID="lblKO_Alias" runat="server" CssClass="text-blue"></asp:Label>
                 <%-- <a href="javascript:;" id="iconCam" runat="server" class="h4 text-green pull-right"><i class="fa fa-video-camera"></i> Live Camera</a>--%>
             </div>
             <%-- <asp:Button ID="btnUpdateStatus" runat="server" style="display:none;" ClientIDMode="Static" />--%>
