@@ -211,7 +211,7 @@ Partial Class frmDepositPayment
         Me.lblLabelDepositAmt.Name = "lblLabelDepositAmt"
         Me.lblLabelDepositAmt.Size = New System.Drawing.Size(278, 50)
         Me.lblLabelDepositAmt.TabIndex = 85
-        Me.lblLabelDepositAmt.Text = "Initial Storage Fee"
+        Me.lblLabelDepositAmt.Text = "ค่ามัดจำ"
         Me.lblLabelDepositAmt.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
         '
         'lblDepositAmt
@@ -257,7 +257,7 @@ Partial Class frmDepositPayment
         Me.lblLabelLockerName.Name = "lblLabelLockerName"
         Me.lblLabelLockerName.Size = New System.Drawing.Size(196, 50)
         Me.lblLabelLockerName.TabIndex = 81
-        Me.lblLabelLockerName.Text = "Storage Box"
+        Me.lblLabelLockerName.Text = "ช่องฝาก"
         Me.lblLabelLockerName.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
         '
         'lblLockerName
@@ -341,7 +341,7 @@ Partial Class frmDepositPayment
         Me.lblPleasePaid.Name = "lblPleasePaid"
         Me.lblPleasePaid.Size = New System.Drawing.Size(516, 62)
         Me.lblPleasePaid.TabIndex = 91
-        Me.lblPleasePaid.Text = "Please pay the amount below"
+        Me.lblPleasePaid.Text = "กรุณาชำระ"
         Me.lblPleasePaid.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
         '
         'pnlPickupOpenLocker
