@@ -31,9 +31,9 @@ Public Class Report_Transaction_Info
 
     Private Sub BindLog()
         Dim sql As String = "select deposit_status_name, deposit_status, deposit_transaction_no, locker_name,location_name,com_name kiosk_name, " & Environment.NewLine
-        sql += " card_type, nation_code, trans_start_time, deposit_paid_time, " & Environment.NewLine
+        sql += " trans_start_time, deposit_paid_time, " & Environment.NewLine
         sql += " collect_transaction_no,collect_time, collect_paid_time,lost_qr_code, service_amt, service_time_str, " & Environment.NewLine
-        sql += " first_name + ' ' + last_name customer_name, birth_date, cust_image deposit_cust_image, collect_cust_image " & Environment.NewLine
+        sql += " cust_image deposit_cust_image, collect_cust_image " & Environment.NewLine
         sql += " from v_transaction_log" & Environment.NewLine
         sql += " where deposit_transaction_no=@_DEPOSIT_TRANS_NO" & Environment.NewLine
         sql += " order by isnull(collect_time,trans_start_time) desc" & Environment.NewLine

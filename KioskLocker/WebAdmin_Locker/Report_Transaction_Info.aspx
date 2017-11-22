@@ -62,8 +62,8 @@
                                 <td class="h5"><asp:Label ID="lblTransactionNo" runat="server"></asp:Label></td> 
                                 <td>Locker :</td> 
                                 <td class="h5"><asp:Label ID="lblLockerName" runat="server"></asp:Label></td>
-                                <td rowspan="5">
-                                    <asp:Image ID="imgCusImage" runat="server"  Width="148px" Height="177px" BorderWidth="1" />
+                                <td rowspan="4">
+                                    <asp:Image ID="imgCusImage" runat="server"  Width="180px" Height="135px" BorderWidth="1" />
                                 </td>                 
                             </tr>
                             <tr>
@@ -80,15 +80,13 @@
                                 <td class="h5"><asp:Label ID="lblDepositPaidTime" runat="server"></asp:Label></td>                    
                             </tr>
                             <tr><th colspan="4">&nbsp;</th></tr>
-                            <tr><th colspan="4">&nbsp;</th></tr>
-                            <tr><th colspan="4">&nbsp;</th></tr>
                             <tr>
                                 <td>Collect Transaction :</td>
                                 <td class="h5"><asp:Label ID="lblCollectTransNo" runat="server"></asp:Label></td> 
                                 <td>Collect Time :</td> 
                                 <td class="h5"><asp:Label ID="lblCollectTime" runat="server"></asp:Label></td>
-                                <td rowspan="5">
-                                    <asp:Image ID="imgCollectCustImage" runat="server"  Width="148px" Height="177px" BorderWidth="1" />
+                                <td rowspan="4">
+                                    <asp:Image ID="imgCollectCustImage" runat="server"  Width="180px" Height="135px" BorderWidth="1" />
                                 </td>              
                             </tr>  
                             <tr>
@@ -103,8 +101,7 @@
                                 <td>Service Time :</td> 
                                 <td class="h5"><asp:Label ID="lblServiceTime" runat="server"></asp:Label></td>                  
                             </tr>
-                            <tr><th colspan="4">&nbsp;</th></tr>
-                            <tr><th colspan="4">&nbsp;</th></tr>              
+                            <tr><th colspan="4">&nbsp;</th></tr>           
                       </tbody>
                     </table>  
                 </div>

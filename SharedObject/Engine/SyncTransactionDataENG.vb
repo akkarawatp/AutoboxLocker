@@ -116,10 +116,7 @@ Public Class SyncTransactionDataENG
                     kLnq.GetDataByPK(dr("id"), kTrans.Trans)
                     If kLnq.ID > 0 Then
                         Dim ServiceLockerID As Long = 0
-                        Dim vGender As String = ""
                         If Convert.IsDBNull(dr("ms_locker_id")) = False Then ServiceLockerID = dr("ms_locker_id")
-                        If kLnq.GENDER <> vbNullChar Then vGender = kLnq.GENDER.ToString
-
                         Try
                             ret = ws.SyncKioskDepositTransactionByRecord(cf.LOCATION_NAME, kLnq.TRANS_NO, kLnq.TRANS_START_TIME, kLnq.TRANS_END_TIME.Value, kLnq.MS_KIOSK_ID, ServiceLockerID, kLnq.PIN_CODE, kLnq.SERVICE_RATE, kLnq.SERVICE_RATE_LIMIT_DAY, kLnq.DEPOSIT_AMT, kLnq.PAID_TIME, kLnq.RECEIVE_COIN1, kLnq.RECEIVE_COIN2, kLnq.RECEIVE_COIN5, kLnq.RECEIVE_COIN10, kLnq.RECEIVE_BANKNOTE20, kLnq.RECEIVE_BANKNOTE50, kLnq.RECEIVE_BANKNOTE100, kLnq.RECEIVE_BANKNOTE500, kLnq.RECEIVE_BANKNOTE1000, kLnq.CHANGE_COIN1, kLnq.CHANGE_COIN2, kLnq.CHANGE_COIN5, kLnq.CHANGE_COIN10, kLnq.CHANGE_BANKNOTE20, kLnq.CHANGE_BANKNOTE50, kLnq.CHANGE_BANKNOTE100, kLnq.CHANGE_BANKNOTE500, kLnq.TRANS_STATUS, kLnq.MS_APP_SCREEN_ID, kLnq.MS_APP_STEP_ID)
                             If ret = "true" Then
