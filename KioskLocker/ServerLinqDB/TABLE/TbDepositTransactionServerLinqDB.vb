@@ -8,7 +8,7 @@ Imports ServerLinqDB.ConnectDB
 
 Namespace TABLE
     'Represents a transaction for TB_DEPOSIT_TRANSACTION table ServerLinqDB.
-    '[Create by  on November, 19 2017]
+    '[Create by  on November, 22 2017]
     Public Class TbDepositTransactionServerLinqDB
         Public sub TbDepositTransactionServerLinqDB()
 
@@ -49,15 +49,6 @@ Namespace TABLE
         Dim _TRANS_END_TIME As  System.Nullable(Of DateTime)  = New DateTime(1,1,1)
         Dim _MS_KIOSK_ID As Long = 0
         Dim _MS_LOCKER_ID As  System.Nullable(Of Long) 
-        Dim _PASSPORT_NO As  String  = ""
-        Dim _IDCARD_NO As  String  = ""
-        Dim _NATION_CODE As  String  = ""
-        Dim _FIRST_NAME As  String  = ""
-        Dim _LAST_NAME As  String  = ""
-        Dim _GENDER As  System.Nullable(Of Char)  = ""
-        Dim _BIRTH_DATE As  System.Nullable(Of DateTime)  = New DateTime(1,1,1)
-        Dim _PASSPORT_EXPIRE_DATE As  System.Nullable(Of DateTime)  = New DateTime(1,1,1)
-        Dim _IDCARD_EXPIRE_DATE As  System.Nullable(Of DateTime)  = New DateTime(1,1,1)
         Dim _PIN_CODE As  String  = ""
         Dim _CUST_IMAGE() As Byte
         Dim _SERVICE_RATE As Double = 0
@@ -175,87 +166,6 @@ Namespace TABLE
             End Get
             Set(ByVal value As  System.Nullable(Of Long) )
                _MS_LOCKER_ID = value
-            End Set
-        End Property 
-        <Column(Storage:="_PASSPORT_NO", DbType:="VarChar(50)")>  _
-        Public Property PASSPORT_NO() As  String 
-            Get
-                Return _PASSPORT_NO
-            End Get
-            Set(ByVal value As  String )
-               _PASSPORT_NO = value
-            End Set
-        End Property 
-        <Column(Storage:="_IDCARD_NO", DbType:="VarChar(50)")>  _
-        Public Property IDCARD_NO() As  String 
-            Get
-                Return _IDCARD_NO
-            End Get
-            Set(ByVal value As  String )
-               _IDCARD_NO = value
-            End Set
-        End Property 
-        <Column(Storage:="_NATION_CODE", DbType:="VarChar(10)")>  _
-        Public Property NATION_CODE() As  String 
-            Get
-                Return _NATION_CODE
-            End Get
-            Set(ByVal value As  String )
-               _NATION_CODE = value
-            End Set
-        End Property 
-        <Column(Storage:="_FIRST_NAME", DbType:="VarChar(100)")>  _
-        Public Property FIRST_NAME() As  String 
-            Get
-                Return _FIRST_NAME
-            End Get
-            Set(ByVal value As  String )
-               _FIRST_NAME = value
-            End Set
-        End Property 
-        <Column(Storage:="_LAST_NAME", DbType:="VarChar(100)")>  _
-        Public Property LAST_NAME() As  String 
-            Get
-                Return _LAST_NAME
-            End Get
-            Set(ByVal value As  String )
-               _LAST_NAME = value
-            End Set
-        End Property 
-        <Column(Storage:="_GENDER", DbType:="Char(1)")>  _
-        Public Property GENDER() As  System.Nullable(Of Char) 
-            Get
-                Return _GENDER
-            End Get
-            Set(ByVal value As  System.Nullable(Of Char) )
-               _GENDER = value
-            End Set
-        End Property 
-        <Column(Storage:="_BIRTH_DATE", DbType:="DateTime")>  _
-        Public Property BIRTH_DATE() As  System.Nullable(Of DateTime) 
-            Get
-                Return _BIRTH_DATE
-            End Get
-            Set(ByVal value As  System.Nullable(Of DateTime) )
-               _BIRTH_DATE = value
-            End Set
-        End Property 
-        <Column(Storage:="_PASSPORT_EXPIRE_DATE", DbType:="DateTime")>  _
-        Public Property PASSPORT_EXPIRE_DATE() As  System.Nullable(Of DateTime) 
-            Get
-                Return _PASSPORT_EXPIRE_DATE
-            End Get
-            Set(ByVal value As  System.Nullable(Of DateTime) )
-               _PASSPORT_EXPIRE_DATE = value
-            End Set
-        End Property 
-        <Column(Storage:="_IDCARD_EXPIRE_DATE", DbType:="DateTime")>  _
-        Public Property IDCARD_EXPIRE_DATE() As  System.Nullable(Of DateTime) 
-            Get
-                Return _IDCARD_EXPIRE_DATE
-            End Get
-            Set(ByVal value As  System.Nullable(Of DateTime) )
-               _IDCARD_EXPIRE_DATE = value
             End Set
         End Property 
         <Column(Storage:="_PIN_CODE", DbType:="VarChar(50)")>  _
@@ -515,15 +425,6 @@ Namespace TABLE
             _TRANS_END_TIME = New DateTime(1,1,1)
             _MS_KIOSK_ID = 0
             _MS_LOCKER_ID = Nothing
-            _PASSPORT_NO = ""
-            _IDCARD_NO = ""
-            _NATION_CODE = ""
-            _FIRST_NAME = ""
-            _LAST_NAME = ""
-            _GENDER = ""
-            _BIRTH_DATE = New DateTime(1,1,1)
-            _PASSPORT_EXPIRE_DATE = New DateTime(1,1,1)
-            _IDCARD_EXPIRE_DATE = New DateTime(1,1,1)
             _PIN_CODE = ""
              _CUST_IMAGE = Nothing
             _SERVICE_RATE = 0
@@ -871,7 +772,7 @@ Namespace TABLE
         End Function
 
         Private Function SetParameterData() As SqlParameter()
-            Dim cmbParam(45) As SqlParameter
+            Dim cmbParam(36) As SqlParameter
             cmbParam(0) = New SqlParameter("@_ID", SqlDbType.BigInt)
             cmbParam(0).Value = _ID
 
@@ -918,170 +819,107 @@ Namespace TABLE
                 cmbParam(9).Value = DBNull.value
             End IF
 
-            cmbParam(10) = New SqlParameter("@_PASSPORT_NO", SqlDbType.VarChar)
-            If _PASSPORT_NO.Trim <> "" Then 
-                cmbParam(10).Value = _PASSPORT_NO
+            cmbParam(10) = New SqlParameter("@_PIN_CODE", SqlDbType.VarChar)
+            If _PIN_CODE.Trim <> "" Then 
+                cmbParam(10).Value = _PIN_CODE
             Else
                 cmbParam(10).Value = DBNull.value
             End If
 
-            cmbParam(11) = New SqlParameter("@_IDCARD_NO", SqlDbType.VarChar)
-            If _IDCARD_NO.Trim <> "" Then 
-                cmbParam(11).Value = _IDCARD_NO
+            If _CUST_IMAGE IsNot Nothing Then 
+                cmbParam(11) = New SqlParameter("@_CUST_IMAGE",SqlDbType.Image, _CUST_IMAGE.Length)
+                cmbParam(11).Value = _CUST_IMAGE
             Else
+                cmbParam(11) = New SqlParameter("@_CUST_IMAGE", SqlDbType.Image)
                 cmbParam(11).Value = DBNull.value
             End If
 
-            cmbParam(12) = New SqlParameter("@_NATION_CODE", SqlDbType.VarChar)
-            If _NATION_CODE.Trim <> "" Then 
-                cmbParam(12).Value = _NATION_CODE
-            Else
-                cmbParam(12).Value = DBNull.value
-            End If
+            cmbParam(12) = New SqlParameter("@_SERVICE_RATE", SqlDbType.Float)
+            cmbParam(12).Value = _SERVICE_RATE
 
-            cmbParam(13) = New SqlParameter("@_FIRST_NAME", SqlDbType.VarChar)
-            If _FIRST_NAME.Trim <> "" Then 
-                cmbParam(13).Value = _FIRST_NAME
-            Else
-                cmbParam(13).Value = DBNull.value
-            End If
+            cmbParam(13) = New SqlParameter("@_SERVICE_RATE_LIMIT_DAY", SqlDbType.Float)
+            cmbParam(13).Value = _SERVICE_RATE_LIMIT_DAY
 
-            cmbParam(14) = New SqlParameter("@_LAST_NAME", SqlDbType.VarChar)
-            If _LAST_NAME.Trim <> "" Then 
-                cmbParam(14).Value = _LAST_NAME
-            Else
-                cmbParam(14).Value = DBNull.value
-            End If
+            cmbParam(14) = New SqlParameter("@_DEPOSIT_AMT", SqlDbType.Float)
+            cmbParam(14).Value = _DEPOSIT_AMT
 
-            cmbParam(15) = New SqlParameter("@_GENDER", SqlDbType.Char)
-            If _GENDER.Value <> "" Then 
-                cmbParam(15).Value = _GENDER.Value
+            cmbParam(15) = New SqlParameter("@_PAID_TIME", SqlDbType.DateTime)
+            If _PAID_TIME.Value.Year > 1 Then 
+                cmbParam(15).Value = _PAID_TIME.Value
             Else
                 cmbParam(15).Value = DBNull.value
-            End IF
-
-            cmbParam(16) = New SqlParameter("@_BIRTH_DATE", SqlDbType.DateTime)
-            If _BIRTH_DATE.Value.Year > 1 Then 
-                cmbParam(16).Value = _BIRTH_DATE.Value
-            Else
-                cmbParam(16).Value = DBNull.value
             End If
 
-            cmbParam(17) = New SqlParameter("@_PASSPORT_EXPIRE_DATE", SqlDbType.DateTime)
-            If _PASSPORT_EXPIRE_DATE.Value.Year > 1 Then 
-                cmbParam(17).Value = _PASSPORT_EXPIRE_DATE.Value
-            Else
-                cmbParam(17).Value = DBNull.value
-            End If
+            cmbParam(16) = New SqlParameter("@_RECEIVE_COIN1", SqlDbType.Int)
+            cmbParam(16).Value = _RECEIVE_COIN1
 
-            cmbParam(18) = New SqlParameter("@_IDCARD_EXPIRE_DATE", SqlDbType.DateTime)
-            If _IDCARD_EXPIRE_DATE.Value.Year > 1 Then 
-                cmbParam(18).Value = _IDCARD_EXPIRE_DATE.Value
-            Else
-                cmbParam(18).Value = DBNull.value
-            End If
+            cmbParam(17) = New SqlParameter("@_RECEIVE_COIN2", SqlDbType.Int)
+            cmbParam(17).Value = _RECEIVE_COIN2
 
-            cmbParam(19) = New SqlParameter("@_PIN_CODE", SqlDbType.VarChar)
-            If _PIN_CODE.Trim <> "" Then 
-                cmbParam(19).Value = _PIN_CODE
-            Else
-                cmbParam(19).Value = DBNull.value
-            End If
+            cmbParam(18) = New SqlParameter("@_RECEIVE_COIN5", SqlDbType.Int)
+            cmbParam(18).Value = _RECEIVE_COIN5
 
-            If _CUST_IMAGE IsNot Nothing Then 
-                cmbParam(20) = New SqlParameter("@_CUST_IMAGE",SqlDbType.Image, _CUST_IMAGE.Length)
-                cmbParam(20).Value = _CUST_IMAGE
-            Else
-                cmbParam(20) = New SqlParameter("@_CUST_IMAGE", SqlDbType.Image)
-                cmbParam(20).Value = DBNull.value
-            End If
+            cmbParam(19) = New SqlParameter("@_RECEIVE_COIN10", SqlDbType.Int)
+            cmbParam(19).Value = _RECEIVE_COIN10
 
-            cmbParam(21) = New SqlParameter("@_SERVICE_RATE", SqlDbType.Float)
-            cmbParam(21).Value = _SERVICE_RATE
+            cmbParam(20) = New SqlParameter("@_RECEIVE_BANKNOTE20", SqlDbType.Int)
+            cmbParam(20).Value = _RECEIVE_BANKNOTE20
 
-            cmbParam(22) = New SqlParameter("@_SERVICE_RATE_LIMIT_DAY", SqlDbType.Float)
-            cmbParam(22).Value = _SERVICE_RATE_LIMIT_DAY
+            cmbParam(21) = New SqlParameter("@_RECEIVE_BANKNOTE50", SqlDbType.Int)
+            cmbParam(21).Value = _RECEIVE_BANKNOTE50
 
-            cmbParam(23) = New SqlParameter("@_DEPOSIT_AMT", SqlDbType.Float)
-            cmbParam(23).Value = _DEPOSIT_AMT
+            cmbParam(22) = New SqlParameter("@_RECEIVE_BANKNOTE100", SqlDbType.Int)
+            cmbParam(22).Value = _RECEIVE_BANKNOTE100
 
-            cmbParam(24) = New SqlParameter("@_PAID_TIME", SqlDbType.DateTime)
-            If _PAID_TIME.Value.Year > 1 Then 
-                cmbParam(24).Value = _PAID_TIME.Value
-            Else
-                cmbParam(24).Value = DBNull.value
-            End If
+            cmbParam(23) = New SqlParameter("@_RECEIVE_BANKNOTE500", SqlDbType.Int)
+            cmbParam(23).Value = _RECEIVE_BANKNOTE500
 
-            cmbParam(25) = New SqlParameter("@_RECEIVE_COIN1", SqlDbType.Int)
-            cmbParam(25).Value = _RECEIVE_COIN1
+            cmbParam(24) = New SqlParameter("@_RECEIVE_BANKNOTE1000", SqlDbType.Int)
+            cmbParam(24).Value = _RECEIVE_BANKNOTE1000
 
-            cmbParam(26) = New SqlParameter("@_RECEIVE_COIN2", SqlDbType.Int)
-            cmbParam(26).Value = _RECEIVE_COIN2
+            cmbParam(25) = New SqlParameter("@_CHANGE_COIN1", SqlDbType.Int)
+            cmbParam(25).Value = _CHANGE_COIN1
 
-            cmbParam(27) = New SqlParameter("@_RECEIVE_COIN5", SqlDbType.Int)
-            cmbParam(27).Value = _RECEIVE_COIN5
+            cmbParam(26) = New SqlParameter("@_CHANGE_COIN2", SqlDbType.Int)
+            cmbParam(26).Value = _CHANGE_COIN2
 
-            cmbParam(28) = New SqlParameter("@_RECEIVE_COIN10", SqlDbType.Int)
-            cmbParam(28).Value = _RECEIVE_COIN10
+            cmbParam(27) = New SqlParameter("@_CHANGE_COIN5", SqlDbType.Int)
+            cmbParam(27).Value = _CHANGE_COIN5
 
-            cmbParam(29) = New SqlParameter("@_RECEIVE_BANKNOTE20", SqlDbType.Int)
-            cmbParam(29).Value = _RECEIVE_BANKNOTE20
+            cmbParam(28) = New SqlParameter("@_CHANGE_COIN10", SqlDbType.Int)
+            cmbParam(28).Value = _CHANGE_COIN10
 
-            cmbParam(30) = New SqlParameter("@_RECEIVE_BANKNOTE50", SqlDbType.Int)
-            cmbParam(30).Value = _RECEIVE_BANKNOTE50
+            cmbParam(29) = New SqlParameter("@_CHANGE_BANKNOTE20", SqlDbType.Int)
+            cmbParam(29).Value = _CHANGE_BANKNOTE20
 
-            cmbParam(31) = New SqlParameter("@_RECEIVE_BANKNOTE100", SqlDbType.Int)
-            cmbParam(31).Value = _RECEIVE_BANKNOTE100
+            cmbParam(30) = New SqlParameter("@_CHANGE_BANKNOTE50", SqlDbType.Int)
+            cmbParam(30).Value = _CHANGE_BANKNOTE50
 
-            cmbParam(32) = New SqlParameter("@_RECEIVE_BANKNOTE500", SqlDbType.Int)
-            cmbParam(32).Value = _RECEIVE_BANKNOTE500
+            cmbParam(31) = New SqlParameter("@_CHANGE_BANKNOTE100", SqlDbType.Int)
+            cmbParam(31).Value = _CHANGE_BANKNOTE100
 
-            cmbParam(33) = New SqlParameter("@_RECEIVE_BANKNOTE1000", SqlDbType.Int)
-            cmbParam(33).Value = _RECEIVE_BANKNOTE1000
+            cmbParam(32) = New SqlParameter("@_CHANGE_BANKNOTE500", SqlDbType.Int)
+            cmbParam(32).Value = _CHANGE_BANKNOTE500
 
-            cmbParam(34) = New SqlParameter("@_CHANGE_COIN1", SqlDbType.Int)
-            cmbParam(34).Value = _CHANGE_COIN1
+            cmbParam(33) = New SqlParameter("@_TRANS_STATUS", SqlDbType.Char)
+            cmbParam(33).Value = _TRANS_STATUS
 
-            cmbParam(35) = New SqlParameter("@_CHANGE_COIN2", SqlDbType.Int)
-            cmbParam(35).Value = _CHANGE_COIN2
-
-            cmbParam(36) = New SqlParameter("@_CHANGE_COIN5", SqlDbType.Int)
-            cmbParam(36).Value = _CHANGE_COIN5
-
-            cmbParam(37) = New SqlParameter("@_CHANGE_COIN10", SqlDbType.Int)
-            cmbParam(37).Value = _CHANGE_COIN10
-
-            cmbParam(38) = New SqlParameter("@_CHANGE_BANKNOTE20", SqlDbType.Int)
-            cmbParam(38).Value = _CHANGE_BANKNOTE20
-
-            cmbParam(39) = New SqlParameter("@_CHANGE_BANKNOTE50", SqlDbType.Int)
-            cmbParam(39).Value = _CHANGE_BANKNOTE50
-
-            cmbParam(40) = New SqlParameter("@_CHANGE_BANKNOTE100", SqlDbType.Int)
-            cmbParam(40).Value = _CHANGE_BANKNOTE100
-
-            cmbParam(41) = New SqlParameter("@_CHANGE_BANKNOTE500", SqlDbType.Int)
-            cmbParam(41).Value = _CHANGE_BANKNOTE500
-
-            cmbParam(42) = New SqlParameter("@_TRANS_STATUS", SqlDbType.Char)
-            cmbParam(42).Value = _TRANS_STATUS
-
-            cmbParam(43) = New SqlParameter("@_MS_APP_SCREEN_ID", SqlDbType.BigInt)
+            cmbParam(34) = New SqlParameter("@_MS_APP_SCREEN_ID", SqlDbType.BigInt)
             If _MS_APP_SCREEN_ID IsNot Nothing Then 
-                cmbParam(43).Value = _MS_APP_SCREEN_ID.Value
+                cmbParam(34).Value = _MS_APP_SCREEN_ID.Value
             Else
-                cmbParam(43).Value = DBNull.value
+                cmbParam(34).Value = DBNull.value
             End IF
 
-            cmbParam(44) = New SqlParameter("@_MS_APP_STEP_ID", SqlDbType.BigInt)
+            cmbParam(35) = New SqlParameter("@_MS_APP_STEP_ID", SqlDbType.BigInt)
             If _MS_APP_STEP_ID IsNot Nothing Then 
-                cmbParam(44).Value = _MS_APP_STEP_ID.Value
+                cmbParam(35).Value = _MS_APP_STEP_ID.Value
             Else
-                cmbParam(44).Value = DBNull.value
+                cmbParam(35).Value = DBNull.value
             End IF
 
-            cmbParam(45) = New SqlParameter("@_SYNC_TO_SERVER", SqlDbType.Char)
-            cmbParam(45).Value = _SYNC_TO_SERVER
+            cmbParam(36) = New SqlParameter("@_SYNC_TO_SERVER", SqlDbType.Char)
+            cmbParam(36).Value = _SYNC_TO_SERVER
 
             Return cmbParam
         End Function
@@ -1112,15 +950,6 @@ Namespace TABLE
                         If Convert.IsDBNull(Rdr("trans_end_time")) = False Then _trans_end_time = Convert.ToDateTime(Rdr("trans_end_time"))
                         If Convert.IsDBNull(Rdr("ms_kiosk_id")) = False Then _ms_kiosk_id = Convert.ToInt64(Rdr("ms_kiosk_id"))
                         If Convert.IsDBNull(Rdr("ms_locker_id")) = False Then _ms_locker_id = Convert.ToInt64(Rdr("ms_locker_id"))
-                        If Convert.IsDBNull(Rdr("passport_no")) = False Then _passport_no = Rdr("passport_no").ToString()
-                        If Convert.IsDBNull(Rdr("idcard_no")) = False Then _idcard_no = Rdr("idcard_no").ToString()
-                        If Convert.IsDBNull(Rdr("nation_code")) = False Then _nation_code = Rdr("nation_code").ToString()
-                        If Convert.IsDBNull(Rdr("first_name")) = False Then _first_name = Rdr("first_name").ToString()
-                        If Convert.IsDBNull(Rdr("last_name")) = False Then _last_name = Rdr("last_name").ToString()
-                        If Convert.IsDBNull(Rdr("gender")) = False Then _gender = Rdr("gender").ToString()
-                        If Convert.IsDBNull(Rdr("birth_date")) = False Then _birth_date = Convert.ToDateTime(Rdr("birth_date"))
-                        If Convert.IsDBNull(Rdr("passport_expire_date")) = False Then _passport_expire_date = Convert.ToDateTime(Rdr("passport_expire_date"))
-                        If Convert.IsDBNull(Rdr("idcard_expire_date")) = False Then _idcard_expire_date = Convert.ToDateTime(Rdr("idcard_expire_date"))
                         If Convert.IsDBNull(Rdr("pin_code")) = False Then _pin_code = Rdr("pin_code").ToString()
                         If Convert.IsDBNull(Rdr("cust_image")) = False Then _cust_image = CType(Rdr("cust_image"), Byte())
                         If Convert.IsDBNull(Rdr("service_rate")) = False Then _service_rate = Convert.ToDouble(Rdr("service_rate"))
@@ -1192,15 +1021,6 @@ Namespace TABLE
                         If Convert.IsDBNull(Rdr("trans_end_time")) = False Then _trans_end_time = Convert.ToDateTime(Rdr("trans_end_time"))
                         If Convert.IsDBNull(Rdr("ms_kiosk_id")) = False Then _ms_kiosk_id = Convert.ToInt64(Rdr("ms_kiosk_id"))
                         If Convert.IsDBNull(Rdr("ms_locker_id")) = False Then _ms_locker_id = Convert.ToInt64(Rdr("ms_locker_id"))
-                        If Convert.IsDBNull(Rdr("passport_no")) = False Then _passport_no = Rdr("passport_no").ToString()
-                        If Convert.IsDBNull(Rdr("idcard_no")) = False Then _idcard_no = Rdr("idcard_no").ToString()
-                        If Convert.IsDBNull(Rdr("nation_code")) = False Then _nation_code = Rdr("nation_code").ToString()
-                        If Convert.IsDBNull(Rdr("first_name")) = False Then _first_name = Rdr("first_name").ToString()
-                        If Convert.IsDBNull(Rdr("last_name")) = False Then _last_name = Rdr("last_name").ToString()
-                        If Convert.IsDBNull(Rdr("gender")) = False Then _gender = Rdr("gender").ToString()
-                        If Convert.IsDBNull(Rdr("birth_date")) = False Then _birth_date = Convert.ToDateTime(Rdr("birth_date"))
-                        If Convert.IsDBNull(Rdr("passport_expire_date")) = False Then _passport_expire_date = Convert.ToDateTime(Rdr("passport_expire_date"))
-                        If Convert.IsDBNull(Rdr("idcard_expire_date")) = False Then _idcard_expire_date = Convert.ToDateTime(Rdr("idcard_expire_date"))
                         If Convert.IsDBNull(Rdr("pin_code")) = False Then _pin_code = Rdr("pin_code").ToString()
                         If Convert.IsDBNull(Rdr("cust_image")) = False Then _cust_image = CType(Rdr("cust_image"), Byte())
                         If Convert.IsDBNull(Rdr("service_rate")) = False Then _service_rate = Convert.ToDouble(Rdr("service_rate"))
@@ -1252,8 +1072,8 @@ Namespace TABLE
         Private ReadOnly Property SqlInsert() As String 
             Get
                 Dim Sql As String=""
-                Sql += "INSERT INTO " & tableName  & " (CREATED_BY, CREATED_DATE, TRANS_NO, TRANS_START_TIME, TRANS_END_TIME, MS_KIOSK_ID, MS_LOCKER_ID, PASSPORT_NO, IDCARD_NO, NATION_CODE, FIRST_NAME, LAST_NAME, GENDER, BIRTH_DATE, PASSPORT_EXPIRE_DATE, IDCARD_EXPIRE_DATE, PIN_CODE, CUST_IMAGE, SERVICE_RATE, SERVICE_RATE_LIMIT_DAY, DEPOSIT_AMT, PAID_TIME, RECEIVE_COIN1, RECEIVE_COIN2, RECEIVE_COIN5, RECEIVE_COIN10, RECEIVE_BANKNOTE20, RECEIVE_BANKNOTE50, RECEIVE_BANKNOTE100, RECEIVE_BANKNOTE500, RECEIVE_BANKNOTE1000, CHANGE_COIN1, CHANGE_COIN2, CHANGE_COIN5, CHANGE_COIN10, CHANGE_BANKNOTE20, CHANGE_BANKNOTE50, CHANGE_BANKNOTE100, CHANGE_BANKNOTE500, TRANS_STATUS, MS_APP_SCREEN_ID, MS_APP_STEP_ID, SYNC_TO_SERVER)"
-                Sql += " OUTPUT INSERTED.ID, INSERTED.CREATED_BY, INSERTED.CREATED_DATE, INSERTED.UPDATED_BY, INSERTED.UPDATED_DATE, INSERTED.TRANS_NO, INSERTED.TRANS_START_TIME, INSERTED.TRANS_END_TIME, INSERTED.MS_KIOSK_ID, INSERTED.MS_LOCKER_ID, INSERTED.PASSPORT_NO, INSERTED.IDCARD_NO, INSERTED.NATION_CODE, INSERTED.FIRST_NAME, INSERTED.LAST_NAME, INSERTED.GENDER, INSERTED.BIRTH_DATE, INSERTED.PASSPORT_EXPIRE_DATE, INSERTED.IDCARD_EXPIRE_DATE, INSERTED.PIN_CODE, INSERTED.CUST_IMAGE, INSERTED.SERVICE_RATE, INSERTED.SERVICE_RATE_LIMIT_DAY, INSERTED.DEPOSIT_AMT, INSERTED.PAID_TIME, INSERTED.RECEIVE_COIN1, INSERTED.RECEIVE_COIN2, INSERTED.RECEIVE_COIN5, INSERTED.RECEIVE_COIN10, INSERTED.RECEIVE_BANKNOTE20, INSERTED.RECEIVE_BANKNOTE50, INSERTED.RECEIVE_BANKNOTE100, INSERTED.RECEIVE_BANKNOTE500, INSERTED.RECEIVE_BANKNOTE1000, INSERTED.CHANGE_COIN1, INSERTED.CHANGE_COIN2, INSERTED.CHANGE_COIN5, INSERTED.CHANGE_COIN10, INSERTED.CHANGE_BANKNOTE20, INSERTED.CHANGE_BANKNOTE50, INSERTED.CHANGE_BANKNOTE100, INSERTED.CHANGE_BANKNOTE500, INSERTED.TRANS_STATUS, INSERTED.MS_APP_SCREEN_ID, INSERTED.MS_APP_STEP_ID, INSERTED.SYNC_TO_SERVER"
+                Sql += "INSERT INTO " & tableName  & " (CREATED_BY, CREATED_DATE, TRANS_NO, TRANS_START_TIME, TRANS_END_TIME, MS_KIOSK_ID, MS_LOCKER_ID, PIN_CODE, CUST_IMAGE, SERVICE_RATE, SERVICE_RATE_LIMIT_DAY, DEPOSIT_AMT, PAID_TIME, RECEIVE_COIN1, RECEIVE_COIN2, RECEIVE_COIN5, RECEIVE_COIN10, RECEIVE_BANKNOTE20, RECEIVE_BANKNOTE50, RECEIVE_BANKNOTE100, RECEIVE_BANKNOTE500, RECEIVE_BANKNOTE1000, CHANGE_COIN1, CHANGE_COIN2, CHANGE_COIN5, CHANGE_COIN10, CHANGE_BANKNOTE20, CHANGE_BANKNOTE50, CHANGE_BANKNOTE100, CHANGE_BANKNOTE500, TRANS_STATUS, MS_APP_SCREEN_ID, MS_APP_STEP_ID, SYNC_TO_SERVER)"
+                Sql += " OUTPUT INSERTED.ID, INSERTED.CREATED_BY, INSERTED.CREATED_DATE, INSERTED.UPDATED_BY, INSERTED.UPDATED_DATE, INSERTED.TRANS_NO, INSERTED.TRANS_START_TIME, INSERTED.TRANS_END_TIME, INSERTED.MS_KIOSK_ID, INSERTED.MS_LOCKER_ID, INSERTED.PIN_CODE, INSERTED.CUST_IMAGE, INSERTED.SERVICE_RATE, INSERTED.SERVICE_RATE_LIMIT_DAY, INSERTED.DEPOSIT_AMT, INSERTED.PAID_TIME, INSERTED.RECEIVE_COIN1, INSERTED.RECEIVE_COIN2, INSERTED.RECEIVE_COIN5, INSERTED.RECEIVE_COIN10, INSERTED.RECEIVE_BANKNOTE20, INSERTED.RECEIVE_BANKNOTE50, INSERTED.RECEIVE_BANKNOTE100, INSERTED.RECEIVE_BANKNOTE500, INSERTED.RECEIVE_BANKNOTE1000, INSERTED.CHANGE_COIN1, INSERTED.CHANGE_COIN2, INSERTED.CHANGE_COIN5, INSERTED.CHANGE_COIN10, INSERTED.CHANGE_BANKNOTE20, INSERTED.CHANGE_BANKNOTE50, INSERTED.CHANGE_BANKNOTE100, INSERTED.CHANGE_BANKNOTE500, INSERTED.TRANS_STATUS, INSERTED.MS_APP_SCREEN_ID, INSERTED.MS_APP_STEP_ID, INSERTED.SYNC_TO_SERVER"
                 Sql += " VALUES("
                 sql += "@_CREATED_BY" & ", "
                 sql += "@_CREATED_DATE" & ", "
@@ -1262,15 +1082,6 @@ Namespace TABLE
                 sql += "@_TRANS_END_TIME" & ", "
                 sql += "@_MS_KIOSK_ID" & ", "
                 sql += "@_MS_LOCKER_ID" & ", "
-                sql += "@_PASSPORT_NO" & ", "
-                sql += "@_IDCARD_NO" & ", "
-                sql += "@_NATION_CODE" & ", "
-                sql += "@_FIRST_NAME" & ", "
-                sql += "@_LAST_NAME" & ", "
-                sql += "@_GENDER" & ", "
-                sql += "@_BIRTH_DATE" & ", "
-                sql += "@_PASSPORT_EXPIRE_DATE" & ", "
-                sql += "@_IDCARD_EXPIRE_DATE" & ", "
                 sql += "@_PIN_CODE" & ", "
                 sql += "@_CUST_IMAGE" & ", "
                 sql += "@_SERVICE_RATE" & ", "
@@ -1316,15 +1127,6 @@ Namespace TABLE
                 Sql += "TRANS_END_TIME = " & "@_TRANS_END_TIME" & ", "
                 Sql += "MS_KIOSK_ID = " & "@_MS_KIOSK_ID" & ", "
                 Sql += "MS_LOCKER_ID = " & "@_MS_LOCKER_ID" & ", "
-                Sql += "PASSPORT_NO = " & "@_PASSPORT_NO" & ", "
-                Sql += "IDCARD_NO = " & "@_IDCARD_NO" & ", "
-                Sql += "NATION_CODE = " & "@_NATION_CODE" & ", "
-                Sql += "FIRST_NAME = " & "@_FIRST_NAME" & ", "
-                Sql += "LAST_NAME = " & "@_LAST_NAME" & ", "
-                Sql += "GENDER = " & "@_GENDER" & ", "
-                Sql += "BIRTH_DATE = " & "@_BIRTH_DATE" & ", "
-                Sql += "PASSPORT_EXPIRE_DATE = " & "@_PASSPORT_EXPIRE_DATE" & ", "
-                Sql += "IDCARD_EXPIRE_DATE = " & "@_IDCARD_EXPIRE_DATE" & ", "
                 Sql += "PIN_CODE = " & "@_PIN_CODE" & ", "
                 Sql += "CUST_IMAGE = " & "@_CUST_IMAGE" & ", "
                 Sql += "SERVICE_RATE = " & "@_SERVICE_RATE" & ", "
@@ -1369,7 +1171,7 @@ Namespace TABLE
         'Get Select Statement for table TB_DEPOSIT_TRANSACTION
         Private ReadOnly Property SqlSelect() As String
             Get
-                Dim Sql As String = "SELECT ID, CREATED_BY, CREATED_DATE, UPDATED_BY, UPDATED_DATE, TRANS_NO, TRANS_START_TIME, TRANS_END_TIME, MS_KIOSK_ID, MS_LOCKER_ID, PASSPORT_NO, IDCARD_NO, NATION_CODE, FIRST_NAME, LAST_NAME, GENDER, BIRTH_DATE, PASSPORT_EXPIRE_DATE, IDCARD_EXPIRE_DATE, PIN_CODE, CUST_IMAGE, SERVICE_RATE, SERVICE_RATE_LIMIT_DAY, DEPOSIT_AMT, PAID_TIME, RECEIVE_COIN1, RECEIVE_COIN2, RECEIVE_COIN5, RECEIVE_COIN10, RECEIVE_BANKNOTE20, RECEIVE_BANKNOTE50, RECEIVE_BANKNOTE100, RECEIVE_BANKNOTE500, RECEIVE_BANKNOTE1000, CHANGE_COIN1, CHANGE_COIN2, CHANGE_COIN5, CHANGE_COIN10, CHANGE_BANKNOTE20, CHANGE_BANKNOTE50, CHANGE_BANKNOTE100, CHANGE_BANKNOTE500, TRANS_STATUS, MS_APP_SCREEN_ID, MS_APP_STEP_ID, SYNC_TO_SERVER FROM " & tableName
+                Dim Sql As String = "SELECT ID, CREATED_BY, CREATED_DATE, UPDATED_BY, UPDATED_DATE, TRANS_NO, TRANS_START_TIME, TRANS_END_TIME, MS_KIOSK_ID, MS_LOCKER_ID, PIN_CODE, CUST_IMAGE, SERVICE_RATE, SERVICE_RATE_LIMIT_DAY, DEPOSIT_AMT, PAID_TIME, RECEIVE_COIN1, RECEIVE_COIN2, RECEIVE_COIN5, RECEIVE_COIN10, RECEIVE_BANKNOTE20, RECEIVE_BANKNOTE50, RECEIVE_BANKNOTE100, RECEIVE_BANKNOTE500, RECEIVE_BANKNOTE1000, CHANGE_COIN1, CHANGE_COIN2, CHANGE_COIN5, CHANGE_COIN10, CHANGE_BANKNOTE20, CHANGE_BANKNOTE50, CHANGE_BANKNOTE100, CHANGE_BANKNOTE500, TRANS_STATUS, MS_APP_SCREEN_ID, MS_APP_STEP_ID, SYNC_TO_SERVER FROM " & tableName
                 Return Sql
             End Get
         End Property
