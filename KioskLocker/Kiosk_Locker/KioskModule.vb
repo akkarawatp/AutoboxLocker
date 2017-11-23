@@ -1723,10 +1723,10 @@ Module KioskModule
             Dim ret As ExecuteDataInfo = lnq.InsertData(CreateBy, trans.Trans)
             If ret.IsSuccess = True Then
                 trans.CommitTransaction()
-                SendKioskAlarm("KIOSK_ERROR_INSERT_LOG_ACTIVITY", False)
+                SendKioskAlarm("LOCKER_ERROR_INSERT_LOG_ACTIVITY", False)
             Else
                 trans.RollbackTransaction()
-                SendKioskAlarm("KIOSK_ERROR_INSERT_LOG_ACTIVITY", True)
+                SendKioskAlarm("LOCKER_ERROR_INSERT_LOG_ACTIVITY", True)
 
                 Dim _Err As String = ret.ErrorMessage & vbNewLine
                 _Err += "ClassName=" & ClassName & "&FunctionName=" & FunctionName & vbNewLine
@@ -1737,7 +1737,7 @@ Module KioskModule
             End If
 
         Catch ex As Exception
-            SendKioskAlarm("KIOSK_ERROR_INSERT_LOG_ACTIVITY", True)
+            SendKioskAlarm("LOCKER_ERROR_INSERT_LOG_ACTIVITY", True)
 
             Dim _Err As String = "Exception : " & ex.Message & " " & ex.StackTrace & vbNewLine
             _Err += "ClassName=" & ClassName & "&FunctionName=" & FunctionName & vbNewLine
@@ -1792,7 +1792,7 @@ Module KioskModule
             Engine.LogFileENG.CreateKioskErrorLog(CreatedBy, _Err, KioskData.KioskID)
         End Try
 
-        'SendKioskAlarm("KIOSK_INSERT_ERROR_LOG", True)
+        'SendKioskAlarm("LOCKER_INSERT_ERROR_LOG", True)
     End Sub
 
     Public Sub InsertErrorLog(ErrorMessage As String, DepositTransNo As String, CollectTransNo As String, StaffConsoleTransNo As String, MsAppScreenID As Long, MsAppStepID As Long)
@@ -1840,7 +1840,7 @@ Module KioskModule
         End Try
 
         If KioskData.KioskID <> "" Then
-            SendKioskAlarm("KIOSK_INSERT_ERROR_LOG", True)
+            SendKioskAlarm("LOCKER_INSERT_ERROR_LOG", True)
         End If
 
 

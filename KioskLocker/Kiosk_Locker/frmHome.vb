@@ -183,7 +183,7 @@ Public Class frmHome
     Private Sub btnDeposit_Click(sender As Object, e As EventArgs) Handles pnlDeposit.Click, lblDeposit.Click
         If LockerList.Rows.Count = 0 Then
             InsertErrorLog("Locker Information not found", 0, 0, 0, KioskConfig.SelectForm, KioskLockerStep.Home_ClickDeposit)
-            SendKioskAlarm("KIOSK_OUT_OF_SERVICE", True)
+            SendKioskAlarm("LOCKER_OUT_OF_SERVICE", True)
             ShowFormError("Out of service", "Locker Information not found", KioskConfig.SelectForm, KioskConfigData.KioskLockerStep.Home_ClickDeposit, True)
             Exit Sub
         End If
@@ -198,10 +198,10 @@ Public Class frmHome
             Me.Close()
             'frmDepositSelectLocker.BringToFront()
             Application.DoEvents()
-            SendKioskAlarm("KIOSK_OUT_OF_SERVICE", False)
+            SendKioskAlarm("LOCKER_OUT_OF_SERVICE", False)
         Else
             InsertErrorLog(ret.ErrorMessage, 0, 0, 0, KioskLockerForm.Home, KioskLockerStep.Home_ClickDeposit)
-            SendKioskAlarm("KIOSK_OUT_OF_SERVICE", True)
+            SendKioskAlarm("LOCKER_OUT_OF_SERVICE", True)
             ShowDialogErrorMessage("Cannot create transaction")
         End If
     End Sub
@@ -221,10 +221,10 @@ Public Class frmHome
             frmMain.TimerCheckOpenClose.Enabled = False
             Me.Close()
             Application.DoEvents()
-            SendKioskAlarm("KIOSK_OUT_OF_SERVICE", False)
+            SendKioskAlarm("LOCKER_OUT_OF_SERVICE", False)
         Else
             InsertErrorLog(ret.ErrorMessage, 0, 0, 0, KioskLockerForm.Home, KioskLockerStep.Home_ClickPickup)
-            SendKioskAlarm("KIOSK_OUT_OF_SERVICE", False)
+            SendKioskAlarm("LOCKER_OUT_OF_SERVICE", False)
             ShowDialogErrorMessage("Cannot create transaction")
         End If
     End Sub

@@ -36,7 +36,7 @@ Public Class frmCollectSelectDocument
         frmMain.TimerCheckOpenClose.Enabled = False
         Me.Close()
         Application.DoEvents()
-        SendKioskAlarm("KIOSK_OUT_OF_SERVICE", False)
+        SendKioskAlarm("LOCKER_OUT_OF_SERVICE", False)
     End Sub
 
     Private Sub lblCaptionPinCode_Click(sender As Object, e As EventArgs) Handles lblCaptionPinCode.Click, pnlPinCode.Click, lblImagePinCode.Click

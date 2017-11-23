@@ -561,7 +561,7 @@ Public Class SyncMasterDataENG
         End Try
     End Sub
 
-    Private Shared Sub PullMasterMonitoringAlarm(MsKioskID As Long)
+    Public Shared Sub PullMasterMonitoringAlarm(MsKioskID As Long)
         Try
             Dim ws As New SyncDataWebservice.ATBLockerWebService
             ws.Timeout = 10000
