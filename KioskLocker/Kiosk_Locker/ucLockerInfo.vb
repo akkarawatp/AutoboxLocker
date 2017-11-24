@@ -89,6 +89,7 @@ Public Class ucLockerInfo
                     Me.BackColor = Color.Black
                     lblName.BackColor = Color.Black
                     lblName.ForeColor = Color.White
+                    AddHandler lblName.Click, AddressOf ucLockerInfo_Click
                 ElseIf _AvailableStatus = AvailableStatus.NoActive Then
                     Me.BackColor = Color.Gray
                 End If

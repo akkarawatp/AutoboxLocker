@@ -30,6 +30,7 @@ Public Class frmHome
         Application.DoEvents()
 
         'ต้อง Clear Transaction ทุกครั้งที่เข้าหน้า Home
+        ServiceID = 0
         Deposit = New DepositTransactionData(KioskData.KioskID)
         Collect = New CollectTransactionData(KioskData.KioskID)
         StaffConsole = New StaffConsoleLogonData(KioskData.KioskID)
@@ -73,11 +74,6 @@ Public Class frmHome
             RemoveHandler pnlDeposit.Click, AddressOf btnDeposit_Click
             RemoveHandler lblDeposit.Click, AddressOf btnDeposit_Click
             lblDeposit.Enabled = False
-
-            'lblLabelNotification.Width = pnlDeposit.Width
-            'lblLabelNotification.Left = pnlDeposit.Left
-            'lblLabelNotification.Text = GetNotificationText(1)
-            'lblLabelNotification.Visible = True
             IsStorageFull = True
             Application.DoEvents()
         End If
@@ -87,21 +83,6 @@ Public Class frmHome
 
             Dim dvDt As DataTable = GetStatusAllDeviceDT()
             If dvDt.Rows.Count > 0 Then
-                ''แสดง Status ของเครื่องอ่่านบัตรประชาชนและ Passport
-                'dvDt.DefaultView.RowFilter = "device_id=" & DeviceID.IDCardPassportScanner & " and ms_device_status_id<>1"
-                'If dvDt.DefaultView.Count > 0 Then
-                '    'lblLabelNotification.Text = GetNotificationText(6)
-                '    pnlDeposit.BackgroundImage = My.Resources.IconDepositFull
-                '    RemoveHandler pnlDeposit.Click, AddressOf btnDeposit_Click
-                '    RemoveHandler lblDeposit.Click, AddressOf btnDeposit_Click
-                '    lblDeposit.Enabled = False
-                '    'lblLabelNotification.Visible = True
-                'End If
-                'dvDt.DefaultView.RowFilter = ""
-
-
-
-
                 'แสดง Notification เมื่อเหรียญ5หมด
                 dvDt.DefaultView.RowFilter = "device_id=" & DeviceID.CoinOut_5 & " and stock_status='Critical'"
                 If dvDt.DefaultView.Count > 0 Then

@@ -418,8 +418,9 @@ Namespace Data
             StaffConsoleKioskSetting = 19
             StaffConsoleDeviceSetting = 20
             StaffConsoleLockerSetting = 21
+            StaffConsoleCollectSelectLocker = 22
 
-            ScreenSaver = 22
+            'ScreenSaver = 22
         End Enum
 		
 		Public Enum KioskLockerStep
@@ -573,6 +574,10 @@ Namespace Data
             StaffConsoleStockAndHardware_ClickLockerSetting = 1610
             StaffConsoleStockAndHardware_ClickOpenAll = 1611
             StaffConsoleStockAndHardware_ClickExitProgram = 1612
+            '-------------------
+            StaffConsoleLoadLockList_LoadLockerList = 1613
+            StaffConsoleLoadLockList_ClickCollect = 1614
+
 
             StaffConsoleFillPaper_OpenForm = 1701
 			StaffConsoleFillPaper_CheckAuthorize = 1702
@@ -609,8 +614,13 @@ Namespace Data
 			StaffConsoleLockerSetting_CabinetAdd = 2107
 			StaffConsoleLockerSetting_CabinetEdit = 2108
 			StaffConsoleLockerSetting_CabinetDelete = 2109
-			StaffConsoleLockerSetting_LockerDbClick = 2110
-			
+            StaffConsoleLockerSetting_LockerDbClick = 2110
+
+            '--------------------------------
+            StaffConsoleCollectSelectLocker_OpenForm = 2201
+            StaffConsoleCollectSelectLocker_LoadLockerList = 2202
+            StaffConsoleCollectSelectLocker_SelectLocker = 2203
+
         End Enum
     End Class
 End Namespace

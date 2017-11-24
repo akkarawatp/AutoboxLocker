@@ -63,7 +63,7 @@ Public Class frmDepositPayment
             InsertLogTransactionActivity(Deposit.DepositTransNo, "", "", KioskConfig.SelectForm, KioskLockerStep.DepositPayment_OpenForm, "ค่ามัดจำ " & Deposit.DepositAmount & " บาท", False)
             DepositCaptureImage()
         ElseIf ServiceID = TransactionType.CollectBelonging Then
-            InsertLogTransactionActivity(Collect.DepositTransNo, Collect.TransactionNo, "", KioskConfig.SelectForm, KioskLockerStep.PickupPayment_OpenForm, "ค่าบริการ " & Collect.ServiceAmount & " บาท ค่ามัดจำ " & Collect.DepositAmount & " บาท", False)
+            InsertLogTransactionActivity(Collect.DepositTransNo, Collect.TransactionNo, StaffConsole.TransNo, KioskConfig.SelectForm, KioskLockerStep.PickupPayment_OpenForm, "ค่าบริการ " & Collect.ServiceAmount & " บาท ค่ามัดจำ " & Collect.DepositAmount & " บาท", False)
             CollectCaptureImage()
         End If
 
@@ -123,7 +123,7 @@ Public Class frmDepositPayment
             Dim _err As String = "Exception : " & ex.Message & vbNewLine & ex.StackTrace
 
             If ServiceID = ConstantsData.TransactionType.CollectBelonging Then
-                InsertErrorLog(_err, Collect.DepositTransNo, Collect.TransactionNo, "", KioskConfig.SelectForm, KioskConfigData.KioskLockerStep.PickupPayment_OpenForm)
+                InsertErrorLog(_err, Collect.DepositTransNo, Collect.TransactionNo, StaffConsole.TransNo, KioskConfig.SelectForm, KioskConfigData.KioskLockerStep.PickupPayment_OpenForm)
             ElseIf ServiceID = ConstantsData.TransactionType.DepositBelonging Then
                 InsertErrorLog(_err, Deposit.DepositTransNo, "", "", KioskConfig.SelectForm, KioskConfigData.KioskLockerStep.DepositPayment_OpenForm)
             End If
@@ -145,7 +145,7 @@ Public Class frmDepositPayment
                 If ServiceID = TransactionType.DepositBelonging Then
                     InsertLogTransactionActivity(Deposit.DepositTransNo, "", "", KioskConfig.SelectForm, MsAppStepID, "", False)
                 ElseIf ServiceID = TransactionType.CollectBelonging Then
-                    InsertLogTransactionActivity(Collect.DepositTransNo, Collect.TransactionNo, "", KioskConfig.SelectForm, MsAppStepID, "", False)
+                    InsertLogTransactionActivity(Collect.DepositTransNo, Collect.TransactionNo, StaffConsole.TransNo, KioskConfig.SelectForm, MsAppStepID, "", False)
                 End If
 
                 UpdateDeviceStatus(DeviceID.BankNoteIn, BanknoteInStatus.Ready)
@@ -167,7 +167,7 @@ Public Class frmDepositPayment
                         InsertLogTransactionActivity(Deposit.DepositTransNo, "", "", KioskConfig.SelectForm, MsAppStepID, "", False)
                     ElseIf ServiceID = TransactionType.CollectBelonging Then
                         MsAppStepID = KioskLockerStep.PickupPayment_StartDeviceCoinIn
-                        InsertLogTransactionActivity(Collect.DepositTransNo, Collect.TransactionNo, "", KioskConfig.SelectForm, MsAppStepID, "", False)
+                        InsertLogTransactionActivity(Collect.DepositTransNo, Collect.TransactionNo, StaffConsole.TransNo, KioskConfig.SelectForm, MsAppStepID, "", False)
                     End If
 
                     UpdateDeviceStatus(DeviceID.CoinIn, CoinInStatus.Ready)
@@ -182,8 +182,8 @@ Public Class frmDepositPayment
                     ElseIf ServiceID = TransactionType.CollectBelonging Then
                         MsAppStepID = KioskLockerStep.DepositPayment_StartDeviceCoinIn
                         UpdateCollectStatus(Collect.CollectTransactionID, CollectTransactionData.TransactionStatus.Problem, MsAppStepID)
-                        InsertErrorLog("เครื่องรับเหรียญ ไม่สามารถใช้งานได้", Collect.DepositTransNo, Collect.TransactionNo, "", KioskConfig.SelectForm, MsAppStepID)
-                        InsertLogTransactionActivity(Collect.DepositTransNo, Collect.TransactionNo, "", KioskConfig.SelectForm, MsAppStepID, "ไม่สามารถใช้งานได้", True)
+                        InsertErrorLog("เครื่องรับเหรียญ ไม่สามารถใช้งานได้", Collect.DepositTransNo, Collect.TransactionNo, StaffConsole.TransNo, KioskConfig.SelectForm, MsAppStepID)
+                        InsertLogTransactionActivity(Collect.DepositTransNo, Collect.TransactionNo, StaffConsole.TransNo, KioskConfig.SelectForm, MsAppStepID, "ไม่สามารถใช้งานได้", True)
                     End If
 
                     UpdateDeviceStatus(DeviceID.CoinIn, CoinInStatus.Disconnected)
@@ -201,8 +201,8 @@ Public Class frmDepositPayment
                 ElseIf ServiceID = TransactionType.CollectBelonging Then
                     MsAppStepID = KioskLockerStep.PickupPayment_StartDeviceBanknoteIn
                     UpdateCollectStatus(Collect.CollectTransactionID, CollectTransactionData.TransactionStatus.Problem, MsAppStepID)
-                    InsertErrorLog("เครื่องรับธนบัตร ไม่สามารถใช้งานได้", Collect.DepositTransNo, Collect.TransactionNo, "", KioskConfig.SelectForm, MsAppStepID)
-                    InsertLogTransactionActivity(Collect.DepositTransNo, Collect.TransactionNo, "", KioskConfig.SelectForm, MsAppStepID, "ไม่สามารถใช้งานได้", True)
+                    InsertErrorLog("เครื่องรับธนบัตร ไม่สามารถใช้งานได้", Collect.DepositTransNo, Collect.TransactionNo, StaffConsole.TransNo, KioskConfig.SelectForm, MsAppStepID)
+                    InsertLogTransactionActivity(Collect.DepositTransNo, Collect.TransactionNo, StaffConsole.TransNo, KioskConfig.SelectForm, MsAppStepID, "ไม่สามารถใช้งานได้", True)
                 End If
 
                 UpdateDeviceStatus(DeviceID.BankNoteIn, BanknoteInStatus.Disconnected)
@@ -221,8 +221,8 @@ Public Class frmDepositPayment
             ElseIf ServiceID = TransactionType.CollectBelonging Then
                 MsAppStepID = KioskLockerStep.DepositPayment_StartDeviceCoinIn
                 UpdateCollectStatus(Collect.CollectTransactionID, CollectTransactionData.TransactionStatus.Problem, MsAppStepID)
-                InsertErrorLog("เครื่อรับธนบัตรหรือเครื่องรับเหรียญ ไม่สามารถใช้งานได้", Collect.DepositTransNo, Collect.TransactionNo, "", KioskConfig.SelectForm, MsAppStepID)
-                InsertLogTransactionActivity(Collect.DepositTransNo, Collect.TransactionNo, "", KioskConfig.SelectForm, MsAppStepID, "ไม่สามารถใช้งานได้", True)
+                InsertErrorLog("เครื่อรับธนบัตรหรือเครื่องรับเหรียญ ไม่สามารถใช้งานได้", Collect.DepositTransNo, Collect.TransactionNo, StaffConsole.TransNo, KioskConfig.SelectForm, MsAppStepID)
+                InsertLogTransactionActivity(Collect.DepositTransNo, Collect.TransactionNo, StaffConsole.TransNo, KioskConfig.SelectForm, MsAppStepID, "ไม่สามารถใช้งานได้", True)
             End If
 
             ShowFormError("Out of Service", "เครื่อรับธนบัตรหรือเครื่องรับเหรียญ ไม่สามารถใช้งานได้", KioskConfig.SelectForm, MsAppStepID, True)
@@ -284,7 +284,7 @@ Public Class frmDepositPayment
         Dim si As Integer = DSCamCapture.FrameSizes.s640x480
         Dim SelectedSize As DSCamCapture.FrameSizes = CType(si, DSCamCapture.FrameSizes)
         If WebCam.ConnectToDevice(CamIndex, 15, pbImage.ClientSize, SelectedSize, pbImage.Handle) = True Then
-            InsertLogTransactionActivity(Deposit.DepositTransNo, Collect.TransactionNo, "", KioskConfig.SelectForm, KioskLockerStep.PickupPayment_ConnectWebcamSuccess, "", False)
+            InsertLogTransactionActivity(Deposit.DepositTransNo, Collect.TransactionNo, StaffConsole.TransNo, KioskConfig.SelectForm, KioskLockerStep.PickupPayment_ConnectWebcamSuccess, "", False)
 
             'AddHandler WebCam.FrameSaved, AddressOf WebcamFrameSaved
             AddHandler WebCam.FrameCaptured, AddressOf WebcamFrameCaptured
@@ -292,8 +292,8 @@ Public Class frmDepositPayment
             WebCam.GetCurrentFrame()
         Else
             UpdateDepositStatus(Deposit.DepositTransactionID, CollectTransactionData.TransactionStatus.Problem, KioskLockerStep.PickupPayment_ConnectWebcamFail)
-            InsertErrorLog("ไม่สามารถเชื่อมต่อกับกล้อง Webcam ได้", Deposit.DepositTransNo, Collect.TransactionNo, "", KioskConfig.SelectForm, KioskLockerStep.PickupPayment_ConnectWebcamFail)
-            InsertLogTransactionActivity(Deposit.DepositTransNo, Collect.TransactionNo, "", KioskConfig.SelectForm, KioskLockerStep.PickupPayment_ConnectWebcamFail, "", True)
+            InsertErrorLog("ไม่สามารถเชื่อมต่อกับกล้อง Webcam ได้", Deposit.DepositTransNo, Collect.TransactionNo, StaffConsole.TransNo, KioskConfig.SelectForm, KioskLockerStep.PickupPayment_ConnectWebcamFail)
+            InsertLogTransactionActivity(Deposit.DepositTransNo, Collect.TransactionNo, StaffConsole.TransNo, KioskConfig.SelectForm, KioskLockerStep.PickupPayment_ConnectWebcamFail, "", True)
 
             UpdateDeviceStatus(DeviceID.WebCamera, WebCameraStatus.Disconnected)
             SendKioskAlarm("WEBCAMERA_DISCONNECTED", True)
@@ -322,7 +322,7 @@ Public Class frmDepositPayment
             If ServiceID = Data.ConstantsData.TransactionType.DepositBelonging Then
                 InsertLogTransactionActivity(Deposit.DepositTransNo, "", "", KioskConfig.SelectForm, KioskLockerStep.DepositPayment_CheckHardwareStatus, "", False)
             ElseIf ServiceID = Data.ConstantsData.TransactionType.CollectBelonging Then
-                InsertLogTransactionActivity(Collect.DepositTransNo, Collect.TransactionNo, "", KioskConfig.SelectForm, KioskLockerStep.PickupPayment_CheckHardwareStatus, "", False)
+                InsertLogTransactionActivity(Collect.DepositTransNo, Collect.TransactionNo, StaffConsole.TransNo, KioskConfig.SelectForm, KioskLockerStep.PickupPayment_CheckHardwareStatus, "", False)
             End If
 
             'ตรวจสอบและส่ง Alarm เมื่อเครื่องเชื่อมอินเตอร์เน็ตได้
@@ -341,8 +341,8 @@ Public Class frmDepositPayment
                 ElseIf ServiceID = Data.ConstantsData.TransactionType.CollectBelonging Then
                     MsAppStepID = KioskLockerStep.PickupPayment_CheckHardwareStatus
                     UpdateCollectStatus(Collect.CollectTransactionID, CollectTransactionData.TransactionStatus.Problem, MsAppStepID)
-                    InsertErrorLog(Msg, Collect.DepositTransNo, Collect.TransactionNo, "", KioskConfig.SelectForm, MsAppStepID)
-                    InsertLogTransactionActivity(Collect.DepositTransNo, Collect.TransactionNo, "", KioskConfig.SelectForm, MsAppStepID, "ไม่สามารถใช้งานได้", True)
+                    InsertErrorLog(Msg, Collect.DepositTransNo, Collect.TransactionNo, StaffConsole.TransNo, KioskConfig.SelectForm, MsAppStepID)
+                    InsertLogTransactionActivity(Collect.DepositTransNo, Collect.TransactionNo, StaffConsole.TransNo, KioskConfig.SelectForm, MsAppStepID, "ไม่สามารถใช้งานได้", True)
                 End If
 
                 ShowFormError("", "", KioskConfig.SelectForm, MsAppStepID, True)
@@ -357,8 +357,8 @@ Public Class frmDepositPayment
             ElseIf ServiceID = Data.ConstantsData.TransactionType.CollectBelonging Then
                 MsAppStepID = KioskLockerStep.PickupPayment_CheckHardwareStatus
                 UpdateCollectStatus(Collect.CollectTransactionID, CollectTransactionData.TransactionStatus.Problem, MsAppStepID)
-                InsertErrorLog(_err, Collect.DepositTransNo, Collect.TransactionNo, "", KioskConfig.SelectForm, MsAppStepID)
-                InsertLogTransactionActivity(Collect.DepositTransNo, Collect.TransactionNo, "", KioskConfig.SelectForm, MsAppStepID, "ไม่สามารถใช้งานได้" & _err, True)
+                InsertErrorLog(_err, Collect.DepositTransNo, Collect.TransactionNo, StaffConsole.TransNo, KioskConfig.SelectForm, MsAppStepID)
+                InsertLogTransactionActivity(Collect.DepositTransNo, Collect.TransactionNo, StaffConsole.TransNo, KioskConfig.SelectForm, MsAppStepID, "ไม่สามารถใช้งานได้" & _err, True)
             End If
 
             ShowFormError("", "", KioskConfig.SelectForm, MsAppStepID, True)
@@ -450,11 +450,11 @@ Public Class frmDepositPayment
                 End Select
                 'UpdatePickupTransaction(Pickup)
 
-                InsertLogTransactionActivity(Collect.DepositTransNo, Collect.TransactionNo, "", KioskConfig.SelectForm, KioskConfigData.KioskLockerStep.PickupPayment_ReceiveBankNote, ReceiveData & " บาท", False)
+                InsertLogTransactionActivity(Collect.DepositTransNo, Collect.TransactionNo, StaffConsole.TransNo, KioskConfig.SelectForm, KioskConfigData.KioskLockerStep.PickupPayment_ReceiveBankNote, ReceiveData & " บาท", False)
                 UpdateKioskCurrentQty(Data.ConstantsData.DeviceID.BankNoteIn, 1, ReceiveData, False)
 
                 If (Collect.PaidAmount + Collect.DepositAmount) >= Collect.ServiceAmount Then
-                    InsertLogTransactionActivity(Collect.DepositTransNo, Collect.TransactionNo, "", KioskConfig.SelectForm, KioskConfigData.KioskLockerStep.PickupPayment_PaidSuccess, " จำนวนเงินที่จ่าย " & Collect.PaidAmount, False)
+                    InsertLogTransactionActivity(Collect.DepositTransNo, Collect.TransactionNo, StaffConsole.TransNo, KioskConfig.SelectForm, KioskConfigData.KioskLockerStep.PickupPayment_PaidSuccess, " จำนวนเงินที่จ่าย " & Collect.PaidAmount, False)
                     Me.Invoke(myForm, "")
                 Else
                     Me.Invoke(RestartBanknoteIn, "")
@@ -522,10 +522,10 @@ Public Class frmDepositPayment
                 End Select
                 UpdateKioskCurrentQty(Data.ConstantsData.DeviceID.CoinIn, 1, ReceiveData, False)
 
-                InsertLogTransactionActivity(Collect.DepositTransNo, Collect.TransactionNo, "", KioskConfig.SelectForm, KioskConfigData.KioskLockerStep.PickupPayment_ReceiveCoin, ReceiveData & " บาท", False)
+                InsertLogTransactionActivity(Collect.DepositTransNo, Collect.TransactionNo, StaffConsole.TransNo, KioskConfig.SelectForm, KioskConfigData.KioskLockerStep.PickupPayment_ReceiveCoin, ReceiveData & " บาท", False)
                 If (Collect.PaidAmount + Collect.DepositAmount) >= Collect.ServiceAmount Then
                     'จ่ายครบแล้ว
-                    InsertLogTransactionActivity(Collect.DepositTransNo, Collect.TransactionNo, "", KioskConfig.SelectForm, KioskConfigData.KioskLockerStep.PickupPayment_PaidSuccess, " จำนวนเงินที่จ่าย " & Collect.PaidAmount, False)
+                    InsertLogTransactionActivity(Collect.DepositTransNo, Collect.TransactionNo, StaffConsole.TransNo, KioskConfig.SelectForm, KioskConfigData.KioskLockerStep.PickupPayment_PaidSuccess, " จำนวนเงินที่จ่าย " & Collect.PaidAmount, False)
                     Me.Invoke(myForm, "")
                 End If
             End If
@@ -574,7 +574,7 @@ Public Class frmDepositPayment
         Collect.PaidTime = DateTime.Now
         UpdateCollectTransaction(Collect)
 
-        InsertLogTransactionActivity(Collect.DepositTransNo, Collect.TransactionNo, "", KioskConfig.SelectForm, KioskLockerStep.PickupPayment_LEDBlinkOn, Collect.LockerName, False)
+        InsertLogTransactionActivity(Collect.DepositTransNo, Collect.TransactionNo, StaffConsole.TransNo, KioskConfig.SelectForm, KioskLockerStep.PickupPayment_LEDBlinkOn, Collect.LockerName, False)
         BoardLED.LEDBlinkOn(Collect.LockerPinLED)
         Application.DoEvents()
     End Sub
@@ -592,7 +592,7 @@ Public Class frmDepositPayment
         tmOpenLockerTimeOut.Enabled = False
         tmOpenLockerTimeOut.Stop()
 
-        InsertLogTransactionActivity(Collect.DepositTransNo, Collect.TransactionNo, "", KioskConfig.SelectForm, KioskLockerStep.PickupPayment_ClickConfirmOpenLocker, Collect.LockerName, False)
+        InsertLogTransactionActivity(Collect.DepositTransNo, Collect.TransactionNo, StaffConsole.TransNo, KioskConfig.SelectForm, KioskLockerStep.PickupPayment_ClickConfirmOpenLocker, Collect.LockerName, False)
 
         frmLoading.Show(frmMain)
         Application.DoEvents()
@@ -602,7 +602,7 @@ Public Class frmDepositPayment
 
     Private Sub PickupConfirmOpenLocker()
         If OpenLocker(Collect.LockerID, Collect.LockerPinSolenoid, Collect.LockerPinSendor, KioskLockerStep.PickupPayment_OpenLocker) = True Then
-            InsertLogTransactionActivity(Collect.DepositTransNo, Collect.TransactionNo, "", KioskConfig.SelectForm, KioskLockerStep.PickupPayment_OpenLocker, "ช่องฝาก " & Collect.LockerName & " ถูกเปิดออก", False)
+            InsertLogTransactionActivity(Collect.DepositTransNo, Collect.TransactionNo, StaffConsole.TransNo, KioskConfig.SelectForm, KioskLockerStep.PickupPayment_OpenLocker, "ช่องฝาก " & Collect.LockerName & " ถูกเปิดออก", False)
 
             Dim f As New frmCollectThankyou
             f.MdiParent = frmMain
@@ -611,7 +611,7 @@ Public Class frmDepositPayment
 
             frmMain.CloseAllChildForm(f)
         Else
-            InsertLogTransactionActivity(Collect.DepositTransNo, Collect.TransactionNo, "", KioskConfig.SelectForm, KioskLockerStep.PickupPayment_OpenLockerFailReturnMoney, Collect.PaidAmount & " บาท", True)
+            InsertLogTransactionActivity(Collect.DepositTransNo, Collect.TransactionNo, StaffConsole.TransNo, KioskConfig.SelectForm, KioskLockerStep.PickupPayment_OpenLockerFailReturnMoney, Collect.PaidAmount & " บาท", True)
 
             'เปิดตู้ไม่ได้ คืนเงินเต็มจำนวน
             ReturnMoney(Collect.PaidAmount, Deposit, Collect)
@@ -632,7 +632,7 @@ Public Class frmDepositPayment
                 If ServiceID = TransactionType.DepositBelonging Then
                     InsertLogTransactionActivity(Deposit.DepositTransNo, "", "", KioskConfig.SelectForm, KioskConfigData.KioskLockerStep.DepositPayment_ShowExtend, "", False)
                 ElseIf ServiceID = TransactionType.CollectBelonging Then
-                    InsertLogTransactionActivity(Collect.DepositTransNo, Collect.TransactionNo, "", KioskConfig.SelectForm, KioskConfigData.KioskLockerStep.PickupPayment_ShowExtend, "", False)
+                    InsertLogTransactionActivity(Collect.DepositTransNo, Collect.TransactionNo, StaffConsole.TransNo, KioskConfig.SelectForm, KioskConfigData.KioskLockerStep.PickupPayment_ShowExtend, "", False)
                 End If
 
                 Dim f As New frmDialog_TimeOut
@@ -640,7 +640,7 @@ Public Class frmDepositPayment
                     If ServiceID = TransactionType.DepositBelonging Then
                         InsertLogTransactionActivity(Deposit.DepositTransNo, "", "", KioskConfig.SelectForm, KioskConfigData.KioskLockerStep.DepositPayment_OKExtend, "", False)
                     ElseIf ServiceID = TransactionType.CollectBelonging Then
-                        InsertLogTransactionActivity(Collect.DepositTransNo, Collect.TransactionNo, "", KioskConfig.SelectForm, KioskConfigData.KioskLockerStep.PickupPayment_OKExtend, "", False)
+                        InsertLogTransactionActivity(Collect.DepositTransNo, Collect.TransactionNo, StaffConsole.TransNo, KioskConfig.SelectForm, KioskConfigData.KioskLockerStep.PickupPayment_OKExtend, "", False)
                     End If
 
                     TimeOutCheckTime = DateTime.Now
@@ -666,7 +666,7 @@ Public Class frmDepositPayment
                         End If
 
                         UpdateCollectStatus(Collect.CollectTransactionID, CollectTransactionData.TransactionStatus.TimeOut, KioskConfigData.KioskLockerStep.PickupPayment_CancelExtend)
-                        InsertLogTransactionActivity(Collect.DepositTransNo, Collect.TransactionNo, "", KioskConfig.SelectForm, KioskConfigData.KioskLockerStep.PickupPayment_CancelExtend, RtnMsg, False)
+                        InsertLogTransactionActivity(Collect.DepositTransNo, Collect.TransactionNo, StaffConsole.TransNo, KioskConfig.SelectForm, KioskConfigData.KioskLockerStep.PickupPayment_CancelExtend, RtnMsg, False)
 
                     End If
                     ProcessTimeOut()

@@ -20,7 +20,7 @@ Public Class frmCollectThankyou
 
 
     Private Sub frmPickupThankyou_Shown(sender As Object, e As EventArgs) Handles Me.Shown
-        InsertLogTransactionActivity(Collect.DepositTransNo, Collect.TransactionNo, "", KioskConfig.SelectForm, KioskLockerStep.PickupThankYou_OpenForm, "", False)
+        InsertLogTransactionActivity(Collect.DepositTransNo, Collect.TransactionNo, StaffConsole.TransNo, KioskConfig.SelectForm, KioskLockerStep.PickupThankYou_OpenForm, "", False)
         Me.WindowState = FormWindowState.Maximized
         frmMain.pnlFooter.Visible = True
         frmMain.pnlCancel.Visible = False
@@ -39,18 +39,18 @@ Public Class frmCollectThankyou
 
             TimerCheckCloseLocker.Enabled = True
             TimerCheckCloseLocker.Start()
-            InsertLogTransactionActivity(Collect.DepositTransNo, Collect.TransactionNo, "", KioskConfig.SelectForm, KioskLockerStep.PickupThankYou_StartSensor, "", False)
+            InsertLogTransactionActivity(Collect.DepositTransNo, Collect.TransactionNo, StaffConsole.TransNo, KioskConfig.SelectForm, KioskLockerStep.PickupThankYou_StartSensor, "", False)
         Else
             'ถ้า Sensor ไม่ทำงาน ให้ทอนเงิน และคืนมัดจำเลย เพราะตู้ได้เปิดออกแล้ว
             If Collect.ChangeAmount > 0 Then
-                InsertLogTransactionActivity(Collect.DepositTransNo, Collect.TransactionNo, "", KioskConfig.SelectForm, KioskLockerStep.PickupThankYou_StartSensor, "Sensor ไม่สามารถใช้งานได้ ทอนเงินและคืนมัดจำ " & Collect.ChangeAmount & " บาท", False)
+                InsertLogTransactionActivity(Collect.DepositTransNo, Collect.TransactionNo, StaffConsole.TransNo, KioskConfig.SelectForm, KioskLockerStep.PickupThankYou_StartSensor, "Sensor ไม่สามารถใช้งานได้ ทอนเงินและคืนมัดจำ " & Collect.ChangeAmount & " บาท", False)
                 ChangeMoney(Collect.ChangeAmount, Deposit, Collect)
             End If
 
             BoardLED.LEDStop(Collect.LockerPinLED)
 
             UpdateDeviceStatus(Data.ConstantsData.DeviceID.SensorBoard, Data.ConstantsData.BoardStatus.Disconnected)
-            InsertLogTransactionActivity(Collect.DepositTransNo, Collect.TransactionNo, "", KioskConfig.SelectForm, KioskLockerStep.PickupThankYou_StartSensor, "Sensor ไม่สามารถใช้งานได้", True)
+            InsertLogTransactionActivity(Collect.DepositTransNo, Collect.TransactionNo, StaffConsole.TransNo, KioskConfig.SelectForm, KioskLockerStep.PickupThankYou_StartSensor, "Sensor ไม่สามารถใช้งานได้", True)
             ShowFormError("Out of Service", "Sensor ไม่สามารถใช้งานได้", KioskConfig.SelectForm, KioskLockerStep.PickupThankYou_StartSensor, True)
             Exit Sub
         End If
@@ -83,7 +83,7 @@ Public Class frmCollectThankyou
     Private Sub TimerCheckCloseLocker_Tick(sender As Object, e As EventArgs) Handles TimerCheckCloseLocker.Tick
         TimerCheckCloseLocker.Enabled = False
         If _IsCloseLocker = True And _CallOpenLocker = True Then
-            InsertLogTransactionActivity(Collect.DepositTransNo, Collect.TransactionNo, "", KioskConfig.SelectForm, KioskLockerStep.PickupThankYou_CloseLocker, Collect.LockerName, False)
+            InsertLogTransactionActivity(Collect.DepositTransNo, Collect.TransactionNo, StaffConsole.TransNo, KioskConfig.SelectForm, KioskLockerStep.PickupThankYou_CloseLocker, Collect.LockerName, False)
 
             'เมื่อปิดตู้ ก็อัพเดท Status ว่าปิดตู้แล้วด้วยนะ
             Dim sql As String = "update ms_locker "
@@ -99,18 +99,18 @@ Public Class frmCollectThankyou
                 trans.CommitTransaction()
                 Application.DoEvents()
 
-                InsertLogTransactionActivity(Collect.DepositTransNo, Collect.TransactionNo, "", KioskConfig.SelectForm, KioskLockerStep.PickupThankYou_CloseLocker, "ปรับปรุงสถานะช่องฝาก " & Collect.LockerName, False)
+                InsertLogTransactionActivity(Collect.DepositTransNo, Collect.TransactionNo, StaffConsole.TransNo, KioskConfig.SelectForm, KioskLockerStep.PickupThankYou_CloseLocker, "ปรับปรุงสถานะช่องฝาก " & Collect.LockerName, False)
             Else
                 trans.RollbackTransaction()
 
                 Threading.Thread.Sleep(1000)
-                InsertLogTransactionActivity(Collect.DepositTransNo, Collect.TransactionNo, "", KioskConfig.SelectForm, KioskLockerStep.PickupThankYou_CloseLocker, "ปรับปรุงสถานะช่องฝาก " & Collect.LockerName & " ไม่สำเร็จ ทำซ้ำอีกครั้ง", True)
+                InsertLogTransactionActivity(Collect.DepositTransNo, Collect.TransactionNo, StaffConsole.TransNo, KioskConfig.SelectForm, KioskLockerStep.PickupThankYou_CloseLocker, "ปรับปรุงสถานะช่องฝาก " & Collect.LockerName & " ไม่สำเร็จ ทำซ้ำอีกครั้ง", True)
 
                 trans = New KioskTransactionDB
                 ReDim p(1)
                 p(0) = KioskDB.SetBigInt("@_LOCKER_ID", Collect.LockerID)
                 If KioskDB.ExecuteNonQuery(sql, trans.Trans, p).IsSuccess = True Then
-                    InsertLogTransactionActivity(Collect.DepositTransNo, Collect.TransactionNo, "", KioskConfig.SelectForm, KioskLockerStep.PickupThankYou_CloseLocker, "ปรับปรุงสถานะช่องฝาก " & Collect.LockerName & " อีกครั้งสำเร็จ", False)
+                    InsertLogTransactionActivity(Collect.DepositTransNo, Collect.TransactionNo, StaffConsole.TransNo, KioskConfig.SelectForm, KioskLockerStep.PickupThankYou_CloseLocker, "ปรับปรุงสถานะช่องฝาก " & Collect.LockerName & " อีกครั้งสำเร็จ", False)
                     trans.CommitTransaction()
                 Else
                     trans.RollbackTransaction()
@@ -120,7 +120,7 @@ Public Class frmCollectThankyou
 
             'ทอนเงิน และคืนมัดจำ
             If Collect.ChangeAmount > 0 Then
-                InsertLogTransactionActivity(Collect.DepositTransNo, Collect.TransactionNo, "", KioskConfig.SelectForm, KioskLockerStep.PickupThankYou_ChangeMoney, Collect.ChangeAmount & " บาท", False)
+                InsertLogTransactionActivity(Collect.DepositTransNo, Collect.TransactionNo, StaffConsole.TransNo, KioskConfig.SelectForm, KioskLockerStep.PickupThankYou_ChangeMoney, Collect.ChangeAmount & " บาท", False)
                 ChangeMoney(Collect.ChangeAmount, Deposit, Collect)
             End If
 
@@ -139,18 +139,18 @@ Public Class frmCollectThankyou
                     ret = True
                     Exit For
                 Else
-                    InsertLogTransactionActivity(Collect.DepositTransNo, Collect.TransactionNo, "", KioskConfig.SelectForm, KioskLockerStep.PickupThankYou_CloseLocker, "UpdateRetry=" & UpdateRetry, True)
+                    InsertLogTransactionActivity(Collect.DepositTransNo, Collect.TransactionNo, StaffConsole.TransNo, KioskConfig.SelectForm, KioskLockerStep.PickupThankYou_CloseLocker, "UpdateRetry=" & UpdateRetry, True)
                 End If
             Next
 
             Application.DoEvents()
-            InsertLogTransactionActivity(Collect.DepositTransNo, Collect.TransactionNo, "", KioskConfig.SelectForm, KioskLockerStep.PickupThankYou_LEDStart, Collect.LockerName, False)
+            InsertLogTransactionActivity(Collect.DepositTransNo, Collect.TransactionNo, StaffConsole.TransNo, KioskConfig.SelectForm, KioskLockerStep.PickupThankYou_LEDStart, Collect.LockerName, False)
             BoardLED.LEDStop(Collect.LockerPinLED)
             Threading.Thread.Sleep(1000)
             BoardLED.LEDStart(Collect.LockerPinLED)
             SetLockerList()
 
-            InsertLogTransactionActivity(Collect.DepositTransNo, Collect.TransactionNo, "", KioskConfig.SelectForm, KioskLockerStep.PickupThankYou_BackToHome, "การทำรายการเสร็จสมบูรณ์", False)
+            InsertLogTransactionActivity(Collect.DepositTransNo, Collect.TransactionNo, StaffConsole.TransNo, KioskConfig.SelectForm, KioskLockerStep.PickupThankYou_BackToHome, "การทำรายการเสร็จสมบูรณ์", False)
 
             TimerCheckCloseLocker.Stop()
             BoardSensor.Disconnect()

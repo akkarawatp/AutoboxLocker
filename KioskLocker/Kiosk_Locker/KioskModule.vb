@@ -2119,6 +2119,7 @@ Module KioskModule
                 KioskConfig.SyncMasterInterval = lnq.INTERVAL_SYNC_MASTER_MIN
                 KioskConfig.SyncTransInterval = lnq.INTERVAL_SYNC_TRANSACTION_MIN
                 KioskConfig.SyncLogInterval = lnq.INTERVAL_SYNC_LOG_MIN
+
             End If
             lnq = Nothing
 
@@ -2419,7 +2420,7 @@ Module KioskModule
                 End If
             End If
         Catch ex As Exception
-            InsertLogTransactionActivity(Collect.DepositTransNo, Collect.TransactionNo, "", KioskConfig.SelectForm, KioskConfigData.KioskLockerStep.PickupScanQRCode_CalServiceAmount, "Exception PickupCalServiceAmount " & ex.Message & " " & ex.StackTrace, True)
+            InsertLogTransactionActivity(Collect.DepositTransNo, Collect.TransactionNo, StaffConsole.TransNo, KioskConfig.SelectForm, KioskConfigData.KioskLockerStep.PickupScanQRCode_CalServiceAmount, "Exception PickupCalServiceAmount " & ex.Message & " " & ex.StackTrace, True)
         End Try
         Return ret
     End Function

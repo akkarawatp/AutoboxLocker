@@ -21,12 +21,17 @@ Public Class frmSC_StockAndHardware
 
         InsertLogTransactionActivity(StaffConsole.TransNo, KioskConfig.SelectForm, KioskLockerStep.StaffConsoleStockAndHardware_GetKioskConfig, "", False)
         GetKioskConfig()
+        GetKioskDeviceConfig()
 
         InsertLogTransactionActivity(StaffConsole.TransNo, KioskConfig.SelectForm, KioskLockerStep.StaffConsoleStockAndHardware_SetStockAndHardwareStatus, "", False)
         SetStockAndHardwareStatus()
 
         InsertLogTransactionActivity(StaffConsole.TransNo, KioskConfig.SelectForm, KioskLockerStep.StaffConsoleStockAndHardware_CheckAuthorize, "", False)
         CheckStaffConsoleAuthorization()
+
+        frmDepositSelectLocker.MdiParent = frmMain
+        frmDepositSelectLocker.LoadLockerList()
+        InsertLogTransactionActivity(StaffConsole.TransNo, KioskConfig.SelectForm, KioskLockerStep.StaffConsoleLoadLockList_LoadLockerList, "", False)
     End Sub
 
     Private Sub CheckStaffConsoleAuthorization()
@@ -202,7 +207,7 @@ Public Class frmSC_StockAndHardware
     End Sub
 
     Private Sub pbClose_Click(sender As Object, e As EventArgs) Handles pbClose.Click
-
+        ServiceID = 0
         InsertLogTransactionActivity(StaffConsole.TransNo, KioskConfig.SelectForm, KioskLockerStep.StaffConsoleStockAndHardware_ClickClose, "", False)
         frmMain.CloseAllChildForm()
         Dim f As New frmHome
@@ -288,4 +293,29 @@ Public Class frmSC_StockAndHardware
 
     End Sub
 
+    Private Sub btnCollect_Click(sender As Object, e As EventArgs) Handles btnCollect.Click, lblCollect.Click
+        If LockerList.Rows.Count = 0 Then
+            InsertErrorLog("Locker Information not found", 0, 0, 0, KioskConfig.SelectForm, KioskLockerStep.StaffConsoleLoadLockList_ClickCollect)
+            SendKioskAlarm("KIOSK_OUT_OF_SERVICE", True)
+            ShowFormError("Out of service", "Locker Information not found", KioskConfig.SelectForm, KioskLockerStep.StaffConsoleLoadLockList_ClickCollect, True)
+            Exit Sub
+        End If
+
+        'Create New Collect Transaction
+        Dim ret As ExecuteDataInfo = CreateNewPickupTransaction()
+        If ret.IsSuccess = True Then
+            InsertLogTransactionActivity("", Collect.TransactionNo, StaffConsole.TransNo, KioskConfig.SelectForm, KioskLockerStep.StaffConsoleLoadLockList_ClickCollect, "", False)
+            frmDepositSelectLocker.Show()
+            frmMain.btnPointer.Visible = False
+            frmMain.TimerCheckOpenClose.Enabled = False
+            Me.Close()
+            'frmDepositSelectLocker.BringToFront()
+            Application.DoEvents()
+            SendKioskAlarm("KIOSK_OUT_OF_SERVICE", False)
+        Else
+            InsertErrorLog(ret.ErrorMessage, "", "", StaffConsole.TransNo, KioskConfig.SelectForm, KioskLockerStep.StaffConsoleLoadLockList_ClickCollect)
+            SendKioskAlarm("KIOSK_OUT_OF_SERVICE", True)
+            ShowDialogErrorMessage("Cannot create Collect transaction")
+        End If
+    End Sub
 End Class

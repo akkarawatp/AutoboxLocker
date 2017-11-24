@@ -1,7 +1,6 @@
-﻿'Imports System.Data.SqlClient
+﻿Imports System.Data.SqlClient
+Imports KioskLinqDB.ConnectDB
 Imports AutoboxLocker.Data.KioskConfigData
-'Imports AutoboxLocker.Data.KioskLockerStateData
-'Imports AutoboxLocker.ServiceTransactionData
 Public Class frmDepositSelectLocker
     Dim TimeOut As Int32 = KioskConfig.TimeOutSec
     Dim TimeOutCheckTime As DateTime = DateTime.Now
@@ -9,19 +8,31 @@ Public Class frmDepositSelectLocker
     Private Sub frmDepositSelectLocker_Load(sender As Object, e As EventArgs) Handles Me.Load
         Me.ControlBox = False
         Me.BackColor = bgColor
-        KioskConfig.SelectForm = KioskLockerForm.DepositSelectLocker
-        'SetChildFormLanguage()
+
+        If ServiceID = Data.ConstantsData.TransactionType.DepositBelonging Then
+            KioskConfig.SelectForm = KioskLockerForm.DepositSelectLocker
+        ElseIf ServiceID = Data.ConstantsData.TransactionType.CollectBelonging Then
+            KioskConfig.SelectForm = KioskLockerForm.StaffConsoleCollectSelectLocker
+        End If
     End Sub
     Private Sub frmDepositSelectLocker_Shown(sender As Object, e As EventArgs) Handles Me.Shown
+        'หน้าจอ เลือกช่องฝากใช้สำหรับกรณี
+        'ลูกค้าทำรายการฝาก
+        'Staff Console ทำรายการรับคืนเพื่อเปิดตู้ให้ลูกค้า
+
         Me.WindowState = FormWindowState.Maximized
         frmMain.pnlFooter.Visible = True
         frmMain.pnlCancel.Visible = True
 
         Application.DoEvents()
-        InsertLogTransactionActivity(Deposit.DepositTransNo, "", "", KioskConfig.SelectForm, KioskLockerStep.DepositSelectLocker_OpenForm, "", False)
+        If ServiceID = Data.ConstantsData.TransactionType.DepositBelonging Then
+            InsertLogTransactionActivity(Deposit.DepositTransNo, "", "", KioskConfig.SelectForm, KioskLockerStep.DepositSelectLocker_OpenForm, "", False)
+        ElseIf ServiceID = Data.ConstantsData.TransactionType.CollectBelonging Then
+            InsertLogTransactionActivity("", Collect.TransactionNo, StaffConsole.TransNo, KioskConfig.SelectForm, KioskLockerStep.StaffConsoleCollectSelectLocker_OpenForm, "", False)
+        End If
+
         TimeOutCheckTime = DateTime.Now
         TimerTimeOut.Enabled = True
-
     End Sub
 
     Dim AllPadding As Integer = 1
@@ -29,9 +40,12 @@ Public Class frmDepositSelectLocker
 
     Public Sub LoadLockerList()
         Try
-            InsertLogTransactionActivity(Deposit.DepositTransNo, "", "", KioskConfig.SelectForm, KioskLockerStep.DepositSelectLocker_LoadLockerList, "", False)
-            Dim cbWith As Integer = 0
+            InsertLogTransactionActivity("", "", "", KioskConfig.SelectForm, KioskLockerStep.DepositSelectLocker_LoadLockerList, "", False)
+            If ServiceID = Data.ConstantsData.TransactionType.StaffConsole Then
+                InsertLogTransactionActivity(StaffConsole.TransNo, KioskConfig.SelectForm, KioskLockerStep.StaffConsoleCollectSelectLocker_LoadLockerList, "", False)
+            End If
 
+            Dim cbWith As Integer = 0
             UcCabinet1.LoadCabinetData(False, CabinetList)
             If UcCabinet1.LockerActiveQty > 0 Then
                 cbWith += UcCabinet1.Width + AllPadding
@@ -127,47 +141,122 @@ Public Class frmDepositSelectLocker
     Private Sub UcCabinet1_LockerClick(f As ucLockerInfo) Handles UcCabinet1.LockerClick, UcCabinet2.LockerClick, UcCabinet3.LockerClick, UcCabinet4.LockerClick, UcCabinet5.LockerClick, UcCabinet6.LockerClick, UcCabinet7.LockerClick, UcCabinet8.LockerClick, UcCabinet9.LockerClick, UcCabinet10.LockerClick
         'MessageBox.Show(LockerID)
 
-        If f.LockerAvailable = ucLockerInfo.AvailableStatus.Availabled Then
-            TimeOutCheckTime = DateTime.Now
-            TimerTimeOut.Enabled = False
-            TimerTimeOut.Stop()
+        If ServiceID = Data.ConstantsData.TransactionType.DepositBelonging Then
+            If f.LockerAvailable = ucLockerInfo.AvailableStatus.Availabled Then
+                TimeOutCheckTime = DateTime.Now
+                TimerTimeOut.Enabled = False
+                TimerTimeOut.Stop()
 
-            frmLoading.Show(frmMain)
-            InsertLogTransactionActivity(Deposit.DepositTransNo, "", "", KioskConfig.SelectForm, KioskLockerStep.DepositSelectLocker_SelectLocker, " " & f.txtLockerName.Text, False)
+                frmLoading.Show(frmMain)
 
-            Application.DoEvents()
+                InsertLogTransactionActivity(Deposit.DepositTransNo, "", "", KioskConfig.SelectForm, KioskLockerStep.DepositSelectLocker_SelectLocker, " " & f.txtLockerName.Text, False)
 
-            Deposit.LockerID = f.LockerID
-            Deposit.LockerName = f.txtLockerName.Text
-            Deposit.CabinetID = f.CabinetID
-            Deposit.CabinetModelID = f.CabinetModelID
-            Deposit.LockerPinSolenoid = f.cbSolenoidPin.SelectedValue
-            Deposit.LockerPinLED = f.cbLEDPin.SelectedValue
-            Deposit.LockerPinSendor = f.cbSensorPin.SelectedValue
+                Application.DoEvents()
 
-            'เลือกช่องฝากแล้วก็ Update Transaction โลด
-            If UpdateServiceTransaction(Deposit).IsSuccess = True Then
-                frmDepositSetPINCode.MdiParent = frmMain
-                frmDepositSetPINCode.Show()
+                Deposit.LockerID = f.LockerID
+                Deposit.LockerName = f.txtLockerName.Text
+                Deposit.CabinetID = f.CabinetID
+                Deposit.CabinetModelID = f.CabinetModelID
+                Deposit.LockerPinSolenoid = f.cbSolenoidPin.SelectedValue
+                Deposit.LockerPinLED = f.cbLEDPin.SelectedValue
+                Deposit.LockerPinSendor = f.cbSensorPin.SelectedValue
 
-                'frmDepositScanPassport.MdiParent = frmMain
-                'frmDepositScanPassport.pnlProcessing.Left = (frmDepositScanPassport.Width / 2) - (frmDepositScanPassport.pnlProcessing.Width / 2)
-                'frmDepositScanPassport.pnlProcessing.Top = 35
-                'frmDepositScanPassport.pnlProcessing.Visible = True
+                'เลือกช่องฝากแล้วก็ Update Transaction โลด
+                If UpdateServiceTransaction(Deposit).IsSuccess = True Then
+                    frmDepositSetPINCode.MdiParent = frmMain
+                    frmDepositSetPINCode.Show()
+                    frmLoading.Close()
 
-                'frmDepositScanPassport.Show()
-                'frmDepositScanPassport.lblTitle.Visible = True
-                'Application.DoEvents()
-                'frmDepositScanPassport.StartInitialDevice()
-                'frmDepositScanPassport.pnlProcessing.Visible = False
-                frmLoading.Close()
+                    Me.Close()
+                End If
 
-                Me.Close()
+            ElseIf f.LockerAvailable = ucLockerInfo.AvailableStatus.NotAvailable AndAlso f.LockerAvailable = ucLockerInfo.AvailableStatus.NoActive Then
+                'ถ้าสถานะ ไม่ว่าง ก็ให้อยู่นิ่งๆ ไม่ต้องทำอะไร
             End If
-        ElseIf f.LockerAvailable = ucLockerInfo.AvailableStatus.NotAvailable AndAlso f.LockerAvailable = ucLockerInfo.AvailableStatus.NoActive Then
-            'ถ้าสถานะ ไม่ว่าง ก็ให้อยู่นิ่งๆ ไม่ต้องทำอะไร
+
+        ElseIf ServiceID = Data.ConstantsData.TransactionType.CollectBelonging Then
+            'กรณีรับคืนจาก StaffConsole ให้คำนวณค่าฝาก และแสดงหน้าจอชำระเงิน
+
+            If f.LockerAvailable = ucLockerInfo.AvailableStatus.NotAvailable Then
+                InsertLogTransactionActivity("", Collect.TransactionNo, StaffConsole.TransNo, KioskConfig.SelectForm, KioskLockerStep.StaffConsoleCollectSelectLocker_SelectLocker, " " & f.txtLockerName.Text, False)
+
+                TimeOutCheckTime = DateTime.Now
+                TimerTimeOut.Enabled = False
+                TimerTimeOut.Stop()
+
+                frmLoading.Show(frmMain)
+
+                If SetPickupInitialInformation(f.LockerID) = True Then
+                    Collect.PickupTime = DateTime.Now
+                    Collect.ServiceAmount = PickupCalServiceAmount()   'ค่าบริการที่ระบบคำนวณได้
+                    Collect.LostQRCode = "Y"
+
+                    If UpdateCollectTransaction(Collect).IsSuccess = True Then
+                        Application.DoEvents()
+                        WebCam = New WebCamera.DSCamCapture
+                        frmDepositPayment.MdiParent = frmMain
+                        frmDepositPayment.Show()
+                        frmDepositPayment.BringToFront()
+
+                        frmLoading.Close()
+                        Me.Close()
+                    End If
+                End If
+            ElseIf f.LockerAvailable = ucLockerInfo.AvailableStatus.Availabled AndAlso f.LockerAvailable = ucLockerInfo.AvailableStatus.NoActive Then
+                'กรณีรับคืนจาก StaffConsole ถ้าเป็นตู้ที่ว่างอยู่ ก็ไม่ให้คลิกได้ เพราะจะรับคืน จะไปคลิกตู้ว่างทำไม
+            End If
         End If
+
+
     End Sub
+
+
+
+
+    Private Function SetPickupInitialInformation(LockerID As Long) As Boolean
+        Dim ret As Boolean = False
+        Try
+            Dim sql As String = "select t.id, t.trans_no, t.ms_locker_id, l.locker_name, l.pin_solenoid, l.pin_led, l.pin_sensor,  "
+            sql += " t.service_rate, t.service_rate_limit_day, t.deposit_amt, t.paid_time, c.ms_cabinet_model_id "
+            sql += " from TB_DEPOSIT_TRANSACTION t"
+            sql += " inner join MS_LOCKER l on l.id=t.ms_locker_id"
+            sql += " inner join MS_CABINET c on c.id=l.ms_cabinet_id"
+            sql += " where t.ms_locker_id=@_LOCKER_ID "
+            sql += " and t.trans_status=@_TRANS_STATUS"
+            sql += " and t.paid_time is not null "
+
+            Dim p(2) As SqlParameter
+            p(0) = KioskDB.SetBigInt("@_LOCKER_ID", LockerID)
+            p(1) = KioskDB.SetText("@_TRANS_STATUS", Convert.ToInt16(DepositTransactionData.TransactionStatus.Success))
+
+            Dim dt As DataTable = KioskDB.ExecuteTable(sql, p)
+            If dt.Rows.Count > 0 Then
+                Dim dr As DataRow = dt.Rows(0)
+                Collect.DepositTransNo = dr("trans_no")
+                Collect.LockerID = Convert.ToInt64(dr("ms_locker_id"))
+                Collect.LockerName = dr("locker_name").ToString
+                If Convert.IsDBNull(dr("pin_solenoid")) = False Then Collect.LockerPinSolenoid = Convert.ToInt16(dr("pin_solenoid"))
+                If Convert.IsDBNull(dr("pin_led")) = False Then Collect.LockerPinLED = Convert.ToInt16(dr("pin_led"))
+                If Convert.IsDBNull(dr("pin_sensor")) = False Then Collect.LockerPinSendor = dr("pin_sensor")
+
+                Collect.DepositAmount = Convert.ToInt64(dr("deposit_amt"))   'เงินค่ามัดจำที่ลูกค้าจ่ายแล้ว
+                Collect.CabinetModelID = Convert.ToInt64(dr("ms_cabinet_model_id"))
+                If Convert.IsDBNull(dr("paid_time")) = False Then
+                    Collect.DepositPaidTime = Convert.ToDateTime(dr("paid_time"))
+                End If
+
+                Dim re As ExecuteDataInfo = UpdateCollectTransaction(Collect)
+                ret = re.IsSuccess
+            Else
+                ret = False
+            End If
+            dt.Dispose()
+        Catch ex As Exception
+            ret = False
+            InsertErrorLog("Exception " & ex.Message & vbNewLine & ex.StackTrace, "", Collect.TransactionNo, "", KioskConfig.SelectForm, KioskLockerStep.PickupScanQRCode_CheckDataQRCode)
+        End Try
+        Return ret
+    End Function
 
     Private Sub TimerTimeOut_Tick(sender As Object, e As EventArgs) Handles TimerTimeOut.Tick
         If KioskConfig.SelectForm = KioskLockerForm.DepositSelectLocker Then
