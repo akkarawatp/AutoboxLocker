@@ -40,7 +40,7 @@ Public Class frmCollectSelectDocument
     End Sub
 
     Private Sub lblCaptionPinCode_Click(sender As Object, e As EventArgs) Handles lblCaptionPinCode.Click, pnlPinCode.Click, lblImagePinCode.Click
-        InsertLogTransactionActivity("", Collect.TransactionNo, "", KioskConfig.SelectForm, KioskLockerStep.PickupSelectDoc_ClickIDCard, "", False)
+        InsertLogTransactionActivity("", Collect.TransactionNo, "", KioskConfig.SelectForm, KioskLockerStep.PickupSelectDoc_ClickPinCode, "", False)
         Collect.LostQRCode = "Y"
         Dim ret As ExecuteDataInfo = UpdateCollectTransaction(Collect)
         If ret.IsSuccess = True Then
@@ -58,7 +58,7 @@ Public Class frmCollectSelectDocument
             frmLoading.Close()
             Me.Close()
         Else
-            InsertLogTransactionActivity("", Collect.TransactionNo, "", KioskConfig.SelectForm, KioskLockerStep.PickupSelectDoc_ClickIDCard, " Update Pickup Data Fail", True)
+            InsertLogTransactionActivity("", Collect.TransactionNo, "", KioskConfig.SelectForm, KioskLockerStep.PickupSelectDoc_ClickPinCode, " Update Pickup Data Fail", True)
         End If
     End Sub
 

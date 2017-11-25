@@ -418,9 +418,9 @@ Namespace Data
             StaffConsoleKioskSetting = 19
             StaffConsoleDeviceSetting = 20
             StaffConsoleLockerSetting = 21
-            StaffConsoleCollectSelectLocker = 22
+            StaffConsoleCollectSelectLocker = 24
 
-            'ScreenSaver = 22
+            ScreenSaver = 22
         End Enum
 		
 		Public Enum KioskLockerStep
@@ -482,6 +482,7 @@ Namespace Data
             DepositPayment_ConnectWebcamSuccess = 514
             DepositPayment_ConnectWebcamFail = 515
             DepositPayment_CaptureImageSuccess = 516
+            DepositPayment_DisconnectWebcam = 517
 
             DepositPrintQRCode_OpenForm = 601
             DepositPrintQRCode_OpenLocker = 602
@@ -498,7 +499,7 @@ Namespace Data
 
             PickupSelectDoc_OpenForm = 2301
             PickupSelectDoc_ClickQRCode = 2302
-            PickupSelectDoc_ClickIDCard = 2303
+            PickupSelectDoc_ClickPinCode = 2303
             PickupSelectDoc_Timeout = 2304
 
             PickupScanQRCode_OpenForm = 801
@@ -520,15 +521,14 @@ Namespace Data
             PickupPayment_CancelExtend = 1111
             PickupPayment_PaidTimeOut = 1112
             PickupPayment_ReturnMoney = 1113
-            PickupPayment_ConnectWebcamSuccess = 1114
-            PickupPayment_ConnectWebcamFail = 1115
-            PickupPayment_CaptureImageSuccess = 1116
-
-            'New Requirement
             PickupPayment_ClickConfirmOpenLocker = 1114
             PickupPayment_OpenLocker = 1115
             PickupPayment_LEDBlinkOn = 1116
             PickupPayment_OpenLockerFailReturnMoney = 1117    'OpenLockerFail
+            PickupPayment_ConnectWebcamSuccess = 1118
+            PickupPayment_ConnectWebcamFail = 1119
+            PickupPayment_CaptureImageSuccess = 1120
+            PickupPayment_DisconnectWebcam = 1121
 
             PickupByPinCode_OpenForm = 1001
             'PickupScanPersonInfo_CheckPassportDevice = 1002
@@ -616,10 +616,9 @@ Namespace Data
 			StaffConsoleLockerSetting_CabinetDelete = 2109
             StaffConsoleLockerSetting_LockerDbClick = 2110
 
-            '--------------------------------
-            StaffConsoleCollectSelectLocker_OpenForm = 2201
-            StaffConsoleCollectSelectLocker_LoadLockerList = 2202
-            StaffConsoleCollectSelectLocker_SelectLocker = 2203
+            StaffConsoleCollectSelectLocker_OpenForm = 2401
+            StaffConsoleCollectSelectLocker_LoadLockerList = 2402
+            StaffConsoleCollectSelectLocker_SelectLocker = 2403
 
         End Enum
     End Class

@@ -91,7 +91,7 @@ Public Class frmDepositPayment
                 lblChangeAmt.Visible = True
                 lblChangeTHB.Visible = True
 
-                If Collect.DepositAmount > Collect.ServiceAmount Then
+                If Collect.DepositAmount >= Collect.ServiceAmount Then
                     'ถ้าค่ามัดจำ มากกว่าค่าบริการ
                     'ให้แสดงจำนวนเงินที่ทอน และปุ่มเปิดประตู
 
@@ -284,16 +284,16 @@ Public Class frmDepositPayment
         Dim si As Integer = DSCamCapture.FrameSizes.s640x480
         Dim SelectedSize As DSCamCapture.FrameSizes = CType(si, DSCamCapture.FrameSizes)
         If WebCam.ConnectToDevice(CamIndex, 15, pbImage.ClientSize, SelectedSize, pbImage.Handle) = True Then
-            InsertLogTransactionActivity(Deposit.DepositTransNo, Collect.TransactionNo, StaffConsole.TransNo, KioskConfig.SelectForm, KioskLockerStep.PickupPayment_ConnectWebcamSuccess, "", False)
+            InsertLogTransactionActivity(Collect.DepositTransNo, Collect.TransactionNo, StaffConsole.TransNo, KioskConfig.SelectForm, KioskLockerStep.PickupPayment_ConnectWebcamSuccess, "", False)
 
             'AddHandler WebCam.FrameSaved, AddressOf WebcamFrameSaved
             AddHandler WebCam.FrameCaptured, AddressOf WebcamFrameCaptured
             WebCam.Start()
             WebCam.GetCurrentFrame()
         Else
-            UpdateDepositStatus(Deposit.DepositTransactionID, CollectTransactionData.TransactionStatus.Problem, KioskLockerStep.PickupPayment_ConnectWebcamFail)
-            InsertErrorLog("ไม่สามารถเชื่อมต่อกับกล้อง Webcam ได้", Deposit.DepositTransNo, Collect.TransactionNo, StaffConsole.TransNo, KioskConfig.SelectForm, KioskLockerStep.PickupPayment_ConnectWebcamFail)
-            InsertLogTransactionActivity(Deposit.DepositTransNo, Collect.TransactionNo, StaffConsole.TransNo, KioskConfig.SelectForm, KioskLockerStep.PickupPayment_ConnectWebcamFail, "", True)
+            UpdateCollectStatus(Collect.CollectTransactionID, CollectTransactionData.TransactionStatus.Problem, KioskLockerStep.PickupPayment_ConnectWebcamFail)
+            InsertErrorLog("ไม่สามารถเชื่อมต่อกับกล้อง Webcam ได้", Collect.DepositTransNo, Collect.TransactionNo, StaffConsole.TransNo, KioskConfig.SelectForm, KioskLockerStep.PickupPayment_ConnectWebcamFail)
+            InsertLogTransactionActivity(Collect.DepositTransNo, Collect.TransactionNo, StaffConsole.TransNo, KioskConfig.SelectForm, KioskLockerStep.PickupPayment_ConnectWebcamFail, "", True)
 
             UpdateDeviceStatus(DeviceID.WebCamera, WebCameraStatus.Disconnected)
             SendKioskAlarm("WEBCAMERA_DISCONNECTED", True)
@@ -302,16 +302,21 @@ Public Class frmDepositPayment
     End Sub
 
     Private Sub WebcamFrameCaptured(capImage As Bitmap)
-        InsertLogTransactionActivity(Deposit.DepositTransNo, Collect.TransactionNo, "", KioskConfig.SelectForm, KioskLockerStep.DepositPayment_CaptureImageSuccess, "", False)
-
         If ServiceID = TransactionType.DepositBelonging Then
+            InsertLogTransactionActivity(Deposit.DepositTransNo, Collect.TransactionNo, StaffConsole.TransNo, KioskConfig.SelectForm, KioskLockerStep.DepositPayment_CaptureImageSuccess, "", False)
             Deposit.CustomerImage = Engine.ConverterENG.BitmapToByte(capImage)
             UpdateServiceTransaction(Deposit)
+
+            InsertLogTransactionActivity(Deposit.DepositTransNo, Collect.TransactionNo, StaffConsole.TransNo, KioskConfig.SelectForm, KioskLockerStep.DepositPayment_DisconnectWebcam, "", False)
+
+
         ElseIf ServiceID = TransactionType.CollectBelonging Then
+            InsertLogTransactionActivity(Collect.DepositTransNo, Collect.TransactionNo, StaffConsole.TransNo, KioskConfig.SelectForm, KioskLockerStep.PickupPayment_CaptureImageSuccess, "", False)
             Collect.CustomerImage = Engine.ConverterENG.BitmapToByte(capImage)
             UpdateCollectTransaction(Collect)
-        End If
 
+            InsertLogTransactionActivity(Collect.DepositTransNo, Collect.TransactionNo, StaffConsole.TransNo, KioskConfig.SelectForm, KioskLockerStep.PickupPayment_DisconnectWebcam, "", False)
+        End If
         WebCam.Dispose()
     End Sub
 #End Region

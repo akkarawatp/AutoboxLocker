@@ -1905,25 +1905,6 @@ Module KioskModule
         Catch ex As Exception
             InsertErrorLog("Exception SendKioskAlarm " & ex.Message & vbNewLine & ex.StackTrace, DepositTransNo, Collect.TransactionNo, StaffConsole.TransNo, KioskConfig.SelectForm, 0)
         End Try
-
-
-        'Try
-        '    If AlarmMasterList.Rows.Count > 0 Then
-        '        AlarmMasterList.DefaultView.RowFilter = "alarm_problem='" & AlarmProblem & "'"
-        '        If AlarmMasterList.DefaultView.Count > 0 Then
-        '            Dim ws As New AlarmWebReference.ApplicationWebservice
-        '            ws.Timeout = 10000
-        '            ws.Url = KioskConfig.WebServiceAlarmURL
-        '            'ws.Url = "http://localhost:37814/ApplicationWebservice.asmx?WSDL"
-
-        '            Dim ret As String = ws.SendAlarmOtherApp(KioskData.MacAddress, AlarmMasterList.DefaultView.ToTable.Copy, IsProblem, KioskConfig.LocationName, "Left & Lug Service Info " & KioskConfig.LocationName, "Alarm Left & Lug " & AlarmProblem)
-        '            ws.Dispose()
-        '        End If
-        '        AlarmMasterList.DefaultView.RowFilter = ""
-        '    End If
-        'Catch ex As Exception
-
-        'End Try
     End Sub
 
     Public Function CheckInternetConnection(URL As String) As Boolean

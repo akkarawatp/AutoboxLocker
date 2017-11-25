@@ -16,13 +16,13 @@ Public Class frmSC_StockAndHardware
     End Sub
 
     Private Sub frmSC_StockAndHardware_Shown(sender As Object, e As EventArgs) Handles Me.Shown
-
         Application.DoEvents()
 
         InsertLogTransactionActivity(StaffConsole.TransNo, KioskConfig.SelectForm, KioskLockerStep.StaffConsoleStockAndHardware_GetKioskConfig, "", False)
         GetKioskConfig()
         GetKioskDeviceConfig()
 
+        KioskConfig.SelectForm = Data.KioskConfigData.KioskLockerForm.StaffConsoleStoakAndHardware
         InsertLogTransactionActivity(StaffConsole.TransNo, KioskConfig.SelectForm, KioskLockerStep.StaffConsoleStockAndHardware_SetStockAndHardwareStatus, "", False)
         SetStockAndHardwareStatus()
 
@@ -75,6 +75,13 @@ Public Class frmSC_StockAndHardware
             StaffConsole.AuthorizeInfo.DefaultView.RowFilter = "ms_functional_id=21"
             If StaffConsole.AuthorizeInfo.DefaultView.Count = 0 Then
                 btnOpenAll.Visible = False
+            End If
+            StaffConsole.AuthorizeInfo.DefaultView.RowFilter = ""
+
+            'Collect
+            StaffConsole.AuthorizeInfo.DefaultView.RowFilter = "ms_functional_id=29"
+            If StaffConsole.AuthorizeInfo.DefaultView.Count = 0 Then
+                btnCollect.Visible = False
             End If
             StaffConsole.AuthorizeInfo.DefaultView.RowFilter = ""
         End If
@@ -208,7 +215,7 @@ Public Class frmSC_StockAndHardware
 
     Private Sub pbClose_Click(sender As Object, e As EventArgs) Handles pbClose.Click
         ServiceID = 0
-        InsertLogTransactionActivity(StaffConsole.TransNo, KioskConfig.SelectForm, KioskLockerStep.StaffConsoleStockAndHardware_ClickClose, "", False)
+        InsertLogTransactionActivity(StaffConsole.TransNo, Data.KioskConfigData.KioskLockerForm.StaffConsoleStoakAndHardware, KioskLockerStep.StaffConsoleStockAndHardware_ClickClose, "", False)
         frmMain.CloseAllChildForm()
         Dim f As New frmHome
         f.MdiParent = frmMain

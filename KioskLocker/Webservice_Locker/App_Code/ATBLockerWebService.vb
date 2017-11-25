@@ -903,17 +903,6 @@ Public Class ATBLockerWebService
             If TransEndTime.Year <> 1 Then sLnq.TRANS_END_TIME = Convert.ToDateTime(TransEndTime)
             sLnq.MS_KIOSK_ID = MsKioskID
             If ServerLockerID > 0 Then sLnq.MS_LOCKER_ID = ServerLockerID
-
-            'If PassportNo.Trim <> "" Then sLnq.PASSPORT_NO = PassportNo
-            'If IDCardNo.Trim <> "" Then sLnq.IDCARD_NO = IDCardNo
-            'If NationCode.Trim <> "" Then sLnq.NATION_CODE = NationCode
-            'If FirstName.Trim <> "" Then sLnq.FIRST_NAME = FirstName
-            'If LastName.Trim <> "" Then sLnq.LAST_NAME = LastName
-            'If Gender.Trim <> "" Then sLnq.GENDER = Gender
-            'If BirthDate.Year <> 1 Then sLnq.BIRTH_DATE = BirthDate
-            'If PassportExpireDate.Year <> 1 Then sLnq.PASSPORT_EXPIRE_DATE = PassportExpireDate
-            'If IDCardExpireDate.Year <> 1 Then sLnq.IDCARD_EXPIRE_DATE = IDCardExpireDate
-            ''If CustImage IsNot Nothing Then sLnq.CUST_IMAGE = CustImage
             If PinCode.Trim <> "" Then sLnq.PIN_CODE = PinCode
             sLnq.SERVICE_RATE = ServiceRate
             sLnq.SERVICE_RATE_LIMIT_DAY = ServiceRateLimitDay
@@ -966,92 +955,92 @@ Public Class ATBLockerWebService
     End Function
 
 
-    <WebMethod()>
-    Public Function SyncKioskDepositTransaction(dt As DataTable, KioskName As String) As String
-        Dim ret As String = "false"
-        Try
-            Engine.LogFileENG.CreateServerLogAgent("SyncKioskDepositTransaction from " & KioskName & " " & dt.Rows.Count & " Records")
+    '<WebMethod()>
+    'Public Function SyncKioskDepositTransaction(dt As DataTable, KioskName As String) As String
+    '    Dim ret As String = "false"
+    '    Try
+    '        Engine.LogFileENG.CreateServerLogAgent("SyncKioskDepositTransaction from " & KioskName & " " & dt.Rows.Count & " Records")
 
-            If dt.Rows.Count > 0 Then
-                Dim sTrans As New ServerLinqDB.ConnectDB.ServerTransactionDB
-                Dim sRet As New ExecuteDataInfo
+    '        If dt.Rows.Count > 0 Then
+    '            Dim sTrans As New ServerLinqDB.ConnectDB.ServerTransactionDB
+    '            Dim sRet As New ExecuteDataInfo
 
-                For Each dr As DataRow In dt.Rows
-                    Dim sLnq As New TbDepositTransactionServerLinqDB
-                    sLnq.ChkDataByTRANS_NO(dr("TRANS_NO"), sTrans.Trans)
-                    sLnq.TRANS_NO = dr("TRANS_NO")
-                    sLnq.TRANS_START_TIME = Convert.ToDateTime(dr("TRANS_START_TIME"))
-                    If Convert.IsDBNull(dr("TRANS_END_TIME")) = False Then sLnq.TRANS_END_TIME = Convert.ToDateTime(dr("TRANS_END_TIME"))
-                    sLnq.MS_KIOSK_ID = dr("ms_kiosk_id")
-                    If Convert.IsDBNull(dr("locker_name")) = False Then
-                        sLnq.MS_LOCKER_ID = GetServerLockerID(dr("ms_kiosk_id"), dr("locker_name"), sTrans.Trans)
-                    End If
+    '            For Each dr As DataRow In dt.Rows
+    '                Dim sLnq As New TbDepositTransactionServerLinqDB
+    '                sLnq.ChkDataByTRANS_NO(dr("TRANS_NO"), sTrans.Trans)
+    '                sLnq.TRANS_NO = dr("TRANS_NO")
+    '                sLnq.TRANS_START_TIME = Convert.ToDateTime(dr("TRANS_START_TIME"))
+    '                If Convert.IsDBNull(dr("TRANS_END_TIME")) = False Then sLnq.TRANS_END_TIME = Convert.ToDateTime(dr("TRANS_END_TIME"))
+    '                sLnq.MS_KIOSK_ID = dr("ms_kiosk_id")
+    '                If Convert.IsDBNull(dr("locker_name")) = False Then
+    '                    sLnq.MS_LOCKER_ID = GetServerLockerID(dr("ms_kiosk_id"), dr("locker_name"), sTrans.Trans)
+    '                End If
 
-                    If Convert.IsDBNull(dr("PASSPORT_NO")) = False Then sLnq.PASSPORT_NO = dr("PASSPORT_NO")
-                    If Convert.IsDBNull(dr("IDCARD_NO")) = False Then sLnq.IDCARD_NO = dr("IDCARD_NO")
-                    If Convert.IsDBNull(dr("NATION_CODE")) = False Then sLnq.NATION_CODE = dr("NATION_CODE")
-                    If Convert.IsDBNull(dr("FIRST_NAME")) = False Then sLnq.FIRST_NAME = dr("FIRST_NAME")
-                    If Convert.IsDBNull(dr("LAST_NAME")) = False Then sLnq.LAST_NAME = dr("LAST_NAME")
-                    If Convert.IsDBNull(dr("GENDER")) = False Then sLnq.GENDER = Convert.ToString(Chr(dr("GENDER")))
-                    If Convert.IsDBNull(dr("BIRTH_DATE")) = False Then sLnq.BIRTH_DATE = Convert.ToDateTime(dr("BIRTH_DATE"))
-                    If Convert.IsDBNull(dr("PASSPORT_EXPIRE_DATE")) = False Then sLnq.PASSPORT_EXPIRE_DATE = Convert.ToDateTime(dr("PASSPORT_EXPIRE_DATE"))
-                    If Convert.IsDBNull(dr("IDCARD_EXPIRE_DATE")) = False Then sLnq.IDCARD_EXPIRE_DATE = Convert.ToDateTime(dr("IDCARD_EXPIRE_DATE"))
-                    If Convert.IsDBNull(dr("cust_image")) = False Then sLnq.CUST_IMAGE = CType(dr("cust_image"), Byte())
-                    sLnq.SERVICE_RATE = dr("SERVICE_RATE")
-                    sLnq.SERVICE_RATE_LIMIT_DAY = dr("SERVICE_RATE_LIMIT_DAY")
-                    sLnq.DEPOSIT_AMT = dr("DEPOSIT_AMT")
-                    If Convert.IsDBNull(dr("PAID_TIME")) = False Then sLnq.PAID_TIME = dr("PAID_TIME")
-                    sLnq.RECEIVE_COIN1 = dr("RECEIVE_COIN1")
-                    sLnq.RECEIVE_COIN2 = dr("RECEIVE_COIN2")
-                    sLnq.RECEIVE_COIN5 = dr("RECEIVE_COIN5")
-                    sLnq.RECEIVE_COIN10 = dr("RECEIVE_COIN10")
-                    sLnq.RECEIVE_BANKNOTE20 = dr("RECEIVE_BANKNOTE20")
-                    sLnq.RECEIVE_BANKNOTE50 = dr("RECEIVE_BANKNOTE50")
-                    sLnq.RECEIVE_BANKNOTE100 = dr("RECEIVE_BANKNOTE100")
-                    sLnq.RECEIVE_BANKNOTE500 = dr("RECEIVE_BANKNOTE500")
-                    sLnq.RECEIVE_BANKNOTE1000 = dr("RECEIVE_BANKNOTE1000")
-                    sLnq.CHANGE_COIN1 = dr("CHANGE_COIN1")
-                    sLnq.CHANGE_COIN2 = dr("CHANGE_COIN2")
-                    sLnq.CHANGE_COIN5 = dr("CHANGE_COIN5")
-                    sLnq.CHANGE_COIN10 = dr("CHANGE_COIN10")
-                    sLnq.CHANGE_BANKNOTE20 = dr("CHANGE_BANKNOTE20")
-                    sLnq.CHANGE_BANKNOTE50 = dr("CHANGE_BANKNOTE50")
-                    sLnq.CHANGE_BANKNOTE100 = dr("CHANGE_BANKNOTE100")
-                    sLnq.CHANGE_BANKNOTE500 = dr("CHANGE_BANKNOTE500")
-                    sLnq.TRANS_STATUS = dr("TRANS_STATUS")
-                    If Convert.IsDBNull(dr("MS_APP_SCREEN_ID")) = False Then sLnq.MS_APP_SCREEN_ID = dr("MS_APP_SCREEN_ID")
-                    If Convert.IsDBNull(dr("MS_APP_STEP_ID")) = False Then sLnq.MS_APP_STEP_ID = dr("MS_APP_STEP_ID")
-                    sLnq.SYNC_TO_SERVER = "Y"
+    '                'If Convert.IsDBNull(dr("PASSPORT_NO")) = False Then sLnq.PASSPORT_NO = dr("PASSPORT_NO")
+    '                'If Convert.IsDBNull(dr("IDCARD_NO")) = False Then sLnq.IDCARD_NO = dr("IDCARD_NO")
+    '                'If Convert.IsDBNull(dr("NATION_CODE")) = False Then sLnq.NATION_CODE = dr("NATION_CODE")
+    '                'If Convert.IsDBNull(dr("FIRST_NAME")) = False Then sLnq.FIRST_NAME = dr("FIRST_NAME")
+    '                'If Convert.IsDBNull(dr("LAST_NAME")) = False Then sLnq.LAST_NAME = dr("LAST_NAME")
+    '                'If Convert.IsDBNull(dr("GENDER")) = False Then sLnq.GENDER = Convert.ToString(Chr(dr("GENDER")))
+    '                'If Convert.IsDBNull(dr("BIRTH_DATE")) = False Then sLnq.BIRTH_DATE = Convert.ToDateTime(dr("BIRTH_DATE"))
+    '                'If Convert.IsDBNull(dr("PASSPORT_EXPIRE_DATE")) = False Then sLnq.PASSPORT_EXPIRE_DATE = Convert.ToDateTime(dr("PASSPORT_EXPIRE_DATE"))
+    '                'If Convert.IsDBNull(dr("IDCARD_EXPIRE_DATE")) = False Then sLnq.IDCARD_EXPIRE_DATE = Convert.ToDateTime(dr("IDCARD_EXPIRE_DATE"))
+    '                If Convert.IsDBNull(dr("cust_image")) = False Then sLnq.CUST_IMAGE = CType(dr("cust_image"), Byte())
+    '                sLnq.SERVICE_RATE = dr("SERVICE_RATE")
+    '                sLnq.SERVICE_RATE_LIMIT_DAY = dr("SERVICE_RATE_LIMIT_DAY")
+    '                sLnq.DEPOSIT_AMT = dr("DEPOSIT_AMT")
+    '                If Convert.IsDBNull(dr("PAID_TIME")) = False Then sLnq.PAID_TIME = dr("PAID_TIME")
+    '                sLnq.RECEIVE_COIN1 = dr("RECEIVE_COIN1")
+    '                sLnq.RECEIVE_COIN2 = dr("RECEIVE_COIN2")
+    '                sLnq.RECEIVE_COIN5 = dr("RECEIVE_COIN5")
+    '                sLnq.RECEIVE_COIN10 = dr("RECEIVE_COIN10")
+    '                sLnq.RECEIVE_BANKNOTE20 = dr("RECEIVE_BANKNOTE20")
+    '                sLnq.RECEIVE_BANKNOTE50 = dr("RECEIVE_BANKNOTE50")
+    '                sLnq.RECEIVE_BANKNOTE100 = dr("RECEIVE_BANKNOTE100")
+    '                sLnq.RECEIVE_BANKNOTE500 = dr("RECEIVE_BANKNOTE500")
+    '                sLnq.RECEIVE_BANKNOTE1000 = dr("RECEIVE_BANKNOTE1000")
+    '                sLnq.CHANGE_COIN1 = dr("CHANGE_COIN1")
+    '                sLnq.CHANGE_COIN2 = dr("CHANGE_COIN2")
+    '                sLnq.CHANGE_COIN5 = dr("CHANGE_COIN5")
+    '                sLnq.CHANGE_COIN10 = dr("CHANGE_COIN10")
+    '                sLnq.CHANGE_BANKNOTE20 = dr("CHANGE_BANKNOTE20")
+    '                sLnq.CHANGE_BANKNOTE50 = dr("CHANGE_BANKNOTE50")
+    '                sLnq.CHANGE_BANKNOTE100 = dr("CHANGE_BANKNOTE100")
+    '                sLnq.CHANGE_BANKNOTE500 = dr("CHANGE_BANKNOTE500")
+    '                sLnq.TRANS_STATUS = dr("TRANS_STATUS")
+    '                If Convert.IsDBNull(dr("MS_APP_SCREEN_ID")) = False Then sLnq.MS_APP_SCREEN_ID = dr("MS_APP_SCREEN_ID")
+    '                If Convert.IsDBNull(dr("MS_APP_STEP_ID")) = False Then sLnq.MS_APP_STEP_ID = dr("MS_APP_STEP_ID")
+    '                sLnq.SYNC_TO_SERVER = "Y"
 
-                    If sLnq.ID > 0 Then
-                        sRet = sLnq.UpdateData(KioskName, sTrans.Trans)
-                    Else
-                        sRet = sLnq.InsertData(KioskName, sTrans.Trans)
-                    End If
+    '                If sLnq.ID > 0 Then
+    '                    sRet = sLnq.UpdateData(KioskName, sTrans.Trans)
+    '                Else
+    '                    sRet = sLnq.InsertData(KioskName, sTrans.Trans)
+    '                End If
 
-                    If sRet.IsSuccess = False Then
-                        Exit For
-                    End If
-                Next
+    '                If sRet.IsSuccess = False Then
+    '                    Exit For
+    '                End If
+    '            Next
 
-                If sRet.IsSuccess = True Then
-                    sTrans.CommitTransaction()
-                    ret = "true"
-                    Engine.LogFileENG.CreateServerLogAgent("SyncKioskDepositTransaction from " & KioskName & " Success " & dt.Rows.Count & " Records")
-                Else
-                    sTrans.RollbackTransaction()
-                    ret = "false|" & sRet.ErrorMessage
-                    Engine.LogFileENG.CreateServerErrorLogAgent(ret)
-                End If
-            End If
-            dt.Dispose()
-        Catch ex As Exception
-            ret = "false|" & ex.Message
-            Engine.LogFileENG.CreateServerExceptionLogAgent(ex.Message, ex.StackTrace)
-        End Try
+    '            If sRet.IsSuccess = True Then
+    '                sTrans.CommitTransaction()
+    '                ret = "true"
+    '                Engine.LogFileENG.CreateServerLogAgent("SyncKioskDepositTransaction from " & KioskName & " Success " & dt.Rows.Count & " Records")
+    '            Else
+    '                sTrans.RollbackTransaction()
+    '                ret = "false|" & sRet.ErrorMessage
+    '                Engine.LogFileENG.CreateServerErrorLogAgent(ret)
+    '            End If
+    '        End If
+    '        dt.Dispose()
+    '    Catch ex As Exception
+    '        ret = "false|" & ex.Message
+    '        Engine.LogFileENG.CreateServerExceptionLogAgent(ex.Message, ex.StackTrace)
+    '    End Try
 
-        Return ret
-    End Function
+    '    Return ret
+    'End Function
 
 
     <WebMethod()>

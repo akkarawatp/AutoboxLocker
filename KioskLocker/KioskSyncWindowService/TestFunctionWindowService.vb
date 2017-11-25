@@ -22,7 +22,8 @@ Public Class TestFunctionWindowService
         'Engine.SyncTransactionDataENG.SyncCollectTransaction(KioskInfoENG.KioskID)
         'Engine.SyncTransactionDataENG.SyncStaffConsoleTransaction(23)
         'Engine.SyncTransactionDataENG.SyncDeleteCompleteTransaction(23)
-        'Engine.SyncTransactionDataENG.ConvertDepositTransationCustImage(KioskInfoENG.KioskID)
+        Engine.SyncTransactionDataENG.ConvertDepositTransationCustImage(KioskInfoENG.KioskID)
+
         'Engine.SyncTransactionDataENG.SyncDepositTransactionCustImage(KioskInfoENG.KioskID)
         'Engine.SyncTransactionDataENG.SyncDeleteCompleteTransaction(KioskInfoENG.KioskID)
 
@@ -33,18 +34,17 @@ Public Class TestFunctionWindowService
         'Engine.SyncLogDataENG.SyncAllLog(2)
         'Engine.SyncLogDataENG.SendAlarmData(23)
 
-        'Engine.SyncMasterDataENG.PullMasterAppScreen(23)
-        'Engine.SyncMasterDataENG.PullMasterAppStep(23)
+        'Engine.SyncMasterDataENG.PullMasterAppScreen(KioskInfoENG.KioskID)
+        'Engine.SyncMasterDataENG.PullMasterAppStep(KioskInfoENG.KioskID)
         'Engine.SyncMasterDataENG.PullMasterCabinetModel(2)
         'Engine.SyncMasterDataENG.PullMasterDeviceType(2)
         'Engine.SyncMasterDataENG.PullMasterDeviceStatus(23)
         'Engine.SyncMasterDataENG.PullMasterDevice(2)
-        'Engine.SyncMasterDataENG.PullMasterKioskScreenControl(23)
         'Engine.SyncMasterDataENG.PullMasterKioskNotificationText(23)
-        Engine.SyncMasterDataENG.PullMasterMonitoringAlarm(KioskInfoENG.KioskID)
+        'Engine.SyncMasterDataENG.PullMasterMonitoringAlarm(KioskInfoENG.KioskID)
         'Engine.SyncMasterDataENG.PullMasterServiceRate(34)
 
-        'SyncTransactionDataENG.ConvertCollectTransationCustImage(KioskInfoENG.KioskID)
+        SyncTransactionDataENG.ConvertCollectTransationCustImage(KioskInfoENG.KioskID)
         'SyncTransactionDataENG.SyncCollectTransactionCustImage(KioskInfoENG.KioskID)
 
 

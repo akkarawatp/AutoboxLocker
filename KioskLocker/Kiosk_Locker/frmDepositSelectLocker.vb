@@ -41,10 +41,6 @@ Public Class frmDepositSelectLocker
     Public Sub LoadLockerList()
         Try
             InsertLogTransactionActivity("", "", "", KioskConfig.SelectForm, KioskLockerStep.DepositSelectLocker_LoadLockerList, "", False)
-            If ServiceID = Data.ConstantsData.TransactionType.StaffConsole Then
-                InsertLogTransactionActivity(StaffConsole.TransNo, KioskConfig.SelectForm, KioskLockerStep.StaffConsoleCollectSelectLocker_LoadLockerList, "", False)
-            End If
-
             Dim cbWith As Integer = 0
             UcCabinet1.LoadCabinetData(False, CabinetList)
             If UcCabinet1.LockerActiveQty > 0 Then
@@ -178,8 +174,6 @@ Public Class frmDepositSelectLocker
             'กรณีรับคืนจาก StaffConsole ให้คำนวณค่าฝาก และแสดงหน้าจอชำระเงิน
 
             If f.LockerAvailable = ucLockerInfo.AvailableStatus.NotAvailable Then
-                InsertLogTransactionActivity("", Collect.TransactionNo, StaffConsole.TransNo, KioskConfig.SelectForm, KioskLockerStep.StaffConsoleCollectSelectLocker_SelectLocker, " " & f.txtLockerName.Text, False)
-
                 TimeOutCheckTime = DateTime.Now
                 TimerTimeOut.Enabled = False
                 TimerTimeOut.Stop()
@@ -187,6 +181,8 @@ Public Class frmDepositSelectLocker
                 frmLoading.Show(frmMain)
 
                 If SetPickupInitialInformation(f.LockerID) = True Then
+                    InsertLogTransactionActivity(Collect.DepositTransNo, Collect.TransactionNo, StaffConsole.TransNo, KioskConfig.SelectForm, KioskLockerStep.StaffConsoleCollectSelectLocker_SelectLocker, " " & f.txtLockerName.Text, False)
+
                     Collect.PickupTime = DateTime.Now
                     Collect.ServiceAmount = PickupCalServiceAmount()   'ค่าบริการที่ระบบคำนวณได้
                     Collect.LostQRCode = "Y"

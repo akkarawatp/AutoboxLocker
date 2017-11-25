@@ -35,7 +35,7 @@ Public Class frmDepositSetPINCode
                 TimerTimeOut.Stop()
 
                 UpdateDepositStatus(Deposit.DepositTransactionID, DepositTransactionData.TransactionStatus.TimeOut, KioskLockerStep.DepositSetPinCode_Timeout)
-                InsertLogTransactionActivity(Deposit.DepositTransNo, "", "", KioskConfig.SelectForm, KioskLockerStep.DepositSetPinCode_Timeout, " ลูกค้าไม่ทำรายการภายในเวลาที่กำหนด", False)
+                InsertLogTransactionActivity(Deposit.DepositTransNo, "", "", KioskConfig.SelectForm, KioskLockerStep.DepositSetPinCode_Timeout, "", False)
 
                 frmMain.CloseAllChildForm()
                 Dim f As New frmHome
@@ -82,7 +82,7 @@ Public Class frmDepositSetPINCode
                 Deposit.PinCode = ""
                 txtPinCode.Text = ""
 
-                InsertLogTransactionActivity(Deposit.DepositTransNo, "", "", KioskConfig.SelectForm, KioskLockerStep.DepositSetPinCode_ConfirmPinCodeFail, " ยืนยันรหัสส่วนตัวไม่ถูกต้อง", False)
+                InsertLogTransactionActivity(Deposit.DepositTransNo, "", "", KioskConfig.SelectForm, KioskLockerStep.DepositSetPinCode_ConfirmPinCodeFail, "", False)
                 ShowDialogErrorMessage(String.Format("คุณยืนยันรหัสส่วนตัวไม่ถูกต้อง กรุณากำหนดรหัสส่วนตัว {0} หลัก", KioskConfig.PincodeLen))
             End If
         End If
