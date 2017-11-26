@@ -81,13 +81,13 @@ Public Class ucLockerInfo
 
             If _IsSetting = False Then
                 If _AvailableStatus = AvailableStatus.Availabled Then
-                    Me.BackColor = Color.SkyBlue
-                    lblName.BackColor = Color.SkyBlue
+                    Me.BackColor = Color.White
+                    lblName.BackColor = Color.White
                     lblName.ForeColor = Color.Black
                     AddHandler lblName.Click, AddressOf ucLockerInfo_Click
                 ElseIf _AvailableStatus = AvailableStatus.NotAvailable Then
-                    Me.BackColor = Color.Black
-                    lblName.BackColor = Color.Black
+                    Me.BackColor = Color.FromArgb(232, 88, 88)
+                    lblName.BackColor = Color.FromArgb(232, 88, 88)
                     lblName.ForeColor = Color.White
                     AddHandler lblName.Click, AddressOf ucLockerInfo_Click
                 ElseIf _AvailableStatus = AvailableStatus.NoActive Then

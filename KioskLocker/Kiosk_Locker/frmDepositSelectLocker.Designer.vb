@@ -23,6 +23,7 @@ Partial Class frmDepositSelectLocker
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmDepositSelectLocker))
         Me.pnlCabinetLayout = New System.Windows.Forms.Panel()
         Me.pnlLayoutPC = New System.Windows.Forms.Panel()
         Me.Panel1 = New System.Windows.Forms.Panel()
@@ -37,18 +38,20 @@ Partial Class frmDepositSelectLocker
         Me.UcCabinet2 = New AutoboxLocker.ucCabinet()
         Me.UcCabinet1 = New AutoboxLocker.ucCabinet()
         Me.lblTitle = New System.Windows.Forms.Label()
-        Me.pnlAvailable = New System.Windows.Forms.Panel()
         Me.lblAvailable = New System.Windows.Forms.Label()
         Me.lblNotAvailable = New System.Windows.Forms.Label()
-        Me.pnlNotAvailable = New System.Windows.Forms.Panel()
         Me.TimerTimeOut = New System.Windows.Forms.Timer(Me.components)
+        Me.PictureBox1 = New System.Windows.Forms.PictureBox()
         Me.pnlCabinetLayout.SuspendLayout()
         Me.pnlLayoutPC.SuspendLayout()
+        CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'pnlCabinetLayout
         '
         Me.pnlCabinetLayout.Anchor = System.Windows.Forms.AnchorStyles.Top
+        Me.pnlCabinetLayout.BackgroundImage = Global.AutoboxLocker.My.Resources.Resources.bgLayoutSelectLocker
+        Me.pnlCabinetLayout.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
         Me.pnlCabinetLayout.Controls.Add(Me.pnlLayoutPC)
         Me.pnlCabinetLayout.Controls.Add(Me.UcCabinet10)
         Me.pnlCabinetLayout.Controls.Add(Me.UcCabinet9)
@@ -60,9 +63,9 @@ Partial Class frmDepositSelectLocker
         Me.pnlCabinetLayout.Controls.Add(Me.UcCabinet3)
         Me.pnlCabinetLayout.Controls.Add(Me.UcCabinet2)
         Me.pnlCabinetLayout.Controls.Add(Me.UcCabinet1)
-        Me.pnlCabinetLayout.Location = New System.Drawing.Point(96, 146)
+        Me.pnlCabinetLayout.Location = New System.Drawing.Point(97, 240)
         Me.pnlCabinetLayout.Name = "pnlCabinetLayout"
-        Me.pnlCabinetLayout.Size = New System.Drawing.Size(824, 383)
+        Me.pnlCabinetLayout.Size = New System.Drawing.Size(824, 392)
         Me.pnlCabinetLayout.TabIndex = 45
         '
         'pnlLayoutPC
@@ -71,7 +74,7 @@ Partial Class frmDepositSelectLocker
         Me.pnlLayoutPC.BackColor = System.Drawing.Color.White
         Me.pnlLayoutPC.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.pnlLayoutPC.Controls.Add(Me.Panel1)
-        Me.pnlLayoutPC.Location = New System.Drawing.Point(519, 1)
+        Me.pnlLayoutPC.Location = New System.Drawing.Point(519, 5)
         Me.pnlLayoutPC.Name = "pnlLayoutPC"
         Me.pnlLayoutPC.Size = New System.Drawing.Size(75, 379)
         Me.pnlLayoutPC.TabIndex = 1
@@ -95,7 +98,7 @@ Partial Class frmDepositSelectLocker
         Me.UcCabinet10.CabinetID = CType(0, Long)
         Me.UcCabinet10.CabinetModelID = CType(0, Long)
         Me.UcCabinet10.CabinetName = "J"
-        Me.UcCabinet10.Location = New System.Drawing.Point(744, 1)
+        Me.UcCabinet10.Location = New System.Drawing.Point(744, 5)
         Me.UcCabinet10.LockerActiveQty = 0
         Me.UcCabinet10.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.UcCabinet10.Name = "UcCabinet10"
@@ -112,7 +115,7 @@ Partial Class frmDepositSelectLocker
         Me.UcCabinet9.CabinetID = CType(0, Long)
         Me.UcCabinet9.CabinetModelID = CType(0, Long)
         Me.UcCabinet9.CabinetName = "I"
-        Me.UcCabinet9.Location = New System.Drawing.Point(669, 1)
+        Me.UcCabinet9.Location = New System.Drawing.Point(669, 5)
         Me.UcCabinet9.LockerActiveQty = 0
         Me.UcCabinet9.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.UcCabinet9.Name = "UcCabinet9"
@@ -129,7 +132,7 @@ Partial Class frmDepositSelectLocker
         Me.UcCabinet8.CabinetID = CType(0, Long)
         Me.UcCabinet8.CabinetModelID = CType(0, Long)
         Me.UcCabinet8.CabinetName = "H"
-        Me.UcCabinet8.Location = New System.Drawing.Point(594, 1)
+        Me.UcCabinet8.Location = New System.Drawing.Point(594, 5)
         Me.UcCabinet8.LockerActiveQty = 0
         Me.UcCabinet8.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.UcCabinet8.Name = "UcCabinet8"
@@ -146,7 +149,7 @@ Partial Class frmDepositSelectLocker
         Me.UcCabinet7.CabinetID = CType(0, Long)
         Me.UcCabinet7.CabinetModelID = CType(0, Long)
         Me.UcCabinet7.CabinetName = "G"
-        Me.UcCabinet7.Location = New System.Drawing.Point(444, 1)
+        Me.UcCabinet7.Location = New System.Drawing.Point(444, 5)
         Me.UcCabinet7.LockerActiveQty = 0
         Me.UcCabinet7.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.UcCabinet7.Name = "UcCabinet7"
@@ -163,7 +166,7 @@ Partial Class frmDepositSelectLocker
         Me.UcCabinet6.CabinetID = CType(0, Long)
         Me.UcCabinet6.CabinetModelID = CType(0, Long)
         Me.UcCabinet6.CabinetName = "F"
-        Me.UcCabinet6.Location = New System.Drawing.Point(369, 1)
+        Me.UcCabinet6.Location = New System.Drawing.Point(369, 5)
         Me.UcCabinet6.LockerActiveQty = 0
         Me.UcCabinet6.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.UcCabinet6.Name = "UcCabinet6"
@@ -180,7 +183,7 @@ Partial Class frmDepositSelectLocker
         Me.UcCabinet5.CabinetID = CType(0, Long)
         Me.UcCabinet5.CabinetModelID = CType(0, Long)
         Me.UcCabinet5.CabinetName = "E"
-        Me.UcCabinet5.Location = New System.Drawing.Point(294, 1)
+        Me.UcCabinet5.Location = New System.Drawing.Point(294, 5)
         Me.UcCabinet5.LockerActiveQty = 0
         Me.UcCabinet5.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.UcCabinet5.Name = "UcCabinet5"
@@ -197,7 +200,7 @@ Partial Class frmDepositSelectLocker
         Me.UcCabinet4.CabinetID = CType(0, Long)
         Me.UcCabinet4.CabinetModelID = CType(0, Long)
         Me.UcCabinet4.CabinetName = "D"
-        Me.UcCabinet4.Location = New System.Drawing.Point(219, 1)
+        Me.UcCabinet4.Location = New System.Drawing.Point(219, 5)
         Me.UcCabinet4.LockerActiveQty = 0
         Me.UcCabinet4.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.UcCabinet4.Name = "UcCabinet4"
@@ -214,7 +217,7 @@ Partial Class frmDepositSelectLocker
         Me.UcCabinet3.CabinetID = CType(0, Long)
         Me.UcCabinet3.CabinetModelID = CType(0, Long)
         Me.UcCabinet3.CabinetName = "C"
-        Me.UcCabinet3.Location = New System.Drawing.Point(144, 1)
+        Me.UcCabinet3.Location = New System.Drawing.Point(144, 5)
         Me.UcCabinet3.LockerActiveQty = 0
         Me.UcCabinet3.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.UcCabinet3.Name = "UcCabinet3"
@@ -231,7 +234,7 @@ Partial Class frmDepositSelectLocker
         Me.UcCabinet2.CabinetID = CType(0, Long)
         Me.UcCabinet2.CabinetModelID = CType(0, Long)
         Me.UcCabinet2.CabinetName = "B"
-        Me.UcCabinet2.Location = New System.Drawing.Point(69, 1)
+        Me.UcCabinet2.Location = New System.Drawing.Point(69, 5)
         Me.UcCabinet2.LockerActiveQty = 0
         Me.UcCabinet2.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.UcCabinet2.Name = "UcCabinet2"
@@ -248,7 +251,7 @@ Partial Class frmDepositSelectLocker
         Me.UcCabinet1.CabinetID = CType(0, Long)
         Me.UcCabinet1.CabinetModelID = CType(0, Long)
         Me.UcCabinet1.CabinetName = "A"
-        Me.UcCabinet1.Location = New System.Drawing.Point(-6, 1)
+        Me.UcCabinet1.Location = New System.Drawing.Point(-6, 5)
         Me.UcCabinet1.LockerActiveQty = 0
         Me.UcCabinet1.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.UcCabinet1.Name = "UcCabinet1"
@@ -258,82 +261,74 @@ Partial Class frmDepositSelectLocker
         '
         'lblTitle
         '
-        Me.lblTitle.Anchor = System.Windows.Forms.AnchorStyles.Top
+        Me.lblTitle.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.lblTitle.Font = New System.Drawing.Font("Thai Sans Lite", 48.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(222, Byte))
-        Me.lblTitle.Location = New System.Drawing.Point(12, 32)
+        Me.lblTitle.Location = New System.Drawing.Point(11, 80)
         Me.lblTitle.Name = "lblTitle"
-        Me.lblTitle.Size = New System.Drawing.Size(1000, 90)
+        Me.lblTitle.Size = New System.Drawing.Size(1000, 80)
         Me.lblTitle.TabIndex = 46
         Me.lblTitle.Text = "เลือกช่องฝากสัมภาระ"
         Me.lblTitle.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
-        'pnlAvailable
-        '
-        Me.pnlAvailable.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.pnlAvailable.BackColor = System.Drawing.Color.SkyBlue
-        Me.pnlAvailable.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.pnlAvailable.Location = New System.Drawing.Point(910, 483)
-        Me.pnlAvailable.Name = "pnlAvailable"
-        Me.pnlAvailable.Size = New System.Drawing.Size(20, 20)
-        Me.pnlAvailable.TabIndex = 47
-        '
         'lblAvailable
         '
-        Me.lblAvailable.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.lblAvailable.AutoSize = True
+        Me.lblAvailable.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.lblAvailable.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.lblAvailable.Font = New System.Drawing.Font("Thai Sans Lite", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(222, Byte))
-        Me.lblAvailable.Location = New System.Drawing.Point(934, 484)
+        Me.lblAvailable.Location = New System.Drawing.Point(927, 245)
         Me.lblAvailable.Name = "lblAvailable"
-        Me.lblAvailable.Size = New System.Drawing.Size(31, 20)
+        Me.lblAvailable.Size = New System.Drawing.Size(57, 34)
         Me.lblAvailable.TabIndex = 48
-        Me.lblAvailable.Text = "ว่าง"
+        Me.lblAvailable.Text = "ตู้ว่าง"
+        Me.lblAvailable.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
         'lblNotAvailable
         '
-        Me.lblNotAvailable.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.lblNotAvailable.AutoSize = True
+        Me.lblNotAvailable.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.lblNotAvailable.BackColor = System.Drawing.Color.FromArgb(CType(CType(232, Byte), Integer), CType(CType(88, Byte), Integer), CType(CType(88, Byte), Integer))
+        Me.lblNotAvailable.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.lblNotAvailable.Font = New System.Drawing.Font("Thai Sans Lite", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(222, Byte))
-        Me.lblNotAvailable.Location = New System.Drawing.Point(934, 510)
+        Me.lblNotAvailable.ForeColor = System.Drawing.Color.White
+        Me.lblNotAvailable.Location = New System.Drawing.Point(927, 285)
         Me.lblNotAvailable.Name = "lblNotAvailable"
-        Me.lblNotAvailable.Size = New System.Drawing.Size(43, 20)
+        Me.lblNotAvailable.Size = New System.Drawing.Size(57, 34)
         Me.lblNotAvailable.TabIndex = 50
         Me.lblNotAvailable.Text = "ไม่ว่าง"
-        '
-        'pnlNotAvailable
-        '
-        Me.pnlNotAvailable.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.pnlNotAvailable.BackColor = System.Drawing.Color.Black
-        Me.pnlNotAvailable.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.pnlNotAvailable.Location = New System.Drawing.Point(910, 509)
-        Me.pnlNotAvailable.Name = "pnlNotAvailable"
-        Me.pnlNotAvailable.Size = New System.Drawing.Size(20, 20)
-        Me.pnlNotAvailable.TabIndex = 49
+        Me.lblNotAvailable.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
         'TimerTimeOut
         '
         Me.TimerTimeOut.Interval = 1000
+        '
+        'PictureBox1
+        '
+        Me.PictureBox1.Image = CType(resources.GetObject("PictureBox1.Image"), System.Drawing.Image)
+        Me.PictureBox1.Location = New System.Drawing.Point(48, 80)
+        Me.PictureBox1.Name = "PictureBox1"
+        Me.PictureBox1.Size = New System.Drawing.Size(202, 80)
+        Me.PictureBox1.TabIndex = 96
+        Me.PictureBox1.TabStop = False
         '
         'frmDepositSelectLocker
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.White
-        Me.ClientSize = New System.Drawing.Size(1024, 553)
-        Me.Controls.Add(Me.lblNotAvailable)
-        Me.Controls.Add(Me.pnlNotAvailable)
+        Me.ClientSize = New System.Drawing.Size(1024, 768)
         Me.Controls.Add(Me.lblAvailable)
-        Me.Controls.Add(Me.pnlAvailable)
+        Me.Controls.Add(Me.PictureBox1)
+        Me.Controls.Add(Me.lblNotAvailable)
         Me.Controls.Add(Me.lblTitle)
         Me.Controls.Add(Me.pnlCabinetLayout)
         Me.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(222, Byte))
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None
         Me.Margin = New System.Windows.Forms.Padding(4)
         Me.Name = "frmDepositSelectLocker"
-        Me.WindowState = System.Windows.Forms.FormWindowState.Maximized
         Me.pnlCabinetLayout.ResumeLayout(False)
         Me.pnlLayoutPC.ResumeLayout(False)
+        CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
-        Me.PerformLayout()
 
     End Sub
     Friend WithEvents pnlCabinetLayout As Panel
@@ -350,9 +345,8 @@ Partial Class frmDepositSelectLocker
     Friend WithEvents UcCabinet1 As ucCabinet
     Friend WithEvents lblTitle As Label
     Friend WithEvents Panel1 As Panel
-    Friend WithEvents pnlAvailable As Panel
     Friend WithEvents lblAvailable As Label
     Friend WithEvents lblNotAvailable As Label
-    Friend WithEvents pnlNotAvailable As Panel
     Friend WithEvents TimerTimeOut As Timer
+    Friend WithEvents PictureBox1 As PictureBox
 End Class

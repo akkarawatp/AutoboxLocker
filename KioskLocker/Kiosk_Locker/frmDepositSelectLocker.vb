@@ -20,9 +20,11 @@ Public Class frmDepositSelectLocker
         'ลูกค้าทำรายการฝาก
         'Staff Console ทำรายการรับคืนเพื่อเปิดตู้ให้ลูกค้า
 
-        Me.WindowState = FormWindowState.Maximized
         frmMain.pnlFooter.Visible = True
         frmMain.pnlCancel.Visible = True
+        Me.WindowState = FormWindowState.Maximized
+        frmMain.CloseAllChildForm(Me)
+
 
         Application.DoEvents()
         If ServiceID = Data.ConstantsData.TransactionType.DepositBelonging Then
@@ -99,7 +101,14 @@ Public Class frmDepositSelectLocker
 
             'วิธีการคำนวณ 
             'ความกว้างทั้งหมดคือ (oQty*61)
-            Dim pLeft As Integer = (pnlCabinetLayout.Width / 2) - ((cbWith + PcWidth + AllPadding) / 2)
+            Dim AllCabinetWidth As Integer = (cbWith + PcWidth + AllPadding)
+
+            pnlCabinetLayout.Width = AllCabinetWidth + 15
+            pnlCabinetLayout.Left = (Me.Width / 2) - (pnlCabinetLayout.Width / 2)
+
+
+
+            Dim pLeft As Integer = (pnlCabinetLayout.Width / 2) - (AllCabinetWidth / 2) + 1
             pLeft = SetCabinetPosition(UcCabinet1, pLeft, 1)
             pLeft = SetCabinetPosition(UcCabinet2, pLeft, 2)
             pLeft = SetCabinetPosition(UcCabinet3, pLeft, 3)

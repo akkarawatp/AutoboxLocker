@@ -189,9 +189,9 @@ Public Class ucCabinet
                     f.lblName.Visible = True
                     f.lblName.AutoSize = False
                     f.lblName.Height = 40
-                    f.lblName.Font = New Font("Superspace", 24, FontStyle.Bold)
+                    f.lblName.Font = New Font("Superspace", 18, FontStyle.Bold)
                     'f.lblName.Font = New Font("Thai Sans Lite", 24, FontStyle.Bold)
-                    f.lblName.Top = (f.Height / 2) - (f.txtLockerName.Height / 2)
+                    f.lblName.Top = (f.Height / 2) - (f.lblName.Height / 2)
                     f.lblName.Left = 0
                     f.lblName.Width = f.Width
                     f.lblName.BorderStyle = BorderStyle.None

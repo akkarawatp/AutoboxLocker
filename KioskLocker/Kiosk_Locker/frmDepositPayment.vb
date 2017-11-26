@@ -61,10 +61,10 @@ Public Class frmDepositPayment
 
         If ServiceID = TransactionType.DepositBelonging Then
             InsertLogTransactionActivity(Deposit.DepositTransNo, "", "", KioskConfig.SelectForm, KioskLockerStep.DepositPayment_OpenForm, "ค่ามัดจำ " & Deposit.DepositAmount & " บาท", False)
-            DepositCaptureImage()
+
         ElseIf ServiceID = TransactionType.CollectBelonging Then
             InsertLogTransactionActivity(Collect.DepositTransNo, Collect.TransactionNo, StaffConsole.TransNo, KioskConfig.SelectForm, KioskLockerStep.PickupPayment_OpenForm, "ค่าบริการ " & Collect.ServiceAmount & " บาท ค่ามัดจำ " & Collect.DepositAmount & " บาท", False)
-            CollectCaptureImage()
+
         End If
 
 
@@ -76,6 +76,8 @@ Public Class frmDepositPayment
     Private Sub SetPaymentInformation()
         Try
             If ServiceID = ConstantsData.TransactionType.CollectBelonging Then
+                CollectCaptureImage() 'ถ่ายรูปตอนรับคืน
+
                 'จัดตำแหน่ง Control ในกรณีรับคืน
                 pnlLockerName.Location = New Point(496, 61)
                 pnlServiceAmt.Location = New Point(pnlLockerName.Location.X, pnlLockerName.Location.Y + pnlLockerName.Height + 8)
@@ -109,8 +111,9 @@ Public Class frmDepositPayment
                     lblPaidRemain.Text = Collect.ServiceAmount - Collect.DepositAmount
                 End If
             Else
-                SetDepositMoneyAmt()
+                DepositCaptureImage() 'ถ่ายรูปตอนฝาก
 
+                SetDepositMoneyAmt()
                 lblLockerName.Text = Deposit.LockerName
                 lblDepositAmt.Text = Deposit.DepositAmount
                 lblPaidRemain.Text = Deposit.DepositAmount

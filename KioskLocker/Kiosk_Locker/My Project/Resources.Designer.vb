@@ -63,6 +63,16 @@ Namespace My.Resources
         '''<summary>
         '''  Looks up a localized resource of type System.Drawing.Bitmap.
         '''</summary>
+        Friend ReadOnly Property bgLayoutSelectLocker() As System.Drawing.Bitmap
+            Get
+                Dim obj As Object = ResourceManager.GetObject("bgLayoutSelectLocker", resourceCulture)
+                Return CType(obj,System.Drawing.Bitmap)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized resource of type System.Drawing.Bitmap.
+        '''</summary>
         Friend ReadOnly Property bgMainFooter() As System.Drawing.Bitmap
             Get
                 Dim obj As Object = ResourceManager.GetObject("bgMainFooter", resourceCulture)
@@ -466,6 +476,16 @@ Namespace My.Resources
         Friend ReadOnly Property imgButtonOK() As System.Drawing.Bitmap
             Get
                 Dim obj As Object = ResourceManager.GetObject("imgButtonOK", resourceCulture)
+                Return CType(obj,System.Drawing.Bitmap)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized resource of type System.Drawing.Bitmap.
+        '''</summary>
+        Friend ReadOnly Property imgTextPincode() As System.Drawing.Bitmap
+            Get
+                Dim obj As Object = ResourceManager.GetObject("imgTextPincode", resourceCulture)
                 Return CType(obj,System.Drawing.Bitmap)
             End Get
         End Property

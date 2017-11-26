@@ -5,7 +5,7 @@ Public Class frmDepositSetPINCode
     Dim TimeOut As Int32 = KioskConfig.TimeOutSec
     Dim TimeOutCheckTime As DateTime = DateTime.Now
 
-    Const DefaultNotictText As String = "กรุณากำหนดรหัสส่วนตัว {0} หลักสำหรับรับคืนสัมภาระ"
+    Const DefaultNotictText As String = ""
 
     Private Sub frmDepositSetPINCode_Load(sender As Object, e As EventArgs) Handles Me.Load
         Me.ControlBox = False
@@ -16,7 +16,7 @@ Public Class frmDepositSetPINCode
         Me.WindowState = FormWindowState.Maximized
         frmMain.pnlFooter.Visible = True
         frmMain.pnlCancel.Visible = True
-        lblLabelNotification.Text = String.Format(DefaultNotictText, KioskConfig.PincodeLen)
+        lblLabelNotification.Text = DefaultNotictText
 
         Application.DoEvents()
         InsertLogTransactionActivity(Deposit.DepositTransNo, "", "", KioskConfig.SelectForm, KioskLockerStep.DepositSetPinCode_OpenForm, "", False)
@@ -47,11 +47,17 @@ Public Class frmDepositSetPINCode
 
     Private Sub ClearAndConfirmPin()
         If Deposit.PinCode = "" Then
-            Deposit.PinCode = txtPinCode.Text
-            txtPinCode.Text = ""
+            Deposit.PinCode = TmpPinCode
+            TmpPinCode = ""
+            txtPincode1.Text = ""
+            txtPincode2.Text = ""
+            txtPincode3.Text = ""
+            txtPincode4.Text = ""
+            txtPincode5.Text = ""
+            txtPincode6.Text = ""
             lblLabelNotification.Text = "กรุณายืนยันรหัสส่วนตัว"
         Else
-            If Deposit.PinCode = txtPinCode.Text Then
+            If Deposit.PinCode = TmpPinCode Then
                 frmLoading.Show(frmMain)
 
                 'ไปหน้าจอชำระเงินโลด
@@ -68,9 +74,15 @@ Public Class frmDepositSetPINCode
                 'ยืนยันรหัสส่วนตัวไม่ตรงกัน ให้เริ่มขั้นตอนใหม่
                 TimeOutCheckTime = DateTime.Now
 
-                lblLabelNotification.Text = String.Format(DefaultNotictText, KioskConfig.PincodeLen)
+                lblLabelNotification.Text = DefaultNotictText
                 Deposit.PinCode = ""
-                txtPinCode.Text = ""
+                TmpPinCode = ""
+                txtPincode1.Text = ""
+                txtPincode2.Text = ""
+                txtPincode3.Text = ""
+                txtPincode4.Text = ""
+                txtPincode5.Text = ""
+                txtPincode6.Text = ""
 
                 InsertLogTransactionActivity(Deposit.DepositTransNo, "", "", KioskConfig.SelectForm, KioskLockerStep.DepositSetPinCode_ConfirmPinCodeFail, "", False)
                 ShowDialogErrorMessage(String.Format("คุณยืนยันรหัสส่วนตัวไม่ถูกต้อง กรุณากำหนดรหัสส่วนตัว {0} หลัก", KioskConfig.PincodeLen))
@@ -124,11 +136,29 @@ Public Class frmDepositSetPINCode
 
 #Region "Fill in PIN CODE"
 
+    Dim TmpPinCode As String = ""
     Private Sub InsertNumber(ByVal Num As Int16)
-        txtPinCode.Text = txtPinCode.Text & Num
+        TmpPinCode = TmpPinCode & Num
         TimeOutCheckTime = DateTime.Now
 
-
+        If TmpPinCode.Length = 1 Then
+            txtPincode1.Text = Num
+        End If
+        If TmpPinCode.Length = 2 Then
+            txtPincode2.Text = Num
+        End If
+        If TmpPinCode.Length = 3 Then
+            txtPincode3.Text = Num
+        End If
+        If TmpPinCode.Length = 4 Then
+            txtPincode4.Text = Num
+        End If
+        If TmpPinCode.Length = 5 Then
+            txtPincode5.Text = Num
+        End If
+        If TmpPinCode.Length = 6 Then
+            txtPincode6.Text = Num
+        End If
     End Sub
     Private Sub btn0_Click(sender As Object, e As EventArgs) Handles btn0.Click
         InsertNumber(0)
@@ -170,7 +200,7 @@ Public Class frmDepositSetPINCode
     End Sub
 
     Private Sub btnOK_Click(sender As Object, e As EventArgs) Handles btnOK.Click
-        If txtPinCode.Text.Length <> KioskConfig.PincodeLen Then
+        If TmpPinCode.Length <> KioskConfig.PincodeLen Then
             ShowDialogErrorMessage(String.Format("กรุณากำหนดรหัสส่วนตัว {0} หลัก", KioskConfig.PincodeLen))
             Exit Sub
         End If
@@ -180,7 +210,13 @@ Public Class frmDepositSetPINCode
     End Sub
 
     Private Sub btnClear_Click(sender As Object, e As EventArgs) Handles btnClear.Click
-        txtPinCode.Text = ""
+        TmpPinCode = ""
+        txtPincode1.Text = ""
+        txtPincode2.Text = ""
+        txtPincode3.Text = ""
+        txtPincode4.Text = ""
+        txtPincode5.Text = ""
+        txtPincode6.Text = ""
         TimeOutCheckTime = DateTime.Now
     End Sub
 #End Region

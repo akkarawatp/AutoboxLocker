@@ -605,6 +605,8 @@
   <ItemGroup>
     <Content Include="LogoIcon.ico" />
     <Content Include="Logo.ico" />
+    <None Include="Resources\imgTextPincode.png" />
+    <None Include="Resources\bgLayoutSelectLocker.png" />
     <None Include="Resources\imgButtonOK.png" />
     <None Include="Resources\imgButtonNumber9.png" />
     <None Include="Resources\imgButtonNumber8.png" />
