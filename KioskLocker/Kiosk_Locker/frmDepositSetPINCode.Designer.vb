@@ -23,6 +23,7 @@ Partial Class frmDepositSetPINCode
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmDepositSetPINCode))
         Me.lblTitle = New System.Windows.Forms.Label()
         Me.TimerTimeOut = New System.Windows.Forms.Timer(Me.components)
         Me.txtPinCode = New System.Windows.Forms.TextBox()
@@ -36,7 +37,7 @@ Partial Class frmDepositSetPINCode
         Me.btn9 = New System.Windows.Forms.PictureBox()
         Me.btn8 = New System.Windows.Forms.PictureBox()
         Me.btn7 = New System.Windows.Forms.PictureBox()
-        Me.btnBackSpace = New System.Windows.Forms.PictureBox()
+        Me.btnOK = New System.Windows.Forms.PictureBox()
         Me.btn0 = New System.Windows.Forms.PictureBox()
         Me.btnClear = New System.Windows.Forms.PictureBox()
         CType(Me.btn1, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -48,7 +49,7 @@ Partial Class frmDepositSetPINCode
         CType(Me.btn9, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.btn8, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.btn7, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.btnBackSpace, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.btnOK, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.btn0, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.btnClear, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
@@ -96,7 +97,7 @@ Partial Class frmDepositSetPINCode
         '
         'btn1
         '
-        Me.btn1.Image = Global.AutoboxLocker.My.Resources.Resources.imgButtonNumber1
+        Me.btn1.Image = CType(resources.GetObject("btn1.Image"), System.Drawing.Image)
         Me.btn1.Location = New System.Drawing.Point(609, 158)
         Me.btn1.Name = "btn1"
         Me.btn1.Size = New System.Drawing.Size(70, 70)
@@ -106,7 +107,7 @@ Partial Class frmDepositSetPINCode
         '
         'btn2
         '
-        Me.btn2.Image = Global.AutoboxLocker.My.Resources.Resources.imgButtonNumber2
+        Me.btn2.Image = CType(resources.GetObject("btn2.Image"), System.Drawing.Image)
         Me.btn2.Location = New System.Drawing.Point(688, 158)
         Me.btn2.Name = "btn2"
         Me.btn2.Size = New System.Drawing.Size(70, 70)
@@ -116,7 +117,7 @@ Partial Class frmDepositSetPINCode
         '
         'btn3
         '
-        Me.btn3.Image = Global.AutoboxLocker.My.Resources.Resources.imgButtonNumber3
+        Me.btn3.Image = CType(resources.GetObject("btn3.Image"), System.Drawing.Image)
         Me.btn3.Location = New System.Drawing.Point(767, 158)
         Me.btn3.Name = "btn3"
         Me.btn3.Size = New System.Drawing.Size(70, 70)
@@ -126,7 +127,7 @@ Partial Class frmDepositSetPINCode
         '
         'btn6
         '
-        Me.btn6.Image = Global.AutoboxLocker.My.Resources.Resources.imgButtonNumber6
+        Me.btn6.Image = CType(resources.GetObject("btn6.Image"), System.Drawing.Image)
         Me.btn6.Location = New System.Drawing.Point(767, 231)
         Me.btn6.Name = "btn6"
         Me.btn6.Size = New System.Drawing.Size(70, 70)
@@ -136,7 +137,7 @@ Partial Class frmDepositSetPINCode
         '
         'btn5
         '
-        Me.btn5.Image = Global.AutoboxLocker.My.Resources.Resources.imgButtonNumber5
+        Me.btn5.Image = CType(resources.GetObject("btn5.Image"), System.Drawing.Image)
         Me.btn5.Location = New System.Drawing.Point(688, 231)
         Me.btn5.Name = "btn5"
         Me.btn5.Size = New System.Drawing.Size(70, 70)
@@ -146,7 +147,7 @@ Partial Class frmDepositSetPINCode
         '
         'btn4
         '
-        Me.btn4.Image = Global.AutoboxLocker.My.Resources.Resources.imgButtonNumber4
+        Me.btn4.Image = CType(resources.GetObject("btn4.Image"), System.Drawing.Image)
         Me.btn4.Location = New System.Drawing.Point(609, 231)
         Me.btn4.Name = "btn4"
         Me.btn4.Size = New System.Drawing.Size(70, 70)
@@ -156,7 +157,7 @@ Partial Class frmDepositSetPINCode
         '
         'btn9
         '
-        Me.btn9.Image = Global.AutoboxLocker.My.Resources.Resources.imgButtonNumber9
+        Me.btn9.Image = CType(resources.GetObject("btn9.Image"), System.Drawing.Image)
         Me.btn9.Location = New System.Drawing.Point(767, 304)
         Me.btn9.Name = "btn9"
         Me.btn9.Size = New System.Drawing.Size(70, 70)
@@ -166,7 +167,7 @@ Partial Class frmDepositSetPINCode
         '
         'btn8
         '
-        Me.btn8.Image = Global.AutoboxLocker.My.Resources.Resources.imgButtonNumber8
+        Me.btn8.Image = CType(resources.GetObject("btn8.Image"), System.Drawing.Image)
         Me.btn8.Location = New System.Drawing.Point(688, 304)
         Me.btn8.Name = "btn8"
         Me.btn8.Size = New System.Drawing.Size(70, 70)
@@ -176,7 +177,7 @@ Partial Class frmDepositSetPINCode
         '
         'btn7
         '
-        Me.btn7.Image = Global.AutoboxLocker.My.Resources.Resources.imgButtonNumber7
+        Me.btn7.Image = CType(resources.GetObject("btn7.Image"), System.Drawing.Image)
         Me.btn7.Location = New System.Drawing.Point(609, 304)
         Me.btn7.Name = "btn7"
         Me.btn7.Size = New System.Drawing.Size(70, 70)
@@ -184,19 +185,19 @@ Partial Class frmDepositSetPINCode
         Me.btn7.TabIndex = 100
         Me.btn7.TabStop = False
         '
-        'btnBackSpace
+        'btnOK
         '
-        Me.btnBackSpace.Image = Global.AutoboxLocker.My.Resources.Resources.imgButtonBackSpace
-        Me.btnBackSpace.Location = New System.Drawing.Point(767, 377)
-        Me.btnBackSpace.Name = "btnBackSpace"
-        Me.btnBackSpace.Size = New System.Drawing.Size(70, 70)
-        Me.btnBackSpace.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
-        Me.btnBackSpace.TabIndex = 105
-        Me.btnBackSpace.TabStop = False
+        Me.btnOK.Image = Global.AutoboxLocker.My.Resources.Resources.imgButtonOK
+        Me.btnOK.Location = New System.Drawing.Point(767, 377)
+        Me.btnOK.Name = "btnOK"
+        Me.btnOK.Size = New System.Drawing.Size(70, 70)
+        Me.btnOK.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
+        Me.btnOK.TabIndex = 105
+        Me.btnOK.TabStop = False
         '
         'btn0
         '
-        Me.btn0.Image = Global.AutoboxLocker.My.Resources.Resources.imgButtonNumber0
+        Me.btn0.Image = CType(resources.GetObject("btn0.Image"), System.Drawing.Image)
         Me.btn0.Location = New System.Drawing.Point(688, 377)
         Me.btn0.Name = "btn0"
         Me.btn0.Size = New System.Drawing.Size(70, 70)
@@ -206,7 +207,7 @@ Partial Class frmDepositSetPINCode
         '
         'btnClear
         '
-        Me.btnClear.Image = Global.AutoboxLocker.My.Resources.Resources.imgButtonClear
+        Me.btnClear.Image = CType(resources.GetObject("btnClear.Image"), System.Drawing.Image)
         Me.btnClear.Location = New System.Drawing.Point(609, 377)
         Me.btnClear.Name = "btnClear"
         Me.btnClear.Size = New System.Drawing.Size(70, 70)
@@ -220,7 +221,7 @@ Partial Class frmDepositSetPINCode
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.White
         Me.ClientSize = New System.Drawing.Size(1024, 553)
-        Me.Controls.Add(Me.btnBackSpace)
+        Me.Controls.Add(Me.btnOK)
         Me.Controls.Add(Me.btn0)
         Me.Controls.Add(Me.btnClear)
         Me.Controls.Add(Me.btn9)
@@ -249,7 +250,7 @@ Partial Class frmDepositSetPINCode
         CType(Me.btn9, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.btn8, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.btn7, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.btnBackSpace, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.btnOK, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.btn0, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.btnClear, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
@@ -269,7 +270,7 @@ Partial Class frmDepositSetPINCode
     Friend WithEvents btn9 As PictureBox
     Friend WithEvents btn8 As PictureBox
     Friend WithEvents btn7 As PictureBox
-    Friend WithEvents btnBackSpace As PictureBox
+    Friend WithEvents btnOK As PictureBox
     Friend WithEvents btn0 As PictureBox
     Friend WithEvents btnClear As PictureBox
 End Class

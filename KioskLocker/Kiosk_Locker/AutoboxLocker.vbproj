@@ -605,6 +605,21 @@
   <ItemGroup>
     <Content Include="LogoIcon.ico" />
     <Content Include="Logo.ico" />
+    <None Include="Resources\imgButtonOK.png" />
+    <None Include="Resources\imgButtonNumber9.png" />
+    <None Include="Resources\imgButtonNumber8.png" />
+    <None Include="Resources\imgButtonNumber7.png" />
+    <None Include="Resources\imgButtonNumber6.png" />
+    <None Include="Resources\imgButtonNumber5.png" />
+    <None Include="Resources\imgButtonNumber4.png" />
+    <None Include="Resources\imgButtonNumber3.png" />
+    <None Include="Resources\imgButtonNumber2.png" />
+    <None Include="Resources\imgButtonNumber1.png" />
+    <None Include="Resources\imgButtonNumber0.png" />
+    <None Include="Resources\imgButtonClear.png" />
+    <None Include="Resources\btnDeposit.png" />
+    <None Include="Resources\btnCollect.png" />
+    <None Include="Resources\IconCollect.png" />
     <None Include="Resources\imgButtonNumber8.jpg" />
     <None Include="Resources\imgButtonNumber7.jpg" />
     <None Include="Resources\imgButtonNumber6.jpg" />

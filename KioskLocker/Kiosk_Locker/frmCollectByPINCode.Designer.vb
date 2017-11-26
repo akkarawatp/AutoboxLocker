@@ -186,7 +186,7 @@ Partial Class frmCollectByPINCode
         '
         'btnBackSpace
         '
-        Me.btnBackSpace.Image = Global.AutoboxLocker.My.Resources.Resources.imgButtonBackSpace
+        Me.btnBackSpace.Image = Global.AutoboxLocker.My.Resources.Resources.imgButtonOK
         Me.btnBackSpace.Location = New System.Drawing.Point(767, 377)
         Me.btnBackSpace.Name = "btnBackSpace"
         Me.btnBackSpace.Size = New System.Drawing.Size(70, 70)

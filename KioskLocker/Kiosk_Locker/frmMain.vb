@@ -606,7 +606,7 @@ Public Class frmMain
         'btnPointer.Top = 0
 
         'Move to buttom left
-        btnPointer.Location = New Point(0, Me.Height - btnPointer.Height)
+        btnPointer.Location = New Point(3, 711)
         btnPointer.BringToFront()
         Application.DoEvents()
 
@@ -620,19 +620,19 @@ Public Class frmMain
             btnPointer.Text = "2"
 
             'Move to buttom right
-            btnPointer.Location = New Point(Me.Width - btnPointer.Width, Me.Height - btnPointer.Height)
+            btnPointer.Location = New Point(Me.Width - btnPointer.Width, 711)
             btnPointer.BringToFront()
         ElseIf btnPointer.Text = "2" Then
             btnPointer.Text = "3"
 
             'Move to top right
-            btnPointer.Location = New Point(Me.Width - btnPointer.Width, 0)
+            btnPointer.Location = New Point(Me.Width - btnPointer.Width, 7)
             btnPointer.BringToFront()
         ElseIf btnPointer.Text = "3" Then
             btnPointer.Text = "4"
 
             'Move to buttom right
-            btnPointer.Location = New Point(Me.Width - btnPointer.Width, Me.Height - btnPointer.Height)
+            btnPointer.Location = New Point(Me.Width - btnPointer.Width, 711)
             btnPointer.BringToFront()
         ElseIf btnPointer.Text = "4" Then
             InsertLogTransactionActivity("", "", "", KioskConfig.KioskLockerForm.Main, KioskConfig.KioskLockerStep.Main_OpenFormLoginStaffConsole, "", False)

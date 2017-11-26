@@ -31,11 +31,8 @@ Partial Class frmMain
         Me.pnlCancel = New System.Windows.Forms.Panel()
         Me.btnCancel = New System.Windows.Forms.Label()
         Me.pnlHead = New System.Windows.Forms.Panel()
-        Me.pbLogo = New System.Windows.Forms.PictureBox()
         Me.pnlFooter.SuspendLayout()
         Me.pnlCancel.SuspendLayout()
-        Me.pnlHead.SuspendLayout()
-        CType(Me.pbLogo, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'TimerCheckOpenClose
@@ -48,12 +45,14 @@ Partial Class frmMain
         '
         'pnlFooter
         '
+        Me.pnlFooter.BackColor = System.Drawing.Color.Transparent
+        Me.pnlFooter.BackgroundImage = Global.AutoboxLocker.My.Resources.Resources.bgMainFooter
         Me.pnlFooter.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
         Me.pnlFooter.Controls.Add(Me.pnlCancel)
-        Me.pnlFooter.Dock = System.Windows.Forms.DockStyle.Bottom
-        Me.pnlFooter.Location = New System.Drawing.Point(0, 665)
+        Me.pnlFooter.Location = New System.Drawing.Point(0, 688)
+        Me.pnlFooter.Margin = New System.Windows.Forms.Padding(0)
         Me.pnlFooter.Name = "pnlFooter"
-        Me.pnlFooter.Size = New System.Drawing.Size(1024, 103)
+        Me.pnlFooter.Size = New System.Drawing.Size(1024, 80)
         Me.pnlFooter.TabIndex = 11
         '
         'btnPointer
@@ -61,7 +60,7 @@ Partial Class frmMain
         Me.btnPointer.BackColor = System.Drawing.Color.White
         Me.btnPointer.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnPointer.ForeColor = System.Drawing.Color.White
-        Me.btnPointer.Location = New System.Drawing.Point(0, 721)
+        Me.btnPointer.Location = New System.Drawing.Point(3, 711)
         Me.btnPointer.Name = "btnPointer"
         Me.btnPointer.Size = New System.Drawing.Size(55, 47)
         Me.btnPointer.TabIndex = 51
@@ -78,7 +77,7 @@ Partial Class frmMain
         Me.pnlCancel.BackgroundImage = Global.AutoboxLocker.My.Resources.Resources.btnBG
         Me.pnlCancel.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
         Me.pnlCancel.Controls.Add(Me.btnCancel)
-        Me.pnlCancel.Location = New System.Drawing.Point(834, 30)
+        Me.pnlCancel.Location = New System.Drawing.Point(834, 2)
         Me.pnlCancel.Name = "pnlCancel"
         Me.pnlCancel.Size = New System.Drawing.Size(116, 44)
         Me.pnlCancel.TabIndex = 4
@@ -98,29 +97,20 @@ Partial Class frmMain
         '
         'pnlHead
         '
-        Me.pnlHead.BackColor = System.Drawing.Color.White
+        Me.pnlHead.BackColor = System.Drawing.Color.Transparent
         Me.pnlHead.BackgroundImage = Global.AutoboxLocker.My.Resources.Resources.bgMainHeader
-        Me.pnlHead.Controls.Add(Me.pbLogo)
-        Me.pnlHead.Dock = System.Windows.Forms.DockStyle.Top
+        Me.pnlHead.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
         Me.pnlHead.Location = New System.Drawing.Point(0, 0)
+        Me.pnlHead.Margin = New System.Windows.Forms.Padding(0)
         Me.pnlHead.Name = "pnlHead"
-        Me.pnlHead.Size = New System.Drawing.Size(1024, 108)
+        Me.pnlHead.Size = New System.Drawing.Size(1024, 50)
         Me.pnlHead.TabIndex = 45
-        '
-        'pbLogo
-        '
-        Me.pbLogo.BackgroundImage = Global.AutoboxLocker.My.Resources.Resources.logo
-        Me.pbLogo.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
-        Me.pbLogo.Location = New System.Drawing.Point(28, 10)
-        Me.pbLogo.Name = "pbLogo"
-        Me.pbLogo.Size = New System.Drawing.Size(66, 80)
-        Me.pbLogo.TabIndex = 50
-        Me.pbLogo.TabStop = False
         '
         'frmMain
         '
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None
         Me.BackColor = System.Drawing.Color.White
+        Me.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None
         Me.ClientSize = New System.Drawing.Size(1024, 768)
         Me.Controls.Add(Me.btnPointer)
         Me.Controls.Add(Me.pnlFooter)
@@ -131,8 +121,6 @@ Partial Class frmMain
         Me.Text = "frmMain"
         Me.pnlFooter.ResumeLayout(False)
         Me.pnlCancel.ResumeLayout(False)
-        Me.pnlHead.ResumeLayout(False)
-        CType(Me.pbLogo, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
     End Sub
@@ -140,7 +128,6 @@ Partial Class frmMain
     Friend WithEvents TimerCheckOpenClose As Timer
     Friend WithEvents btnPointer As Button
     Friend WithEvents TimerSetPointer As Timer
-    Friend WithEvents pbLogo As PictureBox
     Friend WithEvents pnlFooter As Panel
     Friend WithEvents TimerCheckAutoSleep As Timer
     Friend WithEvents btnCancel As Label

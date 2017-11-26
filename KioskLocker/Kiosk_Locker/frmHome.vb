@@ -21,7 +21,7 @@ Public Class frmHome
     Private Sub frmHome_Shown(sender As Object, e As EventArgs) Handles Me.Shown
         Me.WindowState = FormWindowState.Maximized
         CheckForIllegalCrossThreadCalls = False
-        frmMain.pnlFooter.Visible = False
+        frmMain.pnlCancel.Visible = False
         frmMain.btnPointer.Visible = True
         frmMain.TimerCheckOpenClose.Enabled = True
         frmMain.CloseAllChildForm(Me)
@@ -54,7 +54,7 @@ Public Class frmHome
         SetLabelNotificationText()
 
         pnlDeposit.Enabled = True
-        pnlPickup.Enabled = True
+        pnlCollect.Enabled = True
 
         frmLoading.Close()
     End Sub
@@ -190,8 +190,8 @@ Public Class frmHome
 
 #End Region
 
-#Region "Pickup"
-    Private Sub btnPickup_Click(sender As Object, e As EventArgs) Handles pnlPickup.Click, lblPickup.Click
+#Region "Collect"
+    Private Sub pnlCollect_Click(sender As Object, e As EventArgs) Handles pnlCollect.Click, lblPickup.Click
         Dim ret As ExecuteDataInfo = CreateNewPickupTransaction()
         InsertLogTransactionActivity("", Collect.TransactionNo, "", KioskLockerForm.Home, KioskLockerStep.Home_ClickPickup, "เริ่มทำรายการรับคืน", False)
         If ret.IsSuccess = True Then
