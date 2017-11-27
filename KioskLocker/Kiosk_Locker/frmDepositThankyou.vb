@@ -191,9 +191,7 @@ Public Class frmDepositThankyou
 
                 Application.DoEvents()
                 InsertLogTransactionActivity(Deposit.DepositTransNo, "", "", KioskConfig.SelectForm, KioskLockerStep.DepositThankYou_BackToHome, "การทำรายการเสร็จสมบูรณ์", False)
-                Dim f As New frmHome
-                f.MdiParent = frmMain
-                f.Show()
+
                 TimerCheckCloseLocker.Stop()
                 Application.DoEvents()
 
@@ -201,8 +199,9 @@ Public Class frmDepositThankyou
                 RemoveHandler BoardSensor.SensorReceiveData, AddressOf SensorDataReceived
                 Threading.Thread.Sleep(1000)
 
-                frmLoading.Close()
                 Me.Close()
+                frmMain.GoToHome()
+                'frmLoading.Close()
             End If
         Else
             TimerCheckCloseLocker.Enabled = True

@@ -576,9 +576,6 @@
     <None Include="Resources\IconDeposit.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\IconPickup.png" />
-  </ItemGroup>
-  <ItemGroup>
     <None Include="Resources\IconQRCode.png" />
   </ItemGroup>
   <ItemGroup>
@@ -605,6 +602,8 @@
   <ItemGroup>
     <Content Include="LogoIcon.ico" />
     <Content Include="Logo.ico" />
+    <None Include="Resources\pbIconOpenLocker.png" />
+    <None Include="Resources\imgHorizontalLine.png" />
     <None Include="Resources\imgTextPincode.png" />
     <None Include="Resources\bgLayoutSelectLocker.png" />
     <None Include="Resources\imgButtonOK.png" />
@@ -622,18 +621,6 @@
     <None Include="Resources\btnDeposit.png" />
     <None Include="Resources\btnCollect.png" />
     <None Include="Resources\IconCollect.png" />
-    <None Include="Resources\imgButtonNumber8.jpg" />
-    <None Include="Resources\imgButtonNumber7.jpg" />
-    <None Include="Resources\imgButtonNumber6.jpg" />
-    <None Include="Resources\imgButtonNumber5.jpg" />
-    <None Include="Resources\imgButtonNumber4.jpg" />
-    <None Include="Resources\imgButtonNumber3.jpg" />
-    <None Include="Resources\imgButtonNumber2.jpg" />
-    <None Include="Resources\imgButtonNumber1.jpg" />
-    <None Include="Resources\imgButtonNumber0.jpg" />
-    <None Include="Resources\imgButtonClear.jpg" />
-    <None Include="Resources\imgButtonBackSpace.jpg" />
-    <None Include="Resources\imgButtonNumber9.jpg" />
     <None Include="Resources\IconCollectThankYou.png" />
     <None Include="Resources\IconPickupQRCodeFail.png" />
     <None Include="Resources\IconRedTriangle.png" />

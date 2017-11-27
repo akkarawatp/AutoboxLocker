@@ -68,11 +68,8 @@ Public Class frmMain
             StartInitialDevice()
 #End If
             SetLEDStatus()
+            GoToHome()
 
-            Application.DoEvents()
-            Dim fHome As New frmHome
-            fHome.MdiParent = Me
-            fHome.Show()
 
             CheckKioskScreenSaver()
             'GetAdsInfo()
@@ -80,6 +77,15 @@ Public Class frmMain
             InsertErrorLog("Cannot Load Device Infomation List", 0, 0, 0, KioskConfig.SelectForm, 0)
             ShowFormError("Out of service", "Load Device Fail", KioskConfig.SelectForm, 0, True)
         End If
+    End Sub
+
+    Public Sub GoToHome()
+        Application.DoEvents()
+        Dim fHome As New frmHome
+        fHome.MdiParent = Me
+        fHome.StartPosition = FormStartPosition.WindowsDefaultLocation
+        fHome.WindowState = FormWindowState.Normal
+        fHome.Show()
     End Sub
 
 

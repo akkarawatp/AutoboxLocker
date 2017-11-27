@@ -142,9 +142,6 @@
   <data name="icon_cabinet_edit" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\icon_cabinet_edit.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="btnPickupOpenLocker" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\btnPickupOpenLocker.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
   <data name="bgMainHeader" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\bgMainHeader.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -153,9 +150,6 @@
   </data>
   <data name="IconRedTriangle" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\IconRedTriangle.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="btnBG" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\btnBG.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="IconDepositTime" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\IconDepositTime.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -172,14 +166,8 @@
   <data name="IconPickupQRCode" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\IconPickupQRCode.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="btnColWhite" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\btnColWhite.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
   <data name="IconQRCode" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\IconQRCode.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="IconOpenLocker" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\IconOpenLocker.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="IconPickupQRCodeFail" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\IconPickupQRCodeFail.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -249,5 +237,17 @@
   </data>
   <data name="imgTextPincode" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\imgTextPincode.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="imgHorizontalLine" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\imgHorizontalLine.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="btnBG" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\btnBG.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="btnColWhite" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\btnColWhite.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="pbIconOpenLocker" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\pbIconOpenLocker.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>

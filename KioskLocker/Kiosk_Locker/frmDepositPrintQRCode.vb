@@ -36,7 +36,7 @@ Public Class frmDepositPrintQRCode
         Try
             'เวลาที่พิมพ์ Slip เสร็จ
             Deposit.PaidTime = DateTime.Now
-            lblChangeAmt.Text = Deposit.ChangeAmount
+            'lblChangeAmt.Text = Deposit.ChangeAmount
             Application.DoEvents()
             PrintSlip()
             If Deposit.ChangeAmount > 0 Then

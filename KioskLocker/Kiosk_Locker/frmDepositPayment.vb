@@ -79,26 +79,26 @@ Public Class frmDepositPayment
                 CollectCaptureImage() 'ถ่ายรูปตอนรับคืน
 
                 'จัดตำแหน่ง Control ในกรณีรับคืน
-                pnlLockerName.Location = New Point(496, 61)
-                pnlServiceAmt.Location = New Point(pnlLockerName.Location.X, pnlLockerName.Location.Y + pnlLockerName.Height + 8)
-                pnlDepositAmt.Location = New Point(pnlServiceAmt.Location.X, pnlServiceAmt.Location.Y + pnlServiceAmt.Height + 8)
-                pnlServiceAmt.Visible = True
+                'pnlLockerName.Location = New Point(496, 61)
+                'pnlServiceAmt.Location = New Point(pnlLockerName.Location.X, pnlLockerName.Location.Y + pnlLockerName.Height + 8)
+                'pnlDepositAmt.Location = New Point(pnlServiceAmt.Location.X, pnlServiceAmt.Location.Y + pnlServiceAmt.Height + 8)
+                'pnlServiceAmt.Visible = True
 
                 lblLockerName.Text = Collect.LockerName
-                lblServiceAmt.Text = Collect.ServiceAmount
-                lblDepositAmt.Text = Collect.DepositAmount   'ค่ามัดจำ 
-                lblPaidAmt.Text = 0
+                'lblServiceAmt.Text = Collect.ServiceAmount
+                'lblDepositAmt.Text = Collect.DepositAmount   'ค่ามัดจำ 
+                'lblPaidAmt.Text = 0
 
-                lblLabelChange.Visible = True
-                lblChangeAmt.Visible = True
-                lblChangeTHB.Visible = True
+                'lblLabelChange.Visible = True
+                'lblChangeAmt.Visible = True
+                'lblChangeTHB.Visible = True
 
                 If Collect.DepositAmount >= Collect.ServiceAmount Then
                     'ถ้าค่ามัดจำ มากกว่าค่าบริการ
                     'ให้แสดงจำนวนเงินที่ทอน และปุ่มเปิดประตู
 
                     Collect.ChangeAmount = (Collect.DepositAmount - Collect.ServiceAmount)
-                    lblChangeAmt.Text = Collect.ChangeAmount
+                    'lblChangeAmt.Text = Collect.ChangeAmount
                     lblPaidRemain.Text = 0
 
                     CollectPaymentComplete()
@@ -107,7 +107,7 @@ Public Class frmDepositPayment
                     tmPaymentTimeOut.Enabled = False
                     tmPaymentTimeOut.Stop()
                 Else
-                    lblChangeAmt.Text = 0
+                    'lblChangeAmt.Text = 0
                     lblPaidRemain.Text = Collect.ServiceAmount - Collect.DepositAmount
                 End If
             Else
@@ -115,7 +115,7 @@ Public Class frmDepositPayment
 
                 SetDepositMoneyAmt()
                 lblLockerName.Text = Deposit.LockerName
-                lblDepositAmt.Text = Deposit.DepositAmount
+                'lblDepositAmt.Text = Deposit.DepositAmount
                 lblPaidRemain.Text = Deposit.DepositAmount
 
                 Deposit.ChangeAmount = Deposit.PaidAmount - Deposit.DepositAmount
@@ -376,19 +376,19 @@ Public Class frmDepositPayment
 
 
     Private Sub PaidLabel(data As String)
-        lblPaidAmt.Text = data
+        'lblPaidAmt.Text = data
 
         Dim PaidRemain As Integer = 0
         If ServiceID = ConstantsData.TransactionType.CollectBelonging Then
-            If (Collect.PaidAmount + Collect.DepositAmount) >= Collect.ServiceAmount Then
-                lblChangeAmt.Text = Collect.ChangeAmount
-            End If
+            'If (Collect.PaidAmount + Collect.DepositAmount) >= Collect.ServiceAmount Then
+            '    lblChangeAmt.Text = Collect.ChangeAmount
+            'End If
 
             PaidRemain = Collect.ServiceAmount - (Collect.PaidAmount + Collect.DepositAmount)
         ElseIf ServiceID = ConstantsData.TransactionType.DepositBelonging Then
-            If Deposit.PaidAmount >= Deposit.DepositAmount Then
-                lblChangeAmt.Text = Deposit.ChangeAmount
-            End If
+            'If Deposit.PaidAmount >= Deposit.DepositAmount Then
+            '    lblChangeAmt.Text = Deposit.ChangeAmount
+            'End If
 
             PaidRemain = Deposit.DepositAmount - Deposit.PaidAmount
         End If
@@ -570,10 +570,10 @@ Public Class frmDepositPayment
 
         lblPleasePaid.Visible = False
 
-        lblPleasePaidComplete.Location = New Point(503, 232)
-        lblPleasePaidComplete.Visible = True
-        pnlPickupOpenLocker.Location = New Point(597, 301)
-        pnlPickupOpenLocker.Visible = True
+        'lblPleasePaidComplete.Location = New Point(503, 232)
+        'lblPleasePaidComplete.Visible = True
+        'pnlPickupOpenLocker.Location = New Point(597, 301)
+        'pnlPickupOpenLocker.Visible = True
         frmMain.pnlCancel.Visible = False
         OpenLockerTimeOutCheckTime = DateTime.Now
         tmOpenLockerTimeOut.Enabled = True
@@ -596,7 +596,7 @@ Public Class frmDepositPayment
         End If
     End Sub
 
-    Private Sub lblPickupOpenLocker_Click(sender As Object, e As EventArgs) Handles lblCollectOpenLocker.Click, pnlPickupOpenLocker.Click
+    Private Sub lblPickupOpenLocker_Click(sender As Object, e As EventArgs)
         tmOpenLockerTimeOut.Enabled = False
         tmOpenLockerTimeOut.Stop()
 

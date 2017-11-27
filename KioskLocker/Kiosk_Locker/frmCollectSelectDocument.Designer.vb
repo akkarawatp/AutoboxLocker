@@ -54,8 +54,8 @@ Partial Class frmCollectSelectDocument
         '
         'pnlPinCode
         '
-        Me.pnlPinCode.BackgroundImage = Global.AutoboxLocker.My.Resources.Resources.btnPickupOpenLocker
-        Me.pnlPinCode.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
+        'Me.pnlPinCode.BackgroundImage = Global.AutoboxLocker.My.Resources.Resources.btnPickupOpenLocker
+        'Me.pnlPinCode.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
         Me.pnlPinCode.Controls.Add(Me.lblImagePinCode)
         Me.pnlPinCode.Controls.Add(Me.lblCaptionPinCode)
         Me.pnlPinCode.Location = New System.Drawing.Point(548, 166)
