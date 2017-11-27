@@ -602,6 +602,7 @@
   <ItemGroup>
     <Content Include="LogoIcon.ico" />
     <Content Include="Logo.ico" />
+    <None Include="Resources\imgCollectSelectDocument.png" />
     <None Include="Resources\pbIconOpenLocker.png" />
     <None Include="Resources\imgHorizontalLine.png" />
     <None Include="Resources\imgTextPincode.png" />

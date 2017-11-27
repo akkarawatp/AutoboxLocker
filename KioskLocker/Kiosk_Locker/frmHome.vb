@@ -195,9 +195,10 @@ Public Class frmHome
         Dim ret As ExecuteDataInfo = CreateNewPickupTransaction()
         InsertLogTransactionActivity("", Collect.TransactionNo, "", KioskLockerForm.Home, KioskLockerStep.Home_ClickPickup, "เริ่มทำรายการรับคืน", False)
         If ret.IsSuccess = True Then
-            'Dim f As New frmCollectSelectDocument
-            frmCollectSelectDocument.MdiParent = frmMain
-            frmCollectSelectDocument.Show()
+            'frmCollectSelectDocument.MdiParent = frmMain
+            'frmCollectSelectDocument.Show()
+            frmCollectScanQRCode.MdiParent = frmMain
+            frmCollectScanQRCode.Show()
             frmMain.btnPointer.Visible = False
             frmMain.TimerCheckOpenClose.Enabled = False
             Me.Close()
@@ -205,7 +206,7 @@ Public Class frmHome
             SendKioskAlarm("LOCKER_OUT_OF_SERVICE", False)
         Else
             InsertErrorLog(ret.ErrorMessage, 0, 0, 0, KioskLockerForm.Home, KioskLockerStep.Home_ClickPickup)
-            SendKioskAlarm("LOCKER_OUT_OF_SERVICE", False)
+            SendKioskAlarm("LOCKER_OUT_OF_SERVICE", True)
             ShowDialogErrorMessage("Cannot create transaction")
         End If
     End Sub

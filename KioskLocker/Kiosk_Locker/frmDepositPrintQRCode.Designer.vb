@@ -45,7 +45,7 @@ Partial Class frmDepositPrintQRCode
         '
         Me.lblTitle.Anchor = System.Windows.Forms.AnchorStyles.Top
         Me.lblTitle.BackColor = System.Drawing.Color.Transparent
-        Me.lblTitle.Font = New System.Drawing.Font("Thai Sans Lite", 39.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(222, Byte))
+        Me.lblTitle.Font = New System.Drawing.Font("Thai Sans Lite", 40.0!, System.Drawing.FontStyle.Bold)
         Me.lblTitle.ForeColor = System.Drawing.Color.Black
         Me.lblTitle.Location = New System.Drawing.Point(12, 80)
         Me.lblTitle.Name = "lblTitle"

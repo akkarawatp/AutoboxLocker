@@ -21,7 +21,7 @@ Public Class frmCollectByPINCode
         lblLabelNotification.Text = String.Format(DefaultNotictText, KioskConfig.PincodeLen)
 
         Application.DoEvents()
-        InsertLogTransactionActivity(Collect.DepositTransNo, Collect.TransactionNo, "", KioskConfig.SelectForm, KioskLockerStep.PickupByPinCode_OpenForm, "", False)
+        'InsertLogTransactionActivity(Collect.DepositTransNo, Collect.TransactionNo, "", KioskConfig.SelectForm, KioskLockerStep.PickupByPinCode_OpenForm, "", False)
         TimeOutCheckTime = DateTime.Now
         TimerTimeOut.Enabled = True
 
@@ -36,8 +36,8 @@ Public Class frmCollectByPINCode
                 TimerTimeOut.Enabled = False
                 TimerTimeOut.Stop()
 
-                UpdateCollectStatus(Collect.CollectTransactionID, CollectTransactionData.TransactionStatus.TimeOut, KioskLockerStep.PickupByPinCode_Timeout)
-                InsertLogTransactionActivity(Collect.DepositTransNo, Collect.TransactionNo, "", KioskConfig.SelectForm, KioskLockerStep.PickupByPinCode_Timeout, " ลูกค้าไม่ทำรายการภายในเวลาที่กำหนด", False)
+                UpdateCollectStatus(Collect.CollectTransactionID, CollectTransactionData.TransactionStatus.TimeOut, KioskLockerStep.PickupScanQRCode_Timeout)
+                InsertLogTransactionActivity(Collect.DepositTransNo, Collect.TransactionNo, "", KioskConfig.SelectForm, KioskLockerStep.PickupScanQRCode_Timeout, " ลูกค้าไม่ทำรายการภายในเวลาที่กำหนด", False)
 
                 frmMain.CloseAllChildForm()
                 Dim f As New frmHome
@@ -85,20 +85,20 @@ Public Class frmCollectByPINCode
 
                     Dim pDt As DataTable = KioskDB.ExecuteTable(sql, p)
                     If pDt.Rows.Count = 0 Then
-                        InsertLogTransactionActivity(DepositTransNo, Collect.TransactionNo, "", KioskConfig.SelectForm, KioskLockerStep.PickupByPinCode_HaveData, "", False)
+                        'InsertLogTransactionActivity(DepositTransNo, Collect.TransactionNo, "", KioskConfig.SelectForm, KioskLockerStep.PickupByPinCode_HaveData, "", False)
 
                         ret = SetPickupInformation(tmpDr)
                         Exit For
                     Else
-                        InsertLogTransactionActivity(DepositTransNo, Collect.TransactionNo, "", KioskConfig.SelectForm, KioskLockerStep.PickupByPinCode_HaveData, "รายการฝาก TransNo=" & DepositTransNo & " ได้มีการรับคืนแล้ว จึงไม่สามารถทำรายการรับคืนได้อีก", False)
+                        'InsertLogTransactionActivity(DepositTransNo, Collect.TransactionNo, "", KioskConfig.SelectForm, KioskLockerStep.PickupByPinCode_HaveData, "รายการฝาก TransNo=" & DepositTransNo & " ได้มีการรับคืนแล้ว จึงไม่สามารถทำรายการรับคืนได้อีก", False)
                         ret = False
                     End If
                     pDt.Dispose()
                 Next
             Else
-                InsertLogTransactionActivity("", Collect.TransactionNo, "", KioskConfig.SelectForm, KioskLockerStep.PickupByPinCode_NoDataFound, "", False)
+                'InsertLogTransactionActivity("", Collect.TransactionNo, "", KioskConfig.SelectForm, KioskLockerStep.PickupByPinCode_NoDataFound, "", False)
 
-                Dim MsStepID As Long = KioskLockerStep.PickupByPinCode_GetPickupWithPinCode
+                Dim MsStepID As Long = 0 'KioskLockerStep.PickupByPinCode_GetPickupWithPinCode
 
                 '#################################################################################
                 'ถ้าไม่เจอให้หาจาก Service Transaction ที่มี Status Inprogress และมี deposit_trans_no ตรงกัน
@@ -148,7 +148,7 @@ Public Class frmCollectByPINCode
             dt.Dispose()
         Catch ex As Exception
             ret = False
-            InsertErrorLog("Exception : " & ex.Message & " " & ex.StackTrace, Collect.DepositTransNo, Collect.TransactionNo, "", KioskConfig.SelectForm, KioskLockerStep.PickupByPinCode_GetPickupDataFail)
+            'InsertErrorLog("Exception : " & ex.Message & " " & ex.StackTrace, Collect.DepositTransNo, Collect.TransactionNo, "", KioskConfig.SelectForm, KioskLockerStep.PickupByPinCode_GetPickupDataFail)
         End Try
 
         Return ret
@@ -201,7 +201,7 @@ Public Class frmCollectByPINCode
                 lblLabelNotification.Text = String.Format(DefaultNotictText, KioskConfig.PincodeLen)
                 txtPinCode.Text = ""
 
-                InsertLogTransactionActivity(Deposit.DepositTransNo, Collect.TransactionNo, "", KioskConfig.SelectForm, KioskLockerStep.PickupByPinCode_GetPickupDataFail, "Error Update Deposit Data", True)
+                'InsertLogTransactionActivity(Deposit.DepositTransNo, Collect.TransactionNo, "", KioskConfig.SelectForm, KioskLockerStep.PickupByPinCode_GetPickupDataFail, "Error Update Deposit Data", True)
                 ShowDialogErrorMessage("รหัสส่วนตัวไม่ถูกต้อง กรุณาลองใหม่อีกครั้ง")
                 Application.DoEvents()
 

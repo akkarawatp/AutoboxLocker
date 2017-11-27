@@ -505,8 +505,13 @@ Namespace Data
             PickupScanQRCode_OpenForm = 801
             PickupScanQRCode_CheckDataQRCode = 802
             PickupScanQRCode_CalServiceAmount = 803
-            'PickupScanQRCode_ClickQRCodeLost = 804
-            PickupScanQRCode_Timeout = 805
+            '-----------------------------
+            PickupScanQRCode_GetPickupWithPinCode = 804
+            PickupScanQRCode_HaveData = 805
+            PickupScanQRCode_NoDataFound = 806
+            PickupScanQRCode_GetPickupDataFail = 807
+            '-----------------------------
+            PickupScanQRCode_Timeout = 88
 
             PickupPayment_OpenForm = 1101
             PickupPayment_CheckHardwareStatus = 1102
@@ -530,22 +535,22 @@ Namespace Data
             PickupPayment_CaptureImageSuccess = 1120
             PickupPayment_DisconnectWebcam = 1121
 
-            PickupByPinCode_OpenForm = 1001
+            'PickupByPinCode_OpenForm = 1001
             'PickupScanPersonInfo_CheckPassportDevice = 1002
             'PickupScanPersonInfo_CheckIDCardDevice = 1003
             'PickupScanPersonInfo_ScanIDCard = 1004
             'PickupScanPersonInfo_ScanPassport = 1005
             'PickupScanPersonInfo_CheckIDCardExpire = 1006
             'PickupScanPersonInfo_CheckPassportExpire = 1007
-            PickupByPinCode_GetPickupWithPinCode = 1008
+            'PickupByPinCode_GetPickupWithPinCode = 1008
             'PickupScanPersonInfo_GetPickupWithScanPassport = 1009
-            PickupByPinCode_HaveData = 1010
-            PickupByPinCode_NoDataFound = 1011
-            PickupByPinCode_GetPickupDataFail = 1012
+            'PickupByPinCode_HaveData = 1010
+            'PickupByPinCode_NoDataFound = 1011
+            'PickupByPinCode_GetPickupDataFail = 1012
             'PickupScanPersonInfo_RemoveIdCard = 1013
             'PickupScanPersonInfo_InsertIdCard = 1014
             'PickupScanPersonInfo_InsertPassport = 1015
-            PickupByPinCode_Timeout = 1016
+            'PickupByPinCode_Timeout = 1016
 
             PickupThankYou_OpenForm = 1201
             PickupThankYou_StartSensor = 1202
