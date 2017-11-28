@@ -399,15 +399,14 @@ Public Class frmCollectScanQRCode
         InsertLogTransactionActivity("", Collect.TransactionNo, "", KioskConfig.SelectForm, KioskLockerStep.PickupScanQRCode_GetPickupWithPinCode, "", False)
 
         If CheckDepositDataByPinCode(txtPincode.Text, cbLocker.SelectedValue) = True Then
-            Application.DoEvents()
             Collect.LostQRCode = "Y"
             UpdateCollectTransaction(Collect)
 
-            Application.DoEvents()
             frmDepositPayment.Show()
-            frmDepositPayment.BringToFront()
-            frmLoading.Close()
             Me.Close()
+            frmLoading.Close()
+            Application.DoEvents()
+            'frmDepositPayment.BringToFront()
         Else
             InsertLogTransactionActivity(Collect.DepositTransNo, Collect.TransactionNo, "", KioskConfig.SelectForm, KioskLockerStep.PickupScanQRCode_GetPickupWithPinCode, "Pin Code ไม่ถูกต้อง Deposit Trans No=" & Collect.DepositTransNo, True)
             txtQRCode.Text = ""

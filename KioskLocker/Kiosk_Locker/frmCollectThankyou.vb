@@ -35,7 +35,7 @@ Public Class frmCollectThankyou
             BoardSensor.SensorRequestData(Collect.LockerPinSendor)
             AddHandler BoardSensor.SensorReceiveData, AddressOf SensorDataReceived
             _CallOpenLocker = True
-            lblChangeAmt.Text = Collect.ChangeAmount
+            'lblChangeAmt.Text = Collect.ChangeAmount
 
             TimerCheckCloseLocker.Enabled = True
             TimerCheckCloseLocker.Start()
@@ -158,11 +158,8 @@ Public Class frmCollectThankyou
             RemoveHandler BoardSensor.SensorReceiveData, AddressOf SensorDataReceived
             Threading.Thread.Sleep(1000)
 
-            Dim f As New frmHome
-            f.MdiParent = frmMain
-            f.Show()
-
             Me.Close()
+            frmMain.GoToHome()
         Else
             TimerCheckCloseLocker.Enabled = True
         End If

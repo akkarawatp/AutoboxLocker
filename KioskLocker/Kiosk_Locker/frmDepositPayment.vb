@@ -1,4 +1,4 @@
-﻿Imports System.IO
+﻿Imports System.Threading
 Imports AutoboxLocker.Data
 Imports AutoboxLocker.Data.KioskConfigData
 Imports WebCamera
@@ -76,29 +76,21 @@ Public Class frmDepositPayment
     Private Sub SetPaymentInformation()
         Try
             If ServiceID = ConstantsData.TransactionType.CollectBelonging Then
-                CollectCaptureImage() 'ถ่ายรูปตอนรับคืน
+                'Dim t As New Thread(Sub() CollectCaptureImage()) 'ถ่ายรูปตอนรับคืน
+                't.Start()
+                CollectCaptureImage()
 
                 'จัดตำแหน่ง Control ในกรณีรับคืน
-                'pnlLockerName.Location = New Point(496, 61)
-                'pnlServiceAmt.Location = New Point(pnlLockerName.Location.X, pnlLockerName.Location.Y + pnlLockerName.Height + 8)
-                'pnlDepositAmt.Location = New Point(pnlServiceAmt.Location.X, pnlServiceAmt.Location.Y + pnlServiceAmt.Height + 8)
-                'pnlServiceAmt.Visible = True
-
+                lblTitle.Text = "ชำระค่าบริการ"
+                lblSubTitle.Visible = True
+                lblLabelLockerName.Text = "ช่องเก็บสัมภาระของคุณ"
+                lblPleasePaid.Text = "ค่าบริการที่ต้องชำระ"
                 lblLockerName.Text = Collect.LockerName
-                'lblServiceAmt.Text = Collect.ServiceAmount
-                'lblDepositAmt.Text = Collect.DepositAmount   'ค่ามัดจำ 
-                'lblPaidAmt.Text = 0
-
-                'lblLabelChange.Visible = True
-                'lblChangeAmt.Visible = True
-                'lblChangeTHB.Visible = True
-
                 If Collect.DepositAmount >= Collect.ServiceAmount Then
                     'ถ้าค่ามัดจำ มากกว่าค่าบริการ
                     'ให้แสดงจำนวนเงินที่ทอน และปุ่มเปิดประตู
 
                     Collect.ChangeAmount = (Collect.DepositAmount - Collect.ServiceAmount)
-                    'lblChangeAmt.Text = Collect.ChangeAmount
                     lblPaidRemain.Text = 0
 
                     CollectPaymentComplete()
@@ -111,11 +103,12 @@ Public Class frmDepositPayment
                     lblPaidRemain.Text = Collect.ServiceAmount - Collect.DepositAmount
                 End If
             Else
-                DepositCaptureImage() 'ถ่ายรูปตอนฝาก
+                'Dim t As New Thread(Sub() DepositCaptureImage()) 'ถ่ายรูปตอนฝาก
+                't.Start()
+                DepositCaptureImage()
 
                 SetDepositMoneyAmt()
                 lblLockerName.Text = Deposit.LockerName
-                'lblDepositAmt.Text = Deposit.DepositAmount
                 lblPaidRemain.Text = Deposit.DepositAmount
 
                 Deposit.ChangeAmount = Deposit.PaidAmount - Deposit.DepositAmount
@@ -311,8 +304,6 @@ Public Class frmDepositPayment
             UpdateServiceTransaction(Deposit)
 
             InsertLogTransactionActivity(Deposit.DepositTransNo, Collect.TransactionNo, StaffConsole.TransNo, KioskConfig.SelectForm, KioskLockerStep.DepositPayment_DisconnectWebcam, "", False)
-
-
         ElseIf ServiceID = TransactionType.CollectBelonging Then
             InsertLogTransactionActivity(Collect.DepositTransNo, Collect.TransactionNo, StaffConsole.TransNo, KioskConfig.SelectForm, KioskLockerStep.PickupPayment_CaptureImageSuccess, "", False)
             Collect.CustomerImage = Engine.ConverterENG.BitmapToByte(capImage)
@@ -537,7 +528,6 @@ Public Class frmDepositPayment
                     Me.Invoke(myForm, "")
                 End If
             End If
-
         End If
     End Sub
 
@@ -560,6 +550,9 @@ Public Class frmDepositPayment
 #Region "การจ่ายเงินในขั้นตอนการรับคืน"
     Private Sub CollectPaymentComplete()
         'กรณีรับคืน เมื่อจ่ายครบแล้ว
+        frmLoading.Show(frmMain)
+        Application.DoEvents()
+
         BanknoteIn.DisableDeviceCashIn()
         CoinIn.DisableDeviceCoinIn()
         RemoveHandler BanknoteIn.ReceiveEvent, AddressOf BanknoteInDataReceived
@@ -569,46 +562,21 @@ Public Class frmDepositPayment
         tmPaymentTimeOut.Stop()
 
         lblPleasePaid.Visible = False
-
-        'lblPleasePaidComplete.Location = New Point(503, 232)
-        'lblPleasePaidComplete.Visible = True
-        'pnlPickupOpenLocker.Location = New Point(597, 301)
-        'pnlPickupOpenLocker.Visible = True
         frmMain.pnlCancel.Visible = False
-        OpenLockerTimeOutCheckTime = DateTime.Now
-        tmOpenLockerTimeOut.Enabled = True
-
-        'Pickup.PaidTime = DateTime.Now
         Collect.PaidTime = DateTime.Now
         UpdateCollectTransaction(Collect)
 
         InsertLogTransactionActivity(Collect.DepositTransNo, Collect.TransactionNo, StaffConsole.TransNo, KioskConfig.SelectForm, KioskLockerStep.PickupPayment_LEDBlinkOn, Collect.LockerName, False)
         BoardLED.LEDBlinkOn(Collect.LockerPinLED)
         Application.DoEvents()
-    End Sub
 
-    Dim OpenLockerTimeOutCheckTime As DateTime
-    Private Sub tmOpenLockerTimeOut_Tick(sender As Object, e As EventArgs) Handles tmOpenLockerTimeOut.Tick
-        If OpenLockerTimeOutCheckTime.AddSeconds(TimeOut) <= DateTime.Now Then
-            tmOpenLockerTimeOut.Enabled = False
-            tmOpenLockerTimeOut.Stop()
-            lblPickupOpenLocker_Click(Nothing, Nothing)
-        End If
-    End Sub
-
-    Private Sub lblPickupOpenLocker_Click(sender As Object, e As EventArgs)
-        tmOpenLockerTimeOut.Enabled = False
-        tmOpenLockerTimeOut.Stop()
-
-        InsertLogTransactionActivity(Collect.DepositTransNo, Collect.TransactionNo, StaffConsole.TransNo, KioskConfig.SelectForm, KioskLockerStep.PickupPayment_ClickConfirmOpenLocker, Collect.LockerName, False)
-
-        frmLoading.Show(frmMain)
-        Application.DoEvents()
-        PickupConfirmOpenLocker()
+        'Open Locker
+        CollectConfirmOpenLocker()
         frmLoading.Close()
     End Sub
 
-    Private Sub PickupConfirmOpenLocker()
+    Private Sub CollectConfirmOpenLocker()
+        InsertLogTransactionActivity(Collect.DepositTransNo, Collect.TransactionNo, StaffConsole.TransNo, KioskConfig.SelectForm, KioskLockerStep.PickupPayment_ClickConfirmOpenLocker, Collect.LockerName, False)
         If OpenLocker(Collect.LockerID, Collect.LockerPinSolenoid, Collect.LockerPinSendor, KioskLockerStep.PickupPayment_OpenLocker) = True Then
             InsertLogTransactionActivity(Collect.DepositTransNo, Collect.TransactionNo, StaffConsole.TransNo, KioskConfig.SelectForm, KioskLockerStep.PickupPayment_OpenLocker, "ช่องฝาก " & Collect.LockerName & " ถูกเปิดออก", False)
 
@@ -682,8 +650,6 @@ Public Class frmDepositPayment
             End If
         End If
     End Sub
-
-
 
     Private Sub btn1000_Click(sender As Object, e As EventArgs) Handles btn1000.Click
         BanknoteInDataReceived("ReceiveCash 1000")

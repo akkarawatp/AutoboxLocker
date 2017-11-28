@@ -26,7 +26,7 @@ Partial Class frmDepositSelectLocker
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmDepositSelectLocker))
         Me.pnlCabinetLayout = New System.Windows.Forms.Panel()
         Me.pnlLayoutPC = New System.Windows.Forms.Panel()
-        Me.Panel1 = New System.Windows.Forms.Panel()
+        Me.PictureBox2 = New System.Windows.Forms.PictureBox()
         Me.UcCabinet10 = New AutoboxLocker.ucCabinet()
         Me.UcCabinet9 = New AutoboxLocker.ucCabinet()
         Me.UcCabinet8 = New AutoboxLocker.ucCabinet()
@@ -44,13 +44,13 @@ Partial Class frmDepositSelectLocker
         Me.PictureBox1 = New System.Windows.Forms.PictureBox()
         Me.pnlCabinetLayout.SuspendLayout()
         Me.pnlLayoutPC.SuspendLayout()
+        CType(Me.PictureBox2, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'pnlCabinetLayout
         '
         Me.pnlCabinetLayout.Anchor = System.Windows.Forms.AnchorStyles.Top
-        Me.pnlCabinetLayout.BackgroundImage = Global.AutoboxLocker.My.Resources.Resources.bgLayoutSelectLocker
         Me.pnlCabinetLayout.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
         Me.pnlCabinetLayout.Controls.Add(Me.pnlLayoutPC)
         Me.pnlCabinetLayout.Controls.Add(Me.UcCabinet10)
@@ -71,23 +71,22 @@ Partial Class frmDepositSelectLocker
         'pnlLayoutPC
         '
         Me.pnlLayoutPC.Anchor = System.Windows.Forms.AnchorStyles.Top
-        Me.pnlLayoutPC.BackColor = System.Drawing.Color.White
+        Me.pnlLayoutPC.BackColor = System.Drawing.Color.FromArgb(CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer))
         Me.pnlLayoutPC.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.pnlLayoutPC.Controls.Add(Me.Panel1)
+        Me.pnlLayoutPC.Controls.Add(Me.PictureBox2)
         Me.pnlLayoutPC.Location = New System.Drawing.Point(519, 5)
         Me.pnlLayoutPC.Name = "pnlLayoutPC"
         Me.pnlLayoutPC.Size = New System.Drawing.Size(75, 379)
         Me.pnlLayoutPC.TabIndex = 1
         '
-        'Panel1
+        'PictureBox2
         '
-        Me.Panel1.Anchor = System.Windows.Forms.AnchorStyles.None
-        Me.Panel1.BackColor = System.Drawing.Color.Silver
-        Me.Panel1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
-        Me.Panel1.Location = New System.Drawing.Point(14, 121)
-        Me.Panel1.Name = "Panel1"
-        Me.Panel1.Size = New System.Drawing.Size(44, 87)
-        Me.Panel1.TabIndex = 11
+        Me.PictureBox2.Image = Global.AutoboxLocker.My.Resources.Resources.IconLockerControl
+        Me.PictureBox2.Location = New System.Drawing.Point(6, 134)
+        Me.PictureBox2.Name = "PictureBox2"
+        Me.PictureBox2.Size = New System.Drawing.Size(62, 31)
+        Me.PictureBox2.TabIndex = 0
+        Me.PictureBox2.TabStop = False
         '
         'UcCabinet10
         '
@@ -327,6 +326,7 @@ Partial Class frmDepositSelectLocker
         Me.Name = "frmDepositSelectLocker"
         Me.pnlCabinetLayout.ResumeLayout(False)
         Me.pnlLayoutPC.ResumeLayout(False)
+        CType(Me.PictureBox2, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
@@ -344,9 +344,9 @@ Partial Class frmDepositSelectLocker
     Friend WithEvents pnlLayoutPC As Panel
     Friend WithEvents UcCabinet1 As ucCabinet
     Friend WithEvents lblTitle As Label
-    Friend WithEvents Panel1 As Panel
     Friend WithEvents lblAvailable As Label
     Friend WithEvents lblNotAvailable As Label
     Friend WithEvents TimerTimeOut As Timer
     Friend WithEvents PictureBox1 As PictureBox
+    Friend WithEvents PictureBox2 As PictureBox
 End Class

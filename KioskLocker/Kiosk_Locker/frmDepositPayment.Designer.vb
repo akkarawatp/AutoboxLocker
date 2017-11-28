@@ -40,11 +40,11 @@ Partial Class frmDepositPayment
         Me.lblPaidRemain = New System.Windows.Forms.Label()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.lblPleasePaid = New System.Windows.Forms.Label()
-        Me.tmOpenLockerTimeOut = New System.Windows.Forms.Timer(Me.components)
         Me.PictureBox3 = New System.Windows.Forms.PictureBox()
         Me.PictureBox2 = New System.Windows.Forms.PictureBox()
         Me.PictureBox1 = New System.Windows.Forms.PictureBox()
         Me.lblTitle = New System.Windows.Forms.Label()
+        Me.lblSubTitle = New System.Windows.Forms.Label()
         Me.pnlLockerName.SuspendLayout()
         CType(Me.PictureBox3, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.PictureBox2, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -58,27 +58,29 @@ Partial Class frmDepositPayment
         'btn1000
         '
         Me.btn1000.Anchor = System.Windows.Forms.AnchorStyles.Top
-        Me.btn1000.Location = New System.Drawing.Point(27, 175)
+        Me.btn1000.Location = New System.Drawing.Point(27, 201)
         Me.btn1000.Name = "btn1000"
         Me.btn1000.Size = New System.Drawing.Size(75, 23)
         Me.btn1000.TabIndex = 68
         Me.btn1000.Text = "1000"
         Me.btn1000.UseVisualStyleBackColor = True
+        Me.btn1000.Visible = False
         '
         'btn500
         '
         Me.btn500.Anchor = System.Windows.Forms.AnchorStyles.Top
-        Me.btn500.Location = New System.Drawing.Point(108, 175)
+        Me.btn500.Location = New System.Drawing.Point(108, 201)
         Me.btn500.Name = "btn500"
         Me.btn500.Size = New System.Drawing.Size(75, 23)
         Me.btn500.TabIndex = 69
         Me.btn500.Text = "500"
         Me.btn500.UseVisualStyleBackColor = True
+        Me.btn500.Visible = False
         '
         'btn100
         '
         Me.btn100.Anchor = System.Windows.Forms.AnchorStyles.Top
-        Me.btn100.Location = New System.Drawing.Point(189, 175)
+        Me.btn100.Location = New System.Drawing.Point(189, 201)
         Me.btn100.Name = "btn100"
         Me.btn100.Size = New System.Drawing.Size(75, 23)
         Me.btn100.TabIndex = 70
@@ -88,7 +90,7 @@ Partial Class frmDepositPayment
         'btn50
         '
         Me.btn50.Anchor = System.Windows.Forms.AnchorStyles.Top
-        Me.btn50.Location = New System.Drawing.Point(270, 175)
+        Me.btn50.Location = New System.Drawing.Point(270, 201)
         Me.btn50.Name = "btn50"
         Me.btn50.Size = New System.Drawing.Size(75, 23)
         Me.btn50.TabIndex = 71
@@ -98,7 +100,7 @@ Partial Class frmDepositPayment
         'btn20
         '
         Me.btn20.Anchor = System.Windows.Forms.AnchorStyles.Top
-        Me.btn20.Location = New System.Drawing.Point(351, 175)
+        Me.btn20.Location = New System.Drawing.Point(351, 201)
         Me.btn20.Name = "btn20"
         Me.btn20.Size = New System.Drawing.Size(75, 23)
         Me.btn20.TabIndex = 72
@@ -108,7 +110,7 @@ Partial Class frmDepositPayment
         'btn10
         '
         Me.btn10.Anchor = System.Windows.Forms.AnchorStyles.Top
-        Me.btn10.Location = New System.Drawing.Point(432, 175)
+        Me.btn10.Location = New System.Drawing.Point(432, 201)
         Me.btn10.Name = "btn10"
         Me.btn10.Size = New System.Drawing.Size(75, 23)
         Me.btn10.TabIndex = 73
@@ -119,7 +121,7 @@ Partial Class frmDepositPayment
         'btn5
         '
         Me.btn5.Anchor = System.Windows.Forms.AnchorStyles.Top
-        Me.btn5.Location = New System.Drawing.Point(513, 175)
+        Me.btn5.Location = New System.Drawing.Point(513, 201)
         Me.btn5.Name = "btn5"
         Me.btn5.Size = New System.Drawing.Size(75, 23)
         Me.btn5.TabIndex = 74
@@ -130,7 +132,7 @@ Partial Class frmDepositPayment
         'btn2
         '
         Me.btn2.Anchor = System.Windows.Forms.AnchorStyles.Top
-        Me.btn2.Location = New System.Drawing.Point(594, 175)
+        Me.btn2.Location = New System.Drawing.Point(594, 201)
         Me.btn2.Name = "btn2"
         Me.btn2.Size = New System.Drawing.Size(75, 23)
         Me.btn2.TabIndex = 75
@@ -141,7 +143,7 @@ Partial Class frmDepositPayment
         'btn1
         '
         Me.btn1.Anchor = System.Windows.Forms.AnchorStyles.Top
-        Me.btn1.Location = New System.Drawing.Point(675, 175)
+        Me.btn1.Location = New System.Drawing.Point(675, 201)
         Me.btn1.Name = "btn1"
         Me.btn1.Size = New System.Drawing.Size(75, 23)
         Me.btn1.TabIndex = 76
@@ -219,10 +221,6 @@ Partial Class frmDepositPayment
         Me.lblPleasePaid.Text = "ค่ามัดจำที่ต้องชำระ"
         Me.lblPleasePaid.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
         '
-        'tmOpenLockerTimeOut
-        '
-        Me.tmOpenLockerTimeOut.Interval = 1000
-        '
         'PictureBox3
         '
         Me.PictureBox3.Image = Global.AutoboxLocker.My.Resources.Resources.imgHorizontalLine
@@ -263,6 +261,19 @@ Partial Class frmDepositPayment
         Me.lblTitle.Text = "ชำระค่ามัดจำ"
         Me.lblTitle.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
+        'lblSubTitle
+        '
+        Me.lblSubTitle.Anchor = System.Windows.Forms.AnchorStyles.Top
+        Me.lblSubTitle.Font = New System.Drawing.Font("Thai Sans Lite", 27.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblSubTitle.ForeColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(128, Byte), Integer), CType(CType(0, Byte), Integer))
+        Me.lblSubTitle.Location = New System.Drawing.Point(158, 152)
+        Me.lblSubTitle.Name = "lblSubTitle"
+        Me.lblSubTitle.Size = New System.Drawing.Size(709, 51)
+        Me.lblSubTitle.TabIndex = 116
+        Me.lblSubTitle.Text = "เงินมัดจำและเงินทอน คืนให้หลังรับของและปิดตู้สนิทแล้ว"
+        Me.lblSubTitle.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        Me.lblSubTitle.Visible = False
+        '
         'frmDepositPayment
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -270,6 +281,7 @@ Partial Class frmDepositPayment
         Me.AutoScroll = True
         Me.BackColor = System.Drawing.Color.White
         Me.ClientSize = New System.Drawing.Size(1024, 768)
+        Me.Controls.Add(Me.lblSubTitle)
         Me.Controls.Add(Me.btn1)
         Me.Controls.Add(Me.btn2)
         Me.Controls.Add(Me.btn5)
@@ -315,8 +327,8 @@ Partial Class frmDepositPayment
     Friend WithEvents lblPaidRemain As Label
     Friend WithEvents Label1 As Label
     Friend WithEvents lblPleasePaid As Label
-    Friend WithEvents tmOpenLockerTimeOut As Timer
     Friend WithEvents PictureBox2 As PictureBox
     Friend WithEvents PictureBox3 As PictureBox
     Friend WithEvents lblTitle As Label
+    Friend WithEvents lblSubTitle As Label
 End Class

@@ -461,12 +461,6 @@
     <None Include="Resources\IconClose.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\cb_w.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\cb_w_check.png" />
-  </ItemGroup>
-  <ItemGroup>
     <BootstrapperPackage Include=".NETFramework,Version=v4.5.2">
       <Visible>False</Visible>
       <ProductName>Microsoft .NET Framework 4.5.2 %28x86 and x64%29</ProductName>
@@ -576,13 +570,7 @@
     <None Include="Resources\IconDeposit.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\IconQRCode.png" />
-  </ItemGroup>
-  <ItemGroup>
     <None Include="Resources\IconPrintQRCode.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\IconOpenLocker.png" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\IconDepositTime.png" />
@@ -602,6 +590,8 @@
   <ItemGroup>
     <Content Include="LogoIcon.ico" />
     <Content Include="Logo.ico" />
+    <None Include="Resources\IconLockerControl.png" />
+    <None Include="Resources\pbIconCloseLocker.png" />
     <None Include="Resources\imgCollectSelectDocument.png" />
     <None Include="Resources\pbIconOpenLocker.png" />
     <None Include="Resources\imgHorizontalLine.png" />
@@ -623,15 +613,10 @@
     <None Include="Resources\btnCollect.png" />
     <None Include="Resources\IconCollect.png" />
     <None Include="Resources\IconCollectThankYou.png" />
-    <None Include="Resources\IconPickupQRCodeFail.png" />
     <None Include="Resources\IconRedTriangle.png" />
-    <None Include="Resources\IconPickupQRCode.png" />
     <None Include="Resources\IconDepositFull.png" />
-    <None Include="Resources\IconReceiveChange.png" />
     <None Include="Resources\IconRods.png" />
-    <None Include="Resources\btnPickupOpenLocker.png" />
     <None Include="Resources\IconPayment.png" />
-    <None Include="Resources\IconPickupOpenLocker.png" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="bin\Debug\" />

@@ -233,39 +233,19 @@ Namespace My.Resources
         '''<summary>
         '''  Looks up a localized resource of type System.Drawing.Bitmap.
         '''</summary>
+        Friend ReadOnly Property IconLockerControl() As System.Drawing.Bitmap
+            Get
+                Dim obj As Object = ResourceManager.GetObject("IconLockerControl", resourceCulture)
+                Return CType(obj,System.Drawing.Bitmap)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized resource of type System.Drawing.Bitmap.
+        '''</summary>
         Friend ReadOnly Property IconPayment() As System.Drawing.Bitmap
             Get
                 Dim obj As Object = ResourceManager.GetObject("IconPayment", resourceCulture)
-                Return CType(obj,System.Drawing.Bitmap)
-            End Get
-        End Property
-        
-        '''<summary>
-        '''  Looks up a localized resource of type System.Drawing.Bitmap.
-        '''</summary>
-        Friend ReadOnly Property IconPickupOpenLocker() As System.Drawing.Bitmap
-            Get
-                Dim obj As Object = ResourceManager.GetObject("IconPickupOpenLocker", resourceCulture)
-                Return CType(obj,System.Drawing.Bitmap)
-            End Get
-        End Property
-        
-        '''<summary>
-        '''  Looks up a localized resource of type System.Drawing.Bitmap.
-        '''</summary>
-        Friend ReadOnly Property IconPickupQRCode() As System.Drawing.Bitmap
-            Get
-                Dim obj As Object = ResourceManager.GetObject("IconPickupQRCode", resourceCulture)
-                Return CType(obj,System.Drawing.Bitmap)
-            End Get
-        End Property
-        
-        '''<summary>
-        '''  Looks up a localized resource of type System.Drawing.Bitmap.
-        '''</summary>
-        Friend ReadOnly Property IconPickupQRCodeFail() As System.Drawing.Bitmap
-            Get
-                Dim obj As Object = ResourceManager.GetObject("IconPickupQRCodeFail", resourceCulture)
                 Return CType(obj,System.Drawing.Bitmap)
             End Get
         End Property
@@ -296,36 +276,6 @@ Namespace My.Resources
         Friend ReadOnly Property IconProcessing() As System.Drawing.Bitmap
             Get
                 Dim obj As Object = ResourceManager.GetObject("IconProcessing", resourceCulture)
-                Return CType(obj,System.Drawing.Bitmap)
-            End Get
-        End Property
-        
-        '''<summary>
-        '''  Looks up a localized resource of type System.Drawing.Bitmap.
-        '''</summary>
-        Friend ReadOnly Property IconQRCode() As System.Drawing.Bitmap
-            Get
-                Dim obj As Object = ResourceManager.GetObject("IconQRCode", resourceCulture)
-                Return CType(obj,System.Drawing.Bitmap)
-            End Get
-        End Property
-        
-        '''<summary>
-        '''  Looks up a localized resource of type System.Drawing.Bitmap.
-        '''</summary>
-        Friend ReadOnly Property IconReceiveChange() As System.Drawing.Bitmap
-            Get
-                Dim obj As Object = ResourceManager.GetObject("IconReceiveChange", resourceCulture)
-                Return CType(obj,System.Drawing.Bitmap)
-            End Get
-        End Property
-        
-        '''<summary>
-        '''  Looks up a localized resource of type System.Drawing.Bitmap.
-        '''</summary>
-        Friend ReadOnly Property IconRedTriangle() As System.Drawing.Bitmap
-            Get
-                Dim obj As Object = ResourceManager.GetObject("IconRedTriangle", resourceCulture)
                 Return CType(obj,System.Drawing.Bitmap)
             End Get
         End Property
@@ -496,6 +446,16 @@ Namespace My.Resources
         Friend ReadOnly Property logo() As System.Drawing.Bitmap
             Get
                 Dim obj As Object = ResourceManager.GetObject("logo", resourceCulture)
+                Return CType(obj,System.Drawing.Bitmap)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized resource of type System.Drawing.Bitmap.
+        '''</summary>
+        Friend ReadOnly Property pbIconCloseLocker() As System.Drawing.Bitmap
+            Get
+                Dim obj As Object = ResourceManager.GetObject("pbIconCloseLocker", resourceCulture)
                 Return CType(obj,System.Drawing.Bitmap)
             End Get
         End Property

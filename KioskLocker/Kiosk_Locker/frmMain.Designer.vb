@@ -26,10 +26,10 @@ Partial Class frmMain
         Me.TimerCheckOpenClose = New System.Windows.Forms.Timer(Me.components)
         Me.TimerSetPointer = New System.Windows.Forms.Timer(Me.components)
         Me.pnlFooter = New System.Windows.Forms.Panel()
-        Me.btnPointer = New System.Windows.Forms.Button()
-        Me.TimerCheckAutoSleep = New System.Windows.Forms.Timer(Me.components)
         Me.pnlCancel = New System.Windows.Forms.Panel()
         Me.btnCancel = New System.Windows.Forms.Label()
+        Me.btnPointer = New System.Windows.Forms.Button()
+        Me.TimerCheckAutoSleep = New System.Windows.Forms.Timer(Me.components)
         Me.pnlHead = New System.Windows.Forms.Panel()
         Me.pnlFooter.SuspendLayout()
         Me.pnlCancel.SuspendLayout()
@@ -55,6 +55,29 @@ Partial Class frmMain
         Me.pnlFooter.Size = New System.Drawing.Size(1024, 80)
         Me.pnlFooter.TabIndex = 11
         '
+        'pnlCancel
+        '
+        Me.pnlCancel.BackgroundImage = Global.AutoboxLocker.My.Resources.Resources.btnBG
+        Me.pnlCancel.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
+        Me.pnlCancel.Controls.Add(Me.btnCancel)
+        Me.pnlCancel.Location = New System.Drawing.Point(454, 2)
+        Me.pnlCancel.Name = "pnlCancel"
+        Me.pnlCancel.Size = New System.Drawing.Size(116, 44)
+        Me.pnlCancel.TabIndex = 4
+        Me.pnlCancel.Visible = False
+        '
+        'btnCancel
+        '
+        Me.btnCancel.BackColor = System.Drawing.Color.Transparent
+        Me.btnCancel.Font = New System.Drawing.Font("Microsoft Sans Serif", 15.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(222, Byte))
+        Me.btnCancel.ForeColor = System.Drawing.Color.Transparent
+        Me.btnCancel.Location = New System.Drawing.Point(3, 7)
+        Me.btnCancel.Name = "btnCancel"
+        Me.btnCancel.Size = New System.Drawing.Size(110, 27)
+        Me.btnCancel.TabIndex = 3
+        Me.btnCancel.Text = "ยกเลิก"
+        Me.btnCancel.TextAlign = System.Drawing.ContentAlignment.BottomCenter
+        '
         'btnPointer
         '
         Me.btnPointer.BackColor = System.Drawing.Color.White
@@ -71,29 +94,6 @@ Partial Class frmMain
         '
         Me.TimerCheckAutoSleep.Enabled = True
         Me.TimerCheckAutoSleep.Interval = 60000
-        '
-        'pnlCancel
-        '
-        Me.pnlCancel.BackgroundImage = Global.AutoboxLocker.My.Resources.Resources.btnBG
-        Me.pnlCancel.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
-        Me.pnlCancel.Controls.Add(Me.btnCancel)
-        Me.pnlCancel.Location = New System.Drawing.Point(834, 2)
-        Me.pnlCancel.Name = "pnlCancel"
-        Me.pnlCancel.Size = New System.Drawing.Size(116, 44)
-        Me.pnlCancel.TabIndex = 4
-        Me.pnlCancel.Visible = False
-        '
-        'btnCancel
-        '
-        Me.btnCancel.BackColor = System.Drawing.Color.Transparent
-        Me.btnCancel.Font = New System.Drawing.Font("Microsoft Sans Serif", 15.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(222, Byte))
-        Me.btnCancel.ForeColor = System.Drawing.Color.Transparent
-        Me.btnCancel.Location = New System.Drawing.Point(3, 9)
-        Me.btnCancel.Name = "btnCancel"
-        Me.btnCancel.Size = New System.Drawing.Size(110, 27)
-        Me.btnCancel.TabIndex = 3
-        Me.btnCancel.Text = "ยกเลิก"
-        Me.btnCancel.TextAlign = System.Drawing.ContentAlignment.BottomCenter
         '
         'pnlHead
         '
