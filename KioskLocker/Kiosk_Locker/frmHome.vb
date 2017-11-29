@@ -71,6 +71,7 @@ Public Class frmHome
         If LockerList.DefaultView.Count = LockerQty Then
             'ถ้าช่องฝากทั้งหมด ไม่ว่างแล้ว
             pnlDeposit.BackgroundImage = My.Resources.IconDepositFull
+            pnlDeposit.BackgroundImageLayout = ImageLayout.Stretch
             RemoveHandler pnlDeposit.Click, AddressOf btnDeposit_Click
             RemoveHandler lblDeposit.Click, AddressOf btnDeposit_Click
             lblDeposit.Enabled = False
@@ -173,10 +174,11 @@ Public Class frmHome
         Dim ret As ExecuteDataInfo = CreateNewDepositTransaction()
         If ret.IsSuccess = True Then
             InsertLogTransactionActivity(Deposit.DepositTransNo, "", "", KioskLockerForm.Home, KioskLockerStep.Home_ClickDeposit, "", False)
+            Me.Close()
             frmDepositSelectLocker.Show()
             frmMain.btnPointer.Visible = False
             frmMain.TimerCheckOpenClose.Enabled = False
-            Me.Close()
+
             'frmDepositSelectLocker.BringToFront()
             Application.DoEvents()
             SendKioskAlarm("LOCKER_OUT_OF_SERVICE", False)
@@ -195,13 +197,12 @@ Public Class frmHome
         Dim ret As ExecuteDataInfo = CreateNewPickupTransaction()
         InsertLogTransactionActivity("", Collect.TransactionNo, "", KioskLockerForm.Home, KioskLockerStep.Home_ClickPickup, "เริ่มทำรายการรับคืน", False)
         If ret.IsSuccess = True Then
-            'frmCollectSelectDocument.MdiParent = frmMain
-            'frmCollectSelectDocument.Show()
+            Me.Close()
+
             frmCollectScanQRCode.MdiParent = frmMain
             frmCollectScanQRCode.Show()
             frmMain.btnPointer.Visible = False
             frmMain.TimerCheckOpenClose.Enabled = False
-            Me.Close()
             Application.DoEvents()
             SendKioskAlarm("LOCKER_OUT_OF_SERVICE", False)
         Else

@@ -18,6 +18,7 @@ Public Class frmCollectScanQRCode
     Private Sub frmPickupScanQRCode_Shown(sender As Object, e As EventArgs) Handles Me.Shown
         frmMain.pnlFooter.Visible = True
         frmMain.pnlCancel.Visible = True
+        Me.WindowState = FormWindowState.Maximized
 
         txtQRCode.Text = ""
         txtQRCode.Focus()
@@ -60,11 +61,12 @@ Public Class frmCollectScanQRCode
                 Collect.LostQRCode = "N"
                 UpdateCollectTransaction(Collect)
 
-                Application.DoEvents()
-                frmDepositPayment.Show()
-                frmDepositPayment.BringToFront()
-                frmLoading.Close()
                 Me.Close()
+                frmLoading.Close()
+                frmDepositPayment.Show()
+                'frmDepositPayment.BringToFront()
+
+                Application.DoEvents()
             Else
                 InsertLogTransactionActivity(Collect.DepositTransNo, Collect.TransactionNo, "", KioskConfig.SelectForm, KioskLockerStep.PickupScanQRCode_CheckDataQRCode, "QR Code ไม่ถูกต้อง Deposit Trans No=" & Collect.DepositTransNo, True)
                 txtQRCode.Text = ""
@@ -402,8 +404,8 @@ Public Class frmCollectScanQRCode
             Collect.LostQRCode = "Y"
             UpdateCollectTransaction(Collect)
 
-            frmDepositPayment.Show()
             Me.Close()
+            frmDepositPayment.Show()
             frmLoading.Close()
             Application.DoEvents()
             'frmDepositPayment.BringToFront()

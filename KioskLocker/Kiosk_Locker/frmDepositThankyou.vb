@@ -17,8 +17,7 @@ Public Class frmDepositThankyou
 
     Private Sub frmDepositThankyou_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         Me.ControlBox = False
-        Me.BackColor = bgColor
-        Me.WindowState = FormWindowState.Maximized
+
         'lblTimeOut.Text = TimeOut
         KioskConfig.SelectForm = KioskLockerForm.DepositThankYou
         'SetChildFormLanguage()
@@ -29,6 +28,7 @@ Public Class frmDepositThankyou
         CheckForIllegalCrossThreadCalls = False
         frmMain.pnlFooter.Visible = True
         frmMain.pnlCancel.Visible = False
+        Me.WindowState = FormWindowState.Maximized
         'Delete Temp QRCode
         If Directory.Exists(Application.StartupPath & "\QRCode") = True Then
             For Each f As String In Directory.GetFiles(Application.StartupPath & "\QRCode")

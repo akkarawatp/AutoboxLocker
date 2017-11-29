@@ -96,7 +96,7 @@ Partial Class frmCollectByPINCode
         '
         'btn1
         '
-        Me.btn1.Image = Global.AutoboxLocker.My.Resources.Resources.imgButtonNumber1
+        'Me.btn1.Image = Global.AutoboxLocker.My.Resources.Resources.imgButtonNumber1
         Me.btn1.Location = New System.Drawing.Point(609, 158)
         Me.btn1.Name = "btn1"
         Me.btn1.Size = New System.Drawing.Size(70, 70)
@@ -106,7 +106,7 @@ Partial Class frmCollectByPINCode
         '
         'btn2
         '
-        Me.btn2.Image = Global.AutoboxLocker.My.Resources.Resources.imgButtonNumber2
+        'Me.btn2.Image = Global.AutoboxLocker.My.Resources.Resources.imgButtonNumber2
         Me.btn2.Location = New System.Drawing.Point(688, 158)
         Me.btn2.Name = "btn2"
         Me.btn2.Size = New System.Drawing.Size(70, 70)
@@ -116,7 +116,7 @@ Partial Class frmCollectByPINCode
         '
         'btn3
         '
-        Me.btn3.Image = Global.AutoboxLocker.My.Resources.Resources.imgButtonNumber3
+        'Me.btn3.Image = Global.AutoboxLocker.My.Resources.Resources.imgButtonNumber3
         Me.btn3.Location = New System.Drawing.Point(767, 158)
         Me.btn3.Name = "btn3"
         Me.btn3.Size = New System.Drawing.Size(70, 70)
@@ -126,7 +126,7 @@ Partial Class frmCollectByPINCode
         '
         'btn6
         '
-        Me.btn6.Image = Global.AutoboxLocker.My.Resources.Resources.imgButtonNumber6
+        'Me.btn6.Image = Global.AutoboxLocker.My.Resources.Resources.imgButtonNumber6
         Me.btn6.Location = New System.Drawing.Point(767, 231)
         Me.btn6.Name = "btn6"
         Me.btn6.Size = New System.Drawing.Size(70, 70)
@@ -136,7 +136,7 @@ Partial Class frmCollectByPINCode
         '
         'btn5
         '
-        Me.btn5.Image = Global.AutoboxLocker.My.Resources.Resources.imgButtonNumber5
+        'Me.btn5.Image = Global.AutoboxLocker.My.Resources.Resources.imgButtonNumber5
         Me.btn5.Location = New System.Drawing.Point(688, 231)
         Me.btn5.Name = "btn5"
         Me.btn5.Size = New System.Drawing.Size(70, 70)
@@ -146,7 +146,7 @@ Partial Class frmCollectByPINCode
         '
         'btn4
         '
-        Me.btn4.Image = Global.AutoboxLocker.My.Resources.Resources.imgButtonNumber4
+        'Me.btn4.Image = Global.AutoboxLocker.My.Resources.Resources.imgButtonNumber4
         Me.btn4.Location = New System.Drawing.Point(609, 231)
         Me.btn4.Name = "btn4"
         Me.btn4.Size = New System.Drawing.Size(70, 70)
@@ -156,7 +156,7 @@ Partial Class frmCollectByPINCode
         '
         'btn9
         '
-        Me.btn9.Image = Global.AutoboxLocker.My.Resources.Resources.imgButtonNumber9
+        'Me.btn9.Image = Global.AutoboxLocker.My.Resources.Resources.imgButtonNumber9
         Me.btn9.Location = New System.Drawing.Point(767, 304)
         Me.btn9.Name = "btn9"
         Me.btn9.Size = New System.Drawing.Size(70, 70)
@@ -166,7 +166,7 @@ Partial Class frmCollectByPINCode
         '
         'btn8
         '
-        Me.btn8.Image = Global.AutoboxLocker.My.Resources.Resources.imgButtonNumber8
+        'Me.btn8.Image = Global.AutoboxLocker.My.Resources.Resources.imgButtonNumber8
         Me.btn8.Location = New System.Drawing.Point(688, 304)
         Me.btn8.Name = "btn8"
         Me.btn8.Size = New System.Drawing.Size(70, 70)
@@ -176,7 +176,7 @@ Partial Class frmCollectByPINCode
         '
         'btn7
         '
-        Me.btn7.Image = Global.AutoboxLocker.My.Resources.Resources.imgButtonNumber7
+        'Me.btn7.Image = Global.AutoboxLocker.My.Resources.Resources.imgButtonNumber7
         Me.btn7.Location = New System.Drawing.Point(609, 304)
         Me.btn7.Name = "btn7"
         Me.btn7.Size = New System.Drawing.Size(70, 70)
@@ -186,7 +186,7 @@ Partial Class frmCollectByPINCode
         '
         'btnBackSpace
         '
-        Me.btnBackSpace.Image = Global.AutoboxLocker.My.Resources.Resources.imgButtonOK
+        'Me.btnBackSpace.Image = Global.AutoboxLocker.My.Resources.Resources.imgButtonOK
         Me.btnBackSpace.Location = New System.Drawing.Point(767, 377)
         Me.btnBackSpace.Name = "btnBackSpace"
         Me.btnBackSpace.Size = New System.Drawing.Size(70, 70)
@@ -196,7 +196,7 @@ Partial Class frmCollectByPINCode
         '
         'btn0
         '
-        Me.btn0.Image = Global.AutoboxLocker.My.Resources.Resources.imgButtonNumber0
+        'Me.btn0.Image = Global.AutoboxLocker.My.Resources.Resources.imgButtonNumber0
         Me.btn0.Location = New System.Drawing.Point(688, 377)
         Me.btn0.Name = "btn0"
         Me.btn0.Size = New System.Drawing.Size(70, 70)
@@ -206,7 +206,7 @@ Partial Class frmCollectByPINCode
         '
         'btnClear
         '
-        Me.btnClear.Image = Global.AutoboxLocker.My.Resources.Resources.imgButtonClear
+        'Me.btnClear.Image = Global.AutoboxLocker.My.Resources.Resources.imgButtonClear
         Me.btnClear.Location = New System.Drawing.Point(609, 377)
         Me.btnClear.Name = "btnClear"
         Me.btnClear.Size = New System.Drawing.Size(70, 70)

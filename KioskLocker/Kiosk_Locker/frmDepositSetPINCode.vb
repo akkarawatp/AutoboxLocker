@@ -14,6 +14,7 @@ Public Class frmDepositSetPINCode
     End Sub
     Private Sub frmDepositSetPINCode_Shown(sender As Object, e As EventArgs) Handles Me.Shown
         Me.WindowState = FormWindowState.Maximized
+        frmMain.CloseAllChildForm(Me)
         frmMain.pnlFooter.Visible = True
         frmMain.pnlCancel.Visible = True
         lblLabelNotification.Text = DefaultNotictText
@@ -58,18 +59,14 @@ Public Class frmDepositSetPINCode
             lblLabelNotification.Text = "กรุณายืนยันรหัสส่วนตัว"
         Else
             If Deposit.PinCode = TmpPinCode Then
-                frmLoading.Show(frmMain)
-
                 'ไปหน้าจอชำระเงินโลด
                 InsertLogTransactionActivity(Deposit.DepositTransNo, "", "", KioskConfig.SelectForm, KioskLockerStep.DepositSetPinCode_ConfirmPinCodeSuccess, "", False)
+                Me.Close()
 
                 frmDepositPayment.MdiParent = frmMain
                 frmDepositPayment.Show()
-                frmLoading.Close()
                 Application.DoEvents()
-
-                Me.Close()
-
+                Threading.Thread.Sleep(1000)
             Else
                 'ยืนยันรหัสส่วนตัวไม่ตรงกัน ให้เริ่มขั้นตอนใหม่
                 TimeOutCheckTime = DateTime.Now
@@ -138,6 +135,8 @@ Public Class frmDepositSetPINCode
 
     Dim TmpPinCode As String = ""
     Private Sub InsertNumber(ByVal Num As Int16)
+        If TmpPinCode.Length >= KioskConfig.PincodeLen Then Exit Sub
+
         TmpPinCode = TmpPinCode & Num
         TimeOutCheckTime = DateTime.Now
 
@@ -218,6 +217,16 @@ Public Class frmDepositSetPINCode
         txtPincode5.Text = ""
         txtPincode6.Text = ""
         TimeOutCheckTime = DateTime.Now
+    End Sub
+
+    Private Sub btn_MouseDown(sender As Object, e As MouseEventArgs) Handles btn0.MouseDown, btn1.MouseDown, btn2.MouseDown, btn3.MouseDown, btn4.MouseDown, btn5.MouseDown, btn6.MouseDown, btn7.MouseDown, btn8.MouseDown, btn9.MouseDown
+        Dim btn As PictureBox = sender
+        btn.BackColor = Color.Gray
+    End Sub
+
+    Private Sub btn_MouseUp(sender As Object, e As MouseEventArgs) Handles btn0.MouseUp, btn1.MouseUp, btn2.MouseUp, btn3.MouseUp, btn4.MouseUp, btn5.MouseUp, btn6.MouseUp, btn7.MouseUp, btn8.MouseUp, btn9.MouseUp
+        Dim btn As PictureBox = sender
+        btn.BackColor = Color.Transparent
     End Sub
 #End Region
 

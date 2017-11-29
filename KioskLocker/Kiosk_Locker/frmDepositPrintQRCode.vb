@@ -15,9 +15,6 @@ Public Class frmDepositPrintQRCode
 
     Private Sub frmDepositPrintQRCode_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         Me.ControlBox = False
-        Me.BackColor = bgColor
-        Me.WindowState = FormWindowState.Maximized
-
         CheckForIllegalCrossThreadCalls = False
         lblTimeOut.Text = TimeOut
         KioskConfig.SelectForm = KioskLockerForm.DepositPrintQRCode
@@ -27,8 +24,8 @@ Public Class frmDepositPrintQRCode
     Private Sub frmDepositPrintQRCode_Shown(sender As Object, e As EventArgs) Handles Me.Shown
         frmMain.pnlFooter.Visible = True
         frmMain.pnlCancel.Visible = False
-        '
-
+        Me.WindowState = FormWindowState.Maximized
+        Application.DoEvents()
         InsertLogTransactionActivity(Deposit.DepositTransNo, "", "", KioskConfig.SelectForm, KioskLockerStep.DepositPrintQRCode_OpenForm, "", False)
     End Sub
 
@@ -44,13 +41,11 @@ Public Class frmDepositPrintQRCode
                 ChangeMoney(Deposit.ChangeAmount, Deposit, Collect)
             End If
 
-
             InsertLogTransactionActivity(Deposit.DepositTransNo, "", "", KioskConfig.SelectForm, KioskLockerStep.DepositPrintQRCode_LEDBlinkOn, Deposit.LockerName, False)
             BoardLED.LEDBlinkOn(Deposit.LockerPinLED)
 
             Application.DoEvents()
             CheckTimeOpenLocker()
-
         Catch ex As Exception
             InsertLogTransactionActivity(Deposit.DepositTransNo, "", "", KioskConfig.SelectForm, KioskLockerStep.DepositPrintQRCode_PrintSlip, "Update Status ไม่สำเร็จ คืนเงินให้ลูกค้า " & (Deposit.PaidAmount - Deposit.ChangeAmount) & " บาท", True)
             UpdateDepositStatus(Deposit.DepositTransactionID, DepositTransactionData.TransactionStatus.Problem, KioskLockerStep.DepositPrintQRCode_ChangeMoney)
@@ -64,9 +59,9 @@ Public Class frmDepositPrintQRCode
     Private Sub CheckTimeOpenLocker()
         '    'หน่วงเวลาตาม Timeout
         Threading.Thread.Sleep(TimeOut * 1000)
+        Me.Close()
         frmDepositThankyou.MdiParent = frmMain
         frmDepositThankyou.Show()
-        Me.Close()
     End Sub
 
 #Region "Print With PrintDocument"

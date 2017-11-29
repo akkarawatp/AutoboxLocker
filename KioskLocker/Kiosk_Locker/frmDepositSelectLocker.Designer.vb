@@ -23,10 +23,10 @@ Partial Class frmDepositSelectLocker
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
-        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmDepositSelectLocker))
         Me.pnlCabinetLayout = New System.Windows.Forms.Panel()
         Me.pnlLayoutPC = New System.Windows.Forms.Panel()
         Me.PictureBox2 = New System.Windows.Forms.PictureBox()
+        Me.TimerTimeOut = New System.Windows.Forms.Timer(Me.components)
         Me.UcCabinet10 = New AutoboxLocker.ucCabinet()
         Me.UcCabinet9 = New AutoboxLocker.ucCabinet()
         Me.UcCabinet8 = New AutoboxLocker.ucCabinet()
@@ -37,20 +37,15 @@ Partial Class frmDepositSelectLocker
         Me.UcCabinet3 = New AutoboxLocker.ucCabinet()
         Me.UcCabinet2 = New AutoboxLocker.ucCabinet()
         Me.UcCabinet1 = New AutoboxLocker.ucCabinet()
-        Me.lblTitle = New System.Windows.Forms.Label()
-        Me.lblAvailable = New System.Windows.Forms.Label()
-        Me.lblNotAvailable = New System.Windows.Forms.Label()
-        Me.TimerTimeOut = New System.Windows.Forms.Timer(Me.components)
-        Me.PictureBox1 = New System.Windows.Forms.PictureBox()
         Me.pnlCabinetLayout.SuspendLayout()
         Me.pnlLayoutPC.SuspendLayout()
         CType(Me.PictureBox2, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'pnlCabinetLayout
         '
         Me.pnlCabinetLayout.Anchor = System.Windows.Forms.AnchorStyles.Top
+        Me.pnlCabinetLayout.BackgroundImage = Global.AutoboxLocker.My.Resources.Resources.bgLayoutSelectLocker
         Me.pnlCabinetLayout.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
         Me.pnlCabinetLayout.Controls.Add(Me.pnlLayoutPC)
         Me.pnlCabinetLayout.Controls.Add(Me.UcCabinet10)
@@ -63,7 +58,7 @@ Partial Class frmDepositSelectLocker
         Me.pnlCabinetLayout.Controls.Add(Me.UcCabinet3)
         Me.pnlCabinetLayout.Controls.Add(Me.UcCabinet2)
         Me.pnlCabinetLayout.Controls.Add(Me.UcCabinet1)
-        Me.pnlCabinetLayout.Location = New System.Drawing.Point(97, 240)
+        Me.pnlCabinetLayout.Location = New System.Drawing.Point(97, 179)
         Me.pnlCabinetLayout.Name = "pnlCabinetLayout"
         Me.pnlCabinetLayout.Size = New System.Drawing.Size(824, 392)
         Me.pnlCabinetLayout.TabIndex = 45
@@ -87,6 +82,10 @@ Partial Class frmDepositSelectLocker
         Me.PictureBox2.Size = New System.Drawing.Size(62, 31)
         Me.PictureBox2.TabIndex = 0
         Me.PictureBox2.TabStop = False
+        '
+        'TimerTimeOut
+        '
+        Me.TimerTimeOut.Interval = 1000
         '
         'UcCabinet10
         '
@@ -258,76 +257,23 @@ Partial Class frmDepositSelectLocker
         Me.UcCabinet1.Size = New System.Drawing.Size(75, 380)
         Me.UcCabinet1.TabIndex = 0
         '
-        'lblTitle
-        '
-        Me.lblTitle.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.lblTitle.Font = New System.Drawing.Font("Thai Sans Lite", 48.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(222, Byte))
-        Me.lblTitle.Location = New System.Drawing.Point(11, 80)
-        Me.lblTitle.Name = "lblTitle"
-        Me.lblTitle.Size = New System.Drawing.Size(1000, 80)
-        Me.lblTitle.TabIndex = 46
-        Me.lblTitle.Text = "เลือกช่องฝากสัมภาระ"
-        Me.lblTitle.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        '
-        'lblAvailable
-        '
-        Me.lblAvailable.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.lblAvailable.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.lblAvailable.Font = New System.Drawing.Font("Thai Sans Lite", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(222, Byte))
-        Me.lblAvailable.Location = New System.Drawing.Point(927, 245)
-        Me.lblAvailable.Name = "lblAvailable"
-        Me.lblAvailable.Size = New System.Drawing.Size(57, 34)
-        Me.lblAvailable.TabIndex = 48
-        Me.lblAvailable.Text = "ตู้ว่าง"
-        Me.lblAvailable.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        '
-        'lblNotAvailable
-        '
-        Me.lblNotAvailable.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.lblNotAvailable.BackColor = System.Drawing.Color.FromArgb(CType(CType(232, Byte), Integer), CType(CType(88, Byte), Integer), CType(CType(88, Byte), Integer))
-        Me.lblNotAvailable.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.lblNotAvailable.Font = New System.Drawing.Font("Thai Sans Lite", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(222, Byte))
-        Me.lblNotAvailable.ForeColor = System.Drawing.Color.White
-        Me.lblNotAvailable.Location = New System.Drawing.Point(927, 285)
-        Me.lblNotAvailable.Name = "lblNotAvailable"
-        Me.lblNotAvailable.Size = New System.Drawing.Size(57, 34)
-        Me.lblNotAvailable.TabIndex = 50
-        Me.lblNotAvailable.Text = "ไม่ว่าง"
-        Me.lblNotAvailable.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        '
-        'TimerTimeOut
-        '
-        Me.TimerTimeOut.Interval = 1000
-        '
-        'PictureBox1
-        '
-        Me.PictureBox1.Image = CType(resources.GetObject("PictureBox1.Image"), System.Drawing.Image)
-        Me.PictureBox1.Location = New System.Drawing.Point(48, 80)
-        Me.PictureBox1.Name = "PictureBox1"
-        Me.PictureBox1.Size = New System.Drawing.Size(202, 80)
-        Me.PictureBox1.TabIndex = 96
-        Me.PictureBox1.TabStop = False
-        '
         'frmDepositSelectLocker
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.White
+        Me.BackgroundImage = Global.AutoboxLocker.My.Resources.Resources.bgDepositSelectLocker
+        Me.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
         Me.ClientSize = New System.Drawing.Size(1024, 768)
-        Me.Controls.Add(Me.lblAvailable)
-        Me.Controls.Add(Me.PictureBox1)
-        Me.Controls.Add(Me.lblNotAvailable)
-        Me.Controls.Add(Me.lblTitle)
         Me.Controls.Add(Me.pnlCabinetLayout)
         Me.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(222, Byte))
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None
         Me.Margin = New System.Windows.Forms.Padding(4)
         Me.Name = "frmDepositSelectLocker"
+        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent
         Me.pnlCabinetLayout.ResumeLayout(False)
         Me.pnlLayoutPC.ResumeLayout(False)
         CType(Me.PictureBox2, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
     End Sub
@@ -343,10 +289,6 @@ Partial Class frmDepositSelectLocker
     Friend WithEvents UcCabinet2 As ucCabinet
     Friend WithEvents pnlLayoutPC As Panel
     Friend WithEvents UcCabinet1 As ucCabinet
-    Friend WithEvents lblTitle As Label
-    Friend WithEvents lblAvailable As Label
-    Friend WithEvents lblNotAvailable As Label
     Friend WithEvents TimerTimeOut As Timer
-    Friend WithEvents PictureBox1 As PictureBox
     Friend WithEvents PictureBox2 As PictureBox
 End Class

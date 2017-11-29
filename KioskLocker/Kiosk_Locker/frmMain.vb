@@ -88,6 +88,10 @@ Public Class frmMain
         fHome.Show()
     End Sub
 
+    Public Sub ShowChildForm(frm As Form)
+        frm.Show()
+    End Sub
+
 
 #Region "Start Device"
     Private Sub StartInitialDevice()

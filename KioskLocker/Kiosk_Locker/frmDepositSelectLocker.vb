@@ -19,12 +19,9 @@ Public Class frmDepositSelectLocker
         'หน้าจอ เลือกช่องฝากใช้สำหรับกรณี
         'ลูกค้าทำรายการฝาก
         'Staff Console ทำรายการรับคืนเพื่อเปิดตู้ให้ลูกค้า
-
         frmMain.pnlFooter.Visible = True
         frmMain.pnlCancel.Visible = True
         Me.WindowState = FormWindowState.Maximized
-        frmMain.CloseAllChildForm(Me)
-
 
         Application.DoEvents()
         If ServiceID = Data.ConstantsData.TransactionType.DepositBelonging Then
@@ -168,11 +165,11 @@ Public Class frmDepositSelectLocker
 
                 'เลือกช่องฝากแล้วก็ Update Transaction โลด
                 If UpdateServiceTransaction(Deposit).IsSuccess = True Then
+                    Me.Close()
+
                     frmDepositSetPINCode.MdiParent = frmMain
                     frmDepositSetPINCode.Show()
                     frmLoading.Close()
-
-                    Me.Close()
                 End If
 
             ElseIf f.LockerAvailable = ucLockerInfo.AvailableStatus.NotAvailable AndAlso f.LockerAvailable = ucLockerInfo.AvailableStatus.NoActive Then

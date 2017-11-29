@@ -159,12 +159,6 @@
     <Compile Include="frmLoading.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="frmCollectSelectDocument.Designer.vb">
-      <DependentUpon>frmCollectSelectDocument.vb</DependentUpon>
-    </Compile>
-    <Compile Include="frmCollectSelectDocument.vb">
-      <SubType>Form</SubType>
-    </Compile>
     <Compile Include="frmCollectThankyou.Designer.vb">
       <DependentUpon>frmCollectThankyou.vb</DependentUpon>
     </Compile>
@@ -336,9 +330,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="frmLoading.resx">
       <DependentUpon>frmLoading.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="frmCollectSelectDocument.resx">
-      <DependentUpon>frmCollectSelectDocument.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmCollectThankyou.resx">
       <DependentUpon>frmCollectThankyou.vb</DependentUpon>
@@ -567,9 +558,6 @@
     <None Include="Resources\bgMainHeader.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\IconDeposit.png" />
-  </ItemGroup>
-  <ItemGroup>
     <None Include="Resources\IconPrintQRCode.png" />
   </ItemGroup>
   <ItemGroup>
@@ -590,6 +578,16 @@
   <ItemGroup>
     <Content Include="LogoIcon.ico" />
     <Content Include="Logo.ico" />
+    <None Include="Resources\bgCollectThankyou.png" />
+    <None Include="Resources\bgCollectScanQRCode.png" />
+    <None Include="Resources\bgDepositThankyou.png" />
+    <None Include="Resources\bgDepositPrintQRCode.png" />
+    <None Include="Resources\frmDepositPrintQRCode.png" />
+    <None Include="Resources\bgCollectPayment.png" />
+    <None Include="Resources\bgDepositPayment.png" />
+    <None Include="Resources\bgDepositSetPINCode.png" />
+    <None Include="Resources\bgDepositSelectLocker.png" />
+    <None Include="Resources\bgHome.png" />
     <None Include="Resources\IconLockerControl.png" />
     <None Include="Resources\pbIconCloseLocker.png" />
     <None Include="Resources\imgCollectSelectDocument.png" />
@@ -609,10 +607,6 @@
     <None Include="Resources\imgButtonNumber1.png" />
     <None Include="Resources\imgButtonNumber0.png" />
     <None Include="Resources\imgButtonClear.png" />
-    <None Include="Resources\btnDeposit.png" />
-    <None Include="Resources\btnCollect.png" />
-    <None Include="Resources\IconCollect.png" />
-    <None Include="Resources\IconCollectThankYou.png" />
     <None Include="Resources\IconRedTriangle.png" />
     <None Include="Resources\IconDepositFull.png" />
     <None Include="Resources\IconRods.png" />

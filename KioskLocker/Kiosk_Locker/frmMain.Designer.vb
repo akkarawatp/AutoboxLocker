@@ -103,7 +103,7 @@ Partial Class frmMain
         Me.pnlHead.Location = New System.Drawing.Point(0, 0)
         Me.pnlHead.Margin = New System.Windows.Forms.Padding(0)
         Me.pnlHead.Name = "pnlHead"
-        Me.pnlHead.Size = New System.Drawing.Size(1024, 50)
+        Me.pnlHead.Size = New System.Drawing.Size(1024, 20)
         Me.pnlHead.TabIndex = 45
         '
         'frmMain

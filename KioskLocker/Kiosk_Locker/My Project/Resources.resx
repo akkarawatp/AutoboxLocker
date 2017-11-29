@@ -118,20 +118,11 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="IconDeposit" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\IconDeposit.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
   <data name="CompleteDialog" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\CompleteDialog.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="icon_cabinet_add" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\icon_cabinet_add.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="IconPrintQRCode" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\IconPrintQRCode.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="IconPayment" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\IconPayment.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="icon_cabinet_delete" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\icon_cabinet_delete.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -151,65 +142,11 @@
   <data name="IconPickupTime" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\IconPickupTime.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="IconDepositFull" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\IconDepositFull.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="IconRods" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\IconRods.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
   <data name="IconProcessing" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\IconProcessing.gif;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="IconClose" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\IconClose.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="IconCollectThankYou" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\IconCollectThankYou.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="btnCollect" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\btnCollect.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="btnDeposit" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\btnDeposit.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="IconCollect" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\IconCollect.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="imgButtonClear" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\imgButtonClear.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="imgButtonNumber0" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\imgButtonNumber0.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="imgButtonNumber1" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\imgButtonNumber1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="imgButtonNumber2" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\imgButtonNumber2.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="imgButtonNumber3" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\imgButtonNumber3.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="imgButtonNumber4" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\imgButtonNumber4.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="imgButtonNumber5" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\imgButtonNumber5.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="imgButtonNumber6" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\imgButtonNumber6.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="imgButtonNumber7" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\imgButtonNumber7.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="imgButtonNumber8" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\imgButtonNumber8.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="imgButtonNumber9" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\imgButtonNumber9.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="imgButtonOK" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\imgButtonOK.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="logo" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\logo.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -219,9 +156,6 @@
   </data>
   <data name="imgTextPincode" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\imgTextPincode.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="imgHorizontalLine" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\imgHorizontalLine.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="btnBG" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\btnBG.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -240,5 +174,35 @@
   </data>
   <data name="IconLockerControl" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\IconLockerControl.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="bgHome" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\bgHome.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="IconDepositFull" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\IconDepositFull.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="bgDepositSelectLocker" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\bgDepositSelectLocker.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="bgDepositSetPINCode" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\bgDepositSetPINCode.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="bgDepositPayment" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\bgDepositPayment.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="bgCollectPayment" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\bgCollectPayment.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="bgDepositPrintQRCode" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\bgDepositPrintQRCode.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="bgDepositThankyou" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\bgDepositThankyou.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="bgCollectScanQRCode" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\bgCollectScanQRCode.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="bgCollectThankyou" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\bgCollectThankyou.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>

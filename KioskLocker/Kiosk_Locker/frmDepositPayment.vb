@@ -48,7 +48,7 @@ Public Class frmDepositPayment
         frmMain.pnlFooter.Visible = True
         frmMain.pnlCancel.Visible = True
         CheckForIllegalCrossThreadCalls = False
-
+        frmLoading.Show(frmMain)
         SetPaymentInformation()
         Application.DoEvents()
 
@@ -61,13 +61,10 @@ Public Class frmDepositPayment
 
         If ServiceID = TransactionType.DepositBelonging Then
             InsertLogTransactionActivity(Deposit.DepositTransNo, "", "", KioskConfig.SelectForm, KioskLockerStep.DepositPayment_OpenForm, "ค่ามัดจำ " & Deposit.DepositAmount & " บาท", False)
-
         ElseIf ServiceID = TransactionType.CollectBelonging Then
             InsertLogTransactionActivity(Collect.DepositTransNo, Collect.TransactionNo, StaffConsole.TransNo, KioskConfig.SelectForm, KioskLockerStep.PickupPayment_OpenForm, "ค่าบริการ " & Collect.ServiceAmount & " บาท ค่ามัดจำ " & Collect.DepositAmount & " บาท", False)
-
         End If
-
-
+        frmLoading.Close()
     End Sub
 
 #Region "Initial Form Show"
@@ -78,13 +75,12 @@ Public Class frmDepositPayment
             If ServiceID = ConstantsData.TransactionType.CollectBelonging Then
                 'Dim t As New Thread(Sub() CollectCaptureImage()) 'ถ่ายรูปตอนรับคืน
                 't.Start()
+                Me.BackgroundImage = My.Resources.bgCollectPayment
+                Application.DoEvents()
+
                 CollectCaptureImage()
 
                 'จัดตำแหน่ง Control ในกรณีรับคืน
-                lblTitle.Text = "ชำระค่าบริการ"
-                lblSubTitle.Visible = True
-                lblLabelLockerName.Text = "ช่องเก็บสัมภาระของคุณ"
-                lblPleasePaid.Text = "ค่าบริการที่ต้องชำระ"
                 lblLockerName.Text = Collect.LockerName
                 If Collect.DepositAmount >= Collect.ServiceAmount Then
                     'ถ้าค่ามัดจำ มากกว่าค่าบริการ
@@ -540,10 +536,10 @@ Public Class frmDepositPayment
         tmPaymentTimeOut.Enabled = False
         tmPaymentTimeOut.Stop()
 
-        frmDepositPrintQRCode.Show()
-        Application.DoEvents()
-        frmDepositPrintQRCode.PaymentCompletePrintQRCode()
         Me.Close()
+        frmDepositPrintQRCode.Show()
+        frmDepositPrintQRCode.PaymentCompletePrintQRCode()
+        Application.DoEvents()
 
     End Sub
 
@@ -561,7 +557,6 @@ Public Class frmDepositPayment
         tmPaymentTimeOut.Enabled = False
         tmPaymentTimeOut.Stop()
 
-        lblPleasePaid.Visible = False
         frmMain.pnlCancel.Visible = False
         Collect.PaidTime = DateTime.Now
         UpdateCollectTransaction(Collect)
@@ -678,6 +673,4 @@ Public Class frmDepositPayment
     Private Sub btn1_Click(sender As Object, e As EventArgs) Handles btn1.Click
         CoinInDataReceived("ReceiveCoin 1")
     End Sub
-
-
 End Class
