@@ -53,8 +53,8 @@ Public Class frmHome
         'SetChildFormLanguage()
         SetLabelNotificationText()
 
-        pnlDeposit.Enabled = True
-        pnlCollect.Enabled = True
+        lblDeposit.Enabled = True
+        lblCollect.Enabled = True
 
         frmLoading.Close()
     End Sub
@@ -70,9 +70,8 @@ Public Class frmHome
         LockerList.DefaultView.RowFilter = "current_available='N' and active_status='Y'"
         If LockerList.DefaultView.Count = LockerQty Then
             'ถ้าช่องฝากทั้งหมด ไม่ว่างแล้ว
-            pnlDeposit.BackgroundImage = My.Resources.IconDepositFull
-            pnlDeposit.BackgroundImageLayout = ImageLayout.Stretch
-            RemoveHandler pnlDeposit.Click, AddressOf btnDeposit_Click
+            lblDeposit.Image = My.Resources.IconDepositFull
+            RemoveHandler lblDeposit.Click, AddressOf btnDeposit_Click
             RemoveHandler lblDeposit.Click, AddressOf btnDeposit_Click
             lblDeposit.Enabled = False
             IsStorageFull = True
@@ -162,7 +161,7 @@ Public Class frmHome
     End Sub
 
 #Region "Deposit"
-    Private Sub btnDeposit_Click(sender As Object, e As EventArgs) Handles pnlDeposit.Click, lblDeposit.Click
+    Private Sub btnDeposit_Click(sender As Object, e As EventArgs) Handles lblDeposit.Click
         If LockerList.Rows.Count = 0 Then
             InsertErrorLog("Locker Information not found", 0, 0, 0, KioskConfig.SelectForm, KioskLockerStep.Home_ClickDeposit)
             SendKioskAlarm("LOCKER_OUT_OF_SERVICE", True)
@@ -193,7 +192,7 @@ Public Class frmHome
 #End Region
 
 #Region "Collect"
-    Private Sub pnlCollect_Click(sender As Object, e As EventArgs) Handles pnlCollect.Click, lblPickup.Click
+    Private Sub pnlCollect_Click(sender As Object, e As EventArgs) Handles lblCollect.Click
         Dim ret As ExecuteDataInfo = CreateNewPickupTransaction()
         InsertLogTransactionActivity("", Collect.TransactionNo, "", KioskLockerForm.Home, KioskLockerStep.Home_ClickPickup, "เริ่มทำรายการรับคืน", False)
         If ret.IsSuccess = True Then

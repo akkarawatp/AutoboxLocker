@@ -1,6 +1,4 @@
 ﻿Imports AutoboxLocker.Data.KioskConfigData
-Imports AutoboxLocker.ServiceTransactionData
-Imports KioskLinqDB.ConnectDB
 Imports KioskLinqDB.TABLE
 Public Class frmSC_FillPaper
 
@@ -15,6 +13,8 @@ Public Class frmSC_FillPaper
     End Sub
 
     Private Sub frmSC_FillPaper_Shown(sender As Object, e As EventArgs) Handles Me.Shown
+        Me.WindowState = FormWindowState.Maximized
+        frmSC_Main.lblTitle.Text = "FILL PAPER"
         InsertLogTransactionActivity(StaffConsole.TransNo, KioskConfig.SelectForm, KioskLockerStep.StaffConsoleFillPaper_OpenForm, "", False)
         txtValue.Focus()
 
@@ -31,8 +31,6 @@ Public Class frmSC_FillPaper
         lnq = Nothing
 
         txtMax.Text = Max
-        ChangeColor()
-
         InsertLogTransactionActivity(StaffConsole.TransNo, KioskConfig.SelectForm, KioskLockerStep.StaffConsoleFillPaper_CheckAuthorize, "", False)
         SetStaffConsoleAuthorize()
     End Sub
@@ -63,33 +61,14 @@ Public Class frmSC_FillPaper
         End If
     End Sub
 
-    Private Sub txtValue_KeyUp(sender As Object, e As KeyEventArgs) Handles txtValue.KeyUp
-        ChangeColor()
-    End Sub
-
-    Private Sub ChangeColor()
-        If txtValue.Text = "" Then
-            txtValue.BackColor = Color.White
-            Exit Sub
-        End If
-        If CInt(txtValue.Text) <= Critical Then
-            txtValue.BackColor = Color.Red
-        ElseIf CInt(txtValue.Text) <= Warning Then
-            txtValue.BackColor = Color.Yellow
-        Else
-            txtValue.BackColor = Color.Green
-        End If
-    End Sub
-
-    Private Sub lblCancel_Click(sender As Object, e As EventArgs) Handles lblCancel.Click, btnCancel.Click
+    Private Sub lblCancel_Click(sender As Object, e As EventArgs) Handles btnCancel.Click
         InsertLogTransactionActivity(StaffConsole.TransNo, KioskConfig.SelectForm, KioskLockerStep.StaffConsoleFillPaper_ClickCancel, "", False)
         Me.Close()
-        frmMain.CloseAllChildForm()
-        Dim f As New frmSC_StockAndHardware
-        f.ShowDialog(frmMain)
+        frmSC_StockAndHardware.MdiParent = frmSC_Main
+        frmSC_StockAndHardware.Show()
     End Sub
 
-    Private Sub lblConfirm_Click(sender As Object, e As EventArgs) Handles lblConfirm.Click, btnConfirm.Click
+    Private Sub lblConfirm_Click(sender As Object, e As EventArgs) Handles btnConfirm.Click
         InsertLogTransactionActivity(StaffConsole.TransNo, KioskConfig.SelectForm, KioskLockerStep.StaffConsoleFillPaper_ClickConfirm, "", False)
 
         If txtValue.Text = "" Then
@@ -101,12 +80,10 @@ Public Class frmSC_FillPaper
         End If
 
         UpdateKioskCurrentQty(Data.ConstantsData.DeviceID.Printer, CInt(txtValue.Text), 0, True)
-
         ShowDialogErrorMessageSC("Fill Paper Success")
-        frmMain.CloseAllChildForm()
         Me.Close()
-        Dim f As New frmSC_StockAndHardware
-        f.ShowDialog(frmMain)
+        frmSC_StockAndHardware.MdiParent = frmSC_Main
+        frmSC_StockAndHardware.Show()
     End Sub
 
 

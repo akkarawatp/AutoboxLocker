@@ -16,6 +16,8 @@ Public Class frmSC_StockAndHardware
     End Sub
 
     Private Sub frmSC_StockAndHardware_Shown(sender As Object, e As EventArgs) Handles Me.Shown
+        Me.WindowState = FormWindowState.Maximized
+        frmSC_Main.lblTitle.Text = "DASHBOARD"
         Application.DoEvents()
 
         InsertLogTransactionActivity(StaffConsole.TransNo, KioskConfig.SelectForm, KioskLockerStep.StaffConsoleStockAndHardware_GetKioskConfig, "", False)
@@ -29,9 +31,9 @@ Public Class frmSC_StockAndHardware
         InsertLogTransactionActivity(StaffConsole.TransNo, KioskConfig.SelectForm, KioskLockerStep.StaffConsoleStockAndHardware_CheckAuthorize, "", False)
         CheckStaffConsoleAuthorization()
 
-        frmDepositSelectLocker.MdiParent = frmMain
-        frmDepositSelectLocker.LoadLockerList()
-        InsertLogTransactionActivity(StaffConsole.TransNo, KioskConfig.SelectForm, KioskLockerStep.StaffConsoleLoadLockList_LoadLockerList, "", False)
+        'frmDepositSelectLocker.MdiParent = frmMain
+        'frmDepositSelectLocker.LoadLockerList()
+        'InsertLogTransactionActivity(StaffConsole.TransNo, KioskConfig.SelectForm, KioskLockerStep.StaffConsoleLoadLockList_LoadLockerList, "", False)
     End Sub
 
     Private Sub CheckStaffConsoleAuthorization()
@@ -39,49 +41,49 @@ Public Class frmSC_StockAndHardware
             'Fill Paper
             StaffConsole.AuthorizeInfo.DefaultView.RowFilter = "ms_functional_id=16"
             If StaffConsole.AuthorizeInfo.DefaultView.Count = 0 Then
-                btnFillPaper.Visible = False
+                lblFillPaper.Visible = False
             End If
             StaffConsole.AuthorizeInfo.DefaultView.RowFilter = ""
 
             'Fill Money
             StaffConsole.AuthorizeInfo.DefaultView.RowFilter = "ms_functional_id=17"
             If StaffConsole.AuthorizeInfo.DefaultView.Count = 0 Then
-                btnFillMoney.Visible = False
+                lblFillMoney.Visible = False
             End If
             StaffConsole.AuthorizeInfo.DefaultView.RowFilter = ""
 
             'Kiosk Setting
             StaffConsole.AuthorizeInfo.DefaultView.RowFilter = "ms_functional_id=18"
             If StaffConsole.AuthorizeInfo.DefaultView.Count = 0 Then
-                btnKioskSetting.Visible = False
+                lblKioskSetting.Visible = False
             End If
             StaffConsole.AuthorizeInfo.DefaultView.RowFilter = ""
 
             'Device Setting
             StaffConsole.AuthorizeInfo.DefaultView.RowFilter = "ms_functional_id=19"
             If StaffConsole.AuthorizeInfo.DefaultView.Count = 0 Then
-                btnDeviceSetting.Visible = False
+                lblDeviceSetting.Visible = False
             End If
             StaffConsole.AuthorizeInfo.DefaultView.RowFilter = ""
 
             'Locker Setting
             StaffConsole.AuthorizeInfo.DefaultView.RowFilter = "ms_functional_id=20"
             If StaffConsole.AuthorizeInfo.DefaultView.Count = 0 Then
-                btnLockerSetting.Visible = False
+                lblLockerSetting.Visible = False
             End If
             StaffConsole.AuthorizeInfo.DefaultView.RowFilter = ""
 
             'Open All
             StaffConsole.AuthorizeInfo.DefaultView.RowFilter = "ms_functional_id=21"
             If StaffConsole.AuthorizeInfo.DefaultView.Count = 0 Then
-                btnOpenAll.Visible = False
+                lblOpenAll.Visible = False
             End If
             StaffConsole.AuthorizeInfo.DefaultView.RowFilter = ""
 
             'Collect
             StaffConsole.AuthorizeInfo.DefaultView.RowFilter = "ms_functional_id=29"
             If StaffConsole.AuthorizeInfo.DefaultView.Count = 0 Then
-                btnCollect.Visible = False
+                lblCollect.Visible = False
             End If
             StaffConsole.AuthorizeInfo.DefaultView.RowFilter = ""
         End If
@@ -129,7 +131,7 @@ Public Class frmSC_StockAndHardware
                 Else
                     SetForm(frm, IconRed, FormColor.Red, DeviceName, StatusName)
                 End If
-                flpHWStatus.Controls.Add(frm)
+                'flpHWStatus.Controls.Add(frm)
 
                 'Material Stock
                 frm = New ucfrmStatus
@@ -183,7 +185,7 @@ Public Class frmSC_StockAndHardware
                             End If
                         End If
                     End If
-                    flpM_Stock.Controls.Add(frm)
+                    'flpM_Stock.Controls.Add(frm)
                 End If
             Next
         End If
@@ -213,7 +215,7 @@ Public Class frmSC_StockAndHardware
 
     End Sub
 
-    Private Sub pbClose_Click(sender As Object, e As EventArgs) Handles pbClose.Click
+    Private Sub pbClose_Click(sender As Object, e As EventArgs)
         ServiceID = 0
         InsertLogTransactionActivity(StaffConsole.TransNo, Data.KioskConfigData.KioskLockerForm.StaffConsoleStoakAndHardware, KioskLockerStep.StaffConsoleStockAndHardware_ClickClose, "", False)
         frmMain.CloseAllChildForm()
@@ -226,20 +228,19 @@ Public Class frmSC_StockAndHardware
 
     Private Sub lblFillPaper_Click(sender As Object, e As EventArgs) Handles lblFillPaper.Click, btnFillPaper.Click
         InsertLogTransactionActivity(StaffConsole.TransNo, KioskConfig.SelectForm, KioskLockerStep.StaffConsoleStockAndHardware_ClickFillPaper, "", False)
+        Me.Close()
+        frmSC_FillPaper.MdiParent = frmSC_Main
+        frmSC_FillPaper.Show()
 
-        Me.Hide()
-        frmMain.CloseAllChildForm()
-        Dim f As New frmSC_FillPaper
-        f.ShowDialog(frmMain)
+        Application.DoEvents()
     End Sub
 
     Private Sub lblFillMoney_Click(sender As Object, e As EventArgs) Handles lblFillMoney.Click, btnFillMoney.Click
         InsertLogTransactionActivity(StaffConsole.TransNo, KioskConfig.SelectForm, KioskLockerStep.StaffConsoleStockAndHardware_ClickFillMoney, "", False)
-
-        Me.Hide()
-        frmMain.CloseAllChildForm()
-        Dim f As New frmSC_FillMoney
-        f.ShowDialog(frmMain)
+        Me.Close()
+        frmSC_FillMoney.MdiParent = frmSC_Main
+        frmSC_FillMoney.Show()
+        Application.DoEvents()
     End Sub
 
     Private Sub lblKioskSetting_Click(sender As Object, e As EventArgs) Handles lblKioskSetting.Click, btnKioskSetting.Click
@@ -269,7 +270,7 @@ Public Class frmSC_StockAndHardware
         f.ShowDialog(frmMain)
     End Sub
 
-    Private Sub lblExit_Click(sender As Object, e As EventArgs) Handles lblExit.Click, btnExit.Click
+    Private Sub lblExit_Click(sender As Object, e As EventArgs)
         InsertLogTransactionActivity(StaffConsole.TransNo, KioskConfig.SelectForm, KioskLockerStep.StaffConsoleStockAndHardware_ClickExitProgram, "", False)
         WebCam.Dispose()
         Application.Exit()
@@ -300,7 +301,7 @@ Public Class frmSC_StockAndHardware
 
     End Sub
 
-    Private Sub btnCollect_Click(sender As Object, e As EventArgs) Handles btnCollect.Click, lblCollect.Click
+    Private Sub btnCollect_Click(sender As Object, e As EventArgs) Handles lblCollect.Click, btnCollect.Click
         If LockerList.Rows.Count = 0 Then
             InsertErrorLog("Locker Information not found", 0, 0, 0, KioskConfig.SelectForm, KioskLockerStep.StaffConsoleLoadLockList_ClickCollect)
             SendKioskAlarm("KIOSK_OUT_OF_SERVICE", True)

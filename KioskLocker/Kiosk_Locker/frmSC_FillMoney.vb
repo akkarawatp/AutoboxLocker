@@ -1,5 +1,4 @@
 ﻿Imports AutoboxLocker.Data.KioskConfigData
-Imports AutoboxLocker.ServiceTransactionData
 Imports System.Data.SqlClient
 Imports KioskLinqDB.ConnectDB
 Imports KioskLinqDB.TABLE
@@ -69,6 +68,8 @@ Public Class frmSC_FillMoney
 
 
     Private Sub frmSC_FillPaper_Shown(sender As Object, e As EventArgs) Handles Me.Shown
+        Me.WindowState = FormWindowState.Maximized
+        frmSC_Main.lblTitle.Text = "FILL MONEY"
         InsertLogTransactionActivity(StaffConsole.TransNo, KioskConfig.SelectForm, KioskLockerStep.StaffConsoleFillMoney_OpenFOrm, "", False)
 
         Dim sql As String = "select kd.device_id, kd.kiosk_max_qty max_qty, kd.kiosk_current_qty current_qty, kd.kiosk_current_money current_money,kd.unit_value"
@@ -146,7 +147,6 @@ Public Class frmSC_FillMoney
         If StaffConsole.AuthorizeInfo.Rows.Count > 0 Then
             AppScreenList.DefaultView.RowFilter = "id='" & Convert.ToInt16(KioskConfig.SelectForm) & "'"
             If AppScreenList.DefaultView.Count > 0 Then
-                lblCheckOutMoney.Visible = False
                 txtCoinOut5.Enabled = False
                 txtBanknoteOut20.Enabled = False
                 txtBanknoteOut100.Enabled = False
@@ -154,7 +154,6 @@ Public Class frmSC_FillMoney
 
                 StaffConsole.AuthorizeInfo.DefaultView.RowFilter = "ms_functional_id=17 and authorization_name='Edit'"
                 If StaffConsole.AuthorizeInfo.DefaultView.Count > 0 Then
-                    lblCheckOutMoney.Visible = True
                     txtCoinOut5.Enabled = True
                     txtBanknoteOut20.Enabled = True
                     txtBanknoteOut100.Enabled = True
@@ -167,15 +166,12 @@ Public Class frmSC_FillMoney
     End Sub
 
 
-    Private Sub lblCancel_Click(sender As Object, e As EventArgs) Handles lblCancel.Click, btnCancel.Click
+    Private Sub lblCancel_Click(sender As Object, e As EventArgs) Handles btnCancel.Click
         InsertLogTransactionActivity(StaffConsole.TransNo, KioskConfig.SelectForm, KioskLockerStep.StaffConsoleFillMoney_ClickCancel, "", False)
-
         ConfirmFillMoney("N")
-
         Me.Close()
-        frmMain.CloseAllChildForm()
-        Dim f As New frmSC_StockAndHardware
-        f.ShowDialog(frmMain)
+        frmSC_StockAndHardware.MdiParent = frmSC_Main
+        frmSC_StockAndHardware.Show()
     End Sub
 
     Private Function ConfirmFillMoney(IsConfirm As String) As TbFillMoneyKioskLinqDB
@@ -216,7 +212,7 @@ Public Class frmSC_FillMoney
         Return lnq
     End Function
 
-    Private Sub lblConfirm_Click(sender As Object, e As EventArgs) Handles lblConfirm.Click, btnConfirm.Click
+    Private Sub lblConfirm_Click(sender As Object, e As EventArgs) Handles btnConfirm.Click
         InsertLogTransactionActivity(StaffConsole.TransNo, KioskConfig.SelectForm, KioskLockerStep.StaffConsoleFillMoney_ClickConfirm, "", False)
 
         Dim lnq As TbFillMoneyKioskLinqDB = ConfirmFillMoney("Y")
@@ -234,13 +230,12 @@ Public Class frmSC_FillMoney
         lnq = Nothing
 
         ShowDialogErrorMessageSC("Fill Money Success")
-        frmMain.CloseAllChildForm()
         Me.Close()
-        Dim f As New frmSC_StockAndHardware
-        f.ShowDialog(frmMain)
+        frmSC_StockAndHardware.MdiParent = frmSC_Main
+        frmSC_StockAndHardware.Show()
     End Sub
 
-    Private Sub lblCheckOutMoney_Click(sender As Object, e As EventArgs) Handles lblCheckOutMoney.Click, btnCheckOutMoney.Click
+    Private Sub lblCheckOutMoney_Click(sender As Object, e As EventArgs) Handles btnCheckOutMoney.Click
         InsertLogTransactionActivity(StaffConsole.TransNo, KioskConfig.SelectForm, KioskLockerStep.StaffConsoleFillMoney_ClickCheckOutMoney, "", False)
 
         txtBanknoteInMoney.Text = "0.00"

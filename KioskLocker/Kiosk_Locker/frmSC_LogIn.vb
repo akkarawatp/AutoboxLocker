@@ -12,17 +12,14 @@ Public Class frmSC_LogIn
     End Sub
 
     Private Sub frmSC_LogIn_Shown(sender As Object, e As EventArgs) Handles Me.Shown
-
         'Me.WindowState = FormWindowState.Maximized
         txtUsername.Focus()
         KioskConfig.SelectForm = KioskLockerForm.StaffConsoleLogin
         StaffConsole = New StaffConsoleLogonData(KioskData.KioskID)
-
-        lblHeader.Text = "Staff Console"
         InsertLogTransactionActivity(StaffConsole.TransNo, KioskConfig.SelectForm, KioskLockerStep.StaffConsoleLogin_OpenFOrm, "", False)
     End Sub
 
-    Private Sub lblCancel_Click(sender As Object, e As EventArgs) Handles lblCancel.Click, btnCancel.Click
+    Private Sub lblCancel_Click(sender As Object, e As EventArgs) Handles lblCancel.Click
         InsertLogTransactionActivity(StaffConsole.TransNo, KioskConfig.SelectForm, KioskLockerStep.StaffConsoleLogin_ClickCancel, "", False)
         frmMain.TimerCheckOpenClose.Enabled = True
         Me.Close()
@@ -40,7 +37,7 @@ Public Class frmSC_LogIn
         End If
     End Sub
 
-    Private Sub btnLogin_Click(sender As Object, e As EventArgs) Handles lblLogin.Click, btnLogin.Click
+    Private Sub btnLogin_Click(sender As Object, e As EventArgs) Handles lblLogin.Click
 
         InsertLogTransactionActivity(StaffConsole.TransNo, KioskConfig.SelectForm, KioskLockerStep.StaffConsoleLogin_ClickLogin, "", False)
 
@@ -90,10 +87,8 @@ Public Class frmSC_LogIn
                 UpdateAllDeviceStatusByComPort()
                 UpdateAllDeviceStatusByUsbPort()
 
-                Me.Hide()
-                frmMain.CloseAllChildForm()
-                Dim f As New frmSC_StockAndHardware
-                f.ShowDialog(frmMain)
+                Me.Close()
+                frmSC_Main.Show()
             Else
                 InsertLogTransactionActivity(StaffConsole.TransNo, KioskConfig.SelectForm, KioskLockerStep.StaffConsoleLogin_LoginValidate, SSOLogin.ErrorMessage, True)
                 ShowDialogErrorMessageSC(SSOLogin.ErrorMessage)

@@ -165,6 +165,12 @@
     <Compile Include="frmCollectThankyou.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="frmSC_Main.Designer.vb">
+      <DependentUpon>frmSC_Main.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmSC_Main.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="frmSC_DialogSettingLocker.Designer.vb">
       <DependentUpon>frmSC_DialogSettingLocker.vb</DependentUpon>
     </Compile>
@@ -333,6 +339,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="frmCollectThankyou.resx">
       <DependentUpon>frmCollectThankyou.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmSC_Main.resx">
+      <DependentUpon>frmSC_Main.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmSC_DialogSettingLocker.resx">
       <DependentUpon>frmSC_DialogSettingLocker.vb</DependentUpon>
@@ -578,6 +587,19 @@
   <ItemGroup>
     <Content Include="LogoIcon.ico" />
     <Content Include="Logo.ico" />
+    <None Include="Resources\btnButtonCheckOutMoney.png" />
+    <None Include="Resources\bgSCFillMoney.png" />
+    <None Include="Resources\bgSCFillPaper.png" />
+    <None Include="Resources\btnButtonConfirm.png" />
+    <None Include="Resources\btnButtonCancel.png" />
+    <None Include="Resources\btnButtonOrange.png" />
+    <None Include="Resources\bgSCStockAndHardware.png" />
+    <None Include="Resources\bgSCHeader.png" />
+    <None Include="Resources\imgButtonExitProgram.png" />
+    <None Include="Resources\imgButtonIconDeposit.png" />
+    <None Include="Resources\imgButtonIconCollect.png" />
+    <None Include="Resources\imgButtonLogin.png" />
+    <None Include="Resources\bgSCLogin.png" />
     <None Include="Resources\bgCollectThankyou.png" />
     <None Include="Resources\bgCollectScanQRCode.png" />
     <None Include="Resources\bgDepositThankyou.png" />

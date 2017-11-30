@@ -23,10 +23,8 @@ Partial Class frmHome
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Me.lblLabelNotification = New System.Windows.Forms.Label()
-        Me.lblPickup = New System.Windows.Forms.Label()
+        Me.lblCollect = New System.Windows.Forms.Label()
         Me.lblDeposit = New System.Windows.Forms.Label()
-        Me.pnlCollect = New System.Windows.Forms.Panel()
-        Me.pnlDeposit = New System.Windows.Forms.Panel()
         Me.SuspendLayout()
         '
         'lblLabelNotification
@@ -34,7 +32,7 @@ Partial Class frmHome
         Me.lblLabelNotification.Anchor = System.Windows.Forms.AnchorStyles.Top
         Me.lblLabelNotification.Font = New System.Drawing.Font("Thai Sans Lite", 20.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(222, Byte))
         Me.lblLabelNotification.ForeColor = System.Drawing.Color.Red
-        Me.lblLabelNotification.Location = New System.Drawing.Point(135, 690)
+        Me.lblLabelNotification.Location = New System.Drawing.Point(133, 691)
         Me.lblLabelNotification.Name = "lblLabelNotification"
         Me.lblLabelNotification.Size = New System.Drawing.Size(755, 64)
         Me.lblLabelNotification.TabIndex = 94
@@ -42,47 +40,29 @@ Partial Class frmHome
         Me.lblLabelNotification.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         Me.lblLabelNotification.Visible = False
         '
-        'lblPickup
+        'lblCollect
         '
-        Me.lblPickup.BackColor = System.Drawing.Color.Transparent
-        Me.lblPickup.Font = New System.Drawing.Font("Thai Sans Lite", 40.0!, System.Drawing.FontStyle.Bold)
-        Me.lblPickup.Location = New System.Drawing.Point(546, 563)
-        Me.lblPickup.Margin = New System.Windows.Forms.Padding(0)
-        Me.lblPickup.Name = "lblPickup"
-        Me.lblPickup.Size = New System.Drawing.Size(325, 127)
-        Me.lblPickup.TabIndex = 17
-        Me.lblPickup.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        Me.lblCollect.BackColor = System.Drawing.Color.White
+        Me.lblCollect.Font = New System.Drawing.Font("Thai Sans Lite", 40.0!, System.Drawing.FontStyle.Bold)
+        Me.lblCollect.Image = Global.AutoboxLocker.My.Resources.Resources.imgButtonIconCollect
+        Me.lblCollect.Location = New System.Drawing.Point(523, 208)
+        Me.lblCollect.Margin = New System.Windows.Forms.Padding(0)
+        Me.lblCollect.Name = "lblCollect"
+        Me.lblCollect.Size = New System.Drawing.Size(350, 484)
+        Me.lblCollect.TabIndex = 17
+        Me.lblCollect.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
         'lblDeposit
         '
-        Me.lblDeposit.BackColor = System.Drawing.Color.Transparent
+        Me.lblDeposit.BackColor = System.Drawing.Color.White
         Me.lblDeposit.Font = New System.Drawing.Font("Thai Sans Lite", 40.0!, System.Drawing.FontStyle.Bold)
-        Me.lblDeposit.Location = New System.Drawing.Point(145, 563)
+        Me.lblDeposit.Image = Global.AutoboxLocker.My.Resources.Resources.imgButtonIconDeposit
+        Me.lblDeposit.Location = New System.Drawing.Point(127, 224)
         Me.lblDeposit.Margin = New System.Windows.Forms.Padding(0)
         Me.lblDeposit.Name = "lblDeposit"
-        Me.lblDeposit.Size = New System.Drawing.Size(331, 127)
+        Me.lblDeposit.Size = New System.Drawing.Size(347, 467)
         Me.lblDeposit.TabIndex = 17
         Me.lblDeposit.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        '
-        'pnlCollect
-        '
-        Me.pnlCollect.BackColor = System.Drawing.Color.Transparent
-        Me.pnlCollect.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
-        Me.pnlCollect.Enabled = False
-        Me.pnlCollect.Location = New System.Drawing.Point(528, 226)
-        Me.pnlCollect.Name = "pnlCollect"
-        Me.pnlCollect.Size = New System.Drawing.Size(343, 334)
-        Me.pnlCollect.TabIndex = 18
-        '
-        'pnlDeposit
-        '
-        Me.pnlDeposit.BackColor = System.Drawing.Color.Transparent
-        Me.pnlDeposit.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
-        Me.pnlDeposit.Enabled = False
-        Me.pnlDeposit.Location = New System.Drawing.Point(141, 226)
-        Me.pnlDeposit.Name = "pnlDeposit"
-        Me.pnlDeposit.Size = New System.Drawing.Size(335, 334)
-        Me.pnlDeposit.TabIndex = 16
         '
         'frmHome
         '
@@ -92,11 +72,9 @@ Partial Class frmHome
         Me.BackgroundImage = Global.AutoboxLocker.My.Resources.Resources.bgHome
         Me.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
         Me.ClientSize = New System.Drawing.Size(1024, 768)
-        Me.Controls.Add(Me.lblPickup)
+        Me.Controls.Add(Me.lblCollect)
         Me.Controls.Add(Me.lblDeposit)
         Me.Controls.Add(Me.lblLabelNotification)
-        Me.Controls.Add(Me.pnlCollect)
-        Me.Controls.Add(Me.pnlDeposit)
         Me.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(222, Byte))
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None
         Me.Margin = New System.Windows.Forms.Padding(4)
@@ -104,9 +82,7 @@ Partial Class frmHome
         Me.ResumeLayout(False)
 
     End Sub
-    Friend WithEvents pnlDeposit As Panel
     Friend WithEvents lblDeposit As Label
-    Friend WithEvents pnlCollect As Panel
-    Friend WithEvents lblPickup As Label
+    Friend WithEvents lblCollect As Label
     Friend WithEvents lblLabelNotification As Label
 End Class

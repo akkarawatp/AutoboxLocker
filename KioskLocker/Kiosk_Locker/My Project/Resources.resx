@@ -205,4 +205,43 @@
   <data name="bgCollectThankyou" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\bgCollectThankyou.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="bgSCLogin" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\bgSCLogin.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="imgButtonLogin" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\imgButtonLogin.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="imgButtonIconCollect" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\imgButtonIconCollect.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="imgButtonIconDeposit" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\imgButtonIconDeposit.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="bgSCHeader" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\bgSCHeader.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="imgButtonExitProgram" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\imgButtonExitProgram.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="bgSCStockAndHardware" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\bgSCStockAndHardware.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="btnButtonOrange" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\btnButtonOrange.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="btnButtonCancel" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\btnButtonCancel.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="btnButtonConfirm" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\btnButtonConfirm.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="bgSCFillPaper" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\bgSCFillPaper.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="bgSCFillMoney" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\bgSCFillMoney.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="btnButtonCheckOutMoney" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\btnButtonCheckOutMoney.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
 </root>

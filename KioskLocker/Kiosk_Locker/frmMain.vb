@@ -651,8 +651,8 @@ Public Class frmMain
             TimerCheckOpenClose.Enabled = False
 
             TimerSetPointer.Enabled = True
-            Dim frm As New frmSC_LogIn
-            frm.ShowDialog(Me)
+            Me.Hide()
+            frmSC_LogIn.ShowDialog()
         End If
         TimerSetPointer.Enabled = True
         TimerSetPointer.Start()
