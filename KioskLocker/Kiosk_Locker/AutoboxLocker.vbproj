@@ -303,16 +303,16 @@
     <Compile Include="ucCabinet.vb">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="ucfrmStatus.Designer.vb">
-      <DependentUpon>ucfrmStatus.vb</DependentUpon>
-    </Compile>
-    <Compile Include="ucfrmStatus.vb">
-      <SubType>UserControl</SubType>
-    </Compile>
     <Compile Include="ucLockerInfo.Designer.vb">
       <DependentUpon>ucLockerInfo.vb</DependentUpon>
     </Compile>
     <Compile Include="ucLockerInfo.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ucStockProgress.Designer.vb">
+      <DependentUpon>ucStockProgress.vb</DependentUpon>
+    </Compile>
+    <Compile Include="ucStockProgress.vb">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="Web References\Webservice_Locker\Reference.vb">
@@ -406,11 +406,11 @@
     <EmbeddedResource Include="ucCabinet.resx">
       <DependentUpon>ucCabinet.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="ucfrmStatus.resx">
-      <DependentUpon>ucfrmStatus.vb</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="ucLockerInfo.resx">
       <DependentUpon>ucLockerInfo.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ucStockProgress.resx">
+      <DependentUpon>ucStockProgress.vb</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

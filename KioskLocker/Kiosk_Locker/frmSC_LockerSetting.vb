@@ -12,7 +12,8 @@ Public Class frmSC_LockerSetting
     End Sub
 
     Private Sub frmSC_DialogSetting_Shown(sender As Object, e As EventArgs) Handles Me.Shown
-        'Me.WindowState = FormWindowState.Maximized
+        Me.WindowState = FormWindowState.Maximized
+        Application.DoEvents()
         InsertLogTransactionActivity(StaffConsole.TransNo, KioskConfig.SelectForm, KioskLockerStep.StaffConsoleLockerSetting_OpenForm, "", False)
 
         lblHeader.Text = "Kiosk Layout"
@@ -266,9 +267,8 @@ Public Class frmSC_LockerSetting
     Private Sub lblClose_Click(sender As Object, e As EventArgs) Handles lblClose.Click, btnClose.Click
         InsertLogTransactionActivity(StaffConsole.TransNo, KioskConfig.SelectForm, KioskLockerStep.StaffConsoleLockerSetting_ClickClose, "", False)
         Me.Close()
-        frmMain.CloseAllChildForm()
-        Dim f As New frmSC_StockAndHardware
-        f.ShowDialog(frmMain)
+        frmSC_StockAndHardware.MdiParent = frmSC_Main
+        frmSC_StockAndHardware.Show()
     End Sub
 
     Private Sub UcCabinet_MoveLeftClick(sender As ucCabinet) Handles UcCabinet1.MoveLeftClick, UcCabinet2.MoveLeftClick, UcCabinet3.MoveLeftClick, UcCabinet4.MoveLeftClick, UcCabinet5.MoveLeftClick, UcCabinet6.MoveLeftClick, UcCabinet7.MoveLeftClick, UcCabinet8.MoveLeftClick, UcCabinet9.MoveLeftClick, UcCabinet10.MoveLeftClick

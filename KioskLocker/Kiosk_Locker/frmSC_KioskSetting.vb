@@ -14,12 +14,13 @@ Public Class frmSC_KioskSetting
     End Sub
 
     Private Sub frmSC_KioskSetting_Shown(sender As Object, e As EventArgs) Handles Me.Shown
+        Me.WindowState = FormWindowState.Maximized
+        Application.DoEvents()
         InsertLogTransactionActivity(StaffConsole.TransNo, KioskConfig.SelectForm, KioskLockerStep.StaffConsoleKioskSetting_OpenForm, "", False)
-        'Me.WindowState = FormWindowState.Maximized
+
 
         InsertLogTransactionActivity(StaffConsole.TransNo, KioskConfig.SelectForm, KioskLockerStep.StaffConsoleKioskSetting_SetKioskSetting, "", False)
         BindDDLNetworkDevice()
-        'If CkeckAutoScrollBar() Then Me.AutoScroll = True
 
         txtKioskID.Text = KioskData.KioskID
         chkLoginSSO.Checked = KioskConfig.IsLoginSSO
@@ -123,7 +124,7 @@ Public Class frmSC_KioskSetting
             Next
         End If
 
-        Dim ini As New AutoboxLocker.Org.Mentalis.Files.IniReader(INIFileName)
+        Dim ini As New Org.Mentalis.Files.IniReader(INIFileName)
         ini.Section = "Setting"
         cbNetworkDevice.SelectedIndex = cbNetworkDevice.FindStringExact(ini.ReadString("CardLanDesc"))
         ini = Nothing
@@ -155,9 +156,9 @@ Public Class frmSC_KioskSetting
 
     Private Sub lblCancel_Click(sender As Object, e As EventArgs) Handles lblCancel.Click, btnCancel.Click
         InsertLogTransactionActivity(StaffConsole.TransNo, KioskConfig.SelectForm, KioskLockerStep.StaffConsoleKioskSetting_ClickCancel, "", False)
-        frmMain.CloseAllChildForm()
-        Dim f As New frmSC_StockAndHardware
-        f.ShowDialog(frmMain)
+        Me.Close()
+        frmSC_StockAndHardware.MdiParent = frmSC_Main
+        frmSC_StockAndHardware.Show()
     End Sub
 
     Private Sub lblSave_Click(sender As Object, e As EventArgs) Handles lblSave.Click, btnSave.Click
@@ -304,11 +305,9 @@ Public Class frmSC_KioskSetting
                             trans.CommitTransaction()
 
                             ShowDialogErrorMessageSC("Save Success")
-                            frmMain.CloseAllChildForm()
                             Me.Close()
-                            Dim f As New frmSC_StockAndHardware
-                            f.ShowDialog()
-
+                            frmSC_StockAndHardware.MdiParent = frmSC_Main
+                            frmSC_StockAndHardware.Show()
                         Else
                             trans.RollbackTransaction()
 

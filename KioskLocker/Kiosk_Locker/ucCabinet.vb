@@ -172,7 +172,7 @@ Public Class ucCabinet
 
                 f.BorderStyle = BorderStyle.FixedSingle
                 If lDr("active_status") = "N" Then
-                    f.LockerAvailable = ucLockerInfo.AvailableStatus.NoActive
+                    f.LockerAvailable = ucLockerInfo.AvailableStatus.InActive
                 ElseIf lDr("current_available") = "Y" Then
                     f.LockerAvailable = ucLockerInfo.AvailableStatus.Availabled
                 ElseIf lDr("current_available") = "N" Then

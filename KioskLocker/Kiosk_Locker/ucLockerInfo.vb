@@ -8,26 +8,15 @@ Public Class ucLockerInfo
     Dim _AvailableStatus As AvailableStatus = AvailableStatus.Availabled
 
     Public Sub New()
-
         ' This call is required by the designer.
         InitializeComponent()
-
-        ' Add any initialization after the InitializeComponent() call.
-
-
-        'Dim sol As New BoardSolenoid.SolenoidClass
         BoardSolenoid.BindSolenoidPin(cbSolenoidPin)
-
-        'Dim led As New BoardLED.LEDClass
         BoardLED.BindLEDPin(cbLEDPin)
-
-        'Dim sensor As New BoardSensor.SensorClass
         BoardSensor.BindSensorPin(cbSensorPin)
     End Sub
 
 
 
-    'Public Event LockerClick(sender As ucLockerInfo) as Event
     Public Event LockerClick(sender As ucLockerInfo, e As EventArgs)
     Public Property LockerID As Integer
         Get
@@ -90,7 +79,7 @@ Public Class ucLockerInfo
                     lblName.BackColor = Color.FromArgb(232, 88, 88)
                     lblName.ForeColor = Color.White
                     AddHandler lblName.Click, AddressOf ucLockerInfo_Click
-                ElseIf _AvailableStatus = AvailableStatus.NoActive Then
+                ElseIf _AvailableStatus = AvailableStatus.InActive Then
                     Me.BackColor = Color.Gray
                 End If
             End If
@@ -118,7 +107,7 @@ Public Class ucLockerInfo
     Public Enum AvailableStatus
         Availabled = 1
         NotAvailable = 2
-        NoActive = 3
+        InActive = 3
     End Enum
 
     Private Sub LoadLockerPinSetting()
@@ -139,7 +128,6 @@ Public Class ucLockerInfo
 
     Private Sub ucLockerInfo_DoubleClick(sender As Object, e As EventArgs) Handles Me.DoubleClick
         If _IsSetting = True Then
-            'Me.BackColor = Color.Gray
             Dim frm As New frmSC_DialogSettingLocker
             frm.LockerID = _LockerID
             frm.ShowDialog()

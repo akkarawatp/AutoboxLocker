@@ -2,6 +2,7 @@
 Imports System.IO
 Imports KioskLinqDB.ConnectDB
 Imports AutoboxLocker.Data.KioskConfigData
+Imports AutoboxLocker.Data.ConstantsData
 
 Public Class frmSC_StockAndHardware
 
@@ -125,16 +126,14 @@ Public Class frmSC_StockAndHardware
                 Dim Movement As String = dr("movement_direction")
 
                 'Hardware Status
-                Dim frm As New ucfrmStatus
+
                 If IsProblem = False Then
-                    SetForm(frm, IconGreen, FormColor.Green, DeviceName, StatusName)
+                    SetDeviceStatus(dr("device_id"), IconGreen)
                 Else
-                    SetForm(frm, IconRed, FormColor.Red, DeviceName, StatusName)
+                    SetDeviceStatus(dr("device_id"), IconRed)
                 End If
-                'flpHWStatus.Controls.Add(frm)
 
                 'Material Stock
-                frm = New ucfrmStatus
                 If Dt.Rows(i).Item("device_type_id") = Data.ConstantsData.DeviceType.BanknoteIn Or
                    Dt.Rows(i).Item("device_type_id") = Data.ConstantsData.DeviceType.BanknoteOut Or
                    Dt.Rows(i).Item("device_type_id") = Data.ConstantsData.DeviceType.CoinIn Or
@@ -164,55 +163,136 @@ Public Class frmSC_StockAndHardware
                         If Movement = "1" Then
                             If CurrentQty < WarningQty Then
                                 'Normal
-                                SetForm(frm, IconGreen, FormColor.Green, DeviceName, Detail)
+                                SetStock(dr("device_id"), CurrentQty, MaxQty, Color.FromArgb(6, 175, 143))
                             ElseIf CurrentQty < CriticalQty Then
                                 'Warning
-                                SetForm(frm, IconYellow, FormColor.Yellow, DeviceName, Detail)
+                                SetStock(dr("device_id"), CurrentQty, MaxQty, Color.Orange)
                             Else
                                 'Critical
-                                SetForm(frm, IconRed, FormColor.Red, DeviceName, Detail)
+                                SetStock(dr("device_id"), CurrentQty, MaxQty, Color.Red)
                             End If
                         Else
                             If CurrentQty > WarningQty Then
                                 'Normal
-                                SetForm(frm, IconGreen, FormColor.Green, DeviceName, Detail)
+                                SetStock(dr("device_id"), CurrentQty, MaxQty, Color.FromArgb(6, 175, 143))
                             ElseIf CurrentQty > CriticalQty Then
                                 'Warning
-                                SetForm(frm, IconYellow, FormColor.Yellow, DeviceName, Detail)
+                                SetStock(dr("device_id"), CurrentQty, MaxQty, Color.Orange)
                             Else
                                 'Critical
-                                SetForm(frm, IconRed, FormColor.Red, DeviceName, Detail)
+                                SetStock(dr("device_id"), CurrentQty, MaxQty, Color.Red)
                             End If
                         End If
                     End If
-                    'flpM_Stock.Controls.Add(frm)
+                    ''flpM_Stock.Controls.Add(frm)
                 End If
             Next
+            Application.DoEvents()
         End If
         Dt.Dispose()
     End Sub
 
-    Sub SetForm(ByVal frm As ucfrmStatus, ByVal ImgByte() As Byte, ByVal frmColor As FormColor, ByVal frmHeader As String, ByVal frmMessage As String)
+    Sub SetDeviceStatus(vDeviceID As Long, ByVal ImgByte() As Byte)
         If ImgByte.Length > 0 Then
             Dim ms As New MemoryStream(ImgByte)
-            Dim im As Image
-            im = Image.FromStream(ms)
-            Dim Img As Image
-            Img = im
-            frm.pb.Image = Img
+
+            Select Case vDeviceID
+                Case DeviceID.BankNoteIn
+                    pbStatusBanknoteIn.BackgroundImage = Image.FromStream(ms)
+                Case DeviceID.CoinIn
+                    pbStatusCoinIn.BackgroundImage = Image.FromStream(ms)
+                Case DeviceID.BankNoteOut_20
+                    pbStatusBanknoteOut20.BackgroundImage = Image.FromStream(ms)
+                Case DeviceID.BankNoteOut_50
+
+                Case DeviceID.BankNoteOut_100
+                    pbStatusBanknoteOut100.BackgroundImage = Image.FromStream(ms)
+                Case DeviceID.BankNoteOut_500
+
+                Case DeviceID.CoinOut_1
+
+                Case DeviceID.CoinOut_2
+
+                Case DeviceID.CoinOut_5
+                    pbStatusCoinOut5.BackgroundImage = Image.FromStream(ms)
+                Case DeviceID.CoinOut_10
+
+                Case DeviceID.WebCamera
+                    pbStatusWebcam.BackgroundImage = Image.FromStream(ms)
+                Case DeviceID.Printer
+                    pbStatusPrinter.BackgroundImage = Image.FromStream(ms)
+                Case DeviceID.QRCodeReader
+                    pbStatusQRCode.BackgroundImage = Image.FromStream(ms)
+                Case DeviceID.LEDBoard
+                    pbStatusLED.BackgroundImage = Image.FromStream(ms)
+                Case DeviceID.SolenoidBoard
+                    pbStatusSolenoid.BackgroundImage = Image.FromStream(ms)
+                Case DeviceID.SensorBoard
+                    pbStatusSensor.BackgroundImage = Image.FromStream(ms)
+                Case DeviceID.NetworkConnection
+                    pbStatusNetwork.BackgroundImage = Image.FromStream(ms)
+            End Select
+
         End If
 
-        frm.lblHeader.Text = frmHeader
-        frm.lblDetail.Text = frmMessage
-        Select Case frmColor
-            Case FormColor.Red
-                frm.pnlDetail.BackColor = Color.Red
-            Case FormColor.Yellow
-                frm.pnlDetail.BackColor = Color.Yellow
-            Case FormColor.Green
-                frm.pnlDetail.BackColor = Color.Green
-        End Select
 
+    End Sub
+
+    Sub SetStock(vDeviceID As Long, CurrValue As Integer, TotalValue As Integer, StatusColor As Color)
+        Select Case vDeviceID
+            Case DeviceID.BankNoteIn
+                lblStockBanknoteIn.Text = CurrValue
+                lblTotalBanknoteIn.Text = "/" & TotalValue
+                lblStockBanknoteIn.ForeColor = StatusColor
+
+                pgStockBanknoteIn.MaxValue = TotalValue
+                pgStockBanknoteIn.Value = CurrValue
+                pgStockBanknoteIn.BarColor = StatusColor
+            Case DeviceID.CoinIn
+                lblStockCoinIn.Text = CurrValue
+                lblTotalCoinIn.Text = "/" & TotalValue
+                lblStockCoinIn.ForeColor = StatusColor
+
+                pgStockCoinIn.MaxValue = TotalValue
+                pgStockCoinIn.Value = CurrValue
+                pgStockCoinIn.BarColor = StatusColor
+
+            Case DeviceID.BankNoteOut_20
+                lblStockBanknote20.Text = CurrValue
+                lblTotalBanknote20.Text = "/" & TotalValue
+                lblStockBanknote20.ForeColor = StatusColor
+
+                pgStockBanknote20.MaxValue = TotalValue
+                pgStockBanknote20.Value = CurrValue
+                pgStockBanknote20.BarColor = StatusColor
+
+            Case DeviceID.BankNoteOut_100
+                lblStockBanknote100.Text = CurrValue
+                lblTotalBanknote100.Text = "/" & TotalValue
+                lblStockBanknote100.ForeColor = StatusColor
+
+                pgStockBanknote100.MaxValue = TotalValue
+                pgStockBanknote100.Value = CurrValue
+                pgStockBanknote100.ForeColor = StatusColor
+
+            Case DeviceID.CoinOut_5
+                lblStockCoinOut5.Text = CurrValue
+                lblTotalCoinOut5.Text = "/" & TotalValue
+                lblStockCoinOut5.ForeColor = StatusColor
+
+                pgStockCoinOut5.MaxValue = TotalValue
+                pgStockCoinOut5.Value = CurrValue
+                pgStockCoinOut5.BarColor = StatusColor
+
+            Case DeviceID.Printer
+                lblStockPrinter.Text = CurrValue
+                lblTotalPrinter.Text = "/" & TotalValue
+                lblStockPrinter.ForeColor = StatusColor
+
+                pgStockPrinter.MaxValue = TotalValue
+                pgStockPrinter.Value = CurrValue
+                pgStockPrinter.BarColor = StatusColor
+        End Select
     End Sub
 
     Private Sub pbClose_Click(sender As Object, e As EventArgs)
@@ -246,28 +326,28 @@ Public Class frmSC_StockAndHardware
     Private Sub lblKioskSetting_Click(sender As Object, e As EventArgs) Handles lblKioskSetting.Click, btnKioskSetting.Click
         InsertLogTransactionActivity(StaffConsole.TransNo, KioskConfig.SelectForm, KioskLockerStep.StaffConsoleStockAndHardware_ClickKioskSetting, "", False)
 
-        Me.Hide()
-        frmMain.CloseAllChildForm()
-        Dim f As New frmSC_KioskSetting
-        f.ShowDialog(frmMain)
+        Me.Close()
+        frmSC_KioskSetting.MdiParent = frmSC_Main
+        frmSC_KioskSetting.Show()
+        Application.DoEvents()
     End Sub
 
     Private Sub lblDeviceSetting_Click(sender As Object, e As EventArgs) Handles lblDeviceSetting.Click, btnDeviceSetting.Click
         InsertLogTransactionActivity(StaffConsole.TransNo, KioskConfig.SelectForm, KioskLockerStep.StaffConsoleStockAndHardware_ClickDeviceSetting, "", False)
 
-        Me.Hide()
-        frmMain.CloseAllChildForm()
-        Dim f As New frmSC_DeviceSetting
-        f.ShowDialog(frmMain)
+        Me.Close()
+        frmSC_DeviceSetting.MdiParent = frmSC_Main
+        frmSC_DeviceSetting.Show()
+        Application.DoEvents()
     End Sub
 
     Public Sub lblLockerSetting_Click(sender As Object, e As EventArgs) Handles lblLockerSetting.Click, btnLockerSetting.Click
         InsertLogTransactionActivity(StaffConsole.TransNo, KioskConfig.SelectForm, KioskLockerStep.StaffConsoleStockAndHardware_ClickLockerSetting, "", False)
 
-        Me.Hide()
-        frmMain.CloseAllChildForm()
-        Dim f As New frmSC_LockerSetting
-        f.ShowDialog(frmMain)
+        Me.Close()
+        frmSC_LockerSetting.MdiParent = frmSC_Main
+        frmSC_LockerSetting.Show()
+        Application.DoEvents()
     End Sub
 
     Private Sub lblExit_Click(sender As Object, e As EventArgs)
@@ -294,7 +374,6 @@ Public Class frmSC_StockAndHardware
 
                     End Try
                 Next
-
                 Application.DoEvents()
             End If
         End If
@@ -313,11 +392,10 @@ Public Class frmSC_StockAndHardware
         Dim ret As ExecuteDataInfo = CreateNewPickupTransaction()
         If ret.IsSuccess = True Then
             InsertLogTransactionActivity("", Collect.TransactionNo, StaffConsole.TransNo, KioskConfig.SelectForm, KioskLockerStep.StaffConsoleLoadLockList_ClickCollect, "", False)
+            Me.Close()
             frmDepositSelectLocker.Show()
             frmMain.btnPointer.Visible = False
             frmMain.TimerCheckOpenClose.Enabled = False
-            Me.Close()
-            'frmDepositSelectLocker.BringToFront()
             Application.DoEvents()
             SendKioskAlarm("KIOSK_OUT_OF_SERVICE", False)
         Else
@@ -325,5 +403,9 @@ Public Class frmSC_StockAndHardware
             SendKioskAlarm("KIOSK_OUT_OF_SERVICE", True)
             ShowDialogErrorMessage("Cannot create Collect transaction")
         End If
+    End Sub
+
+    Private Sub TimerRefreshStock_Tick(sender As Object, e As EventArgs) Handles TimerRefreshStock.Tick
+        SetStockAndHardwareStatus()
     End Sub
 End Class

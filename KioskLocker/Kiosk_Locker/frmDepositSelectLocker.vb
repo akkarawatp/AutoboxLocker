@@ -172,7 +172,7 @@ Public Class frmDepositSelectLocker
                     frmLoading.Close()
                 End If
 
-            ElseIf f.LockerAvailable = ucLockerInfo.AvailableStatus.NotAvailable AndAlso f.LockerAvailable = ucLockerInfo.AvailableStatus.NoActive Then
+            ElseIf f.LockerAvailable = ucLockerInfo.AvailableStatus.NotAvailable AndAlso f.LockerAvailable = ucLockerInfo.AvailableStatus.InActive Then
                 'ถ้าสถานะ ไม่ว่าง ก็ให้อยู่นิ่งๆ ไม่ต้องทำอะไร
             End If
 
@@ -204,7 +204,7 @@ Public Class frmDepositSelectLocker
                         Me.Close()
                     End If
                 End If
-            ElseIf f.LockerAvailable = ucLockerInfo.AvailableStatus.Availabled AndAlso f.LockerAvailable = ucLockerInfo.AvailableStatus.NoActive Then
+            ElseIf f.LockerAvailable = ucLockerInfo.AvailableStatus.Availabled AndAlso f.LockerAvailable = ucLockerInfo.AvailableStatus.InActive Then
                 'กรณีรับคืนจาก StaffConsole ถ้าเป็นตู้ที่ว่างอยู่ ก็ไม่ให้คลิกได้ เพราะจะรับคืน จะไปคลิกตู้ว่างทำไม
             End If
         End If
