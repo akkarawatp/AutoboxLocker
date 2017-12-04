@@ -594,6 +594,32 @@ Public Class SyncTransactionDataENG
                 Next
             End If
             sDt.Dispose()
+
+
+            'PICKUP TRANSACTION
+            sql = "select id "
+            sql += " from TB_PICKUP_TRANSACTION "
+            sql += " where ms_kiosk_id=@_KIOSK_ID"
+            sql += " and trans_status in ('0')"
+            'sql += " and sync_to_server='Y'"
+            sql += " and DATEADD(d,2,created_date) < getdate()"
+
+            ReDim p(1)
+            p(0) = KioskDB.SetBigInt("@_KIOSK_ID", MsKioskID)
+            Dim pDt As DataTable = KioskDB.ExecuteTable(sql, p)
+            If pDt.Rows.Count > 0 Then
+                For Each dr As DataRow In pDt.Rows
+                    Dim lnq As New TbPickupTransactionKioskLinqDB
+                    Dim trans As New KioskTransactionDB
+                    If lnq.DeleteByPK(dr("id"), trans.Trans).IsSuccess = True Then
+                        trans.CommitTransaction()
+                    Else
+                        trans.RollbackTransaction()
+                        LogFileENG.CreateErrorLogAgent(MsKioskID, lnq.ErrorMessage)
+                    End If
+                Next
+            End If
+            pDt.Dispose()
         Catch ex As Exception
             LogFileENG.CreateExceptionLogAgent(MsKioskID, ex.Message, ex.StackTrace)
         End Try
