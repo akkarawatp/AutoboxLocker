@@ -136,17 +136,8 @@
   <data name="bgMainFooter" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\bgMainFooter.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="IconDepositTime" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\IconDepositTime.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="IconPickupTime" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\IconPickupTime.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
   <data name="IconProcessing" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\IconProcessing.gif;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="IconClose" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\IconClose.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="logo" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\logo.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -243,5 +234,29 @@
   </data>
   <data name="btnButtonCheckOutMoney" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\btnButtonCheckOutMoney.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="bgSCKioskSetting" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\bgSCKioskSetting.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="imgCheckboxCheck" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\imgCheckboxCheck.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="imgCheckboxUncheck" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\imgCheckboxUncheck.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="btnButtonAdd" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\btnButtonAdd.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="btnButtonSave" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\btnButtonSave.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="iconButtonStepLeft" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\iconButtonStepLeft.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="iconButtonStepRight" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\iconButtonStepRight.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="IconClose" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\IconClose.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>

@@ -114,7 +114,7 @@ Public Class ucCabinet
 
 
         Dim fPadding As Integer = 1
-        Dim fFooter As Integer = IIf(_IsSetting = True, 60, 0)
+        Dim fFooter As Integer = IIf(_IsSetting = True, 30, 0)
         Dim fTop As Integer = 0
         Dim fHeigh As Integer = 0
         If LockerQty > 0 Then
@@ -265,6 +265,7 @@ Public Class ucCabinet
             Else
                 trans.RollbackTransaction()
             End If
+            Application.DoEvents()
         End If
         Return ret
     End Function

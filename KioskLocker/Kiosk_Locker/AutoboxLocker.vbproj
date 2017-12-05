@@ -13,6 +13,7 @@
     <MyType>WindowsForms</MyType>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
     <PublishUrl>publish\</PublishUrl>
     <Install>true</Install>
     <InstallFrom>Disk</InstallFrom>
@@ -25,7 +26,6 @@
     <MapFileExtensions>true</MapFileExtensions>
     <ApplicationRevision>0</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
-    <IsWebBootstrapper>false</IsWebBootstrapper>
     <UseApplicationTrust>false</UseApplicationTrust>
     <BootstrapperEnabled>true</BootstrapperEnabled>
   </PropertyGroup>
@@ -587,6 +587,13 @@
   <ItemGroup>
     <Content Include="LogoIcon.ico" />
     <Content Include="Logo.ico" />
+    <None Include="Resources\iconButtonStepLeft.png" />
+    <None Include="Resources\iconButtonStepRight.png" />
+    <None Include="Resources\btnButtonAdd.png" />
+    <None Include="Resources\btnButtonSave.png" />
+    <None Include="Resources\imgCheckboxUncheck.png" />
+    <None Include="Resources\imgCheckboxCheck.png" />
+    <None Include="Resources\bgSCKioskSetting.png" />
     <None Include="Resources\btnButtonCheckOutMoney.png" />
     <None Include="Resources\bgSCFillMoney.png" />
     <None Include="Resources\bgSCFillPaper.png" />

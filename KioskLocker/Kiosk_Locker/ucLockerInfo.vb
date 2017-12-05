@@ -49,6 +49,7 @@ Public Class ucLockerInfo
             _IsSetting = value
 
             If value = False Then
+                pbLockerName.Visible = _IsSetting
                 txtLockerName.Visible = _IsSetting
                 cbSolenoidPin.Visible = _IsSetting
                 cbSensorPin.Visible = _IsSetting

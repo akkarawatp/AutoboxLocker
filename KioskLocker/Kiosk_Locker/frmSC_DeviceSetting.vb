@@ -13,6 +13,9 @@ Public Class frmSC_DeviceSetting
     End Sub
 
     Private Sub frmSC_KioskSetting_Shown(sender As Object, e As EventArgs) Handles Me.Shown
+        Me.WindowState = FormWindowState.Maximized
+        frmSC_Main.lblTitle.Text = "DEVICE SETTINGS"
+        Application.DoEvents()
         InsertLogTransactionActivity(StaffConsole.TransNo, KioskConfig.SelectForm, KioskLockerStep.StaffConsoleDeviceSetting_OpenForm, "", False)
         CheckForIllegalCrossThreadCalls = False
         BindDDLComport()
@@ -223,7 +226,7 @@ Public Class frmSC_DeviceSetting
         cbWebCamera.Items.AddRange(WebCam.GetCaptureDevices)
     End Sub
 
-    Private Sub lblCancel_Click(sender As Object, e As EventArgs) Handles lblCancel.Click, btnCancel.Click
+    Private Sub lblCancel_Click(sender As Object, e As EventArgs) Handles btnCancel.Click
         InsertLogTransactionActivity(StaffConsole.TransNo, KioskConfig.SelectForm, KioskLockerStep.StaffConsoleDeviceSetting_ClickCancel, "", False)
         frmMain.CloseAllChildForm()
         Dim f As New frmSC_StockAndHardware
@@ -271,7 +274,7 @@ Public Class frmSC_DeviceSetting
         Return ret
     End Function
 
-    Private Sub lblSave_Click(sender As Object, e As EventArgs) Handles lblSave.Click, btnSave.Click
+    Private Sub lblSave_Click(sender As Object, e As EventArgs) Handles btnSave.Click
         'If cbBanknoteIn.Text.Trim = "" Then
         '    ShowDialogErrorMessageSC("กรุณาเลือกเครื่องรับธนบัตร")
         '    Exit Sub

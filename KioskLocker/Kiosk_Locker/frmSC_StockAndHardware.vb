@@ -6,14 +6,11 @@ Imports AutoboxLocker.Data.ConstantsData
 
 Public Class frmSC_StockAndHardware
 
-    Public Enum FormColor
-        Red = 1
-        Yellow = 2
-        Green = 3
-    End Enum
     Private Sub frmSC_StockAndHardware_Load(sender As Object, e As EventArgs) Handles Me.Load
         KioskConfig.SelectForm = Data.KioskConfigData.KioskLockerForm.StaffConsoleStoakAndHardware
         Me.ControlBox = False
+        pgStockCoinIn.Direction = ucStockProgress.ProgressDirection.RightToLeft
+        pgStockBanknoteIn.Direction = ucStockProgress.ProgressDirection.RightToLeft
     End Sub
 
     Private Sub frmSC_StockAndHardware_Shown(sender As Object, e As EventArgs) Handles Me.Shown
@@ -325,6 +322,8 @@ Public Class frmSC_StockAndHardware
 
     Private Sub lblKioskSetting_Click(sender As Object, e As EventArgs) Handles lblKioskSetting.Click, btnKioskSetting.Click
         InsertLogTransactionActivity(StaffConsole.TransNo, KioskConfig.SelectForm, KioskLockerStep.StaffConsoleStockAndHardware_ClickKioskSetting, "", False)
+        frmLoading.Show(frmSC_Main)
+        Application.DoEvents()
 
         Me.Close()
         frmSC_KioskSetting.MdiParent = frmSC_Main

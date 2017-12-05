@@ -22,46 +22,46 @@ Partial Class ucCabinet
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Me.pbDelete = New System.Windows.Forms.PictureBox()
-        Me.pbMoveLeft = New System.Windows.Forms.PictureBox()
         Me.pbMoveRight = New System.Windows.Forms.PictureBox()
-        CType(Me.pbDelete, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.pbMoveLeft, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.pbMoveLeft = New System.Windows.Forms.PictureBox()
+        Me.pbDelete = New System.Windows.Forms.PictureBox()
         CType(Me.pbMoveRight, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.pbMoveLeft, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.pbDelete, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
+        '
+        'pbMoveRight
+        '
+        Me.pbMoveRight.Anchor = System.Windows.Forms.AnchorStyles.Bottom
+        Me.pbMoveRight.BackgroundImage = Global.AutoboxLocker.My.Resources.Resources.iconButtonStepRight
+        Me.pbMoveRight.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
+        Me.pbMoveRight.Location = New System.Drawing.Point(71, 292)
+        Me.pbMoveRight.Name = "pbMoveRight"
+        Me.pbMoveRight.Size = New System.Drawing.Size(24, 24)
+        Me.pbMoveRight.TabIndex = 7
+        Me.pbMoveRight.TabStop = False
+        '
+        'pbMoveLeft
+        '
+        Me.pbMoveLeft.Anchor = System.Windows.Forms.AnchorStyles.Bottom
+        Me.pbMoveLeft.BackgroundImage = Global.AutoboxLocker.My.Resources.Resources.iconButtonStepLeft
+        Me.pbMoveLeft.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
+        Me.pbMoveLeft.Location = New System.Drawing.Point(1, 292)
+        Me.pbMoveLeft.Name = "pbMoveLeft"
+        Me.pbMoveLeft.Size = New System.Drawing.Size(24, 24)
+        Me.pbMoveLeft.TabIndex = 6
+        Me.pbMoveLeft.TabStop = False
         '
         'pbDelete
         '
         Me.pbDelete.Anchor = System.Windows.Forms.AnchorStyles.Bottom
         Me.pbDelete.BackgroundImage = Global.AutoboxLocker.My.Resources.Resources.icon_cabinet_delete
         Me.pbDelete.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
-        Me.pbDelete.Location = New System.Drawing.Point(35, 292)
+        Me.pbDelete.Location = New System.Drawing.Point(36, 292)
         Me.pbDelete.Name = "pbDelete"
         Me.pbDelete.Size = New System.Drawing.Size(24, 24)
         Me.pbDelete.TabIndex = 5
         Me.pbDelete.TabStop = False
-        '
-        'pbMoveLeft
-        '
-        Me.pbMoveLeft.Anchor = System.Windows.Forms.AnchorStyles.Bottom
-        Me.pbMoveLeft.BackgroundImage = Global.AutoboxLocker.My.Resources.Resources.IconPickupTime
-        Me.pbMoveLeft.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
-        Me.pbMoveLeft.Location = New System.Drawing.Point(1, 294)
-        Me.pbMoveLeft.Name = "pbMoveLeft"
-        Me.pbMoveLeft.Size = New System.Drawing.Size(23, 20)
-        Me.pbMoveLeft.TabIndex = 6
-        Me.pbMoveLeft.TabStop = False
-        '
-        'pbMoveRight
-        '
-        Me.pbMoveRight.Anchor = System.Windows.Forms.AnchorStyles.Bottom
-        Me.pbMoveRight.BackgroundImage = Global.AutoboxLocker.My.Resources.Resources.IconDepositTime
-        Me.pbMoveRight.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
-        Me.pbMoveRight.Location = New System.Drawing.Point(71, 294)
-        Me.pbMoveRight.Name = "pbMoveRight"
-        Me.pbMoveRight.Size = New System.Drawing.Size(23, 20)
-        Me.pbMoveRight.TabIndex = 7
-        Me.pbMoveRight.TabStop = False
         '
         'ucCabinet
         '
@@ -74,9 +74,9 @@ Partial Class ucCabinet
         Me.Controls.Add(Me.pbDelete)
         Me.Name = "ucCabinet"
         Me.Size = New System.Drawing.Size(97, 318)
-        CType(Me.pbDelete, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.pbMoveLeft, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.pbMoveRight, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.pbMoveLeft, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.pbDelete, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
     End Sub

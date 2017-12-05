@@ -22,8 +22,14 @@ Partial Class frmSC_LockerSetting
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
-        Me.lblHeader = New System.Windows.Forms.Label()
         Me.Panel1 = New System.Windows.Forms.Panel()
+        Me.pnlPC = New System.Windows.Forms.Panel()
+        Me.pbMoveRight = New System.Windows.Forms.PictureBox()
+        Me.txtPCPosition = New System.Windows.Forms.TextBox()
+        Me.pbMoveLeft = New System.Windows.Forms.PictureBox()
+        Me.pnAdd = New System.Windows.Forms.Panel()
+        Me.btnClose = New System.Windows.Forms.Panel()
+        Me.pnSave = New System.Windows.Forms.Panel()
         Me.UcCabinet10 = New AutoboxLocker.ucCabinet()
         Me.UcCabinet9 = New AutoboxLocker.ucCabinet()
         Me.UcCabinet8 = New AutoboxLocker.ucCabinet()
@@ -33,34 +39,12 @@ Partial Class frmSC_LockerSetting
         Me.UcCabinet4 = New AutoboxLocker.ucCabinet()
         Me.UcCabinet3 = New AutoboxLocker.ucCabinet()
         Me.UcCabinet2 = New AutoboxLocker.ucCabinet()
-        Me.pnlPC = New System.Windows.Forms.Panel()
-        Me.txtPCPosition = New System.Windows.Forms.TextBox()
         Me.UcCabinet1 = New AutoboxLocker.ucCabinet()
-        Me.lblSave = New System.Windows.Forms.Label()
-        Me.pnSave = New System.Windows.Forms.Panel()
-        Me.btnClose = New System.Windows.Forms.Panel()
-        Me.lblClose = New System.Windows.Forms.Label()
-        Me.pnAdd = New System.Windows.Forms.Panel()
-        Me.lblAdd = New System.Windows.Forms.Label()
         Me.Panel1.SuspendLayout()
         Me.pnlPC.SuspendLayout()
-        Me.pnSave.SuspendLayout()
-        Me.btnClose.SuspendLayout()
-        Me.pnAdd.SuspendLayout()
+        CType(Me.pbMoveRight, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.pbMoveLeft, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
-        '
-        'lblHeader
-        '
-        Me.lblHeader.Anchor = System.Windows.Forms.AnchorStyles.Top
-        Me.lblHeader.BackColor = System.Drawing.Color.Transparent
-        Me.lblHeader.Font = New System.Drawing.Font("Microsoft Sans Serif", 30.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(222, Byte))
-        Me.lblHeader.ForeColor = System.Drawing.Color.White
-        Me.lblHeader.Location = New System.Drawing.Point(41, 8)
-        Me.lblHeader.Name = "lblHeader"
-        Me.lblHeader.Size = New System.Drawing.Size(939, 44)
-        Me.lblHeader.TabIndex = 43
-        Me.lblHeader.Text = "Locker Setting"
-        Me.lblHeader.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
         'Panel1
         '
@@ -75,10 +59,78 @@ Partial Class frmSC_LockerSetting
         Me.Panel1.Controls.Add(Me.UcCabinet2)
         Me.Panel1.Controls.Add(Me.pnlPC)
         Me.Panel1.Controls.Add(Me.UcCabinet1)
-        Me.Panel1.Location = New System.Drawing.Point(0, 51)
+        Me.Panel1.Location = New System.Drawing.Point(0, 115)
         Me.Panel1.Name = "Panel1"
-        Me.Panel1.Size = New System.Drawing.Size(1024, 635)
+        Me.Panel1.Size = New System.Drawing.Size(1024, 575)
         Me.Panel1.TabIndex = 44
+        '
+        'pnlPC
+        '
+        Me.pnlPC.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
+        Me.pnlPC.Controls.Add(Me.pbMoveRight)
+        Me.pnlPC.Controls.Add(Me.txtPCPosition)
+        Me.pnlPC.Controls.Add(Me.pbMoveLeft)
+        Me.pnlPC.Location = New System.Drawing.Point(476, 4)
+        Me.pnlPC.Name = "pnlPC"
+        Me.pnlPC.Size = New System.Drawing.Size(93, 568)
+        Me.pnlPC.TabIndex = 1
+        '
+        'pbMoveRight
+        '
+        Me.pbMoveRight.Anchor = System.Windows.Forms.AnchorStyles.Bottom
+        Me.pbMoveRight.BackgroundImage = Global.AutoboxLocker.My.Resources.Resources.iconButtonStepRight
+        Me.pbMoveRight.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
+        Me.pbMoveRight.Location = New System.Drawing.Point(53, 544)
+        Me.pbMoveRight.Name = "pbMoveRight"
+        Me.pbMoveRight.Size = New System.Drawing.Size(24, 24)
+        Me.pbMoveRight.TabIndex = 12
+        Me.pbMoveRight.TabStop = False
+        '
+        'txtPCPosition
+        '
+        Me.txtPCPosition.Location = New System.Drawing.Point(3, 3)
+        Me.txtPCPosition.Name = "txtPCPosition"
+        Me.txtPCPosition.Size = New System.Drawing.Size(87, 20)
+        Me.txtPCPosition.TabIndex = 0
+        Me.txtPCPosition.Visible = False
+        '
+        'pbMoveLeft
+        '
+        Me.pbMoveLeft.Anchor = System.Windows.Forms.AnchorStyles.Bottom
+        Me.pbMoveLeft.BackgroundImage = Global.AutoboxLocker.My.Resources.Resources.iconButtonStepLeft
+        Me.pbMoveLeft.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
+        Me.pbMoveLeft.Location = New System.Drawing.Point(13, 544)
+        Me.pbMoveLeft.Name = "pbMoveLeft"
+        Me.pbMoveLeft.Size = New System.Drawing.Size(24, 24)
+        Me.pbMoveLeft.TabIndex = 11
+        Me.pbMoveLeft.TabStop = False
+        '
+        'pnAdd
+        '
+        Me.pnAdd.BackgroundImage = Global.AutoboxLocker.My.Resources.Resources.btnButtonAdd
+        Me.pnAdd.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
+        Me.pnAdd.Location = New System.Drawing.Point(23, 694)
+        Me.pnAdd.Name = "pnAdd"
+        Me.pnAdd.Size = New System.Drawing.Size(124, 41)
+        Me.pnAdd.TabIndex = 48
+        '
+        'btnClose
+        '
+        Me.btnClose.BackgroundImage = Global.AutoboxLocker.My.Resources.Resources.btnButtonCancel
+        Me.btnClose.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
+        Me.btnClose.Location = New System.Drawing.Point(817, 694)
+        Me.btnClose.Name = "btnClose"
+        Me.btnClose.Size = New System.Drawing.Size(120, 41)
+        Me.btnClose.TabIndex = 48
+        '
+        'pnSave
+        '
+        Me.pnSave.BackgroundImage = Global.AutoboxLocker.My.Resources.Resources.btnButtonSave
+        Me.pnSave.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
+        Me.pnSave.Location = New System.Drawing.Point(670, 694)
+        Me.pnSave.Name = "pnSave"
+        Me.pnSave.Size = New System.Drawing.Size(118, 41)
+        Me.pnSave.TabIndex = 47
         '
         'UcCabinet10
         '
@@ -92,7 +144,7 @@ Partial Class frmSC_LockerSetting
         Me.UcCabinet10.LockerActiveQty = 0
         Me.UcCabinet10.Name = "UcCabinet10"
         Me.UcCabinet10.OrderLayoutNo = 10
-        Me.UcCabinet10.Size = New System.Drawing.Size(90, 628)
+        Me.UcCabinet10.Size = New System.Drawing.Size(90, 568)
         Me.UcCabinet10.TabIndex = 10
         '
         'UcCabinet9
@@ -107,7 +159,7 @@ Partial Class frmSC_LockerSetting
         Me.UcCabinet9.LockerActiveQty = 0
         Me.UcCabinet9.Name = "UcCabinet9"
         Me.UcCabinet9.OrderLayoutNo = 9
-        Me.UcCabinet9.Size = New System.Drawing.Size(95, 628)
+        Me.UcCabinet9.Size = New System.Drawing.Size(95, 568)
         Me.UcCabinet9.TabIndex = 9
         '
         'UcCabinet8
@@ -122,7 +174,7 @@ Partial Class frmSC_LockerSetting
         Me.UcCabinet8.LockerActiveQty = 0
         Me.UcCabinet8.Name = "UcCabinet8"
         Me.UcCabinet8.OrderLayoutNo = 8
-        Me.UcCabinet8.Size = New System.Drawing.Size(95, 628)
+        Me.UcCabinet8.Size = New System.Drawing.Size(95, 568)
         Me.UcCabinet8.TabIndex = 8
         '
         'UcCabinet7
@@ -137,7 +189,7 @@ Partial Class frmSC_LockerSetting
         Me.UcCabinet7.LockerActiveQty = 0
         Me.UcCabinet7.Name = "UcCabinet7"
         Me.UcCabinet7.OrderLayoutNo = 7
-        Me.UcCabinet7.Size = New System.Drawing.Size(95, 628)
+        Me.UcCabinet7.Size = New System.Drawing.Size(95, 568)
         Me.UcCabinet7.TabIndex = 7
         '
         'UcCabinet6
@@ -152,7 +204,7 @@ Partial Class frmSC_LockerSetting
         Me.UcCabinet6.LockerActiveQty = 0
         Me.UcCabinet6.Name = "UcCabinet6"
         Me.UcCabinet6.OrderLayoutNo = 6
-        Me.UcCabinet6.Size = New System.Drawing.Size(95, 628)
+        Me.UcCabinet6.Size = New System.Drawing.Size(95, 568)
         Me.UcCabinet6.TabIndex = 6
         '
         'UcCabinet5
@@ -167,7 +219,7 @@ Partial Class frmSC_LockerSetting
         Me.UcCabinet5.LockerActiveQty = 0
         Me.UcCabinet5.Name = "UcCabinet5"
         Me.UcCabinet5.OrderLayoutNo = 5
-        Me.UcCabinet5.Size = New System.Drawing.Size(95, 628)
+        Me.UcCabinet5.Size = New System.Drawing.Size(95, 568)
         Me.UcCabinet5.TabIndex = 5
         '
         'UcCabinet4
@@ -182,7 +234,7 @@ Partial Class frmSC_LockerSetting
         Me.UcCabinet4.LockerActiveQty = 0
         Me.UcCabinet4.Name = "UcCabinet4"
         Me.UcCabinet4.OrderLayoutNo = 4
-        Me.UcCabinet4.Size = New System.Drawing.Size(95, 628)
+        Me.UcCabinet4.Size = New System.Drawing.Size(95, 568)
         Me.UcCabinet4.TabIndex = 4
         '
         'UcCabinet3
@@ -197,7 +249,7 @@ Partial Class frmSC_LockerSetting
         Me.UcCabinet3.LockerActiveQty = 0
         Me.UcCabinet3.Name = "UcCabinet3"
         Me.UcCabinet3.OrderLayoutNo = 3
-        Me.UcCabinet3.Size = New System.Drawing.Size(95, 628)
+        Me.UcCabinet3.Size = New System.Drawing.Size(95, 568)
         Me.UcCabinet3.TabIndex = 3
         '
         'UcCabinet2
@@ -212,24 +264,8 @@ Partial Class frmSC_LockerSetting
         Me.UcCabinet2.LockerActiveQty = 0
         Me.UcCabinet2.Name = "UcCabinet2"
         Me.UcCabinet2.OrderLayoutNo = 2
-        Me.UcCabinet2.Size = New System.Drawing.Size(95, 628)
+        Me.UcCabinet2.Size = New System.Drawing.Size(95, 568)
         Me.UcCabinet2.TabIndex = 2
-        '
-        'pnlPC
-        '
-        Me.pnlPC.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
-        Me.pnlPC.Controls.Add(Me.txtPCPosition)
-        Me.pnlPC.Location = New System.Drawing.Point(476, 4)
-        Me.pnlPC.Name = "pnlPC"
-        Me.pnlPC.Size = New System.Drawing.Size(93, 628)
-        Me.pnlPC.TabIndex = 1
-        '
-        'txtPCPosition
-        '
-        Me.txtPCPosition.Location = New System.Drawing.Point(3, 3)
-        Me.txtPCPosition.Name = "txtPCPosition"
-        Me.txtPCPosition.Size = New System.Drawing.Size(87, 20)
-        Me.txtPCPosition.TabIndex = 0
         '
         'UcCabinet1
         '
@@ -243,86 +279,19 @@ Partial Class frmSC_LockerSetting
         Me.UcCabinet1.LockerActiveQty = 0
         Me.UcCabinet1.Name = "UcCabinet1"
         Me.UcCabinet1.OrderLayoutNo = 1
-        Me.UcCabinet1.Size = New System.Drawing.Size(95, 628)
+        Me.UcCabinet1.Size = New System.Drawing.Size(95, 568)
         Me.UcCabinet1.TabIndex = 0
-        '
-        'lblSave
-        '
-        Me.lblSave.BackColor = System.Drawing.Color.Transparent
-        Me.lblSave.Font = New System.Drawing.Font("Microsoft Sans Serif", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(222, Byte))
-        Me.lblSave.ForeColor = System.Drawing.Color.Black
-        Me.lblSave.Location = New System.Drawing.Point(16, 6)
-        Me.lblSave.Name = "lblSave"
-        Me.lblSave.Size = New System.Drawing.Size(122, 27)
-        Me.lblSave.TabIndex = 46
-        Me.lblSave.Text = "Save"
-        Me.lblSave.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        '
-        'pnSave
-        '
-        Me.pnSave.BackgroundImage = Global.AutoboxLocker.My.Resources.Resources.btnColWhite
-        Me.pnSave.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
-        Me.pnSave.Controls.Add(Me.lblSave)
-        Me.pnSave.Location = New System.Drawing.Point(679, 710)
-        Me.pnSave.Name = "pnSave"
-        Me.pnSave.Size = New System.Drawing.Size(150, 41)
-        Me.pnSave.TabIndex = 47
-        '
-        'btnClose
-        '
-        Me.btnClose.BackgroundImage = Global.AutoboxLocker.My.Resources.Resources.btnColWhite
-        Me.btnClose.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
-        Me.btnClose.Controls.Add(Me.lblClose)
-        Me.btnClose.Location = New System.Drawing.Point(840, 710)
-        Me.btnClose.Name = "btnClose"
-        Me.btnClose.Size = New System.Drawing.Size(150, 41)
-        Me.btnClose.TabIndex = 48
-        '
-        'lblClose
-        '
-        Me.lblClose.BackColor = System.Drawing.Color.Transparent
-        Me.lblClose.Font = New System.Drawing.Font("Microsoft Sans Serif", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(222, Byte))
-        Me.lblClose.ForeColor = System.Drawing.Color.Black
-        Me.lblClose.Location = New System.Drawing.Point(16, 6)
-        Me.lblClose.Name = "lblClose"
-        Me.lblClose.Size = New System.Drawing.Size(122, 27)
-        Me.lblClose.TabIndex = 46
-        Me.lblClose.Text = "Close"
-        Me.lblClose.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        '
-        'pnAdd
-        '
-        Me.pnAdd.BackgroundImage = Global.AutoboxLocker.My.Resources.Resources.btnColWhite
-        Me.pnAdd.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
-        Me.pnAdd.Controls.Add(Me.lblAdd)
-        Me.pnAdd.Location = New System.Drawing.Point(23, 710)
-        Me.pnAdd.Name = "pnAdd"
-        Me.pnAdd.Size = New System.Drawing.Size(150, 41)
-        Me.pnAdd.TabIndex = 48
-        '
-        'lblAdd
-        '
-        Me.lblAdd.BackColor = System.Drawing.Color.Transparent
-        Me.lblAdd.Font = New System.Drawing.Font("Microsoft Sans Serif", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(222, Byte))
-        Me.lblAdd.ForeColor = System.Drawing.Color.Black
-        Me.lblAdd.Location = New System.Drawing.Point(16, 6)
-        Me.lblAdd.Name = "lblAdd"
-        Me.lblAdd.Size = New System.Drawing.Size(122, 27)
-        Me.lblAdd.TabIndex = 46
-        Me.lblAdd.Text = "Add"
-        Me.lblAdd.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
         'frmSC_LockerSetting
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.AutoScroll = True
-        Me.BackColor = System.Drawing.Color.FromArgb(CType(CType(97, Byte), Integer), CType(CType(78, Byte), Integer), CType(CType(72, Byte), Integer))
-        Me.ClientSize = New System.Drawing.Size(1024, 780)
+        Me.BackColor = System.Drawing.Color.White
+        Me.ClientSize = New System.Drawing.Size(1024, 768)
         Me.Controls.Add(Me.pnAdd)
         Me.Controls.Add(Me.btnClose)
         Me.Controls.Add(Me.Panel1)
-        Me.Controls.Add(Me.lblHeader)
         Me.Controls.Add(Me.pnSave)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None
         Me.Name = "frmSC_LockerSetting"
@@ -330,14 +299,11 @@ Partial Class frmSC_LockerSetting
         Me.Panel1.ResumeLayout(False)
         Me.pnlPC.ResumeLayout(False)
         Me.pnlPC.PerformLayout()
-        Me.pnSave.ResumeLayout(False)
-        Me.btnClose.ResumeLayout(False)
-        Me.pnAdd.ResumeLayout(False)
+        CType(Me.pbMoveRight, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.pbMoveLeft, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
     End Sub
-
-    Friend WithEvents lblHeader As Label
     Friend WithEvents Panel1 As Panel
     Friend WithEvents UcCabinet1 As ucCabinet
     Friend WithEvents pnlPC As Panel
@@ -350,11 +316,10 @@ Partial Class frmSC_LockerSetting
     Friend WithEvents UcCabinet8 As ucCabinet
     Friend WithEvents UcCabinet7 As ucCabinet
     Friend WithEvents UcCabinet6 As ucCabinet
-    Friend WithEvents lblSave As Label
     Friend WithEvents pnSave As Panel
     Friend WithEvents txtPCPosition As TextBox
     Friend WithEvents btnClose As Panel
-    Friend WithEvents lblClose As Label
     Friend WithEvents pnAdd As Panel
-    Friend WithEvents lblAdd As Label
+    Friend WithEvents pbMoveRight As PictureBox
+    Friend WithEvents pbMoveLeft As PictureBox
 End Class

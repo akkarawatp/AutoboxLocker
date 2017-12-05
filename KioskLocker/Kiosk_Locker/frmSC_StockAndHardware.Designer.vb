@@ -537,6 +537,7 @@ Partial Class frmSC_StockAndHardware
         Me.pgStockCoinIn.Location = New System.Drawing.Point(458, 434)
         Me.pgStockCoinIn.MaxValue = 500
         Me.pgStockCoinIn.MinValue = 1
+        'Me.pgStockCoinIn.Direction = ucStockProgress.ProgressDirection.RightToLeft
         Me.pgStockCoinIn.Name = "pgStockCoinIn"
         Me.pgStockCoinIn.Size = New System.Drawing.Size(128, 7)
         Me.pgStockCoinIn.TabIndex = 93
@@ -584,7 +585,7 @@ Partial Class frmSC_StockAndHardware
         '
         'pgStockPrinter
         '
-        Me.pgStockPrinter.Location = New System.Drawing.Point(679, 618)
+        Me.pgStockPrinter.Location = New System.Drawing.Point(673, 618)
         Me.pgStockPrinter.MaxValue = 500
         Me.pgStockPrinter.MinValue = 1
         Me.pgStockPrinter.Name = "pgStockPrinter"

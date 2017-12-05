@@ -15,9 +15,9 @@ Public Class frmSC_KioskSetting
 
     Private Sub frmSC_KioskSetting_Shown(sender As Object, e As EventArgs) Handles Me.Shown
         Me.WindowState = FormWindowState.Maximized
+        frmSC_Main.lblTitle.Text = "KIOSK SETTINGS"
         Application.DoEvents()
         InsertLogTransactionActivity(StaffConsole.TransNo, KioskConfig.SelectForm, KioskLockerStep.StaffConsoleKioskSetting_OpenForm, "", False)
-
 
         InsertLogTransactionActivity(StaffConsole.TransNo, KioskConfig.SelectForm, KioskLockerStep.StaffConsoleKioskSetting_SetKioskSetting, "", False)
         BindDDLNetworkDevice()
@@ -26,6 +26,7 @@ Public Class frmSC_KioskSetting
         chkLoginSSO.Checked = KioskConfig.IsLoginSSO
         If KioskConfig.KioskOpen24Hours = True Then
             chkKioskOpen24.Checked = True
+            pbCheckOpen24.BackgroundImage = My.Resources.imgCheckboxCheck
             txtOpenTimeH.Text = "00"
             txtOpenTimeM.Text = "00"
             txtCloseTimeH.Text = "00"
@@ -37,6 +38,7 @@ Public Class frmSC_KioskSetting
             txtCloseTimeM.Enabled = False
         Else
             chkKioskOpen24.Checked = False
+            pbCheckOpen24.BackgroundImage = My.Resources.imgCheckboxUncheck
             txtOpenTimeH.Text = KioskConfig.KioskOpenTime.Split(":")(0)
             txtOpenTimeM.Text = KioskConfig.KioskOpenTime.Split(":")(1)
             txtCloseTimeH.Text = KioskConfig.KioskCloseTime.Split(":")(0)
@@ -67,7 +69,7 @@ Public Class frmSC_KioskSetting
 
         InsertLogTransactionActivity(StaffConsole.TransNo, KioskConfig.SelectForm, KioskLockerStep.StaffConsoleKioskSetting_CheckAuthorize, "", False)
         SetStaffConsoleAuthorize()
-
+        frmLoading.Close()
     End Sub
 
     Private Sub SetStaffConsoleAuthorize()
@@ -154,14 +156,14 @@ Public Class frmSC_KioskSetting
     End Sub
 
 
-    Private Sub lblCancel_Click(sender As Object, e As EventArgs) Handles lblCancel.Click, btnCancel.Click
+    Private Sub lblCancel_Click(sender As Object, e As EventArgs) Handles btnCancel.Click
         InsertLogTransactionActivity(StaffConsole.TransNo, KioskConfig.SelectForm, KioskLockerStep.StaffConsoleKioskSetting_ClickCancel, "", False)
         Me.Close()
         frmSC_StockAndHardware.MdiParent = frmSC_Main
         frmSC_StockAndHardware.Show()
     End Sub
 
-    Private Sub lblSave_Click(sender As Object, e As EventArgs) Handles lblSave.Click, btnSave.Click
+    Private Sub lblSave_Click(sender As Object, e As EventArgs) Handles btnSave.Click
         InsertLogTransactionActivity(StaffConsole.TransNo, KioskConfig.SelectForm, KioskLockerStep.StaffConsoleKioskSetting_ClickSave, "", False)
 
         If chkKioskOpen24.Checked = False Then
@@ -409,4 +411,15 @@ Public Class frmSC_KioskSetting
         End If
     End Sub
 
+    Private Sub pbCheckOpen24_Click(sender As Object, e As EventArgs) Handles pbCheckOpen24.Click
+        If chkKioskOpen24.Checked = True Then
+            pbCheckOpen24.BackgroundImage = My.Resources.imgCheckboxUncheck
+            chkKioskOpen24.Checked = False
+        Else
+            pbCheckOpen24.BackgroundImage = My.Resources.imgCheckboxCheck
+            chkKioskOpen24.Checked = True
+        End If
+
+        Application.DoEvents()
+    End Sub
 End Class

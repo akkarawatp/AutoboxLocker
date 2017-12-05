@@ -13,10 +13,10 @@ Public Class frmSC_LockerSetting
 
     Private Sub frmSC_DialogSetting_Shown(sender As Object, e As EventArgs) Handles Me.Shown
         Me.WindowState = FormWindowState.Maximized
+        frmSC_Main.lblTitle.Text = "KIOSK LAYOUT"
         Application.DoEvents()
         InsertLogTransactionActivity(StaffConsole.TransNo, KioskConfig.SelectForm, KioskLockerStep.StaffConsoleLockerSetting_OpenForm, "", False)
 
-        lblHeader.Text = "Kiosk Layout"
         LoadAllCabinetData()
 
         InsertLogTransactionActivity(StaffConsole.TransNo, KioskConfig.SelectForm, KioskLockerStep.StaffConsoleLockerSetting_CheckAuthorize, "", False)
@@ -50,7 +50,6 @@ Public Class frmSC_LockerSetting
         If CabinetList.Rows.Count = 10 Then
             'ถ้ามีตู้ครบทั้ง 10 ตู้ให้ซ่อนปุ่ม Add โลด
             pnAdd.Visible = False
-            lblAdd.Visible = False
         End If
     End Sub
 
@@ -209,7 +208,7 @@ Public Class frmSC_LockerSetting
         Return pLeft
     End Function
 
-    Private Sub lblSave_Click(sender As Object, e As EventArgs) Handles lblSave.Click, pnSave.Click
+    Private Sub lblSave_Click(sender As Object, e As EventArgs) Handles pnSave.Click
         Try
             InsertLogTransactionActivity(StaffConsole.TransNo, KioskConfig.SelectForm, KioskLockerStep.StaffConsoleLockerSetting_ClickSave, "", False)
             If txtPCPosition.Text.Trim = "" Then
@@ -264,7 +263,7 @@ Public Class frmSC_LockerSetting
 
     End Sub
 
-    Private Sub lblClose_Click(sender As Object, e As EventArgs) Handles lblClose.Click, btnClose.Click
+    Private Sub lblClose_Click(sender As Object, e As EventArgs) Handles btnClose.Click
         InsertLogTransactionActivity(StaffConsole.TransNo, KioskConfig.SelectForm, KioskLockerStep.StaffConsoleLockerSetting_ClickClose, "", False)
         Me.Close()
         frmSC_StockAndHardware.MdiParent = frmSC_Main
@@ -369,7 +368,7 @@ Public Class frmSC_LockerSetting
 
     End Sub
 
-    Private Sub lblAdd_Click(sender As Object, e As EventArgs) Handles lblAdd.Click, pnAdd.Click
+    Private Sub lblAdd_Click(sender As Object, e As EventArgs) Handles pnAdd.Click
         Dim f As New frmSC_LayoutAdd
         f.lblHeader.Text = "เพิ่มตู้"
         If f.ShowDialog(Me.ParentForm) = DialogResult.OK Then
@@ -569,5 +568,18 @@ Public Class frmSC_LockerSetting
         Me.Close()
         frmSC_StockAndHardware.lblLockerSetting_Click(Nothing, Nothing)
         Application.DoEvents()
+    End Sub
+
+    Private Sub pbMoveLeft_Click(sender As Object, e As EventArgs) Handles pbMoveLeft.Click
+        If txtPCPosition.Text <= 1 Then Exit Sub
+
+        txtPCPosition.Text = txtPCPosition.Text - 1
+        lblSave_Click(Nothing, Nothing)
+    End Sub
+
+    Private Sub pbMoveRight_Click(sender As Object, e As EventArgs) Handles pbMoveRight.Click
+        If txtPCPosition.Text >= 10 Then Exit Sub
+        txtPCPosition.Text = txtPCPosition.Text + 1
+        lblSave_Click(Nothing, Nothing)
     End Sub
 End Class
