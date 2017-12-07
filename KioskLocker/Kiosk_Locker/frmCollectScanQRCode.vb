@@ -29,6 +29,7 @@ Public Class frmCollectScanQRCode
         Application.DoEvents()
 
         InsertLogTransactionActivity("", Collect.TransactionNo, "", KioskConfig.SelectForm, KioskLockerStep.PickupScanQRCode_OpenForm, "", False)
+        frmLoading.Close()
     End Sub
 
     Private Sub SetDDLLocker()
@@ -55,18 +56,15 @@ Public Class frmCollectScanQRCode
         If Asc(e.KeyChar) = 13 Then
             TimerTimeOut.Enabled = False
             frmLoading.Show(frmMain)
+            Application.DoEvents()
+
             InsertLogTransactionActivity("", Collect.TransactionNo, "", KioskConfig.SelectForm, KioskLockerStep.PickupScanQRCode_CheckDataQRCode, "", False)
             If CheckDataQRCode(txtQRCode.Text) = True Then
-                Application.DoEvents()
                 Collect.LostQRCode = "N"
                 UpdateCollectTransaction(Collect)
 
                 Me.Close()
-                frmLoading.Close()
                 frmDepositPayment.Show()
-                'frmDepositPayment.BringToFront()
-
-                Application.DoEvents()
             Else
                 InsertLogTransactionActivity(Collect.DepositTransNo, Collect.TransactionNo, "", KioskConfig.SelectForm, KioskLockerStep.PickupScanQRCode_CheckDataQRCode, "QR Code ไม่ถูกต้อง Deposit Trans No=" & Collect.DepositTransNo, True)
                 txtQRCode.Text = ""
@@ -406,18 +404,15 @@ Public Class frmCollectScanQRCode
 
             Me.Close()
             frmDepositPayment.Show()
-            frmLoading.Close()
-            Application.DoEvents()
-            'frmDepositPayment.BringToFront()
         Else
             InsertLogTransactionActivity(Collect.DepositTransNo, Collect.TransactionNo, "", KioskConfig.SelectForm, KioskLockerStep.PickupScanQRCode_GetPickupWithPinCode, "Pin Code ไม่ถูกต้อง Deposit Trans No=" & Collect.DepositTransNo, True)
             txtQRCode.Text = ""
             frmLoading.Close()
 
-            Dim frm As New frmDialog_OK
-            frm.lblMessage.Text = "Invalid QR Code"
-            frm.ShowDialog(Me)
+            ShowDialogErrorMessage("Invalid PIN Code")
+            txtPincode.Text = ""
             TimerTimeOut.Enabled = True
+            txtQRCode.Focus()
         End If
     End Sub
     Private Sub InsertNumber(ByVal Num As Int16)

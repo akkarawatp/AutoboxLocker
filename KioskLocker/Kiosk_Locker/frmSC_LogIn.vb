@@ -86,7 +86,8 @@ Public Class frmSC_LogIn
                 'ตรวจสอบและส่ง Alarm เมื่อเครื่องเชื่อมอินเตอร์เน็ตได้
                 UpdateAllDeviceStatusByComPort()
                 UpdateAllDeviceStatusByUsbPort()
-
+                txtUsername.Text = ""
+                txtPassword.Text = ""
                 Me.Close()
                 frmSC_Main.Show()
             Else

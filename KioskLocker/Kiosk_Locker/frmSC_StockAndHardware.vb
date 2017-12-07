@@ -29,9 +29,9 @@ Public Class frmSC_StockAndHardware
         InsertLogTransactionActivity(StaffConsole.TransNo, KioskConfig.SelectForm, KioskLockerStep.StaffConsoleStockAndHardware_CheckAuthorize, "", False)
         CheckStaffConsoleAuthorization()
 
-        'frmDepositSelectLocker.MdiParent = frmMain
-        'frmDepositSelectLocker.LoadLockerList()
-        'InsertLogTransactionActivity(StaffConsole.TransNo, KioskConfig.SelectForm, KioskLockerStep.StaffConsoleLoadLockList_LoadLockerList, "", False)
+        frmDepositSelectLocker.MdiParent = frmMain
+        frmDepositSelectLocker.LoadLockerList()
+        InsertLogTransactionActivity(StaffConsole.TransNo, KioskConfig.SelectForm, KioskLockerStep.StaffConsoleLoadLockList_LoadLockerList, "", False)
     End Sub
 
     Private Sub CheckStaffConsoleAuthorization()
@@ -387,11 +387,15 @@ Public Class frmSC_StockAndHardware
             Exit Sub
         End If
 
+        frmLoading.Show(frmMain)
+        Application.DoEvents()
         'Create New Collect Transaction
         Dim ret As ExecuteDataInfo = CreateNewPickupTransaction()
         If ret.IsSuccess = True Then
             InsertLogTransactionActivity("", Collect.TransactionNo, StaffConsole.TransNo, KioskConfig.SelectForm, KioskLockerStep.StaffConsoleLoadLockList_ClickCollect, "", False)
             Me.Close()
+            frmMain.CloseAllChildForm(frmLoading)
+            frmMain.Show()
             frmDepositSelectLocker.Show()
             frmMain.btnPointer.Visible = False
             frmMain.TimerCheckOpenClose.Enabled = False
@@ -402,6 +406,7 @@ Public Class frmSC_StockAndHardware
             SendKioskAlarm("KIOSK_OUT_OF_SERVICE", True)
             ShowDialogErrorMessage("Cannot create Collect transaction")
         End If
+        frmLoading.Close()
     End Sub
 
     Private Sub TimerRefreshStock_Tick(sender As Object, e As EventArgs) Handles TimerRefreshStock.Tick

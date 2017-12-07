@@ -62,7 +62,6 @@ Partial Class frmDepositPayment
         Me.btn500.TabIndex = 69
         Me.btn500.Text = "500"
         Me.btn500.UseVisualStyleBackColor = True
-        Me.btn500.Visible = False
         '
         'btn100
         '
@@ -157,7 +156,7 @@ Partial Class frmDepositPayment
         Me.lblPaidRemain.BackColor = System.Drawing.Color.Transparent
         Me.lblPaidRemain.Font = New System.Drawing.Font("Thai Sans Lite", 100.0!, System.Drawing.FontStyle.Bold)
         Me.lblPaidRemain.ForeColor = System.Drawing.Color.Black
-        Me.lblPaidRemain.Location = New System.Drawing.Point(639, 412)
+        Me.lblPaidRemain.Location = New System.Drawing.Point(646, 412)
         Me.lblPaidRemain.Margin = New System.Windows.Forms.Padding(0)
         Me.lblPaidRemain.Name = "lblPaidRemain"
         Me.lblPaidRemain.Size = New System.Drawing.Size(313, 139)
@@ -168,10 +167,11 @@ Partial Class frmDepositPayment
         'Label1
         '
         Me.Label1.BackColor = System.Drawing.Color.Transparent
+        Me.Label1.FlatStyle = System.Windows.Forms.FlatStyle.System
         Me.Label1.Font = New System.Drawing.Font("Thai Sans Lite", 30.0!, System.Drawing.FontStyle.Bold)
-        Me.Label1.Location = New System.Drawing.Point(906, 461)
+        Me.Label1.Location = New System.Drawing.Point(921, 461)
         Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(35, 41)
+        Me.Label1.Size = New System.Drawing.Size(23, 41)
         Me.Label1.TabIndex = 93
         Me.Label1.Text = "฿"
         Me.Label1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft

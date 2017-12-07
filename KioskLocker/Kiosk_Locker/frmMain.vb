@@ -636,7 +636,7 @@ Public Class frmMain
             btnPointer.Text = "3"
 
             'Move to top right
-            btnPointer.Location = New Point(Me.Width - btnPointer.Width, 7)
+            btnPointer.Location = New Point(Me.Width - btnPointer.Width, 10)
             btnPointer.BringToFront()
         ElseIf btnPointer.Text = "3" Then
             btnPointer.Text = "4"

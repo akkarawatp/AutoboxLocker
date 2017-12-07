@@ -505,13 +505,11 @@ Namespace Data
             PickupScanQRCode_OpenForm = 801
             PickupScanQRCode_CheckDataQRCode = 802
             PickupScanQRCode_CalServiceAmount = 803
-            '-----------------------------
             PickupScanQRCode_GetPickupWithPinCode = 804
             PickupScanQRCode_HaveData = 805
             PickupScanQRCode_NoDataFound = 806
             PickupScanQRCode_GetPickupDataFail = 807
-            '-----------------------------
-            PickupScanQRCode_Timeout = 88
+            PickupScanQRCode_Timeout = 808
 
             PickupPayment_OpenForm = 1101
             PickupPayment_CheckHardwareStatus = 1102

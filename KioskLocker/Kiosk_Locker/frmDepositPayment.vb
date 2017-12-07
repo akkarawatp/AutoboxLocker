@@ -48,7 +48,6 @@ Public Class frmDepositPayment
         frmMain.pnlFooter.Visible = True
         frmMain.pnlCancel.Visible = True
         CheckForIllegalCrossThreadCalls = False
-        frmLoading.Show(frmMain)
         SetPaymentInformation()
         Application.DoEvents()
 
@@ -64,6 +63,7 @@ Public Class frmDepositPayment
         ElseIf ServiceID = TransactionType.CollectBelonging Then
             InsertLogTransactionActivity(Collect.DepositTransNo, Collect.TransactionNo, StaffConsole.TransNo, KioskConfig.SelectForm, KioskLockerStep.PickupPayment_OpenForm, "ค่าบริการ " & Collect.ServiceAmount & " บาท ค่ามัดจำ " & Collect.DepositAmount & " บาท", False)
         End If
+
         frmLoading.Close()
     End Sub
 
@@ -89,6 +89,7 @@ Public Class frmDepositPayment
                     Collect.ChangeAmount = (Collect.DepositAmount - Collect.ServiceAmount)
                     lblPaidRemain.Text = 0
 
+                    frmLoading.Close()
                     CollectPaymentComplete()
                     IsInitialDevice = False  'จ่ายเงินครบแล้ว เครื่องรับเงินไม่ต้องทำงานก็ได้
 

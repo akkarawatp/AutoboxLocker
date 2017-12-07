@@ -32,6 +32,7 @@ Public Class frmDepositSelectLocker
 
         TimeOutCheckTime = DateTime.Now
         TimerTimeOut.Enabled = True
+        frmLoading.Close()
     End Sub
 
     Dim AllPadding As Integer = 1
@@ -194,15 +195,16 @@ Public Class frmDepositSelectLocker
                     Collect.LostQRCode = "Y"
 
                     If UpdateCollectTransaction(Collect).IsSuccess = True Then
+                        Me.Close()
                         Application.DoEvents()
                         WebCam = New WebCamera.DSCamCapture
                         frmDepositPayment.MdiParent = frmMain
                         frmDepositPayment.Show()
-                        frmDepositPayment.BringToFront()
-
+                    Else
                         frmLoading.Close()
-                        Me.Close()
                     End If
+                Else
+                    frmLoading.Close()
                 End If
             ElseIf f.LockerAvailable = ucLockerInfo.AvailableStatus.Availabled AndAlso f.LockerAvailable = ucLockerInfo.AvailableStatus.InActive Then
                 'กรณีรับคืนจาก StaffConsole ถ้าเป็นตู้ที่ว่างอยู่ ก็ไม่ให้คลิกได้ เพราะจะรับคืน จะไปคลิกตู้ว่างทำไม

@@ -59,14 +59,14 @@ Public Class frmDepositSetPINCode
             lblLabelNotification.Text = "กรุณายืนยันรหัสส่วนตัว"
         Else
             If Deposit.PinCode = TmpPinCode Then
+                frmLoading.Show(frmMain)
+                Application.DoEvents()
                 'ไปหน้าจอชำระเงินโลด
                 InsertLogTransactionActivity(Deposit.DepositTransNo, "", "", KioskConfig.SelectForm, KioskLockerStep.DepositSetPinCode_ConfirmPinCodeSuccess, "", False)
                 Me.Close()
 
                 frmDepositPayment.MdiParent = frmMain
                 frmDepositPayment.Show()
-                Application.DoEvents()
-                Threading.Thread.Sleep(1000)
             Else
                 'ยืนยันรหัสส่วนตัวไม่ตรงกัน ให้เริ่มขั้นตอนใหม่
                 TimeOutCheckTime = DateTime.Now

@@ -169,6 +169,8 @@ Public Class frmHome
             Exit Sub
         End If
 
+        frmLoading.Show(frmMain)
+        Application.DoEvents()
         'Create New Deposit Service Transaction
         Dim ret As ExecuteDataInfo = CreateNewDepositTransaction()
         If ret.IsSuccess = True Then
@@ -177,15 +179,15 @@ Public Class frmHome
             frmDepositSelectLocker.Show()
             frmMain.btnPointer.Visible = False
             frmMain.TimerCheckOpenClose.Enabled = False
-
-            'frmDepositSelectLocker.BringToFront()
-            Application.DoEvents()
             SendKioskAlarm("LOCKER_OUT_OF_SERVICE", False)
         Else
+            frmLoading.Close()
             InsertErrorLog(ret.ErrorMessage, 0, 0, 0, KioskLockerForm.Home, KioskLockerStep.Home_ClickDeposit)
             SendKioskAlarm("LOCKER_OUT_OF_SERVICE", True)
             ShowDialogErrorMessage("Cannot create transaction")
+
         End If
+
     End Sub
 
 
@@ -196,6 +198,8 @@ Public Class frmHome
         Dim ret As ExecuteDataInfo = CreateNewPickupTransaction()
         InsertLogTransactionActivity("", Collect.TransactionNo, "", KioskLockerForm.Home, KioskLockerStep.Home_ClickPickup, "เริ่มทำรายการรับคืน", False)
         If ret.IsSuccess = True Then
+            frmLoading.Show(frmMain)
+            Application.DoEvents()
             Me.Close()
 
             frmCollectScanQRCode.MdiParent = frmMain
