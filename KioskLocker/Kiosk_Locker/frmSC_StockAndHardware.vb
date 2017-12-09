@@ -1,8 +1,8 @@
 ﻿Imports System.Data.SqlClient
 Imports System.IO
 Imports KioskLinqDB.ConnectDB
-Imports AutoboxLocker.Data.KioskConfigData
-Imports AutoboxLocker.Data.ConstantsData
+Imports MiniboxLocker.Data.KioskConfigData
+Imports MiniboxLocker.Data.ConstantsData
 
 Public Class frmSC_StockAndHardware
 
@@ -16,6 +16,7 @@ Public Class frmSC_StockAndHardware
     Private Sub frmSC_StockAndHardware_Shown(sender As Object, e As EventArgs) Handles Me.Shown
         Me.WindowState = FormWindowState.Maximized
         frmSC_Main.lblTitle.Text = "DASHBOARD"
+        frmLoading.Show(frmSC_Main)
         Application.DoEvents()
 
         InsertLogTransactionActivity(StaffConsole.TransNo, KioskConfig.SelectForm, KioskLockerStep.StaffConsoleStockAndHardware_GetKioskConfig, "", False)
@@ -32,6 +33,7 @@ Public Class frmSC_StockAndHardware
         frmDepositSelectLocker.MdiParent = frmMain
         frmDepositSelectLocker.LoadLockerList()
         InsertLogTransactionActivity(StaffConsole.TransNo, KioskConfig.SelectForm, KioskLockerStep.StaffConsoleLoadLockList_LoadLockerList, "", False)
+        frmLoading.Close()
     End Sub
 
     Private Sub CheckStaffConsoleAuthorization()
@@ -407,9 +409,5 @@ Public Class frmSC_StockAndHardware
             ShowDialogErrorMessage("Cannot create Collect transaction")
         End If
         frmLoading.Close()
-    End Sub
-
-    Private Sub TimerRefreshStock_Tick(sender As Object, e As EventArgs) Handles TimerRefreshStock.Tick
-        SetStockAndHardwareStatus()
     End Sub
 End Class

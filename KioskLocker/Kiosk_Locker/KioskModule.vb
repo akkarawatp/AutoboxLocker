@@ -3,7 +3,7 @@ Imports System.Data.SqlClient
 Imports System.Drawing.Text
 Imports System.Runtime.InteropServices
 Imports System.Threading
-Imports AutoboxLocker.Data
+Imports MiniboxLocker.Data
 Imports KioskLinqDB.ConnectDB
 Imports KioskLinqDB.TABLE
 Imports System.Net

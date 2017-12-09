@@ -62,13 +62,12 @@ Partial Class frmSC_StockAndHardware
         Me.lblTotalBanknote100 = New System.Windows.Forms.Label()
         Me.lblStockPrinter = New System.Windows.Forms.Label()
         Me.lblTotalPrinter = New System.Windows.Forms.Label()
-        Me.TimerRefreshStock = New System.Windows.Forms.Timer(Me.components)
-        Me.pgStockCoinIn = New AutoboxLocker.ucStockProgress()
-        Me.pgStockCoinOut5 = New AutoboxLocker.ucStockProgress()
-        Me.pgStockBanknote20 = New AutoboxLocker.ucStockProgress()
-        Me.pgStockBanknoteIn = New AutoboxLocker.ucStockProgress()
-        Me.pgStockBanknote100 = New AutoboxLocker.ucStockProgress()
-        Me.pgStockPrinter = New AutoboxLocker.ucStockProgress()
+        Me.pgStockCoinIn = New MiniboxLocker.ucStockProgress()
+        Me.pgStockCoinOut5 = New MiniboxLocker.ucStockProgress()
+        Me.pgStockBanknote20 = New MiniboxLocker.ucStockProgress()
+        Me.pgStockBanknoteIn = New MiniboxLocker.ucStockProgress()
+        Me.pgStockBanknote100 = New MiniboxLocker.ucStockProgress()
+        Me.pgStockPrinter = New MiniboxLocker.ucStockProgress()
         Me.btnOpenAll.SuspendLayout()
         Me.btnLockerSetting.SuspendLayout()
         Me.btnDeviceSetting.SuspendLayout()
@@ -176,7 +175,7 @@ Partial Class frmSC_StockAndHardware
         'btnOpenAll
         '
         Me.btnOpenAll.Anchor = System.Windows.Forms.AnchorStyles.Top
-        Me.btnOpenAll.BackgroundImage = Global.AutoboxLocker.My.Resources.Resources.btnButtonOrange
+        Me.btnOpenAll.BackgroundImage = Global.MiniboxLocker.My.Resources.Resources.btnButtonOrange
         Me.btnOpenAll.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
         Me.btnOpenAll.Controls.Add(Me.lblOpenAll)
         Me.btnOpenAll.Location = New System.Drawing.Point(815, 610)
@@ -187,7 +186,7 @@ Partial Class frmSC_StockAndHardware
         'btnLockerSetting
         '
         Me.btnLockerSetting.Anchor = System.Windows.Forms.AnchorStyles.Top
-        Me.btnLockerSetting.BackgroundImage = Global.AutoboxLocker.My.Resources.Resources.btnButtonOrange
+        Me.btnLockerSetting.BackgroundImage = Global.MiniboxLocker.My.Resources.Resources.btnButtonOrange
         Me.btnLockerSetting.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
         Me.btnLockerSetting.Controls.Add(Me.lblLockerSetting)
         Me.btnLockerSetting.Location = New System.Drawing.Point(815, 547)
@@ -198,7 +197,7 @@ Partial Class frmSC_StockAndHardware
         'btnDeviceSetting
         '
         Me.btnDeviceSetting.Anchor = System.Windows.Forms.AnchorStyles.Top
-        Me.btnDeviceSetting.BackgroundImage = Global.AutoboxLocker.My.Resources.Resources.btnButtonOrange
+        Me.btnDeviceSetting.BackgroundImage = Global.MiniboxLocker.My.Resources.Resources.btnButtonOrange
         Me.btnDeviceSetting.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
         Me.btnDeviceSetting.Controls.Add(Me.lblDeviceSetting)
         Me.btnDeviceSetting.Location = New System.Drawing.Point(815, 481)
@@ -209,7 +208,7 @@ Partial Class frmSC_StockAndHardware
         'btnKioskSetting
         '
         Me.btnKioskSetting.Anchor = System.Windows.Forms.AnchorStyles.Top
-        Me.btnKioskSetting.BackgroundImage = Global.AutoboxLocker.My.Resources.Resources.btnButtonOrange
+        Me.btnKioskSetting.BackgroundImage = Global.MiniboxLocker.My.Resources.Resources.btnButtonOrange
         Me.btnKioskSetting.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
         Me.btnKioskSetting.Controls.Add(Me.lblKioskSetting)
         Me.btnKioskSetting.Location = New System.Drawing.Point(815, 420)
@@ -220,7 +219,7 @@ Partial Class frmSC_StockAndHardware
         'btnFillMoney
         '
         Me.btnFillMoney.Anchor = System.Windows.Forms.AnchorStyles.Top
-        Me.btnFillMoney.BackgroundImage = Global.AutoboxLocker.My.Resources.Resources.btnButtonOrange
+        Me.btnFillMoney.BackgroundImage = Global.MiniboxLocker.My.Resources.Resources.btnButtonOrange
         Me.btnFillMoney.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
         Me.btnFillMoney.Controls.Add(Me.lblFillMoney)
         Me.btnFillMoney.Location = New System.Drawing.Point(815, 304)
@@ -231,7 +230,7 @@ Partial Class frmSC_StockAndHardware
         'btnFillPaper
         '
         Me.btnFillPaper.Anchor = System.Windows.Forms.AnchorStyles.Top
-        Me.btnFillPaper.BackgroundImage = Global.AutoboxLocker.My.Resources.Resources.btnButtonOrange
+        Me.btnFillPaper.BackgroundImage = Global.MiniboxLocker.My.Resources.Resources.btnButtonOrange
         Me.btnFillPaper.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
         Me.btnFillPaper.Controls.Add(Me.lblFillPaper)
         Me.btnFillPaper.Location = New System.Drawing.Point(814, 242)
@@ -255,7 +254,7 @@ Partial Class frmSC_StockAndHardware
         'btnCollect
         '
         Me.btnCollect.Anchor = System.Windows.Forms.AnchorStyles.Top
-        Me.btnCollect.BackgroundImage = Global.AutoboxLocker.My.Resources.Resources.btnButtonOrange
+        Me.btnCollect.BackgroundImage = Global.MiniboxLocker.My.Resources.Resources.btnButtonOrange
         Me.btnCollect.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
         Me.btnCollect.Controls.Add(Me.lblCollect)
         Me.btnCollect.Location = New System.Drawing.Point(815, 362)
@@ -527,17 +526,11 @@ Partial Class frmSC_StockAndHardware
         Me.lblTotalPrinter.Text = "/500"
         Me.lblTotalPrinter.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
-        'TimerRefreshStock
-        '
-        Me.TimerRefreshStock.Enabled = True
-        Me.TimerRefreshStock.Interval = 5000
-        '
         'pgStockCoinIn
         '
         Me.pgStockCoinIn.Location = New System.Drawing.Point(458, 434)
         Me.pgStockCoinIn.MaxValue = 500
         Me.pgStockCoinIn.MinValue = 1
-        'Me.pgStockCoinIn.Direction = ucStockProgress.ProgressDirection.RightToLeft
         Me.pgStockCoinIn.Name = "pgStockCoinIn"
         Me.pgStockCoinIn.Size = New System.Drawing.Size(128, 7)
         Me.pgStockCoinIn.TabIndex = 93
@@ -598,7 +591,7 @@ Partial Class frmSC_StockAndHardware
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.White
-        Me.BackgroundImage = Global.AutoboxLocker.My.Resources.Resources.bgSCStockAndHardware
+        Me.BackgroundImage = Global.MiniboxLocker.My.Resources.Resources.bgSCStockAndHardware
         Me.ClientSize = New System.Drawing.Size(1024, 768)
         Me.Controls.Add(Me.pgStockPrinter)
         Me.Controls.Add(Me.pgStockBanknote100)
@@ -700,7 +693,6 @@ Partial Class frmSC_StockAndHardware
     Friend WithEvents lblTotalBanknote100 As Label
     Friend WithEvents lblStockPrinter As Label
     Friend WithEvents lblTotalPrinter As Label
-    Friend WithEvents TimerRefreshStock As Timer
     Friend WithEvents pgStockCoinIn As ucStockProgress
     Friend WithEvents pgStockCoinOut5 As ucStockProgress
     Friend WithEvents pgStockBanknote20 As ucStockProgress

@@ -1,4 +1,4 @@
-﻿Imports AutoboxLocker.Data.KioskConfigData
+﻿Imports MiniboxLocker.Data.KioskConfigData
 Imports System.Data.SqlClient
 Imports KioskLinqDB.ConnectDB
 Imports KioskLinqDB.TABLE

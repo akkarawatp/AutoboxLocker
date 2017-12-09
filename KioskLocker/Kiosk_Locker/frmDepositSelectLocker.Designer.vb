@@ -27,16 +27,16 @@ Partial Class frmDepositSelectLocker
         Me.pnlLayoutPC = New System.Windows.Forms.Panel()
         Me.PictureBox2 = New System.Windows.Forms.PictureBox()
         Me.TimerTimeOut = New System.Windows.Forms.Timer(Me.components)
-        Me.UcCabinet10 = New AutoboxLocker.ucCabinet()
-        Me.UcCabinet9 = New AutoboxLocker.ucCabinet()
-        Me.UcCabinet8 = New AutoboxLocker.ucCabinet()
-        Me.UcCabinet7 = New AutoboxLocker.ucCabinet()
-        Me.UcCabinet6 = New AutoboxLocker.ucCabinet()
-        Me.UcCabinet5 = New AutoboxLocker.ucCabinet()
-        Me.UcCabinet4 = New AutoboxLocker.ucCabinet()
-        Me.UcCabinet3 = New AutoboxLocker.ucCabinet()
-        Me.UcCabinet2 = New AutoboxLocker.ucCabinet()
-        Me.UcCabinet1 = New AutoboxLocker.ucCabinet()
+        Me.UcCabinet10 = New MiniboxLocker.ucCabinet()
+        Me.UcCabinet9 = New MiniboxLocker.ucCabinet()
+        Me.UcCabinet8 = New MiniboxLocker.ucCabinet()
+        Me.UcCabinet7 = New MiniboxLocker.ucCabinet()
+        Me.UcCabinet6 = New MiniboxLocker.ucCabinet()
+        Me.UcCabinet5 = New MiniboxLocker.ucCabinet()
+        Me.UcCabinet4 = New MiniboxLocker.ucCabinet()
+        Me.UcCabinet3 = New MiniboxLocker.ucCabinet()
+        Me.UcCabinet2 = New MiniboxLocker.ucCabinet()
+        Me.UcCabinet1 = New MiniboxLocker.ucCabinet()
         Me.pnlCabinetLayout.SuspendLayout()
         Me.pnlLayoutPC.SuspendLayout()
         CType(Me.PictureBox2, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -45,7 +45,7 @@ Partial Class frmDepositSelectLocker
         'pnlCabinetLayout
         '
         Me.pnlCabinetLayout.Anchor = System.Windows.Forms.AnchorStyles.Top
-        Me.pnlCabinetLayout.BackgroundImage = Global.AutoboxLocker.My.Resources.Resources.bgLayoutSelectLocker
+        Me.pnlCabinetLayout.BackgroundImage = Global.MiniboxLocker.My.Resources.Resources.bgLayoutSelectLocker
         Me.pnlCabinetLayout.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
         Me.pnlCabinetLayout.Controls.Add(Me.pnlLayoutPC)
         Me.pnlCabinetLayout.Controls.Add(Me.UcCabinet10)
@@ -76,7 +76,7 @@ Partial Class frmDepositSelectLocker
         '
         'PictureBox2
         '
-        Me.PictureBox2.Image = Global.AutoboxLocker.My.Resources.Resources.IconLockerControl
+        Me.PictureBox2.Image = Global.MiniboxLocker.My.Resources.Resources.IconLockerControl
         Me.PictureBox2.Location = New System.Drawing.Point(6, 134)
         Me.PictureBox2.Name = "PictureBox2"
         Me.PictureBox2.Size = New System.Drawing.Size(62, 31)
@@ -262,7 +262,7 @@ Partial Class frmDepositSelectLocker
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.White
-        Me.BackgroundImage = Global.AutoboxLocker.My.Resources.Resources.bgDepositSelectLocker
+        Me.BackgroundImage = Global.MiniboxLocker.My.Resources.Resources.bgDepositSelectLocker
         Me.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
         Me.ClientSize = New System.Drawing.Size(1024, 768)
         Me.Controls.Add(Me.pnlCabinetLayout)

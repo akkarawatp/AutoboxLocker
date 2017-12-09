@@ -30,16 +30,16 @@ Partial Class frmSC_LockerSetting
         Me.pnAdd = New System.Windows.Forms.Panel()
         Me.btnClose = New System.Windows.Forms.Panel()
         Me.pnSave = New System.Windows.Forms.Panel()
-        Me.UcCabinet10 = New AutoboxLocker.ucCabinet()
-        Me.UcCabinet9 = New AutoboxLocker.ucCabinet()
-        Me.UcCabinet8 = New AutoboxLocker.ucCabinet()
-        Me.UcCabinet7 = New AutoboxLocker.ucCabinet()
-        Me.UcCabinet6 = New AutoboxLocker.ucCabinet()
-        Me.UcCabinet5 = New AutoboxLocker.ucCabinet()
-        Me.UcCabinet4 = New AutoboxLocker.ucCabinet()
-        Me.UcCabinet3 = New AutoboxLocker.ucCabinet()
-        Me.UcCabinet2 = New AutoboxLocker.ucCabinet()
-        Me.UcCabinet1 = New AutoboxLocker.ucCabinet()
+        Me.UcCabinet10 = New MiniboxLocker.ucCabinet()
+        Me.UcCabinet9 = New MiniboxLocker.ucCabinet()
+        Me.UcCabinet8 = New MiniboxLocker.ucCabinet()
+        Me.UcCabinet7 = New MiniboxLocker.ucCabinet()
+        Me.UcCabinet6 = New MiniboxLocker.ucCabinet()
+        Me.UcCabinet5 = New MiniboxLocker.ucCabinet()
+        Me.UcCabinet4 = New MiniboxLocker.ucCabinet()
+        Me.UcCabinet3 = New MiniboxLocker.ucCabinet()
+        Me.UcCabinet2 = New MiniboxLocker.ucCabinet()
+        Me.UcCabinet1 = New MiniboxLocker.ucCabinet()
         Me.Panel1.SuspendLayout()
         Me.pnlPC.SuspendLayout()
         CType(Me.pbMoveRight, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -78,7 +78,7 @@ Partial Class frmSC_LockerSetting
         'pbMoveRight
         '
         Me.pbMoveRight.Anchor = System.Windows.Forms.AnchorStyles.Bottom
-        Me.pbMoveRight.BackgroundImage = Global.AutoboxLocker.My.Resources.Resources.iconButtonStepRight
+        Me.pbMoveRight.BackgroundImage = Global.MiniboxLocker.My.Resources.Resources.iconButtonStepRight
         Me.pbMoveRight.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
         Me.pbMoveRight.Location = New System.Drawing.Point(53, 544)
         Me.pbMoveRight.Name = "pbMoveRight"
@@ -97,7 +97,7 @@ Partial Class frmSC_LockerSetting
         'pbMoveLeft
         '
         Me.pbMoveLeft.Anchor = System.Windows.Forms.AnchorStyles.Bottom
-        Me.pbMoveLeft.BackgroundImage = Global.AutoboxLocker.My.Resources.Resources.iconButtonStepLeft
+        Me.pbMoveLeft.BackgroundImage = Global.MiniboxLocker.My.Resources.Resources.iconButtonStepLeft
         Me.pbMoveLeft.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
         Me.pbMoveLeft.Location = New System.Drawing.Point(13, 544)
         Me.pbMoveLeft.Name = "pbMoveLeft"
@@ -107,7 +107,7 @@ Partial Class frmSC_LockerSetting
         '
         'pnAdd
         '
-        Me.pnAdd.BackgroundImage = Global.AutoboxLocker.My.Resources.Resources.btnButtonAdd
+        Me.pnAdd.BackgroundImage = Global.MiniboxLocker.My.Resources.Resources.btnButtonAdd
         Me.pnAdd.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
         Me.pnAdd.Location = New System.Drawing.Point(23, 694)
         Me.pnAdd.Name = "pnAdd"
@@ -116,7 +116,7 @@ Partial Class frmSC_LockerSetting
         '
         'btnClose
         '
-        Me.btnClose.BackgroundImage = Global.AutoboxLocker.My.Resources.Resources.btnButtonCancel
+        Me.btnClose.BackgroundImage = Global.MiniboxLocker.My.Resources.Resources.btnButtonCancel
         Me.btnClose.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
         Me.btnClose.Location = New System.Drawing.Point(817, 694)
         Me.btnClose.Name = "btnClose"
@@ -125,7 +125,7 @@ Partial Class frmSC_LockerSetting
         '
         'pnSave
         '
-        Me.pnSave.BackgroundImage = Global.AutoboxLocker.My.Resources.Resources.btnButtonSave
+        Me.pnSave.BackgroundImage = Global.MiniboxLocker.My.Resources.Resources.btnButtonSave
         Me.pnSave.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
         Me.pnSave.Location = New System.Drawing.Point(670, 694)
         Me.pnSave.Name = "pnSave"

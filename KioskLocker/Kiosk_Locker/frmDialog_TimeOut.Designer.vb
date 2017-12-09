@@ -67,7 +67,7 @@ Partial Class frmDialog_TimeOut
         'btnNo
         '
         Me.btnNo.Anchor = System.Windows.Forms.AnchorStyles.Bottom
-        Me.btnNo.BackgroundImage = Global.AutoboxLocker.My.Resources.Resources.btnBG
+        Me.btnNo.BackgroundImage = Global.MiniboxLocker.My.Resources.Resources.btnBG
         Me.btnNo.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
         Me.btnNo.Controls.Add(Me.lblNo)
         Me.btnNo.Location = New System.Drawing.Point(373, 327)
@@ -90,7 +90,7 @@ Partial Class frmDialog_TimeOut
         'btnYes
         '
         Me.btnYes.Anchor = System.Windows.Forms.AnchorStyles.Bottom
-        Me.btnYes.BackgroundImage = Global.AutoboxLocker.My.Resources.Resources.btnBG
+        Me.btnYes.BackgroundImage = Global.MiniboxLocker.My.Resources.Resources.btnBG
         Me.btnYes.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
         Me.btnYes.Controls.Add(Me.lblYes)
         Me.btnYes.Location = New System.Drawing.Point(170, 327)

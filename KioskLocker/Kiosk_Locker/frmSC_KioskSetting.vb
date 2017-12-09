@@ -1,10 +1,10 @@
 ﻿Imports System.Net.NetworkInformation
-Imports AutoboxLocker.Data.KioskConfigData
-'Imports AutoboxLocker.ServiceTransactionData
+Imports MiniboxLocker.Data.KioskConfigData
+'Imports MiniboxLocker.ServiceTransactionData
 Imports KioskLinqDB.ConnectDB
 Imports KioskLinqDB.TABLE
 Imports System.Management
-Imports AutoboxLocker.Data
+Imports MiniboxLocker.Data
 
 Public Class frmSC_KioskSetting
     Private Sub frmSC_KioskSetting_Load(sender As Object, e As EventArgs) Handles Me.Load
@@ -260,7 +260,7 @@ Public Class frmSC_KioskSetting
         End If
 
         Try
-            Dim ini As New AutoboxLocker.Org.Mentalis.Files.IniReader(INIFileName)
+            Dim ini As New MiniboxLocker.Org.Mentalis.Files.IniReader(INIFileName)
             ini.Section = "Setting"
             ini.Write("CardLanDesc", cbNetworkDevice.Text)
             ini = Nothing

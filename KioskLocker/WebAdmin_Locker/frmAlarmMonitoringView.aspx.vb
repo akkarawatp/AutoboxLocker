@@ -266,8 +266,8 @@ Public Class frmAlarmMonitoringView
 
         Dim str As New StringBuilder
         If dt.Rows.Count > 0 Then
-            Dim sql As String = "select t.ms_locker_id, t.trans_start_time, t.passport_no, t.idcard_no, t.nation_code, " & vbNewLine
-            sql += " t.first_name, t.last_name, t.cust_image, l.locker_name " & vbNewLine
+            Dim sql As String = "select t.ms_locker_id, t.trans_no, t.trans_start_time,  " & vbNewLine
+            sql += " t.cust_image, l.locker_name " & vbNewLine
             sql += " from TB_DEPOSIT_TRANSACTION t " & vbNewLine
             sql += " inner join MS_LOCKER l On l.id=t.ms_locker_id " & vbNewLine
             sql += " left join TB_PICKUP_TRANSACTION p On p.deposit_trans_no=t.trans_no and p.trans_status='1' " & vbNewLine
@@ -330,22 +330,22 @@ Public Class frmAlarmMonitoringView
                             If InfoDt.DefaultView.Count > 0 Then
                                 Dim iDr As DataRowView = InfoDt.DefaultView(0)
 
-                                Dim FirstName As String = ""
-                                Dim LastName As String = ""
-                                Dim PassportNo As String = ""
-                                Dim NationCode As String = ""
-                                Dim IDCardNo As String = ""
+                                'Dim FirstName As String = ""
+                                'Dim LastName As String = ""
+                                'Dim PassportNo As String = ""
+                                'Dim NationCode As String = ""
+                                'Dim IDCardNo As String = ""
                                 Dim DepositTime As String = ""
                                 Dim CustImg As String = "&nbsp;"
 
-                                If Convert.IsDBNull(iDr("first_name")) = False Then FirstName = iDr("first_name")
-                                If Convert.IsDBNull(iDr("last_name")) = False Then LastName = iDr("last_name")
-                                If Convert.IsDBNull(iDr("passport_no")) = False Then PassportNo = iDr("passport_no")
-                                If Convert.IsDBNull(iDr("idcard_no")) = False Then IDCardNo = iDr("idcard_no")
-                                If Convert.IsDBNull(iDr("nation_code")) = False Then NationCode = iDr("nation_code")
+                                'If Convert.IsDBNull(iDr("first_name")) = False Then FirstName = iDr("first_name")
+                                'If Convert.IsDBNull(iDr("last_name")) = False Then LastName = iDr("last_name")
+                                'If Convert.IsDBNull(iDr("passport_no")) = False Then PassportNo = iDr("passport_no")
+                                'If Convert.IsDBNull(iDr("idcard_no")) = False Then IDCardNo = iDr("idcard_no")
+                                'If Convert.IsDBNull(iDr("nation_code")) = False Then NationCode = iDr("nation_code")
                                 If Convert.IsDBNull(iDr("trans_start_time")) = False Then DepositTime = Convert.ToDateTime(iDr("trans_start_time")).ToString("dd/MM/yyyy HH:mm", New Globalization.CultureInfo("en-US"))
                                 If Convert.IsDBNull(iDr("cust_image")) = False Then
-                                    CustImg = "data:image/" & FirstName & ";base64," & Convert.ToBase64String(iDr("cust_image"))
+                                    CustImg = "data:image/" & iDr("trans_no") & ";base64," & Convert.ToBase64String(iDr("cust_image"))
                                 End If
 
 
@@ -353,32 +353,33 @@ Public Class frmAlarmMonitoringView
                                 TextInfo += "    <table class=' + 'table m-b' + ' >"
                                 TextInfo += "       <thead>"
                                 TextInfo += "           <tr>"
-                                TextInfo += "               <th colspan='+'3'+' class='+'h4 text-center'+'>" & FirstName & " " & LastName & "</th>"
+                                TextInfo += "               <th  class='+'h4 text-center'+'>Deposit Time :</th>"
+                                TextInfo += "               <th  class='+'h4 text-center'+'>" & DepositTime & "</th>"
                                 TextInfo += "           </tr>"
                                 TextInfo += "       </thead>"
                                 TextInfo += "       <tbody>"
                                 TextInfo += "           <tr>"
-                                If PassportNo.Trim <> "" Then
-                                    TextInfo += "               <td class='+'col-sm-5'+'>Passport No :</td>"
-                                    TextInfo += "               <td >" & PassportNo & "</td>"
-                                Else
-                                    TextInfo += "               <td class='+'col-sm-5'+'>ID Card No :</td>"
-                                    TextInfo += "               <td >" & IDCardNo & "</td>"
-                                End If
-                                TextInfo += "               <td rowspan='+'4'+'><img src='+'" & CustImg & "'+' style='+'width:150px;'+'  /></td>"
+                                'If PassportNo.Trim <> "" Then
+                                '    TextInfo += "               <td class='+'col-sm-5'+'>Passport No :</td>"
+                                '    TextInfo += "               <td >" & PassportNo & "</td>"
+                                'Else
+                                '    TextInfo += "               <td class='+'col-sm-5'+'>ID Card No :</td>"
+                                '    TextInfo += "               <td >" & IDCardNo & "</td>"
+                                'End If
+                                TextInfo += "               <td colspan='+'2'+'><img src='+'" & CustImg & "'+' style='+'width:150px;'+'  /></td>"
                                 TextInfo += "           </tr>"
-                                TextInfo += "           <tr>"
-                                TextInfo += "               <td >Nationality :</td>"
-                                TextInfo += "               <td >" & NationCode & "</td>"
-                                TextInfo += "           </tr>"
-                                TextInfo += "           <tr>"
-                                TextInfo += "               <td >Locker Name :</td>"
-                                TextInfo += "               <td >" & dt_detail.Rows(j)("Locker_Name").ToString() & "</td>"
-                                TextInfo += "           </tr>"
-                                TextInfo += "           <tr>"
-                                TextInfo += "               <td >Deposit Time :</td>"
-                                TextInfo += "               <td >" & DepositTime & "</td>"
-                                TextInfo += "           </tr>"
+                                'TextInfo += "           <tr>"
+                                'TextInfo += "               <td >Nationality :</td>"
+                                'TextInfo += "               <td >" & NationCode & "</td>"
+                                'TextInfo += "           </tr>"
+                                'TextInfo += "           <tr>"
+                                'TextInfo += "               <td >Locker Name :</td>"
+                                'TextInfo += "               <td >" & dt_detail.Rows(j)("Locker_Name").ToString() & "</td>"
+                                'TextInfo += "           </tr>"
+                                'TextInfo += "           <tr>"
+                                'TextInfo += "               <td >Deposit Time :</td>"
+                                'TextInfo += "               <td >" & DepositTime & "</td>"
+                                'TextInfo += "           </tr>"
                                 TextInfo += "       </tbody>"
                                 TextInfo += "   </table>"
                                 TextInfo += "</div>'"

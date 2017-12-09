@@ -1,5 +1,5 @@
-﻿Imports AutoboxLocker.Data
-Imports AutoboxLocker.Data.KioskConfigData
+﻿Imports MiniboxLocker.Data
+Imports MiniboxLocker.Data.KioskConfigData
 Imports KioskLinqDB.ConnectDB
 
 Public Class frmHome

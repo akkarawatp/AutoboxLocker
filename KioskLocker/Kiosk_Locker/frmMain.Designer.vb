@@ -46,7 +46,7 @@ Partial Class frmMain
         'pnlFooter
         '
         Me.pnlFooter.BackColor = System.Drawing.Color.Transparent
-        Me.pnlFooter.BackgroundImage = Global.AutoboxLocker.My.Resources.Resources.bgMainFooter
+        Me.pnlFooter.BackgroundImage = Global.MiniboxLocker.My.Resources.Resources.bgMainFooter
         Me.pnlFooter.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
         Me.pnlFooter.Controls.Add(Me.pnlCancel)
         Me.pnlFooter.Location = New System.Drawing.Point(0, 688)
@@ -57,7 +57,7 @@ Partial Class frmMain
         '
         'pnlCancel
         '
-        Me.pnlCancel.BackgroundImage = Global.AutoboxLocker.My.Resources.Resources.btnBG
+        Me.pnlCancel.BackgroundImage = Global.MiniboxLocker.My.Resources.Resources.btnBG
         Me.pnlCancel.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
         Me.pnlCancel.Controls.Add(Me.btnCancel)
         Me.pnlCancel.Location = New System.Drawing.Point(454, 2)
@@ -100,7 +100,7 @@ Partial Class frmMain
         'pnlHead
         '
         Me.pnlHead.BackColor = System.Drawing.Color.Transparent
-        Me.pnlHead.BackgroundImage = Global.AutoboxLocker.My.Resources.Resources.bgMainHeader
+        Me.pnlHead.BackgroundImage = Global.MiniboxLocker.My.Resources.Resources.bgMainHeader
         Me.pnlHead.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
         Me.pnlHead.Location = New System.Drawing.Point(0, 0)
         Me.pnlHead.Margin = New System.Windows.Forms.Padding(0)

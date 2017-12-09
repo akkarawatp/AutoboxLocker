@@ -107,7 +107,7 @@ Partial Class frmSC_DeviceSetting
         'btnCancel
         '
         Me.btnCancel.Anchor = System.Windows.Forms.AnchorStyles.Top
-        Me.btnCancel.BackgroundImage = Global.AutoboxLocker.My.Resources.Resources.btnButtonCancel
+        Me.btnCancel.BackgroundImage = Global.MiniboxLocker.My.Resources.Resources.btnButtonCancel
         Me.btnCancel.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
         Me.btnCancel.Location = New System.Drawing.Point(560, 621)
         Me.btnCancel.Name = "btnCancel"
@@ -117,7 +117,7 @@ Partial Class frmSC_DeviceSetting
         'btnSave
         '
         Me.btnSave.Anchor = System.Windows.Forms.AnchorStyles.Top
-        Me.btnSave.BackgroundImage = Global.AutoboxLocker.My.Resources.Resources.btnButtonConfirm
+        Me.btnSave.BackgroundImage = Global.MiniboxLocker.My.Resources.Resources.btnButtonConfirm
         Me.btnSave.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
         Me.btnSave.Location = New System.Drawing.Point(394, 621)
         Me.btnSave.Name = "btnSave"

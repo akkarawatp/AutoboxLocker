@@ -1,6 +1,6 @@
 ﻿Imports KioskLinqDB.TABLE
 Imports KioskLinqDB.ConnectDB
-Imports AutoboxLocker.Data.KioskConfigData
+Imports MiniboxLocker.Data.KioskConfigData
 Imports System.Data.SqlClient
 Public Class frmSC_DialogSettingLocker
     Dim _LockerID As Long = 0

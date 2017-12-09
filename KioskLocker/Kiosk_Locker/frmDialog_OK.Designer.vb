@@ -45,7 +45,7 @@ Partial Class frmDialog_OK
         'btnOK
         '
         Me.btnOK.Anchor = System.Windows.Forms.AnchorStyles.Bottom
-        'Me.btnOK.BackgroundImage = Global.AutoboxLocker.My.Resources.Resources.btnColWhite
+        'Me.btnOK.BackgroundImage = Global.MiniboxLocker.My.Resources.Resources.btnColWhite
         Me.btnOK.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
         Me.btnOK.Controls.Add(Me.lblOK)
         Me.btnOK.Location = New System.Drawing.Point(283, 249)

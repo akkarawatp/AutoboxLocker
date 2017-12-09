@@ -144,9 +144,9 @@ Namespace My
     Friend Module MySettingsProperty
         
         <Global.System.ComponentModel.Design.HelpKeywordAttribute("My.Settings")>  _
-        Friend ReadOnly Property Settings() As Global.AutoboxLocker.My.MySettings
+        Friend ReadOnly Property Settings() As Global.MiniboxLocker.My.MySettings
             Get
-                Return Global.AutoboxLocker.My.MySettings.Default
+                Return Global.MiniboxLocker.My.MySettings.Default
             End Get
         End Property
     End Module

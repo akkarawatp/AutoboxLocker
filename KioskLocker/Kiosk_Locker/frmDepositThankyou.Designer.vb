@@ -57,7 +57,7 @@ Partial Class frmDepositThankyou
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.AutoScroll = True
         Me.BackColor = System.Drawing.Color.White
-        Me.BackgroundImage = Global.AutoboxLocker.My.Resources.Resources.bgDepositThankyou
+        Me.BackgroundImage = Global.MiniboxLocker.My.Resources.Resources.bgDepositThankyou
         Me.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
         Me.ClientSize = New System.Drawing.Size(1024, 768)
         Me.Controls.Add(Me.btnCloseLocker)

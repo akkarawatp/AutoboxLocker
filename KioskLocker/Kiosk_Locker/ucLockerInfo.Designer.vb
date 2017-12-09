@@ -113,7 +113,7 @@ Partial Class ucLockerInfo
         '
         'pbLockerName
         '
-        Me.pbLockerName.Image = Global.AutoboxLocker.My.Resources.Resources.btnButtonOrange
+        Me.pbLockerName.Image = Global.MiniboxLocker.My.Resources.Resources.btnButtonOrange
         Me.pbLockerName.Location = New System.Drawing.Point(0, 0)
         Me.pbLockerName.Name = "pbLockerName"
         Me.pbLockerName.Size = New System.Drawing.Size(93, 16)

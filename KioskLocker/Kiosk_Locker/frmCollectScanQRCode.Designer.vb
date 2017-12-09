@@ -213,7 +213,7 @@ Partial Class frmCollectScanQRCode
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.White
-        Me.BackgroundImage = Global.AutoboxLocker.My.Resources.Resources.bgCollectScanQRCode
+        Me.BackgroundImage = Global.MiniboxLocker.My.Resources.Resources.bgCollectScanQRCode
         Me.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
         Me.ClientSize = New System.Drawing.Size(1024, 768)
         Me.Controls.Add(Me.Panel1)

@@ -33,7 +33,7 @@ Partial Class ucCabinet
         'pbMoveRight
         '
         Me.pbMoveRight.Anchor = System.Windows.Forms.AnchorStyles.Bottom
-        Me.pbMoveRight.BackgroundImage = Global.AutoboxLocker.My.Resources.Resources.iconButtonStepRight
+        Me.pbMoveRight.BackgroundImage = Global.MiniboxLocker.My.Resources.Resources.iconButtonStepRight
         Me.pbMoveRight.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
         Me.pbMoveRight.Location = New System.Drawing.Point(71, 292)
         Me.pbMoveRight.Name = "pbMoveRight"
@@ -44,7 +44,7 @@ Partial Class ucCabinet
         'pbMoveLeft
         '
         Me.pbMoveLeft.Anchor = System.Windows.Forms.AnchorStyles.Bottom
-        Me.pbMoveLeft.BackgroundImage = Global.AutoboxLocker.My.Resources.Resources.iconButtonStepLeft
+        Me.pbMoveLeft.BackgroundImage = Global.MiniboxLocker.My.Resources.Resources.iconButtonStepLeft
         Me.pbMoveLeft.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
         Me.pbMoveLeft.Location = New System.Drawing.Point(1, 292)
         Me.pbMoveLeft.Name = "pbMoveLeft"
@@ -55,7 +55,7 @@ Partial Class ucCabinet
         'pbDelete
         '
         Me.pbDelete.Anchor = System.Windows.Forms.AnchorStyles.Bottom
-        Me.pbDelete.BackgroundImage = Global.AutoboxLocker.My.Resources.Resources.icon_cabinet_delete
+        Me.pbDelete.BackgroundImage = Global.MiniboxLocker.My.Resources.Resources.icon_cabinet_delete
         Me.pbDelete.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
         Me.pbDelete.Location = New System.Drawing.Point(36, 292)
         Me.pbDelete.Name = "pbDelete"

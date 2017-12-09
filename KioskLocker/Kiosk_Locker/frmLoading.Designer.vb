@@ -40,7 +40,7 @@ Partial Class frmLoading
         '
         'PictureBox1
         '
-        Me.PictureBox1.Image = Global.AutoboxLocker.My.Resources.Resources.IconProcessing
+        Me.PictureBox1.Image = Global.MiniboxLocker.My.Resources.Resources.IconProcessing
         Me.PictureBox1.Location = New System.Drawing.Point(382, 254)
         Me.PictureBox1.Name = "PictureBox1"
         Me.PictureBox1.Size = New System.Drawing.Size(260, 260)

@@ -1,7 +1,7 @@
 ﻿Imports System.DirectoryServices.AccountManagement
-Imports AutoboxLocker.Data
-Imports AutoboxLocker.Data.KioskConfigData
-Imports AutoboxLocker.ServiceTransactionData
+Imports MiniboxLocker.Data
+Imports MiniboxLocker.Data.KioskConfigData
+Imports MiniboxLocker.ServiceTransactionData
 Imports KioskLinqDB.ConnectDB
 Imports Engine
 
@@ -23,6 +23,7 @@ Public Class frmSC_LogIn
         InsertLogTransactionActivity(StaffConsole.TransNo, KioskConfig.SelectForm, KioskLockerStep.StaffConsoleLogin_ClickCancel, "", False)
         frmMain.TimerCheckOpenClose.Enabled = True
         Me.Close()
+        frmMain.Show()
     End Sub
 
     Private Sub txtUsername_KeyPress(sender As Object, e As KeyPressEventArgs) Handles txtUsername.KeyPress

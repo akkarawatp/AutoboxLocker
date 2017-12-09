@@ -1,6 +1,6 @@
 ﻿'Imports System.DirectoryServices.AccountManagement
-Imports AutoboxLocker.Data.KioskConfigData
-'Imports AutoboxLocker.ServiceTransactionData
+Imports MiniboxLocker.Data.KioskConfigData
+'Imports MiniboxLocker.ServiceTransactionData
 Imports KioskLinqDB.TABLE
 Imports KioskLinqDB.ConnectDB
 

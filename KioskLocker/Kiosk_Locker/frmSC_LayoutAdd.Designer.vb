@@ -73,7 +73,7 @@ Partial Class frmSC_LayoutAdd
         'btnCancel
         '
         Me.btnCancel.Anchor = System.Windows.Forms.AnchorStyles.Bottom
-        'Me.btnCancel.BackgroundImage = Global.AutoboxLocker.My.Resources.Resources.btnColWhite
+        'Me.btnCancel.BackgroundImage = Global.MiniboxLocker.My.Resources.Resources.btnColWhite
         Me.btnCancel.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
         Me.btnCancel.Controls.Add(Me.lblCancel)
         Me.btnCancel.Location = New System.Drawing.Point(275, 165)
@@ -96,7 +96,7 @@ Partial Class frmSC_LayoutAdd
         'btnOK
         '
         Me.btnOK.Anchor = System.Windows.Forms.AnchorStyles.Bottom
-        'Me.btnOK.BackgroundImage = Global.AutoboxLocker.My.Resources.Resources.btnColWhite
+        'Me.btnOK.BackgroundImage = Global.MiniboxLocker.My.Resources.Resources.btnColWhite
         Me.btnOK.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
         Me.btnOK.Controls.Add(Me.lblOK)
         Me.btnOK.Location = New System.Drawing.Point(69, 165)

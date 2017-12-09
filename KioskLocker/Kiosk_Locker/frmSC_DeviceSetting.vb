@@ -1,9 +1,9 @@
 ﻿Imports System.Drawing.Printing
 Imports KioskLinqDB.ConnectDB
 Imports KioskLinqDB.TABLE
-Imports AutoboxLocker.Data
+Imports MiniboxLocker.Data
 Imports System.Data.SqlClient
-Imports AutoboxLocker.Data.KioskConfigData
+Imports MiniboxLocker.Data.KioskConfigData
 
 Public Class frmSC_DeviceSetting
     Private Sub frmSC_KioskSetting_Load(sender As Object, e As EventArgs) Handles Me.Load
@@ -228,9 +228,9 @@ Public Class frmSC_DeviceSetting
 
     Private Sub lblCancel_Click(sender As Object, e As EventArgs) Handles btnCancel.Click
         InsertLogTransactionActivity(StaffConsole.TransNo, KioskConfig.SelectForm, KioskLockerStep.StaffConsoleDeviceSetting_ClickCancel, "", False)
-        frmMain.CloseAllChildForm()
-        Dim f As New frmSC_StockAndHardware
-        f.ShowDialog(frmMain)
+        Me.Close()
+        frmSC_StockAndHardware.MdiParent = frmSC_Main
+        frmSC_StockAndHardware.Show()
     End Sub
 
     Private Function UpdateDeviceByDeviceID(vDeviceID As ConstantsData.DeviceID, ComportVID As String, DriverName1 As String, DriverName2 As String) As Boolean
@@ -356,10 +356,9 @@ Public Class frmSC_DeviceSetting
 
         InsertLogTransactionActivity(StaffConsole.TransNo, KioskConfig.SelectForm, 0, "", False)
 
-        frmMain.CloseAllChildForm()
         Me.Close()
-        Dim f As New frmSC_StockAndHardware
-        f.ShowDialog()
+        frmSC_StockAndHardware.MdiParent = frmSC_Main
+        frmSC_StockAndHardware.Show()
 
     End Sub
 End Class

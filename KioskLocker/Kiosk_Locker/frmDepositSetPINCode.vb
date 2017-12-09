@@ -1,5 +1,5 @@
 ﻿Imports System.Data.SqlClient
-Imports AutoboxLocker.Data.KioskConfigData
+Imports MiniboxLocker.Data.KioskConfigData
 Imports KioskLinqDB.ConnectDB
 Public Class frmDepositSetPINCode
     Dim TimeOut As Int32 = KioskConfig.TimeOutSec

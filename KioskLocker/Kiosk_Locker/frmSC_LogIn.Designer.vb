@@ -71,7 +71,7 @@ Partial Class frmSC_LogIn
         Me.lblLogin.BackColor = System.Drawing.Color.White
         Me.lblLogin.Font = New System.Drawing.Font("Microsoft Sans Serif", 24.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(222, Byte))
         Me.lblLogin.ForeColor = System.Drawing.Color.Transparent
-        Me.lblLogin.Image = Global.AutoboxLocker.My.Resources.Resources.imgButtonLogin
+        Me.lblLogin.Image = Global.MiniboxLocker.My.Resources.Resources.imgButtonLogin
         Me.lblLogin.Location = New System.Drawing.Point(355, 540)
         Me.lblLogin.Name = "lblLogin"
         Me.lblLogin.Size = New System.Drawing.Size(295, 67)
@@ -84,7 +84,7 @@ Partial Class frmSC_LogIn
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.AutoScroll = True
         Me.BackColor = System.Drawing.Color.White
-        Me.BackgroundImage = Global.AutoboxLocker.My.Resources.Resources.bgSCLogin
+        Me.BackgroundImage = Global.MiniboxLocker.My.Resources.Resources.bgSCLogin
         Me.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
         Me.ClientSize = New System.Drawing.Size(1024, 768)
         Me.Controls.Add(Me.lblCancel)

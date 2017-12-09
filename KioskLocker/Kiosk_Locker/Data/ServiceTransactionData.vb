@@ -1,4 +1,4 @@
-﻿Imports AutoboxLocker.Data
+﻿Imports MiniboxLocker.Data
 Public Class DepositTransactionData
     Dim _KioskID As String = ""
     Dim _DepositTransactionID As Long = 0

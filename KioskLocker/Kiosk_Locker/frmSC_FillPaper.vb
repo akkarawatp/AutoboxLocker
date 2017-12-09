@@ -1,4 +1,4 @@
-﻿Imports AutoboxLocker.Data.KioskConfigData
+﻿Imports MiniboxLocker.Data.KioskConfigData
 Imports KioskLinqDB.TABLE
 Public Class frmSC_FillPaper
 

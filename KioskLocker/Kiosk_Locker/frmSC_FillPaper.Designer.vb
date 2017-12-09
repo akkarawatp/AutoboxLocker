@@ -58,7 +58,7 @@ Partial Class frmSC_FillPaper
         'btnCancel
         '
         Me.btnCancel.Anchor = System.Windows.Forms.AnchorStyles.Top
-        Me.btnCancel.BackgroundImage = Global.AutoboxLocker.My.Resources.Resources.btnButtonCancel
+        Me.btnCancel.BackgroundImage = Global.MiniboxLocker.My.Resources.Resources.btnButtonCancel
         Me.btnCancel.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
         Me.btnCancel.Location = New System.Drawing.Point(717, 424)
         Me.btnCancel.Name = "btnCancel"
@@ -68,7 +68,7 @@ Partial Class frmSC_FillPaper
         'btnConfirm
         '
         Me.btnConfirm.Anchor = System.Windows.Forms.AnchorStyles.Top
-        Me.btnConfirm.BackgroundImage = Global.AutoboxLocker.My.Resources.Resources.btnButtonConfirm
+        Me.btnConfirm.BackgroundImage = Global.MiniboxLocker.My.Resources.Resources.btnButtonConfirm
         Me.btnConfirm.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
         Me.btnConfirm.Location = New System.Drawing.Point(538, 424)
         Me.btnConfirm.Name = "btnConfirm"
@@ -80,7 +80,7 @@ Partial Class frmSC_FillPaper
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.White
-        Me.BackgroundImage = Global.AutoboxLocker.My.Resources.Resources.bgSCFillPaper
+        Me.BackgroundImage = Global.MiniboxLocker.My.Resources.Resources.bgSCFillPaper
         Me.ClientSize = New System.Drawing.Size(1024, 768)
         Me.Controls.Add(Me.txtValue)
         Me.Controls.Add(Me.txtMax)

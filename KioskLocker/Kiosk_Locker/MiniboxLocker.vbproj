@@ -6,9 +6,9 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{A0BC5FA5-B518-4D4B-BFE6-50B52A369F82}</ProjectGuid>
     <OutputType>WinExe</OutputType>
-    <StartupObject>AutoboxLocker.My.MyApplication</StartupObject>
-    <RootNamespace>AutoboxLocker</RootNamespace>
-    <AssemblyName>AutoboxLocker</AssemblyName>
+    <StartupObject>MiniboxLocker.My.MyApplication</StartupObject>
+    <RootNamespace>MiniboxLocker</RootNamespace>
+    <AssemblyName>MiniboxLocker</AssemblyName>
     <FileAlignment>512</FileAlignment>
     <MyType>WindowsForms</MyType>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
@@ -36,7 +36,7 @@
     <DefineDebug>true</DefineDebug>
     <DefineTrace>true</DefineTrace>
     <OutputPath>bin\Debug\</OutputPath>
-    <DocumentationFile>AutoboxLocker.xml</DocumentationFile>
+    <DocumentationFile>MiniboxLocker.xml</DocumentationFile>
     <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022</NoWarn>
     <RegisterForComInterop>true</RegisterForComInterop>
   </PropertyGroup>
@@ -47,7 +47,7 @@
     <DefineTrace>true</DefineTrace>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
-    <DocumentationFile>AutoboxLocker.xml</DocumentationFile>
+    <DocumentationFile>MiniboxLocker.xml</DocumentationFile>
     <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022</NoWarn>
     <RegisterForComInterop>true</RegisterForComInterop>
   </PropertyGroup>
@@ -422,13 +422,13 @@
       <SubType>Designer</SubType>
     </None>
     <None Include="Web References\Webservice_Locker\ATBLockerWebService.wsdl" />
-    <None Include="Web References\Webservice_Locker\LoginReturnData1.datasource">
+    <None Include="Web References\Webservice_Locker\LoginReturnData.datasource">
       <DependentUpon>Reference.map</DependentUpon>
     </None>
-    <None Include="Web References\Webservice_Locker\MasterPromotionData1.datasource">
+    <None Include="Web References\Webservice_Locker\MasterPromotionData.datasource">
       <DependentUpon>Reference.map</DependentUpon>
     </None>
-    <None Include="Web References\Webservice_Locker\MasterServiceRateData1.datasource">
+    <None Include="Web References\Webservice_Locker\MasterServiceRateData.datasource">
       <DependentUpon>Reference.map</DependentUpon>
     </None>
     <None Include="Web References\Webservice_Locker\Reference.map">

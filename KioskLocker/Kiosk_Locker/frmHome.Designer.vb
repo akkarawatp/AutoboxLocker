@@ -44,7 +44,7 @@ Partial Class frmHome
         '
         Me.lblCollect.BackColor = System.Drawing.Color.White
         Me.lblCollect.Font = New System.Drawing.Font("Thai Sans Lite", 40.0!, System.Drawing.FontStyle.Bold)
-        Me.lblCollect.Image = Global.AutoboxLocker.My.Resources.Resources.imgButtonIconCollect
+        Me.lblCollect.Image = Global.MiniboxLocker.My.Resources.Resources.imgButtonIconCollect
         Me.lblCollect.Location = New System.Drawing.Point(523, 208)
         Me.lblCollect.Margin = New System.Windows.Forms.Padding(0)
         Me.lblCollect.Name = "lblCollect"
@@ -56,7 +56,7 @@ Partial Class frmHome
         '
         Me.lblDeposit.BackColor = System.Drawing.Color.White
         Me.lblDeposit.Font = New System.Drawing.Font("Thai Sans Lite", 40.0!, System.Drawing.FontStyle.Bold)
-        Me.lblDeposit.Image = Global.AutoboxLocker.My.Resources.Resources.imgButtonIconDeposit
+        Me.lblDeposit.Image = Global.MiniboxLocker.My.Resources.Resources.imgButtonIconDeposit
         Me.lblDeposit.Location = New System.Drawing.Point(127, 224)
         Me.lblDeposit.Margin = New System.Windows.Forms.Padding(0)
         Me.lblDeposit.Name = "lblDeposit"
@@ -69,7 +69,7 @@ Partial Class frmHome
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.White
-        Me.BackgroundImage = Global.AutoboxLocker.My.Resources.Resources.bgHome
+        Me.BackgroundImage = Global.MiniboxLocker.My.Resources.Resources.bgHome
         Me.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
         Me.ClientSize = New System.Drawing.Size(1024, 768)
         Me.Controls.Add(Me.lblCollect)

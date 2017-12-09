@@ -186,7 +186,7 @@ Partial Class frmSC_DialogSettingLocker
         '
         'pbClose
         '
-        Me.pbClose.BackgroundImage = Global.AutoboxLocker.My.Resources.Resources.IconClose
+        Me.pbClose.BackgroundImage = Global.MiniboxLocker.My.Resources.Resources.IconClose
         Me.pbClose.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
         Me.pbClose.Location = New System.Drawing.Point(340, 3)
         Me.pbClose.Name = "pbClose"
@@ -284,7 +284,7 @@ Partial Class frmSC_DialogSettingLocker
         'btnSave
         '
         Me.btnSave.Anchor = System.Windows.Forms.AnchorStyles.Bottom
-        Me.btnSave.BackgroundImage = Global.AutoboxLocker.My.Resources.Resources.btnColWhite
+        Me.btnSave.BackgroundImage = Global.MiniboxLocker.My.Resources.Resources.btnColWhite
         Me.btnSave.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
         Me.btnSave.Controls.Add(Me.lblSave)
         Me.btnSave.Location = New System.Drawing.Point(144, 229)

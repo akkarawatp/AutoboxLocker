@@ -692,7 +692,7 @@ Partial Class frmSC_KioskSetting
         'btnCancel
         '
         Me.btnCancel.Anchor = System.Windows.Forms.AnchorStyles.Top
-        Me.btnCancel.BackgroundImage = Global.AutoboxLocker.My.Resources.Resources.btnButtonCancel
+        Me.btnCancel.BackgroundImage = Global.MiniboxLocker.My.Resources.Resources.btnButtonCancel
         Me.btnCancel.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
         Me.btnCancel.Location = New System.Drawing.Point(819, 571)
         Me.btnCancel.Name = "btnCancel"
@@ -702,7 +702,7 @@ Partial Class frmSC_KioskSetting
         'btnSave
         '
         Me.btnSave.Anchor = System.Windows.Forms.AnchorStyles.Top
-        Me.btnSave.BackgroundImage = Global.AutoboxLocker.My.Resources.Resources.btnButtonConfirm
+        Me.btnSave.BackgroundImage = Global.MiniboxLocker.My.Resources.Resources.btnButtonConfirm
         Me.btnSave.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
         Me.btnSave.Location = New System.Drawing.Point(660, 571)
         Me.btnSave.Name = "btnSave"
@@ -712,7 +712,7 @@ Partial Class frmSC_KioskSetting
         'pbCheckOpen24
         '
         Me.pbCheckOpen24.BackColor = System.Drawing.Color.Transparent
-        Me.pbCheckOpen24.BackgroundImage = Global.AutoboxLocker.My.Resources.Resources.imgCheckboxUncheck
+        Me.pbCheckOpen24.BackgroundImage = Global.MiniboxLocker.My.Resources.Resources.imgCheckboxUncheck
         Me.pbCheckOpen24.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
         Me.pbCheckOpen24.Location = New System.Drawing.Point(196, 366)
         Me.pbCheckOpen24.Name = "pbCheckOpen24"
@@ -726,7 +726,7 @@ Partial Class frmSC_KioskSetting
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.AutoScroll = True
         Me.BackColor = System.Drawing.Color.White
-        Me.BackgroundImage = Global.AutoboxLocker.My.Resources.Resources.bgSCKioskSetting
+        Me.BackgroundImage = Global.MiniboxLocker.My.Resources.Resources.bgSCKioskSetting
         Me.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
         Me.ClientSize = New System.Drawing.Size(1024, 764)
         Me.Controls.Add(Me.pbCheckOpen24)

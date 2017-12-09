@@ -109,7 +109,7 @@ Namespace Webservice_Locker
         '''<remarks/>
         Public Sub New()
             MyBase.New
-            Me.Url = Global.AutoboxLocker.My.MySettings.Default.Kiosk_Locker_Webservice_Locker_ATBLockerWebService
+            Me.Url = Global.MiniboxLocker.My.MySettings.Default.Kiosk_Locker_Webservice_Locker_ATBLockerWebService
             If (Me.IsLocalFileSystemWebService(Me.Url) = true) Then
                 Me.UseDefaultCredentials = true
                 Me.useDefaultCredentialsSetExplicitly = false

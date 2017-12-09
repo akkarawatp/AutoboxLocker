@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
 VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "AutoboxLocker", "Kiosk_Locker\AutoboxLocker.vbproj", "{A0BC5FA5-B518-4D4B-BFE6-50B52A369F82}"
+Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "MiniboxLocker", "Kiosk_Locker\MiniboxLocker.vbproj", "{A0BC5FA5-B518-4D4B-BFE6-50B52A369F82}"
 EndProject
 Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "BanknoteIn", "..\HardwareKiosk\BanknoteIn\BanknoteIn.vbproj", "{8DEDFDA6-C134-4125-8CAF-ACAD71AE933F}"
 EndProject

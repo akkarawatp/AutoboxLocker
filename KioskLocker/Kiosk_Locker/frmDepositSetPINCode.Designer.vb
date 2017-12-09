@@ -86,7 +86,7 @@ Partial Class frmDepositSetPINCode
         '
         'Panel6
         '
-        Me.Panel6.BackgroundImage = Global.AutoboxLocker.My.Resources.Resources.imgTextPincode
+        Me.Panel6.BackgroundImage = Global.MiniboxLocker.My.Resources.Resources.imgTextPincode
         Me.Panel6.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
         Me.Panel6.Controls.Add(Me.txtPincode6)
         Me.Panel6.Location = New System.Drawing.Point(383, 429)
@@ -112,7 +112,7 @@ Partial Class frmDepositSetPINCode
         '
         'Panel5
         '
-        Me.Panel5.BackgroundImage = Global.AutoboxLocker.My.Resources.Resources.imgTextPincode
+        Me.Panel5.BackgroundImage = Global.MiniboxLocker.My.Resources.Resources.imgTextPincode
         Me.Panel5.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
         Me.Panel5.Controls.Add(Me.txtPincode5)
         Me.Panel5.Location = New System.Drawing.Point(320, 429)
@@ -138,7 +138,7 @@ Partial Class frmDepositSetPINCode
         '
         'Panel4
         '
-        Me.Panel4.BackgroundImage = Global.AutoboxLocker.My.Resources.Resources.imgTextPincode
+        Me.Panel4.BackgroundImage = Global.MiniboxLocker.My.Resources.Resources.imgTextPincode
         Me.Panel4.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
         Me.Panel4.Controls.Add(Me.txtPincode4)
         Me.Panel4.Location = New System.Drawing.Point(256, 429)
@@ -164,7 +164,7 @@ Partial Class frmDepositSetPINCode
         '
         'Panel3
         '
-        Me.Panel3.BackgroundImage = Global.AutoboxLocker.My.Resources.Resources.imgTextPincode
+        Me.Panel3.BackgroundImage = Global.MiniboxLocker.My.Resources.Resources.imgTextPincode
         Me.Panel3.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
         Me.Panel3.Controls.Add(Me.txtPincode3)
         Me.Panel3.Location = New System.Drawing.Point(193, 429)
@@ -190,7 +190,7 @@ Partial Class frmDepositSetPINCode
         '
         'Panel2
         '
-        Me.Panel2.BackgroundImage = Global.AutoboxLocker.My.Resources.Resources.imgTextPincode
+        Me.Panel2.BackgroundImage = Global.MiniboxLocker.My.Resources.Resources.imgTextPincode
         Me.Panel2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
         Me.Panel2.Controls.Add(Me.txtPincode2)
         Me.Panel2.Location = New System.Drawing.Point(131, 429)
@@ -216,7 +216,7 @@ Partial Class frmDepositSetPINCode
         '
         'Panel1
         '
-        Me.Panel1.BackgroundImage = Global.AutoboxLocker.My.Resources.Resources.imgTextPincode
+        Me.Panel1.BackgroundImage = Global.MiniboxLocker.My.Resources.Resources.imgTextPincode
         Me.Panel1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
         Me.Panel1.Controls.Add(Me.txtPincode1)
         Me.Panel1.Location = New System.Drawing.Point(71, 429)
@@ -365,7 +365,7 @@ Partial Class frmDepositSetPINCode
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.White
-        Me.BackgroundImage = Global.AutoboxLocker.My.Resources.Resources.bgDepositSetPINCode
+        Me.BackgroundImage = Global.MiniboxLocker.My.Resources.Resources.bgDepositSetPINCode
         Me.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
         Me.ClientSize = New System.Drawing.Size(1024, 768)
         Me.Controls.Add(Me.Panel6)

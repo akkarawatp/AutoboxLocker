@@ -228,7 +228,7 @@ Partial Class frmSC_FillMoney
         '
         Me.btnFillAllFull.Anchor = System.Windows.Forms.AnchorStyles.Top
         Me.btnFillAllFull.BackColor = System.Drawing.Color.White
-        Me.btnFillAllFull.BackgroundImage = Global.AutoboxLocker.My.Resources.Resources.btnButtonOrange
+        Me.btnFillAllFull.BackgroundImage = Global.MiniboxLocker.My.Resources.Resources.btnButtonOrange
         Me.btnFillAllFull.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
         Me.btnFillAllFull.Controls.Add(Me.lblFillAllFull)
         Me.btnFillAllFull.ForeColor = System.Drawing.Color.White
@@ -253,7 +253,7 @@ Partial Class frmSC_FillMoney
         'btnCheckOutMoney
         '
         Me.btnCheckOutMoney.Anchor = System.Windows.Forms.AnchorStyles.Top
-        Me.btnCheckOutMoney.BackgroundImage = Global.AutoboxLocker.My.Resources.Resources.btnButtonCheckOutMoney
+        Me.btnCheckOutMoney.BackgroundImage = Global.MiniboxLocker.My.Resources.Resources.btnButtonCheckOutMoney
         Me.btnCheckOutMoney.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
         Me.btnCheckOutMoney.Location = New System.Drawing.Point(70, 503)
         Me.btnCheckOutMoney.Name = "btnCheckOutMoney"
@@ -263,7 +263,7 @@ Partial Class frmSC_FillMoney
         'btnCancel
         '
         Me.btnCancel.Anchor = System.Windows.Forms.AnchorStyles.Top
-        Me.btnCancel.BackgroundImage = Global.AutoboxLocker.My.Resources.Resources.btnButtonCancel
+        Me.btnCancel.BackgroundImage = Global.MiniboxLocker.My.Resources.Resources.btnButtonCancel
         Me.btnCancel.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
         Me.btnCancel.Location = New System.Drawing.Point(541, 514)
         Me.btnCancel.Name = "btnCancel"
@@ -273,7 +273,7 @@ Partial Class frmSC_FillMoney
         'btnConfirm
         '
         Me.btnConfirm.Anchor = System.Windows.Forms.AnchorStyles.Top
-        Me.btnConfirm.BackgroundImage = Global.AutoboxLocker.My.Resources.Resources.btnButtonConfirm
+        Me.btnConfirm.BackgroundImage = Global.MiniboxLocker.My.Resources.Resources.btnButtonConfirm
         Me.btnConfirm.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
         Me.btnConfirm.Location = New System.Drawing.Point(400, 514)
         Me.btnConfirm.Name = "btnConfirm"
@@ -284,7 +284,7 @@ Partial Class frmSC_FillMoney
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.BackgroundImage = Global.AutoboxLocker.My.Resources.Resources.bgSCFillMoney
+        Me.BackgroundImage = Global.MiniboxLocker.My.Resources.Resources.bgSCFillMoney
         Me.ClientSize = New System.Drawing.Size(1024, 768)
         Me.Controls.Add(Me.lblMaxBanknote100)
         Me.Controls.Add(Me.lblMaxBanknote20)

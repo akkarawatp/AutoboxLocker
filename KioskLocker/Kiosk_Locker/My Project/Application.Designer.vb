@@ -32,7 +32,7 @@ Namespace My
         
         <Global.System.Diagnostics.DebuggerStepThroughAttribute()>  _
         Protected Overrides Sub OnCreateMainForm()
-            Me.MainForm = Global.AutoboxLocker.frmMain
+            Me.MainForm = Global.MiniboxLocker.frmMain
         End Sub
     End Class
 End Namespace

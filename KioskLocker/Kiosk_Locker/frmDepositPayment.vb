@@ -1,6 +1,6 @@
 ﻿Imports System.Threading
-Imports AutoboxLocker.Data
-Imports AutoboxLocker.Data.KioskConfigData
+Imports MiniboxLocker.Data
+Imports MiniboxLocker.Data.KioskConfigData
 Imports WebCamera
 
 Public Class frmDepositPayment

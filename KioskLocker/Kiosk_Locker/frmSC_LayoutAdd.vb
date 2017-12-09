@@ -1,4 +1,4 @@
-﻿Imports AutoboxLocker.Data.KioskConfigData
+﻿Imports MiniboxLocker.Data.KioskConfigData
 Public Class frmSC_LayoutAdd
 
     Public CabinetModelID As Integer = 0

@@ -51,7 +51,7 @@ Partial Class frmDialog_YesNo
         'btnNo
         '
         Me.btnNo.Anchor = System.Windows.Forms.AnchorStyles.Bottom
-        'Me.btnNo.BackgroundImage = Global.AutoboxLocker.My.Resources.Resources.btnColWhite
+        'Me.btnNo.BackgroundImage = Global.MiniboxLocker.My.Resources.Resources.btnColWhite
         Me.btnNo.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
         Me.btnNo.Controls.Add(Me.lblNo)
         Me.btnNo.Location = New System.Drawing.Point(470, 252)
@@ -74,7 +74,7 @@ Partial Class frmDialog_YesNo
         'btnYes
         '
         Me.btnYes.Anchor = System.Windows.Forms.AnchorStyles.Bottom
-        'Me.btnYes.BackgroundImage = Global.AutoboxLocker.My.Resources.Resources.btnColWhite
+        'Me.btnYes.BackgroundImage = Global.MiniboxLocker.My.Resources.Resources.btnColWhite
         Me.btnYes.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
         Me.btnYes.Controls.Add(Me.lblYes)
         Me.btnYes.Location = New System.Drawing.Point(224, 252)

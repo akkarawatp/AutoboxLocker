@@ -1,5 +1,5 @@
 ﻿Imports System.Data.SqlClient
-Imports AutoboxLocker.Data
+Imports MiniboxLocker.Data
 Imports System.Management
 Imports KioskLinqDB.ConnectDB
 Imports KioskLinqDB.TABLE
@@ -318,7 +318,7 @@ Public Class frmMain
 
     Private Function GetCardLanDesc() As String
         Dim CardLanDesc As String = ""
-        Dim ini As New AutoboxLocker.Org.Mentalis.Files.IniReader(INIFileName)
+        Dim ini As New MiniboxLocker.Org.Mentalis.Files.IniReader(INIFileName)
         ini.Section = "Setting"
         CardLanDesc = ini.ReadString("CardLanDesc").ToString
         ini = Nothing

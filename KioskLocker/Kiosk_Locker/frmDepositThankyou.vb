@@ -1,7 +1,7 @@
 ﻿Imports System.ComponentModel
 Imports System.Data.SqlClient
 Imports System.IO
-Imports AutoboxLocker.Data.KioskConfigData
+Imports MiniboxLocker.Data.KioskConfigData
 Imports KioskLinqDB.ConnectDB
 Imports KioskLinqDB.TABLE
 
