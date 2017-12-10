@@ -314,12 +314,8 @@ Public Class frmSettingUser
         If e.Item.DataItem("active_status").ToString = "N" Then
             td.Attributes("class") = "text-danger"
         Else
-            td.Attributes("class") = "text-primary"
+            td.Attributes("class") = "text-success"
         End If
-
-        'ColEdit.Visible = AuthorizedLevel = TSKBL.AuthorizedLevel.Edit
-        'ColDelete.Visible = AuthorizedLevel = TSKBL.AuthorizedLevel.Edit
-
     End Sub
 
     Private Sub rptList_ItemCommand(source As Object, e As RepeaterCommandEventArgs) Handles rptList.ItemCommand
@@ -370,8 +366,6 @@ Public Class frmSettingUser
                 Catch ex As Exception
                     ScriptManager.RegisterStartupScript(Me.Page, GetType(String), "Alert", "alert('Cant display');", True)
                 End Try
-
-
             Case "Delete"
                 Dim lblUserName As Label = e.Item.FindControl("lblUserName")
                 Dim userid As Long = e.CommandArgument
@@ -423,12 +417,6 @@ Public Class frmSettingUser
         ufDt.Dispose()
     End Sub
     Private Sub btnSave_Click(sender As Object, e As EventArgs) Handles btnSave.Click
-
-        'If txtAccountNo.Text = "" Then
-        '    ScriptManager.RegisterStartupScript(Me.Page, GetType(String), "Alert", "alert('Insert Acount No');", True)
-        '    Exit Sub
-        'End If
-
         If txtUsername.Text = "" Then
             ScriptManager.RegisterStartupScript(Me.Page, GetType(String), "Alert", "alert('Insert User Name');", True)
             Exit Sub
@@ -533,7 +521,6 @@ Public Class frmSettingUser
                 End If
             Next
 
-
             Dim ret_ws As ExecuteDataInfo
             If Edit_User_ID = 0 Then
                 ret_ws = Engine.UserENG.InsertUserAccount(firstname, lastname, companyname, email, mobileno, user_name, password, activestatus)
@@ -546,7 +533,6 @@ Public Class frmSettingUser
                 ScriptManager.RegisterStartupScript(Me.Page, GetType(String), "Alert", "alert('" & ret_ws.ErrorMessage & "');", True)
                 Exit Sub
             End If
-
 
             trans.CommitTransaction()
             ScriptManager.RegisterStartupScript(Me.Page, GetType(String), "Alert", "alert('Save success');", True)

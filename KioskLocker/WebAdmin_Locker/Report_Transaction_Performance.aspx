@@ -65,9 +65,9 @@
                     <div class="col-sm-10">
                             <div class="btn-group btn-group-justified">
                               <asp:LinkButton id="aByHour" runat="server" CssClass="btn btn-success">Hourly</asp:LinkButton>
-                              <asp:LinkButton id="aByDay" runat="server" CssClass="btn btn-default">Daily</asp:LinkButton>
-                              <asp:LinkButton id="aByMonth" runat="server" CssClass="btn btn-default">Monthly</asp:LinkButton>
-                              <asp:LinkButton id="aByYear" runat="server" CssClass="btn btn-default">Yearly</asp:LinkButton>                             
+                              <asp:LinkButton id="aByDay" runat="server" CssClass="btn btn-warning">Daily</asp:LinkButton>
+                              <asp:LinkButton id="aByMonth" runat="server" CssClass="btn btn-warning">Monthly</asp:LinkButton>
+                              <asp:LinkButton id="aByYear" runat="server" CssClass="btn btn-warning">Yearly</asp:LinkButton>                             
                             </div>                                           
                     </div>
                   </div>                    

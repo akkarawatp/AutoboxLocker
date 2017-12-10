@@ -97,10 +97,6 @@ Partial Class frmSettingPromotions
         rptList.DataSource = DT
         rptList.DataBind()
 
-        'ColEdit.Visible = AuthorizedLevel = TSKBL.AuthorizedLevel.Edit
-        'ColDelete.Visible = AuthorizedLevel = TSKBL.AuthorizedLevel.Edit
-        'btnAdd.Visible = AuthorizedLevel = TSKBL.AuthorizedLevel.Edit
-
         lblTotalList.Text = FormatNumber(DT.Rows.Count, 0)
 
         pnlList.Visible = True

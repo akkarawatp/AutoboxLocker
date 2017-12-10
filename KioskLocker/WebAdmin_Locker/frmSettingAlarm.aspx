@@ -287,7 +287,7 @@
                             <div class="form-group" style="margin-left: -5px;">
                                 <h4 class="card-title col-sm-2 control-label" style="text-align: left;">Active Status </h4>
                                 <label class="col-sm-10 cb-checkbox cb-md">
-                                    <asp:CheckBox ID="chkActive" runat="server" />
+                                    <asp:CheckBox ID="chkActive" runat="server" Checked="true" />
                                 </label>
                             </div>
                             <div class="form-group" style="text-align: right">

@@ -47,7 +47,7 @@ Public Class uc_MoneyStock_UI
                     divContainer.Attributes("class") = "row m-a-0 text-warning"
                     progress.Attributes("class") = "progress-bar progress-bar-warning"
                 Else
-                    divContainer.Attributes("class") = "row m-a-0 text-success"
+                    divContainer.Attributes("class") = "row m-a-0 text-green"
                     progress.Attributes("class") = "progress-bar progress-bar-success"
                 End If
             Case -1
@@ -58,7 +58,7 @@ Public Class uc_MoneyStock_UI
                     divContainer.Attributes("class") = "row m-a-0 text-warning"
                     progress.Attributes("class") = "progress-bar progress-bar-warning"
                 Else
-                    divContainer.Attributes("class") = "row m-a-0 text-success"
+                    divContainer.Attributes("class") = "row m-a-0 text-green"
                     progress.Attributes("class") = "progress-bar progress-bar-success"
                 End If
         End Select

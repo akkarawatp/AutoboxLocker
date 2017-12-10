@@ -20,7 +20,7 @@
                 pnlPrinterStock.CssClass = "row text-warning p-t"
                 barPrinterLevel.CssClass = "progress-bar progress-bar-warning"
             Else
-                pnlPrinterStock.CssClass = "row text-success p-t"
+                pnlPrinterStock.CssClass = "row text-green p-t"
                 barPrinterLevel.CssClass = "progress-bar progress-bar-success"
             End If
         End If

@@ -5015,7 +5015,7 @@ button.list-group-item-danger {
             bottom: 0;
             left: 0;
             position: absolute;
-            background: #0000FF;
+            background: #ef8b10;
             -webkit-animation: border-expand 0.2s cubic-bezier(0.4, 0, 0.4, 1) 0.01s alternate forwards;
             animation: border-expand 0.2s cubic-bezier(0.4, 0, 0.4, 1) 0.01s alternate forwards;
             -webkit-transition: all 1s cubic-bezier(0.4, 0, 1, 1);

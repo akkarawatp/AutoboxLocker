@@ -90,8 +90,8 @@
                              <div class="card card-block no-border bg-white row-equal align-middle">
                                  <div class="col-sm-3">
                                      <div class="col-sm-12">
-                                         <h3 class="m-a-0 text-blue" id="h3" runat="server">
-                                             <asp:Label ID="lblComName" runat="server"></asp:Label>
+                                         <h3 class="m-a-0 text-orange" id="h3" runat="server">
+                                             <asp:Label ID="lblComName" runat="server" Font-Bold="true"></asp:Label>
 
                                          </h3>
                                      </div>
@@ -204,7 +204,7 @@
                                   <div class="card col-sm-3" style="padding:0; padding-right:0;">
                                     <div class="card-header" style="text-align:center;">
                                         <asp:Image ImageUrl="Images/BlackDot.png" Height="30px" ID="imgIcon" runat="server" /> 
-                                        <asp:Label ID="lblDeviceName" runat="server"></asp:Label>
+                                        <asp:Label ID="lblDeviceName" runat="server" Visible="false"></asp:Label>
                                     </div>
                                     <div class="card-block no-border bg-white row-equal align-middle">
                                       <div class="form-group m-b">

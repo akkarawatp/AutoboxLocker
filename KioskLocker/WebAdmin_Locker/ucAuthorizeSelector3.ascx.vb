@@ -49,9 +49,9 @@
             aRoleEdit.Text = "<i class=""climacon moon new""></i> Edit"
             aRoleNA.Text = "<i class=""climacon moon new""></i> N/A"
 
-            aRoleView.CssClass = "btn btn-default"
-            aRoleEdit.CssClass = "btn btn-default"
-            aRoleNA.CssClass = "btn btn-default"
+            aRoleView.CssClass = "btn btn-warning"
+            aRoleEdit.CssClass = "btn btn-warning"
+            aRoleNA.CssClass = "btn btn-warning"
 
             Select Case value
                 Case Role.Edit

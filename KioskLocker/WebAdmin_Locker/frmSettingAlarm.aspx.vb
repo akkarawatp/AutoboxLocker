@@ -91,7 +91,7 @@ Public Class frmSettingAlarm
         rptEmailAlarm.DataSource = ""
         rptEmailAlarm.DataBind()
 
-        chkActive.Checked = False
+        chkActive.Checked = True
         lblEditMode.Text = "Add"
     End Sub
 
@@ -298,87 +298,6 @@ Public Class frmSettingAlarm
     End Sub
 #End Region
 
-    '#Region "ServerAlarm"
-    '    'Private Sub BindServerAlarmList(GROUP_ID As Integer)
-    '    'Dim DT As DataTable = BL.GetList_Server_Alarm(GROUP_ID)
-    '    'rptServerAlarm.DataSource = DT
-    '    'rptServerAlarm.DataBind()
-    '    'End Sub
-
-    '    'Private Sub rptServerAlarm_ItemDataBound(sender As Object, e As RepeaterItemEventArgs) Handles rptServerAlarm.ItemDataBound
-    '    'If e.Item.ItemType <> ListItemType.Item And e.Item.ItemType <> ListItemType.AlternatingItem Then Exit Sub
-
-    '    'Dim chkItemServerAlarm As CheckBox = e.Item.FindControl("chkItemServerAlarm")
-    '    'Dim lblServerAlamID As Label = e.Item.FindControl("lblServerAlamID")
-    '    'Dim lblServerAlarmCode As Label = e.Item.FindControl("lblServerAlarmCode")
-    '    'Dim lblServerAlarmProblem As Label = e.Item.FindControl("lblServerAlarmProblem")
-    '    'Dim lblServerEngDesc As Label = e.Item.FindControl("lblServerEngDesc")
-    '    'Dim lblServerSMSMessage As Label = e.Item.FindControl("lblServerSMSMessage")
-    '    'Dim lblServerType As Label = e.Item.FindControl("lblServerType")
-
-    '    'chkItemServerAlarm.Checked = False
-    '    'If e.Item.DataItem("SELECTED").ToString = "T" Then
-    '    '    chkItemServerAlarm.Checked = True
-    '    'End If
-
-    '    'lblServerAlamID.Text = e.Item.DataItem("ID").ToString
-    '    'lblServerAlarmCode.Text = e.Item.DataItem("ALARM_CODE").ToString
-    '    'lblServerAlarmProblem.Text = e.Item.DataItem("ALARM_PROBLEM").ToString
-    '    'lblServerEngDesc.Text = e.Item.DataItem("ENG_DESC").ToString
-    '    'lblServerSMSMessage.Text = e.Item.DataItem("SMS_MESSAGE").ToString
-    '    'lblServerType.Text = e.Item.DataItem("MONITORING_TYPE_NAME").ToString
-    '    'End Sub
-
-    '    'Private Sub btnCheckServerAll_Click(sender As Object, e As EventArgs) Handles btnCheckServerAll.Click
-    '    'For i As Integer = 0 To rptServerAlarm.Items.Count - 1
-    '    '    Dim chkItemServerAlarm As CheckBox = rptServerAlarm.Items(i).FindControl("chkItemServerAlarm")
-    '    '    chkItemServerAlarm.Checked = Not chkHeadServerAlarm.Checked
-    '    'Next
-    '    'chkHeadServerAlarm.Checked = Not chkHeadServerAlarm.Checked
-    '    'End Sub
-
-    '#End Region
-
-    '#Region "InterfaceAlarm"
-    '    Private Sub BindInterfaceAlarmList(GROUP_ID As Integer)
-    '        'Dim DT As DataTable = BL.GetList_Interface_Alarm(GROUP_ID)
-    '        'rptInterfaceAlarm.DataSource = DT
-    '        'rptInterfaceAlarm.DataBind()
-    '    End Sub
-
-    '    Private Sub rptInterfaceAlarm_ItemDataBound(sender As Object, e As RepeaterItemEventArgs) Handles rptInterfaceAlarm.ItemDataBound
-    '        'If e.Item.ItemType <> ListItemType.Item And e.Item.ItemType <> ListItemType.AlternatingItem Then Exit Sub
-
-    '        'Dim chkItemInterfaceAlarm As CheckBox = e.Item.FindControl("chkItemInterfaceAlarm")
-    '        'Dim lblInterfaceAlamID As Label = e.Item.FindControl("lblInterfaceAlamID")
-    '        'Dim lblInterfaceAlarmCode As Label = e.Item.FindControl("lblInterfaceAlarmCode")
-    '        'Dim lblInterfaceAlarmProblem As Label = e.Item.FindControl("lblInterfaceAlarmProblem")
-    '        'Dim lblInterfaceEngDesc As Label = e.Item.FindControl("lblInterfaceEngDesc")
-    '        'Dim lblInterfaceSMSMessage As Label = e.Item.FindControl("lblInterfaceSMSMessage")
-    '        'Dim lblInterfaceServerType As Label = e.Item.FindControl("lblInterfaceServerType")
-
-    '        'chkItemInterfaceAlarm.Checked = False
-    '        'If e.Item.DataItem("SELECTED").ToString = "T" Then
-    '        '    chkItemInterfaceAlarm.Checked = True
-    '        'End If
-
-    '        'lblInterfaceAlamID.Text = e.Item.DataItem("ID").ToString
-    '        'lblInterfaceAlarmCode.Text = e.Item.DataItem("ALARM_CODE").ToString
-    '        'lblInterfaceAlarmProblem.Text = e.Item.DataItem("ALARM_PROBLEM").ToString
-    '        'lblInterfaceEngDesc.Text = e.Item.DataItem("ENG_DESC").ToString
-    '        'lblInterfaceSMSMessage.Text = e.Item.DataItem("SMS_MESSAGE").ToString
-    '        'lblInterfaceServerType.Text = e.Item.DataItem("MONITORING_TYPE_NAME").ToString
-    '    End Sub
-
-    '    Private Sub btnCheckInterfaceAll_Click(sender As Object, e As EventArgs) Handles btnCheckInterfaceAll.Click
-    '        'For i As Integer = 0 To rptInterfaceAlarm.Items.Count - 1
-    '        '    Dim chkItemInterfaceAlarm As CheckBox = rptInterfaceAlarm.Items(i).FindControl("chkItemInterfaceAlarm")
-    '        '    chkItemInterfaceAlarm.Checked = Not chkHeadInterfaceAlarm.Checked
-    '        'Next
-    '        'chkHeadInterfaceAlarm.Checked = Not chkHeadInterfaceAlarm.Checked
-    '    End Sub
-    '#End Region
-
 #Region "Computer Alarm"
     Private Sub BindComputerAlarmList(GROUP_ID As Integer)
         Dim DT As DataTable = BL.Get_Computer_Alarm_ByGroup(GROUP_ID)
@@ -499,67 +418,6 @@ Public Class frmSettingAlarm
 
 #End Region
 
-    '#Region "Mobile Alarm"
-    '    Private Sub BindMobileAlarmList(GROUP_ID As Integer)
-    '        'Dim DT As DataTable = BL.Get_Mobile_Alarm_ByGroup(GROUP_ID)
-    '        'rptMobileAlarm.DataSource = DT
-    '        'rptMobileAlarm.DataBind()
-    '    End Sub
-    '    Protected Function CurrentMobileAlarmList() As DataTable
-    '        'Dim DT As New DataTable
-    '        'DT.Columns.Add("MOBILE_NO")
-
-    '        'For Each Item As RepeaterItem In rptMobileAlarm.Items
-    '        '    If Item.ItemType <> ListItemType.Item And Item.ItemType <> ListItemType.AlternatingItem Then Continue For
-    '        '    Dim DR As DataRow = DT.NewRow
-    '        '    Dim txtMobileNumber As TextBox = Item.FindControl("txtMobileNumber")
-
-    '        '    DT.Rows.Add(DR)
-    '        '    If IsNumeric(txtMobileNumber.Text) Then
-    '        '        DR("MOBILE_NO") = txtMobileNumber.Text
-    '        '    End If
-
-    '        '    DT.AcceptChanges()
-    '        'Next
-
-    '        'Return DT
-    '    End Function
-    '    Private Sub rptMobileAlarm_ItemCommand(source As Object, e As System.Web.UI.WebControls.RepeaterCommandEventArgs) Handles rptMobileAlarm.ItemCommand
-    '        'Select Case e.CommandName
-    '        '    Case "Delete"
-    '        '        Dim DT As DataTable = CurrentMobileAlarmList()
-    '        '        Try
-    '        '            DT.Rows(e.Item.ItemIndex).Delete()
-    '        '            DT.AcceptChanges()
-    '        '        Catch : End Try
-    '        '        rptMobileAlarm.DataSource = DT
-    '        '        rptMobileAlarm.DataBind()
-    '        'End Select
-    '    End Sub
-
-    '    Private Sub rptMobileAlarm_ItemDataBound(sender As Object, e As System.Web.UI.WebControls.RepeaterItemEventArgs) Handles rptMobileAlarm.ItemDataBound
-    '        'If e.Item.ItemType <> ListItemType.Item And e.Item.ItemType <> ListItemType.AlternatingItem Then Exit Sub
-
-    '        'Dim txtMobileNumber As TextBox = e.Item.FindControl("txtMobileNumber")
-    '        'Dim lblNo As Label = e.Item.FindControl("lblNo")
-    '        'Dim ColDelete As HtmlTableCell = e.Item.FindControl("ColDelete")
-
-    '        'lblNo.Text = e.Item.ItemIndex + 1
-    '        'If Not IsDBNull(e.Item.DataItem("MOBILE_NO")) Then
-    '        '    txtMobileNumber.Text = e.Item.DataItem("MOBILE_NO")
-    '        'End If
-
-    '        'BL.SetTextIntKeypress(txtMobileNumber)
-    '    End Sub
-
-    '    Private Sub lnkAddNewMobile_Click(sender As Object, e As System.EventArgs) Handles lnkAddNewMobile.Click
-    '        'Dim DT As DataTable = CurrentMobileAlarmList()
-    '        'DT.Rows.Add()
-    '        'rptMobileAlarm.DataSource = DT
-    '        'rptMobileAlarm.DataBind()
-    '    End Sub
-    '#End Region
-
 #Region "Email Alarm"
     Private Sub BindEmailAlarmList(GROUP_ID As Integer)
         Dim DT As DataTable = BL.Get_Email_Alarm_ByGroup(GROUP_ID)
@@ -664,7 +522,6 @@ Public Class frmSettingAlarm
             End If
         Next
 
-
         Dim dt_computer As New DataTable
         dt_computer.TableName = "TBComputer"
         dt_computer.Columns.Add("MACADDRESS")
@@ -682,8 +539,6 @@ Public Class frmSettingAlarm
                 dt_computer.Rows.Add(dr_computer)
             End If
         Next
-
-
 
         Dim dt_email As New DataTable
         dt_email.TableName = "TBEmail"
@@ -710,10 +565,8 @@ Public Class frmSettingAlarm
 
     Public Function InsertEdit_Setting_Alarm(ByVal GROUP_ID As Integer, GROUP_CODE As String, GROUP_NAME As String, ACTIVE_STATUS As String, DT_KIOSK As DataTable,
                                             DT_COMPUTER As DataTable, DT_EMAIL As DataTable, USER_NAME As String) As String
-
         Dim trans As New ServerTransactionDB
         Try
-
             '=== TB_ALARM_GROUP
             Dim lnqAlGroup As New TbAlarmGroupServerLinqDB
             lnqAlGroup.GetDataByPK(Edit_GRP_ID, trans.Trans)
@@ -734,7 +587,6 @@ Public Class frmSettingAlarm
                 'ScriptManager.RegisterStartupScript(Me.Page, GetType(String), "Alert", "alert('" & ret.ErrorMessage & "');", True)
                 Return ret.ErrorMessage
             End If
-
 
             '=== TB_ALARM_GROUP_MONITORING
             Dim p(1) As SqlParameter
@@ -767,7 +619,6 @@ Public Class frmSettingAlarm
                 Next
             End If
 
-
             '===TB_ALARM_GROUP_COMPUTER
             Dim p_c(1) As SqlParameter
             p_c(0) = ServerDB.SetText("@_GROUP_ID", lnqAlGroup.ID)
@@ -795,10 +646,8 @@ Public Class frmSettingAlarm
 
                         lnqAlGroupComputer = Nothing
                     End With
-
                 Next
             End If
-
 
             '===TB_ALARM_GROUP_EMAIL
             Dim p_e(1) As SqlParameter
@@ -846,11 +695,9 @@ Public Class frmSettingAlarm
             lnqAlGroup = Nothing
             Return ""
         Catch ex As Exception
-
             trans.RollbackTransaction()
             Return ex.ToString()
         End Try
-
     End Function
 
 

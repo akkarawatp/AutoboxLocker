@@ -289,10 +289,10 @@ Public Class Report_Transaction_Performance
             pnlFromYear.Visible = False
             pnlToYear.Visible = False
 
-            aByHour.CssClass = "btn btn-default"
-            aByDay.CssClass = "btn btn-default"
-            aByMonth.CssClass = "btn btn-default"
-            aByYear.CssClass = "btn btn-default"
+            aByHour.CssClass = "btn btn-warning"
+            aByDay.CssClass = "btn btn-warning"
+            aByMonth.CssClass = "btn btn-warning"
+            aByYear.CssClass = "btn btn-warning"
 
             Select Case value
                 Case LockerBL.ReportPeriod.Hourly

@@ -429,7 +429,6 @@ Public Class frmSettingRole
         Dim btnEdit As Button = e.Item.FindControl("btnEdit")
         Dim btnDelete As Button = e.Item.FindControl("btnDelete")
         Dim cfmDelete As AjaxControlToolkit.ConfirmButtonExtender = e.Item.FindControl("cfmDelete")
-
         Dim ColEdit As HtmlTableCell = e.Item.FindControl("ColEdit")
         Dim ColDelete As HtmlTableCell = e.Item.FindControl("ColDelete")
 
@@ -437,7 +436,7 @@ Public Class frmSettingRole
         If e.Item.DataItem("active_status").ToString = "N" Then
             td.Attributes("class") = "text-danger"
         Else
-            td.Attributes("class") = "text-primary"
+            td.Attributes("class") = "text-success"
         End If
         If Not IsDBNull(e.Item.DataItem("Users")) Then
             lblMember.Text = FormatNumber(e.Item.DataItem("Users"), 0)
@@ -451,12 +450,7 @@ Public Class frmSettingRole
         btnEdit.CommandArgument = e.Item.DataItem("Role_ID")
         btnDelete.CommandArgument = e.Item.DataItem("Role_ID")
 
-        'cfmDelete.ConfirmText = "Are you sure you want to delete '" & e.Item.DataItem("Role_Name").ToString.Replace("'", "''") & "'?"
         cfmDelete.ConfirmText = "Are you sure you want to delete '" & e.Item.DataItem("Role_Name").ToString() & "'?"
-
-
-        'ColEdit.Visible = AuthorizedLevel = TSKBL.AuthorizedLevel.Edit
-        'ColDelete.Visible = AuthorizedLevel = TSKBL.AuthorizedLevel.Edit
     End Sub
 
     Private Sub rptList_ItemCommand(source As Object, e As RepeaterCommandEventArgs) Handles rptList.ItemCommand
@@ -598,7 +592,7 @@ Public Class frmSettingRole
         Dim td As HtmlTableCell = rptItem.FindControl("td")
         Dim chk As CheckBox = rptItem.FindControl("chk")
         If chk.Checked Then
-            td.Attributes("class") = "btn-primary"
+            td.Attributes("class") = "btn-success"
         Else
             td.Attributes("class") = ""
         End If
