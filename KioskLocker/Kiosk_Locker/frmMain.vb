@@ -585,9 +585,7 @@ Public Class frmMain
                     IsCloseTime = False
                     InsertLogTransactionActivity("", "", "", KioskConfig.SelectForm, KioskConfigData.KioskLockerStep.Main_KioskTimeOpen, "", False)
                     CloseAllChildForm()
-                    Dim f As New frmHome
-                    f.MdiParent = Me
-                    f.Show()
+                    GoToHome()
 
                     CheckKioskScreenSaver()
                     'GetAdsInfo()

@@ -248,49 +248,61 @@ Public Class frmDepositPayment
 
 #Region "Capture Image"
     Private Sub DepositCaptureImage()
-        Dim CamIndex As Integer = KioskConfig.WebCameraIndex
-        Dim pbImage As New PictureBox
-        Dim si As Integer = DSCamCapture.FrameSizes.s640x480
-        Dim SelectedSize As DSCamCapture.FrameSizes = CType(si, DSCamCapture.FrameSizes)
-        If WebCam.ConnectToDevice(CamIndex, 15, pbImage.ClientSize, SelectedSize, pbImage.Handle) = True Then
-            InsertLogTransactionActivity(Deposit.DepositTransNo, "", "", KioskConfig.SelectForm, KioskLockerStep.DepositPayment_ConnectWebcamSuccess, "", False)
+        Try
+            Dim CamIndex As Integer = KioskConfig.WebCameraIndex
+            Dim pbImage As New PictureBox
+            Dim si As Integer = DSCamCapture.FrameSizes.s640x480
+            Dim SelectedSize As DSCamCapture.FrameSizes = CType(si, DSCamCapture.FrameSizes)
+            If WebCam.ConnectToDevice(CamIndex, 15, pbImage.ClientSize, SelectedSize, pbImage.Handle) = True Then
+                InsertLogTransactionActivity(Deposit.DepositTransNo, "", "", KioskConfig.SelectForm, KioskLockerStep.DepositPayment_ConnectWebcamSuccess, "", False)
 
-            'AddHandler WebCam.FrameSaved, AddressOf WebcamFrameSaved
-            AddHandler WebCam.FrameCaptured, AddressOf WebcamFrameCaptured
-            WebCam.Start()
-            WebCam.GetCurrentFrame()
-        Else
-            UpdateDepositStatus(Deposit.DepositTransactionID, DepositTransactionData.TransactionStatus.Problem, KioskLockerStep.DepositPayment_ConnectWebcamFail)
-            InsertErrorLog("ไม่สามารถเชื่อมต่อกับกล้อง Webcam ได้", Deposit.DepositTransNo, "", "", KioskConfig.SelectForm, KioskLockerStep.DepositPayment_ConnectWebcamFail)
-            InsertLogTransactionActivity(Deposit.DepositTransNo, "", "", KioskConfig.SelectForm, KioskLockerStep.DepositPayment_ConnectWebcamFail, "", True)
-
+                'AddHandler WebCam.FrameSaved, AddressOf WebcamFrameSaved
+                AddHandler WebCam.FrameCaptured, AddressOf WebcamFrameCaptured
+                WebCam.Start()
+                WebCam.GetCurrentFrame()
+            Else
+                InsertErrorLog("ไม่สามารถเชื่อมต่อกับกล้อง Webcam ได้", Deposit.DepositTransNo, "", "", KioskConfig.SelectForm, KioskLockerStep.DepositPayment_ConnectWebcamFail)
+                InsertLogTransactionActivity(Deposit.DepositTransNo, "", "", KioskConfig.SelectForm, KioskLockerStep.DepositPayment_ConnectWebcamFail, "", True)
+                UpdateDeviceStatus(DeviceID.WebCamera, WebCameraStatus.Disconnected)
+                SendKioskAlarm("WEBCAMERA_DISCONNECTED", True)
+            End If
+        Catch ex As Exception
+            InsertErrorLog("Exception : " & ex.Message & vbNewLine & ex.StackTrace & vbNewLine & " ไม่สามารถเชื่อมต่อกับกล้อง Webcam ได้", Deposit.DepositTransNo, "", "", KioskConfig.SelectForm, KioskLockerStep.DepositPayment_ConnectWebcamFail)
+            InsertLogTransactionActivity(Deposit.DepositTransNo, "", "", KioskConfig.SelectForm, KioskLockerStep.DepositPayment_ConnectWebcamFail, "Exception : " & ex.Message & vbNewLine & ex.StackTrace, True)
             UpdateDeviceStatus(DeviceID.WebCamera, WebCameraStatus.Disconnected)
             SendKioskAlarm("WEBCAMERA_DISCONNECTED", True)
-        End If
-
+        End Try
     End Sub
 
 
     Private Sub CollectCaptureImage()
-        Dim CamIndex As Integer = KioskConfig.WebCameraIndex
-        Dim pbImage As New PictureBox
-        Dim si As Integer = DSCamCapture.FrameSizes.s640x480
-        Dim SelectedSize As DSCamCapture.FrameSizes = CType(si, DSCamCapture.FrameSizes)
-        If WebCam.ConnectToDevice(CamIndex, 15, pbImage.ClientSize, SelectedSize, pbImage.Handle) = True Then
-            InsertLogTransactionActivity(Collect.DepositTransNo, Collect.TransactionNo, StaffConsole.TransNo, KioskConfig.SelectForm, KioskLockerStep.PickupPayment_ConnectWebcamSuccess, "", False)
+        Try
+            Dim CamIndex As Integer = KioskConfig.WebCameraIndex
+            Dim pbImage As New PictureBox
+            Dim si As Integer = DSCamCapture.FrameSizes.s640x480
+            Dim SelectedSize As DSCamCapture.FrameSizes = CType(si, DSCamCapture.FrameSizes)
+            If WebCam.ConnectToDevice(CamIndex, 15, pbImage.ClientSize, SelectedSize, pbImage.Handle) = True Then
+                InsertLogTransactionActivity(Collect.DepositTransNo, Collect.TransactionNo, StaffConsole.TransNo, KioskConfig.SelectForm, KioskLockerStep.PickupPayment_ConnectWebcamSuccess, "", False)
 
-            'AddHandler WebCam.FrameSaved, AddressOf WebcamFrameSaved
-            AddHandler WebCam.FrameCaptured, AddressOf WebcamFrameCaptured
-            WebCam.Start()
-            WebCam.GetCurrentFrame()
-        Else
-            UpdateCollectStatus(Collect.CollectTransactionID, CollectTransactionData.TransactionStatus.Problem, KioskLockerStep.PickupPayment_ConnectWebcamFail)
-            InsertErrorLog("ไม่สามารถเชื่อมต่อกับกล้อง Webcam ได้", Collect.DepositTransNo, Collect.TransactionNo, StaffConsole.TransNo, KioskConfig.SelectForm, KioskLockerStep.PickupPayment_ConnectWebcamFail)
-            InsertLogTransactionActivity(Collect.DepositTransNo, Collect.TransactionNo, StaffConsole.TransNo, KioskConfig.SelectForm, KioskLockerStep.PickupPayment_ConnectWebcamFail, "", True)
+                'AddHandler WebCam.FrameSaved, AddressOf WebcamFrameSaved
+                AddHandler WebCam.FrameCaptured, AddressOf WebcamFrameCaptured
+                WebCam.Start()
+                WebCam.GetCurrentFrame()
+            Else
+                InsertErrorLog("ไม่สามารถเชื่อมต่อกับกล้อง Webcam ได้", Collect.DepositTransNo, Collect.TransactionNo, StaffConsole.TransNo, KioskConfig.SelectForm, KioskLockerStep.PickupPayment_ConnectWebcamFail)
+                InsertLogTransactionActivity(Collect.DepositTransNo, Collect.TransactionNo, StaffConsole.TransNo, KioskConfig.SelectForm, KioskLockerStep.PickupPayment_ConnectWebcamFail, "", True)
+
+                UpdateDeviceStatus(DeviceID.WebCamera, WebCameraStatus.Disconnected)
+                SendKioskAlarm("WEBCAMERA_DISCONNECTED", True)
+            End If
+        Catch ex As Exception
+            InsertErrorLog("Exception : " & ex.Message & vbNewLine & ex.StackTrace & vbNewLine & " ไม่สามารถเชื่อมต่อกับกล้อง Webcam ได้", Collect.DepositTransNo, Collect.TransactionNo, StaffConsole.TransNo, KioskConfig.SelectForm, KioskLockerStep.PickupPayment_ConnectWebcamFail)
+            InsertLogTransactionActivity(Collect.DepositTransNo, Collect.TransactionNo, StaffConsole.TransNo, KioskConfig.SelectForm, KioskLockerStep.PickupPayment_ConnectWebcamFail, "Exception : " & ex.Message & vbNewLine & ex.StackTrace, True)
 
             UpdateDeviceStatus(DeviceID.WebCamera, WebCameraStatus.Disconnected)
             SendKioskAlarm("WEBCAMERA_DISCONNECTED", True)
-        End If
+        End Try
+
 
     End Sub
 
