@@ -239,7 +239,7 @@ Public Class frmAlarmMonitoringView
                     divContainer.Attributes("class") = "row m-a-0 text-warning"
                     progress.Attributes("class") = "progress-bar progress-bar-warning"
                 Else
-                    divContainer.Attributes("class") = "row m-a-0 text-success"
+                    divContainer.Attributes("class") = "row m-a-0 text-green"
                     progress.Attributes("class") = "progress-bar progress-bar-success"
                 End If
             Case -1
@@ -250,7 +250,7 @@ Public Class frmAlarmMonitoringView
                     divContainer.Attributes("class") = "row m-a-0 text-warning"
                     progress.Attributes("class") = "progress-bar progress-bar-warning"
                 Else
-                    divContainer.Attributes("class") = "row m-a-0 text-success"
+                    divContainer.Attributes("class") = "row m-a-0 text-green"
                     progress.Attributes("class") = "progress-bar progress-bar-success"
                 End If
         End Select
@@ -311,38 +311,27 @@ Public Class frmAlarmMonitoringView
 
                 If order_layout = "-1" Then
                     str.AppendLine("<tr >")
-                    str.AppendLine("    <td style='height:" & cabinet_height & "px; background-color:white; text-align:center;'>&nbsp;</td>")
+                    str.AppendLine("    <td style='height:" & cabinet_height & "px; background-color:gray; text-align:center;'>&nbsp;</td>")
                     str.AppendLine("</tr>")
                 Else
                     For j As Integer = 0 To dt_detail.Rows.Count - 1
                         Dim locker_name As String = dt_detail.Rows(j)("Locker_Name").ToString()
                         Dim current_available As String = dt_detail(j)("current_available").ToString()
-                        Dim bgcolor As String = "#000000"
-                        Dim forecolor As String = "#FFFFFF"
+                        Dim bgcolor As String = "#DD6777"
+                        Dim forecolor As String = "#000000"
                         Dim ScriptDialog = ""
                         Dim CursorStyle = ""
 
                         If current_available = "Y" Then
-                            bgcolor = "#33B2FF"
+                            bgcolor = "#FFFFFF"
                             forecolor = "#000000"
                         Else
                             InfoDt.DefaultView.RowFilter = "ms_locker_id=" & dt_detail.Rows(j)("ms_locker_id")
                             If InfoDt.DefaultView.Count > 0 Then
                                 Dim iDr As DataRowView = InfoDt.DefaultView(0)
-
-                                'Dim FirstName As String = ""
-                                'Dim LastName As String = ""
-                                'Dim PassportNo As String = ""
-                                'Dim NationCode As String = ""
-                                'Dim IDCardNo As String = ""
                                 Dim DepositTime As String = ""
                                 Dim CustImg As String = "&nbsp;"
 
-                                'If Convert.IsDBNull(iDr("first_name")) = False Then FirstName = iDr("first_name")
-                                'If Convert.IsDBNull(iDr("last_name")) = False Then LastName = iDr("last_name")
-                                'If Convert.IsDBNull(iDr("passport_no")) = False Then PassportNo = iDr("passport_no")
-                                'If Convert.IsDBNull(iDr("idcard_no")) = False Then IDCardNo = iDr("idcard_no")
-                                'If Convert.IsDBNull(iDr("nation_code")) = False Then NationCode = iDr("nation_code")
                                 If Convert.IsDBNull(iDr("trans_start_time")) = False Then DepositTime = Convert.ToDateTime(iDr("trans_start_time")).ToString("dd/MM/yyyy HH:mm", New Globalization.CultureInfo("en-US"))
                                 If Convert.IsDBNull(iDr("cust_image")) = False Then
                                     CustImg = "data:image/" & iDr("trans_no") & ";base64," & Convert.ToBase64String(iDr("cust_image"))
@@ -359,32 +348,11 @@ Public Class frmAlarmMonitoringView
                                 TextInfo += "       </thead>"
                                 TextInfo += "       <tbody>"
                                 TextInfo += "           <tr>"
-                                'If PassportNo.Trim <> "" Then
-                                '    TextInfo += "               <td class='+'col-sm-5'+'>Passport No :</td>"
-                                '    TextInfo += "               <td >" & PassportNo & "</td>"
-                                'Else
-                                '    TextInfo += "               <td class='+'col-sm-5'+'>ID Card No :</td>"
-                                '    TextInfo += "               <td >" & IDCardNo & "</td>"
-                                'End If
                                 TextInfo += "               <td colspan='+'2'+'><img src='+'" & CustImg & "'+' style='+'width:150px;'+'  /></td>"
                                 TextInfo += "           </tr>"
-                                'TextInfo += "           <tr>"
-                                'TextInfo += "               <td >Nationality :</td>"
-                                'TextInfo += "               <td >" & NationCode & "</td>"
-                                'TextInfo += "           </tr>"
-                                'TextInfo += "           <tr>"
-                                'TextInfo += "               <td >Locker Name :</td>"
-                                'TextInfo += "               <td >" & dt_detail.Rows(j)("Locker_Name").ToString() & "</td>"
-                                'TextInfo += "           </tr>"
-                                'TextInfo += "           <tr>"
-                                'TextInfo += "               <td >Deposit Time :</td>"
-                                'TextInfo += "               <td >" & DepositTime & "</td>"
-                                'TextInfo += "           </tr>"
                                 TextInfo += "       </tbody>"
                                 TextInfo += "   </table>"
                                 TextInfo += "</div>'"
-
-
                                 ScriptDialog = "onclick=""ShowDialogProfile('" & locker_name & "'," & TextInfo & ")"""
 
                                 CursorStyle = "cursor:pointer;"

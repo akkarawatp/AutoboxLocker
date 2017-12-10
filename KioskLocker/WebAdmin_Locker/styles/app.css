@@ -110,7 +110,7 @@
 }
 
 ::selection {
-    background: #009900;
+    background: #ef8b10;
     color: white;
     text-shadow: none;
 }
@@ -1484,8 +1484,8 @@ figure:hover:before {
     }
 
     .sidebar-panel > nav li.open.menu-accordion > a::before {
-        background: #0000FF;
-        box-shadow: 0 0 0 0.0625rem #0000FF;
+        background: #ef8b10;
+        box-shadow: 0 0 0 0.0625rem #ef8b10;
     }
 
     .sidebar-panel > nav > ul > li > ul {
@@ -1817,7 +1817,7 @@ figure:hover:before {
 
 /* default header skin */
 .main-panel > .header {
-    background-color: #0082f0;
+    background-color: #ef8b10;
 }
 
     .main-panel > .header .navbar-text {
@@ -1832,7 +1832,7 @@ figure:hover:before {
 
         .main-panel > .header .nav > li > a:hover,
         .main-panel > .header .nav > li > a:focus {
-            background-color: #36C3F2;
+            background-color: #f5aa0f;
             color: #fff;
             font-weight: bold;
         }
@@ -1840,7 +1840,7 @@ figure:hover:before {
     .main-panel > .header .nav .open > a,
     .main-panel > .header .nav .open > a:hover,
     .main-panel > .header .nav .open > a:focus {
-        background-color: #36C3F2;
+        background-color: #f5aa0f;
         color: #fff;
         font-weight: bold;
     }
@@ -4055,20 +4055,20 @@ footer.session-footer {
 /* Success Button Style */
 .btn-success {
     color: white;
-    background-color: #0082f0;
-    border-color: #0082f0;
+    background-color: #ff6a00;
+    border-color: #ff6a00;
 }
 
     .btn-success:focus, .btn-success.focus {
         color: white;
-        background-color: #0000FF;
-        border-color: #0000FF;
+        background-color: #ff6a00;
+        border-color: #ff6a00;
     }
 
     .btn-success:hover {
         color: white;
-        background-color: #0000FF;
-        border-color: #0000FF;
+        background-color: #ff6a00;
+        border-color: #ff6a00;
     }
 
     .btn-success:active, .btn-success.active,
@@ -7035,7 +7035,7 @@ a.text-warning:focus {
 }
 
 .text-success {
-    color: #6FC080;
+    color: #ef8b10;
 }
 
 a.text-success:hover,
@@ -9584,12 +9584,12 @@ ul.wysihtml5-toolbar {
 }
 
 .cb-checkbox.checked .cb-inner {
-    border-color: #0082f0;
-    background-color: #0082f0;
+    border-color: #ef8b10;
+    background-color: #ef8b10;
 }
 
 .cb-checkbox:hover .cb-inner {
-    border-color: #009900;
+    border-color: #ef8b10;
 }
 
 .cb-checkbox .cb-inner,
@@ -12077,7 +12077,7 @@ li.app-noty {
 }
 
     .sk-wave .sk-rect {
-        background-color: #0000FF;
+        background-color: #ef8b10;
         height: 100%;
         width: 6px;
         display: inline-block;

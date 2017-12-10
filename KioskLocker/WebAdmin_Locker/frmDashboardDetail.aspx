@@ -70,7 +70,7 @@
         <div class="col-sm-6">
             <div class="card bg-white" id="BarBlock">
                 <div class="card-block text-center p-t-0">
-                    <h5 class="text-blue">Annual Service Transactions</h5>
+                    <h5 class="text-orange">Annual Service Transactions</h5>
                     <div class="chart bar" style="height: 200px"></div>
                     
                     <a href="javascript:;" class="btn btn-primary btn-xs" style="background-color:#36C3F2;">DEPOSIT</a>

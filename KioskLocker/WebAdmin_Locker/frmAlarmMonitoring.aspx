@@ -89,22 +89,7 @@
                                             </asp:LinkButton>                                                                
                                         </div>
                                     </div>
-                                    <%-- <div class="col-sm-12 mobile_product">                                        
-                                        <div class="btn-group-justified">
-                                            <asp:LinkButton class="btn btn-success btn-icon condition" id="lnkShift" runat="server">
-                                                <i class="fa fa-clock-o"></i>
-                                              <span>Open/Close Shift</span>
-                                            </asp:LinkButton>    
-                                        </div>
-                                    </div>
-                                     <div class="col-sm-12 mobile_product">                                        
-                                        <div class="btn-group-justified">
-                                            <asp:LinkButton class="btn btn-success btn-icon condition" id="lnkAgent" runat="server">
-                                                <i class="fa fa-user-secret"></i>
-                                              <span>Monitoring Agent</span>
-                                            </asp:LinkButton>                                                                     
-                                        </div>
-                                    </div> --%>  
+                                    
                                       <div class="col-sm-12 mobile_product">                                        
                                         <div class="btn-group-justified"> 
                                              <asp:LinkButton class="btn btn-success btn-icon condition" id="lnkNetwork" runat="server">

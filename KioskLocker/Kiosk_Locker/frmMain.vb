@@ -70,9 +70,7 @@ Public Class frmMain
             SetLEDStatus()
             GoToHome()
 
-
             CheckKioskScreenSaver()
-            'GetAdsInfo()
         Else
             InsertErrorLog("Cannot Load Device Infomation List", 0, 0, 0, KioskConfig.SelectForm, 0)
             ShowFormError("Out of service", "Load Device Fail", KioskConfig.SelectForm, 0, True)
@@ -247,37 +245,6 @@ Public Class frmMain
         SetLockerList()
     End Sub
 
-    'Private Sub GetAdsInfo()
-    '    Try
-    '        DT_ADS = New DataTable
-    '        DT_ADS.Columns.Add("Ads_Image", GetType(Image))
-    '        DT_ADS.Columns.Add("Ads_Sec", GetType(Int16))
-
-    '        For Each f As String In Directory.GetFiles(Application.StartupPath & "\Ads", "*.png")
-    '            Dim dr As DataRow = DT_ADS.NewRow
-    '            dr("Ads_Image") = Image.FromFile(f)
-    '            dr("Ads_Sec") = 5
-    '            DT_ADS.Rows.Add(dr)
-    '        Next
-
-    '        If DT_ADS.Rows.Count = 1 Then
-    '            TimerAds.Enabled = False
-    '            Dim ImgAds As Image = DirectCast(DT_ADS.Rows(0).Item("Ads_Image"), Image)
-    '            pnlAds.BackgroundImage = ImgAds
-    '        ElseIf DT_ADS.Rows.Count > 1 Then
-    '            TimerAds.Enabled = True
-    '            Ads_Rec = 0
-    '        Else
-    '            TimerAds.Enabled = False
-    '            Dim ImgAds As Bitmap = New Bitmap(Application.StartupPath & "/Ads_Nothing.png")
-    '            pnlAds.BackgroundImage = ImgAds
-    '            pnlAds.BackgroundImageLayout = ImageLayout.Stretch
-    '        End If
-    '    Catch ex As Exception
-    '        InsertErrorLog(ex.Message & vbNewLine & ex.StackTrace, 0, 0, 0, KioskConfig.SelectForm, Data.KioskConfigData.KioskLockerStep.Main_LoadAppScreenList)
-    '    End Try
-    'End Sub
-
     Private Sub SetAppScreenList()
         AppScreenList = New DataTable
         AppStepList = New DataTable
@@ -289,18 +256,6 @@ Public Class frmMain
         AppStepList = stLnq.GetDataList("", "", Nothing, Nothing)
         InsertLogTransactionActivity("", "", "", KioskConfigData.KioskLockerForm.Main, KioskConfigData.KioskLockerStep.Main_LoadAppScreenList, "", False)
     End Sub
-
-    'Private Sub SetLangMasterList()
-    '    LangMasterList = New DataTable
-    '    Dim lnq As New MsKioskScreenControlKioskLinqDB
-    '    LangMasterList = lnq.GetDataList("", "", Nothing, Nothing)
-    'End Sub
-
-    'Private Sub SetLangNotificationList()
-    '    LangNotificationList = New DataTable
-    '    Dim lnq As New MsKioskNotificationTextKioskLinqDB
-    '    LangNotificationList = lnq.GetDataList("", "", Nothing, Nothing)
-    'End Sub
 
     Private Sub SetAlarmMasterList()
         Try
@@ -407,10 +362,6 @@ Public Class frmMain
                         trans.RollbackTransaction()
                         InsertErrorLog(koRe.ErrorMessage, 0, 0, 0, KioskConfig.SelectForm, KioskConfigData.KioskLockerStep.Main_GetKioskSystemData)
                     End If
-                    'Else
-                    '    InsertErrorLog("Cannot found Kiosk Network Connection :" & kdLnq.ErrorMessage, 0, 0, 0, KioskConfig.SelectForm, KioskConfigData.KioskLockerStep.Main_GetKioskSystemData)
-                    '    ShowFormError("Attention", "Cannot found Kiosk  Network Connection", KioskConfig.SelectForm, 0, True)
-                    '    Exit Sub
                 End If
                 kdLnq = Nothing
             End If
@@ -421,19 +372,6 @@ Public Class frmMain
             InsertErrorLog("Exception 2: " & ex.Message & vbNewLine & ex.StackTrace, 0, 0, 0, KioskConfig.SelectForm, KioskConfigData.KioskLockerStep.Main_GetKioskSystemData)
         End Try
     End Sub
-
-    'Private Sub TimerAds_Tick(sender As Object, e As EventArgs) Handles TimerAds.Tick
-    '    Dim ImgAds As Image = DirectCast(DT_ADS.Rows(Ads_Rec).Item("Ads_Image"), Image)
-    '    Ads_Interval = CInt(DT_ADS.Rows(Ads_Rec).Item("Ads_Sec")) * 1000
-    '    pnlAds.BackgroundImage = ImgAds
-    '    TimerAds.Interval = Ads_Interval
-
-    '    If Ads_Rec >= DT_ADS.Rows.Count - 1 Then
-    '        Ads_Rec = 0
-    '    Else
-    '        Ads_Rec += 1
-    '    End If
-    'End Sub
 
     Sub CloseAllChildForm()
         For i As Integer = My.Application.OpenForms.Count - 1 To 0 Step -1
@@ -452,110 +390,6 @@ Public Class frmMain
             End If
         Next i
     End Sub
-
-    '#Region "Change Language"
-    '    Private Sub btnJP_Click(sender As Object, e As EventArgs) Handles btnJP.Click
-    '        InsertLogTransactionActivity(Customer.DepositTransNo, Collect.TransactionNo, "", KioskConfig.KioskLockerForm.Main, KioskConfig.KioskLockerStep.Main_ChangeLangJP, "", False)
-    '        KioskConfig.Language = Data.ConstantsData.KioskLanguage.Japan
-    '        ChangeFormMainLanguage()
-    '        SetChildFormLanguage()
-
-    '        Dim frm As Form = Me.ActiveMdiChild
-    '        If frm.Name = "frmHome" Then
-    '            DirectCast(frm, frmHome).SetLabelNotificationText()
-    '        ElseIf frm.Name = "frmCollectSelectDocument" Then
-    '            DirectCast(frm, frmCollectSelectDocument).SetLabelNotificationText()
-    '        End If
-    '    End Sub
-
-    '    Private Sub btnEN_Click(sender As Object, e As EventArgs) Handles btnEN.Click
-    '        InsertLogTransactionActivity(Customer.DepositTransNo, Collect.TransactionNo, "", KioskConfig.KioskLockerForm.Main, KioskConfig.KioskLockerStep.Main_ChangeLangEN, "", False)
-    '        KioskConfig.Language = Data.ConstantsData.KioskLanguage.English
-    '        ChangeFormMainLanguage()
-    '        SetChildFormLanguage()
-
-    '        Dim frm As Form = Me.ActiveMdiChild
-    '        If frm.Name = "frmHome" Then
-    '            DirectCast(frm, frmHome).SetLabelNotificationText()
-    '        ElseIf frm.Name = "frmCollectSelectDocument" Then
-    '            DirectCast(frm, frmCollectSelectDocument).SetLabelNotificationText()
-    '        End If
-
-    '    End Sub
-
-    '    Private Sub btnCH_Click(sender As Object, e As EventArgs) Handles btnCH.Click
-    '        InsertLogTransactionActivity(Customer.DepositTransNo, Collect.TransactionNo, "", KioskConfig.KioskLockerForm.Main, KioskConfig.KioskLockerStep.Main_ChangeLangCH, "", False)
-    '        KioskConfig.Language = Data.ConstantsData.KioskLanguage.China
-    '        ChangeFormMainLanguage()
-    '        SetChildFormLanguage()
-
-    '        Dim frm As Form = Me.ActiveMdiChild
-    '        If frm.Name = "frmHome" Then
-    '            DirectCast(frm, frmHome).SetLabelNotificationText()
-    '        ElseIf frm.Name = "frmCollectSelectDocument" Then
-    '            DirectCast(frm, frmCollectSelectDocument).SetLabelNotificationText()
-    '        End If
-    '    End Sub
-
-    '    Private Sub btnTH_Click(sender As Object, e As EventArgs) Handles btnTH.Click
-    '        InsertLogTransactionActivity(Customer.DepositTransNo, Collect.TransactionNo, "", KioskConfig.KioskLockerForm.Main, KioskConfig.KioskLockerStep.Main_ChangeLangTH, "", False)
-    '        KioskConfig.Language = Data.ConstantsData.KioskLanguage.Thai
-    '        ChangeFormMainLanguage()
-    '        SetChildFormLanguage()
-
-    '        Dim frm As Form = Me.ActiveMdiChild
-    '        If frm.Name = "frmHome" Then
-    '            DirectCast(frm, frmHome).SetLabelNotificationText()
-    '        ElseIf frm.Name = "frmCollectSelectDocument" Then
-    '            DirectCast(frm, frmCollectSelectDocument).SetLabelNotificationText()
-    '        End If
-    '    End Sub
-
-    '    Public Sub ChangeFormMainLanguage()
-    '        Dim fldName As String = ""
-    '        Select Case KioskConfig.Language
-    '            Case Data.ConstantsData.KioskLanguage.Thai
-    '                fldName = "TH_Display"
-    '            Case Data.ConstantsData.KioskLanguage.English
-    '                fldName = "EN_Display"
-    '            Case Data.ConstantsData.KioskLanguage.China
-    '                fldName = "CH_Display"
-    '            Case Data.KioskLanguage.Japan
-    '                fldName = "JP_Display"
-    '        End Select
-
-    '        LangMasterList.DefaultView.RowFilter = "ms_app_screen_id='" & Convert.ToInt16(Data.KioskConfigData.KioskLockerForm.Main) & "'"
-    '        If LangMasterList.DefaultView.Count > 0 Then
-    '            For Each dr As DataRowView In LangMasterList.DefaultView
-    '                Dim ControlName As String = dr("Control_Name")
-    '                Dim cc() As Control = Me.Controls.Find(ControlName, True)
-    '                If cc.Length > 0 Then
-    '                    cc(0).Text = dr(fldName)
-
-    '                    Dim FontSize As Int16 = dr("font_size")
-    '                    Dim FontStyle As FontStyle = Convert.ToInt16(dr("font_style"))
-    '                    cc(0).Font = New Font("Thai Sans Lite", FontSize, FontStyle)
-
-    '                    If KioskConfig.Language = Data.ConstantsData.KioskLanguage.China Then
-    '                        FontSize = FontSize * 0.7
-    '                        cc(0).Font = New Font("Hiragino GB W3", FontSize, FontStyle)
-
-    '                        'cc(0).Font = New Font("Songti SC Black", FontSize, FontStyle)
-    '                    ElseIf KioskConfig.Language = Data.ConstantsData.KioskLanguage.Japan Then
-    '                        FontSize = FontSize * 0.7
-
-    '                        cc(0).Font = New Font("MS Gothic", FontSize, FontStyle)
-    '                        'cc(0).Font = New Font("ＭＳ Ｐゴシック", FontSize, FontStyle)
-    '                    End If
-    '                End If
-    '            Next
-    '        End If
-    '        LangMasterList.DefaultView.RowFilter = ""
-    '        Application.DoEvents()
-    '    End Sub
-
-
-    '#End Region
 
 #Region "Download Screen Saver"
     Private Sub CheckKioskScreenSaver()
@@ -612,8 +446,6 @@ Public Class frmMain
     Private Sub TimerSetPointer_Tick(sender As Object, e As EventArgs) Handles TimerSetPointer.Tick
         btnPointer.Parent = Me
         btnPointer.Text = "1"
-        'btnPointer.Left = 0
-        'btnPointer.Top = 0
 
         'Move to buttom left
         btnPointer.Location = New Point(3, 711)

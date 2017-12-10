@@ -27,7 +27,7 @@
                         <table class="table-responsive table m-b-1" >
                             <tr>
                                 <th colspan="2" class="h4 text-left">
-                                    <asp:LinkButton ID="lblLocationName" runat="server" ForeColor="#0000FF"></asp:LinkButton>
+                                    <asp:LinkButton ID="lblLocationName" runat="server" ForeColor="orange" Font-Bold="true"></asp:LinkButton>
                                 </th>                   
                             </tr>
                             <tr>

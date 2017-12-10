@@ -89,7 +89,7 @@
         </div>
 
         <div class="col-md-6 ">
-            <div class="row col-sm-6 m-a-0 text-uppercase bold mobile_group_head m-b h4">
+            <div class="row col-sm-6 m-a-0 text-uppercase bold mobile_group_head m-b h4" >
                 Money Stock
             </div>
 

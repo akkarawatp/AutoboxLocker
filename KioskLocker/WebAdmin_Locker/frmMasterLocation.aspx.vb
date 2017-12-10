@@ -630,16 +630,13 @@ Public Class frmMasterLocation
         If Not e.Item.DataItem("active_status").ToString = "Y" Then
             td.Attributes("class") = "text-danger"
         Else
-            td.Attributes("class") = "text-primary"
+            td.Attributes("class") = "text-success"
         End If
 
         lblKiosk.Text = FormatNumber(e.Item.DataItem("Total_Kiosk"), 0)
         btnEdit.CommandArgument = e.Item.DataItem("location_code")
         btnDelete.CommandArgument = e.Item.DataItem("location_code")
         cfmDelete.ConfirmText = "Confirm to delete " & e.Item.DataItem("location_name").ToString & " ?"
-
-        'ColEdit.Visible = AuthorizedLevel = TSKBL.AuthorizedLevel.Edit
-        'ColDelete.Visible = AuthorizedLevel = TSKBL.AuthorizedLevel.Edit
     End Sub
 
     Dim cmDt As DataTable

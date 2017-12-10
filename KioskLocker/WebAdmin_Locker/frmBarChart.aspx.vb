@@ -116,7 +116,7 @@ Partial Class frmBarChart
         Next
 
         BarChart.Series(0).Color = ColorTranslator.FromHtml("#36C3F2")
-        BarChart.Series(1).Color = ColorTranslator.FromHtml("#000080")
+        BarChart.Series(1).Color = ColorTranslator.FromHtml("#ef8b10")
         BarChart.Series(2).Color = ColorTranslator.FromHtml("#DD6777")
 
 

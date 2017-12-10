@@ -28,7 +28,7 @@
                                 <div class="card-block">
                                     <div role="form" class="form-layout">
                                         <div class="text-center m-b">
-                                            <h4 class="text-uppercase">Welcome To Locker Kiosk</h4>
+                                            <h4 class="text-uppercase">Welcome To Minibox Locker</h4>
                                             <p>Sign In to Administrative Web</p>
                                         </div>
                                         <div class="form-inputs">
