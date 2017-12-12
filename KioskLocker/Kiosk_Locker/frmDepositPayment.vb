@@ -51,12 +51,10 @@ Public Class frmDepositPayment
         SetPaymentInformation()
         Application.DoEvents()
 
-#If DEBUG = False Then
         If IsInitialDevice = True Then
             StartPaymentInitialDevice()
             TimeOutCheckTime = DateTime.Now
         End If
-#End If
 
         If ServiceID = TransactionType.DepositBelonging Then
             InsertLogTransactionActivity(Deposit.DepositTransNo, "", "", KioskConfig.SelectForm, KioskLockerStep.DepositPayment_OpenForm, "ค่ามัดจำ " & Deposit.DepositAmount & " บาท", False)

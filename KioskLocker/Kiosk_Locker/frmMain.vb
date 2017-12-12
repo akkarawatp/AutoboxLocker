@@ -63,10 +63,7 @@ Public Class frmMain
         If DeviceInfoList.Rows.Count > 0 Then
             GetKioskDeviceConfig()   'ข้อมูลการตั้งค่า Comport ของ HW
             InitCabinetInfo()
-
-#If DEBUG = False Then
             StartInitialDevice()
-#End If
             SetLEDStatus()
             GoToHome()
 

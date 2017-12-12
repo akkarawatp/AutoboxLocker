@@ -39,6 +39,7 @@ Partial Class frmCollectThankyou
         Me.btnOpenLocker.TabIndex = 99
         Me.btnOpenLocker.Text = "ปิดตู้"
         Me.btnOpenLocker.UseVisualStyleBackColor = True
+        Me.btnOpenLocker.Visible = False
         '
         'frmCollectThankyou
         '

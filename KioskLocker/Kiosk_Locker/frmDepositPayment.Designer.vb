@@ -62,6 +62,7 @@ Partial Class frmDepositPayment
         Me.btn500.TabIndex = 69
         Me.btn500.Text = "500"
         Me.btn500.UseVisualStyleBackColor = True
+        Me.btn500.Visible = False
         '
         'btn100
         '
@@ -72,6 +73,7 @@ Partial Class frmDepositPayment
         Me.btn100.TabIndex = 70
         Me.btn100.Text = "100"
         Me.btn100.UseVisualStyleBackColor = True
+        Me.btn100.Visible = False
         '
         'btn50
         '
@@ -82,6 +84,7 @@ Partial Class frmDepositPayment
         Me.btn50.TabIndex = 71
         Me.btn50.Text = "50"
         Me.btn50.UseVisualStyleBackColor = True
+        Me.btn50.Visible = False
         '
         'btn20
         '
