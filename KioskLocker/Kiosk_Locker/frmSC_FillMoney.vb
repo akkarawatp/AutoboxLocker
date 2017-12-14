@@ -69,6 +69,7 @@ Public Class frmSC_FillMoney
 
     Private Sub frmSC_FillPaper_Shown(sender As Object, e As EventArgs) Handles Me.Shown
         Me.WindowState = FormWindowState.Maximized
+        Application.DoEvents()
         frmSC_Main.lblTitle.Text = "FILL MONEY"
         InsertLogTransactionActivity(StaffConsole.TransNo, KioskConfig.SelectForm, KioskLockerStep.StaffConsoleFillMoney_OpenFOrm, "", False)
 
@@ -141,6 +142,9 @@ Public Class frmSC_FillMoney
 
         InsertLogTransactionActivity(StaffConsole.TransNo, KioskConfig.SelectForm, KioskLockerStep.StaffConsoleFillMoney_CheckAuthorize, "", False)
         SetStaffConsoleAuthorize()
+
+        frmLoading.Close()
+        Application.DoEvents()
     End Sub
 
     Private Sub SetStaffConsoleAuthorize()
@@ -167,6 +171,9 @@ Public Class frmSC_FillMoney
 
 
     Private Sub lblCancel_Click(sender As Object, e As EventArgs) Handles btnCancel.Click
+        frmLoading.Show(frmSC_Main)
+        Application.DoEvents()
+
         InsertLogTransactionActivity(StaffConsole.TransNo, KioskConfig.SelectForm, KioskLockerStep.StaffConsoleFillMoney_ClickCancel, "", False)
         ConfirmFillMoney("N")
         Me.Close()
@@ -213,6 +220,9 @@ Public Class frmSC_FillMoney
     End Function
 
     Private Sub lblConfirm_Click(sender As Object, e As EventArgs) Handles btnConfirm.Click
+        frmLoading.Show(frmSC_Main)
+        Application.DoEvents()
+
         InsertLogTransactionActivity(StaffConsole.TransNo, KioskConfig.SelectForm, KioskLockerStep.StaffConsoleFillMoney_ClickConfirm, "", False)
 
         Dim lnq As TbFillMoneyKioskLinqDB = ConfirmFillMoney("Y")

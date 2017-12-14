@@ -16,8 +16,6 @@ Public Class frmSC_StockAndHardware
     Private Sub frmSC_StockAndHardware_Shown(sender As Object, e As EventArgs) Handles Me.Shown
         Me.WindowState = FormWindowState.Maximized
         frmSC_Main.lblTitle.Text = "DASHBOARD"
-        frmLoading.Show(frmSC_Main)
-        Application.DoEvents()
 
         InsertLogTransactionActivity(StaffConsole.TransNo, KioskConfig.SelectForm, KioskLockerStep.StaffConsoleStockAndHardware_GetKioskConfig, "", False)
         GetKioskConfig()
@@ -33,6 +31,7 @@ Public Class frmSC_StockAndHardware
         frmDepositSelectLocker.MdiParent = frmMain
         frmDepositSelectLocker.LoadLockerList()
         InsertLogTransactionActivity(StaffConsole.TransNo, KioskConfig.SelectForm, KioskLockerStep.StaffConsoleLoadLockList_LoadLockerList, "", False)
+
         frmLoading.Close()
     End Sub
 
@@ -306,15 +305,19 @@ Public Class frmSC_StockAndHardware
     End Sub
 
     Private Sub lblFillPaper_Click(sender As Object, e As EventArgs) Handles lblFillPaper.Click, btnFillPaper.Click
+        frmLoading.Show(frmSC_Main)
+        Application.DoEvents()
+
         InsertLogTransactionActivity(StaffConsole.TransNo, KioskConfig.SelectForm, KioskLockerStep.StaffConsoleStockAndHardware_ClickFillPaper, "", False)
         Me.Close()
         frmSC_FillPaper.MdiParent = frmSC_Main
         frmSC_FillPaper.Show()
-
-        Application.DoEvents()
     End Sub
 
     Private Sub lblFillMoney_Click(sender As Object, e As EventArgs) Handles lblFillMoney.Click, btnFillMoney.Click
+        frmLoading.Show(frmSC_Main)
+        Application.DoEvents()
+
         InsertLogTransactionActivity(StaffConsole.TransNo, KioskConfig.SelectForm, KioskLockerStep.StaffConsoleStockAndHardware_ClickFillMoney, "", False)
         Me.Close()
         frmSC_FillMoney.MdiParent = frmSC_Main
@@ -323,32 +326,33 @@ Public Class frmSC_StockAndHardware
     End Sub
 
     Private Sub lblKioskSetting_Click(sender As Object, e As EventArgs) Handles lblKioskSetting.Click, btnKioskSetting.Click
-        InsertLogTransactionActivity(StaffConsole.TransNo, KioskConfig.SelectForm, KioskLockerStep.StaffConsoleStockAndHardware_ClickKioskSetting, "", False)
         frmLoading.Show(frmSC_Main)
         Application.DoEvents()
 
+        InsertLogTransactionActivity(StaffConsole.TransNo, KioskConfig.SelectForm, KioskLockerStep.StaffConsoleStockAndHardware_ClickKioskSetting, "", False)
         Me.Close()
         frmSC_KioskSetting.MdiParent = frmSC_Main
         frmSC_KioskSetting.Show()
-        Application.DoEvents()
     End Sub
 
     Private Sub lblDeviceSetting_Click(sender As Object, e As EventArgs) Handles lblDeviceSetting.Click, btnDeviceSetting.Click
-        InsertLogTransactionActivity(StaffConsole.TransNo, KioskConfig.SelectForm, KioskLockerStep.StaffConsoleStockAndHardware_ClickDeviceSetting, "", False)
+        frmLoading.Show(frmSC_Main)
+        Application.DoEvents()
 
+        InsertLogTransactionActivity(StaffConsole.TransNo, KioskConfig.SelectForm, KioskLockerStep.StaffConsoleStockAndHardware_ClickDeviceSetting, "", False)
         Me.Close()
         frmSC_DeviceSetting.MdiParent = frmSC_Main
         frmSC_DeviceSetting.Show()
-        Application.DoEvents()
     End Sub
 
     Public Sub lblLockerSetting_Click(sender As Object, e As EventArgs) Handles lblLockerSetting.Click, btnLockerSetting.Click
-        InsertLogTransactionActivity(StaffConsole.TransNo, KioskConfig.SelectForm, KioskLockerStep.StaffConsoleStockAndHardware_ClickLockerSetting, "", False)
+        frmLoading.Show(frmSC_Main)
+        Application.DoEvents()
 
+        InsertLogTransactionActivity(StaffConsole.TransNo, KioskConfig.SelectForm, KioskLockerStep.StaffConsoleStockAndHardware_ClickLockerSetting, "", False)
         Me.Close()
         frmSC_LockerSetting.MdiParent = frmSC_Main
         frmSC_LockerSetting.Show()
-        Application.DoEvents()
     End Sub
 
     Private Sub lblExit_Click(sender As Object, e As EventArgs)
@@ -362,6 +366,8 @@ Public Class frmSC_StockAndHardware
 
         Dim y As DialogResult = MessageBox.Show("ยืนยันการเปิดทุกช่องฝาก", "Comfirm?", MessageBoxButtons.OKCancel, MessageBoxIcon.Question)
         If y = DialogResult.OK Then
+            frmLoading.Show(frmSC_Main)
+            Application.DoEvents()
 
             InsertLogTransactionActivity(StaffConsole.TransNo, KioskConfig.SelectForm, KioskLockerStep.StaffConsoleStockAndHardware_ClickOpenAll, "ยืนยันการเปิดช่องฝากทั้งหมด", False)
             If LockerList.Rows.Count > 0 Then
@@ -377,6 +383,7 @@ Public Class frmSC_StockAndHardware
                 Next
                 Application.DoEvents()
             End If
+            frmLoading.Close()
         End If
 
     End Sub

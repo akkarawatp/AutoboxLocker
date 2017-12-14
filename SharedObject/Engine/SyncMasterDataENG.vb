@@ -954,6 +954,7 @@ Public Class SyncMasterDataENG
                     If kLnq.ID > 0 Then
                         kRet = kLnq.UpdateData(Environment.MachineName, kTrans.Trans)
                     Else
+                        kLnq.MS_DEVICE_STATUS_ID = 2
                         kRet = kLnq.InsertData(Environment.MachineName, kTrans.Trans)
                     End If
 

@@ -21,6 +21,8 @@ Public Class frmSC_LockerSetting
 
         InsertLogTransactionActivity(StaffConsole.TransNo, KioskConfig.SelectForm, KioskLockerStep.StaffConsoleLockerSetting_CheckAuthorize, "", False)
         SetStaffConsoleAuthorize()
+
+        frmLoading.Close()
     End Sub
 
     Private Sub LoadAllCabinetData()
@@ -217,6 +219,9 @@ Public Class frmSC_LockerSetting
                 Exit Sub
             End If
 
+            frmLoading.Show(frmSC_Main)
+            Application.DoEvents()
+
             UcCabinet1.SaveLockerData()
             UcCabinet2.SaveLockerData()
             UcCabinet3.SaveLockerData()
@@ -243,6 +248,7 @@ Public Class frmSC_LockerSetting
                     SetCabinetInformation()
                     SetLockerList()
                 Else
+                    frmLoading.Close()
                     trans.RollbackTransaction()
                     InsertLogTransactionActivity(StaffConsole.TransNo, KioskConfig.SelectForm, KioskLockerStep.StaffConsoleLockerSetting_ClickSave, ret.ErrorMessage, True)
                     ShowDialogErrorMessageSC("Save Fail")
@@ -255,7 +261,9 @@ Public Class frmSC_LockerSetting
 
             AdjustLockerLayout()
             'MessageBox.Show("Save Complete", "Save", MessageBoxButtons.OK, MessageBoxIcon.Information)
+            frmLoading.Close()
         Catch ex As Exception
+            frmLoading.Close()
             InsertLogTransactionActivity(StaffConsole.TransNo, KioskConfig.SelectForm, KioskLockerStep.StaffConsoleLockerSetting_ClickSave, "Exception : " & ex.Message & vbNewLine & ex.StackTrace, True)
             InsertErrorLogSC(StaffConsole.Username, "Exception : " & ex.Message & vbNewLine & ex.StackTrace, StaffConsole.TransNo, KioskConfig.SelectForm, 0)
             ShowDialogErrorMessage("Save Fail")
@@ -264,6 +272,9 @@ Public Class frmSC_LockerSetting
     End Sub
 
     Private Sub lblClose_Click(sender As Object, e As EventArgs) Handles btnClose.Click
+        frmLoading.Show(frmSC_Main)
+        Application.DoEvents()
+
         InsertLogTransactionActivity(StaffConsole.TransNo, KioskConfig.SelectForm, KioskLockerStep.StaffConsoleLockerSetting_ClickClose, "", False)
         Me.Close()
         frmSC_StockAndHardware.MdiParent = frmSC_Main
@@ -280,8 +291,6 @@ Public Class frmSC_LockerSetting
                 Dim ret As ExecuteDataInfo = MoveCabinetPosition(FromPosition, ToPosition, ucCb)
 
                 If ret.IsSuccess = True Then
-                    'ucCb.OrderLayoutNo = ToPosition
-                    'LoadAllCabinetData()
                     Me.Close()
                     frmSC_StockAndHardware.lblLockerSetting_Click(Nothing, Nothing)
                     Application.DoEvents()
@@ -351,9 +360,6 @@ Public Class frmSC_LockerSetting
                 Dim ret As ExecuteDataInfo = MoveCabinetPosition(FromPosition, ToPosition, ucCb)
 
                 If ret.IsSuccess = True Then
-                    'ucCb.OrderLayoutNo = ToPosition
-                    'LoadAllCabinetData()
-
                     Me.Close()
                     frmSC_StockAndHardware.lblLockerSetting_Click(Nothing, Nothing)
                     Application.DoEvents()

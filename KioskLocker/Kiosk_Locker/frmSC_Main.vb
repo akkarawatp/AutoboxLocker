@@ -7,6 +7,8 @@ Public Class frmSC_Main
         frmSC_StockAndHardware.StartPosition = FormStartPosition.WindowsDefaultLocation
         frmSC_StockAndHardware.WindowState = FormWindowState.Normal
         frmSC_StockAndHardware.Show()
+
+
     End Sub
 
     Private Sub btnExitProgram_Click(sender As Object, e As EventArgs) Handles btnExitProgram.Click

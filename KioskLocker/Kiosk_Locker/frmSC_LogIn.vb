@@ -54,6 +54,9 @@ Public Class frmSC_LogIn
         End If
 
         If KioskConfig.IsLoginSSO = True Then
+            frmLoading.Show(frmSC_Main)
+            Application.DoEvents()
+
             Dim WS As New Webservice_Locker.ATBLockerWebService
             WS.Url = KioskConfig.WebserviceLockerURL
             WS.Timeout = 10000
@@ -95,8 +98,10 @@ Public Class frmSC_LogIn
                 InsertLogTransactionActivity(StaffConsole.TransNo, KioskConfig.SelectForm, KioskLockerStep.StaffConsoleLogin_LoginValidate, SSOLogin.ErrorMessage, True)
                 ShowDialogErrorMessageSC(SSOLogin.ErrorMessage)
                 InsertErrorLog(SSOLogin.ErrorMessage, 0, 0, 0, KioskConfig.SelectForm, 0)
+                frmLoading.Close()
             End If
             WS.Dispose()
+
             'Else
             '    'Login With Windows Account
             '    Dim pc As New PrincipalContext(ContextType.Machine)

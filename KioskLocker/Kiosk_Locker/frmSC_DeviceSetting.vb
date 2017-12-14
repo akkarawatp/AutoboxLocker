@@ -27,6 +27,7 @@ Public Class frmSC_DeviceSetting
 
         InsertLogTransactionActivity(StaffConsole.TransNo, KioskConfig.SelectForm, KioskLockerStep.StaffConsoleDeviceSetting_CheckAuthorize, "", False)
         SetStaffConsoleAuthorize()
+        frmLoading.Close()
     End Sub
 
     Private Sub SetStaffConsoleAuthorize()
@@ -227,6 +228,8 @@ Public Class frmSC_DeviceSetting
     End Sub
 
     Private Sub lblCancel_Click(sender As Object, e As EventArgs) Handles btnCancel.Click
+        frmLoading.Show(frmSC_Main)
+        Application.DoEvents()
         InsertLogTransactionActivity(StaffConsole.TransNo, KioskConfig.SelectForm, KioskLockerStep.StaffConsoleDeviceSetting_ClickCancel, "", False)
         Me.Close()
         frmSC_StockAndHardware.MdiParent = frmSC_Main
@@ -330,6 +333,8 @@ Public Class frmSC_DeviceSetting
         '    Exit Sub
         'End If
 
+        frmLoading.Show(frmSC_Main)
+        Application.DoEvents()
         InsertLogTransactionActivity(StaffConsole.TransNo, KioskConfig.SelectForm, KioskLockerStep.StaffConsoleDeviceSetting_ClickSave, "", False)
 
         UpdateDeviceByDeviceID(DeviceID.BankNoteIn, cbBanknoteIn.Text, "", "")

@@ -157,6 +157,9 @@ Public Class frmSC_KioskSetting
 
 
     Private Sub lblCancel_Click(sender As Object, e As EventArgs) Handles btnCancel.Click
+        frmLoading.Show(frmSC_Main)
+        Application.DoEvents()
+
         InsertLogTransactionActivity(StaffConsole.TransNo, KioskConfig.SelectForm, KioskLockerStep.StaffConsoleKioskSetting_ClickCancel, "", False)
         Me.Close()
         frmSC_StockAndHardware.MdiParent = frmSC_Main
@@ -260,7 +263,10 @@ Public Class frmSC_KioskSetting
         End If
 
         Try
-            Dim ini As New MiniboxLocker.Org.Mentalis.Files.IniReader(INIFileName)
+            frmLoading.Show(frmSC_Main)
+            Application.DoEvents()
+
+            Dim ini As New IniReader(INIFileName)
             ini.Section = "Setting"
             ini.Write("CardLanDesc", cbNetworkDevice.Text)
             ini = Nothing
@@ -311,6 +317,7 @@ Public Class frmSC_KioskSetting
                             frmSC_StockAndHardware.MdiParent = frmSC_Main
                             frmSC_StockAndHardware.Show()
                         Else
+                            frmLoading.Close()
                             trans.RollbackTransaction()
 
                             InsertLogTransactionActivity(StaffConsole.TransNo, KioskConfig.SelectForm, KioskLockerStep.StaffConsoleKioskSetting_ClickSave, ret.ErrorMessage, True)
@@ -319,6 +326,7 @@ Public Class frmSC_KioskSetting
                     End If
                     kdLnq = Nothing
                 Else
+                    frmLoading.Close()
                     trans.RollbackTransaction()
                     InsertLogTransactionActivity(StaffConsole.TransNo, KioskConfig.SelectForm, KioskLockerStep.StaffConsoleKioskSetting_ClickSave, ret.ErrorMessage, True)
                     ShowDialogErrorMessageSC(ret.ErrorMessage)
@@ -326,6 +334,7 @@ Public Class frmSC_KioskSetting
             End If
             lnq = Nothing
         Catch ex As Exception
+            frmLoading.Close()
             InsertLogTransactionActivity(StaffConsole.TransNo, KioskConfig.SelectForm, KioskLockerStep.StaffConsoleKioskSetting_ClickSave, ex.Message & " " & ex.StackTrace, True)
             ShowDialogErrorMessageSC(ex.Message & " " & ex.StackTrace)
         End Try

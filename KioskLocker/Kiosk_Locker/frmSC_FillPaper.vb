@@ -33,6 +33,9 @@ Public Class frmSC_FillPaper
         txtMax.Text = Max
         InsertLogTransactionActivity(StaffConsole.TransNo, KioskConfig.SelectForm, KioskLockerStep.StaffConsoleFillPaper_CheckAuthorize, "", False)
         SetStaffConsoleAuthorize()
+        Application.DoEvents()
+
+        frmLoading.Close()
     End Sub
 
     Private Sub SetStaffConsoleAuthorize()
@@ -62,6 +65,8 @@ Public Class frmSC_FillPaper
     End Sub
 
     Private Sub lblCancel_Click(sender As Object, e As EventArgs) Handles btnCancel.Click
+        frmLoading.Show(frmSC_Main)
+        Application.DoEvents()
         InsertLogTransactionActivity(StaffConsole.TransNo, KioskConfig.SelectForm, KioskLockerStep.StaffConsoleFillPaper_ClickCancel, "", False)
         Me.Close()
         frmSC_StockAndHardware.MdiParent = frmSC_Main
@@ -69,6 +74,7 @@ Public Class frmSC_FillPaper
     End Sub
 
     Private Sub lblConfirm_Click(sender As Object, e As EventArgs) Handles btnConfirm.Click
+
         InsertLogTransactionActivity(StaffConsole.TransNo, KioskConfig.SelectForm, KioskLockerStep.StaffConsoleFillPaper_ClickConfirm, "", False)
 
         If txtValue.Text = "" Then
@@ -81,6 +87,8 @@ Public Class frmSC_FillPaper
 
         UpdateKioskCurrentQty(Data.ConstantsData.DeviceID.Printer, CInt(txtValue.Text), 0, True)
         ShowDialogErrorMessageSC("Fill Paper Success")
+        frmLoading.Show(frmSC_Main)
+        Application.DoEvents()
         Me.Close()
         frmSC_StockAndHardware.MdiParent = frmSC_Main
         frmSC_StockAndHardware.Show()
