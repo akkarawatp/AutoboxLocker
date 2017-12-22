@@ -121,6 +121,7 @@
     <Compile Include="TABLE\MsRoleFunctionalServerLinqDB.vb" />
     <Compile Include="TABLE\MsRoleServerLinqDB.vb" />
     <Compile Include="TABLE\MsServiceRateDepositServerLinqDB.vb" />
+    <Compile Include="TABLE\MsServiceRateFineServerLinqDB.vb" />
     <Compile Include="TABLE\MsServiceRateHourServerLinqDB.vb" />
     <Compile Include="TABLE\MsServiceRateOvernightServerLinqDB.vb" />
     <Compile Include="TABLE\MsServiceRateServerLinqDB.vb" />

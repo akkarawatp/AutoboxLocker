@@ -8,7 +8,7 @@ Imports KioskLinqDB.ConnectDB
 
 Namespace TABLE
     'Represents a transaction for TB_PICKUP_TRANSACTION table KioskLinqDB.
-    '[Create by  on November, 19 2017]
+    '[Create by  on December, 23 2017]
     Public Class TbPickupTransactionKioskLinqDB
         Public sub TbPickupTransactionKioskLinqDB()
 
@@ -52,6 +52,8 @@ Namespace TABLE
         Dim _DEPOSIT_TRANS_NO As  String  = ""
         Dim _LOST_QR_CODE As Char = "Z"
         Dim _SERVICE_AMT As Long = 0
+        Dim _IS_FINE As Char = "N"
+        Dim _FINE_AMT As Long = 0
         Dim _PICKUP_TIME As  System.Nullable(Of DateTime)  = New DateTime(1,1,1)
         Dim _PAID_TIME As  System.Nullable(Of DateTime)  = New DateTime(1,1,1)
         Dim _CUST_IMAGE() As Byte
@@ -193,6 +195,24 @@ Namespace TABLE
             End Get
             Set(ByVal value As Long)
                _SERVICE_AMT = value
+            End Set
+        End Property 
+        <Column(Storage:="_IS_FINE", DbType:="Char(1) NOT NULL ",CanBeNull:=false)>  _
+        Public Property IS_FINE() As Char
+            Get
+                Return _IS_FINE
+            End Get
+            Set(ByVal value As Char)
+               _IS_FINE = value
+            End Set
+        End Property 
+        <Column(Storage:="_FINE_AMT", DbType:="Int NOT NULL ",CanBeNull:=false)>  _
+        Public Property FINE_AMT() As Long
+            Get
+                Return _FINE_AMT
+            End Get
+            Set(ByVal value As Long)
+               _FINE_AMT = value
             End Set
         End Property 
         <Column(Storage:="_PICKUP_TIME", DbType:="DateTime")>  _
@@ -428,6 +448,8 @@ Namespace TABLE
             _DEPOSIT_TRANS_NO = ""
             _LOST_QR_CODE = "Z"
             _SERVICE_AMT = 0
+            _IS_FINE = "N"
+            _FINE_AMT = 0
             _PICKUP_TIME = New DateTime(1,1,1)
             _PAID_TIME = New DateTime(1,1,1)
              _CUST_IMAGE = Nothing
@@ -794,7 +816,7 @@ Namespace TABLE
         End Function
 
         Private Function SetParameterData() As SqlParameter()
-            Dim cmbParam(36) As SqlParameter
+            Dim cmbParam(38) As SqlParameter
             cmbParam(0) = New SqlParameter("@_ID", SqlDbType.BigInt)
             cmbParam(0).Value = _ID
 
@@ -862,94 +884,100 @@ Namespace TABLE
             cmbParam(12) = New SqlParameter("@_SERVICE_AMT", SqlDbType.Int)
             cmbParam(12).Value = _SERVICE_AMT
 
-            cmbParam(13) = New SqlParameter("@_PICKUP_TIME", SqlDbType.DateTime)
+            cmbParam(13) = New SqlParameter("@_IS_FINE", SqlDbType.Char)
+            cmbParam(13).Value = _IS_FINE
+
+            cmbParam(14) = New SqlParameter("@_FINE_AMT", SqlDbType.Int)
+            cmbParam(14).Value = _FINE_AMT
+
+            cmbParam(15) = New SqlParameter("@_PICKUP_TIME", SqlDbType.DateTime)
             If _PICKUP_TIME.Value.Year > 1 Then 
-                cmbParam(13).Value = _PICKUP_TIME.Value
+                cmbParam(15).Value = _PICKUP_TIME.Value
             Else
-                cmbParam(13).Value = DBNull.value
-            End If
-
-            cmbParam(14) = New SqlParameter("@_PAID_TIME", SqlDbType.DateTime)
-            If _PAID_TIME.Value.Year > 1 Then 
-                cmbParam(14).Value = _PAID_TIME.Value
-            Else
-                cmbParam(14).Value = DBNull.value
-            End If
-
-            If _CUST_IMAGE IsNot Nothing Then 
-                cmbParam(15) = New SqlParameter("@_CUST_IMAGE",SqlDbType.Image, _CUST_IMAGE.Length)
-                cmbParam(15).Value = _CUST_IMAGE
-            Else
-                cmbParam(15) = New SqlParameter("@_CUST_IMAGE", SqlDbType.Image)
                 cmbParam(15).Value = DBNull.value
             End If
 
-            cmbParam(16) = New SqlParameter("@_RECEIVE_COIN1", SqlDbType.Int)
-            cmbParam(16).Value = _RECEIVE_COIN1
-
-            cmbParam(17) = New SqlParameter("@_RECEIVE_COIN2", SqlDbType.Int)
-            cmbParam(17).Value = _RECEIVE_COIN2
-
-            cmbParam(18) = New SqlParameter("@_RECEIVE_COIN5", SqlDbType.Int)
-            cmbParam(18).Value = _RECEIVE_COIN5
-
-            cmbParam(19) = New SqlParameter("@_RECEIVE_COIN10", SqlDbType.Int)
-            cmbParam(19).Value = _RECEIVE_COIN10
-
-            cmbParam(20) = New SqlParameter("@_RECEIVE_BANKNOTE20", SqlDbType.Int)
-            cmbParam(20).Value = _RECEIVE_BANKNOTE20
-
-            cmbParam(21) = New SqlParameter("@_RECEIVE_BANKNOTE50", SqlDbType.Int)
-            cmbParam(21).Value = _RECEIVE_BANKNOTE50
-
-            cmbParam(22) = New SqlParameter("@_RECEIVE_BANKNOTE100", SqlDbType.Int)
-            cmbParam(22).Value = _RECEIVE_BANKNOTE100
-
-            cmbParam(23) = New SqlParameter("@_RECEIVE_BANKNOTE500", SqlDbType.Int)
-            cmbParam(23).Value = _RECEIVE_BANKNOTE500
-
-            cmbParam(24) = New SqlParameter("@_RECEIVE_BANKNOTE1000", SqlDbType.Int)
-            cmbParam(24).Value = _RECEIVE_BANKNOTE1000
-
-            cmbParam(25) = New SqlParameter("@_CHANGE_COIN1", SqlDbType.Int)
-            cmbParam(25).Value = _CHANGE_COIN1
-
-            cmbParam(26) = New SqlParameter("@_CHANGE_COIN2", SqlDbType.Int)
-            cmbParam(26).Value = _CHANGE_COIN2
-
-            cmbParam(27) = New SqlParameter("@_CHANGE_COIN5", SqlDbType.Int)
-            cmbParam(27).Value = _CHANGE_COIN5
-
-            cmbParam(28) = New SqlParameter("@_CHANGE_COIN10", SqlDbType.Int)
-            cmbParam(28).Value = _CHANGE_COIN10
-
-            cmbParam(29) = New SqlParameter("@_CHANGE_BANKNOTE20", SqlDbType.Int)
-            cmbParam(29).Value = _CHANGE_BANKNOTE20
-
-            cmbParam(30) = New SqlParameter("@_CHANGE_BANKNOTE50", SqlDbType.Int)
-            cmbParam(30).Value = _CHANGE_BANKNOTE50
-
-            cmbParam(31) = New SqlParameter("@_CHANGE_BANKNOTE100", SqlDbType.Int)
-            cmbParam(31).Value = _CHANGE_BANKNOTE100
-
-            cmbParam(32) = New SqlParameter("@_CHANGE_BANKNOTE500", SqlDbType.Int)
-            cmbParam(32).Value = _CHANGE_BANKNOTE500
-
-            cmbParam(33) = New SqlParameter("@_TRANS_STATUS", SqlDbType.Char)
-            cmbParam(33).Value = _TRANS_STATUS
-
-            cmbParam(34) = New SqlParameter("@_MS_APP_SCREEN_ID", SqlDbType.BigInt)
-            If _MS_APP_SCREEN_ID IsNot Nothing Then 
-                cmbParam(34).Value = _MS_APP_SCREEN_ID.Value
+            cmbParam(16) = New SqlParameter("@_PAID_TIME", SqlDbType.DateTime)
+            If _PAID_TIME.Value.Year > 1 Then 
+                cmbParam(16).Value = _PAID_TIME.Value
             Else
-                cmbParam(34).Value = DBNull.value
+                cmbParam(16).Value = DBNull.value
+            End If
+
+            If _CUST_IMAGE IsNot Nothing Then 
+                cmbParam(17) = New SqlParameter("@_CUST_IMAGE",SqlDbType.Image, _CUST_IMAGE.Length)
+                cmbParam(17).Value = _CUST_IMAGE
+            Else
+                cmbParam(17) = New SqlParameter("@_CUST_IMAGE", SqlDbType.Image)
+                cmbParam(17).Value = DBNull.value
+            End If
+
+            cmbParam(18) = New SqlParameter("@_RECEIVE_COIN1", SqlDbType.Int)
+            cmbParam(18).Value = _RECEIVE_COIN1
+
+            cmbParam(19) = New SqlParameter("@_RECEIVE_COIN2", SqlDbType.Int)
+            cmbParam(19).Value = _RECEIVE_COIN2
+
+            cmbParam(20) = New SqlParameter("@_RECEIVE_COIN5", SqlDbType.Int)
+            cmbParam(20).Value = _RECEIVE_COIN5
+
+            cmbParam(21) = New SqlParameter("@_RECEIVE_COIN10", SqlDbType.Int)
+            cmbParam(21).Value = _RECEIVE_COIN10
+
+            cmbParam(22) = New SqlParameter("@_RECEIVE_BANKNOTE20", SqlDbType.Int)
+            cmbParam(22).Value = _RECEIVE_BANKNOTE20
+
+            cmbParam(23) = New SqlParameter("@_RECEIVE_BANKNOTE50", SqlDbType.Int)
+            cmbParam(23).Value = _RECEIVE_BANKNOTE50
+
+            cmbParam(24) = New SqlParameter("@_RECEIVE_BANKNOTE100", SqlDbType.Int)
+            cmbParam(24).Value = _RECEIVE_BANKNOTE100
+
+            cmbParam(25) = New SqlParameter("@_RECEIVE_BANKNOTE500", SqlDbType.Int)
+            cmbParam(25).Value = _RECEIVE_BANKNOTE500
+
+            cmbParam(26) = New SqlParameter("@_RECEIVE_BANKNOTE1000", SqlDbType.Int)
+            cmbParam(26).Value = _RECEIVE_BANKNOTE1000
+
+            cmbParam(27) = New SqlParameter("@_CHANGE_COIN1", SqlDbType.Int)
+            cmbParam(27).Value = _CHANGE_COIN1
+
+            cmbParam(28) = New SqlParameter("@_CHANGE_COIN2", SqlDbType.Int)
+            cmbParam(28).Value = _CHANGE_COIN2
+
+            cmbParam(29) = New SqlParameter("@_CHANGE_COIN5", SqlDbType.Int)
+            cmbParam(29).Value = _CHANGE_COIN5
+
+            cmbParam(30) = New SqlParameter("@_CHANGE_COIN10", SqlDbType.Int)
+            cmbParam(30).Value = _CHANGE_COIN10
+
+            cmbParam(31) = New SqlParameter("@_CHANGE_BANKNOTE20", SqlDbType.Int)
+            cmbParam(31).Value = _CHANGE_BANKNOTE20
+
+            cmbParam(32) = New SqlParameter("@_CHANGE_BANKNOTE50", SqlDbType.Int)
+            cmbParam(32).Value = _CHANGE_BANKNOTE50
+
+            cmbParam(33) = New SqlParameter("@_CHANGE_BANKNOTE100", SqlDbType.Int)
+            cmbParam(33).Value = _CHANGE_BANKNOTE100
+
+            cmbParam(34) = New SqlParameter("@_CHANGE_BANKNOTE500", SqlDbType.Int)
+            cmbParam(34).Value = _CHANGE_BANKNOTE500
+
+            cmbParam(35) = New SqlParameter("@_TRANS_STATUS", SqlDbType.Char)
+            cmbParam(35).Value = _TRANS_STATUS
+
+            cmbParam(36) = New SqlParameter("@_MS_APP_SCREEN_ID", SqlDbType.BigInt)
+            If _MS_APP_SCREEN_ID IsNot Nothing Then 
+                cmbParam(36).Value = _MS_APP_SCREEN_ID.Value
+            Else
+                cmbParam(36).Value = DBNull.value
             End IF
 
-            cmbParam(35) = New SqlParameter("@_MS_APP_STEP_ID", SqlDbType.BigInt)
-            cmbParam(35).Value = _MS_APP_STEP_ID
+            cmbParam(37) = New SqlParameter("@_MS_APP_STEP_ID", SqlDbType.BigInt)
+            cmbParam(37).Value = _MS_APP_STEP_ID
 
-            cmbParam(36) = New SqlParameter("@_SYNC_TO_SERVER", SqlDbType.Char)
-            cmbParam(36).Value = _SYNC_TO_SERVER
+            cmbParam(38) = New SqlParameter("@_SYNC_TO_SERVER", SqlDbType.Char)
+            cmbParam(38).Value = _SYNC_TO_SERVER
 
             Return cmbParam
         End Function
@@ -983,6 +1011,8 @@ Namespace TABLE
                         If Convert.IsDBNull(Rdr("deposit_trans_no")) = False Then _deposit_trans_no = Rdr("deposit_trans_no").ToString()
                         If Convert.IsDBNull(Rdr("lost_qr_code")) = False Then _lost_qr_code = Rdr("lost_qr_code").ToString()
                         If Convert.IsDBNull(Rdr("service_amt")) = False Then _service_amt = Convert.ToInt32(Rdr("service_amt"))
+                        If Convert.IsDBNull(Rdr("is_fine")) = False Then _is_fine = Rdr("is_fine").ToString()
+                        If Convert.IsDBNull(Rdr("fine_amt")) = False Then _fine_amt = Convert.ToInt32(Rdr("fine_amt"))
                         If Convert.IsDBNull(Rdr("pickup_time")) = False Then _pickup_time = Convert.ToDateTime(Rdr("pickup_time"))
                         If Convert.IsDBNull(Rdr("paid_time")) = False Then _paid_time = Convert.ToDateTime(Rdr("paid_time"))
                         If Convert.IsDBNull(Rdr("cust_image")) = False Then _cust_image = CType(Rdr("cust_image"), Byte())
@@ -1054,6 +1084,8 @@ Namespace TABLE
                         If Convert.IsDBNull(Rdr("deposit_trans_no")) = False Then _deposit_trans_no = Rdr("deposit_trans_no").ToString()
                         If Convert.IsDBNull(Rdr("lost_qr_code")) = False Then _lost_qr_code = Rdr("lost_qr_code").ToString()
                         If Convert.IsDBNull(Rdr("service_amt")) = False Then _service_amt = Convert.ToInt32(Rdr("service_amt"))
+                        If Convert.IsDBNull(Rdr("is_fine")) = False Then _is_fine = Rdr("is_fine").ToString()
+                        If Convert.IsDBNull(Rdr("fine_amt")) = False Then _fine_amt = Convert.ToInt32(Rdr("fine_amt"))
                         If Convert.IsDBNull(Rdr("pickup_time")) = False Then _pickup_time = Convert.ToDateTime(Rdr("pickup_time"))
                         If Convert.IsDBNull(Rdr("paid_time")) = False Then _paid_time = Convert.ToDateTime(Rdr("paid_time"))
                         If Convert.IsDBNull(Rdr("cust_image")) = False Then _cust_image = CType(Rdr("cust_image"), Byte())
@@ -1102,8 +1134,8 @@ Namespace TABLE
         Private ReadOnly Property SqlInsert() As String 
             Get
                 Dim Sql As String=""
-                Sql += "INSERT INTO " & tableName  & " (CREATED_BY, CREATED_DATE, TRANSACTION_NO, TRANS_START_TIME, TRANS_END_TIME, MS_KIOSK_ID, MS_LOCKER_ID, DEPOSIT_TRANS_NO, LOST_QR_CODE, SERVICE_AMT, PICKUP_TIME, PAID_TIME, CUST_IMAGE, RECEIVE_COIN1, RECEIVE_COIN2, RECEIVE_COIN5, RECEIVE_COIN10, RECEIVE_BANKNOTE20, RECEIVE_BANKNOTE50, RECEIVE_BANKNOTE100, RECEIVE_BANKNOTE500, RECEIVE_BANKNOTE1000, CHANGE_COIN1, CHANGE_COIN2, CHANGE_COIN5, CHANGE_COIN10, CHANGE_BANKNOTE20, CHANGE_BANKNOTE50, CHANGE_BANKNOTE100, CHANGE_BANKNOTE500, TRANS_STATUS, MS_APP_SCREEN_ID, MS_APP_STEP_ID, SYNC_TO_SERVER)"
-                Sql += " OUTPUT INSERTED.ID, INSERTED.CREATED_BY, INSERTED.CREATED_DATE, INSERTED.UPDATED_BY, INSERTED.UPDATED_DATE, INSERTED.TRANSACTION_NO, INSERTED.TRANS_START_TIME, INSERTED.TRANS_END_TIME, INSERTED.MS_KIOSK_ID, INSERTED.MS_LOCKER_ID, INSERTED.DEPOSIT_TRANS_NO, INSERTED.LOST_QR_CODE, INSERTED.SERVICE_AMT, INSERTED.PICKUP_TIME, INSERTED.PAID_TIME, INSERTED.CUST_IMAGE, INSERTED.RECEIVE_COIN1, INSERTED.RECEIVE_COIN2, INSERTED.RECEIVE_COIN5, INSERTED.RECEIVE_COIN10, INSERTED.RECEIVE_BANKNOTE20, INSERTED.RECEIVE_BANKNOTE50, INSERTED.RECEIVE_BANKNOTE100, INSERTED.RECEIVE_BANKNOTE500, INSERTED.RECEIVE_BANKNOTE1000, INSERTED.CHANGE_COIN1, INSERTED.CHANGE_COIN2, INSERTED.CHANGE_COIN5, INSERTED.CHANGE_COIN10, INSERTED.CHANGE_BANKNOTE20, INSERTED.CHANGE_BANKNOTE50, INSERTED.CHANGE_BANKNOTE100, INSERTED.CHANGE_BANKNOTE500, INSERTED.TRANS_STATUS, INSERTED.MS_APP_SCREEN_ID, INSERTED.MS_APP_STEP_ID, INSERTED.SYNC_TO_SERVER"
+                Sql += "INSERT INTO " & tableName  & " (CREATED_BY, CREATED_DATE, TRANSACTION_NO, TRANS_START_TIME, TRANS_END_TIME, MS_KIOSK_ID, MS_LOCKER_ID, DEPOSIT_TRANS_NO, LOST_QR_CODE, SERVICE_AMT, IS_FINE, FINE_AMT, PICKUP_TIME, PAID_TIME, CUST_IMAGE, RECEIVE_COIN1, RECEIVE_COIN2, RECEIVE_COIN5, RECEIVE_COIN10, RECEIVE_BANKNOTE20, RECEIVE_BANKNOTE50, RECEIVE_BANKNOTE100, RECEIVE_BANKNOTE500, RECEIVE_BANKNOTE1000, CHANGE_COIN1, CHANGE_COIN2, CHANGE_COIN5, CHANGE_COIN10, CHANGE_BANKNOTE20, CHANGE_BANKNOTE50, CHANGE_BANKNOTE100, CHANGE_BANKNOTE500, TRANS_STATUS, MS_APP_SCREEN_ID, MS_APP_STEP_ID, SYNC_TO_SERVER)"
+                Sql += " OUTPUT INSERTED.ID, INSERTED.CREATED_BY, INSERTED.CREATED_DATE, INSERTED.UPDATED_BY, INSERTED.UPDATED_DATE, INSERTED.TRANSACTION_NO, INSERTED.TRANS_START_TIME, INSERTED.TRANS_END_TIME, INSERTED.MS_KIOSK_ID, INSERTED.MS_LOCKER_ID, INSERTED.DEPOSIT_TRANS_NO, INSERTED.LOST_QR_CODE, INSERTED.SERVICE_AMT, INSERTED.IS_FINE, INSERTED.FINE_AMT, INSERTED.PICKUP_TIME, INSERTED.PAID_TIME, INSERTED.CUST_IMAGE, INSERTED.RECEIVE_COIN1, INSERTED.RECEIVE_COIN2, INSERTED.RECEIVE_COIN5, INSERTED.RECEIVE_COIN10, INSERTED.RECEIVE_BANKNOTE20, INSERTED.RECEIVE_BANKNOTE50, INSERTED.RECEIVE_BANKNOTE100, INSERTED.RECEIVE_BANKNOTE500, INSERTED.RECEIVE_BANKNOTE1000, INSERTED.CHANGE_COIN1, INSERTED.CHANGE_COIN2, INSERTED.CHANGE_COIN5, INSERTED.CHANGE_COIN10, INSERTED.CHANGE_BANKNOTE20, INSERTED.CHANGE_BANKNOTE50, INSERTED.CHANGE_BANKNOTE100, INSERTED.CHANGE_BANKNOTE500, INSERTED.TRANS_STATUS, INSERTED.MS_APP_SCREEN_ID, INSERTED.MS_APP_STEP_ID, INSERTED.SYNC_TO_SERVER"
                 Sql += " VALUES("
                 sql += "@_CREATED_BY" & ", "
                 sql += "@_CREATED_DATE" & ", "
@@ -1115,6 +1147,8 @@ Namespace TABLE
                 sql += "@_DEPOSIT_TRANS_NO" & ", "
                 sql += "@_LOST_QR_CODE" & ", "
                 sql += "@_SERVICE_AMT" & ", "
+                sql += "@_IS_FINE" & ", "
+                sql += "@_FINE_AMT" & ", "
                 sql += "@_PICKUP_TIME" & ", "
                 sql += "@_PAID_TIME" & ", "
                 sql += "@_CUST_IMAGE" & ", "
@@ -1160,6 +1194,8 @@ Namespace TABLE
                 Sql += "DEPOSIT_TRANS_NO = " & "@_DEPOSIT_TRANS_NO" & ", "
                 Sql += "LOST_QR_CODE = " & "@_LOST_QR_CODE" & ", "
                 Sql += "SERVICE_AMT = " & "@_SERVICE_AMT" & ", "
+                Sql += "IS_FINE = " & "@_IS_FINE" & ", "
+                Sql += "FINE_AMT = " & "@_FINE_AMT" & ", "
                 Sql += "PICKUP_TIME = " & "@_PICKUP_TIME" & ", "
                 Sql += "PAID_TIME = " & "@_PAID_TIME" & ", "
                 Sql += "CUST_IMAGE = " & "@_CUST_IMAGE" & ", "
@@ -1201,7 +1237,7 @@ Namespace TABLE
         'Get Select Statement for table TB_PICKUP_TRANSACTION
         Private ReadOnly Property SqlSelect() As String
             Get
-                Dim Sql As String = "SELECT ID, CREATED_BY, CREATED_DATE, UPDATED_BY, UPDATED_DATE, TRANSACTION_NO, TRANS_START_TIME, TRANS_END_TIME, MS_KIOSK_ID, MS_LOCKER_ID, DEPOSIT_TRANS_NO, LOST_QR_CODE, SERVICE_AMT, PICKUP_TIME, PAID_TIME, CUST_IMAGE, RECEIVE_COIN1, RECEIVE_COIN2, RECEIVE_COIN5, RECEIVE_COIN10, RECEIVE_BANKNOTE20, RECEIVE_BANKNOTE50, RECEIVE_BANKNOTE100, RECEIVE_BANKNOTE500, RECEIVE_BANKNOTE1000, CHANGE_COIN1, CHANGE_COIN2, CHANGE_COIN5, CHANGE_COIN10, CHANGE_BANKNOTE20, CHANGE_BANKNOTE50, CHANGE_BANKNOTE100, CHANGE_BANKNOTE500, TRANS_STATUS, MS_APP_SCREEN_ID, MS_APP_STEP_ID, SYNC_TO_SERVER FROM " & tableName
+                Dim Sql As String = "SELECT ID, CREATED_BY, CREATED_DATE, UPDATED_BY, UPDATED_DATE, TRANSACTION_NO, TRANS_START_TIME, TRANS_END_TIME, MS_KIOSK_ID, MS_LOCKER_ID, DEPOSIT_TRANS_NO, LOST_QR_CODE, SERVICE_AMT, IS_FINE, FINE_AMT, PICKUP_TIME, PAID_TIME, CUST_IMAGE, RECEIVE_COIN1, RECEIVE_COIN2, RECEIVE_COIN5, RECEIVE_COIN10, RECEIVE_BANKNOTE20, RECEIVE_BANKNOTE50, RECEIVE_BANKNOTE100, RECEIVE_BANKNOTE500, RECEIVE_BANKNOTE1000, CHANGE_COIN1, CHANGE_COIN2, CHANGE_COIN5, CHANGE_COIN10, CHANGE_BANKNOTE20, CHANGE_BANKNOTE50, CHANGE_BANKNOTE100, CHANGE_BANKNOTE500, TRANS_STATUS, MS_APP_SCREEN_ID, MS_APP_STEP_ID, SYNC_TO_SERVER FROM " & tableName
                 Return Sql
             End Get
         End Property

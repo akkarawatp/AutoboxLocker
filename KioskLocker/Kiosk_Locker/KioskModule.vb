@@ -30,7 +30,7 @@ Module KioskModule
     Public AlarmMasterList As New DataTable
     'Public LangMasterList As New DataTable
     'Public LangNotificationList As New DataTable
-    Public ServiceRateData As New MSServerRateData
+    Public ServiceRateData As New MSServiceRateData
     Public THB_CH As String = "泰铢"
     Public THB_JP As String = "THB"
     Public THB_EN As String = "THB"

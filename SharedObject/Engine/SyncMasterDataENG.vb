@@ -471,7 +471,7 @@ Public Class SyncMasterDataENG
             ws.Timeout = 10000
             ws.Url = KioskInfoENG.GetLockerSysconfig(MsKioskID).LOCKER_WEBSERVICE_URL
             Dim sr As SyncDataWebservice.MasterServiceRateData = ws.GetLockerServiceRate(MsKioskID)
-            If sr.ServiceRate.Rows.Count > 0 And sr.ServiceRateDeposit.Rows.Count > 0 And sr.ServiceRateHour.Rows.Count > 0 And sr.ServiceRateOverNight.Rows.Count > 0 Then
+            If sr.ServiceRate.Rows.Count > 0 And sr.ServiceRateDeposit.Rows.Count > 0 And sr.ServiceRateHour.Rows.Count > 0 And sr.ServiceRateOverNight.Rows.Count > 0 And sr.ServiceRateFine.Rows.Count > 0 Then
                 Dim dt As DataTable = sr.ServiceRate
 
                 'Sync Service Rate Data at KIOSK
@@ -615,6 +615,42 @@ Public Class SyncMasterDataENG
                                 End If
                                 kLnq = Nothing
                             Next
+
+                            If ret.IsSuccess = True Then
+                                For Each dDr As DataRow In sr.ServiceRateFine.Rows
+                                    Dim kLnq As New MsServiceRateFineKioskLinqDB
+                                    kLnq.GetDataByPK(Convert.ToInt64(dDr("id")), kTrans.Trans)
+                                    If kLnq.ID > 0 Then
+                                        kLnq.MS_SERVICE_RATE_ID = srID
+                                        kLnq.MS_CABINET_MODEL_ID = Convert.ToInt64(dDr("ms_cabinet_model_id"))
+                                        kLnq.FINE_RATE = Convert.ToInt16(dDr("fine_rate"))
+
+                                        ret = kLnq.UpdateData(Environment.MachineName, kTrans.Trans)
+                                        If ret.IsSuccess = False Then
+                                            LogFileENG.CreateErrorLogAgent(MsKioskID, ret.ErrorMessage)
+                                            Exit For
+                                        End If
+                                    Else
+                                        Dim sql As String = "Set identity_insert [MS_SERVICE_RATE_FINE] On; " & vbNewLine
+                                        sql += " insert into [MS_SERVICE_RATE_FINE] (id,created_by,created_date,ms_service_rate_id,ms_cabinet_model_id, fine_rate)" & vbNewLine
+                                        sql += " values(@_ID,@_CREATED_BY,getdate(),@_MS_SERVICE_RATE_ID,@_MS_CABINET_MODEL_ID,  @_FINE_RATE) " & vbNewLine
+                                        sql += " Set identity_insert [MS_SERVICE_RATE_FINE] off;"
+
+                                        Dim p(5) As SqlParameter
+                                        p(0) = KioskDB.SetBigInt("@_ID", Convert.ToInt64(dDr("id")))
+                                        p(1) = KioskDB.SetText("@_CREATED_BY", Environment.MachineName)
+                                        p(2) = KioskDB.SetBigInt("@_MS_SERVICE_RATE_ID", srID)
+                                        p(3) = KioskDB.SetBigInt("@_MS_CABINET_MODEL_ID", Convert.ToInt64(dDr("ms_cabinet_model_id")))
+                                        p(4) = KioskDB.SetBigInt("@_FINE_RATE", Convert.ToInt64(dDr("fine_rate")))
+
+                                        ret = KioskDB.ExecuteNonQuery(sql, kTrans.Trans, p)
+                                        If ret.IsSuccess = False Then
+                                            LogFileENG.CreateErrorLogAgent(MsKioskID, ret.ErrorMessage)
+                                            Exit For
+                                        End If
+                                    End If
+                                Next
+                            End If
 
                             If ret.IsSuccess = True Then
                                 kTrans.CommitTransaction()

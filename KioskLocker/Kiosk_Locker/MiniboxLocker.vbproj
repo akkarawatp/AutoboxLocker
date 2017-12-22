@@ -123,7 +123,7 @@
     <Compile Include="AutoWakeUP.vb" />
     <Compile Include="DataSync.vb" />
     <Compile Include="Data\ConstantsData.vb" />
-    <Compile Include="Data\MSServerRateData.vb" />
+    <Compile Include="Data\MSServiceRateData.vb" />
     <Compile Include="Data\CollectTransactionData.vb" />
     <Compile Include="Data\ServiceTransactionData.vb" />
     <Compile Include="Data\KioskSettingData.vb" />

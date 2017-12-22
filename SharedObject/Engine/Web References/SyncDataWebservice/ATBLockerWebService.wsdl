@@ -276,6 +276,14 @@
               </s:sequence>
             </s:complexType>
           </s:element>
+          <s:element minOccurs="0" maxOccurs="1" name="ServiceRateFine">
+            <s:complexType>
+              <s:sequence>
+                <s:any minOccurs="0" maxOccurs="unbounded" namespace="http://www.w3.org/2001/XMLSchema" processContents="lax" />
+                <s:any minOccurs="1" namespace="urn:schemas-microsoft-com:xml-diffgram-v1" processContents="lax" />
+              </s:sequence>
+            </s:complexType>
+          </s:element>
         </s:sequence>
       </s:complexType>
       <s:element name="SyncKioskSysconfig">

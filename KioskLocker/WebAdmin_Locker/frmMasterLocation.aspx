@@ -171,6 +171,19 @@
                                                         </asp:Repeater>                  
                                                     </div>
                                                   </div>
+                                                  <div class="form-group">
+                                                      <label class="col-sm-2 control-label">Fine</label>
+                                                      <div class="col-sm-6">
+                                                          <asp:Repeater ID="rptFineRate" runat="server">
+                                                              <ItemTemplate>
+                                                                  <asp:Label ID="lblFineCabinetModelID" runat="server" Text="" CssClass="control-label" Visible="false"></asp:Label>
+                                                                  <asp:Label ID="lblFineCabinetModelName" runat="server" CssClass="control-label" Text="" ></asp:Label>
+                                                                  <asp:TextBox ID="txtFineRate" runat="server" CssClass="control-label" MaxLength="4" Width="50px"></asp:TextBox>
+                                                                  &nbsp;&nbsp;&nbsp;
+                                                              </ItemTemplate>
+                                                          </asp:Repeater>
+                                                      </div>
+                                                  </div>
                                               </asp:Panel>
                                               <asp:Panel ID="tabPromotion" runat="server">
                                                   <div class="form-group">

@@ -356,6 +356,15 @@ Public Class ATBLockerWebService
                 p(0) = ServerDB.SetBigInt("@_SERVICE_RATE_ID", drID)
                 sr.ServiceRateOverNight = ServerDB.ExecuteTable(sql, p)
                 sr.ServiceRateOverNight.TableName = "ServiceRateOverNight"
+
+
+                sql = "select id, ms_cabinet_model_id, fine_rate "
+                sql += " from MS_SERVICE_RATE_FINE "
+                sql += " where ms_service_rate_id=@_SERVICE_RATE_ID "
+                ReDim p(1)
+                p(0) = ServerDB.SetBigInt("@_SERVICE_RATE_ID", drID)
+                sr.ServiceRateFine = ServerDB.ExecuteTable(sql, p)
+                sr.ServiceRateFine.TableName = "ServiceRateFine"
             End If
         Catch ex As Exception
             sr = New MasterServiceRateData
@@ -1103,6 +1112,8 @@ Public Class ATBLockerWebService
                     End If
                     If Convert.IsDBNull(dr("LOST_QR_CODE")) = False Then sLnq.LOST_QR_CODE = Convert.ToString(dr("LOST_QR_CODE"))
                     sLnq.SERVICE_AMT = dr("SERVICE_AMT")
+                    sLnq.IS_FINE = dr("IS_FINE")
+                    sLnq.FINE_AMT = dr("FINE_AMT")
                     If Convert.IsDBNull(dr("PICKUP_TIME")) = False Then sLnq.PICKUP_TIME = Convert.ToDateTime(dr("PICKUP_TIME"))
                     If Convert.IsDBNull(dr("PAID_TIME")) = False Then sLnq.PAID_TIME = Convert.ToDateTime(dr("PAID_TIME"))
                     sLnq.RECEIVE_COIN1 = dr("RECEIVE_COIN1")

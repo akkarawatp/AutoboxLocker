@@ -402,6 +402,7 @@ Public Class frmSC_StockAndHardware
         Dim ret As ExecuteDataInfo = CreateNewPickupTransaction()
         If ret.IsSuccess = True Then
             InsertLogTransactionActivity("", Collect.TransactionNo, StaffConsole.TransNo, KioskConfig.SelectForm, KioskLockerStep.StaffConsoleLoadLockList_ClickCollect, "", False)
+            Collect.IsFine = True
             Me.Close()
             frmMain.CloseAllChildForm(frmLoading)
             frmMain.Show()

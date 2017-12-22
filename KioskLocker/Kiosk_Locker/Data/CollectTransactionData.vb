@@ -14,22 +14,13 @@
     Dim _LockerPinLED As Integer = 0
     Dim _LockerPinSensor As String = "0"
 
-    'Dim _PassportNo As String = ""
-    'Dim _IDCardNo As String = ""
-    'Dim _NationCode As String = ""
-    'Dim _FirstName As String = ""
-    'Dim _LastName As String = ""
-    'Dim _Birthdate As New DateTime(1, 1, 1)
-    'Dim _Gender As String = ""
-    'Dim _PassportExpireDate As New DateTime(1, 1, 1)
-    'Dim _IDCardExpireDate As New DateTime(1, 1, 1)
-    'Dim _CustomerImage As Byte()
-
     Dim _DepositPaidTime As New DateTime(1, 1, 1)
     Dim _PaidTime As New DateTime(1, 1, 1)
     Dim _PickupTime As New DateTime(1, 1, 1)
     Dim _DepositAmount As Integer = 0
     Dim _ServiceAmount As Integer = 0
+    Dim _IsFine As Boolean = False
+    Dim _FineAmount As Integer = 0
     Dim _PaidAmount As Integer = 0
     Dim _CustomerImage As Byte()
 
@@ -162,89 +153,6 @@
         End Set
     End Property
 
-    'Public Property PassportNo As String
-    '    Get
-    '        Return _PassportNo.Trim
-    '    End Get
-    '    Set(value As String)
-    '        _PassportNo = value
-    '    End Set
-    'End Property
-
-    'Public Property IDCardNo As String
-    '    Get
-    '        Return _IDCardNo.Trim()
-    '    End Get
-    '    Set(value As String)
-    '        _IDCardNo = value
-    '    End Set
-    'End Property
-    'Public Property NationCode As String
-    '    Get
-    '        Return _NationCode.Trim
-    '    End Get
-    '    Set(value As String)
-    '        _NationCode = value
-    '    End Set
-    'End Property
-    'Public Property FirstName As String
-    '    Get
-    '        Return _FirstName.Trim
-    '    End Get
-    '    Set(value As String)
-    '        _FirstName = value
-    '    End Set
-    'End Property
-    'Public Property LastName As String
-    '    Get
-    '        Return _LastName.Trim
-    '    End Get
-    '    Set(value As String)
-    '        _LastName = value
-    '    End Set
-    'End Property
-    'Public Property BirthDate As DateTime
-    '    Get
-    '        Return _Birthdate
-    '    End Get
-    '    Set(value As DateTime)
-    '        _Birthdate = value
-    '    End Set
-    'End Property
-    'Public Property Gender As String
-    '    Get
-    '        Return _Gender.Trim
-    '    End Get
-    '    Set(value As String)
-    '        _Gender = value
-    '    End Set
-    'End Property
-    'Public Property PassportExpireDate As DateTime
-    '    Get
-    '        Return _PassportExpireDate
-    '    End Get
-    '    Set(value As DateTime)
-    '        _PassportExpireDate = value
-    '    End Set
-    'End Property
-    'Public Property IDCardExpireDate As DateTime
-    '    Get
-    '        Return _IDCardExpireDate
-    '    End Get
-    '    Set(value As DateTime)
-    '        _IDCardExpireDate = value
-    '    End Set
-    'End Property
-
-    'Public Property CustomerImage As Byte()
-    '    Get
-    '        Return _CustomerImage
-    '    End Get
-    '    Set(value As Byte())
-    '        _CustomerImage = value
-    '    End Set
-    'End Property
-
     Public Property DepositPaidTime As DateTime
         Get
             Return _DepositPaidTime
@@ -287,6 +195,22 @@
         End Get
         Set(value As Integer)
             _ServiceAmount = value
+        End Set
+    End Property
+    Public Property IsFine As Boolean
+        Get
+            Return _IsFine
+        End Get
+        Set(value As Boolean)
+            _IsFine = value
+        End Set
+    End Property
+    Public Property FineAmount As Integer
+        Get
+            Return _FineAmount
+        End Get
+        Set(value As Integer)
+            _FineAmount = value
         End Set
     End Property
     Public Property PaidAmount As Integer

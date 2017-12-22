@@ -2,10 +2,11 @@
 Imports KioskLinqDB.ConnectDB
 
 Namespace Data
-    Public Class MSServerRateData
+    Public Class MSServiceRateData
         Dim _ServiceRateDepositList As New DataTable
         Dim _ServiceRateOvernightList As New DataTable
         Dim _ServiceRateHourList As New DataTable
+        Dim _ServiceFineRateList As New DataTable
 
         Public ReadOnly Property ServiceRateDepositList As DataTable
             Get
@@ -22,6 +23,11 @@ Namespace Data
         Public ReadOnly Property ServiceRateHourList As DataTable
             Get
                 Return _ServiceRateHourList
+            End Get
+        End Property
+        Public ReadOnly Property ServiceFineRateList As DataTable
+            Get
+                Return _ServiceFineRateList
             End Get
         End Property
 
@@ -49,6 +55,14 @@ Namespace Data
                 sql += " inner join MS_SERVICE_RATE_OVERNIGHT sro on sr.id=sro.ms_service_rate_id " & Environment.NewLine
                 sql += " inner join MS_CABINET_MODEL cm On cm.id=sro.ms_cabinet_model_id " & Environment.NewLine
                 sql += " where sr.ms_kiosk_id = @_KIOSK_ID " & Environment.NewLine
+                sql += " union all" & Environment.NewLine
+
+                sql += " select srf.ms_cabinet_model_id, cm.model_name, 0 service_hour, " & Environment.NewLine
+                sql += " srf.fine_rate, 'MS_SERVICE_RATE_FINE' data_group " & Environment.NewLine
+                sql += " From MS_SERVICE_RATE sr " & Environment.NewLine
+                sql += " inner join MS_SERVICE_RATE_FINE srf on sr.id=srf.ms_service_rate_id " & Environment.NewLine
+                sql += " inner join MS_CABINET_MODEL cm On cm.id=srf.ms_cabinet_model_id " & Environment.NewLine
+                sql += " where sr.ms_kiosk_id = @_KIOSK_ID " & Environment.NewLine
 
                 Dim pD(1) As SqlParameter
                 pD(0) = KioskDB.SetBigInt("@_KIOSK_ID", MsKioskID)
@@ -69,6 +83,12 @@ Namespace Data
                     dt.DefaultView.RowFilter = "data_group='MS_SERVICE_RATE_OVERNIGHT'"
                     If dt.DefaultView.Count > 0 Then
                         _ServiceRateOvernightList = dt.DefaultView.ToTable.Copy
+                    End If
+                    dt.DefaultView.RowFilter = ""
+
+                    dt.DefaultView.RowFilter = "data_group='MS_SERVICE_RATE_FINE'"
+                    If dt.DefaultView.Count > 0 Then
+                        _ServiceFineRateList = dt.DefaultView.ToTable.Copy
                     End If
                     dt.DefaultView.RowFilter = ""
                 End If

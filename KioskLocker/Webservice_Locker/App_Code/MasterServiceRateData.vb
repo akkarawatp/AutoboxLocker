@@ -5,6 +5,7 @@ Public Class MasterServiceRateData
     Dim _ServiceRateDeposit As New DataTable
     Dim _ServiceRateHour As New DataTable
     Dim _ServiceRateOverNight As DataTable
+    Dim _ServiceRateFine As DataTable
 
     Public Property ServiceRate As DataTable
         Get
@@ -36,6 +37,14 @@ Public Class MasterServiceRateData
         End Get
         Set(value As DataTable)
             _ServiceRateOverNight = value
+        End Set
+    End Property
+    Public Property ServiceRateFine As DataTable
+        Get
+            Return _ServiceRateFine
+        End Get
+        Set(value As DataTable)
+            _ServiceRateFine = value
         End Set
     End Property
 End Class

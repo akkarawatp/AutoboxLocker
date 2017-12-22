@@ -8,7 +8,7 @@ Imports ServerLinqDB.ConnectDB
 
 Namespace TABLE
     'Represents a transaction for TB_DEPOSIT_TRANSACTION table ServerLinqDB.
-    '[Create by  on November, 22 2017]
+    '[Create by  on December, 22 2017]
     Public Class TbDepositTransactionServerLinqDB
         Public sub TbDepositTransactionServerLinqDB()
 

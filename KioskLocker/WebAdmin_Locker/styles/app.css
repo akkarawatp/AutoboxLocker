@@ -1874,7 +1874,7 @@ figure:hover:before {
 .brand {
     position: relative;
     width: 100%;
-    height: 10rem;
+    height: 7rem;
     display: block;
 }
 
@@ -1898,9 +1898,10 @@ figure:hover:before {
     }
 
         .brand .brand-logo img.LogoBig {
-            height: 155px;
+            margin-top: 10px;
+            height: 80px;
             width: auto;
-            padding: 0 2rem;
+            padding: 0rem 3rem;
             
         }
 

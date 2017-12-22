@@ -133,6 +133,7 @@ Public Class frmMasterLocation
         srdDt = GetDataServiceRateDeposit(0)
         sroDt = GetDataServiceRateOvernight(0)
         srhDt = GetDataServiceRateHour(0)
+        srfDt = GetDataServiceRateFine(0)
 
         rptDepositCabinetModel.DataSource = cmDt
         rptDepositCabinetModel.DataBind()
@@ -145,6 +146,8 @@ Public Class frmMasterLocation
 
         rptServiceRateHour.DataSource = hourDt
         rptServiceRateHour.DataBind()
+        rptFineRate.DataSource = srfDt
+        rptFineRate.DataBind()
     End Sub
 
 
@@ -197,6 +200,15 @@ Public Class frmMasterLocation
             Dim txtOvernightRate As TextBox = rptOvernightRate.Items(i).FindControl("txtOvernightRate")
             If txtOvernightRate.Text.Trim = "" Then
                 ScriptManager.RegisterStartupScript(Me.Page, GetType(String), "Alert", "alert('Insert Next day');", True)
+                Exit Sub
+            End If
+        Next
+
+        'Validate Fine Rate
+        For i As Integer = 0 To rptFineRate.Items.Count - 1
+            Dim txtFineRate As TextBox = rptFineRate.Items(i).FindControl("txtFineRate")
+            If txtFineRate.Text.Trim = "" Then
+                ScriptManager.RegisterStartupScript(Me.Page, GetType(String), "Alert", "alert('Insert Fine reate');", True)
                 Exit Sub
             End If
         Next
@@ -552,6 +564,29 @@ Public Class frmMasterLocation
                     End If
                     oLnq = Nothing
                 Next
+                'Insert/Update MS_SERVICE_RATE_FINE
+                For i As Integer = 0 To rptFineRate.Items.Count - 1
+                    Dim lblFineCabinetModelID As Label = rptFineRate.Items(i).FindControl("lblFineCabinetModelID")
+                    Dim txtFineRate As TextBox = rptFineRate.Items(i).FindControl("txtFineRate")
+
+                    Dim fLnq As New MsServiceRateFineServerLinqDB
+                    fLnq.ChkDataByMS_CABINET_MODEL_ID_MS_SERVICE_RATE_ID(lblFineCabinetModelID.Text, lnq.ID, trans.Trans)
+
+                    fLnq.MS_SERVICE_RATE_ID = lnq.ID
+                    fLnq.MS_CABINET_MODEL_ID = lblFineCabinetModelID.Text
+                    fLnq.FINE_RATE = txtFineRate.Text
+
+                    If fLnq.ID > 0 Then
+                        ret = fLnq.UpdateData(UserName, trans.Trans)
+                    Else
+                        ret = fLnq.InsertData(UserName, trans.Trans)
+                    End If
+
+                    If ret.IsSuccess = False Then
+                        Return ret
+                    End If
+                    fLnq = Nothing
+                Next
             End If
             lnq = Nothing
         Catch ex As Exception
@@ -645,6 +680,7 @@ Public Class frmMasterLocation
     Dim srdDt As DataTable  'MS_SERVICE_RATE_DEPOSIT
     Dim sroDt As DataTable  'MS_SERVICE_RATE_OVERNIGHT
     Dim srhDt As DataTable  'MS_SERVICE_RATE_HOUR
+    Dim srfDt As DataTable  'MS_SERVICE_RATE_FINE
 
     Dim lphDt As DataTable  'MS_LOCATION_PROMOTION_HOUR
     Private Sub rptList_ItemCommand(source As Object, e As System.Web.UI.WebControls.RepeaterCommandEventArgs) Handles rptList.ItemCommand
@@ -664,11 +700,13 @@ Public Class frmMasterLocation
                 txtLocationName.Text = DT.Rows(0).Item("location_name").ToString
 
                 'Get Service Rate Information 
+                Dim ServiceRateID As Long = Convert.ToInt64(DT.Rows(0).Item("ms_service_rate_id"))
                 cmDt = getDataCabinetModel()
                 hourDt = GetHourList()
-                srdDt = GetDataServiceRateDeposit(Convert.ToInt64(DT.Rows(0).Item("ms_service_rate_id")))
-                sroDt = GetDataServiceRateOvernight(Convert.ToInt64(DT.Rows(0).Item("ms_service_rate_id")))
-                srhDt = GetDataServiceRateHour(Convert.ToInt64(DT.Rows(0).Item("ms_service_rate_id")))
+                srdDt = GetDataServiceRateDeposit(ServiceRateID)
+                sroDt = GetDataServiceRateOvernight(ServiceRateID)
+                srhDt = GetDataServiceRateHour(ServiceRateID)
+                srfDt = GetDataServiceRateFine(ServiceRateID)
 
                 rptDepositCabinetModel.DataSource = cmDt
                 rptDepositCabinetModel.DataBind()
@@ -681,6 +719,8 @@ Public Class frmMasterLocation
 
                 rptServiceRateHour.DataSource = hourDt
                 rptServiceRateHour.DataBind()
+                rptFineRate.DataSource = cmDt
+                rptFineRate.DataBind()
 
                 'Get Promotion Information
                 lphDt = GetDataCurrentPromotion(Convert.ToInt64(DT.Rows(0)("id")))
@@ -866,6 +906,21 @@ Public Class frmMasterLocation
         End Try
         Return ret
     End Function
+    Private Function GetDataServiceRateFine(MsServiceRateID As Long) As DataTable
+        Dim ret As New DataTable
+        Try
+            Dim sql As String = "select ms_cabinet_model_id,  fine_rate "
+            sql += " from MS_SERVICE_RATE_FINE "
+            sql += " where ms_service_rate_id=@_SERVICE_RATE_ID"
+            Dim p(1) As SqlParameter
+            p(0) = ServerDB.SetBigInt("@_SERVICE_RATE_ID", MsServiceRateID)
+
+            ret = ServerDB.ExecuteTable(sql, p)
+        Catch ex As Exception
+            ret = New DataTable
+        End Try
+        Return ret
+    End Function
 
     Private Sub rptDepositCabinetModel_ItemDataBound(sender As Object, e As RepeaterItemEventArgs) Handles rptDepositCabinetModel.ItemDataBound
         If e.Item.ItemType <> ListItemType.Item And e.Item.ItemType <> ListItemType.AlternatingItem Then Exit Sub
@@ -902,6 +957,23 @@ Public Class frmMasterLocation
                 txtOvernightRate.Text = sroDt.DefaultView(0)("service_rate_day")
             End If
             sroDt.DefaultView.RowFilter = ""
+        End If
+    End Sub
+    Private Sub rptFineRate_ItemDataBound(sender As Object, e As RepeaterItemEventArgs) Handles rptFineRate.ItemDataBound
+        If e.Item.ItemType <> ListItemType.Item And e.Item.ItemType <> ListItemType.AlternatingItem Then Exit Sub
+
+        Dim lblFineCabinetModelID As Label = e.Item.FindControl("lblFineCabinetModelID")
+        Dim lblFineCabinetModelName As Label = e.Item.FindControl("lblFineCabinetModelName")
+        Dim txtFineRate As TextBox = e.Item.FindControl("txtFineRate")
+
+        lblFineCabinetModelID.Text = e.Item.DataItem("id")
+        lblFineCabinetModelName.Text = e.Item.DataItem("model_name")
+        If srfDt.Rows.Count > 0 Then
+            srfDt.DefaultView.RowFilter = " ms_cabinet_model_id='" & lblFineCabinetModelID.Text & "'"
+            If srfDt.DefaultView.Count > 0 Then
+                txtFineRate.Text = srfDt.DefaultView(0)("fine_rate")
+            End If
+            srfDt.DefaultView.RowFilter = ""
         End If
     End Sub
 

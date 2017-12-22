@@ -1489,6 +1489,8 @@ Namespace SyncDataWebservice
         
         Private serviceRateOverNightField As System.Data.DataTable
         
+        Private serviceRateFineField As System.Data.DataTable
+        
         '''<remarks/>
         Public Property ServiceRate() As System.Data.DataTable
             Get
@@ -1526,6 +1528,16 @@ Namespace SyncDataWebservice
             End Get
             Set
                 Me.serviceRateOverNightField = value
+            End Set
+        End Property
+        
+        '''<remarks/>
+        Public Property ServiceRateFine() As System.Data.DataTable
+            Get
+                Return Me.serviceRateFineField
+            End Get
+            Set
+                Me.serviceRateFineField = value
             End Set
         End Property
     End Class

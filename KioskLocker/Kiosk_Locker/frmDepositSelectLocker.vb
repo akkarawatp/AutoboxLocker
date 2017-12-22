@@ -193,6 +193,9 @@ Public Class frmDepositSelectLocker
                     Collect.PickupTime = DateTime.Now
                     Collect.ServiceAmount = PickupCalServiceAmount()   'ค่าบริการที่ระบบคำนวณได้
                     Collect.LostQRCode = "Y"
+                    If Collect.IsFine = True Then
+                        SetServineFineAmt()
+                    End If
 
                     If UpdateCollectTransaction(Collect).IsSuccess = True Then
                         Me.Close()
@@ -214,7 +217,19 @@ Public Class frmDepositSelectLocker
 
     End Sub
 
-
+    Private Sub SetServineFineAmt()
+        Try
+            'ค่าปรับกรณีลืมรหัส
+            ServiceRateData.ServiceFineRateList.DefaultView.RowFilter = "ms_cabinet_model_id='" & Collect.CabinetModelID & "'"
+            If ServiceRateData.ServiceFineRateList.DefaultView.Count > 0 Then
+                Collect.FineAmount = ServiceRateData.ServiceFineRateList.DefaultView(0)("service_rate")
+            End If
+            ServiceRateData.ServiceFineRateList.DefaultView.RowFilter = ""
+        Catch ex As Exception
+            Dim _err As String = "Exception : " & ex.Message & vbNewLine & ex.StackTrace
+            InsertErrorLog(_err, Collect.DepositTransNo, Collect.TransactionNo, StaffConsole.TransNo, KioskConfig.SelectForm, KioskLockerStep.StaffConsoleCollectSelectLocker_SelectLocker)
+        End Try
+    End Sub
 
 
     Private Function SetPickupInitialInformation(LockerID As Long) As Boolean
