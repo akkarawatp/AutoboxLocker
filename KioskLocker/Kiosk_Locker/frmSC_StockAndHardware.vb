@@ -19,6 +19,8 @@ Public Class frmSC_StockAndHardware
 
         InsertLogTransactionActivity(StaffConsole.TransNo, KioskConfig.SelectForm, KioskLockerStep.StaffConsoleStockAndHardware_GetKioskConfig, "", False)
         GetKioskConfig()
+
+        SetListDeviceInfo()
         GetKioskDeviceConfig()
 
         KioskConfig.SelectForm = Data.KioskConfigData.KioskLockerForm.StaffConsoleStoakAndHardware
@@ -350,6 +352,8 @@ Public Class frmSC_StockAndHardware
         Application.DoEvents()
 
         InsertLogTransactionActivity(StaffConsole.TransNo, KioskConfig.SelectForm, KioskLockerStep.StaffConsoleStockAndHardware_ClickLockerSetting, "", False)
+        SetCabinetInformation()
+        SetCabinetModel()
         Me.Close()
         frmSC_LockerSetting.MdiParent = frmSC_Main
         frmSC_LockerSetting.Show()

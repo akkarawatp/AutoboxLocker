@@ -251,7 +251,7 @@ Public Class GenerateCode
 
     Private Sub rdiKioskDB_CheckedChanged(sender As Object, e As EventArgs) Handles rdiKioskDB.CheckedChanged
         txtDataSource.Text = "localhost"
-        txtDatabaseName.Text = "ATB-Locker"
+        txtDatabaseName.Text = "Minibox"
     End Sub
 
     Private Sub rdiServerDB_CheckedChanged(sender As Object, e As EventArgs) Handles rdiServerDB.CheckedChanged

@@ -20,8 +20,8 @@ Public Class frmMain
             'ถ้าเปิดโปรแกรมมาจากตอนเริ่ม Boot เครื่อง ให้รอก่อน 3 นาที
             Threading.Thread.Sleep(3 * 1000 * 60)
         End If
-
     End Sub
+
 
     Private Sub frmMain_Shown(sender As Object, e As EventArgs) Handles Me.Shown
         'Cursor.Hide()
@@ -264,18 +264,6 @@ Public Class frmMain
             AlarmMasterList = New DataTable
         End Try
     End Sub
-
-
-
-
-    Private Function GetCardLanDesc() As String
-        Dim CardLanDesc As String = ""
-        Dim ini As New MiniboxLocker.Org.Mentalis.Files.IniReader(INIFileName)
-        ini.Section = "Setting"
-        CardLanDesc = ini.ReadString("CardLanDesc").ToString
-        ini = Nothing
-        Return CardLanDesc
-    End Function
 
     Private Sub GetKioskSystemData()
         'หาข้อมูลของเครื่อง PC ทำเฉพาะครั้งแรกที่เปิดโปรแกรมและเก็บค่านี้ไว้ตลอด

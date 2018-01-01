@@ -70,19 +70,14 @@
     <ApplicationIcon>LogoIcon.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="gxdotnet7, Version=7.2.10.0, Culture=neutral, PublicKeyToken=5785895c728cac85">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>C:\Windows\assembly\GAC\gxdotnet7\7.2.10.0__5785895c728cac85\gxdotnet7.dll</HintPath>
-    </Reference>
     <Reference Include="Interop.PrinterClassDll, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <EmbedInteropTypes>True</EmbedInteropTypes>
       <HintPath>bin\Debug\Interop.PrinterClassDll.dll</HintPath>
     </Reference>
-    <Reference Include="prdotnet7, Version=2.1.5.25, Culture=neutral, PublicKeyToken=4020ef1cb3f1980b">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>bin\Debug\prdotnet7.dll</HintPath>
-    </Reference>
+    <Reference Include="Microsoft.SqlServer.BatchParserClient, Version=14.100.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL" />
+    <Reference Include="Microsoft.SqlServer.ConnectionInfo, Version=14.100.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL" />
+    <Reference Include="Microsoft.SqlServer.Smo, Version=14.100.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL" />
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Deployment" />
@@ -273,8 +268,15 @@
     <Compile Include="frmLockerError.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="frmSplashScreen.Designer.vb">
+      <DependentUpon>frmSplashScreen.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmSplashScreen.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="IniReader.vb" />
     <Compile Include="KioskModule.vb" />
+    <Compile Include="ModifyMachineKey.vb" />
     <Compile Include="My Project\AssemblyInfo.vb" />
     <Compile Include="My Project\Application.Designer.vb">
       <AutoGen>True</AutoGen>
@@ -388,6 +390,9 @@
     <EmbeddedResource Include="frmLockerError.resx">
       <DependentUpon>frmLockerError.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="frmSplashScreen.resx">
+      <DependentUpon>frmSplashScreen.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="My Project\Resources.resx">
       <Generator>VbMyResourcesResXFileCodeGenerator</Generator>
       <CustomToolNamespace>My.Resources</CustomToolNamespace>
@@ -434,6 +439,9 @@
     <None Include="Web References\Webservice_Locker\Reference.map">
       <Generator>MSDiscoCodeGenerator</Generator>
       <LastGenOutput>Reference.vb</LastGenOutput>
+    </None>
+    <None Include="Web References\Webservice_Locker\UpdateMachineKeyInfo.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
     </None>
   </ItemGroup>
   <ItemGroup>
@@ -576,6 +584,15 @@
     <None Include="Resources\btnColWhite.png" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="DbScript\01_CreateLoginAutobox.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="DbScript\02_CreateMiniboxDB.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="DbScript\03_CreateDatabaseObject.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="LogoIcon.ico" />
     <Content Include="Logo.ico" />
     <None Include="Resources\iconButtonStepLeft.png" />

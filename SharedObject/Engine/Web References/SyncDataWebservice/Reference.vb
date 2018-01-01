@@ -104,6 +104,10 @@ Namespace SyncDataWebservice
         
         Private SyncLogKioskAgentDataOperationCompleted As System.Threading.SendOrPostCallback
         
+        Private GetLockerUnRegisterOperationCompleted As System.Threading.SendOrPostCallback
+        
+        Private UpdateLockerMachineKeyOperationCompleted As System.Threading.SendOrPostCallback
+        
         Private useDefaultCredentialsSetExplicitly As Boolean
         
         '''<remarks/>
@@ -249,6 +253,12 @@ Namespace SyncDataWebservice
         
         '''<remarks/>
         Public Event SyncLogKioskAgentDataCompleted As SyncLogKioskAgentDataCompletedEventHandler
+        
+        '''<remarks/>
+        Public Event GetLockerUnRegisterCompleted As GetLockerUnRegisterCompletedEventHandler
+        
+        '''<remarks/>
+        Public Event UpdateLockerMachineKeyCompleted As UpdateLockerMachineKeyCompletedEventHandler
         
         '''<remarks/>
         <System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/LoginTIT", RequestNamespace:="http://tempuri.org/", ResponseNamespace:="http://tempuri.org/", Use:=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle:=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)>  _
@@ -1317,6 +1327,60 @@ Namespace SyncDataWebservice
         End Sub
         
         '''<remarks/>
+        <System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/GetLockerUnRegister", RequestNamespace:="http://tempuri.org/", ResponseNamespace:="http://tempuri.org/", Use:=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle:=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)>  _
+        Public Function GetLockerUnRegister(ByVal KioskName As String) As System.Data.DataTable
+            Dim results() As Object = Me.Invoke("GetLockerUnRegister", New Object() {KioskName})
+            Return CType(results(0),System.Data.DataTable)
+        End Function
+        
+        '''<remarks/>
+        Public Overloads Sub GetLockerUnRegisterAsync(ByVal KioskName As String)
+            Me.GetLockerUnRegisterAsync(KioskName, Nothing)
+        End Sub
+        
+        '''<remarks/>
+        Public Overloads Sub GetLockerUnRegisterAsync(ByVal KioskName As String, ByVal userState As Object)
+            If (Me.GetLockerUnRegisterOperationCompleted Is Nothing) Then
+                Me.GetLockerUnRegisterOperationCompleted = AddressOf Me.OnGetLockerUnRegisterOperationCompleted
+            End If
+            Me.InvokeAsync("GetLockerUnRegister", New Object() {KioskName}, Me.GetLockerUnRegisterOperationCompleted, userState)
+        End Sub
+        
+        Private Sub OnGetLockerUnRegisterOperationCompleted(ByVal arg As Object)
+            If (Not (Me.GetLockerUnRegisterCompletedEvent) Is Nothing) Then
+                Dim invokeArgs As System.Web.Services.Protocols.InvokeCompletedEventArgs = CType(arg,System.Web.Services.Protocols.InvokeCompletedEventArgs)
+                RaiseEvent GetLockerUnRegisterCompleted(Me, New GetLockerUnRegisterCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState))
+            End If
+        End Sub
+        
+        '''<remarks/>
+        <System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/UpdateLockerMachineKey", RequestNamespace:="http://tempuri.org/", ResponseNamespace:="http://tempuri.org/", Use:=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle:=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)>  _
+        Public Function UpdateLockerMachineKey(ByVal KioskID As Long, ByVal KioskName As String, ByVal IpAddress As String, ByVal MacAddress As String, ByVal MachineKey As String) As UpdateMachineKeyInfo
+            Dim results() As Object = Me.Invoke("UpdateLockerMachineKey", New Object() {KioskID, KioskName, IpAddress, MacAddress, MachineKey})
+            Return CType(results(0),UpdateMachineKeyInfo)
+        End Function
+        
+        '''<remarks/>
+        Public Overloads Sub UpdateLockerMachineKeyAsync(ByVal KioskID As Long, ByVal KioskName As String, ByVal IpAddress As String, ByVal MacAddress As String, ByVal MachineKey As String)
+            Me.UpdateLockerMachineKeyAsync(KioskID, KioskName, IpAddress, MacAddress, MachineKey, Nothing)
+        End Sub
+        
+        '''<remarks/>
+        Public Overloads Sub UpdateLockerMachineKeyAsync(ByVal KioskID As Long, ByVal KioskName As String, ByVal IpAddress As String, ByVal MacAddress As String, ByVal MachineKey As String, ByVal userState As Object)
+            If (Me.UpdateLockerMachineKeyOperationCompleted Is Nothing) Then
+                Me.UpdateLockerMachineKeyOperationCompleted = AddressOf Me.OnUpdateLockerMachineKeyOperationCompleted
+            End If
+            Me.InvokeAsync("UpdateLockerMachineKey", New Object() {KioskID, KioskName, IpAddress, MacAddress, MachineKey}, Me.UpdateLockerMachineKeyOperationCompleted, userState)
+        End Sub
+        
+        Private Sub OnUpdateLockerMachineKeyOperationCompleted(ByVal arg As Object)
+            If (Not (Me.UpdateLockerMachineKeyCompletedEvent) Is Nothing) Then
+                Dim invokeArgs As System.Web.Services.Protocols.InvokeCompletedEventArgs = CType(arg,System.Web.Services.Protocols.InvokeCompletedEventArgs)
+                RaiseEvent UpdateLockerMachineKeyCompleted(Me, New UpdateLockerMachineKeyCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState))
+            End If
+        End Sub
+        
+        '''<remarks/>
         Public Shadows Sub CancelAsync(ByVal userState As Object)
             MyBase.CancelAsync(userState)
         End Sub
@@ -1426,6 +1490,481 @@ Namespace SyncDataWebservice
             End Get
             Set
                 Me.forceChangePwdField = value
+            End Set
+        End Property
+        
+        '''<remarks/>
+        Public Property ErrorMessage() As String
+            Get
+                Return Me.errorMessageField
+            End Get
+            Set
+                Me.errorMessageField = value
+            End Set
+        End Property
+    End Class
+    
+    '''<remarks/>
+    <System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.6.1055.0"),  _
+     System.SerializableAttribute(),  _
+     System.Diagnostics.DebuggerStepThroughAttribute(),  _
+     System.ComponentModel.DesignerCategoryAttribute("code"),  _
+     System.Xml.Serialization.XmlTypeAttribute([Namespace]:="http://tempuri.org/")>  _
+    Partial Public Class CfKioskSysconfigServerLinqDB
+        
+        Private idField As Long
+        
+        Private cREATED_BYField As String
+        
+        Private cREATED_DATEField As Date
+        
+        Private uPDATED_BYField As String
+        
+        Private uPDATED_DATEField As System.Nullable(Of Date)
+        
+        Private mS_KIOSK_IDField As Long
+        
+        Private mAC_ADDRESSField As String
+        
+        Private iP_ADDRESSField As String
+        
+        Private lOCATION_CODEField As String
+        
+        Private lOCATION_NAMEField As String
+        
+        Private kIOSK_OPEN_TIMEField As String
+        
+        Private kIOSK_OPEN24Field As Char
+        
+        Private lOGIN_SSOField As Char
+        
+        Private sCREEN_SAVER_SECField As Long
+        
+        Private tIME_OUT_SECField As Long
+        
+        Private sHOW_MSG_SECField As Long
+        
+        Private pAYMENT_EXTEND_SECField As Long
+        
+        Private pINCODE_LENField As Long
+        
+        Private lOCKER_WEBSERVICE_URLField As String
+        
+        Private lOCKER_PC_POSITIONField As Long
+        
+        Private cONTACT_CENTER_TELNOField As String
+        
+        Private sLEEP_TIMEField As String
+        
+        Private sLEEP_DURATIONField As Long
+        
+        Private aLARM_WEBSERVICE_URLField As String
+        
+        Private iNTERVAL_SYNC_TRANSACTION_MINField As Long
+        
+        Private iNTERVAL_SYNC_MASTER_MINField As Long
+        
+        Private iNTERVAL_SYNC_LOG_MINField As Long
+        
+        Private sYNC_TO_KIOSKField As Char
+        
+        Private sYNC_TO_SERVERField As Char
+        
+        Private mACHINE_KEYField As String
+        
+        '''<remarks/>
+        Public Property ID() As Long
+            Get
+                Return Me.idField
+            End Get
+            Set
+                Me.idField = value
+            End Set
+        End Property
+        
+        '''<remarks/>
+        Public Property CREATED_BY() As String
+            Get
+                Return Me.cREATED_BYField
+            End Get
+            Set
+                Me.cREATED_BYField = value
+            End Set
+        End Property
+        
+        '''<remarks/>
+        Public Property CREATED_DATE() As Date
+            Get
+                Return Me.cREATED_DATEField
+            End Get
+            Set
+                Me.cREATED_DATEField = value
+            End Set
+        End Property
+        
+        '''<remarks/>
+        Public Property UPDATED_BY() As String
+            Get
+                Return Me.uPDATED_BYField
+            End Get
+            Set
+                Me.uPDATED_BYField = value
+            End Set
+        End Property
+        
+        '''<remarks/>
+        <System.Xml.Serialization.XmlElementAttribute(IsNullable:=true)>  _
+        Public Property UPDATED_DATE() As System.Nullable(Of Date)
+            Get
+                Return Me.uPDATED_DATEField
+            End Get
+            Set
+                Me.uPDATED_DATEField = value
+            End Set
+        End Property
+        
+        '''<remarks/>
+        Public Property MS_KIOSK_ID() As Long
+            Get
+                Return Me.mS_KIOSK_IDField
+            End Get
+            Set
+                Me.mS_KIOSK_IDField = value
+            End Set
+        End Property
+        
+        '''<remarks/>
+        Public Property MAC_ADDRESS() As String
+            Get
+                Return Me.mAC_ADDRESSField
+            End Get
+            Set
+                Me.mAC_ADDRESSField = value
+            End Set
+        End Property
+        
+        '''<remarks/>
+        Public Property IP_ADDRESS() As String
+            Get
+                Return Me.iP_ADDRESSField
+            End Get
+            Set
+                Me.iP_ADDRESSField = value
+            End Set
+        End Property
+        
+        '''<remarks/>
+        Public Property LOCATION_CODE() As String
+            Get
+                Return Me.lOCATION_CODEField
+            End Get
+            Set
+                Me.lOCATION_CODEField = value
+            End Set
+        End Property
+        
+        '''<remarks/>
+        Public Property LOCATION_NAME() As String
+            Get
+                Return Me.lOCATION_NAMEField
+            End Get
+            Set
+                Me.lOCATION_NAMEField = value
+            End Set
+        End Property
+        
+        '''<remarks/>
+        Public Property KIOSK_OPEN_TIME() As String
+            Get
+                Return Me.kIOSK_OPEN_TIMEField
+            End Get
+            Set
+                Me.kIOSK_OPEN_TIMEField = value
+            End Set
+        End Property
+        
+        '''<remarks/>
+        Public Property KIOSK_OPEN24() As Char
+            Get
+                Return Me.kIOSK_OPEN24Field
+            End Get
+            Set
+                Me.kIOSK_OPEN24Field = value
+            End Set
+        End Property
+        
+        '''<remarks/>
+        Public Property LOGIN_SSO() As Char
+            Get
+                Return Me.lOGIN_SSOField
+            End Get
+            Set
+                Me.lOGIN_SSOField = value
+            End Set
+        End Property
+        
+        '''<remarks/>
+        Public Property SCREEN_SAVER_SEC() As Long
+            Get
+                Return Me.sCREEN_SAVER_SECField
+            End Get
+            Set
+                Me.sCREEN_SAVER_SECField = value
+            End Set
+        End Property
+        
+        '''<remarks/>
+        Public Property TIME_OUT_SEC() As Long
+            Get
+                Return Me.tIME_OUT_SECField
+            End Get
+            Set
+                Me.tIME_OUT_SECField = value
+            End Set
+        End Property
+        
+        '''<remarks/>
+        Public Property SHOW_MSG_SEC() As Long
+            Get
+                Return Me.sHOW_MSG_SECField
+            End Get
+            Set
+                Me.sHOW_MSG_SECField = value
+            End Set
+        End Property
+        
+        '''<remarks/>
+        Public Property PAYMENT_EXTEND_SEC() As Long
+            Get
+                Return Me.pAYMENT_EXTEND_SECField
+            End Get
+            Set
+                Me.pAYMENT_EXTEND_SECField = value
+            End Set
+        End Property
+        
+        '''<remarks/>
+        Public Property PINCODE_LEN() As Long
+            Get
+                Return Me.pINCODE_LENField
+            End Get
+            Set
+                Me.pINCODE_LENField = value
+            End Set
+        End Property
+        
+        '''<remarks/>
+        Public Property LOCKER_WEBSERVICE_URL() As String
+            Get
+                Return Me.lOCKER_WEBSERVICE_URLField
+            End Get
+            Set
+                Me.lOCKER_WEBSERVICE_URLField = value
+            End Set
+        End Property
+        
+        '''<remarks/>
+        Public Property LOCKER_PC_POSITION() As Long
+            Get
+                Return Me.lOCKER_PC_POSITIONField
+            End Get
+            Set
+                Me.lOCKER_PC_POSITIONField = value
+            End Set
+        End Property
+        
+        '''<remarks/>
+        Public Property CONTACT_CENTER_TELNO() As String
+            Get
+                Return Me.cONTACT_CENTER_TELNOField
+            End Get
+            Set
+                Me.cONTACT_CENTER_TELNOField = value
+            End Set
+        End Property
+        
+        '''<remarks/>
+        Public Property SLEEP_TIME() As String
+            Get
+                Return Me.sLEEP_TIMEField
+            End Get
+            Set
+                Me.sLEEP_TIMEField = value
+            End Set
+        End Property
+        
+        '''<remarks/>
+        Public Property SLEEP_DURATION() As Long
+            Get
+                Return Me.sLEEP_DURATIONField
+            End Get
+            Set
+                Me.sLEEP_DURATIONField = value
+            End Set
+        End Property
+        
+        '''<remarks/>
+        Public Property ALARM_WEBSERVICE_URL() As String
+            Get
+                Return Me.aLARM_WEBSERVICE_URLField
+            End Get
+            Set
+                Me.aLARM_WEBSERVICE_URLField = value
+            End Set
+        End Property
+        
+        '''<remarks/>
+        Public Property INTERVAL_SYNC_TRANSACTION_MIN() As Long
+            Get
+                Return Me.iNTERVAL_SYNC_TRANSACTION_MINField
+            End Get
+            Set
+                Me.iNTERVAL_SYNC_TRANSACTION_MINField = value
+            End Set
+        End Property
+        
+        '''<remarks/>
+        Public Property INTERVAL_SYNC_MASTER_MIN() As Long
+            Get
+                Return Me.iNTERVAL_SYNC_MASTER_MINField
+            End Get
+            Set
+                Me.iNTERVAL_SYNC_MASTER_MINField = value
+            End Set
+        End Property
+        
+        '''<remarks/>
+        Public Property INTERVAL_SYNC_LOG_MIN() As Long
+            Get
+                Return Me.iNTERVAL_SYNC_LOG_MINField
+            End Get
+            Set
+                Me.iNTERVAL_SYNC_LOG_MINField = value
+            End Set
+        End Property
+        
+        '''<remarks/>
+        Public Property SYNC_TO_KIOSK() As Char
+            Get
+                Return Me.sYNC_TO_KIOSKField
+            End Get
+            Set
+                Me.sYNC_TO_KIOSKField = value
+            End Set
+        End Property
+        
+        '''<remarks/>
+        Public Property SYNC_TO_SERVER() As Char
+            Get
+                Return Me.sYNC_TO_SERVERField
+            End Get
+            Set
+                Me.sYNC_TO_SERVERField = value
+            End Set
+        End Property
+        
+        '''<remarks/>
+        Public Property MACHINE_KEY() As String
+            Get
+                Return Me.mACHINE_KEYField
+            End Get
+            Set
+                Me.mACHINE_KEYField = value
+            End Set
+        End Property
+    End Class
+    
+    '''<remarks/>
+    <System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.6.1055.0"),  _
+     System.SerializableAttribute(),  _
+     System.Diagnostics.DebuggerStepThroughAttribute(),  _
+     System.ComponentModel.DesignerCategoryAttribute("code"),  _
+     System.Xml.Serialization.XmlTypeAttribute([Namespace]:="http://tempuri.org/")>  _
+    Partial Public Class UpdateMachineKeyInfo
+        
+        Private isSuccessField As Boolean
+        
+        Private kioskIDField As Long
+        
+        Private ipAddressField As String
+        
+        Private macAddressField As String
+        
+        Private locationCodeField As String
+        
+        Private locationNameField As String
+        
+        Private kioskSysconfigField As CfKioskSysconfigServerLinqDB
+        
+        Private errorMessageField As String
+        
+        '''<remarks/>
+        Public Property IsSuccess() As Boolean
+            Get
+                Return Me.isSuccessField
+            End Get
+            Set
+                Me.isSuccessField = value
+            End Set
+        End Property
+        
+        '''<remarks/>
+        Public Property KioskID() As Long
+            Get
+                Return Me.kioskIDField
+            End Get
+            Set
+                Me.kioskIDField = value
+            End Set
+        End Property
+        
+        '''<remarks/>
+        Public Property IpAddress() As String
+            Get
+                Return Me.ipAddressField
+            End Get
+            Set
+                Me.ipAddressField = value
+            End Set
+        End Property
+        
+        '''<remarks/>
+        Public Property MacAddress() As String
+            Get
+                Return Me.macAddressField
+            End Get
+            Set
+                Me.macAddressField = value
+            End Set
+        End Property
+        
+        '''<remarks/>
+        Public Property LocationCode() As String
+            Get
+                Return Me.locationCodeField
+            End Get
+            Set
+                Me.locationCodeField = value
+            End Set
+        End Property
+        
+        '''<remarks/>
+        Public Property LocationName() As String
+            Get
+                Return Me.locationNameField
+            End Get
+            Set
+                Me.locationNameField = value
+            End Set
+        End Property
+        
+        '''<remarks/>
+        Public Property KioskSysconfig() As CfKioskSysconfigServerLinqDB
+            Get
+                Return Me.kioskSysconfigField
+            End Get
+            Set
+                Me.kioskSysconfigField = value
             End Set
         End Property
         
@@ -2510,6 +3049,60 @@ Namespace SyncDataWebservice
             Get
                 Me.RaiseExceptionIfNecessary
                 Return CType(Me.results(0),String)
+            End Get
+        End Property
+    End Class
+    
+    '''<remarks/>
+    <System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1055.0")>  _
+    Public Delegate Sub GetLockerUnRegisterCompletedEventHandler(ByVal sender As Object, ByVal e As GetLockerUnRegisterCompletedEventArgs)
+    
+    '''<remarks/>
+    <System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1055.0"),  _
+     System.Diagnostics.DebuggerStepThroughAttribute(),  _
+     System.ComponentModel.DesignerCategoryAttribute("code")>  _
+    Partial Public Class GetLockerUnRegisterCompletedEventArgs
+        Inherits System.ComponentModel.AsyncCompletedEventArgs
+        
+        Private results() As Object
+        
+        Friend Sub New(ByVal results() As Object, ByVal exception As System.Exception, ByVal cancelled As Boolean, ByVal userState As Object)
+            MyBase.New(exception, cancelled, userState)
+            Me.results = results
+        End Sub
+        
+        '''<remarks/>
+        Public ReadOnly Property Result() As System.Data.DataTable
+            Get
+                Me.RaiseExceptionIfNecessary
+                Return CType(Me.results(0),System.Data.DataTable)
+            End Get
+        End Property
+    End Class
+    
+    '''<remarks/>
+    <System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1055.0")>  _
+    Public Delegate Sub UpdateLockerMachineKeyCompletedEventHandler(ByVal sender As Object, ByVal e As UpdateLockerMachineKeyCompletedEventArgs)
+    
+    '''<remarks/>
+    <System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1055.0"),  _
+     System.Diagnostics.DebuggerStepThroughAttribute(),  _
+     System.ComponentModel.DesignerCategoryAttribute("code")>  _
+    Partial Public Class UpdateLockerMachineKeyCompletedEventArgs
+        Inherits System.ComponentModel.AsyncCompletedEventArgs
+        
+        Private results() As Object
+        
+        Friend Sub New(ByVal results() As Object, ByVal exception As System.Exception, ByVal cancelled As Boolean, ByVal userState As Object)
+            MyBase.New(exception, cancelled, userState)
+            Me.results = results
+        End Sub
+        
+        '''<remarks/>
+        Public ReadOnly Property Result() As UpdateMachineKeyInfo
+            Get
+                Me.RaiseExceptionIfNecessary
+                Return CType(Me.results(0),UpdateMachineKeyInfo)
             End Get
         End Property
     End Class

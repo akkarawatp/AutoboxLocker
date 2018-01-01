@@ -2214,8 +2214,8 @@ Module KioskModule
                 Next
                 InsertLogTransactionActivity("", "", "", KioskConfigData.KioskLockerForm.Main, KioskConfigData.KioskLockerStep.Main_GetDeviceInfo, "", False)
             Else
-                InsertErrorLog("Cannot get Kiosk config information", Deposit.DepositTransNo, Collect.DepositTransNo, "", KioskConfig.SelectForm, KioskConfigData.KioskLockerStep.Main_GetDeviceInfo)
-                ShowDialogErrorMessage("Cannot get Kiosk setting information")
+                InsertErrorLog("Cannot get Kiosk Device information", Deposit.DepositTransNo, Collect.DepositTransNo, "", KioskConfig.SelectForm, KioskConfigData.KioskLockerStep.Main_GetDeviceInfo)
+                ShowDialogErrorMessage("Cannot get Kiosk Device information")
             End If
             dDt.Dispose()
 
@@ -2224,6 +2224,14 @@ Module KioskModule
         End Try
     End Sub
 
+    Public Function GetCardLanDesc() As String
+        Dim CardLanDesc As String = ""
+        Dim ini As New MiniboxLocker.Org.Mentalis.Files.IniReader(INIFileName)
+        ini.Section = "Setting"
+        CardLanDesc = ini.ReadString("CardLanDesc").ToString
+        ini = Nothing
+        Return CardLanDesc
+    End Function
 
 
     'Public Sub SetChildFormLanguage()

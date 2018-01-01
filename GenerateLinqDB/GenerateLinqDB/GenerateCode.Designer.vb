@@ -169,7 +169,7 @@ Partial Class GenerateCode
         Me.txtProjectCode.Name = "txtProjectCode"
         Me.txtProjectCode.Size = New System.Drawing.Size(158, 22)
         Me.txtProjectCode.TabIndex = 11
-        Me.txtProjectCode.Text = "Autobox Locker"
+        Me.txtProjectCode.Text = "Minibox Locker"
         '
         'Label7
         '

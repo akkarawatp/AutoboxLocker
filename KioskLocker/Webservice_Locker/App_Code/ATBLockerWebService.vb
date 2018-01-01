@@ -1505,6 +1505,140 @@ Public Class ATBLockerWebService
 
 #End Region
 
+#Region "Setup New Locker"
+    <WebMethod()>
+    Public Function GetLockerUnRegister(KioskName As String) As DataTable
+        LogFileENG.CreateServerLogAgent("GetLockerUnRegister from " & KioskName)
+
+        Dim dt As New DataTable
+        Try
+            Dim sql As String = "select k.id, k.com_name + ' (' + k.ip_address + ') - ' + k.mac_address com_name, k.ip_address, k.mac_address"
+            sql += " from ms_kiosk k "
+            sql += " left join cf_kiosk_sysconfig cf on k.id = cf.ms_kiosk_id "
+            sql += " where k.active_status='Y' and cf.machine_key is null"
+            sql += " and convert(varchar(8),getdate(),112) between convert(varchar(8),k.valid_start_date,112) And convert(varchar(8),k.valid_expire_date,112) "
+            sql += " order by k.com_name "
+
+            dt = ServerDB.ExecuteTable(sql)
+        Catch ex As Exception
+            dt = New DataTable
+            LogFileENG.CreateServerExceptionLogAgent(ex.Message, ex.StackTrace)
+        End Try
+        dt.TableName = "GetLockerUnRegister"
+        Return dt
+    End Function
+
+
+    <WebMethod()>
+    Public Function UpdateLockerMachineKey(KioskID As Long, KioskName As String, IpAddress As String, MacAddress As String, MachineKey As String) As UpdateMachineKeyInfo
+        Dim ret As New UpdateMachineKeyInfo
+        Try
+            Dim trans As New ServerTransactionDB
+            Dim kLnq As New MsKioskServerLinqDB
+            kLnq.GetDataByPK(KioskID, trans.Trans)
+            If kLnq.ID > 0 Then
+                kLnq.IP_ADDRESS = IpAddress
+                kLnq.MAC_ADDRESS = MacAddress
+
+                Dim re As ExecuteDataInfo = kLnq.UpdateData(KioskName, trans.Trans)
+                If re.IsSuccess = True Then
+                    Dim lLnq As New MsLocationServerLinqDB
+                    lLnq.GetDataByPK(kLnq.MS_LOCATION_ID, trans.Trans)
+
+                    Dim lnq As New CfKioskSysconfigServerLinqDB
+                    lnq.ChkDataByMS_KIOSK_ID(KioskID, trans.Trans)
+                    If lnq.ID > 0 Then
+                        lnq.MAC_ADDRESS = MacAddress
+                        lnq.IP_ADDRESS = IpAddress
+                        lnq.LOCATION_CODE = lLnq.LOCATION_CODE
+                        lnq.LOCATION_NAME = lLnq.LOCATION_NAME
+                        lnq.MACHINE_KEY = MachineKey
+
+                        re = lnq.UpdateData(KioskName, trans.Trans)
+                        If re.IsSuccess = True Then
+                            trans.CommitTransaction()
+
+                            ret.IsSuccess = True
+                            ret.KioskID = kLnq.ID
+                            ret.IpAddress = IpAddress
+                            ret.MacAddress = MacAddress
+                            ret.LocationCode = lLnq.LOCATION_CODE
+                            ret.LocationName = lLnq.LOCATION_NAME
+                            ret.KioskSysconfig = lnq
+                        Else
+                            trans.RollbackTransaction()
+
+                            ret.IsSuccess = False
+                            ret.ErrorMessage = re.ErrorMessage
+                        End If
+                    Else
+                        trans.RollbackTransaction()
+                    End If
+                    lnq = Nothing
+                    lLnq = Nothing
+                Else
+                    trans.RollbackTransaction()
+
+                    ret.IsSuccess = False
+                    ret.ErrorMessage = re.ErrorMessage
+                End If
+            Else
+                trans.RollbackTransaction()
+                ret.IsSuccess = False
+                ret.ErrorMessage = "No Locker Found"
+            End If
+            kLnq = Nothing
+        Catch ex As Exception
+            ret.IsSuccess = False
+            ret.ErrorMessage = ex.Message
+            Engine.LogFileENG.CreateServerExceptionLogAgent(ex.Message, ex.StackTrace)
+        End Try
+        Return ret
+    End Function
+
+    <WebMethod()>
+    Public Function ClearLockerMachineKey(KioskID As Long, KioskComName As String) As String
+        Dim ret As String = "false"
+        Try
+            Dim trans As New ServerTransactionDB
+            Dim lnq As New CfKioskSysconfigServerLinqDB
+            lnq.ChkDataByMS_KIOSK_ID(KioskID, trans.Trans)
+            If lnq.ID > 0 Then
+                lnq.MACHINE_KEY = ""
+
+                Dim re As ExecuteDataInfo = lnq.UpdateData(KioskComName, trans.Trans)
+                If re.IsSuccess = True Then
+                    Dim sql As String = "update CF_KIOSK_SYSCONFIG set machine_key=null where id=@_KIOSK_ID;" & Environment.NewLine
+                    sql += " update MS_KIOSK_DEVICE  set sync_to_kiosk='N' where ms_kiosk_id=@_KIOSK_ID;" & Environment.NewLine
+                    sql += " update MS_CABINET set sync_to_kiosk='N' where ms_kiosk_id=@_KIOSK_ID;" & Environment.NewLine
+                    sql += " update MS_LOCKER set sync_to_kiosk='N' where ms_kiosk_id=@_KIOSK_ID;" & Environment.NewLine
+
+                    Dim p(1) As SqlParameter
+                    p(0) = ServerDB.SetBigInt("@_KIOSK_ID", KioskID)
+                    re = ServerDB.ExecuteNonQuery(sql, trans.Trans, p)
+                    If re.IsSuccess = True Then
+                        trans.CommitTransaction()
+                        ret = "true"
+                    Else
+                        trans.RollbackTransaction()
+                        ret = "false|" & re.ErrorMessage
+                    End If
+                Else
+                    trans.RollbackTransaction()
+                    ret = "false|" & re.ErrorMessage
+                End If
+            Else
+                trans.RollbackTransaction()
+            End If
+            lnq = Nothing
+        Catch ex As Exception
+            ret = "false|" & ex.Message
+            Engine.LogFileENG.CreateServerExceptionLogAgent(ex.Message, ex.StackTrace)
+        End Try
+        Return ret
+    End Function
+#End Region
+
     '<WebMethod()>
     'Public Function CreateLogServerAgent() As String
     '    Engine.LogFileENG.CreateServerLogAgent("CreateLogServerAgent")

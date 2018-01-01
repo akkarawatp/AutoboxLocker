@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<wsdl:definitions xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://tempuri.org/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+<wsdl:definitions xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://tempuri.org/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:s1="http://microsoft.com/wsdl/types/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
   <wsdl:types>
     <s:schema elementFormDefault="qualified" targetNamespace="http://tempuri.org/">
+      <s:import namespace="http://microsoft.com/wsdl/types/" />
       <s:element name="LoginTIT">
         <s:complexType>
           <s:sequence>
@@ -804,6 +805,96 @@
           </s:sequence>
         </s:complexType>
       </s:element>
+      <s:element name="GetLockerUnRegister">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="KioskName" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetLockerUnRegisterResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetLockerUnRegisterResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:any minOccurs="0" maxOccurs="unbounded" namespace="http://www.w3.org/2001/XMLSchema" processContents="lax" />
+                  <s:any minOccurs="1" namespace="urn:schemas-microsoft-com:xml-diffgram-v1" processContents="lax" />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="UpdateLockerMachineKey">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="KioskID" type="s:long" />
+            <s:element minOccurs="0" maxOccurs="1" name="KioskName" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="IpAddress" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="MacAddress" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="MachineKey" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="UpdateLockerMachineKeyResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="UpdateLockerMachineKeyResult" type="tns:UpdateMachineKeyInfo" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="UpdateMachineKeyInfo">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="IsSuccess" type="s:boolean" />
+          <s:element minOccurs="1" maxOccurs="1" name="KioskID" type="s:long" />
+          <s:element minOccurs="0" maxOccurs="1" name="IpAddress" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="MacAddress" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="LocationCode" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="LocationName" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="KioskSysconfig" type="tns:CfKioskSysconfigServerLinqDB" />
+          <s:element minOccurs="0" maxOccurs="1" name="ErrorMessage" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="CfKioskSysconfigServerLinqDB">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="ID" type="s:long" />
+          <s:element minOccurs="0" maxOccurs="1" name="CREATED_BY" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="CREATED_DATE" type="s:dateTime" />
+          <s:element minOccurs="0" maxOccurs="1" name="UPDATED_BY" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="UPDATED_DATE" nillable="true" type="s:dateTime" />
+          <s:element minOccurs="1" maxOccurs="1" name="MS_KIOSK_ID" type="s:long" />
+          <s:element minOccurs="0" maxOccurs="1" name="MAC_ADDRESS" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="IP_ADDRESS" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="LOCATION_CODE" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="LOCATION_NAME" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="KIOSK_OPEN_TIME" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="KIOSK_OPEN24" type="s1:char" />
+          <s:element minOccurs="1" maxOccurs="1" name="LOGIN_SSO" type="s1:char" />
+          <s:element minOccurs="1" maxOccurs="1" name="SCREEN_SAVER_SEC" type="s:long" />
+          <s:element minOccurs="1" maxOccurs="1" name="TIME_OUT_SEC" type="s:long" />
+          <s:element minOccurs="1" maxOccurs="1" name="SHOW_MSG_SEC" type="s:long" />
+          <s:element minOccurs="1" maxOccurs="1" name="PAYMENT_EXTEND_SEC" type="s:long" />
+          <s:element minOccurs="1" maxOccurs="1" name="PINCODE_LEN" type="s:long" />
+          <s:element minOccurs="0" maxOccurs="1" name="LOCKER_WEBSERVICE_URL" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="LOCKER_PC_POSITION" type="s:long" />
+          <s:element minOccurs="0" maxOccurs="1" name="CONTACT_CENTER_TELNO" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="SLEEP_TIME" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="SLEEP_DURATION" type="s:long" />
+          <s:element minOccurs="0" maxOccurs="1" name="ALARM_WEBSERVICE_URL" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="INTERVAL_SYNC_TRANSACTION_MIN" type="s:long" />
+          <s:element minOccurs="1" maxOccurs="1" name="INTERVAL_SYNC_MASTER_MIN" type="s:long" />
+          <s:element minOccurs="1" maxOccurs="1" name="INTERVAL_SYNC_LOG_MIN" type="s:long" />
+          <s:element minOccurs="1" maxOccurs="1" name="SYNC_TO_KIOSK" type="s1:char" />
+          <s:element minOccurs="1" maxOccurs="1" name="SYNC_TO_SERVER" type="s1:char" />
+          <s:element minOccurs="0" maxOccurs="1" name="MACHINE_KEY" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+    </s:schema>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://microsoft.com/wsdl/types/">
+      <s:simpleType name="char">
+        <s:restriction base="s:unsignedShort" />
+      </s:simpleType>
     </s:schema>
   </wsdl:types>
   <wsdl:message name="LoginTITSoapIn">
@@ -1022,6 +1113,18 @@
   <wsdl:message name="SyncLogKioskAgentDataSoapOut">
     <wsdl:part name="parameters" element="tns:SyncLogKioskAgentDataResponse" />
   </wsdl:message>
+  <wsdl:message name="GetLockerUnRegisterSoapIn">
+    <wsdl:part name="parameters" element="tns:GetLockerUnRegister" />
+  </wsdl:message>
+  <wsdl:message name="GetLockerUnRegisterSoapOut">
+    <wsdl:part name="parameters" element="tns:GetLockerUnRegisterResponse" />
+  </wsdl:message>
+  <wsdl:message name="UpdateLockerMachineKeySoapIn">
+    <wsdl:part name="parameters" element="tns:UpdateLockerMachineKey" />
+  </wsdl:message>
+  <wsdl:message name="UpdateLockerMachineKeySoapOut">
+    <wsdl:part name="parameters" element="tns:UpdateLockerMachineKeyResponse" />
+  </wsdl:message>
   <wsdl:portType name="ATBLockerWebServiceSoap">
     <wsdl:operation name="LoginTIT">
       <wsdl:input message="tns:LoginTITSoapIn" />
@@ -1166,6 +1269,14 @@
     <wsdl:operation name="SyncLogKioskAgentData">
       <wsdl:input message="tns:SyncLogKioskAgentDataSoapIn" />
       <wsdl:output message="tns:SyncLogKioskAgentDataSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetLockerUnRegister">
+      <wsdl:input message="tns:GetLockerUnRegisterSoapIn" />
+      <wsdl:output message="tns:GetLockerUnRegisterSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="UpdateLockerMachineKey">
+      <wsdl:input message="tns:UpdateLockerMachineKeySoapIn" />
+      <wsdl:output message="tns:UpdateLockerMachineKeySoapOut" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="ATBLockerWebServiceSoap" type="tns:ATBLockerWebServiceSoap">
@@ -1494,6 +1605,24 @@
         <soap:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
+    <wsdl:operation name="GetLockerUnRegister">
+      <soap:operation soapAction="http://tempuri.org/GetLockerUnRegister" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateLockerMachineKey">
+      <soap:operation soapAction="http://tempuri.org/UpdateLockerMachineKey" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
   </wsdl:binding>
   <wsdl:binding name="ATBLockerWebServiceSoap12" type="tns:ATBLockerWebServiceSoap">
     <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
@@ -1814,6 +1943,24 @@
     </wsdl:operation>
     <wsdl:operation name="SyncLogKioskAgentData">
       <soap12:operation soapAction="http://tempuri.org/SyncLogKioskAgentData" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetLockerUnRegister">
+      <soap12:operation soapAction="http://tempuri.org/GetLockerUnRegister" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateLockerMachineKey">
+      <soap12:operation soapAction="http://tempuri.org/UpdateLockerMachineKey" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>

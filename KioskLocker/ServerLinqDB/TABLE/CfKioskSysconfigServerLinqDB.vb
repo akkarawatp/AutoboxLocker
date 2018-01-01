@@ -8,7 +8,7 @@ Imports ServerLinqDB.ConnectDB
 
 Namespace TABLE
     'Represents a transaction for CF_KIOSK_SYSCONFIG table ServerLinqDB.
-    '[Create by  on November, 18 2017]
+    '[Create by  on December, 30 2017]
     Public Class CfKioskSysconfigServerLinqDB
         Public sub CfKioskSysconfigServerLinqDB()
 
@@ -68,6 +68,7 @@ Namespace TABLE
         Dim _INTERVAL_SYNC_LOG_MIN As Long = 0
         Dim _SYNC_TO_KIOSK As Char = "N"
         Dim _SYNC_TO_SERVER As Char = "N"
+        Dim _MACHINE_KEY As  String  = ""
 
         'Generate Field Property 
         <Column(Storage:="_ID", DbType:="BigInt NOT NULL ",CanBeNull:=false)>  _
@@ -331,6 +332,15 @@ Namespace TABLE
                _SYNC_TO_SERVER = value
             End Set
         End Property 
+        <Column(Storage:="_MACHINE_KEY", DbType:="VarChar(1000)")>  _
+        Public Property MACHINE_KEY() As  String 
+            Get
+                Return _MACHINE_KEY
+            End Get
+            Set(ByVal value As  String )
+               _MACHINE_KEY = value
+            End Set
+        End Property 
 
 
         'Clear All Data
@@ -364,6 +374,7 @@ Namespace TABLE
             _INTERVAL_SYNC_LOG_MIN = 1
             _SYNC_TO_KIOSK = "N"
             _SYNC_TO_SERVER = "N"
+            _MACHINE_KEY = ""
         End Sub
 
        'Define Public Method 
@@ -640,7 +651,7 @@ Namespace TABLE
         End Function
 
         Private Function SetParameterData() As SqlParameter()
-            Dim cmbParam(28) As SqlParameter
+            Dim cmbParam(29) As SqlParameter
             cmbParam(0) = New SqlParameter("@_ID", SqlDbType.BigInt)
             cmbParam(0).Value = _ID
 
@@ -744,6 +755,13 @@ Namespace TABLE
             cmbParam(28) = New SqlParameter("@_SYNC_TO_SERVER", SqlDbType.Char)
             cmbParam(28).Value = _SYNC_TO_SERVER
 
+            cmbParam(29) = New SqlParameter("@_MACHINE_KEY", SqlDbType.VarChar)
+            If _MACHINE_KEY.Trim <> "" Then 
+                cmbParam(29).Value = _MACHINE_KEY
+            Else
+                cmbParam(29).Value = DBNull.value
+            End If
+
             Return cmbParam
         End Function
 
@@ -792,6 +810,7 @@ Namespace TABLE
                         If Convert.IsDBNull(Rdr("interval_sync_log_min")) = False Then _interval_sync_log_min = Convert.ToInt32(Rdr("interval_sync_log_min"))
                         If Convert.IsDBNull(Rdr("sync_to_kiosk")) = False Then _sync_to_kiosk = Rdr("sync_to_kiosk").ToString()
                         If Convert.IsDBNull(Rdr("sync_to_server")) = False Then _sync_to_server = Rdr("sync_to_server").ToString()
+                        If Convert.IsDBNull(Rdr("machine_key")) = False Then _machine_key = Rdr("machine_key").ToString()
                     Else
                         ret = False
                         _error = MessageResources.MSGEV002
@@ -855,6 +874,7 @@ Namespace TABLE
                         If Convert.IsDBNull(Rdr("interval_sync_log_min")) = False Then _interval_sync_log_min = Convert.ToInt32(Rdr("interval_sync_log_min"))
                         If Convert.IsDBNull(Rdr("sync_to_kiosk")) = False Then _sync_to_kiosk = Rdr("sync_to_kiosk").ToString()
                         If Convert.IsDBNull(Rdr("sync_to_server")) = False Then _sync_to_server = Rdr("sync_to_server").ToString()
+                        If Convert.IsDBNull(Rdr("machine_key")) = False Then _machine_key = Rdr("machine_key").ToString()
                     Else
                         _error = MessageResources.MSGEV002
                     End If
@@ -879,8 +899,8 @@ Namespace TABLE
         Private ReadOnly Property SqlInsert() As String 
             Get
                 Dim Sql As String=""
-                Sql += "INSERT INTO " & tableName  & " (CREATED_BY, CREATED_DATE, MS_KIOSK_ID, MAC_ADDRESS, IP_ADDRESS, LOCATION_CODE, LOCATION_NAME, KIOSK_OPEN_TIME, KIOSK_OPEN24, LOGIN_SSO, SCREEN_SAVER_SEC, TIME_OUT_SEC, SHOW_MSG_SEC, PAYMENT_EXTEND_SEC, PINCODE_LEN, LOCKER_WEBSERVICE_URL, LOCKER_PC_POSITION, CONTACT_CENTER_TELNO, SLEEP_TIME, SLEEP_DURATION, ALARM_WEBSERVICE_URL, INTERVAL_SYNC_TRANSACTION_MIN, INTERVAL_SYNC_MASTER_MIN, INTERVAL_SYNC_LOG_MIN, SYNC_TO_KIOSK, SYNC_TO_SERVER)"
-                Sql += " OUTPUT INSERTED.ID, INSERTED.CREATED_BY, INSERTED.CREATED_DATE, INSERTED.UPDATED_BY, INSERTED.UPDATED_DATE, INSERTED.MS_KIOSK_ID, INSERTED.MAC_ADDRESS, INSERTED.IP_ADDRESS, INSERTED.LOCATION_CODE, INSERTED.LOCATION_NAME, INSERTED.KIOSK_OPEN_TIME, INSERTED.KIOSK_OPEN24, INSERTED.LOGIN_SSO, INSERTED.SCREEN_SAVER_SEC, INSERTED.TIME_OUT_SEC, INSERTED.SHOW_MSG_SEC, INSERTED.PAYMENT_EXTEND_SEC, INSERTED.PINCODE_LEN, INSERTED.LOCKER_WEBSERVICE_URL, INSERTED.LOCKER_PC_POSITION, INSERTED.CONTACT_CENTER_TELNO, INSERTED.SLEEP_TIME, INSERTED.SLEEP_DURATION, INSERTED.ALARM_WEBSERVICE_URL, INSERTED.INTERVAL_SYNC_TRANSACTION_MIN, INSERTED.INTERVAL_SYNC_MASTER_MIN, INSERTED.INTERVAL_SYNC_LOG_MIN, INSERTED.SYNC_TO_KIOSK, INSERTED.SYNC_TO_SERVER"
+                Sql += "INSERT INTO " & tableName  & " (CREATED_BY, CREATED_DATE, MS_KIOSK_ID, MAC_ADDRESS, IP_ADDRESS, LOCATION_CODE, LOCATION_NAME, KIOSK_OPEN_TIME, KIOSK_OPEN24, LOGIN_SSO, SCREEN_SAVER_SEC, TIME_OUT_SEC, SHOW_MSG_SEC, PAYMENT_EXTEND_SEC, PINCODE_LEN, LOCKER_WEBSERVICE_URL, LOCKER_PC_POSITION, CONTACT_CENTER_TELNO, SLEEP_TIME, SLEEP_DURATION, ALARM_WEBSERVICE_URL, INTERVAL_SYNC_TRANSACTION_MIN, INTERVAL_SYNC_MASTER_MIN, INTERVAL_SYNC_LOG_MIN, SYNC_TO_KIOSK, SYNC_TO_SERVER, MACHINE_KEY)"
+                Sql += " OUTPUT INSERTED.ID, INSERTED.CREATED_BY, INSERTED.CREATED_DATE, INSERTED.UPDATED_BY, INSERTED.UPDATED_DATE, INSERTED.MS_KIOSK_ID, INSERTED.MAC_ADDRESS, INSERTED.IP_ADDRESS, INSERTED.LOCATION_CODE, INSERTED.LOCATION_NAME, INSERTED.KIOSK_OPEN_TIME, INSERTED.KIOSK_OPEN24, INSERTED.LOGIN_SSO, INSERTED.SCREEN_SAVER_SEC, INSERTED.TIME_OUT_SEC, INSERTED.SHOW_MSG_SEC, INSERTED.PAYMENT_EXTEND_SEC, INSERTED.PINCODE_LEN, INSERTED.LOCKER_WEBSERVICE_URL, INSERTED.LOCKER_PC_POSITION, INSERTED.CONTACT_CENTER_TELNO, INSERTED.SLEEP_TIME, INSERTED.SLEEP_DURATION, INSERTED.ALARM_WEBSERVICE_URL, INSERTED.INTERVAL_SYNC_TRANSACTION_MIN, INSERTED.INTERVAL_SYNC_MASTER_MIN, INSERTED.INTERVAL_SYNC_LOG_MIN, INSERTED.SYNC_TO_KIOSK, INSERTED.SYNC_TO_SERVER, INSERTED.MACHINE_KEY"
                 Sql += " VALUES("
                 sql += "@_CREATED_BY" & ", "
                 sql += "@_CREATED_DATE" & ", "
@@ -907,7 +927,8 @@ Namespace TABLE
                 sql += "@_INTERVAL_SYNC_MASTER_MIN" & ", "
                 sql += "@_INTERVAL_SYNC_LOG_MIN" & ", "
                 sql += "@_SYNC_TO_KIOSK" & ", "
-                sql += "@_SYNC_TO_SERVER"
+                sql += "@_SYNC_TO_SERVER" & ", "
+                sql += "@_MACHINE_KEY"
                 sql += ")"
                 Return sql
             End Get
@@ -944,7 +965,8 @@ Namespace TABLE
                 Sql += "INTERVAL_SYNC_MASTER_MIN = " & "@_INTERVAL_SYNC_MASTER_MIN" & ", "
                 Sql += "INTERVAL_SYNC_LOG_MIN = " & "@_INTERVAL_SYNC_LOG_MIN" & ", "
                 Sql += "SYNC_TO_KIOSK = " & "@_SYNC_TO_KIOSK" & ", "
-                Sql += "SYNC_TO_SERVER = " & "@_SYNC_TO_SERVER" + ""
+                Sql += "SYNC_TO_SERVER = " & "@_SYNC_TO_SERVER" & ", "
+                Sql += "MACHINE_KEY = " & "@_MACHINE_KEY" + ""
                 Return Sql
             End Get
         End Property
@@ -962,7 +984,7 @@ Namespace TABLE
         'Get Select Statement for table CF_KIOSK_SYSCONFIG
         Private ReadOnly Property SqlSelect() As String
             Get
-                Dim Sql As String = "SELECT ID, CREATED_BY, CREATED_DATE, UPDATED_BY, UPDATED_DATE, MS_KIOSK_ID, MAC_ADDRESS, IP_ADDRESS, LOCATION_CODE, LOCATION_NAME, KIOSK_OPEN_TIME, KIOSK_OPEN24, LOGIN_SSO, SCREEN_SAVER_SEC, TIME_OUT_SEC, SHOW_MSG_SEC, PAYMENT_EXTEND_SEC, PINCODE_LEN, LOCKER_WEBSERVICE_URL, LOCKER_PC_POSITION, CONTACT_CENTER_TELNO, SLEEP_TIME, SLEEP_DURATION, ALARM_WEBSERVICE_URL, INTERVAL_SYNC_TRANSACTION_MIN, INTERVAL_SYNC_MASTER_MIN, INTERVAL_SYNC_LOG_MIN, SYNC_TO_KIOSK, SYNC_TO_SERVER FROM " & tableName
+                Dim Sql As String = "SELECT ID, CREATED_BY, CREATED_DATE, UPDATED_BY, UPDATED_DATE, MS_KIOSK_ID, MAC_ADDRESS, IP_ADDRESS, LOCATION_CODE, LOCATION_NAME, KIOSK_OPEN_TIME, KIOSK_OPEN24, LOGIN_SSO, SCREEN_SAVER_SEC, TIME_OUT_SEC, SHOW_MSG_SEC, PAYMENT_EXTEND_SEC, PINCODE_LEN, LOCKER_WEBSERVICE_URL, LOCKER_PC_POSITION, CONTACT_CENTER_TELNO, SLEEP_TIME, SLEEP_DURATION, ALARM_WEBSERVICE_URL, INTERVAL_SYNC_TRANSACTION_MIN, INTERVAL_SYNC_MASTER_MIN, INTERVAL_SYNC_LOG_MIN, SYNC_TO_KIOSK, SYNC_TO_SERVER, MACHINE_KEY FROM " & tableName
                 Return Sql
             End Get
         End Property

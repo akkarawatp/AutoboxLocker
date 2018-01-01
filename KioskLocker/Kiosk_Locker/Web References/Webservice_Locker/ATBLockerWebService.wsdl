@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<wsdl:definitions xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://tempuri.org/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+<wsdl:definitions xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://tempuri.org/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:s1="http://microsoft.com/wsdl/types/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
   <wsdl:types>
     <s:schema elementFormDefault="qualified" targetNamespace="http://tempuri.org/">
+      <s:import namespace="http://microsoft.com/wsdl/types/" />
       <s:element name="LoginTIT">
         <s:complexType>
           <s:sequence>
@@ -276,6 +277,14 @@
               </s:sequence>
             </s:complexType>
           </s:element>
+          <s:element minOccurs="0" maxOccurs="1" name="ServiceRateFine">
+            <s:complexType>
+              <s:sequence>
+                <s:any minOccurs="0" maxOccurs="unbounded" namespace="http://www.w3.org/2001/XMLSchema" processContents="lax" />
+                <s:any minOccurs="1" namespace="urn:schemas-microsoft-com:xml-diffgram-v1" processContents="lax" />
+              </s:sequence>
+            </s:complexType>
+          </s:element>
         </s:sequence>
       </s:complexType>
       <s:element name="SyncKioskSysconfig">
@@ -538,7 +547,7 @@
           </s:sequence>
         </s:complexType>
       </s:element>
-      <s:element name="SysnKioskTransactionCustomerImage">
+      <s:element name="SyncKioskDepositTransactionCustomerImage">
         <s:complexType>
           <s:sequence>
             <s:element minOccurs="0" maxOccurs="1" name="KioskName" type="s:string" />
@@ -547,14 +556,14 @@
           </s:sequence>
         </s:complexType>
       </s:element>
-      <s:element name="SysnKioskTransactionCustomerImageResponse">
+      <s:element name="SyncKioskDepositTransactionCustomerImageResponse">
         <s:complexType>
           <s:sequence>
-            <s:element minOccurs="0" maxOccurs="1" name="SysnKioskTransactionCustomerImageResult" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="SyncKioskDepositTransactionCustomerImageResult" type="s:string" />
           </s:sequence>
         </s:complexType>
       </s:element>
-      <s:element name="SyncKioskServiceTransactionByRecord">
+      <s:element name="SyncKioskDepositTransactionByRecord">
         <s:complexType>
           <s:sequence>
             <s:element minOccurs="0" maxOccurs="1" name="KioskName" type="s:string" />
@@ -591,32 +600,26 @@
           </s:sequence>
         </s:complexType>
       </s:element>
-      <s:element name="SyncKioskServiceTransactionByRecordResponse">
+      <s:element name="SyncKioskDepositTransactionByRecordResponse">
         <s:complexType>
           <s:sequence>
-            <s:element minOccurs="0" maxOccurs="1" name="SyncKioskServiceTransactionByRecordResult" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="SyncKioskDepositTransactionByRecordResult" type="s:string" />
           </s:sequence>
         </s:complexType>
       </s:element>
-      <s:element name="SyncKioskServiceTransaction">
+      <s:element name="SyncKioskCollectTransactionCustomerImage">
         <s:complexType>
           <s:sequence>
-            <s:element minOccurs="0" maxOccurs="1" name="dt">
-              <s:complexType>
-                <s:sequence>
-                  <s:any minOccurs="0" maxOccurs="unbounded" namespace="http://www.w3.org/2001/XMLSchema" processContents="lax" />
-                  <s:any minOccurs="1" namespace="urn:schemas-microsoft-com:xml-diffgram-v1" processContents="lax" />
-                </s:sequence>
-              </s:complexType>
-            </s:element>
             <s:element minOccurs="0" maxOccurs="1" name="KioskName" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="TransactionNo" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="CustImage" type="s:base64Binary" />
           </s:sequence>
         </s:complexType>
       </s:element>
-      <s:element name="SyncKioskServiceTransactionResponse">
+      <s:element name="SyncKioskCollectTransactionCustomerImageResponse">
         <s:complexType>
           <s:sequence>
-            <s:element minOccurs="0" maxOccurs="1" name="SyncKioskServiceTransactionResult" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="SyncKioskCollectTransactionCustomerImageResult" type="s:string" />
           </s:sequence>
         </s:complexType>
       </s:element>
@@ -802,6 +805,111 @@
           </s:sequence>
         </s:complexType>
       </s:element>
+      <s:element name="GetLockerUnRegister">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="KioskName" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetLockerUnRegisterResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetLockerUnRegisterResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:any minOccurs="0" maxOccurs="unbounded" namespace="http://www.w3.org/2001/XMLSchema" processContents="lax" />
+                  <s:any minOccurs="1" namespace="urn:schemas-microsoft-com:xml-diffgram-v1" processContents="lax" />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="UpdateLockerMachineKey">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="KioskID" type="s:long" />
+            <s:element minOccurs="0" maxOccurs="1" name="KioskName" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="IpAddress" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="MacAddress" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="MachineKey" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="UpdateLockerMachineKeyResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="UpdateLockerMachineKeyResult" type="tns:UpdateMachineKeyInfo" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="UpdateMachineKeyInfo">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="IsSuccess" type="s:boolean" />
+          <s:element minOccurs="1" maxOccurs="1" name="KioskID" type="s:long" />
+          <s:element minOccurs="0" maxOccurs="1" name="IpAddress" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="MacAddress" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="LocationCode" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="LocationName" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="KioskSysconfig" type="tns:CfKioskSysconfigServerLinqDB" />
+          <s:element minOccurs="0" maxOccurs="1" name="ErrorMessage" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="CfKioskSysconfigServerLinqDB">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="ID" type="s:long" />
+          <s:element minOccurs="0" maxOccurs="1" name="CREATED_BY" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="CREATED_DATE" type="s:dateTime" />
+          <s:element minOccurs="0" maxOccurs="1" name="UPDATED_BY" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="UPDATED_DATE" nillable="true" type="s:dateTime" />
+          <s:element minOccurs="1" maxOccurs="1" name="MS_KIOSK_ID" type="s:long" />
+          <s:element minOccurs="0" maxOccurs="1" name="MAC_ADDRESS" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="IP_ADDRESS" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="LOCATION_CODE" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="LOCATION_NAME" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="KIOSK_OPEN_TIME" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="KIOSK_OPEN24" type="s1:char" />
+          <s:element minOccurs="1" maxOccurs="1" name="LOGIN_SSO" type="s1:char" />
+          <s:element minOccurs="1" maxOccurs="1" name="SCREEN_SAVER_SEC" type="s:long" />
+          <s:element minOccurs="1" maxOccurs="1" name="TIME_OUT_SEC" type="s:long" />
+          <s:element minOccurs="1" maxOccurs="1" name="SHOW_MSG_SEC" type="s:long" />
+          <s:element minOccurs="1" maxOccurs="1" name="PAYMENT_EXTEND_SEC" type="s:long" />
+          <s:element minOccurs="1" maxOccurs="1" name="PINCODE_LEN" type="s:long" />
+          <s:element minOccurs="0" maxOccurs="1" name="LOCKER_WEBSERVICE_URL" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="LOCKER_PC_POSITION" type="s:long" />
+          <s:element minOccurs="0" maxOccurs="1" name="CONTACT_CENTER_TELNO" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="SLEEP_TIME" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="SLEEP_DURATION" type="s:long" />
+          <s:element minOccurs="0" maxOccurs="1" name="ALARM_WEBSERVICE_URL" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="INTERVAL_SYNC_TRANSACTION_MIN" type="s:long" />
+          <s:element minOccurs="1" maxOccurs="1" name="INTERVAL_SYNC_MASTER_MIN" type="s:long" />
+          <s:element minOccurs="1" maxOccurs="1" name="INTERVAL_SYNC_LOG_MIN" type="s:long" />
+          <s:element minOccurs="1" maxOccurs="1" name="SYNC_TO_KIOSK" type="s1:char" />
+          <s:element minOccurs="1" maxOccurs="1" name="SYNC_TO_SERVER" type="s1:char" />
+          <s:element minOccurs="0" maxOccurs="1" name="MACHINE_KEY" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="ClearLockerMachineKey">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="KioskID" type="s:long" />
+            <s:element minOccurs="0" maxOccurs="1" name="KioskComName" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ClearLockerMachineKeyResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ClearLockerMachineKeyResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+    </s:schema>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://microsoft.com/wsdl/types/">
+      <s:simpleType name="char">
+        <s:restriction base="s:unsignedShort" />
+      </s:simpleType>
     </s:schema>
   </wsdl:types>
   <wsdl:message name="LoginTITSoapIn">
@@ -954,23 +1062,23 @@
   <wsdl:message name="UpdateSyncKioskLockerSoapOut">
     <wsdl:part name="parameters" element="tns:UpdateSyncKioskLockerResponse" />
   </wsdl:message>
-  <wsdl:message name="SysnKioskTransactionCustomerImageSoapIn">
-    <wsdl:part name="parameters" element="tns:SysnKioskTransactionCustomerImage" />
+  <wsdl:message name="SyncKioskDepositTransactionCustomerImageSoapIn">
+    <wsdl:part name="parameters" element="tns:SyncKioskDepositTransactionCustomerImage" />
   </wsdl:message>
-  <wsdl:message name="SysnKioskTransactionCustomerImageSoapOut">
-    <wsdl:part name="parameters" element="tns:SysnKioskTransactionCustomerImageResponse" />
+  <wsdl:message name="SyncKioskDepositTransactionCustomerImageSoapOut">
+    <wsdl:part name="parameters" element="tns:SyncKioskDepositTransactionCustomerImageResponse" />
   </wsdl:message>
-  <wsdl:message name="SyncKioskServiceTransactionByRecordSoapIn">
-    <wsdl:part name="parameters" element="tns:SyncKioskServiceTransactionByRecord" />
+  <wsdl:message name="SyncKioskDepositTransactionByRecordSoapIn">
+    <wsdl:part name="parameters" element="tns:SyncKioskDepositTransactionByRecord" />
   </wsdl:message>
-  <wsdl:message name="SyncKioskServiceTransactionByRecordSoapOut">
-    <wsdl:part name="parameters" element="tns:SyncKioskServiceTransactionByRecordResponse" />
+  <wsdl:message name="SyncKioskDepositTransactionByRecordSoapOut">
+    <wsdl:part name="parameters" element="tns:SyncKioskDepositTransactionByRecordResponse" />
   </wsdl:message>
-  <wsdl:message name="SyncKioskServiceTransactionSoapIn">
-    <wsdl:part name="parameters" element="tns:SyncKioskServiceTransaction" />
+  <wsdl:message name="SyncKioskCollectTransactionCustomerImageSoapIn">
+    <wsdl:part name="parameters" element="tns:SyncKioskCollectTransactionCustomerImage" />
   </wsdl:message>
-  <wsdl:message name="SyncKioskServiceTransactionSoapOut">
-    <wsdl:part name="parameters" element="tns:SyncKioskServiceTransactionResponse" />
+  <wsdl:message name="SyncKioskCollectTransactionCustomerImageSoapOut">
+    <wsdl:part name="parameters" element="tns:SyncKioskCollectTransactionCustomerImageResponse" />
   </wsdl:message>
   <wsdl:message name="SyncKioskCollectTransactionSoapIn">
     <wsdl:part name="parameters" element="tns:SyncKioskCollectTransaction" />
@@ -1019,6 +1127,24 @@
   </wsdl:message>
   <wsdl:message name="SyncLogKioskAgentDataSoapOut">
     <wsdl:part name="parameters" element="tns:SyncLogKioskAgentDataResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetLockerUnRegisterSoapIn">
+    <wsdl:part name="parameters" element="tns:GetLockerUnRegister" />
+  </wsdl:message>
+  <wsdl:message name="GetLockerUnRegisterSoapOut">
+    <wsdl:part name="parameters" element="tns:GetLockerUnRegisterResponse" />
+  </wsdl:message>
+  <wsdl:message name="UpdateLockerMachineKeySoapIn">
+    <wsdl:part name="parameters" element="tns:UpdateLockerMachineKey" />
+  </wsdl:message>
+  <wsdl:message name="UpdateLockerMachineKeySoapOut">
+    <wsdl:part name="parameters" element="tns:UpdateLockerMachineKeyResponse" />
+  </wsdl:message>
+  <wsdl:message name="ClearLockerMachineKeySoapIn">
+    <wsdl:part name="parameters" element="tns:ClearLockerMachineKey" />
+  </wsdl:message>
+  <wsdl:message name="ClearLockerMachineKeySoapOut">
+    <wsdl:part name="parameters" element="tns:ClearLockerMachineKeyResponse" />
   </wsdl:message>
   <wsdl:portType name="ATBLockerWebServiceSoap">
     <wsdl:operation name="LoginTIT">
@@ -1121,17 +1247,17 @@
       <wsdl:input message="tns:UpdateSyncKioskLockerSoapIn" />
       <wsdl:output message="tns:UpdateSyncKioskLockerSoapOut" />
     </wsdl:operation>
-    <wsdl:operation name="SysnKioskTransactionCustomerImage">
-      <wsdl:input message="tns:SysnKioskTransactionCustomerImageSoapIn" />
-      <wsdl:output message="tns:SysnKioskTransactionCustomerImageSoapOut" />
+    <wsdl:operation name="SyncKioskDepositTransactionCustomerImage">
+      <wsdl:input message="tns:SyncKioskDepositTransactionCustomerImageSoapIn" />
+      <wsdl:output message="tns:SyncKioskDepositTransactionCustomerImageSoapOut" />
     </wsdl:operation>
-    <wsdl:operation name="SyncKioskServiceTransactionByRecord">
-      <wsdl:input message="tns:SyncKioskServiceTransactionByRecordSoapIn" />
-      <wsdl:output message="tns:SyncKioskServiceTransactionByRecordSoapOut" />
+    <wsdl:operation name="SyncKioskDepositTransactionByRecord">
+      <wsdl:input message="tns:SyncKioskDepositTransactionByRecordSoapIn" />
+      <wsdl:output message="tns:SyncKioskDepositTransactionByRecordSoapOut" />
     </wsdl:operation>
-    <wsdl:operation name="SyncKioskServiceTransaction">
-      <wsdl:input message="tns:SyncKioskServiceTransactionSoapIn" />
-      <wsdl:output message="tns:SyncKioskServiceTransactionSoapOut" />
+    <wsdl:operation name="SyncKioskCollectTransactionCustomerImage">
+      <wsdl:input message="tns:SyncKioskCollectTransactionCustomerImageSoapIn" />
+      <wsdl:output message="tns:SyncKioskCollectTransactionCustomerImageSoapOut" />
     </wsdl:operation>
     <wsdl:operation name="SyncKioskCollectTransaction">
       <wsdl:input message="tns:SyncKioskCollectTransactionSoapIn" />
@@ -1164,6 +1290,18 @@
     <wsdl:operation name="SyncLogKioskAgentData">
       <wsdl:input message="tns:SyncLogKioskAgentDataSoapIn" />
       <wsdl:output message="tns:SyncLogKioskAgentDataSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetLockerUnRegister">
+      <wsdl:input message="tns:GetLockerUnRegisterSoapIn" />
+      <wsdl:output message="tns:GetLockerUnRegisterSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="UpdateLockerMachineKey">
+      <wsdl:input message="tns:UpdateLockerMachineKeySoapIn" />
+      <wsdl:output message="tns:UpdateLockerMachineKeySoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ClearLockerMachineKey">
+      <wsdl:input message="tns:ClearLockerMachineKeySoapIn" />
+      <wsdl:output message="tns:ClearLockerMachineKeySoapOut" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="ATBLockerWebServiceSoap" type="tns:ATBLockerWebServiceSoap">
@@ -1393,8 +1531,8 @@
         <soap:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="SysnKioskTransactionCustomerImage">
-      <soap:operation soapAction="http://tempuri.org/SysnKioskTransactionCustomerImage" style="document" />
+    <wsdl:operation name="SyncKioskDepositTransactionCustomerImage">
+      <soap:operation soapAction="http://tempuri.org/SyncKioskDepositTransactionCustomerImage" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
@@ -1402,8 +1540,8 @@
         <soap:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="SyncKioskServiceTransactionByRecord">
-      <soap:operation soapAction="http://tempuri.org/SyncKioskServiceTransactionByRecord" style="document" />
+    <wsdl:operation name="SyncKioskDepositTransactionByRecord">
+      <soap:operation soapAction="http://tempuri.org/SyncKioskDepositTransactionByRecord" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
@@ -1411,8 +1549,8 @@
         <soap:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="SyncKioskServiceTransaction">
-      <soap:operation soapAction="http://tempuri.org/SyncKioskServiceTransaction" style="document" />
+    <wsdl:operation name="SyncKioskCollectTransactionCustomerImage">
+      <soap:operation soapAction="http://tempuri.org/SyncKioskCollectTransactionCustomerImage" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
@@ -1485,6 +1623,33 @@
     </wsdl:operation>
     <wsdl:operation name="SyncLogKioskAgentData">
       <soap:operation soapAction="http://tempuri.org/SyncLogKioskAgentData" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetLockerUnRegister">
+      <soap:operation soapAction="http://tempuri.org/GetLockerUnRegister" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateLockerMachineKey">
+      <soap:operation soapAction="http://tempuri.org/UpdateLockerMachineKey" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ClearLockerMachineKey">
+      <soap:operation soapAction="http://tempuri.org/ClearLockerMachineKey" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
@@ -1720,8 +1885,8 @@
         <soap12:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="SysnKioskTransactionCustomerImage">
-      <soap12:operation soapAction="http://tempuri.org/SysnKioskTransactionCustomerImage" style="document" />
+    <wsdl:operation name="SyncKioskDepositTransactionCustomerImage">
+      <soap12:operation soapAction="http://tempuri.org/SyncKioskDepositTransactionCustomerImage" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
@@ -1729,8 +1894,8 @@
         <soap12:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="SyncKioskServiceTransactionByRecord">
-      <soap12:operation soapAction="http://tempuri.org/SyncKioskServiceTransactionByRecord" style="document" />
+    <wsdl:operation name="SyncKioskDepositTransactionByRecord">
+      <soap12:operation soapAction="http://tempuri.org/SyncKioskDepositTransactionByRecord" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
@@ -1738,8 +1903,8 @@
         <soap12:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="SyncKioskServiceTransaction">
-      <soap12:operation soapAction="http://tempuri.org/SyncKioskServiceTransaction" style="document" />
+    <wsdl:operation name="SyncKioskCollectTransactionCustomerImage">
+      <soap12:operation soapAction="http://tempuri.org/SyncKioskCollectTransactionCustomerImage" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
@@ -1812,6 +1977,33 @@
     </wsdl:operation>
     <wsdl:operation name="SyncLogKioskAgentData">
       <soap12:operation soapAction="http://tempuri.org/SyncLogKioskAgentData" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetLockerUnRegister">
+      <soap12:operation soapAction="http://tempuri.org/GetLockerUnRegister" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateLockerMachineKey">
+      <soap12:operation soapAction="http://tempuri.org/UpdateLockerMachineKey" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ClearLockerMachineKey">
+      <soap12:operation soapAction="http://tempuri.org/ClearLockerMachineKey" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
