@@ -51,11 +51,55 @@ Public Class frmSplashScreen
     Private Sub StartNewMachineKey()
         Me.Visible = True
         'Me.WindowState = FormWindowState.Normal
+        SetDDLLockerList()
+
         CurrentStep = 1
         pnlDBLogin.Show()
     End Sub
 
+    Private Sub SetDDLLockerList()
+        Dim ws As New Webservice_Locker.ATBLockerWebService
+        Dim dt As DataTable = ws.GetLockerUnRegister(Environment.MachineName)
+        If dt Is Nothing Then
+            dt.Columns.Add("id", GetType(Long))
+            dt.Columns.Add("com_name")
+        End If
+
+        Dim dr As DataRow = dt.NewRow
+        dr("id") = 0
+        dr("com_name") = ""
+        dt.Rows.InsertAt(dr, 0)
+
+        cbUnRegisLocker.ValueMember = "id"
+        cbUnRegisLocker.DisplayMember = "com_name"
+        cbUnRegisLocker.DataSource = dt
+    End Sub
+
+    Private Function Validate() As Boolean
+        Dim ret As Boolean = True
+        If cbUnRegisLocker.SelectedValue = 0 Then
+            MessageBox.Show("กรุณาเลือก Locker", "Alert", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+            Return False
+        End If
+        Dim LanDesc As String = GetCardLanDesc()
+        If LanDesc.Trim = "" Then
+            MessageBox.Show("กรุณาระบุ Card Lan", "Alert", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+            Return False
+        End If
+
+        Return ret
+    End Function
+
     Private Sub ActionStep1()
+        If Validate() = False Then
+            Exit Sub
+        End If
+
+        Me.Cursor = Cursors.WaitCursor
+        Dim LanDesc As String = GetCardLanDesc()
+        Dim IpAddress As String = ""
+        Dim MacAddress As String = ""
+
         SetProgressStatus("Generate Machine Key")
         Dim IdenKey As String = KioskDB.EnCripPwd(txtCPUID.Text & txtProcessorID.Text)
         Dim reg As New ModifyMachineKey
@@ -84,134 +128,122 @@ Public Class frmSplashScreen
                 conn.Close()
                 SqlConnection.ClearAllPools()
 
-                SetProgressStatus("กรุณาเลือกชื่อ Locker...")
-                pnlDBLogin.Hide()
 
-                Dim ws As New Webservice_Locker.ATBLockerWebService
 
-                Dim dt As DataTable = ws.GetLockerUnRegister(Environment.MachineName)
-                If dt Is Nothing Then
-                    dt.Columns.Add("id", GetType(Long))
-                    dt.Columns.Add("com_name")
+
+
+
+                SetProgressStatus("ค้นหาอุปกรณ์ Network")
+                Try
+                    'Network Information
+                    Dim mc As New ManagementClass("Win32_NetworkAdapterConfiguration")
+                    Dim moc As ManagementObjectCollection = mc.GetInstances()
+
+                    For Each mo As ManagementObject In moc
+                        If CStr(mo("Description")).Trim = LanDesc Then
+                            If mo("IPEnabled") = True Then
+                                IpAddress = mo("IPAddress")(0)
+                                MacAddress = mo("MacAddress").ToString().Replace(":", "-")
+
+                                SetProgressStatus("พบอุปกรณ์ Network IP " & IpAddress & "  Mac Address " & MacAddress)
+                                Exit For
+                            Else
+                                SetProgressStatus("Cannot found Network Device " + LanDesc)
+                            End If
+                        End If
+                        mo.Dispose()
+                    Next
+                Catch ex As Exception
+                    SetProgressStatus("Exception : " & ex.Message & vbNewLine & ex.StackTrace)
+                End Try
+
+                If IpAddress <> "" And MacAddress <> "" Then
+                    SetProgressStatus("Register Machine Key...")
+                    Dim ws As New Webservice_Locker.ATBLockerWebService
+                    Dim ret As New Webservice_Locker.UpdateMachineKeyInfo
+                    ret = ws.UpdateLockerMachineKey(cbUnRegisLocker.SelectedValue, Environment.MachineName, IpAddress, MacAddress, lblReadingKey.Text)
+                    If ret.IsSuccess = True Then
+
+                        SetProgressStatus("Update Machine Information")
+                        Dim mmk As New ModifyMachineKey
+                        If mmk.WriteInfo(ret.KioskID, Environment.MachineName, ret.IpAddress, ret.MacAddress, ret.LocationCode, ret.LocationName) = True Then
+                            'Insert Locker CF_KIOSK_SYSCONFIG
+                            Dim cfLnq As New KioskLinqDB.TABLE.CfKioskSysconfigKioskLinqDB
+                            cfLnq.MS_KIOSK_ID = ret.KioskID
+                            cfLnq.MAC_ADDRESS = ret.MacAddress
+                            cfLnq.IP_ADDRESS = ret.IpAddress
+                            cfLnq.LOCATION_CODE = ret.LocationCode
+                            cfLnq.LOCATION_NAME = ret.LocationName
+
+                            With ret.KioskSysconfig
+                                cfLnq.LOGIN_SSO = .LOGIN_SSO
+                                cfLnq.KIOSK_OPEN24 = .KIOSK_OPEN24
+                                cfLnq.SCREEN_SAVER_SEC = .SCREEN_SAVER_SEC
+                                cfLnq.TIME_OUT_SEC = .TIME_OUT_SEC
+                                cfLnq.SHOW_MSG_SEC = .SHOW_MSG_SEC
+                                cfLnq.PAYMENT_EXTEND_SEC = .PAYMENT_EXTEND_SEC
+                                cfLnq.PINCODE_LEN = .PINCODE_LEN
+                                cfLnq.LOCKER_WEBSERVICE_URL = .LOCKER_WEBSERVICE_URL
+                                cfLnq.LOCKER_PC_POSITION = .LOCKER_PC_POSITION
+                                cfLnq.SLEEP_TIME = .SLEEP_TIME
+                                cfLnq.SLEEP_DURATION = .SLEEP_DURATION
+                                cfLnq.CONTACT_CENTER_TELNO = .CONTACT_CENTER_TELNO
+                                cfLnq.ALARM_WEBSERVICE_URL = .ALARM_WEBSERVICE_URL
+                                cfLnq.INTERVAL_SYNC_TRANSACTION_MIN = .INTERVAL_SYNC_TRANSACTION_MIN
+                                cfLnq.INTERVAL_SYNC_MASTER_MIN = .INTERVAL_SYNC_MASTER_MIN
+                                cfLnq.INTERVAL_SYNC_LOG_MIN = .INTERVAL_SYNC_LOG_MIN
+                                cfLnq.SYNC_TO_SERVER = "Y"
+                                cfLnq.SYNC_TO_KIOSK = "Y"
+                                cfLnq.MACHINE_KEY = lblReadingKey.Text
+                            End With
+
+                            Dim trans As New KioskTransactionDB
+                            Dim re As ExecuteDataInfo = cfLnq.InsertData(Environment.MachineName, trans.Trans)
+                            If re.IsSuccess = True Then
+                                trans.CommitTransaction()
+
+                                SetProgressStatus("กำลังดาวน์โหลดข้อมูลตั้งต้น กรุณารอสักครู่")
+                                Engine.SyncMasterDataENG.SyncAllKioskMaster(ret.KioskID)
+
+                                SetProgressStatus("ดาวน์โหลดข้อมูลสำเร็จ คลิกปุ่ม OK เพื่อเข้าสู่โปรแกรม")
+
+                                btnNext.Text = "OK"
+                                Application.DoEvents()
+                                CurrentStep = 2
+                            Else
+                                trans.RollbackTransaction()
+                                MessageBox.Show(re.ErrorMessage, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                            End If
+                        End If
+                        mmk = Nothing
+                    End If
+                    ws.Dispose()
                 End If
-
-                Dim dr As DataRow = dt.NewRow
-                dr("id") = 0
-                dr("com_name") = ""
-                dt.Rows.InsertAt(dr, 0)
-
-                cbUnRegisLocker.ValueMember = "id"
-                cbUnRegisLocker.DisplayMember = "com_name"
-                cbUnRegisLocker.DataSource = dt
-
-                pnlInitDB.Location = pnlDBLogin.Location
-                pnlInitDB.Show()
-                CurrentStep = 2
-                Application.DoEvents()
             End If
         Else
             SetProgressStatus("Generate Fail")
             MessageBox.Show("Generate Machine Key Fail", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
         End If
-    End Sub
-    Private Sub ActionStep2()
-        If cbUnRegisLocker.SelectedValue <> 0 Then
-            Me.Cursor = Cursors.WaitCursor
-            Dim LanDesc As String = GetCardLanDesc()
-            Dim IpAddress As String = ""
-            Dim MacAddress As String = ""
 
-            Try
-                'Network Information
-                Dim mc As New ManagementClass("Win32_NetworkAdapterConfiguration")
-                Dim moc As ManagementObjectCollection = mc.GetInstances()
-
-                For Each mo As ManagementObject In moc
-                    If CStr(mo("Description")).Trim = LanDesc Then
-                        If mo("IPEnabled") = True Then
-                            IpAddress = mo("IPAddress")(0)
-                            MacAddress = mo("MacAddress").ToString().Replace(":", "-")
-                            Exit For
-                        Else
-                            SetProgressStatus("Cannot found Network Device " + LanDesc)
-                        End If
-                    End If
-                    mo.Dispose()
-                Next
-            Catch ex As Exception
-                SetProgressStatus("Exception : " & ex.Message & vbNewLine & ex.StackTrace)
-            End Try
-
-            If IpAddress <> "" And MacAddress <> "" Then
-                Dim ws As New Webservice_Locker.ATBLockerWebService
-                Dim ret As New Webservice_Locker.UpdateMachineKeyInfo
-                ret = ws.UpdateLockerMachineKey(cbUnRegisLocker.SelectedValue, Environment.MachineName, IpAddress, MacAddress, lblReadingKey.Text)
-                If ret.IsSuccess = True Then
-                    Dim mmk As New ModifyMachineKey
-                    If mmk.WriteInfo(ret.KioskID, Environment.MachineName, ret.IpAddress, ret.MacAddress, ret.LocationCode, ret.LocationName) = True Then
-                        'Insert Locker CF_KIOSK_SYSCONFIG
-                        Dim cfLnq As New KioskLinqDB.TABLE.CfKioskSysconfigKioskLinqDB
-                        cfLnq.MS_KIOSK_ID = ret.KioskID
-                        cfLnq.MAC_ADDRESS = ret.MacAddress
-                        cfLnq.IP_ADDRESS = ret.IpAddress
-                        cfLnq.LOCATION_CODE = ret.LocationCode
-                        cfLnq.LOCATION_NAME = ret.LocationName
-
-                        With ret.KioskSysconfig
-                            cfLnq.LOGIN_SSO = .LOGIN_SSO
-                            cfLnq.KIOSK_OPEN24 = .KIOSK_OPEN24
-                            cfLnq.SCREEN_SAVER_SEC = .SCREEN_SAVER_SEC
-                            cfLnq.TIME_OUT_SEC = .TIME_OUT_SEC
-                            cfLnq.SHOW_MSG_SEC = .SHOW_MSG_SEC
-                            cfLnq.PAYMENT_EXTEND_SEC = .PAYMENT_EXTEND_SEC
-                            cfLnq.PINCODE_LEN = .PINCODE_LEN
-                            cfLnq.LOCKER_WEBSERVICE_URL = .LOCKER_WEBSERVICE_URL
-                            cfLnq.LOCKER_PC_POSITION = .LOCKER_PC_POSITION
-                            cfLnq.SLEEP_TIME = .SLEEP_TIME
-                            cfLnq.SLEEP_DURATION = .SLEEP_DURATION
-                            cfLnq.CONTACT_CENTER_TELNO = .CONTACT_CENTER_TELNO
-                            cfLnq.ALARM_WEBSERVICE_URL = .ALARM_WEBSERVICE_URL
-                            cfLnq.INTERVAL_SYNC_TRANSACTION_MIN = .INTERVAL_SYNC_TRANSACTION_MIN
-                            cfLnq.INTERVAL_SYNC_MASTER_MIN = .INTERVAL_SYNC_MASTER_MIN
-                            cfLnq.INTERVAL_SYNC_LOG_MIN = .INTERVAL_SYNC_LOG_MIN
-                            cfLnq.SYNC_TO_SERVER = "Y"
-                            cfLnq.SYNC_TO_KIOSK = "Y"
-                            cfLnq.MACHINE_KEY = lblReadingKey.Text
-                        End With
-
-                        Dim trans As New KioskTransactionDB
-                        Dim re As ExecuteDataInfo = cfLnq.InsertData(Environment.MachineName, trans.Trans)
-                        If re.IsSuccess = True Then
-                            trans.CommitTransaction()
-
-                            SetProgressStatus("Pull All Master Data...")
-                            Engine.SyncMasterDataENG.SyncAllKioskMaster(ret.KioskID)
-
-                            frmMain.Show()
-                            Me.Close()
-                        Else
-                            trans.RollbackTransaction()
-                            MessageBox.Show(re.ErrorMessage, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
-                        End If
-                    End If
-                    mmk = Nothing
-                End If
-                ws.Dispose()
-            End If
-            Me.Cursor = Cursors.Default
-        Else
-            MessageBox.Show("กรุณาเลือกตู้ Locker", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning)
-        End If
+        Me.Cursor = Cursors.Default
     End Sub
 
     Private Sub btnNext_Click(sender As Object, e As EventArgs) Handles btnNext.Click
         'Check Internet Connection
-
-        If CurrentStep = 1 Then
-            ActionStep1()
-        ElseIf CurrentStep = 2 Then
-            ActionStep2()
+        Dim ws As New Webservice_Locker.ATBLockerWebService
+        Dim ret As Webservice_Locker.CheckConnectionData = ws.CheckWebserviceConnection()
+        If ret.IsSuccess = True Then
+            If CurrentStep = 1 Then
+                ActionStep1()
+            ElseIf CurrentStep = 2 Then
+                frmMain.Show()
+                Me.Close()
+            End If
+        Else
+            MessageBox.Show(ret.ErrorMessage, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
         End If
+        ws.Dispose()
+        ret = Nothing
     End Sub
 
     Private Sub OnExecuteInfoMessage(ByVal sender As Object, ByVal args As SqlInfoMessageEventArgs)

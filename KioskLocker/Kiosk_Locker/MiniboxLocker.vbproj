@@ -427,6 +427,9 @@
       <SubType>Designer</SubType>
     </None>
     <None Include="Web References\Webservice_Locker\ATBLockerWebService.wsdl" />
+    <None Include="Web References\Webservice_Locker\CheckConnectionData.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
     <None Include="Web References\Webservice_Locker\LoginReturnData.datasource">
       <DependentUpon>Reference.map</DependentUpon>
     </None>

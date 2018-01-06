@@ -512,7 +512,7 @@ Module KioskModule
     Function UpdateAllDeviceStatusByComPort() As String
         Dim Msg As String = ""
         Try
-            Dim Dt As DataTable = DeviceInfoList 'KioskDB.ExecuteTable(sql, p)
+            Dim Dt As DataTable = DeviceInfoList
             If Dt.Rows.Count > 0 Then
                 For i As Integer = 0 To Dt.Rows.Count - 1
                     If Convert.IsDBNull(Dt.Rows(i)("comport_vid")) = True Then
@@ -524,8 +524,6 @@ Module KioskModule
                     Select Case Dt.Rows(i).Item("device_type_id")
                         Case DeviceType.BanknoteIn
                             If BanknoteIn.ConnectBanknoteInDevice(Comport) = True Then
-                                'BanknoteIn.DisableDeviceCashIn()
-                                'AddHandler BanknoteIn.MySerialPort.DataReceived, AddressOf BanknoteIn.MySerialPortDataReceived
                                 AddHandler BanknoteIn.ReceiveEvent, AddressOf DataReceivedCashIn
                                 UpdateDeviceStatus(vDeviceID, BanknoteInStatus.Ready)
                                 SendKioskAlarm("CASH_IN_Disconnected", False)
@@ -537,7 +535,7 @@ Module KioskModule
                             End If
                         Case DeviceType.CoinIn
                             If CoinIn.ConnectCoinInDevice(Comport) = True Then
-                                AddHandler CoinIn.MySerialPort.DataReceived, AddressOf CoinIn.MySerialPortDataReceived
+                                'AddHandler CoinIn.MySerialPort.DataReceived, AddressOf CoinIn.MySerialPortDataReceived
                                 AddHandler CoinIn.ReceiveEvent, AddressOf DataReceivedCoinIn
                                 UpdateDeviceStatus(vDeviceID, CoinInStatus.Ready)
                                 SendKioskAlarm("COIN_IN_DISCONNECTED", False)

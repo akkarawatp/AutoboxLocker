@@ -155,6 +155,30 @@ Public Class ATBLockerWebService
         Return ret
     End Function
 
+    <WebMethod()>
+    Public Function CheckWebserviceConnection() As CheckConnectionData
+        Dim ret As New CheckConnectionData
+        Try
+            Dim conn As SqlConnection = ServerDB.GetConnection
+            ret.IsSuccess = (conn.State = ConnectionState.Open)
+            If ret.IsSuccess = True Then
+                ret.DbInfo = "Server=" & conn.DataSource & " Database=" & conn.Database
+            Else
+                ret.ErrorMessage = ServerDB.ErrorMessage
+            End If
+
+            If conn.State = ConnectionState.Open Then
+                conn.Close()
+                conn.Dispose()
+                SqlConnection.ClearAllPools()
+            End If
+        Catch ex As Exception
+            ret.IsSuccess = False
+            ret.ErrorMessage = "Exception " & ex.Message & vbNewLine & ex.StackTrace
+        End Try
+        Return ret
+    End Function
+
 
 #Region "Sync Data Webservice"
 #Region "Pull Master Data"

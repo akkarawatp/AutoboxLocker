@@ -148,9 +148,9 @@ Public Class frmDepositPayment
                     CoinIn.DisableDeviceCoinIn()
                     Threading.Thread.Sleep(500)
                     CoinIn.EnableDeviceCoinIn()
-                    RemoveHandler CoinIn.MySerialPort.DataReceived, AddressOf CoinIn.MySerialPortDataReceived
+                    'RemoveHandler CoinIn.MySerialPort.DataReceived, AddressOf CoinIn.MySerialPortDataReceived
                     RemoveHandler CoinIn.ReceiveEvent, AddressOf CoinInDataReceived
-                    AddHandler CoinIn.MySerialPort.DataReceived, AddressOf CoinIn.MySerialPortDataReceived
+                    'AddHandler CoinIn.MySerialPort.DataReceived, AddressOf CoinIn.MySerialPortDataReceived
                     AddHandler CoinIn.ReceiveEvent, AddressOf CoinInDataReceived
 
                     If ServiceID = TransactionType.DepositBelonging Then

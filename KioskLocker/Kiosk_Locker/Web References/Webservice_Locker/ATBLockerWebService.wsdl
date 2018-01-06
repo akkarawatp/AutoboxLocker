@@ -110,6 +110,23 @@
           </s:sequence>
         </s:complexType>
       </s:element>
+      <s:element name="CheckWebserviceConnection">
+        <s:complexType />
+      </s:element>
+      <s:element name="CheckWebserviceConnectionResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="CheckWebserviceConnectionResult" type="tns:CheckConnectionData" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="CheckConnectionData">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="IsSuccess" type="s:boolean" />
+          <s:element minOccurs="0" maxOccurs="1" name="DbInfo" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ErrorMessage" type="s:string" />
+        </s:sequence>
+      </s:complexType>
       <s:element name="GetMasterAppScreen">
         <s:complexType />
       </s:element>
@@ -942,6 +959,12 @@
   <wsdl:message name="ReportKioskCurrentQtySoapOut">
     <wsdl:part name="parameters" element="tns:ReportKioskCurrentQtyResponse" />
   </wsdl:message>
+  <wsdl:message name="CheckWebserviceConnectionSoapIn">
+    <wsdl:part name="parameters" element="tns:CheckWebserviceConnection" />
+  </wsdl:message>
+  <wsdl:message name="CheckWebserviceConnectionSoapOut">
+    <wsdl:part name="parameters" element="tns:CheckWebserviceConnectionResponse" />
+  </wsdl:message>
   <wsdl:message name="GetMasterAppScreenSoapIn">
     <wsdl:part name="parameters" element="tns:GetMasterAppScreen" />
   </wsdl:message>
@@ -1167,6 +1190,10 @@
       <wsdl:input message="tns:ReportKioskCurrentQtySoapIn" />
       <wsdl:output message="tns:ReportKioskCurrentQtySoapOut" />
     </wsdl:operation>
+    <wsdl:operation name="CheckWebserviceConnection">
+      <wsdl:input message="tns:CheckWebserviceConnectionSoapIn" />
+      <wsdl:output message="tns:CheckWebserviceConnectionSoapOut" />
+    </wsdl:operation>
     <wsdl:operation name="GetMasterAppScreen">
       <wsdl:input message="tns:GetMasterAppScreenSoapIn" />
       <wsdl:output message="tns:GetMasterAppScreenSoapOut" />
@@ -1344,6 +1371,15 @@
     </wsdl:operation>
     <wsdl:operation name="ReportKioskCurrentQty">
       <soap:operation soapAction="http://tempuri.org/ReportKioskCurrentQty" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CheckWebserviceConnection">
+      <soap:operation soapAction="http://tempuri.org/CheckWebserviceConnection" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
@@ -1698,6 +1734,15 @@
     </wsdl:operation>
     <wsdl:operation name="ReportKioskCurrentQty">
       <soap12:operation soapAction="http://tempuri.org/ReportKioskCurrentQty" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CheckWebserviceConnection">
+      <soap12:operation soapAction="http://tempuri.org/CheckWebserviceConnection" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>

@@ -2,27 +2,6 @@
 <SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="My" GeneratedClassName="MySettings" UseMySettingsClassName="true">
   <Profiles />
   <Settings>
-    <Setting Name="AIS_Kiosk_AIS_BackEnd_AIS_WS" Type="(Web Service URL)" Scope="Application">
-      <Value Profile="(Default)">http://10.252.176.115/WS_BackEnd/AIS_WS.asmx</Value>
-    </Setting>
-    <Setting Name="AIS_Kiosk_UserAuthorize_UserAuthorize" Type="(Web Service URL)" Scope="Application">
-      <Value Profile="(Default)">http://10.104.240.11/KMService/UserAuthorize.asmx</Value>
-    </Setting>
-    <Setting Name="AIS_Kiosk_ServerDBService_ServerDBService" Type="(Web Service URL)" Scope="Application">
-      <Value Profile="(Default)">http://10.104.240.11/kmservice/serverdbservice.asmx</Value>
-    </Setting>
-    <Setting Name="AIS_Kiosk_ServerDataProvider_ServerDataProvider" Type="(Web Service URL)" Scope="Application">
-      <Value Profile="(Default)">http://localhost/KMService/ServerDataProvider.asmx</Value>
-    </Setting>
-    <Setting Name="AIS_Kiosk_AlarmWebservice_KioskInterfaceAlarmWebservice" Type="(Web Service URL)" Scope="Application">
-      <Value Profile="(Default)">http://10.104.240.11/PhysicalMonitoring/KioskInterfaceAlarmWebservice.asmx</Value>
-    </Setting>
-    <Setting Name="AutoboxLocker_Webservice_Locker_ATBLockerWebService" Type="(Web Service URL)" Scope="Application">
-      <Value Profile="(Default)">http://103.253.72.87/ATB-TIT/Webservice_Locker/ATBLockerWebService.asmx</Value>
-    </Setting>
-    <Setting Name="AutoboxLocker_AlarmWebReference_ApplicationWebservice" Type="(Web Service URL)" Scope="Application">
-      <Value Profile="(Default)">http://103.253.72.88/TIT-MonitorWebservice/ApplicationWebservice.asmx</Value>
-    </Setting>
     <Setting Name="Kiosk_Locker_Webservice_Locker_ATBLockerWebService" Type="(Web Service URL)" Scope="Application">
       <Value Profile="(Default)">http://103.253.72.223/AutoboxLocker/LockerWebservice/ATBLockerWebService.asmx</Value>
     </Setting>

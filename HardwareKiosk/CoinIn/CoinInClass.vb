@@ -5,8 +5,7 @@ Imports System.Threading
 
 Public Class CoinInClass
 
-    Public MySerialPort As New SerialPort
-    'Dim INIFileName As String = Application.StartupPath & "\ConfigDevice.ini"
+    Private MySerialPort As New SerialPort
 
     Public Enum List_Command
         Enable_Device = 1
@@ -145,19 +144,23 @@ Public Class CoinInClass
             MySerialPort.DtrEnable = True
             MySerialPort.Parity = IO.Ports.Parity.None
             MySerialPort.Open()
+
+            AddHandler MySerialPort.DataReceived, AddressOf MySerialPortDataReceived
             Return True
         Catch ex As Exception
+            RemoveHandler MySerialPort.DataReceived, AddressOf MySerialPortDataReceived
             Return False
         End Try
     End Function
 
     Public Sub Disconnect()
         If MySerialPort.IsOpen Then MySerialPort.Close()
+        RemoveHandler MySerialPort.DataReceived, AddressOf MySerialPortDataReceived
     End Sub
 
     Public Event ReceiveEvent(ByVal ReceiveData As String)
 
-    Public Sub MySerialPortDataReceived()
+    Private Sub MySerialPortDataReceived()
         Try
             Thread.Sleep(100)
             Dim Hex As String = ""

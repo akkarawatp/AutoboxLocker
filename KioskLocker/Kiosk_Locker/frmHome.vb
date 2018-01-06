@@ -47,10 +47,6 @@ Public Class frmHome
 
         SetLockerHomeData()
 
-
-        'KioskConfig.Language = Data.ConstantsData.KioskLanguage.Thai
-        'frmMain.ChangeFormMainLanguage()
-        'SetChildFormLanguage()
         SetLabelNotificationText()
 
         lblDeposit.Enabled = True

@@ -48,7 +48,7 @@ Public Class CoinInConnectDevice
 
     Private Sub Connect(ByVal Comport As String)
         If CoinIn.ConnectCoinInDevice(Comport) = True Then
-            AddHandler CoinIn.MySerialPort.DataReceived, AddressOf CoinIn.MySerialPortDataReceived
+            'AddHandler CoinIn.MySerialPort.DataReceived, AddressOf CoinIn.MySerialPortDataReceived
             AddHandler CoinIn.ReceiveEvent, AddressOf DataReceived
             BindpbStatus(True)
         Else

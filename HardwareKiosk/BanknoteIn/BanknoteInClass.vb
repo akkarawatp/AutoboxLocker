@@ -147,7 +147,7 @@ Public Class BanknoteInClass
         RemoveHandler MySerialPort.DataReceived, AddressOf MySerialPortDataReceived
     End Sub
 
-    Public Function ParserReceiveData(ByVal Hex As String) As String
+    Private Function ParserReceiveData(ByVal Hex As String) As String
         Select Case Hex.Replace("3F", "").Trim
             Case "80 8F"
                 'จะได้รับมาตอนเปิดเครื่อง เราต้องส่ง 02 กลับไปเพื่อเริ่มใช้งานอุปกรณ์

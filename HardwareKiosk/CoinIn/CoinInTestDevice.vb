@@ -31,7 +31,7 @@ Public Class CoinInTestDevice
             lblStatus.Text = "Status : Connected"
             lblStatus.ForeColor = Drawing.Color.Green
             pnlCommand.Enabled = True
-            AddHandler CoinIn.MySerialPort.DataReceived, AddressOf CoinIn.MySerialPortDataReceived
+            'AddHandler CoinIn.MySerialPort.DataReceived, AddressOf CoinIn.MySerialPortDataReceived
             AddHandler CoinIn.ReceiveEvent, AddressOf DataReceived
         Else
             btnOpenComport.BackColor = Drawing.Color.Green
