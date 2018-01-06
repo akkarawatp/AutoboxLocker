@@ -20,6 +20,7 @@ Public Class frmHome
 
     Private Sub frmHome_Shown(sender As Object, e As EventArgs) Handles Me.Shown
         Me.WindowState = FormWindowState.Maximized
+        Me.Height = 997
         CheckForIllegalCrossThreadCalls = False
         frmMain.pnlCancel.Visible = False
         frmMain.btnPointer.Visible = True
@@ -49,8 +50,8 @@ Public Class frmHome
 
         SetLabelNotificationText()
 
-        lblDeposit.Enabled = True
-        lblCollect.Enabled = True
+        pbDeposit.Enabled = True
+        pbCollect.Enabled = True
 
         frmLoading.Close()
     End Sub
@@ -66,10 +67,9 @@ Public Class frmHome
         LockerList.DefaultView.RowFilter = "current_available='N' and active_status='Y'"
         If LockerList.DefaultView.Count = LockerQty Then
             'ถ้าช่องฝากทั้งหมด ไม่ว่างแล้ว
-            lblDeposit.Image = My.Resources.IconDepositFull
-            RemoveHandler lblDeposit.Click, AddressOf btnDeposit_Click
-            RemoveHandler lblDeposit.Click, AddressOf btnDeposit_Click
-            lblDeposit.Enabled = False
+            pbDeposit.BackgroundImage = My.Resources.IconDepositFull
+            RemoveHandler pbDeposit.Click, AddressOf btnDeposit_Click
+            pbDeposit.Enabled = False
             IsStorageFull = True
             Application.DoEvents()
         End If
@@ -125,10 +125,10 @@ Public Class frmHome
         Try
             Dim chk As String = ""
             'Update Current Status ลง DB
-            UpdateAllDeviceStatusByComPort()
-            UpdateAllDeviceStatusByUsbPort()
-            'ตรวจสอบ Status จาก DB
-            chk += CheckStockAndStatusAllDevice()
+            'UpdateAllDeviceStatusByComPort()
+            'UpdateAllDeviceStatusByUsbPort()
+            ''ตรวจสอบ Status จาก DB
+            'chk += CheckStockAndStatusAllDevice()
 
             If chk.Trim <> "" Then
                 'Out Of Service
@@ -156,7 +156,7 @@ Public Class frmHome
     End Sub
 
 #Region "Deposit"
-    Private Sub btnDeposit_Click(sender As Object, e As EventArgs) Handles lblDeposit.Click
+    Private Sub btnDeposit_Click(sender As Object, e As EventArgs) Handles pbDeposit.Click
         If LockerList.Rows.Count = 0 Then
             InsertErrorLog("Locker Information not found", 0, 0, 0, KioskConfig.SelectForm, KioskLockerStep.Home_ClickDeposit)
             SendKioskAlarm("LOCKER_OUT_OF_SERVICE", True)
@@ -189,7 +189,7 @@ Public Class frmHome
 #End Region
 
 #Region "Collect"
-    Private Sub pnlCollect_Click(sender As Object, e As EventArgs) Handles lblCollect.Click
+    Private Sub pnlCollect_Click(sender As Object, e As EventArgs) Handles  pbCollect.Click
         Dim ret As ExecuteDataInfo = CreateNewPickupTransaction()
         InsertLogTransactionActivity("", Collect.TransactionNo, "", KioskLockerForm.Home, KioskLockerStep.Home_ClickPickup, "เริ่มทำรายการรับคืน", False)
         If ret.IsSuccess = True Then

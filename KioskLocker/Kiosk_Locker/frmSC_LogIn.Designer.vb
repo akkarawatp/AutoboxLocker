@@ -33,7 +33,7 @@ Partial Class frmSC_LogIn
         Me.txtUsername.Anchor = System.Windows.Forms.AnchorStyles.Top
         Me.txtUsername.BorderStyle = System.Windows.Forms.BorderStyle.None
         Me.txtUsername.Font = New System.Drawing.Font("Microsoft Sans Serif", 20.0!)
-        Me.txtUsername.Location = New System.Drawing.Point(346, 372)
+        Me.txtUsername.Location = New System.Drawing.Point(226, 506)
         Me.txtUsername.MaxLength = 15
         Me.txtUsername.Name = "txtUsername"
         Me.txtUsername.Size = New System.Drawing.Size(316, 31)
@@ -45,7 +45,7 @@ Partial Class frmSC_LogIn
         Me.txtPassword.Anchor = System.Windows.Forms.AnchorStyles.Top
         Me.txtPassword.BorderStyle = System.Windows.Forms.BorderStyle.None
         Me.txtPassword.Font = New System.Drawing.Font("Microsoft Sans Serif", 20.0!)
-        Me.txtPassword.Location = New System.Drawing.Point(346, 457)
+        Me.txtPassword.Location = New System.Drawing.Point(226, 619)
         Me.txtPassword.MaxLength = 15
         Me.txtPassword.Name = "txtPassword"
         Me.txtPassword.PasswordChar = Global.Microsoft.VisualBasic.ChrW(35)
@@ -59,7 +59,7 @@ Partial Class frmSC_LogIn
         Me.lblCancel.BackColor = System.Drawing.Color.Transparent
         Me.lblCancel.Font = New System.Drawing.Font("Microsoft Sans Serif", 24.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(222, Byte))
         Me.lblCancel.ForeColor = System.Drawing.Color.Black
-        Me.lblCancel.Location = New System.Drawing.Point(440, 644)
+        Me.lblCancel.Location = New System.Drawing.Point(319, 862)
         Me.lblCancel.Name = "lblCancel"
         Me.lblCancel.Size = New System.Drawing.Size(128, 31)
         Me.lblCancel.TabIndex = 35
@@ -72,9 +72,9 @@ Partial Class frmSC_LogIn
         Me.lblLogin.Font = New System.Drawing.Font("Microsoft Sans Serif", 24.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(222, Byte))
         Me.lblLogin.ForeColor = System.Drawing.Color.Transparent
         Me.lblLogin.Image = Global.MiniboxLocker.My.Resources.Resources.imgButtonLogin
-        Me.lblLogin.Location = New System.Drawing.Point(355, 540)
+        Me.lblLogin.Location = New System.Drawing.Point(236, 754)
         Me.lblLogin.Name = "lblLogin"
-        Me.lblLogin.Size = New System.Drawing.Size(295, 67)
+        Me.lblLogin.Size = New System.Drawing.Size(298, 58)
         Me.lblLogin.TabIndex = 35
         Me.lblLogin.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
@@ -86,13 +86,14 @@ Partial Class frmSC_LogIn
         Me.BackColor = System.Drawing.Color.White
         Me.BackgroundImage = Global.MiniboxLocker.My.Resources.Resources.bgSCLogin
         Me.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
-        Me.ClientSize = New System.Drawing.Size(1024, 768)
+        Me.ClientSize = New System.Drawing.Size(768, 1024)
         Me.Controls.Add(Me.lblCancel)
         Me.Controls.Add(Me.lblLogin)
         Me.Controls.Add(Me.txtUsername)
         Me.Controls.Add(Me.txtPassword)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None
         Me.Name = "frmSC_LogIn"
+        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "frmSC_LogIn"
         Me.ResumeLayout(False)
         Me.PerformLayout()

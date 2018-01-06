@@ -23,8 +23,10 @@ Partial Class frmHome
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Me.lblLabelNotification = New System.Windows.Forms.Label()
-        Me.lblCollect = New System.Windows.Forms.Label()
-        Me.lblDeposit = New System.Windows.Forms.Label()
+        Me.pbDeposit = New System.Windows.Forms.PictureBox()
+        Me.pbCollect = New System.Windows.Forms.PictureBox()
+        CType(Me.pbDeposit, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.pbCollect, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'lblLabelNotification
@@ -32,7 +34,7 @@ Partial Class frmHome
         Me.lblLabelNotification.Anchor = System.Windows.Forms.AnchorStyles.Top
         Me.lblLabelNotification.Font = New System.Drawing.Font("Thai Sans Lite", 20.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(222, Byte))
         Me.lblLabelNotification.ForeColor = System.Drawing.Color.Red
-        Me.lblLabelNotification.Location = New System.Drawing.Point(133, 691)
+        Me.lblLabelNotification.Location = New System.Drawing.Point(5, 795)
         Me.lblLabelNotification.Name = "lblLabelNotification"
         Me.lblLabelNotification.Size = New System.Drawing.Size(755, 64)
         Me.lblLabelNotification.TabIndex = 94
@@ -40,29 +42,25 @@ Partial Class frmHome
         Me.lblLabelNotification.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         Me.lblLabelNotification.Visible = False
         '
-        'lblCollect
+        'pbDeposit
         '
-        Me.lblCollect.BackColor = System.Drawing.Color.White
-        Me.lblCollect.Font = New System.Drawing.Font("Thai Sans Lite", 40.0!, System.Drawing.FontStyle.Bold)
-        Me.lblCollect.Image = Global.MiniboxLocker.My.Resources.Resources.imgButtonIconCollect
-        Me.lblCollect.Location = New System.Drawing.Point(523, 208)
-        Me.lblCollect.Margin = New System.Windows.Forms.Padding(0)
-        Me.lblCollect.Name = "lblCollect"
-        Me.lblCollect.Size = New System.Drawing.Size(350, 484)
-        Me.lblCollect.TabIndex = 17
-        Me.lblCollect.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        Me.pbDeposit.BackgroundImage = Global.MiniboxLocker.My.Resources.Resources.imgButtonIconDeposit
+        Me.pbDeposit.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
+        Me.pbDeposit.Location = New System.Drawing.Point(30, 388)
+        Me.pbDeposit.Name = "pbDeposit"
+        Me.pbDeposit.Size = New System.Drawing.Size(347, 395)
+        Me.pbDeposit.TabIndex = 95
+        Me.pbDeposit.TabStop = False
         '
-        'lblDeposit
+        'pbCollect
         '
-        Me.lblDeposit.BackColor = System.Drawing.Color.White
-        Me.lblDeposit.Font = New System.Drawing.Font("Thai Sans Lite", 40.0!, System.Drawing.FontStyle.Bold)
-        Me.lblDeposit.Image = Global.MiniboxLocker.My.Resources.Resources.imgButtonIconDeposit
-        Me.lblDeposit.Location = New System.Drawing.Point(127, 224)
-        Me.lblDeposit.Margin = New System.Windows.Forms.Padding(0)
-        Me.lblDeposit.Name = "lblDeposit"
-        Me.lblDeposit.Size = New System.Drawing.Size(347, 467)
-        Me.lblDeposit.TabIndex = 17
-        Me.lblDeposit.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        Me.pbCollect.BackgroundImage = Global.MiniboxLocker.My.Resources.Resources.imgButtonIconCollect
+        Me.pbCollect.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
+        Me.pbCollect.Location = New System.Drawing.Point(398, 374)
+        Me.pbCollect.Name = "pbCollect"
+        Me.pbCollect.Size = New System.Drawing.Size(350, 409)
+        Me.pbCollect.TabIndex = 96
+        Me.pbCollect.TabStop = False
         '
         'frmHome
         '
@@ -71,18 +69,20 @@ Partial Class frmHome
         Me.BackColor = System.Drawing.Color.White
         Me.BackgroundImage = Global.MiniboxLocker.My.Resources.Resources.bgHome
         Me.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
-        Me.ClientSize = New System.Drawing.Size(1024, 768)
-        Me.Controls.Add(Me.lblCollect)
-        Me.Controls.Add(Me.lblDeposit)
+        Me.ClientSize = New System.Drawing.Size(768, 1006)
+        Me.Controls.Add(Me.pbCollect)
+        Me.Controls.Add(Me.pbDeposit)
         Me.Controls.Add(Me.lblLabelNotification)
         Me.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(222, Byte))
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None
         Me.Margin = New System.Windows.Forms.Padding(4)
         Me.Name = "frmHome"
+        CType(Me.pbDeposit, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.pbCollect, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
     End Sub
-    Friend WithEvents lblDeposit As Label
-    Friend WithEvents lblCollect As Label
     Friend WithEvents lblLabelNotification As Label
+    Friend WithEvents pbDeposit As PictureBox
+    Friend WithEvents pbCollect As PictureBox
 End Class

@@ -49,6 +49,7 @@ Partial Class frmDepositSetPINCode
         Me.btn3 = New System.Windows.Forms.PictureBox()
         Me.btn2 = New System.Windows.Forms.PictureBox()
         Me.btn1 = New System.Windows.Forms.PictureBox()
+        Me.PictureBox1 = New System.Windows.Forms.PictureBox()
         Me.Panel6.SuspendLayout()
         Me.Panel5.SuspendLayout()
         Me.Panel4.SuspendLayout()
@@ -67,6 +68,7 @@ Partial Class frmDepositSetPINCode
         CType(Me.btn3, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.btn2, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.btn1, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'TimerTimeOut
@@ -78,9 +80,9 @@ Partial Class frmDepositSetPINCode
         Me.lblLabelNotification.Anchor = System.Windows.Forms.AnchorStyles.Top
         Me.lblLabelNotification.Font = New System.Drawing.Font("Thai Sans Lite", 24.0!, System.Drawing.FontStyle.Bold)
         Me.lblLabelNotification.ForeColor = System.Drawing.Color.Red
-        Me.lblLabelNotification.Location = New System.Drawing.Point(12, 508)
+        Me.lblLabelNotification.Location = New System.Drawing.Point(311, 474)
         Me.lblLabelNotification.Name = "lblLabelNotification"
-        Me.lblLabelNotification.Size = New System.Drawing.Size(574, 43)
+        Me.lblLabelNotification.Size = New System.Drawing.Size(402, 43)
         Me.lblLabelNotification.TabIndex = 93
         Me.lblLabelNotification.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
@@ -89,7 +91,7 @@ Partial Class frmDepositSetPINCode
         Me.Panel6.BackgroundImage = Global.MiniboxLocker.My.Resources.Resources.imgTextPincode
         Me.Panel6.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
         Me.Panel6.Controls.Add(Me.txtPincode6)
-        Me.Panel6.Location = New System.Drawing.Point(383, 429)
+        Me.Panel6.Location = New System.Drawing.Point(647, 395)
         Me.Panel6.Margin = New System.Windows.Forms.Padding(0)
         Me.Panel6.Name = "Panel6"
         Me.Panel6.Size = New System.Drawing.Size(45, 60)
@@ -115,7 +117,7 @@ Partial Class frmDepositSetPINCode
         Me.Panel5.BackgroundImage = Global.MiniboxLocker.My.Resources.Resources.imgTextPincode
         Me.Panel5.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
         Me.Panel5.Controls.Add(Me.txtPincode5)
-        Me.Panel5.Location = New System.Drawing.Point(320, 429)
+        Me.Panel5.Location = New System.Drawing.Point(584, 395)
         Me.Panel5.Margin = New System.Windows.Forms.Padding(0)
         Me.Panel5.Name = "Panel5"
         Me.Panel5.Size = New System.Drawing.Size(45, 60)
@@ -141,7 +143,7 @@ Partial Class frmDepositSetPINCode
         Me.Panel4.BackgroundImage = Global.MiniboxLocker.My.Resources.Resources.imgTextPincode
         Me.Panel4.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
         Me.Panel4.Controls.Add(Me.txtPincode4)
-        Me.Panel4.Location = New System.Drawing.Point(256, 429)
+        Me.Panel4.Location = New System.Drawing.Point(520, 395)
         Me.Panel4.Margin = New System.Windows.Forms.Padding(0)
         Me.Panel4.Name = "Panel4"
         Me.Panel4.Size = New System.Drawing.Size(45, 60)
@@ -167,7 +169,7 @@ Partial Class frmDepositSetPINCode
         Me.Panel3.BackgroundImage = Global.MiniboxLocker.My.Resources.Resources.imgTextPincode
         Me.Panel3.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
         Me.Panel3.Controls.Add(Me.txtPincode3)
-        Me.Panel3.Location = New System.Drawing.Point(193, 429)
+        Me.Panel3.Location = New System.Drawing.Point(457, 395)
         Me.Panel3.Margin = New System.Windows.Forms.Padding(0)
         Me.Panel3.Name = "Panel3"
         Me.Panel3.Size = New System.Drawing.Size(45, 60)
@@ -193,7 +195,7 @@ Partial Class frmDepositSetPINCode
         Me.Panel2.BackgroundImage = Global.MiniboxLocker.My.Resources.Resources.imgTextPincode
         Me.Panel2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
         Me.Panel2.Controls.Add(Me.txtPincode2)
-        Me.Panel2.Location = New System.Drawing.Point(131, 429)
+        Me.Panel2.Location = New System.Drawing.Point(395, 395)
         Me.Panel2.Margin = New System.Windows.Forms.Padding(0)
         Me.Panel2.Name = "Panel2"
         Me.Panel2.Size = New System.Drawing.Size(45, 60)
@@ -219,7 +221,7 @@ Partial Class frmDepositSetPINCode
         Me.Panel1.BackgroundImage = Global.MiniboxLocker.My.Resources.Resources.imgTextPincode
         Me.Panel1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
         Me.Panel1.Controls.Add(Me.txtPincode1)
-        Me.Panel1.Location = New System.Drawing.Point(71, 429)
+        Me.Panel1.Location = New System.Drawing.Point(335, 395)
         Me.Panel1.Margin = New System.Windows.Forms.Padding(0)
         Me.Panel1.Name = "Panel1"
         Me.Panel1.Size = New System.Drawing.Size(45, 60)
@@ -243,9 +245,9 @@ Partial Class frmDepositSetPINCode
         'btnOK
         '
         Me.btnOK.BackColor = System.Drawing.Color.Transparent
-        Me.btnOK.Location = New System.Drawing.Point(804, 545)
+        Me.btnOK.Location = New System.Drawing.Point(447, 817)
         Me.btnOK.Name = "btnOK"
-        Me.btnOK.Size = New System.Drawing.Size(90, 99)
+        Me.btnOK.Size = New System.Drawing.Size(80, 88)
         Me.btnOK.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
         Me.btnOK.TabIndex = 105
         Me.btnOK.TabStop = False
@@ -253,9 +255,9 @@ Partial Class frmDepositSetPINCode
         'btn0
         '
         Me.btn0.BackColor = System.Drawing.Color.Transparent
-        Me.btn0.Location = New System.Drawing.Point(705, 545)
+        Me.btn0.Location = New System.Drawing.Point(356, 817)
         Me.btn0.Name = "btn0"
-        Me.btn0.Size = New System.Drawing.Size(90, 99)
+        Me.btn0.Size = New System.Drawing.Size(80, 88)
         Me.btn0.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
         Me.btn0.TabIndex = 104
         Me.btn0.TabStop = False
@@ -263,9 +265,9 @@ Partial Class frmDepositSetPINCode
         'btnClear
         '
         Me.btnClear.BackColor = System.Drawing.Color.Transparent
-        Me.btnClear.Location = New System.Drawing.Point(606, 545)
+        Me.btnClear.Location = New System.Drawing.Point(264, 817)
         Me.btnClear.Name = "btnClear"
-        Me.btnClear.Size = New System.Drawing.Size(90, 99)
+        Me.btnClear.Size = New System.Drawing.Size(80, 88)
         Me.btnClear.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
         Me.btnClear.TabIndex = 103
         Me.btnClear.TabStop = False
@@ -273,9 +275,9 @@ Partial Class frmDepositSetPINCode
         'btn9
         '
         Me.btn9.BackColor = System.Drawing.Color.Transparent
-        Me.btn9.Location = New System.Drawing.Point(804, 438)
+        Me.btn9.Location = New System.Drawing.Point(447, 723)
         Me.btn9.Name = "btn9"
-        Me.btn9.Size = New System.Drawing.Size(90, 99)
+        Me.btn9.Size = New System.Drawing.Size(80, 88)
         Me.btn9.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
         Me.btn9.TabIndex = 102
         Me.btn9.TabStop = False
@@ -283,9 +285,9 @@ Partial Class frmDepositSetPINCode
         'btn8
         '
         Me.btn8.BackColor = System.Drawing.Color.Transparent
-        Me.btn8.Location = New System.Drawing.Point(705, 438)
+        Me.btn8.Location = New System.Drawing.Point(356, 723)
         Me.btn8.Name = "btn8"
-        Me.btn8.Size = New System.Drawing.Size(90, 99)
+        Me.btn8.Size = New System.Drawing.Size(80, 88)
         Me.btn8.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
         Me.btn8.TabIndex = 101
         Me.btn8.TabStop = False
@@ -293,9 +295,9 @@ Partial Class frmDepositSetPINCode
         'btn7
         '
         Me.btn7.BackColor = System.Drawing.Color.Transparent
-        Me.btn7.Location = New System.Drawing.Point(606, 438)
+        Me.btn7.Location = New System.Drawing.Point(264, 723)
         Me.btn7.Name = "btn7"
-        Me.btn7.Size = New System.Drawing.Size(90, 99)
+        Me.btn7.Size = New System.Drawing.Size(80, 88)
         Me.btn7.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
         Me.btn7.TabIndex = 100
         Me.btn7.TabStop = False
@@ -303,9 +305,9 @@ Partial Class frmDepositSetPINCode
         'btn6
         '
         Me.btn6.BackColor = System.Drawing.Color.Transparent
-        Me.btn6.Location = New System.Drawing.Point(804, 330)
+        Me.btn6.Location = New System.Drawing.Point(447, 629)
         Me.btn6.Name = "btn6"
-        Me.btn6.Size = New System.Drawing.Size(90, 99)
+        Me.btn6.Size = New System.Drawing.Size(80, 88)
         Me.btn6.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
         Me.btn6.TabIndex = 99
         Me.btn6.TabStop = False
@@ -313,9 +315,9 @@ Partial Class frmDepositSetPINCode
         'btn5
         '
         Me.btn5.BackColor = System.Drawing.Color.Transparent
-        Me.btn5.Location = New System.Drawing.Point(705, 330)
+        Me.btn5.Location = New System.Drawing.Point(356, 629)
         Me.btn5.Name = "btn5"
-        Me.btn5.Size = New System.Drawing.Size(90, 99)
+        Me.btn5.Size = New System.Drawing.Size(80, 88)
         Me.btn5.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
         Me.btn5.TabIndex = 98
         Me.btn5.TabStop = False
@@ -323,9 +325,9 @@ Partial Class frmDepositSetPINCode
         'btn4
         '
         Me.btn4.BackColor = System.Drawing.Color.Transparent
-        Me.btn4.Location = New System.Drawing.Point(606, 330)
+        Me.btn4.Location = New System.Drawing.Point(264, 629)
         Me.btn4.Name = "btn4"
-        Me.btn4.Size = New System.Drawing.Size(90, 99)
+        Me.btn4.Size = New System.Drawing.Size(80, 88)
         Me.btn4.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
         Me.btn4.TabIndex = 97
         Me.btn4.TabStop = False
@@ -333,9 +335,9 @@ Partial Class frmDepositSetPINCode
         'btn3
         '
         Me.btn3.BackColor = System.Drawing.Color.Transparent
-        Me.btn3.Location = New System.Drawing.Point(804, 221)
+        Me.btn3.Location = New System.Drawing.Point(447, 535)
         Me.btn3.Name = "btn3"
-        Me.btn3.Size = New System.Drawing.Size(90, 99)
+        Me.btn3.Size = New System.Drawing.Size(80, 88)
         Me.btn3.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
         Me.btn3.TabIndex = 96
         Me.btn3.TabStop = False
@@ -343,9 +345,9 @@ Partial Class frmDepositSetPINCode
         'btn2
         '
         Me.btn2.BackColor = System.Drawing.Color.Transparent
-        Me.btn2.Location = New System.Drawing.Point(705, 221)
+        Me.btn2.Location = New System.Drawing.Point(356, 535)
         Me.btn2.Name = "btn2"
-        Me.btn2.Size = New System.Drawing.Size(90, 99)
+        Me.btn2.Size = New System.Drawing.Size(80, 88)
         Me.btn2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
         Me.btn2.TabIndex = 95
         Me.btn2.TabStop = False
@@ -353,12 +355,22 @@ Partial Class frmDepositSetPINCode
         'btn1
         '
         Me.btn1.BackColor = System.Drawing.Color.Transparent
-        Me.btn1.Location = New System.Drawing.Point(606, 221)
+        Me.btn1.Location = New System.Drawing.Point(264, 535)
         Me.btn1.Name = "btn1"
-        Me.btn1.Size = New System.Drawing.Size(90, 99)
+        Me.btn1.Size = New System.Drawing.Size(80, 88)
         Me.btn1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
         Me.btn1.TabIndex = 94
         Me.btn1.TabStop = False
+        '
+        'PictureBox1
+        '
+        Me.PictureBox1.BackColor = System.Drawing.Color.Transparent
+        Me.PictureBox1.Location = New System.Drawing.Point(105, 1023)
+        Me.PictureBox1.Name = "PictureBox1"
+        Me.PictureBox1.Size = New System.Drawing.Size(90, 1)
+        Me.PictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
+        Me.PictureBox1.TabIndex = 115
+        Me.PictureBox1.TabStop = False
         '
         'frmDepositSetPINCode
         '
@@ -367,7 +379,8 @@ Partial Class frmDepositSetPINCode
         Me.BackColor = System.Drawing.Color.White
         Me.BackgroundImage = Global.MiniboxLocker.My.Resources.Resources.bgDepositSetPINCode
         Me.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
-        Me.ClientSize = New System.Drawing.Size(1024, 768)
+        Me.ClientSize = New System.Drawing.Size(785, 741)
+        Me.Controls.Add(Me.PictureBox1)
         Me.Controls.Add(Me.Panel6)
         Me.Controls.Add(Me.Panel5)
         Me.Controls.Add(Me.Panel4)
@@ -415,6 +428,7 @@ Partial Class frmDepositSetPINCode
         CType(Me.btn3, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.btn2, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.btn1, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
     End Sub
@@ -444,4 +458,5 @@ Partial Class frmDepositSetPINCode
     Friend WithEvents txtPincode4 As TextBox
     Friend WithEvents txtPincode5 As TextBox
     Friend WithEvents txtPincode6 As TextBox
+    Friend WithEvents PictureBox1 As PictureBox
 End Class

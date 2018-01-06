@@ -113,7 +113,7 @@ Partial Class frmSC_StockAndHardware
         Me.lblLockerSetting.BackColor = System.Drawing.Color.Transparent
         Me.lblLockerSetting.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.25!, System.Drawing.FontStyle.Bold)
         Me.lblLockerSetting.ForeColor = System.Drawing.Color.White
-        Me.lblLockerSetting.Location = New System.Drawing.Point(19, 14)
+        Me.lblLockerSetting.Location = New System.Drawing.Point(20, 14)
         Me.lblLockerSetting.Name = "lblLockerSetting"
         Me.lblLockerSetting.Size = New System.Drawing.Size(120, 25)
         Me.lblLockerSetting.TabIndex = 35
@@ -178,7 +178,7 @@ Partial Class frmSC_StockAndHardware
         Me.btnOpenAll.BackgroundImage = Global.MiniboxLocker.My.Resources.Resources.btnButtonOrange
         Me.btnOpenAll.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
         Me.btnOpenAll.Controls.Add(Me.lblOpenAll)
-        Me.btnOpenAll.Location = New System.Drawing.Point(815, 610)
+        Me.btnOpenAll.Location = New System.Drawing.Point(586, 751)
         Me.btnOpenAll.Name = "btnOpenAll"
         Me.btnOpenAll.Size = New System.Drawing.Size(157, 52)
         Me.btnOpenAll.TabIndex = 67
@@ -189,9 +189,9 @@ Partial Class frmSC_StockAndHardware
         Me.btnLockerSetting.BackgroundImage = Global.MiniboxLocker.My.Resources.Resources.btnButtonOrange
         Me.btnLockerSetting.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
         Me.btnLockerSetting.Controls.Add(Me.lblLockerSetting)
-        Me.btnLockerSetting.Location = New System.Drawing.Point(815, 547)
+        Me.btnLockerSetting.Location = New System.Drawing.Point(399, 748)
         Me.btnLockerSetting.Name = "btnLockerSetting"
-        Me.btnLockerSetting.Size = New System.Drawing.Size(157, 55)
+        Me.btnLockerSetting.Size = New System.Drawing.Size(159, 55)
         Me.btnLockerSetting.TabIndex = 66
         '
         'btnDeviceSetting
@@ -200,9 +200,9 @@ Partial Class frmSC_StockAndHardware
         Me.btnDeviceSetting.BackgroundImage = Global.MiniboxLocker.My.Resources.Resources.btnButtonOrange
         Me.btnDeviceSetting.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
         Me.btnDeviceSetting.Controls.Add(Me.lblDeviceSetting)
-        Me.btnDeviceSetting.Location = New System.Drawing.Point(815, 481)
+        Me.btnDeviceSetting.Location = New System.Drawing.Point(216, 748)
         Me.btnDeviceSetting.Name = "btnDeviceSetting"
-        Me.btnDeviceSetting.Size = New System.Drawing.Size(157, 58)
+        Me.btnDeviceSetting.Size = New System.Drawing.Size(157, 55)
         Me.btnDeviceSetting.TabIndex = 66
         '
         'btnKioskSetting
@@ -211,7 +211,7 @@ Partial Class frmSC_StockAndHardware
         Me.btnKioskSetting.BackgroundImage = Global.MiniboxLocker.My.Resources.Resources.btnButtonOrange
         Me.btnKioskSetting.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
         Me.btnKioskSetting.Controls.Add(Me.lblKioskSetting)
-        Me.btnKioskSetting.Location = New System.Drawing.Point(815, 420)
+        Me.btnKioskSetting.Location = New System.Drawing.Point(42, 748)
         Me.btnKioskSetting.Name = "btnKioskSetting"
         Me.btnKioskSetting.Size = New System.Drawing.Size(157, 55)
         Me.btnKioskSetting.TabIndex = 65
@@ -222,7 +222,7 @@ Partial Class frmSC_StockAndHardware
         Me.btnFillMoney.BackgroundImage = Global.MiniboxLocker.My.Resources.Resources.btnButtonOrange
         Me.btnFillMoney.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
         Me.btnFillMoney.Controls.Add(Me.lblFillMoney)
-        Me.btnFillMoney.Location = New System.Drawing.Point(815, 304)
+        Me.btnFillMoney.Location = New System.Drawing.Point(216, 679)
         Me.btnFillMoney.Name = "btnFillMoney"
         Me.btnFillMoney.Size = New System.Drawing.Size(157, 54)
         Me.btnFillMoney.TabIndex = 64
@@ -233,7 +233,7 @@ Partial Class frmSC_StockAndHardware
         Me.btnFillPaper.BackgroundImage = Global.MiniboxLocker.My.Resources.Resources.btnButtonOrange
         Me.btnFillPaper.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
         Me.btnFillPaper.Controls.Add(Me.lblFillPaper)
-        Me.btnFillPaper.Location = New System.Drawing.Point(814, 242)
+        Me.btnFillPaper.Location = New System.Drawing.Point(42, 678)
         Me.btnFillPaper.Name = "btnFillPaper"
         Me.btnFillPaper.Size = New System.Drawing.Size(158, 55)
         Me.btnFillPaper.TabIndex = 63
@@ -257,7 +257,7 @@ Partial Class frmSC_StockAndHardware
         Me.btnCollect.BackgroundImage = Global.MiniboxLocker.My.Resources.Resources.btnButtonOrange
         Me.btnCollect.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
         Me.btnCollect.Controls.Add(Me.lblCollect)
-        Me.btnCollect.Location = New System.Drawing.Point(815, 362)
+        Me.btnCollect.Location = New System.Drawing.Point(401, 680)
         Me.btnCollect.Name = "btnCollect"
         Me.btnCollect.Size = New System.Drawing.Size(157, 53)
         Me.btnCollect.TabIndex = 65
@@ -375,7 +375,7 @@ Partial Class frmSC_StockAndHardware
         Me.lblStockCoinOut5.FlatStyle = System.Windows.Forms.FlatStyle.System
         Me.lblStockCoinOut5.Font = New System.Drawing.Font("Microsoft Sans Serif", 30.0!, System.Drawing.FontStyle.Bold)
         Me.lblStockCoinOut5.ForeColor = System.Drawing.Color.FromArgb(CType(CType(6, Byte), Integer), CType(CType(175, Byte), Integer), CType(CType(143, Byte), Integer))
-        Me.lblStockCoinOut5.Location = New System.Drawing.Point(679, 258)
+        Me.lblStockCoinOut5.Location = New System.Drawing.Point(675, 258)
         Me.lblStockCoinOut5.Margin = New System.Windows.Forms.Padding(0)
         Me.lblStockCoinOut5.Name = "lblStockCoinOut5"
         Me.lblStockCoinOut5.Size = New System.Drawing.Size(72, 38)
@@ -388,7 +388,7 @@ Partial Class frmSC_StockAndHardware
         Me.lblTotalCoinOut5.FlatStyle = System.Windows.Forms.FlatStyle.System
         Me.lblTotalCoinOut5.Font = New System.Drawing.Font("Microsoft Sans Serif", 14.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblTotalCoinOut5.ForeColor = System.Drawing.Color.Black
-        Me.lblTotalCoinOut5.Location = New System.Drawing.Point(679, 298)
+        Me.lblTotalCoinOut5.Location = New System.Drawing.Point(675, 298)
         Me.lblTotalCoinOut5.Margin = New System.Windows.Forms.Padding(0)
         Me.lblTotalCoinOut5.Name = "lblTotalCoinOut5"
         Me.lblTotalCoinOut5.Size = New System.Drawing.Size(74, 20)
@@ -417,7 +417,7 @@ Partial Class frmSC_StockAndHardware
         Me.lblTotalCoinIn.Location = New System.Drawing.Point(444, 400)
         Me.lblTotalCoinIn.Margin = New System.Windows.Forms.Padding(0)
         Me.lblTotalCoinIn.Name = "lblTotalCoinIn"
-        Me.lblTotalCoinIn.Size = New System.Drawing.Size(152, 20)
+        Me.lblTotalCoinIn.Size = New System.Drawing.Size(142, 20)
         Me.lblTotalCoinIn.TabIndex = 84
         Me.lblTotalCoinIn.Text = "/500"
         Me.lblTotalCoinIn.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
@@ -443,7 +443,7 @@ Partial Class frmSC_StockAndHardware
         Me.lblTotalBanknoteIn.Location = New System.Drawing.Point(446, 588)
         Me.lblTotalBanknoteIn.Margin = New System.Windows.Forms.Padding(0)
         Me.lblTotalBanknoteIn.Name = "lblTotalBanknoteIn"
-        Me.lblTotalBanknoteIn.Size = New System.Drawing.Size(148, 20)
+        Me.lblTotalBanknoteIn.Size = New System.Drawing.Size(140, 20)
         Me.lblTotalBanknoteIn.TabIndex = 86
         Me.lblTotalBanknoteIn.Text = "/500"
         Me.lblTotalBanknoteIn.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
@@ -453,7 +453,7 @@ Partial Class frmSC_StockAndHardware
         Me.lblStockBanknote20.FlatStyle = System.Windows.Forms.FlatStyle.System
         Me.lblStockBanknote20.Font = New System.Drawing.Font("Microsoft Sans Serif", 30.0!, System.Drawing.FontStyle.Bold)
         Me.lblStockBanknote20.ForeColor = System.Drawing.Color.FromArgb(CType(CType(6, Byte), Integer), CType(CType(175, Byte), Integer), CType(CType(143, Byte), Integer))
-        Me.lblStockBanknote20.Location = New System.Drawing.Point(679, 369)
+        Me.lblStockBanknote20.Location = New System.Drawing.Point(675, 369)
         Me.lblStockBanknote20.Margin = New System.Windows.Forms.Padding(0)
         Me.lblStockBanknote20.Name = "lblStockBanknote20"
         Me.lblStockBanknote20.Size = New System.Drawing.Size(72, 38)
@@ -466,7 +466,7 @@ Partial Class frmSC_StockAndHardware
         Me.lblTotalBanknote20.FlatStyle = System.Windows.Forms.FlatStyle.System
         Me.lblTotalBanknote20.Font = New System.Drawing.Font("Microsoft Sans Serif", 14.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblTotalBanknote20.ForeColor = System.Drawing.Color.Black
-        Me.lblTotalBanknote20.Location = New System.Drawing.Point(679, 410)
+        Me.lblTotalBanknote20.Location = New System.Drawing.Point(675, 410)
         Me.lblTotalBanknote20.Margin = New System.Windows.Forms.Padding(0)
         Me.lblTotalBanknote20.Name = "lblTotalBanknote20"
         Me.lblTotalBanknote20.Size = New System.Drawing.Size(74, 20)
@@ -479,7 +479,7 @@ Partial Class frmSC_StockAndHardware
         Me.lblStockBanknote100.FlatStyle = System.Windows.Forms.FlatStyle.System
         Me.lblStockBanknote100.Font = New System.Drawing.Font("Microsoft Sans Serif", 30.0!, System.Drawing.FontStyle.Bold)
         Me.lblStockBanknote100.ForeColor = System.Drawing.Color.FromArgb(CType(CType(6, Byte), Integer), CType(CType(175, Byte), Integer), CType(CType(143, Byte), Integer))
-        Me.lblStockBanknote100.Location = New System.Drawing.Point(679, 482)
+        Me.lblStockBanknote100.Location = New System.Drawing.Point(675, 482)
         Me.lblStockBanknote100.Margin = New System.Windows.Forms.Padding(0)
         Me.lblStockBanknote100.Name = "lblStockBanknote100"
         Me.lblStockBanknote100.Size = New System.Drawing.Size(72, 38)
@@ -492,7 +492,7 @@ Partial Class frmSC_StockAndHardware
         Me.lblTotalBanknote100.FlatStyle = System.Windows.Forms.FlatStyle.System
         Me.lblTotalBanknote100.Font = New System.Drawing.Font("Microsoft Sans Serif", 14.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblTotalBanknote100.ForeColor = System.Drawing.Color.Black
-        Me.lblTotalBanknote100.Location = New System.Drawing.Point(679, 521)
+        Me.lblTotalBanknote100.Location = New System.Drawing.Point(675, 521)
         Me.lblTotalBanknote100.Margin = New System.Windows.Forms.Padding(0)
         Me.lblTotalBanknote100.Name = "lblTotalBanknote100"
         Me.lblTotalBanknote100.Size = New System.Drawing.Size(74, 20)
@@ -505,7 +505,7 @@ Partial Class frmSC_StockAndHardware
         Me.lblStockPrinter.FlatStyle = System.Windows.Forms.FlatStyle.System
         Me.lblStockPrinter.Font = New System.Drawing.Font("Microsoft Sans Serif", 22.0!, System.Drawing.FontStyle.Bold)
         Me.lblStockPrinter.ForeColor = System.Drawing.Color.FromArgb(CType(CType(6, Byte), Integer), CType(CType(175, Byte), Integer), CType(CType(143, Byte), Integer))
-        Me.lblStockPrinter.Location = New System.Drawing.Point(660, 584)
+        Me.lblStockPrinter.Location = New System.Drawing.Point(656, 584)
         Me.lblStockPrinter.Margin = New System.Windows.Forms.Padding(0)
         Me.lblStockPrinter.Name = "lblStockPrinter"
         Me.lblStockPrinter.Size = New System.Drawing.Size(54, 28)
@@ -518,7 +518,7 @@ Partial Class frmSC_StockAndHardware
         Me.lblTotalPrinter.FlatStyle = System.Windows.Forms.FlatStyle.System
         Me.lblTotalPrinter.Font = New System.Drawing.Font("Microsoft Sans Serif", 14.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblTotalPrinter.ForeColor = System.Drawing.Color.Black
-        Me.lblTotalPrinter.Location = New System.Drawing.Point(715, 592)
+        Me.lblTotalPrinter.Location = New System.Drawing.Point(711, 592)
         Me.lblTotalPrinter.Margin = New System.Windows.Forms.Padding(0)
         Me.lblTotalPrinter.Name = "lblTotalPrinter"
         Me.lblTotalPrinter.Size = New System.Drawing.Size(39, 20)
@@ -592,7 +592,8 @@ Partial Class frmSC_StockAndHardware
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.White
         Me.BackgroundImage = Global.MiniboxLocker.My.Resources.Resources.bgSCStockAndHardware
-        Me.ClientSize = New System.Drawing.Size(1024, 768)
+        Me.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
+        Me.ClientSize = New System.Drawing.Size(768, 1024)
         Me.Controls.Add(Me.pgStockPrinter)
         Me.Controls.Add(Me.pgStockBanknote100)
         Me.Controls.Add(Me.pgStockBanknoteIn)
@@ -630,6 +631,7 @@ Partial Class frmSC_StockAndHardware
         Me.Controls.Add(Me.btnKioskSetting)
         Me.Controls.Add(Me.btnFillMoney)
         Me.Controls.Add(Me.btnFillPaper)
+        Me.DoubleBuffered = True
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None
         Me.Name = "frmSC_StockAndHardware"
         Me.btnOpenAll.ResumeLayout(False)

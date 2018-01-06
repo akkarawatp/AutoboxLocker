@@ -2,10 +2,12 @@
 Imports MiniboxLocker.Data.KioskConfigData
 Public Class frmSC_Main
     Private Sub frmSC_Main_Shown(sender As Object, e As EventArgs) Handles Me.Shown
+        Me.WindowState = FormWindowState.Maximized
         Application.DoEvents()
+
         frmSC_StockAndHardware.MdiParent = Me
-        frmSC_StockAndHardware.StartPosition = FormStartPosition.WindowsDefaultLocation
-        frmSC_StockAndHardware.WindowState = FormWindowState.Normal
+        'frmSC_StockAndHardware.StartPosition = FormStartPosition.WindowsDefaultLocation
+        'frmSC_StockAndHardware.WindowState = FormWindowState.Normal
         frmSC_StockAndHardware.Show()
 
 

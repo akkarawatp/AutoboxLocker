@@ -27,8 +27,8 @@ Partial Class frmSC_Main
         Me.TimerSetPointer = New System.Windows.Forms.Timer(Me.components)
         Me.TimerCheckAutoSleep = New System.Windows.Forms.Timer(Me.components)
         Me.pnlHead = New System.Windows.Forms.Panel()
-        Me.btnExitProgram = New System.Windows.Forms.PictureBox()
         Me.lblTitle = New System.Windows.Forms.Label()
+        Me.btnExitProgram = New System.Windows.Forms.PictureBox()
         Me.pnlHead.SuspendLayout()
         CType(Me.btnExitProgram, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
@@ -56,39 +56,41 @@ Partial Class frmSC_Main
         Me.pnlHead.Location = New System.Drawing.Point(0, 0)
         Me.pnlHead.Margin = New System.Windows.Forms.Padding(0)
         Me.pnlHead.Name = "pnlHead"
-        Me.pnlHead.Size = New System.Drawing.Size(1024, 113)
+        Me.pnlHead.Size = New System.Drawing.Size(768, 113)
         Me.pnlHead.TabIndex = 45
+        '
+        'lblTitle
+        '
+        Me.lblTitle.Font = New System.Drawing.Font("Microsoft Sans Serif", 27.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(222, Byte))
+        Me.lblTitle.ForeColor = System.Drawing.Color.White
+        Me.lblTitle.Location = New System.Drawing.Point(143, 39)
+        Me.lblTitle.Name = "lblTitle"
+        Me.lblTitle.Size = New System.Drawing.Size(423, 42)
+        Me.lblTitle.TabIndex = 1
+        Me.lblTitle.Text = "lblTitle"
         '
         'btnExitProgram
         '
         Me.btnExitProgram.BackColor = System.Drawing.Color.White
         Me.btnExitProgram.Image = Global.MiniboxLocker.My.Resources.Resources.imgButtonExitProgram
-        Me.btnExitProgram.Location = New System.Drawing.Point(761, 32)
+        Me.btnExitProgram.Location = New System.Drawing.Point(570, 32)
         Me.btnExitProgram.Name = "btnExitProgram"
-        Me.btnExitProgram.Size = New System.Drawing.Size(216, 56)
+        Me.btnExitProgram.Size = New System.Drawing.Size(166, 56)
+        Me.btnExitProgram.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
         Me.btnExitProgram.TabIndex = 0
         Me.btnExitProgram.TabStop = False
-        '
-        'lblTitle
-        '
-        Me.lblTitle.Font = New System.Drawing.Font("Microsoft Sans Serif", 36.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(222, Byte))
-        Me.lblTitle.ForeColor = System.Drawing.Color.White
-        Me.lblTitle.Location = New System.Drawing.Point(231, 32)
-        Me.lblTitle.Name = "lblTitle"
-        Me.lblTitle.Size = New System.Drawing.Size(524, 56)
-        Me.lblTitle.TabIndex = 1
-        Me.lblTitle.Text = "lblTitle"
         '
         'frmSC_Main
         '
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None
         Me.BackColor = System.Drawing.Color.White
         Me.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None
-        Me.ClientSize = New System.Drawing.Size(1024, 768)
+        Me.ClientSize = New System.Drawing.Size(768, 1024)
         Me.Controls.Add(Me.pnlHead)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None
         Me.IsMdiContainer = True
         Me.Name = "frmSC_Main"
+        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "frmMain"
         Me.pnlHead.ResumeLayout(False)
         CType(Me.btnExitProgram, System.ComponentModel.ISupportInitialize).EndInit()

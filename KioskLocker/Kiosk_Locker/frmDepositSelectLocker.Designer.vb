@@ -58,9 +58,9 @@ Partial Class frmDepositSelectLocker
         Me.pnlCabinetLayout.Controls.Add(Me.UcCabinet3)
         Me.pnlCabinetLayout.Controls.Add(Me.UcCabinet2)
         Me.pnlCabinetLayout.Controls.Add(Me.UcCabinet1)
-        Me.pnlCabinetLayout.Location = New System.Drawing.Point(97, 179)
+        Me.pnlCabinetLayout.Location = New System.Drawing.Point(0, 298)
         Me.pnlCabinetLayout.Name = "pnlCabinetLayout"
-        Me.pnlCabinetLayout.Size = New System.Drawing.Size(824, 392)
+        Me.pnlCabinetLayout.Size = New System.Drawing.Size(761, 392)
         Me.pnlCabinetLayout.TabIndex = 45
         '
         'pnlLayoutPC
@@ -69,15 +69,15 @@ Partial Class frmDepositSelectLocker
         Me.pnlLayoutPC.BackColor = System.Drawing.Color.FromArgb(CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer))
         Me.pnlLayoutPC.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.pnlLayoutPC.Controls.Add(Me.PictureBox2)
-        Me.pnlLayoutPC.Location = New System.Drawing.Point(519, 5)
+        Me.pnlLayoutPC.Location = New System.Drawing.Point(481, 5)
         Me.pnlLayoutPC.Name = "pnlLayoutPC"
-        Me.pnlLayoutPC.Size = New System.Drawing.Size(75, 379)
+        Me.pnlLayoutPC.Size = New System.Drawing.Size(68, 379)
         Me.pnlLayoutPC.TabIndex = 1
         '
         'PictureBox2
         '
         Me.PictureBox2.Image = Global.MiniboxLocker.My.Resources.Resources.IconLockerControl
-        Me.PictureBox2.Location = New System.Drawing.Point(6, 134)
+        Me.PictureBox2.Location = New System.Drawing.Point(2, 134)
         Me.PictureBox2.Name = "PictureBox2"
         Me.PictureBox2.Size = New System.Drawing.Size(62, 31)
         Me.PictureBox2.TabIndex = 0
@@ -96,12 +96,12 @@ Partial Class frmDepositSelectLocker
         Me.UcCabinet10.CabinetID = CType(0, Long)
         Me.UcCabinet10.CabinetModelID = CType(0, Long)
         Me.UcCabinet10.CabinetName = "J"
-        Me.UcCabinet10.Location = New System.Drawing.Point(744, 5)
+        Me.UcCabinet10.Location = New System.Drawing.Point(682, 5)
         Me.UcCabinet10.LockerActiveQty = 0
         Me.UcCabinet10.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.UcCabinet10.Name = "UcCabinet10"
         Me.UcCabinet10.OrderLayoutNo = 10
-        Me.UcCabinet10.Size = New System.Drawing.Size(75, 379)
+        Me.UcCabinet10.Size = New System.Drawing.Size(68, 379)
         Me.UcCabinet10.TabIndex = 10
         '
         'UcCabinet9
@@ -113,12 +113,12 @@ Partial Class frmDepositSelectLocker
         Me.UcCabinet9.CabinetID = CType(0, Long)
         Me.UcCabinet9.CabinetModelID = CType(0, Long)
         Me.UcCabinet9.CabinetName = "I"
-        Me.UcCabinet9.Location = New System.Drawing.Point(669, 5)
+        Me.UcCabinet9.Location = New System.Drawing.Point(615, 5)
         Me.UcCabinet9.LockerActiveQty = 0
         Me.UcCabinet9.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.UcCabinet9.Name = "UcCabinet9"
         Me.UcCabinet9.OrderLayoutNo = 9
-        Me.UcCabinet9.Size = New System.Drawing.Size(75, 379)
+        Me.UcCabinet9.Size = New System.Drawing.Size(68, 379)
         Me.UcCabinet9.TabIndex = 9
         '
         'UcCabinet8
@@ -130,12 +130,12 @@ Partial Class frmDepositSelectLocker
         Me.UcCabinet8.CabinetID = CType(0, Long)
         Me.UcCabinet8.CabinetModelID = CType(0, Long)
         Me.UcCabinet8.CabinetName = "H"
-        Me.UcCabinet8.Location = New System.Drawing.Point(594, 5)
+        Me.UcCabinet8.Location = New System.Drawing.Point(548, 5)
         Me.UcCabinet8.LockerActiveQty = 0
         Me.UcCabinet8.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.UcCabinet8.Name = "UcCabinet8"
         Me.UcCabinet8.OrderLayoutNo = 8
-        Me.UcCabinet8.Size = New System.Drawing.Size(75, 379)
+        Me.UcCabinet8.Size = New System.Drawing.Size(68, 379)
         Me.UcCabinet8.TabIndex = 8
         '
         'UcCabinet7
@@ -147,12 +147,12 @@ Partial Class frmDepositSelectLocker
         Me.UcCabinet7.CabinetID = CType(0, Long)
         Me.UcCabinet7.CabinetModelID = CType(0, Long)
         Me.UcCabinet7.CabinetName = "G"
-        Me.UcCabinet7.Location = New System.Drawing.Point(444, 5)
+        Me.UcCabinet7.Location = New System.Drawing.Point(414, 5)
         Me.UcCabinet7.LockerActiveQty = 0
         Me.UcCabinet7.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.UcCabinet7.Name = "UcCabinet7"
         Me.UcCabinet7.OrderLayoutNo = 7
-        Me.UcCabinet7.Size = New System.Drawing.Size(75, 380)
+        Me.UcCabinet7.Size = New System.Drawing.Size(68, 380)
         Me.UcCabinet7.TabIndex = 7
         '
         'UcCabinet6
@@ -164,12 +164,12 @@ Partial Class frmDepositSelectLocker
         Me.UcCabinet6.CabinetID = CType(0, Long)
         Me.UcCabinet6.CabinetModelID = CType(0, Long)
         Me.UcCabinet6.CabinetName = "F"
-        Me.UcCabinet6.Location = New System.Drawing.Point(369, 5)
+        Me.UcCabinet6.Location = New System.Drawing.Point(347, 5)
         Me.UcCabinet6.LockerActiveQty = 0
         Me.UcCabinet6.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.UcCabinet6.Name = "UcCabinet6"
         Me.UcCabinet6.OrderLayoutNo = 6
-        Me.UcCabinet6.Size = New System.Drawing.Size(75, 380)
+        Me.UcCabinet6.Size = New System.Drawing.Size(68, 380)
         Me.UcCabinet6.TabIndex = 6
         '
         'UcCabinet5
@@ -181,12 +181,12 @@ Partial Class frmDepositSelectLocker
         Me.UcCabinet5.CabinetID = CType(0, Long)
         Me.UcCabinet5.CabinetModelID = CType(0, Long)
         Me.UcCabinet5.CabinetName = "E"
-        Me.UcCabinet5.Location = New System.Drawing.Point(294, 5)
+        Me.UcCabinet5.Location = New System.Drawing.Point(280, 5)
         Me.UcCabinet5.LockerActiveQty = 0
         Me.UcCabinet5.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.UcCabinet5.Name = "UcCabinet5"
         Me.UcCabinet5.OrderLayoutNo = 5
-        Me.UcCabinet5.Size = New System.Drawing.Size(75, 380)
+        Me.UcCabinet5.Size = New System.Drawing.Size(68, 380)
         Me.UcCabinet5.TabIndex = 5
         '
         'UcCabinet4
@@ -198,12 +198,12 @@ Partial Class frmDepositSelectLocker
         Me.UcCabinet4.CabinetID = CType(0, Long)
         Me.UcCabinet4.CabinetModelID = CType(0, Long)
         Me.UcCabinet4.CabinetName = "D"
-        Me.UcCabinet4.Location = New System.Drawing.Point(219, 5)
+        Me.UcCabinet4.Location = New System.Drawing.Point(213, 5)
         Me.UcCabinet4.LockerActiveQty = 0
         Me.UcCabinet4.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.UcCabinet4.Name = "UcCabinet4"
         Me.UcCabinet4.OrderLayoutNo = 4
-        Me.UcCabinet4.Size = New System.Drawing.Size(75, 380)
+        Me.UcCabinet4.Size = New System.Drawing.Size(68, 380)
         Me.UcCabinet4.TabIndex = 4
         '
         'UcCabinet3
@@ -215,12 +215,12 @@ Partial Class frmDepositSelectLocker
         Me.UcCabinet3.CabinetID = CType(0, Long)
         Me.UcCabinet3.CabinetModelID = CType(0, Long)
         Me.UcCabinet3.CabinetName = "C"
-        Me.UcCabinet3.Location = New System.Drawing.Point(144, 5)
+        Me.UcCabinet3.Location = New System.Drawing.Point(146, 5)
         Me.UcCabinet3.LockerActiveQty = 0
         Me.UcCabinet3.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.UcCabinet3.Name = "UcCabinet3"
         Me.UcCabinet3.OrderLayoutNo = 3
-        Me.UcCabinet3.Size = New System.Drawing.Size(75, 380)
+        Me.UcCabinet3.Size = New System.Drawing.Size(68, 380)
         Me.UcCabinet3.TabIndex = 3
         '
         'UcCabinet2
@@ -232,12 +232,12 @@ Partial Class frmDepositSelectLocker
         Me.UcCabinet2.CabinetID = CType(0, Long)
         Me.UcCabinet2.CabinetModelID = CType(0, Long)
         Me.UcCabinet2.CabinetName = "B"
-        Me.UcCabinet2.Location = New System.Drawing.Point(69, 5)
+        Me.UcCabinet2.Location = New System.Drawing.Point(79, 5)
         Me.UcCabinet2.LockerActiveQty = 0
         Me.UcCabinet2.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.UcCabinet2.Name = "UcCabinet2"
         Me.UcCabinet2.OrderLayoutNo = 2
-        Me.UcCabinet2.Size = New System.Drawing.Size(75, 380)
+        Me.UcCabinet2.Size = New System.Drawing.Size(68, 380)
         Me.UcCabinet2.TabIndex = 2
         '
         'UcCabinet1
@@ -249,12 +249,12 @@ Partial Class frmDepositSelectLocker
         Me.UcCabinet1.CabinetID = CType(0, Long)
         Me.UcCabinet1.CabinetModelID = CType(0, Long)
         Me.UcCabinet1.CabinetName = "A"
-        Me.UcCabinet1.Location = New System.Drawing.Point(-6, 5)
+        Me.UcCabinet1.Location = New System.Drawing.Point(12, 5)
         Me.UcCabinet1.LockerActiveQty = 0
         Me.UcCabinet1.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.UcCabinet1.Name = "UcCabinet1"
         Me.UcCabinet1.OrderLayoutNo = 1
-        Me.UcCabinet1.Size = New System.Drawing.Size(75, 380)
+        Me.UcCabinet1.Size = New System.Drawing.Size(68, 380)
         Me.UcCabinet1.TabIndex = 0
         '
         'frmDepositSelectLocker
@@ -264,7 +264,7 @@ Partial Class frmDepositSelectLocker
         Me.BackColor = System.Drawing.Color.White
         Me.BackgroundImage = Global.MiniboxLocker.My.Resources.Resources.bgDepositSelectLocker
         Me.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
-        Me.ClientSize = New System.Drawing.Size(1024, 768)
+        Me.ClientSize = New System.Drawing.Size(768, 780)
         Me.Controls.Add(Me.pnlCabinetLayout)
         Me.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(222, Byte))
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None

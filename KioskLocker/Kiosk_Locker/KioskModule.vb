@@ -647,30 +647,30 @@ Module KioskModule
                                         SendKioskAlarm("COIN_OUT_DISCONNECTED", True)
                                     End If
                             End Select
-                        Case DeviceType.LEDBoard
-                            If BoardLED.ConnectLEDDevice(Comport) = True Then
-                                UpdateDeviceStatus(vDeviceID, BoardStatus.Ready)
-                                SendKioskAlarm("BOARD_LED_DISCONNECTED", False)
-                            Else
-                                UpdateDeviceStatus(vDeviceID, BoardStatus.Disconnected)
-                                SendKioskAlarm("BOARD_LED_DISCONNECTED", True)
-                            End If
-                        Case DeviceType.SolenoidBoard
-                            If BoardSolenoid.ConnectSolenoidDevice(Comport) = True Then
-                                UpdateDeviceStatus(vDeviceID, BoardStatus.Ready)
-                                SendKioskAlarm("BOARD_SOLENOID_DISCONNECTED", False)
-                            Else
-                                UpdateDeviceStatus(vDeviceID, BoardStatus.Disconnected)
-                                SendKioskAlarm("BOARD_SOLENOID_DISCONNECTED", True)
-                            End If
-                        Case DeviceType.SensorBoard
-                            If BoardSensor.ConnectSensorDevice(Comport) = True Then
-                                UpdateDeviceStatus(vDeviceID, BoardStatus.Ready)
-                                SendKioskAlarm("BOARD_SENSOR_DISCONNECTED", False)
-                            Else
-                                UpdateDeviceStatus(vDeviceID, BoardStatus.Disconnected)
-                                SendKioskAlarm("BOARD_SENSOR_DISCONNECTED", True)
-                            End If
+                            'Case DeviceType.LEDBoard
+                            '    If BoardLED.ConnectLEDDevice(Comport) = True Then
+                            '        UpdateDeviceStatus(vDeviceID, BoardStatus.Ready)
+                            '        SendKioskAlarm("BOARD_LED_DISCONNECTED", False)
+                            '    Else
+                            '        UpdateDeviceStatus(vDeviceID, BoardStatus.Disconnected)
+                            '        SendKioskAlarm("BOARD_LED_DISCONNECTED", True)
+                            '    End If
+                            'Case DeviceType.SolenoidBoard
+                            '    If BoardSolenoid.ConnectSolenoidDevice(Comport) = True Then
+                            '        UpdateDeviceStatus(vDeviceID, BoardStatus.Ready)
+                            '        SendKioskAlarm("BOARD_SOLENOID_DISCONNECTED", False)
+                            '    Else
+                            '        UpdateDeviceStatus(vDeviceID, BoardStatus.Disconnected)
+                            '        SendKioskAlarm("BOARD_SOLENOID_DISCONNECTED", True)
+                            '    End If
+                            'Case DeviceType.SensorBoard
+                            '    If BoardSensor.ConnectSensorDevice(Comport) = True Then
+                            '        UpdateDeviceStatus(vDeviceID, BoardStatus.Ready)
+                            '        SendKioskAlarm("BOARD_SENSOR_DISCONNECTED", False)
+                            '    Else
+                            '        UpdateDeviceStatus(vDeviceID, BoardStatus.Disconnected)
+                            '        SendKioskAlarm("BOARD_SENSOR_DISCONNECTED", True)
+                            '    End If
                     End Select
                 Next
             End If
@@ -2230,98 +2230,6 @@ Module KioskModule
         ini = Nothing
         Return CardLanDesc
     End Function
-
-
-    'Public Sub SetChildFormLanguage()
-    '    Dim fldName As String = ""
-    '    'Dim fntName As New Font("Thai Sans Lite", FontStyle.Bold)
-    '    Select Case KioskConfig.Language
-    '        Case Data.ConstantsData.KioskLanguage.Thai
-    '            fldName = "TH_Display"
-    '        Case Data.ConstantsData.KioskLanguage.English
-    '            fldName = "EN_Display"
-    '        Case Data.ConstantsData.KioskLanguage.China
-    '            fldName = "CH_Display"
-    '        Case Data.KioskLanguage.Japan
-    '            fldName = "JP_Display"
-    '    End Select
-
-    '    Try
-    '        LangMasterList.DefaultView.RowFilter = "ms_app_screen_id='" & Convert.ToInt16(KioskConfig.SelectForm) & "'"
-    '        If LangMasterList.DefaultView.Count > 0 Then
-    '            AppScreenList.DefaultView.RowFilter = "id='" & Convert.ToInt16(KioskConfig.SelectForm) & "'"
-    '            If AppScreenList.DefaultView.Count > 0 Then
-    '                Dim frm As Form = Application.OpenForms(AppScreenList.DefaultView(0)("form_name"))
-
-    '                For Each dr As DataRowView In LangMasterList.DefaultView
-    '                    Dim ControlName As String = dr("Control_Name")
-    '                    Dim cc() As Control = frm.Controls.Find(ControlName, True)
-    '                    If cc.Length > 0 Then
-    '                        cc(0).Text = dr(fldName)
-
-    '                        Dim FontSize As Int16 = dr("font_size")
-    '                        Dim FontStyle As FontStyle = Convert.ToInt16(dr("font_style"))
-    '                        cc(0).Font = New Font("Thai Sans Lite", FontSize, FontStyle)
-
-    '                        If KioskConfig.Language = Data.ConstantsData.KioskLanguage.China Then
-    '                            FontSize = FontSize * 0.7
-    '                            cc(0).Font = New Font("Hiragino Sans GB W3", FontSize, FontStyle)
-
-    '                            'cc(0).Font = New Font("Songti SC Black", FontSize, FontStyle)
-    '                        ElseIf KioskConfig.Language = Data.ConstantsData.KioskLanguage.Japan Then
-    '                            FontSize = FontSize * 0.7
-
-    '                            cc(0).Font = New Font("MS Gothic", FontSize, FontStyle)
-    '                            'cc(0).Font = New Font("ＭＳ Ｐゴシック", FontSize, FontStyle)
-    '                        End If
-    '                    End If
-    '                Next
-
-    '                If KioskConfig.SelectForm = KioskConfigData.KioskLockerForm.CollectSelectDocument Then
-    '                    Select Case KioskConfig.Language
-    '                        Case Data.ConstantsData.KioskLanguage.China, Data.ConstantsData.KioskLanguage.Japan
-    '                            DirectCast(frm, frmCollectSelectDocument).lblPassport.Top = DirectCast(frm, frmCollectSelectDocument).lblQRCode.Top
-    '                        Case Else
-    '                            DirectCast(frm, frmCollectSelectDocument).lblPassport.Top = 210
-    '                    End Select
-    '                End If
-    '            End If
-    '            AppScreenList.DefaultView.RowFilter = ""
-
-
-    '        End If
-    '        LangMasterList.DefaultView.RowFilter = ""
-    '    Catch ex As Exception
-
-    '    End Try
-    'End Sub
-
-    'Public Function GetNotificationText(_id As Long) As String
-    '    Dim ret As String = ""
-
-    '    Dim fldName As String = ""
-    '    Select Case KioskConfig.Language
-    '        Case Data.ConstantsData.KioskLanguage.Thai
-    '            fldName = "TH_Display"
-    '        Case Data.ConstantsData.KioskLanguage.English
-    '            fldName = "EN_Display"
-    '        Case Data.ConstantsData.KioskLanguage.China
-    '            fldName = "CH_Display"
-    '        Case Data.KioskLanguage.Japan
-    '            fldName = "JP_Display"
-    '    End Select
-    '    Try
-    '        LangNotificationList.DefaultView.RowFilter = "id=" & _id
-    '        If LangNotificationList.DefaultView.Count > 0 Then
-    '            ret = LangNotificationList.DefaultView(0)(fldName)
-    '        End If
-    '        LangNotificationList.DefaultView.RowFilter = ""
-    '    Catch ex As Exception
-
-    '    End Try
-    '    Return ret
-    'End Function
-
 
 
     Public Function PickupCalServiceAmount() As Integer

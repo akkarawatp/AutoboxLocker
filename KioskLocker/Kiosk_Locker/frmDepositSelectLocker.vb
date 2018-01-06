@@ -36,7 +36,7 @@ Public Class frmDepositSelectLocker
     End Sub
 
     Dim AllPadding As Integer = 1
-    Dim PcWidth As Integer = 75
+    Dim PcWidth As Integer = 68
 
     Public Sub LoadLockerList()
         Try
@@ -102,7 +102,7 @@ Public Class frmDepositSelectLocker
             Dim AllCabinetWidth As Integer = (cbWith + PcWidth + AllPadding)
 
             pnlCabinetLayout.Width = AllCabinetWidth + 15
-            pnlCabinetLayout.Left = (Me.Width / 2) - (pnlCabinetLayout.Width / 2)
+            pnlCabinetLayout.Left = (Me.Width / 2) - (pnlCabinetLayout.Width / 2) - 45
 
 
 
@@ -167,10 +167,8 @@ Public Class frmDepositSelectLocker
                 'เลือกช่องฝากแล้วก็ Update Transaction โลด
                 If UpdateServiceTransaction(Deposit).IsSuccess = True Then
                     Me.Close()
-
                     frmDepositSetPINCode.MdiParent = frmMain
                     frmDepositSetPINCode.Show()
-                    frmLoading.Close()
                 End If
 
             ElseIf f.LockerAvailable = ucLockerInfo.AvailableStatus.NotAvailable AndAlso f.LockerAvailable = ucLockerInfo.AvailableStatus.InActive Then
@@ -213,8 +211,6 @@ Public Class frmDepositSelectLocker
                 'กรณีรับคืนจาก StaffConsole ถ้าเป็นตู้ที่ว่างอยู่ ก็ไม่ให้คลิกได้ เพราะจะรับคืน จะไปคลิกตู้ว่างทำไม
             End If
         End If
-
-
     End Sub
 
     Private Sub SetServineFineAmt()
@@ -294,6 +290,5 @@ Public Class frmDepositSelectLocker
                 f.Show()
             End If
         End If
-
     End Sub
 End Class

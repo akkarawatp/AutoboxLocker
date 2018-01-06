@@ -49,10 +49,10 @@ Partial Class frmMain
         Me.pnlFooter.BackgroundImage = Global.MiniboxLocker.My.Resources.Resources.bgMainFooter
         Me.pnlFooter.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
         Me.pnlFooter.Controls.Add(Me.pnlCancel)
-        Me.pnlFooter.Location = New System.Drawing.Point(0, 688)
+        Me.pnlFooter.Location = New System.Drawing.Point(0, 944)
         Me.pnlFooter.Margin = New System.Windows.Forms.Padding(0)
         Me.pnlFooter.Name = "pnlFooter"
-        Me.pnlFooter.Size = New System.Drawing.Size(1024, 80)
+        Me.pnlFooter.Size = New System.Drawing.Size(768, 80)
         Me.pnlFooter.TabIndex = 11
         '
         'pnlCancel
@@ -60,7 +60,7 @@ Partial Class frmMain
         Me.pnlCancel.BackgroundImage = Global.MiniboxLocker.My.Resources.Resources.btnBG
         Me.pnlCancel.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
         Me.pnlCancel.Controls.Add(Me.btnCancel)
-        Me.pnlCancel.Location = New System.Drawing.Point(454, 2)
+        Me.pnlCancel.Location = New System.Drawing.Point(333, 2)
         Me.pnlCancel.Name = "pnlCancel"
         Me.pnlCancel.Size = New System.Drawing.Size(116, 44)
         Me.pnlCancel.TabIndex = 4
@@ -80,12 +80,12 @@ Partial Class frmMain
         '
         'btnPointer
         '
-        Me.btnPointer.BackColor = System.Drawing.Color.White
+        Me.btnPointer.BackColor = System.Drawing.Color.LightGray
         Me.btnPointer.FlatAppearance.MouseDownBackColor = System.Drawing.Color.White
         Me.btnPointer.FlatAppearance.MouseOverBackColor = System.Drawing.Color.White
         Me.btnPointer.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnPointer.ForeColor = System.Drawing.Color.White
-        Me.btnPointer.Location = New System.Drawing.Point(3, 711)
+        Me.btnPointer.Location = New System.Drawing.Point(3, 965)
         Me.btnPointer.Name = "btnPointer"
         Me.btnPointer.Size = New System.Drawing.Size(55, 47)
         Me.btnPointer.TabIndex = 51
@@ -113,13 +113,14 @@ Partial Class frmMain
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None
         Me.BackColor = System.Drawing.Color.White
         Me.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None
-        Me.ClientSize = New System.Drawing.Size(1024, 768)
+        Me.ClientSize = New System.Drawing.Size(768, 1024)
         Me.Controls.Add(Me.btnPointer)
         Me.Controls.Add(Me.pnlFooter)
         Me.Controls.Add(Me.pnlHead)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None
         Me.IsMdiContainer = True
         Me.Name = "frmMain"
+        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "frmMain"
         Me.pnlFooter.ResumeLayout(False)
         Me.pnlCancel.ResumeLayout(False)

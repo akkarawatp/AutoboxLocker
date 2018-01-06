@@ -71,8 +71,6 @@ Public Class frmDepositPayment
     Private Sub SetPaymentInformation()
         Try
             If ServiceID = ConstantsData.TransactionType.CollectBelonging Then
-                'Dim t As New Thread(Sub() CollectCaptureImage()) 'ถ่ายรูปตอนรับคืน
-                't.Start()
                 Me.BackgroundImage = My.Resources.bgCollectPayment
                 Application.DoEvents()
 

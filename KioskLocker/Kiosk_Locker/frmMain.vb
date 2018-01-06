@@ -24,7 +24,7 @@ Public Class frmMain
 
 
     Private Sub frmMain_Shown(sender As Object, e As EventArgs) Handles Me.Shown
-        'Cursor.Hide()
+        Me.WindowState = FormWindowState.Maximized
         CheckForIllegalCrossThreadCalls = False
 
         'Check DB Connect at Startup
@@ -433,7 +433,7 @@ Public Class frmMain
         btnPointer.Text = "1"
 
         'Move to buttom left
-        btnPointer.Location = New Point(3, 711)
+        btnPointer.Location = New Point(3, 965)
         btnPointer.BringToFront()
         Application.DoEvents()
 
@@ -447,7 +447,7 @@ Public Class frmMain
             btnPointer.Text = "2"
 
             'Move to buttom right
-            btnPointer.Location = New Point(Me.Width - btnPointer.Width, 711)
+            btnPointer.Location = New Point(Me.Width - btnPointer.Width, 965)
             btnPointer.BringToFront()
         ElseIf btnPointer.Text = "2" Then
             btnPointer.Text = "3"
@@ -459,7 +459,7 @@ Public Class frmMain
             btnPointer.Text = "4"
 
             'Move to buttom right
-            btnPointer.Location = New Point(Me.Width - btnPointer.Width, 711)
+            btnPointer.Location = New Point(Me.Width - btnPointer.Width, 965)
             btnPointer.BringToFront()
         ElseIf btnPointer.Text = "4" Then
             InsertLogTransactionActivity("", "", "", KioskConfig.KioskLockerForm.Main, KioskConfig.KioskLockerStep.Main_OpenFormLoginStaffConsole, "", False)

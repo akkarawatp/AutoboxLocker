@@ -114,7 +114,7 @@ Public Class ucCabinet
 
 
         Dim fPadding As Integer = 1
-        Dim fFooter As Integer = IIf(_IsSetting = True, 30, 0)
+        Dim fFooter As Integer = IIf(_IsSetting = True, 20, 0)
         Dim fTop As Integer = 0
         Dim fHeigh As Integer = 0
         If LockerQty > 0 Then
@@ -188,9 +188,8 @@ Public Class ucCabinet
                 If _IsSetting = False Then
                     f.lblName.Visible = True
                     f.lblName.AutoSize = False
-                    f.lblName.Height = 40
-                    f.lblName.Font = New Font("Superspace", 18, FontStyle.Bold)
-                    'f.lblName.Font = New Font("Thai Sans Lite", 24, FontStyle.Bold)
+                    f.lblName.Height = 30
+                    f.lblName.Font = New Font("Superspace", 16, FontStyle.Bold)
                     f.lblName.Top = (f.Height / 2) - (f.lblName.Height / 2)
                     f.lblName.Left = 0
                     f.lblName.Width = f.Width

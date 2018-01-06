@@ -45,7 +45,7 @@ Partial Class frmDepositPayment
         'btn1000
         '
         Me.btn1000.Anchor = System.Windows.Forms.AnchorStyles.Top
-        Me.btn1000.Location = New System.Drawing.Point(27, 176)
+        Me.btn1000.Location = New System.Drawing.Point(6, 176)
         Me.btn1000.Name = "btn1000"
         Me.btn1000.Size = New System.Drawing.Size(75, 23)
         Me.btn1000.TabIndex = 68
@@ -56,7 +56,7 @@ Partial Class frmDepositPayment
         'btn500
         '
         Me.btn500.Anchor = System.Windows.Forms.AnchorStyles.Top
-        Me.btn500.Location = New System.Drawing.Point(108, 176)
+        Me.btn500.Location = New System.Drawing.Point(87, 176)
         Me.btn500.Name = "btn500"
         Me.btn500.Size = New System.Drawing.Size(75, 23)
         Me.btn500.TabIndex = 69
@@ -67,18 +67,17 @@ Partial Class frmDepositPayment
         'btn100
         '
         Me.btn100.Anchor = System.Windows.Forms.AnchorStyles.Top
-        Me.btn100.Location = New System.Drawing.Point(189, 176)
+        Me.btn100.Location = New System.Drawing.Point(168, 176)
         Me.btn100.Name = "btn100"
         Me.btn100.Size = New System.Drawing.Size(75, 23)
         Me.btn100.TabIndex = 70
         Me.btn100.Text = "100"
         Me.btn100.UseVisualStyleBackColor = True
-        Me.btn100.Visible = False
         '
         'btn50
         '
         Me.btn50.Anchor = System.Windows.Forms.AnchorStyles.Top
-        Me.btn50.Location = New System.Drawing.Point(270, 176)
+        Me.btn50.Location = New System.Drawing.Point(249, 176)
         Me.btn50.Name = "btn50"
         Me.btn50.Size = New System.Drawing.Size(75, 23)
         Me.btn50.TabIndex = 71
@@ -89,7 +88,7 @@ Partial Class frmDepositPayment
         'btn20
         '
         Me.btn20.Anchor = System.Windows.Forms.AnchorStyles.Top
-        Me.btn20.Location = New System.Drawing.Point(351, 176)
+        Me.btn20.Location = New System.Drawing.Point(330, 176)
         Me.btn20.Name = "btn20"
         Me.btn20.Size = New System.Drawing.Size(75, 23)
         Me.btn20.TabIndex = 72
@@ -100,7 +99,7 @@ Partial Class frmDepositPayment
         'btn10
         '
         Me.btn10.Anchor = System.Windows.Forms.AnchorStyles.Top
-        Me.btn10.Location = New System.Drawing.Point(432, 176)
+        Me.btn10.Location = New System.Drawing.Point(411, 176)
         Me.btn10.Name = "btn10"
         Me.btn10.Size = New System.Drawing.Size(75, 23)
         Me.btn10.TabIndex = 73
@@ -111,7 +110,7 @@ Partial Class frmDepositPayment
         'btn5
         '
         Me.btn5.Anchor = System.Windows.Forms.AnchorStyles.Top
-        Me.btn5.Location = New System.Drawing.Point(513, 176)
+        Me.btn5.Location = New System.Drawing.Point(492, 176)
         Me.btn5.Name = "btn5"
         Me.btn5.Size = New System.Drawing.Size(75, 23)
         Me.btn5.TabIndex = 74
@@ -122,7 +121,7 @@ Partial Class frmDepositPayment
         'btn2
         '
         Me.btn2.Anchor = System.Windows.Forms.AnchorStyles.Top
-        Me.btn2.Location = New System.Drawing.Point(594, 176)
+        Me.btn2.Location = New System.Drawing.Point(573, 176)
         Me.btn2.Name = "btn2"
         Me.btn2.Size = New System.Drawing.Size(75, 23)
         Me.btn2.TabIndex = 75
@@ -133,7 +132,7 @@ Partial Class frmDepositPayment
         'btn1
         '
         Me.btn1.Anchor = System.Windows.Forms.AnchorStyles.Top
-        Me.btn1.Location = New System.Drawing.Point(675, 176)
+        Me.btn1.Location = New System.Drawing.Point(654, 176)
         Me.btn1.Name = "btn1"
         Me.btn1.Size = New System.Drawing.Size(75, 23)
         Me.btn1.TabIndex = 76
@@ -146,10 +145,10 @@ Partial Class frmDepositPayment
         Me.lblLockerName.BackColor = System.Drawing.Color.Transparent
         Me.lblLockerName.Font = New System.Drawing.Font("Thai Sans Lite", 60.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblLockerName.ForeColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(128, Byte), Integer), CType(CType(0, Byte), Integer))
-        Me.lblLockerName.Location = New System.Drawing.Point(695, 231)
+        Me.lblLockerName.Location = New System.Drawing.Point(537, 433)
         Me.lblLockerName.Margin = New System.Windows.Forms.Padding(0)
         Me.lblLockerName.Name = "lblLockerName"
-        Me.lblLockerName.Size = New System.Drawing.Size(190, 87)
+        Me.lblLockerName.Size = New System.Drawing.Size(176, 87)
         Me.lblLockerName.TabIndex = 82
         Me.lblLockerName.Text = "M05"
         Me.lblLockerName.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
@@ -158,12 +157,12 @@ Partial Class frmDepositPayment
         '
         Me.lblPaidRemain.Anchor = System.Windows.Forms.AnchorStyles.Top
         Me.lblPaidRemain.BackColor = System.Drawing.Color.Transparent
-        Me.lblPaidRemain.Font = New System.Drawing.Font("Thai Sans Lite", 100.0!, System.Drawing.FontStyle.Bold)
+        Me.lblPaidRemain.Font = New System.Drawing.Font("Thai Sans Lite", 69.74999!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblPaidRemain.ForeColor = System.Drawing.Color.Black
-        Me.lblPaidRemain.Location = New System.Drawing.Point(646, 412)
+        Me.lblPaidRemain.Location = New System.Drawing.Point(478, 613)
         Me.lblPaidRemain.Margin = New System.Windows.Forms.Padding(0)
         Me.lblPaidRemain.Name = "lblPaidRemain"
-        Me.lblPaidRemain.Size = New System.Drawing.Size(313, 139)
+        Me.lblPaidRemain.Size = New System.Drawing.Size(222, 101)
         Me.lblPaidRemain.TabIndex = 92
         Me.lblPaidRemain.Text = "0000"
         Me.lblPaidRemain.TextAlign = System.Drawing.ContentAlignment.MiddleRight
@@ -173,7 +172,7 @@ Partial Class frmDepositPayment
         Me.Label1.BackColor = System.Drawing.Color.Transparent
         Me.Label1.FlatStyle = System.Windows.Forms.FlatStyle.System
         Me.Label1.Font = New System.Drawing.Font("Thai Sans Lite", 30.0!, System.Drawing.FontStyle.Bold)
-        Me.Label1.Location = New System.Drawing.Point(921, 461)
+        Me.Label1.Location = New System.Drawing.Point(689, 667)
         Me.Label1.Name = "Label1"
         Me.Label1.Size = New System.Drawing.Size(23, 41)
         Me.Label1.TabIndex = 93
@@ -184,11 +183,10 @@ Partial Class frmDepositPayment
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.AutoScroll = True
         Me.BackColor = System.Drawing.Color.White
         Me.BackgroundImage = Global.MiniboxLocker.My.Resources.Resources.bgDepositPayment
         Me.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
-        Me.ClientSize = New System.Drawing.Size(1024, 768)
+        Me.ClientSize = New System.Drawing.Size(768, 1024)
         Me.Controls.Add(Me.lblLockerName)
         Me.Controls.Add(Me.btn1)
         Me.Controls.Add(Me.btn2)

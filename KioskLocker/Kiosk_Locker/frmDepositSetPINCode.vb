@@ -24,6 +24,7 @@ Public Class frmDepositSetPINCode
         TimeOutCheckTime = DateTime.Now
         TimerTimeOut.Enabled = True
 
+        frmLoading.Close()
     End Sub
 
 

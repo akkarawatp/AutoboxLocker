@@ -46,7 +46,6 @@ Partial Class frmDepositThankyou
         Me.btnCloseLocker.TabIndex = 95
         Me.btnCloseLocker.Text = "ปิดตู้"
         Me.btnCloseLocker.UseVisualStyleBackColor = True
-        Me.btnCloseLocker.Visible = False
         '
         'TimerCheckCloseLocker
         '
@@ -60,7 +59,7 @@ Partial Class frmDepositThankyou
         Me.BackColor = System.Drawing.Color.White
         Me.BackgroundImage = Global.MiniboxLocker.My.Resources.Resources.bgDepositThankyou
         Me.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
-        Me.ClientSize = New System.Drawing.Size(1024, 768)
+        Me.ClientSize = New System.Drawing.Size(768, 1024)
         Me.Controls.Add(Me.btnCloseLocker)
         Me.Controls.Add(Me.lblTimeOut)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None
