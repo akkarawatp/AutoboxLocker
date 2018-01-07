@@ -11,9 +11,9 @@ Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "ServerLinqDB", "ServerLinqD
 EndProject
 Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "KioskSyncWindowService", "KioskSyncWindowService\KioskSyncWindowService.vbproj", "{2725D562-718E-4312-8B4B-0A20E8476FA2}"
 EndProject
-Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "KioskServerWindowService", "KioskServerWindowService\KioskServerWindowService.vbproj", "{65396323-CC56-43C8-8724-F709D76137EE}"
+Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "ServerTaskSchedule", "ServerTaskSchedule\ServerTaskSchedule.vbproj", "{CCEE70A7-B568-4A36-A94F-8D1821582113}"
 EndProject
-Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "ServerWindowSchedule", "ServerWindowSchedule\ServerWindowSchedule.vbproj", "{CCEE70A7-B568-4A36-A94F-8D1821582113}"
+Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "ServerWindowService", "ServerWindowService\ServerWindowService.vbproj", "{65396323-CC56-43C8-8724-F709D76137EE}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -37,14 +37,14 @@ Global
 		{2725D562-718E-4312-8B4B-0A20E8476FA2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2725D562-718E-4312-8B4B-0A20E8476FA2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2725D562-718E-4312-8B4B-0A20E8476FA2}.Release|Any CPU.Build.0 = Release|Any CPU
-		{65396323-CC56-43C8-8724-F709D76137EE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{65396323-CC56-43C8-8724-F709D76137EE}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{65396323-CC56-43C8-8724-F709D76137EE}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{65396323-CC56-43C8-8724-F709D76137EE}.Release|Any CPU.Build.0 = Release|Any CPU
 		{CCEE70A7-B568-4A36-A94F-8D1821582113}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{CCEE70A7-B568-4A36-A94F-8D1821582113}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CCEE70A7-B568-4A36-A94F-8D1821582113}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{CCEE70A7-B568-4A36-A94F-8D1821582113}.Release|Any CPU.Build.0 = Release|Any CPU
+		{65396323-CC56-43C8-8724-F709D76137EE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{65396323-CC56-43C8-8724-F709D76137EE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{65396323-CC56-43C8-8724-F709D76137EE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{65396323-CC56-43C8-8724-F709D76137EE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

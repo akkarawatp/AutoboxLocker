@@ -4,13 +4,13 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{65396323-CC56-43C8-8724-F709D76137EE}</ProjectGuid>
+    <ProjectGuid>{CCEE70A7-B568-4A36-A94F-8D1821582113}</ProjectGuid>
     <OutputType>WinExe</OutputType>
-    <StartupObject>KioskServerWindowService.KioskServerWindowService</StartupObject>
-    <RootNamespace>KioskServerWindowService</RootNamespace>
-    <AssemblyName>KioskServerWindowService</AssemblyName>
+    <StartupObject>ServerTaskSchedule.My.MyApplication</StartupObject>
+    <RootNamespace>ServerTaskSchedule</RootNamespace>
+    <AssemblyName>ServerTaskSchedule</AssemblyName>
     <FileAlignment>512</FileAlignment>
-    <MyType>Console</MyType>
+    <MyType>WindowsForms</MyType>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
   </PropertyGroup>
@@ -21,7 +21,7 @@
     <DefineDebug>true</DefineDebug>
     <DefineTrace>true</DefineTrace>
     <OutputPath>bin\Debug\</OutputPath>
-    <DocumentationFile>KioskServerWindowService.xml</DocumentationFile>
+    <DocumentationFile>ServerTaskSchedule.xml</DocumentationFile>
     <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022</NoWarn>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
@@ -31,7 +31,7 @@
     <DefineTrace>true</DefineTrace>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
-    <DocumentationFile>KioskServerWindowService.xml</DocumentationFile>
+    <DocumentationFile>ServerTaskSchedule.xml</DocumentationFile>
     <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022</NoWarn>
   </PropertyGroup>
   <PropertyGroup>
@@ -52,13 +52,9 @@
       <HintPath>bin\Debug\EPPlus.dll</HintPath>
     </Reference>
     <Reference Include="System" />
-    <Reference Include="System.Configuration.Install" />
     <Reference Include="System.Data" />
     <Reference Include="System.Deployment" />
     <Reference Include="System.Drawing" />
-    <Reference Include="System.EnterpriseServices" />
-    <Reference Include="System.ServiceProcess" />
-    <Reference Include="System.Web.Services" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
     <Reference Include="System.Core" />
@@ -72,24 +68,28 @@
     <Import Include="System.Collections" />
     <Import Include="System.Collections.Generic" />
     <Import Include="System.Data" />
+    <Import Include="System.Drawing" />
     <Import Include="System.Diagnostics" />
+    <Import Include="System.Windows.Forms" />
     <Import Include="System.Linq" />
     <Import Include="System.Xml.Linq" />
     <Import Include="System.Threading.Tasks" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="IniReader.vb" />
+    <Compile Include="frmServerWindowSchedule.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmServerWindowSchedule.Designer.vb">
+      <DependentUpon>frmServerWindowSchedule.vb</DependentUpon>
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="LockerNoticeValidExpireENG.vb" />
+    <Compile Include="LockerReportMailENG.vb" />
+    <Compile Include="My Project\AssemblyInfo.vb" />
     <Compile Include="My Project\Application.Designer.vb">
       <AutoGen>True</AutoGen>
       <DependentUpon>Application.myapp</DependentUpon>
     </Compile>
-    <Compile Include="KioskServerWindowService.vb">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="KioskServerWindowService.Designer.vb">
-      <DependentUpon>KioskServerWindowService.vb</DependentUpon>
-    </Compile>
-    <Compile Include="My Project\AssemblyInfo.vb" />
     <Compile Include="My Project\Resources.Designer.vb">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -100,37 +100,17 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
-    <Compile Include="ProjectInstaller.Designer.vb">
-      <DependentUpon>ProjectInstaller.vb</DependentUpon>
-    </Compile>
-    <Compile Include="ProjectInstaller.vb">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="ServerUpdateMonitorENG.vb" />
-    <Compile Include="TestFunctionServerWindowService.Designer.vb">
-      <DependentUpon>TestFunctionServerWindowService.vb</DependentUpon>
-    </Compile>
-    <Compile Include="TestFunctionServerWindowService.vb">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Web References\MonitorWebService\Reference.vb">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Reference.map</DependentUpon>
-    </Compile>
+    <Compile Include="SendMailENG.vb" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="frmServerWindowSchedule.resx">
+      <DependentUpon>frmServerWindowSchedule.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="My Project\Resources.resx">
       <Generator>VbMyResourcesResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.vb</LastGenOutput>
       <CustomToolNamespace>My.Resources</CustomToolNamespace>
       <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="ProjectInstaller.resx">
-      <DependentUpon>ProjectInstaller.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="TestFunctionServerWindowService.resx">
-      <DependentUpon>TestFunctionServerWindowService.vb</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
@@ -144,37 +124,20 @@
       <LastGenOutput>Settings.Designer.vb</LastGenOutput>
     </None>
     <None Include="App.config" />
-    <None Include="Web References\MonitorWebService\MonitorInfoWebService.wsdl" />
-    <None Include="Web References\MonitorWebService\Reference.map">
-      <Generator>MSDiscoCodeGenerator</Generator>
-      <LastGenOutput>Reference.vb</LastGenOutput>
-    </None>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\SharedObject\Engine\Engine.vbproj">
       <Project>{8c9564f9-a9a8-414a-b635-2ad6223fad52}</Project>
       <Name>Engine</Name>
     </ProjectReference>
+    <ProjectReference Include="..\KioskLinqDB\KioskLinqDB.vbproj">
+      <Project>{631d831b-7e5a-44e4-a947-4cb0cb9f35ad}</Project>
+      <Name>KioskLinqDB</Name>
+    </ProjectReference>
     <ProjectReference Include="..\ServerLinqDB\ServerLinqDB.vbproj">
       <Project>{b7589d60-a617-477b-be93-b021a227c0ad}</Project>
       <Name>ServerLinqDB</Name>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <WebReferences Include="Web References\" />
-  </ItemGroup>
-  <ItemGroup>
-    <WebReferenceUrl Include="http://103.253.72.87/TITApp/TIT-MonitorWebservice/MonitorInfoWebService.asmx%3fWSDL">
-      <UrlBehavior>Dynamic</UrlBehavior>
-      <RelPath>Web References\MonitorWebService\</RelPath>
-      <UpdateFromURL>http://103.253.72.87/TITApp/TIT-MonitorWebservice/MonitorInfoWebService.asmx%3fWSDL</UpdateFromURL>
-      <ServiceLocationURL>
-      </ServiceLocationURL>
-      <CachedDynamicPropName>
-      </CachedDynamicPropName>
-      <CachedAppSettingsObjectName>MySettings</CachedAppSettingsObjectName>
-      <CachedSettingsPropName>KioskServerWindowService_MonitorWebService_MonitorInfoWebService</CachedSettingsPropName>
-    </WebReferenceUrl>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

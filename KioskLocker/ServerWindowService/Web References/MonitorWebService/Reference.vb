@@ -25,7 +25,7 @@ Imports System.Xml.Serialization
 Namespace MonitorWebService
     
     '''<remarks/>
-    <System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1586.0"),  _
+    <System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1055.0"),  _
      System.Diagnostics.DebuggerStepThroughAttribute(),  _
      System.ComponentModel.DesignerCategoryAttribute("code"),  _
      System.Web.Services.WebServiceBindingAttribute(Name:="MonitorInfoWebServiceSoap", [Namespace]:="http://tempuri.org/")>  _
@@ -41,7 +41,7 @@ Namespace MonitorWebService
         '''<remarks/>
         Public Sub New()
             MyBase.New
-            Me.Url = Global.KioskServerWindowService.My.MySettings.Default.KioskServerWindowService_MonitorWebService_MonitorInfoWebService
+            Me.Url = Global.ServerWindowService.My.MySettings.Default.KioskServerWindowService_MonitorWebService_MonitorInfoWebService
             If (Me.IsLocalFileSystemWebService(Me.Url) = true) Then
                 Me.UseDefaultCredentials = true
                 Me.useDefaultCredentialsSetExplicitly = false
@@ -154,11 +154,11 @@ Namespace MonitorWebService
     End Class
     
     '''<remarks/>
-    <System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1586.0")>  _
+    <System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1055.0")>  _
     Public Delegate Sub GetMonitorComputerInfoCompletedEventHandler(ByVal sender As Object, ByVal e As GetMonitorComputerInfoCompletedEventArgs)
     
     '''<remarks/>
-    <System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1586.0"),  _
+    <System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1055.0"),  _
      System.Diagnostics.DebuggerStepThroughAttribute(),  _
      System.ComponentModel.DesignerCategoryAttribute("code")>  _
     Partial Public Class GetMonitorComputerInfoCompletedEventArgs
@@ -181,11 +181,11 @@ Namespace MonitorWebService
     End Class
     
     '''<remarks/>
-    <System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1586.0")>  _
+    <System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1055.0")>  _
     Public Delegate Sub CheckDbConnectCompletedEventHandler(ByVal sender As Object, ByVal e As CheckDbConnectCompletedEventArgs)
     
     '''<remarks/>
-    <System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1586.0"),  _
+    <System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1055.0"),  _
      System.Diagnostics.DebuggerStepThroughAttribute(),  _
      System.ComponentModel.DesignerCategoryAttribute("code")>  _
     Partial Public Class CheckDbConnectCompletedEventArgs
