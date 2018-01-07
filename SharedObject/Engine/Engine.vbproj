@@ -127,6 +127,9 @@
       <LastGenOutput>Settings.Designer.vb</LastGenOutput>
     </None>
     <None Include="Web References\SyncDataWebservice\ATBLockerWebService.wsdl" />
+    <None Include="Web References\SyncDataWebservice\CheckConnectionData.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
     <None Include="Web References\SyncDataWebservice\LoginReturnData.datasource">
       <DependentUpon>Reference.map</DependentUpon>
     </None>
@@ -161,10 +164,10 @@
     <WebReferences Include="Web References\" />
   </ItemGroup>
   <ItemGroup>
-    <WebReferenceUrl Include="http://103.253.72.223/AutoboxLocker/LockerWebservice/ATBLockerWebService.asmx%3fWSDL">
+    <WebReferenceUrl Include="http://103.22.183.183/MiniboxWebservice/ATBLockerWebService.asmx%3fWSDL">
       <UrlBehavior>Dynamic</UrlBehavior>
       <RelPath>Web References\SyncDataWebservice\</RelPath>
-      <UpdateFromURL>http://103.253.72.223/AutoboxLocker/LockerWebservice/ATBLockerWebService.asmx%3fWSDL</UpdateFromURL>
+      <UpdateFromURL>http://103.22.183.183/MiniboxWebservice/ATBLockerWebService.asmx%3fWSDL</UpdateFromURL>
       <ServiceLocationURL>
       </ServiceLocationURL>
       <CachedDynamicPropName>

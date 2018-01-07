@@ -2059,10 +2059,10 @@
   </wsdl:binding>
   <wsdl:service name="ATBLockerWebService">
     <wsdl:port name="ATBLockerWebServiceSoap" binding="tns:ATBLockerWebServiceSoap">
-      <soap:address location="http://103.253.72.223/AutoboxLocker/LockerWebservice/ATBLockerWebService.asmx" />
+      <soap:address location="http://103.22.183.183/MiniboxWebservice/ATBLockerWebService.asmx" />
     </wsdl:port>
     <wsdl:port name="ATBLockerWebServiceSoap12" binding="tns:ATBLockerWebServiceSoap12">
-      <soap12:address location="http://103.253.72.223/AutoboxLocker/LockerWebservice/ATBLockerWebService.asmx" />
+      <soap12:address location="http://103.22.183.183/MiniboxWebservice/ATBLockerWebService.asmx" />
     </wsdl:port>
   </wsdl:service>
 </wsdl:definitions>

@@ -550,10 +550,10 @@
       <CachedAppSettingsObjectName>MySettings</CachedAppSettingsObjectName>
       <CachedSettingsPropName>Kiosk_Locker_AlarmWebReference_ApplicationWebservice</CachedSettingsPropName>
     </WebReferenceUrl>
-    <WebReferenceUrl Include="http://103.253.72.223/AutoboxLocker/LockerWebservice/ATBLockerWebService.asmx%3fWSDL">
+    <WebReferenceUrl Include="http://103.22.183.183/MiniboxWebservice/ATBLockerWebService.asmx%3fWSDL">
       <UrlBehavior>Dynamic</UrlBehavior>
       <RelPath>Web References\Webservice_Locker\</RelPath>
-      <UpdateFromURL>http://103.253.72.223/AutoboxLocker/LockerWebservice/ATBLockerWebService.asmx%3fWSDL</UpdateFromURL>
+      <UpdateFromURL>http://103.22.183.183/MiniboxWebservice/ATBLockerWebService.asmx%3fWSDL</UpdateFromURL>
       <ServiceLocationURL>
       </ServiceLocationURL>
       <CachedDynamicPropName>

@@ -42,6 +42,8 @@ Namespace SyncDataWebservice
         
         Private ReportKioskCurrentQtyOperationCompleted As System.Threading.SendOrPostCallback
         
+        Private CheckWebserviceConnectionOperationCompleted As System.Threading.SendOrPostCallback
+        
         Private GetMasterAppScreenOperationCompleted As System.Threading.SendOrPostCallback
         
         Private GetMasterAppStepOperationCompleted As System.Threading.SendOrPostCallback
@@ -108,6 +110,8 @@ Namespace SyncDataWebservice
         
         Private UpdateLockerMachineKeyOperationCompleted As System.Threading.SendOrPostCallback
         
+        Private ClearLockerMachineKeyOperationCompleted As System.Threading.SendOrPostCallback
+        
         Private useDefaultCredentialsSetExplicitly As Boolean
         
         '''<remarks/>
@@ -160,6 +164,9 @@ Namespace SyncDataWebservice
         
         '''<remarks/>
         Public Event ReportKioskCurrentQtyCompleted As ReportKioskCurrentQtyCompletedEventHandler
+        
+        '''<remarks/>
+        Public Event CheckWebserviceConnectionCompleted As CheckWebserviceConnectionCompletedEventHandler
         
         '''<remarks/>
         Public Event GetMasterAppScreenCompleted As GetMasterAppScreenCompletedEventHandler
@@ -259,6 +266,9 @@ Namespace SyncDataWebservice
         
         '''<remarks/>
         Public Event UpdateLockerMachineKeyCompleted As UpdateLockerMachineKeyCompletedEventHandler
+        
+        '''<remarks/>
+        Public Event ClearLockerMachineKeyCompleted As ClearLockerMachineKeyCompletedEventHandler
         
         '''<remarks/>
         <System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/LoginTIT", RequestNamespace:="http://tempuri.org/", ResponseNamespace:="http://tempuri.org/", Use:=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle:=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)>  _
@@ -392,6 +402,33 @@ Namespace SyncDataWebservice
             If (Not (Me.ReportKioskCurrentQtyCompletedEvent) Is Nothing) Then
                 Dim invokeArgs As System.Web.Services.Protocols.InvokeCompletedEventArgs = CType(arg,System.Web.Services.Protocols.InvokeCompletedEventArgs)
                 RaiseEvent ReportKioskCurrentQtyCompleted(Me, New ReportKioskCurrentQtyCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState))
+            End If
+        End Sub
+        
+        '''<remarks/>
+        <System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/CheckWebserviceConnection", RequestNamespace:="http://tempuri.org/", ResponseNamespace:="http://tempuri.org/", Use:=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle:=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)>  _
+        Public Function CheckWebserviceConnection() As CheckConnectionData
+            Dim results() As Object = Me.Invoke("CheckWebserviceConnection", New Object(-1) {})
+            Return CType(results(0),CheckConnectionData)
+        End Function
+        
+        '''<remarks/>
+        Public Overloads Sub CheckWebserviceConnectionAsync()
+            Me.CheckWebserviceConnectionAsync(Nothing)
+        End Sub
+        
+        '''<remarks/>
+        Public Overloads Sub CheckWebserviceConnectionAsync(ByVal userState As Object)
+            If (Me.CheckWebserviceConnectionOperationCompleted Is Nothing) Then
+                Me.CheckWebserviceConnectionOperationCompleted = AddressOf Me.OnCheckWebserviceConnectionOperationCompleted
+            End If
+            Me.InvokeAsync("CheckWebserviceConnection", New Object(-1) {}, Me.CheckWebserviceConnectionOperationCompleted, userState)
+        End Sub
+        
+        Private Sub OnCheckWebserviceConnectionOperationCompleted(ByVal arg As Object)
+            If (Not (Me.CheckWebserviceConnectionCompletedEvent) Is Nothing) Then
+                Dim invokeArgs As System.Web.Services.Protocols.InvokeCompletedEventArgs = CType(arg,System.Web.Services.Protocols.InvokeCompletedEventArgs)
+                RaiseEvent CheckWebserviceConnectionCompleted(Me, New CheckWebserviceConnectionCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState))
             End If
         End Sub
         
@@ -1381,6 +1418,33 @@ Namespace SyncDataWebservice
         End Sub
         
         '''<remarks/>
+        <System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/ClearLockerMachineKey", RequestNamespace:="http://tempuri.org/", ResponseNamespace:="http://tempuri.org/", Use:=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle:=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)>  _
+        Public Function ClearLockerMachineKey(ByVal KioskID As Long, ByVal KioskComName As String) As String
+            Dim results() As Object = Me.Invoke("ClearLockerMachineKey", New Object() {KioskID, KioskComName})
+            Return CType(results(0),String)
+        End Function
+        
+        '''<remarks/>
+        Public Overloads Sub ClearLockerMachineKeyAsync(ByVal KioskID As Long, ByVal KioskComName As String)
+            Me.ClearLockerMachineKeyAsync(KioskID, KioskComName, Nothing)
+        End Sub
+        
+        '''<remarks/>
+        Public Overloads Sub ClearLockerMachineKeyAsync(ByVal KioskID As Long, ByVal KioskComName As String, ByVal userState As Object)
+            If (Me.ClearLockerMachineKeyOperationCompleted Is Nothing) Then
+                Me.ClearLockerMachineKeyOperationCompleted = AddressOf Me.OnClearLockerMachineKeyOperationCompleted
+            End If
+            Me.InvokeAsync("ClearLockerMachineKey", New Object() {KioskID, KioskComName}, Me.ClearLockerMachineKeyOperationCompleted, userState)
+        End Sub
+        
+        Private Sub OnClearLockerMachineKeyOperationCompleted(ByVal arg As Object)
+            If (Not (Me.ClearLockerMachineKeyCompletedEvent) Is Nothing) Then
+                Dim invokeArgs As System.Web.Services.Protocols.InvokeCompletedEventArgs = CType(arg,System.Web.Services.Protocols.InvokeCompletedEventArgs)
+                RaiseEvent ClearLockerMachineKeyCompleted(Me, New ClearLockerMachineKeyCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState))
+            End If
+        End Sub
+        
+        '''<remarks/>
         Public Shadows Sub CancelAsync(ByVal userState As Object)
             MyBase.CancelAsync(userState)
         End Sub
@@ -2082,6 +2146,51 @@ Namespace SyncDataWebservice
     End Class
     
     '''<remarks/>
+    <System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.6.1055.0"),  _
+     System.SerializableAttribute(),  _
+     System.Diagnostics.DebuggerStepThroughAttribute(),  _
+     System.ComponentModel.DesignerCategoryAttribute("code"),  _
+     System.Xml.Serialization.XmlTypeAttribute([Namespace]:="http://tempuri.org/")>  _
+    Partial Public Class CheckConnectionData
+        
+        Private isSuccessField As Boolean
+        
+        Private dbInfoField As String
+        
+        Private errorMessageField As String
+        
+        '''<remarks/>
+        Public Property IsSuccess() As Boolean
+            Get
+                Return Me.isSuccessField
+            End Get
+            Set
+                Me.isSuccessField = value
+            End Set
+        End Property
+        
+        '''<remarks/>
+        Public Property DbInfo() As String
+            Get
+                Return Me.dbInfoField
+            End Get
+            Set
+                Me.dbInfoField = value
+            End Set
+        End Property
+        
+        '''<remarks/>
+        Public Property ErrorMessage() As String
+            Get
+                Return Me.errorMessageField
+            End Get
+            Set
+                Me.errorMessageField = value
+            End Set
+        End Property
+    End Class
+    
+    '''<remarks/>
     <System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1055.0")>  _
     Public Delegate Sub LoginTITCompletedEventHandler(ByVal sender As Object, ByVal e As LoginTITCompletedEventArgs)
     
@@ -2212,6 +2321,33 @@ Namespace SyncDataWebservice
             Get
                 Me.RaiseExceptionIfNecessary
                 Return CType(Me.results(0),Boolean)
+            End Get
+        End Property
+    End Class
+    
+    '''<remarks/>
+    <System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1055.0")>  _
+    Public Delegate Sub CheckWebserviceConnectionCompletedEventHandler(ByVal sender As Object, ByVal e As CheckWebserviceConnectionCompletedEventArgs)
+    
+    '''<remarks/>
+    <System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1055.0"),  _
+     System.Diagnostics.DebuggerStepThroughAttribute(),  _
+     System.ComponentModel.DesignerCategoryAttribute("code")>  _
+    Partial Public Class CheckWebserviceConnectionCompletedEventArgs
+        Inherits System.ComponentModel.AsyncCompletedEventArgs
+        
+        Private results() As Object
+        
+        Friend Sub New(ByVal results() As Object, ByVal exception As System.Exception, ByVal cancelled As Boolean, ByVal userState As Object)
+            MyBase.New(exception, cancelled, userState)
+            Me.results = results
+        End Sub
+        
+        '''<remarks/>
+        Public ReadOnly Property Result() As CheckConnectionData
+            Get
+                Me.RaiseExceptionIfNecessary
+                Return CType(Me.results(0),CheckConnectionData)
             End Get
         End Property
     End Class
@@ -3103,6 +3239,33 @@ Namespace SyncDataWebservice
             Get
                 Me.RaiseExceptionIfNecessary
                 Return CType(Me.results(0),UpdateMachineKeyInfo)
+            End Get
+        End Property
+    End Class
+    
+    '''<remarks/>
+    <System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1055.0")>  _
+    Public Delegate Sub ClearLockerMachineKeyCompletedEventHandler(ByVal sender As Object, ByVal e As ClearLockerMachineKeyCompletedEventArgs)
+    
+    '''<remarks/>
+    <System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1055.0"),  _
+     System.Diagnostics.DebuggerStepThroughAttribute(),  _
+     System.ComponentModel.DesignerCategoryAttribute("code")>  _
+    Partial Public Class ClearLockerMachineKeyCompletedEventArgs
+        Inherits System.ComponentModel.AsyncCompletedEventArgs
+        
+        Private results() As Object
+        
+        Friend Sub New(ByVal results() As Object, ByVal exception As System.Exception, ByVal cancelled As Boolean, ByVal userState As Object)
+            MyBase.New(exception, cancelled, userState)
+            Me.results = results
+        End Sub
+        
+        '''<remarks/>
+        Public ReadOnly Property Result() As String
+            Get
+                Me.RaiseExceptionIfNecessary
+                Return CType(Me.results(0),String)
             End Get
         End Property
     End Class

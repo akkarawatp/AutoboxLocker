@@ -57,7 +57,7 @@ Namespace My
         <Global.System.Configuration.ApplicationScopedSettingAttribute(),  _
          Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.Configuration.SpecialSettingAttribute(Global.System.Configuration.SpecialSetting.WebServiceUrl),  _
-         Global.System.Configuration.DefaultSettingValueAttribute("http://103.253.72.223/AutoboxLocker/LockerWebservice/ATBLockerWebService.asmx")>  _
+         Global.System.Configuration.DefaultSettingValueAttribute("http://103.22.183.183/MiniboxWebservice/ATBLockerWebService.asmx")>  _
         Public ReadOnly Property Kiosk_Locker_Webservice_Locker_ATBLockerWebService() As String
             Get
                 Return CType(Me("Kiosk_Locker_Webservice_Locker_ATBLockerWebService"),String)

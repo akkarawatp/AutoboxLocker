@@ -3,7 +3,7 @@
   <Profiles />
   <Settings>
     <Setting Name="Kiosk_Locker_Webservice_Locker_ATBLockerWebService" Type="(Web Service URL)" Scope="Application">
-      <Value Profile="(Default)">http://103.253.72.223/AutoboxLocker/LockerWebservice/ATBLockerWebService.asmx</Value>
+      <Value Profile="(Default)">http://103.22.183.183/MiniboxWebservice/ATBLockerWebService.asmx</Value>
     </Setting>
   </Settings>
 </SettingsFile>
