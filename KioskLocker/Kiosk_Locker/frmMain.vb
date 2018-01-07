@@ -270,6 +270,7 @@ Public Class frmMain
         Try
             KioskData.ComputerName = Environment.MachineName
             KioskData.CardLanDesc = GetCardLanDesc()
+            IsNoCheckDevice = GetNoCheckDevice()
             Dim IsNetworkDevice As Boolean = False
 
             Try

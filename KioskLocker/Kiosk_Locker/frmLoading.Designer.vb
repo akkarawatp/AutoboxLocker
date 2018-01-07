@@ -41,7 +41,7 @@ Partial Class frmLoading
         'PictureBox1
         '
         Me.PictureBox1.Image = Global.MiniboxLocker.My.Resources.Resources.IconProcessing
-        Me.PictureBox1.Location = New System.Drawing.Point(230, 456)
+        Me.PictureBox1.Location = New System.Drawing.Point(246, 373)
         Me.PictureBox1.Name = "PictureBox1"
         Me.PictureBox1.Size = New System.Drawing.Size(260, 260)
         Me.PictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom

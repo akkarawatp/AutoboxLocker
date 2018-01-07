@@ -40,19 +40,26 @@ Public Class frmDepositThankyou
         Application.DoEvents()
         If DepositOpenLocker() = True Then
             'Open Sensor
-            If BoardSensor.ConnectSensorDevice(KioskConfig.SensorComport) = True Then
+            Dim ConnectSensor As Boolean = False
+            If IsNoCheckDevice = True Then
+                ConnectSensor = True
+                btnCloseLocker.Visible = True
+            Else
+                ConnectSensor = BoardSensor.ConnectSensorDevice(KioskConfig.SensorComport)
                 InsertLogTransactionActivity(Deposit.DepositTransNo, "", "", KioskConfig.SelectForm, KioskLockerStep.DepositThankYou_StartSensor, "", False)
-
                 'ใช้ Sensor เพื่อตรวจจับว่าลูกค้าได้ปิดตู้แล้วจริงๆ จึงกลับหน้าแรก
                 BoardSensor.SensorRequestData(Deposit.LockerPinSendor)
                 AddHandler BoardSensor.SensorReceiveData, AddressOf SensorDataReceived
+            End If
+
+
+            If ConnectSensor = True Then
                 _CallOpenLocker = True
                 TimerCheckCloseLocker.Enabled = True
                 TimerCheckCloseLocker.Start()
             Else
                 'ถ้าตู้เปิดแล้วแต่ Sensor ไม่ทำงาน ให้ปิด LED
                 BoardLED.LEDStop(Deposit.LockerPinLED)
-
 
                 InsertLogTransactionActivity(Deposit.DepositTransNo, "", "", KioskConfig.SelectForm, KioskLockerStep.DepositThankYou_StartSensor, " Sensor ไม่สามารถใช้งานได้", True)
                 UpdateDeviceStatus(Data.ConstantsData.DeviceID.SensorBoard, Data.ConstantsData.BoardStatus.Disconnected)

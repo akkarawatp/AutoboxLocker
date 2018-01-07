@@ -190,6 +190,12 @@ Public Class frmSC_KioskSetting
                 txtCloseTimeM.Focus()
                 Exit Sub
             End If
+
+            If Val(txtOpenTimeH.Text) = 0 And Val(txtOpenTimeM.Text) = 0 And Val(txtCloseTimeH.Text) = 0 And Val(txtCloseTimeM.Text) = 0 Then
+                ShowDialogErrorMessageSC("Please enter Kiosk Open Time")
+                txtOpenTimeH.Focus()
+                Exit Sub
+            End If
         End If
 
         If txtKioskID.Text = "" Then

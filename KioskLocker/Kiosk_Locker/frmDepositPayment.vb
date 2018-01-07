@@ -120,6 +120,19 @@ Public Class frmDepositPayment
     End Sub
 
     Public Sub StartPaymentInitialDevice()
+        If IsNoCheckDevice = True Then
+            btn1.Visible = True
+            btn2.Visible = True
+            btn5.Visible = True
+            btn10.Visible = True
+            btn20.Visible = True
+            btn50.Visible = True
+            btn100.Visible = True
+            btn500.Visible = True
+            btn1000.Visible = True
+            Exit Sub
+        End If
+
         Dim MsAppStepID As Int16 = KioskLockerStep.DepositPayment_StartDeviceBanknoteIn
         Try
             If BanknoteIn.ConnectBanknoteInDevice(KioskConfig.CashInComport) = True Then

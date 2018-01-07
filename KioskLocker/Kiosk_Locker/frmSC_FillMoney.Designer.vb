@@ -50,7 +50,7 @@ Partial Class frmSC_FillMoney
         Me.txtCoinInMoney.BorderStyle = System.Windows.Forms.BorderStyle.None
         Me.txtCoinInMoney.Font = New System.Drawing.Font("Microsoft Sans Serif", 30.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.txtCoinInMoney.ForeColor = System.Drawing.Color.FromArgb(CType(CType(6, Byte), Integer), CType(CType(175, Byte), Integer), CType(CType(143, Byte), Integer))
-        Me.txtCoinInMoney.Location = New System.Drawing.Point(70, 281)
+        Me.txtCoinInMoney.Location = New System.Drawing.Point(66, 338)
         Me.txtCoinInMoney.MaxLength = 15
         Me.txtCoinInMoney.Name = "txtCoinInMoney"
         Me.txtCoinInMoney.ReadOnly = True
@@ -66,11 +66,11 @@ Partial Class frmSC_FillMoney
         Me.txtBanknoteInMoney.BorderStyle = System.Windows.Forms.BorderStyle.None
         Me.txtBanknoteInMoney.Font = New System.Drawing.Font("Microsoft Sans Serif", 30.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.txtBanknoteInMoney.ForeColor = System.Drawing.Color.FromArgb(CType(CType(6, Byte), Integer), CType(CType(175, Byte), Integer), CType(CType(143, Byte), Integer))
-        Me.txtBanknoteInMoney.Location = New System.Drawing.Point(76, 436)
+        Me.txtBanknoteInMoney.Location = New System.Drawing.Point(52, 498)
         Me.txtBanknoteInMoney.MaxLength = 15
         Me.txtBanknoteInMoney.Name = "txtBanknoteInMoney"
         Me.txtBanknoteInMoney.ReadOnly = True
-        Me.txtBanknoteInMoney.Size = New System.Drawing.Size(190, 46)
+        Me.txtBanknoteInMoney.Size = New System.Drawing.Size(184, 46)
         Me.txtBanknoteInMoney.TabIndex = 57
         Me.txtBanknoteInMoney.Text = "0.00"
         Me.txtBanknoteInMoney.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
@@ -81,10 +81,10 @@ Partial Class frmSC_FillMoney
         Me.txtCoinOut5.BackColor = System.Drawing.Color.FromArgb(CType(CType(239, Byte), Integer), CType(CType(239, Byte), Integer), CType(CType(239, Byte), Integer))
         Me.txtCoinOut5.BorderStyle = System.Windows.Forms.BorderStyle.None
         Me.txtCoinOut5.Font = New System.Drawing.Font("Microsoft Sans Serif", 20.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtCoinOut5.Location = New System.Drawing.Point(646, 204)
+        Me.txtCoinOut5.Location = New System.Drawing.Point(492, 276)
         Me.txtCoinOut5.MaxLength = 15
         Me.txtCoinOut5.Name = "txtCoinOut5"
-        Me.txtCoinOut5.Size = New System.Drawing.Size(166, 31)
+        Me.txtCoinOut5.Size = New System.Drawing.Size(128, 31)
         Me.txtCoinOut5.TabIndex = 0
         Me.txtCoinOut5.Text = "0"
         Me.txtCoinOut5.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
@@ -93,11 +93,11 @@ Partial Class frmSC_FillMoney
         '
         Me.lblTotalCoinOut5.Anchor = System.Windows.Forms.AnchorStyles.Top
         Me.lblTotalCoinOut5.BackColor = System.Drawing.Color.White
-        Me.lblTotalCoinOut5.Font = New System.Drawing.Font("Microsoft Sans Serif", 20.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(222, Byte))
+        Me.lblTotalCoinOut5.Font = New System.Drawing.Font("Microsoft Sans Serif", 16.0!)
         Me.lblTotalCoinOut5.ForeColor = System.Drawing.Color.FromArgb(CType(CType(102, Byte), Integer), CType(CType(123, Byte), Integer), CType(CType(128, Byte), Integer))
-        Me.lblTotalCoinOut5.Location = New System.Drawing.Point(835, 202)
+        Me.lblTotalCoinOut5.Location = New System.Drawing.Point(638, 279)
         Me.lblTotalCoinOut5.Name = "lblTotalCoinOut5"
-        Me.lblTotalCoinOut5.Size = New System.Drawing.Size(177, 31)
+        Me.lblTotalCoinOut5.Size = New System.Drawing.Size(123, 31)
         Me.lblTotalCoinOut5.TabIndex = 64
         Me.lblTotalCoinOut5.Text = "/ 500 เหรียญ"
         Me.lblTotalCoinOut5.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
@@ -106,11 +106,11 @@ Partial Class frmSC_FillMoney
         '
         Me.lblTotalBanknoteOut20.Anchor = System.Windows.Forms.AnchorStyles.Top
         Me.lblTotalBanknoteOut20.BackColor = System.Drawing.Color.White
-        Me.lblTotalBanknoteOut20.Font = New System.Drawing.Font("Microsoft Sans Serif", 20.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(222, Byte))
+        Me.lblTotalBanknoteOut20.Font = New System.Drawing.Font("Microsoft Sans Serif", 18.0!)
         Me.lblTotalBanknoteOut20.ForeColor = System.Drawing.Color.FromArgb(CType(CType(102, Byte), Integer), CType(CType(123, Byte), Integer), CType(CType(128, Byte), Integer))
-        Me.lblTotalBanknoteOut20.Location = New System.Drawing.Point(835, 273)
+        Me.lblTotalBanknoteOut20.Location = New System.Drawing.Point(638, 343)
         Me.lblTotalBanknoteOut20.Name = "lblTotalBanknoteOut20"
-        Me.lblTotalBanknoteOut20.Size = New System.Drawing.Size(164, 31)
+        Me.lblTotalBanknoteOut20.Size = New System.Drawing.Size(97, 31)
         Me.lblTotalBanknoteOut20.TabIndex = 66
         Me.lblTotalBanknoteOut20.Text = "/ 500 ใบ"
         Me.lblTotalBanknoteOut20.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
@@ -121,10 +121,10 @@ Partial Class frmSC_FillMoney
         Me.txtBanknoteOut20.BackColor = System.Drawing.Color.FromArgb(CType(CType(239, Byte), Integer), CType(CType(239, Byte), Integer), CType(CType(239, Byte), Integer))
         Me.txtBanknoteOut20.BorderStyle = System.Windows.Forms.BorderStyle.None
         Me.txtBanknoteOut20.Font = New System.Drawing.Font("Microsoft Sans Serif", 20.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtBanknoteOut20.Location = New System.Drawing.Point(646, 272)
+        Me.txtBanknoteOut20.Location = New System.Drawing.Point(492, 343)
         Me.txtBanknoteOut20.MaxLength = 15
         Me.txtBanknoteOut20.Name = "txtBanknoteOut20"
-        Me.txtBanknoteOut20.Size = New System.Drawing.Size(166, 31)
+        Me.txtBanknoteOut20.Size = New System.Drawing.Size(128, 31)
         Me.txtBanknoteOut20.TabIndex = 1
         Me.txtBanknoteOut20.Text = "0"
         Me.txtBanknoteOut20.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
@@ -133,11 +133,11 @@ Partial Class frmSC_FillMoney
         '
         Me.lblTotalBanknoteOut100.Anchor = System.Windows.Forms.AnchorStyles.Top
         Me.lblTotalBanknoteOut100.BackColor = System.Drawing.Color.White
-        Me.lblTotalBanknoteOut100.Font = New System.Drawing.Font("Microsoft Sans Serif", 20.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(222, Byte))
+        Me.lblTotalBanknoteOut100.Font = New System.Drawing.Font("Microsoft Sans Serif", 18.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(222, Byte))
         Me.lblTotalBanknoteOut100.ForeColor = System.Drawing.Color.FromArgb(CType(CType(102, Byte), Integer), CType(CType(123, Byte), Integer), CType(CType(128, Byte), Integer))
-        Me.lblTotalBanknoteOut100.Location = New System.Drawing.Point(835, 343)
+        Me.lblTotalBanknoteOut100.Location = New System.Drawing.Point(638, 415)
         Me.lblTotalBanknoteOut100.Name = "lblTotalBanknoteOut100"
-        Me.lblTotalBanknoteOut100.Size = New System.Drawing.Size(164, 31)
+        Me.lblTotalBanknoteOut100.Size = New System.Drawing.Size(97, 31)
         Me.lblTotalBanknoteOut100.TabIndex = 68
         Me.lblTotalBanknoteOut100.Text = "/ 500 ใบ"
         Me.lblTotalBanknoteOut100.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
@@ -148,10 +148,10 @@ Partial Class frmSC_FillMoney
         Me.txtBanknoteOut100.BackColor = System.Drawing.Color.FromArgb(CType(CType(239, Byte), Integer), CType(CType(239, Byte), Integer), CType(CType(239, Byte), Integer))
         Me.txtBanknoteOut100.BorderStyle = System.Windows.Forms.BorderStyle.None
         Me.txtBanknoteOut100.Font = New System.Drawing.Font("Microsoft Sans Serif", 20.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtBanknoteOut100.Location = New System.Drawing.Point(646, 343)
+        Me.txtBanknoteOut100.Location = New System.Drawing.Point(492, 414)
         Me.txtBanknoteOut100.MaxLength = 15
         Me.txtBanknoteOut100.Name = "txtBanknoteOut100"
-        Me.txtBanknoteOut100.Size = New System.Drawing.Size(166, 31)
+        Me.txtBanknoteOut100.Size = New System.Drawing.Size(128, 31)
         Me.txtBanknoteOut100.TabIndex = 2
         Me.txtBanknoteOut100.Text = "0"
         Me.txtBanknoteOut100.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
@@ -163,11 +163,11 @@ Partial Class frmSC_FillMoney
         Me.txtTotalMoney.BorderStyle = System.Windows.Forms.BorderStyle.None
         Me.txtTotalMoney.Font = New System.Drawing.Font("Microsoft Sans Serif", 38.0!, System.Drawing.FontStyle.Bold)
         Me.txtTotalMoney.ForeColor = System.Drawing.Color.FromArgb(CType(CType(6, Byte), Integer), CType(CType(175, Byte), Integer), CType(CType(143, Byte), Integer))
-        Me.txtTotalMoney.Location = New System.Drawing.Point(509, 422)
+        Me.txtTotalMoney.Location = New System.Drawing.Point(385, 486)
         Me.txtTotalMoney.MaxLength = 15
         Me.txtTotalMoney.Name = "txtTotalMoney"
         Me.txtTotalMoney.ReadOnly = True
-        Me.txtTotalMoney.Size = New System.Drawing.Size(294, 58)
+        Me.txtTotalMoney.Size = New System.Drawing.Size(254, 58)
         Me.txtTotalMoney.TabIndex = 70
         Me.txtTotalMoney.Text = "0.00"
         Me.txtTotalMoney.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
@@ -178,7 +178,7 @@ Partial Class frmSC_FillMoney
         Me.Label9.BackColor = System.Drawing.Color.Transparent
         Me.Label9.Font = New System.Drawing.Font("Microsoft Sans Serif", 20.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(222, Byte))
         Me.Label9.ForeColor = System.Drawing.Color.White
-        Me.Label9.Location = New System.Drawing.Point(220, 599)
+        Me.Label9.Location = New System.Drawing.Point(149, 673)
         Me.Label9.Name = "Label9"
         Me.Label9.Size = New System.Drawing.Size(220, 31)
         Me.Label9.TabIndex = 69
@@ -191,7 +191,7 @@ Partial Class frmSC_FillMoney
         Me.lblMaxCoin5.BackColor = System.Drawing.Color.Transparent
         Me.lblMaxCoin5.Font = New System.Drawing.Font("Microsoft Sans Serif", 20.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(222, Byte))
         Me.lblMaxCoin5.ForeColor = System.Drawing.Color.White
-        Me.lblMaxCoin5.Location = New System.Drawing.Point(849, 377)
+        Me.lblMaxCoin5.Location = New System.Drawing.Point(721, 377)
         Me.lblMaxCoin5.Name = "lblMaxCoin5"
         Me.lblMaxCoin5.Size = New System.Drawing.Size(34, 31)
         Me.lblMaxCoin5.TabIndex = 72
@@ -204,7 +204,7 @@ Partial Class frmSC_FillMoney
         Me.lblMaxBanknote20.BackColor = System.Drawing.Color.Transparent
         Me.lblMaxBanknote20.Font = New System.Drawing.Font("Microsoft Sans Serif", 20.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(222, Byte))
         Me.lblMaxBanknote20.ForeColor = System.Drawing.Color.White
-        Me.lblMaxBanknote20.Location = New System.Drawing.Point(811, 419)
+        Me.lblMaxBanknote20.Location = New System.Drawing.Point(629, 445)
         Me.lblMaxBanknote20.Name = "lblMaxBanknote20"
         Me.lblMaxBanknote20.Size = New System.Drawing.Size(34, 31)
         Me.lblMaxBanknote20.TabIndex = 73
@@ -217,7 +217,7 @@ Partial Class frmSC_FillMoney
         Me.lblMaxBanknote100.BackColor = System.Drawing.Color.Transparent
         Me.lblMaxBanknote100.Font = New System.Drawing.Font("Microsoft Sans Serif", 20.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(222, Byte))
         Me.lblMaxBanknote100.ForeColor = System.Drawing.Color.White
-        Me.lblMaxBanknote100.Location = New System.Drawing.Point(811, 461)
+        Me.lblMaxBanknote100.Location = New System.Drawing.Point(683, 461)
         Me.lblMaxBanknote100.Name = "lblMaxBanknote100"
         Me.lblMaxBanknote100.Size = New System.Drawing.Size(34, 31)
         Me.lblMaxBanknote100.TabIndex = 74
@@ -232,7 +232,7 @@ Partial Class frmSC_FillMoney
         Me.btnFillAllFull.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
         Me.btnFillAllFull.Controls.Add(Me.lblFillAllFull)
         Me.btnFillAllFull.ForeColor = System.Drawing.Color.White
-        Me.btnFillAllFull.Location = New System.Drawing.Point(784, 514)
+        Me.btnFillAllFull.Location = New System.Drawing.Point(556, 582)
         Me.btnFillAllFull.Name = "btnFillAllFull"
         Me.btnFillAllFull.Size = New System.Drawing.Size(183, 51)
         Me.btnFillAllFull.TabIndex = 56
@@ -255,9 +255,9 @@ Partial Class frmSC_FillMoney
         Me.btnCheckOutMoney.Anchor = System.Windows.Forms.AnchorStyles.Top
         Me.btnCheckOutMoney.BackgroundImage = Global.MiniboxLocker.My.Resources.Resources.btnButtonCheckOutMoney
         Me.btnCheckOutMoney.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
-        Me.btnCheckOutMoney.Location = New System.Drawing.Point(70, 503)
+        Me.btnCheckOutMoney.Location = New System.Drawing.Point(52, 582)
         Me.btnCheckOutMoney.Name = "btnCheckOutMoney"
-        Me.btnCheckOutMoney.Size = New System.Drawing.Size(240, 50)
+        Me.btnCheckOutMoney.Size = New System.Drawing.Size(216, 50)
         Me.btnCheckOutMoney.TabIndex = 55
         '
         'btnCancel
@@ -265,9 +265,9 @@ Partial Class frmSC_FillMoney
         Me.btnCancel.Anchor = System.Windows.Forms.AnchorStyles.Top
         Me.btnCancel.BackgroundImage = Global.MiniboxLocker.My.Resources.Resources.btnButtonCancel
         Me.btnCancel.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
-        Me.btnCancel.Location = New System.Drawing.Point(541, 514)
+        Me.btnCancel.Location = New System.Drawing.Point(430, 590)
         Me.btnCancel.Name = "btnCancel"
-        Me.btnCancel.Size = New System.Drawing.Size(137, 51)
+        Me.btnCancel.Size = New System.Drawing.Size(105, 43)
         Me.btnCancel.TabIndex = 55
         '
         'btnConfirm
@@ -275,9 +275,9 @@ Partial Class frmSC_FillMoney
         Me.btnConfirm.Anchor = System.Windows.Forms.AnchorStyles.Top
         Me.btnConfirm.BackgroundImage = Global.MiniboxLocker.My.Resources.Resources.btnButtonConfirm
         Me.btnConfirm.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
-        Me.btnConfirm.Location = New System.Drawing.Point(400, 514)
+        Me.btnConfirm.Location = New System.Drawing.Point(307, 590)
         Me.btnConfirm.Name = "btnConfirm"
-        Me.btnConfirm.Size = New System.Drawing.Size(137, 51)
+        Me.btnConfirm.Size = New System.Drawing.Size(116, 43)
         Me.btnConfirm.TabIndex = 54
         '
         'frmSC_FillMoney
@@ -285,7 +285,7 @@ Partial Class frmSC_FillMoney
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackgroundImage = Global.MiniboxLocker.My.Resources.Resources.bgSCFillMoney
-        Me.ClientSize = New System.Drawing.Size(1024, 768)
+        Me.ClientSize = New System.Drawing.Size(768, 1024)
         Me.Controls.Add(Me.lblMaxBanknote100)
         Me.Controls.Add(Me.lblMaxBanknote20)
         Me.Controls.Add(Me.lblMaxCoin5)

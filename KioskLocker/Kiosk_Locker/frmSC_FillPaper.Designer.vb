@@ -34,10 +34,10 @@ Partial Class frmSC_FillPaper
         Me.txtValue.BackColor = System.Drawing.Color.FromArgb(CType(CType(239, Byte), Integer), CType(CType(239, Byte), Integer), CType(CType(239, Byte), Integer))
         Me.txtValue.BorderStyle = System.Windows.Forms.BorderStyle.None
         Me.txtValue.Font = New System.Drawing.Font("Microsoft Sans Serif", 30.0!)
-        Me.txtValue.Location = New System.Drawing.Point(561, 251)
+        Me.txtValue.Location = New System.Drawing.Point(433, 302)
         Me.txtValue.MaxLength = 15
         Me.txtValue.Name = "txtValue"
-        Me.txtValue.Size = New System.Drawing.Size(306, 46)
+        Me.txtValue.Size = New System.Drawing.Size(276, 46)
         Me.txtValue.TabIndex = 52
         Me.txtValue.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
         '
@@ -48,10 +48,10 @@ Partial Class frmSC_FillPaper
         Me.txtMax.BorderStyle = System.Windows.Forms.BorderStyle.None
         Me.txtMax.Enabled = False
         Me.txtMax.Font = New System.Drawing.Font("Microsoft Sans Serif", 30.0!)
-        Me.txtMax.Location = New System.Drawing.Point(561, 359)
+        Me.txtMax.Location = New System.Drawing.Point(433, 412)
         Me.txtMax.MaxLength = 15
         Me.txtMax.Name = "txtMax"
-        Me.txtMax.Size = New System.Drawing.Size(303, 46)
+        Me.txtMax.Size = New System.Drawing.Size(276, 46)
         Me.txtMax.TabIndex = 53
         Me.txtMax.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
         '
@@ -60,7 +60,7 @@ Partial Class frmSC_FillPaper
         Me.btnCancel.Anchor = System.Windows.Forms.AnchorStyles.Top
         Me.btnCancel.BackgroundImage = Global.MiniboxLocker.My.Resources.Resources.btnButtonCancel
         Me.btnCancel.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
-        Me.btnCancel.Location = New System.Drawing.Point(717, 424)
+        Me.btnCancel.Location = New System.Drawing.Point(572, 560)
         Me.btnCancel.Name = "btnCancel"
         Me.btnCancel.Size = New System.Drawing.Size(171, 62)
         Me.btnCancel.TabIndex = 55
@@ -70,7 +70,7 @@ Partial Class frmSC_FillPaper
         Me.btnConfirm.Anchor = System.Windows.Forms.AnchorStyles.Top
         Me.btnConfirm.BackgroundImage = Global.MiniboxLocker.My.Resources.Resources.btnButtonConfirm
         Me.btnConfirm.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
-        Me.btnConfirm.Location = New System.Drawing.Point(538, 424)
+        Me.btnConfirm.Location = New System.Drawing.Point(393, 560)
         Me.btnConfirm.Name = "btnConfirm"
         Me.btnConfirm.Size = New System.Drawing.Size(173, 62)
         Me.btnConfirm.TabIndex = 54
@@ -81,7 +81,7 @@ Partial Class frmSC_FillPaper
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.White
         Me.BackgroundImage = Global.MiniboxLocker.My.Resources.Resources.bgSCFillPaper
-        Me.ClientSize = New System.Drawing.Size(1024, 768)
+        Me.ClientSize = New System.Drawing.Size(768, 1024)
         Me.Controls.Add(Me.txtValue)
         Me.Controls.Add(Me.txtMax)
         Me.Controls.Add(Me.btnCancel)

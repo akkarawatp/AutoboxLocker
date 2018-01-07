@@ -46,6 +46,7 @@ Partial Class frmDepositThankyou
         Me.btnCloseLocker.TabIndex = 95
         Me.btnCloseLocker.Text = "ปิดตู้"
         Me.btnCloseLocker.UseVisualStyleBackColor = True
+        Me.btnCloseLocker.Visible = False
         '
         'TimerCheckCloseLocker
         '

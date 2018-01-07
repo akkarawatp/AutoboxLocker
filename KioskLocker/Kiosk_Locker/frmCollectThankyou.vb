@@ -30,10 +30,18 @@ Public Class frmCollectThankyou
             UpdateCollectTransaction(Collect)
         End If
 
-        If BoardSensor.ConnectSensorDevice(KioskConfig.SensorComport) = True Then
+        Dim ConnectSensor As Boolean = False
+        If IsNoCheckDevice = True Then
+            ConnectSensor = True
+            btnOpenLocker.Visible = True
+        Else
+            ConnectSensor = BoardSensor.ConnectSensorDevice(KioskConfig.SensorComport)
             'ใช้ Sensor เพื่อตรวจจับว่าลูกค้าได้ปิดตู้แล้วจริงๆ จึงกลับหน้าแรก
             BoardSensor.SensorRequestData(Collect.LockerPinSendor)
             AddHandler BoardSensor.SensorReceiveData, AddressOf SensorDataReceived
+        End If
+
+        If ConnectSensor = True Then
             _CallOpenLocker = True
             'lblChangeAmt.Text = Collect.ChangeAmount
 

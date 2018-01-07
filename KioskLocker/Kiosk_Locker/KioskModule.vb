@@ -24,16 +24,14 @@ Module KioskModule
     Public LockerList As New DataTable
     Public DeviceInfoList As New DataTable
     Public DeviceStatusList As New DataTable
-    'Public DeviceList As New DataTable
     Public AppScreenList As New DataTable
     Public AppStepList As New DataTable
     Public AlarmMasterList As New DataTable
-    'Public LangMasterList As New DataTable
-    'Public LangNotificationList As New DataTable
     Public ServiceRateData As New MSServiceRateData
     Public THB_CH As String = "泰铢"
     Public THB_JP As String = "THB"
     Public THB_EN As String = "THB"
+    Public IsNoCheckDevice As Boolean = False   'ใช้ระหว่าง Debug ถ้าเป็น True ให้ข้ามฟังค์ชั่นการเช็ค HW ไปเลย
 
     Public OutOfService As Boolean
 
@@ -647,30 +645,30 @@ Module KioskModule
                                         SendKioskAlarm("COIN_OUT_DISCONNECTED", True)
                                     End If
                             End Select
-                            'Case DeviceType.LEDBoard
-                            '    If BoardLED.ConnectLEDDevice(Comport) = True Then
-                            '        UpdateDeviceStatus(vDeviceID, BoardStatus.Ready)
-                            '        SendKioskAlarm("BOARD_LED_DISCONNECTED", False)
-                            '    Else
-                            '        UpdateDeviceStatus(vDeviceID, BoardStatus.Disconnected)
-                            '        SendKioskAlarm("BOARD_LED_DISCONNECTED", True)
-                            '    End If
-                            'Case DeviceType.SolenoidBoard
-                            '    If BoardSolenoid.ConnectSolenoidDevice(Comport) = True Then
-                            '        UpdateDeviceStatus(vDeviceID, BoardStatus.Ready)
-                            '        SendKioskAlarm("BOARD_SOLENOID_DISCONNECTED", False)
-                            '    Else
-                            '        UpdateDeviceStatus(vDeviceID, BoardStatus.Disconnected)
-                            '        SendKioskAlarm("BOARD_SOLENOID_DISCONNECTED", True)
-                            '    End If
-                            'Case DeviceType.SensorBoard
-                            '    If BoardSensor.ConnectSensorDevice(Comport) = True Then
-                            '        UpdateDeviceStatus(vDeviceID, BoardStatus.Ready)
-                            '        SendKioskAlarm("BOARD_SENSOR_DISCONNECTED", False)
-                            '    Else
-                            '        UpdateDeviceStatus(vDeviceID, BoardStatus.Disconnected)
-                            '        SendKioskAlarm("BOARD_SENSOR_DISCONNECTED", True)
-                            '    End If
+                        Case DeviceType.LEDBoard
+                            If BoardLED.ConnectLEDDevice(Comport) = True Then
+                                UpdateDeviceStatus(vDeviceID, BoardStatus.Ready)
+                                SendKioskAlarm("BOARD_LED_DISCONNECTED", False)
+                            Else
+                                UpdateDeviceStatus(vDeviceID, BoardStatus.Disconnected)
+                                SendKioskAlarm("BOARD_LED_DISCONNECTED", True)
+                            End If
+                        Case DeviceType.SolenoidBoard
+                            If BoardSolenoid.ConnectSolenoidDevice(Comport) = True Then
+                                UpdateDeviceStatus(vDeviceID, BoardStatus.Ready)
+                                SendKioskAlarm("BOARD_SOLENOID_DISCONNECTED", False)
+                            Else
+                                UpdateDeviceStatus(vDeviceID, BoardStatus.Disconnected)
+                                SendKioskAlarm("BOARD_SOLENOID_DISCONNECTED", True)
+                            End If
+                        Case DeviceType.SensorBoard
+                            If BoardSensor.ConnectSensorDevice(Comport) = True Then
+                                UpdateDeviceStatus(vDeviceID, BoardStatus.Ready)
+                                SendKioskAlarm("BOARD_SENSOR_DISCONNECTED", False)
+                            Else
+                                UpdateDeviceStatus(vDeviceID, BoardStatus.Disconnected)
+                                SendKioskAlarm("BOARD_SENSOR_DISCONNECTED", True)
+                            End If
                     End Select
                 Next
             End If
@@ -2023,8 +2021,10 @@ Module KioskModule
         End If
 
         Try
-            ''ต้องสั่ง Connect เพื่อ Check Hardware Status มาแล้วตั้งแต่หน้า Home
-            BoardSolenoid.SolenoidOpen(PinSolenoid)
+            If IsNoCheckDevice = False Then
+                ''ต้องสั่ง Connect เพื่อ Check Hardware Status มาแล้วตั้งแต่หน้า Home
+                BoardSolenoid.SolenoidOpen(PinSolenoid)
+            End If
 
             Dim lnq As New MsLockerKioskLinqDB
             lnq.GetDataByPK(LockerID, Nothing)
@@ -2045,9 +2045,11 @@ Module KioskModule
             End If
             lnq = Nothing
 
-            'สั่งเปิดตู้ซ้ำ เผื่อกรณีตู้ไม่เปิดออกในครั้งแรก
-            Thread.Sleep(2000)
-            BoardSolenoid.SolenoidOpen(PinSolenoid)
+            If IsNoCheckDevice = False Then
+                'สั่งเปิดตู้ซ้ำ เผื่อกรณีตู้ไม่เปิดออกในครั้งแรก
+                Thread.Sleep(2000)
+                BoardSolenoid.SolenoidOpen(PinSolenoid)
+            End If
         Catch ex As Exception
             InsertErrorLog("Exception : " & ex.Message & vbNewLine & ex.StackTrace, DepositTransNo, Collect.TransactionNo, "", KioskConfig.SelectForm, MsAppStepID)
             InsertLogTransactionActivity(DepositTransNo, Collect.TransactionNo, "", KioskConfig.SelectForm, MsAppStepID, "Exception : " & ex.Message & vbNewLine & ex.StackTrace, True)
@@ -2231,6 +2233,14 @@ Module KioskModule
         Return CardLanDesc
     End Function
 
+    Public Function GetNoCheckDevice() As Boolean
+        Dim ret As Boolean = False
+        Dim ini As New IniReader(INIFileName)
+        ini.Section = "Setting"
+        ret = IIf(ini.ReadString("IsNoCheckDevice") = "Y", True, False)
+        ini = Nothing
+        Return ret
+    End Function
 
     Public Function PickupCalServiceAmount() As Integer
         'คำนวณค่าใช้บริการ

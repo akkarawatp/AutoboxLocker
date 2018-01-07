@@ -38,7 +38,7 @@ Public Class frmSC_LogIn
         End If
     End Sub
 
-    Private Sub btnLogin_Click(sender As Object, e As EventArgs) Handles lblLogin.Click
+    Private Sub btnLogin_Click(sender As Object, e As EventArgs) Handles pbLogin.Click
 
         InsertLogTransactionActivity(StaffConsole.TransNo, KioskConfig.SelectForm, KioskLockerStep.StaffConsoleLogin_ClickLogin, "", False)
 
@@ -85,11 +85,13 @@ Public Class frmSC_LogIn
                 End If
                 StaffConsole.AuthorizeInfo = aDt
 
-                InsertLogTransactionActivity(StaffConsole.TransNo, KioskConfig.SelectForm, KioskLockerStep.StaffConsoleLogin_UpdateHardwareAndStock, "", False)
+                If IsNoCheckDevice = False Then
+                    InsertLogTransactionActivity(StaffConsole.TransNo, KioskConfig.SelectForm, KioskLockerStep.StaffConsoleLogin_UpdateHardwareAndStock, "", False)
+                    'ตรวจสอบและส่ง Alarm เมื่อเครื่องเชื่อมอินเตอร์เน็ตได้
+                    UpdateAllDeviceStatusByComPort()
+                    UpdateAllDeviceStatusByUsbPort()
+                End If
 
-                'ตรวจสอบและส่ง Alarm เมื่อเครื่องเชื่อมอินเตอร์เน็ตได้
-                UpdateAllDeviceStatusByComPort()
-                UpdateAllDeviceStatusByUsbPort()
                 txtUsername.Text = ""
                 txtPassword.Text = ""
                 Me.Close()

@@ -37,7 +37,7 @@ Partial Class ucLockerInfo
         'lblSolinoidPin
         '
         Me.lblSolinoidPin.AutoSize = True
-        Me.lblSolinoidPin.Location = New System.Drawing.Point(-1, 25)
+        Me.lblSolinoidPin.Location = New System.Drawing.Point(-1, 19)
         Me.lblSolinoidPin.Name = "lblSolinoidPin"
         Me.lblSolinoidPin.Size = New System.Drawing.Size(37, 13)
         Me.lblSolinoidPin.TabIndex = 0
@@ -47,7 +47,7 @@ Partial Class ucLockerInfo
         '
         Me.lblSensorPin.AutoSize = True
         Me.lblSensorPin.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(222, Byte))
-        Me.lblSensorPin.Location = New System.Drawing.Point(3, 112)
+        Me.lblSensorPin.Location = New System.Drawing.Point(3, 100)
         Me.lblSensorPin.Name = "lblSensorPin"
         Me.lblSensorPin.Size = New System.Drawing.Size(55, 13)
         Me.lblSensorPin.TabIndex = 8
@@ -56,7 +56,7 @@ Partial Class ucLockerInfo
         'lblLEDPin
         '
         Me.lblLEDPin.AutoSize = True
-        Me.lblLEDPin.Location = New System.Drawing.Point(3, 69)
+        Me.lblLEDPin.Location = New System.Drawing.Point(3, 60)
         Me.lblLEDPin.Name = "lblLEDPin"
         Me.lblLEDPin.Size = New System.Drawing.Size(40, 13)
         Me.lblLEDPin.TabIndex = 6
@@ -66,7 +66,7 @@ Partial Class ucLockerInfo
         '
         Me.cbSolenoidPin.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cbSolenoidPin.FormattingEnabled = True
-        Me.cbSolenoidPin.Location = New System.Drawing.Point(1, 41)
+        Me.cbSolenoidPin.Location = New System.Drawing.Point(1, 35)
         Me.cbSolenoidPin.Name = "cbSolenoidPin"
         Me.cbSolenoidPin.Size = New System.Drawing.Size(65, 21)
         Me.cbSolenoidPin.TabIndex = 15
@@ -75,7 +75,7 @@ Partial Class ucLockerInfo
         '
         Me.cbLEDPin.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cbLEDPin.FormattingEnabled = True
-        Me.cbLEDPin.Location = New System.Drawing.Point(1, 85)
+        Me.cbLEDPin.Location = New System.Drawing.Point(1, 75)
         Me.cbLEDPin.Name = "cbLEDPin"
         Me.cbLEDPin.Size = New System.Drawing.Size(65, 21)
         Me.cbLEDPin.TabIndex = 16
@@ -84,7 +84,7 @@ Partial Class ucLockerInfo
         '
         Me.cbSensorPin.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cbSensorPin.FormattingEnabled = True
-        Me.cbSensorPin.Location = New System.Drawing.Point(1, 128)
+        Me.cbSensorPin.Location = New System.Drawing.Point(1, 114)
         Me.cbSensorPin.Name = "cbSensorPin"
         Me.cbSensorPin.Size = New System.Drawing.Size(65, 21)
         Me.cbSensorPin.TabIndex = 17
@@ -136,7 +136,7 @@ Partial Class ucLockerInfo
         Me.Controls.Add(Me.lblSolinoidPin)
         Me.Controls.Add(Me.pbLockerName)
         Me.Name = "ucLockerInfo"
-        Me.Size = New System.Drawing.Size(68, 152)
+        Me.Size = New System.Drawing.Size(68, 135)
         CType(Me.pbLockerName, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()

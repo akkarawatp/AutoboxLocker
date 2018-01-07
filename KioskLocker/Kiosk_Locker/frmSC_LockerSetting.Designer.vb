@@ -23,13 +23,6 @@ Partial Class frmSC_LockerSetting
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Me.Panel1 = New System.Windows.Forms.Panel()
-        Me.pnlPC = New System.Windows.Forms.Panel()
-        Me.pbMoveRight = New System.Windows.Forms.PictureBox()
-        Me.txtPCPosition = New System.Windows.Forms.TextBox()
-        Me.pbMoveLeft = New System.Windows.Forms.PictureBox()
-        Me.pnAdd = New System.Windows.Forms.Panel()
-        Me.btnClose = New System.Windows.Forms.Panel()
-        Me.pnSave = New System.Windows.Forms.Panel()
         Me.UcCabinet10 = New MiniboxLocker.ucCabinet()
         Me.UcCabinet9 = New MiniboxLocker.ucCabinet()
         Me.UcCabinet8 = New MiniboxLocker.ucCabinet()
@@ -39,7 +32,14 @@ Partial Class frmSC_LockerSetting
         Me.UcCabinet4 = New MiniboxLocker.ucCabinet()
         Me.UcCabinet3 = New MiniboxLocker.ucCabinet()
         Me.UcCabinet2 = New MiniboxLocker.ucCabinet()
+        Me.pnlPC = New System.Windows.Forms.Panel()
+        Me.pbMoveRight = New System.Windows.Forms.PictureBox()
+        Me.txtPCPosition = New System.Windows.Forms.TextBox()
+        Me.pbMoveLeft = New System.Windows.Forms.PictureBox()
         Me.UcCabinet1 = New MiniboxLocker.ucCabinet()
+        Me.pnAdd = New System.Windows.Forms.Panel()
+        Me.btnClose = New System.Windows.Forms.Panel()
+        Me.pnSave = New System.Windows.Forms.Panel()
         Me.Panel1.SuspendLayout()
         Me.pnlPC.SuspendLayout()
         CType(Me.pbMoveRight, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -59,78 +59,10 @@ Partial Class frmSC_LockerSetting
         Me.Panel1.Controls.Add(Me.UcCabinet2)
         Me.Panel1.Controls.Add(Me.pnlPC)
         Me.Panel1.Controls.Add(Me.UcCabinet1)
-        Me.Panel1.Location = New System.Drawing.Point(0, 115)
+        Me.Panel1.Location = New System.Drawing.Point(10, 115)
         Me.Panel1.Name = "Panel1"
-        Me.Panel1.Size = New System.Drawing.Size(1024, 575)
+        Me.Panel1.Size = New System.Drawing.Size(747, 835)
         Me.Panel1.TabIndex = 44
-        '
-        'pnlPC
-        '
-        Me.pnlPC.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
-        Me.pnlPC.Controls.Add(Me.pbMoveRight)
-        Me.pnlPC.Controls.Add(Me.txtPCPosition)
-        Me.pnlPC.Controls.Add(Me.pbMoveLeft)
-        Me.pnlPC.Location = New System.Drawing.Point(476, 4)
-        Me.pnlPC.Name = "pnlPC"
-        Me.pnlPC.Size = New System.Drawing.Size(93, 568)
-        Me.pnlPC.TabIndex = 1
-        '
-        'pbMoveRight
-        '
-        Me.pbMoveRight.Anchor = System.Windows.Forms.AnchorStyles.Bottom
-        Me.pbMoveRight.BackgroundImage = Global.MiniboxLocker.My.Resources.Resources.iconButtonStepRight
-        Me.pbMoveRight.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
-        Me.pbMoveRight.Location = New System.Drawing.Point(53, 544)
-        Me.pbMoveRight.Name = "pbMoveRight"
-        Me.pbMoveRight.Size = New System.Drawing.Size(24, 24)
-        Me.pbMoveRight.TabIndex = 12
-        Me.pbMoveRight.TabStop = False
-        '
-        'txtPCPosition
-        '
-        Me.txtPCPosition.Location = New System.Drawing.Point(3, 3)
-        Me.txtPCPosition.Name = "txtPCPosition"
-        Me.txtPCPosition.Size = New System.Drawing.Size(87, 20)
-        Me.txtPCPosition.TabIndex = 0
-        Me.txtPCPosition.Visible = False
-        '
-        'pbMoveLeft
-        '
-        Me.pbMoveLeft.Anchor = System.Windows.Forms.AnchorStyles.Bottom
-        Me.pbMoveLeft.BackgroundImage = Global.MiniboxLocker.My.Resources.Resources.iconButtonStepLeft
-        Me.pbMoveLeft.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
-        Me.pbMoveLeft.Location = New System.Drawing.Point(13, 544)
-        Me.pbMoveLeft.Name = "pbMoveLeft"
-        Me.pbMoveLeft.Size = New System.Drawing.Size(24, 24)
-        Me.pbMoveLeft.TabIndex = 11
-        Me.pbMoveLeft.TabStop = False
-        '
-        'pnAdd
-        '
-        Me.pnAdd.BackgroundImage = Global.MiniboxLocker.My.Resources.Resources.btnButtonAdd
-        Me.pnAdd.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
-        Me.pnAdd.Location = New System.Drawing.Point(23, 694)
-        Me.pnAdd.Name = "pnAdd"
-        Me.pnAdd.Size = New System.Drawing.Size(124, 41)
-        Me.pnAdd.TabIndex = 48
-        '
-        'btnClose
-        '
-        Me.btnClose.BackgroundImage = Global.MiniboxLocker.My.Resources.Resources.btnButtonCancel
-        Me.btnClose.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
-        Me.btnClose.Location = New System.Drawing.Point(817, 694)
-        Me.btnClose.Name = "btnClose"
-        Me.btnClose.Size = New System.Drawing.Size(120, 41)
-        Me.btnClose.TabIndex = 48
-        '
-        'pnSave
-        '
-        Me.pnSave.BackgroundImage = Global.MiniboxLocker.My.Resources.Resources.btnButtonSave
-        Me.pnSave.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
-        Me.pnSave.Location = New System.Drawing.Point(670, 694)
-        Me.pnSave.Name = "pnSave"
-        Me.pnSave.Size = New System.Drawing.Size(118, 41)
-        Me.pnSave.TabIndex = 47
         '
         'UcCabinet10
         '
@@ -140,11 +72,11 @@ Partial Class frmSC_LockerSetting
         Me.UcCabinet10.CabinetID = CType(0, Long)
         Me.UcCabinet10.CabinetModelID = CType(0, Long)
         Me.UcCabinet10.CabinetName = "J"
-        Me.UcCabinet10.Location = New System.Drawing.Point(938, 4)
+        Me.UcCabinet10.Location = New System.Drawing.Point(678, 4)
         Me.UcCabinet10.LockerActiveQty = 0
         Me.UcCabinet10.Name = "UcCabinet10"
         Me.UcCabinet10.OrderLayoutNo = 10
-        Me.UcCabinet10.Size = New System.Drawing.Size(90, 568)
+        Me.UcCabinet10.Size = New System.Drawing.Size(68, 830)
         Me.UcCabinet10.TabIndex = 10
         '
         'UcCabinet9
@@ -155,11 +87,11 @@ Partial Class frmSC_LockerSetting
         Me.UcCabinet9.CabinetID = CType(0, Long)
         Me.UcCabinet9.CabinetModelID = CType(0, Long)
         Me.UcCabinet9.CabinetName = "I"
-        Me.UcCabinet9.Location = New System.Drawing.Point(854, 4)
+        Me.UcCabinet9.Location = New System.Drawing.Point(610, 4)
         Me.UcCabinet9.LockerActiveQty = 0
         Me.UcCabinet9.Name = "UcCabinet9"
         Me.UcCabinet9.OrderLayoutNo = 9
-        Me.UcCabinet9.Size = New System.Drawing.Size(95, 568)
+        Me.UcCabinet9.Size = New System.Drawing.Size(68, 830)
         Me.UcCabinet9.TabIndex = 9
         '
         'UcCabinet8
@@ -170,11 +102,11 @@ Partial Class frmSC_LockerSetting
         Me.UcCabinet8.CabinetID = CType(0, Long)
         Me.UcCabinet8.CabinetModelID = CType(0, Long)
         Me.UcCabinet8.CabinetName = "H"
-        Me.UcCabinet8.Location = New System.Drawing.Point(759, 4)
+        Me.UcCabinet8.Location = New System.Drawing.Point(542, 4)
         Me.UcCabinet8.LockerActiveQty = 0
         Me.UcCabinet8.Name = "UcCabinet8"
         Me.UcCabinet8.OrderLayoutNo = 8
-        Me.UcCabinet8.Size = New System.Drawing.Size(95, 568)
+        Me.UcCabinet8.Size = New System.Drawing.Size(68, 830)
         Me.UcCabinet8.TabIndex = 8
         '
         'UcCabinet7
@@ -185,11 +117,11 @@ Partial Class frmSC_LockerSetting
         Me.UcCabinet7.CabinetID = CType(0, Long)
         Me.UcCabinet7.CabinetModelID = CType(0, Long)
         Me.UcCabinet7.CabinetName = "G"
-        Me.UcCabinet7.Location = New System.Drawing.Point(664, 4)
+        Me.UcCabinet7.Location = New System.Drawing.Point(474, 4)
         Me.UcCabinet7.LockerActiveQty = 0
         Me.UcCabinet7.Name = "UcCabinet7"
         Me.UcCabinet7.OrderLayoutNo = 7
-        Me.UcCabinet7.Size = New System.Drawing.Size(95, 568)
+        Me.UcCabinet7.Size = New System.Drawing.Size(68, 830)
         Me.UcCabinet7.TabIndex = 7
         '
         'UcCabinet6
@@ -200,11 +132,11 @@ Partial Class frmSC_LockerSetting
         Me.UcCabinet6.CabinetID = CType(0, Long)
         Me.UcCabinet6.CabinetModelID = CType(0, Long)
         Me.UcCabinet6.CabinetName = "F"
-        Me.UcCabinet6.Location = New System.Drawing.Point(569, 4)
+        Me.UcCabinet6.Location = New System.Drawing.Point(406, 4)
         Me.UcCabinet6.LockerActiveQty = 0
         Me.UcCabinet6.Name = "UcCabinet6"
         Me.UcCabinet6.OrderLayoutNo = 6
-        Me.UcCabinet6.Size = New System.Drawing.Size(95, 568)
+        Me.UcCabinet6.Size = New System.Drawing.Size(68, 830)
         Me.UcCabinet6.TabIndex = 6
         '
         'UcCabinet5
@@ -215,11 +147,11 @@ Partial Class frmSC_LockerSetting
         Me.UcCabinet5.CabinetID = CType(0, Long)
         Me.UcCabinet5.CabinetModelID = CType(0, Long)
         Me.UcCabinet5.CabinetName = "E"
-        Me.UcCabinet5.Location = New System.Drawing.Point(381, 4)
+        Me.UcCabinet5.Location = New System.Drawing.Point(272, 4)
         Me.UcCabinet5.LockerActiveQty = 0
         Me.UcCabinet5.Name = "UcCabinet5"
         Me.UcCabinet5.OrderLayoutNo = 5
-        Me.UcCabinet5.Size = New System.Drawing.Size(95, 568)
+        Me.UcCabinet5.Size = New System.Drawing.Size(68, 830)
         Me.UcCabinet5.TabIndex = 5
         '
         'UcCabinet4
@@ -230,11 +162,11 @@ Partial Class frmSC_LockerSetting
         Me.UcCabinet4.CabinetID = CType(0, Long)
         Me.UcCabinet4.CabinetModelID = CType(0, Long)
         Me.UcCabinet4.CabinetName = "D"
-        Me.UcCabinet4.Location = New System.Drawing.Point(286, 4)
+        Me.UcCabinet4.Location = New System.Drawing.Point(204, 4)
         Me.UcCabinet4.LockerActiveQty = 0
         Me.UcCabinet4.Name = "UcCabinet4"
         Me.UcCabinet4.OrderLayoutNo = 4
-        Me.UcCabinet4.Size = New System.Drawing.Size(95, 568)
+        Me.UcCabinet4.Size = New System.Drawing.Size(68, 830)
         Me.UcCabinet4.TabIndex = 4
         '
         'UcCabinet3
@@ -245,11 +177,11 @@ Partial Class frmSC_LockerSetting
         Me.UcCabinet3.CabinetID = CType(0, Long)
         Me.UcCabinet3.CabinetModelID = CType(0, Long)
         Me.UcCabinet3.CabinetName = "C"
-        Me.UcCabinet3.Location = New System.Drawing.Point(191, 4)
+        Me.UcCabinet3.Location = New System.Drawing.Point(136, 4)
         Me.UcCabinet3.LockerActiveQty = 0
         Me.UcCabinet3.Name = "UcCabinet3"
         Me.UcCabinet3.OrderLayoutNo = 3
-        Me.UcCabinet3.Size = New System.Drawing.Size(95, 568)
+        Me.UcCabinet3.Size = New System.Drawing.Size(68, 830)
         Me.UcCabinet3.TabIndex = 3
         '
         'UcCabinet2
@@ -260,12 +192,53 @@ Partial Class frmSC_LockerSetting
         Me.UcCabinet2.CabinetID = CType(0, Long)
         Me.UcCabinet2.CabinetModelID = CType(0, Long)
         Me.UcCabinet2.CabinetName = "B"
-        Me.UcCabinet2.Location = New System.Drawing.Point(96, 4)
+        Me.UcCabinet2.Location = New System.Drawing.Point(68, 4)
         Me.UcCabinet2.LockerActiveQty = 0
         Me.UcCabinet2.Name = "UcCabinet2"
         Me.UcCabinet2.OrderLayoutNo = 2
-        Me.UcCabinet2.Size = New System.Drawing.Size(95, 568)
+        Me.UcCabinet2.Size = New System.Drawing.Size(68, 830)
         Me.UcCabinet2.TabIndex = 2
+        '
+        'pnlPC
+        '
+        Me.pnlPC.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
+        Me.pnlPC.Controls.Add(Me.pbMoveRight)
+        Me.pnlPC.Controls.Add(Me.txtPCPosition)
+        Me.pnlPC.Controls.Add(Me.pbMoveLeft)
+        Me.pnlPC.Location = New System.Drawing.Point(340, 4)
+        Me.pnlPC.Name = "pnlPC"
+        Me.pnlPC.Size = New System.Drawing.Size(66, 830)
+        Me.pnlPC.TabIndex = 1
+        '
+        'pbMoveRight
+        '
+        Me.pbMoveRight.Anchor = System.Windows.Forms.AnchorStyles.Bottom
+        Me.pbMoveRight.BackgroundImage = Global.MiniboxLocker.My.Resources.Resources.iconButtonStepRight
+        Me.pbMoveRight.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
+        Me.pbMoveRight.Location = New System.Drawing.Point(44, 811)
+        Me.pbMoveRight.Name = "pbMoveRight"
+        Me.pbMoveRight.Size = New System.Drawing.Size(18, 18)
+        Me.pbMoveRight.TabIndex = 12
+        Me.pbMoveRight.TabStop = False
+        '
+        'txtPCPosition
+        '
+        Me.txtPCPosition.Location = New System.Drawing.Point(3, 3)
+        Me.txtPCPosition.Name = "txtPCPosition"
+        Me.txtPCPosition.Size = New System.Drawing.Size(61, 20)
+        Me.txtPCPosition.TabIndex = 0
+        Me.txtPCPosition.Visible = False
+        '
+        'pbMoveLeft
+        '
+        Me.pbMoveLeft.Anchor = System.Windows.Forms.AnchorStyles.Bottom
+        Me.pbMoveLeft.BackgroundImage = Global.MiniboxLocker.My.Resources.Resources.iconButtonStepLeft
+        Me.pbMoveLeft.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
+        Me.pbMoveLeft.Location = New System.Drawing.Point(4, 811)
+        Me.pbMoveLeft.Name = "pbMoveLeft"
+        Me.pbMoveLeft.Size = New System.Drawing.Size(18, 18)
+        Me.pbMoveLeft.TabIndex = 11
+        Me.pbMoveLeft.TabStop = False
         '
         'UcCabinet1
         '
@@ -275,12 +248,39 @@ Partial Class frmSC_LockerSetting
         Me.UcCabinet1.CabinetID = CType(0, Long)
         Me.UcCabinet1.CabinetModelID = CType(0, Long)
         Me.UcCabinet1.CabinetName = "A"
-        Me.UcCabinet1.Location = New System.Drawing.Point(1, 4)
+        Me.UcCabinet1.Location = New System.Drawing.Point(0, 4)
         Me.UcCabinet1.LockerActiveQty = 0
         Me.UcCabinet1.Name = "UcCabinet1"
         Me.UcCabinet1.OrderLayoutNo = 1
-        Me.UcCabinet1.Size = New System.Drawing.Size(95, 568)
+        Me.UcCabinet1.Size = New System.Drawing.Size(68, 830)
         Me.UcCabinet1.TabIndex = 0
+        '
+        'pnAdd
+        '
+        Me.pnAdd.BackgroundImage = Global.MiniboxLocker.My.Resources.Resources.btnButtonAdd
+        Me.pnAdd.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
+        Me.pnAdd.Location = New System.Drawing.Point(10, 967)
+        Me.pnAdd.Name = "pnAdd"
+        Me.pnAdd.Size = New System.Drawing.Size(124, 41)
+        Me.pnAdd.TabIndex = 48
+        '
+        'btnClose
+        '
+        Me.btnClose.BackgroundImage = Global.MiniboxLocker.My.Resources.Resources.btnButtonCancel
+        Me.btnClose.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
+        Me.btnClose.Location = New System.Drawing.Point(631, 967)
+        Me.btnClose.Name = "btnClose"
+        Me.btnClose.Size = New System.Drawing.Size(120, 41)
+        Me.btnClose.TabIndex = 48
+        '
+        'pnSave
+        '
+        Me.pnSave.BackgroundImage = Global.MiniboxLocker.My.Resources.Resources.btnButtonSave
+        Me.pnSave.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
+        Me.pnSave.Location = New System.Drawing.Point(484, 967)
+        Me.pnSave.Name = "pnSave"
+        Me.pnSave.Size = New System.Drawing.Size(118, 41)
+        Me.pnSave.TabIndex = 47
         '
         'frmSC_LockerSetting
         '
@@ -288,7 +288,7 @@ Partial Class frmSC_LockerSetting
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.AutoScroll = True
         Me.BackColor = System.Drawing.Color.White
-        Me.ClientSize = New System.Drawing.Size(1024, 768)
+        Me.ClientSize = New System.Drawing.Size(768, 1024)
         Me.Controls.Add(Me.pnAdd)
         Me.Controls.Add(Me.btnClose)
         Me.Controls.Add(Me.Panel1)
