@@ -271,6 +271,7 @@ Public Class frmMain
             KioskData.ComputerName = Environment.MachineName
             KioskData.CardLanDesc = GetCardLanDesc()
             IsNoCheckDevice = GetNoCheckDevice()
+            FontIDAutomation = LoadFont(My.Resources.IDAutomationHC39M_Free, FontIDAutomation)
             Dim IsNetworkDevice As Boolean = False
 
             Try

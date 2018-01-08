@@ -23,6 +23,7 @@ Public Class frmSplashScreen
         Dim MachingKey As String = reg.Read()
         If String.IsNullOrEmpty(MachingKey) = True Then
             'ถ้าไม่เคยมีการ Gen Key ให้เริ่มขั้นตอนการ Gen ใหม่
+            lblReadingKey.Text = IdenKey
             StartNewMachineKey()
         Else
             'ถ้ามีการ Gen Key มาแล้ว ให้ตรวจสอบว่า Key ที่เก็บไว้ตรงกับ Key ที่ Gen หรือไม่
@@ -75,7 +76,7 @@ Public Class frmSplashScreen
         cbUnRegisLocker.DataSource = dt
     End Sub
 
-    Private Function Validate() As Boolean
+    Private Function ValidateData() As Boolean
         Dim ret As Boolean = True
         If cbUnRegisLocker.SelectedValue = 0 Then
             MessageBox.Show("กรุณาเลือก Locker", "Alert", MessageBoxButtons.OK, MessageBoxIcon.Warning)
@@ -91,7 +92,7 @@ Public Class frmSplashScreen
     End Function
 
     Private Sub ActionStep1()
-        If Validate() = False Then
+        If ValidateData() = False Then
             Exit Sub
         End If
 
@@ -127,11 +128,6 @@ Public Class frmSplashScreen
 
                 conn.Close()
                 SqlConnection.ClearAllPools()
-
-
-
-
-
 
                 SetProgressStatus("ค้นหาอุปกรณ์ Network")
                 Try
@@ -202,7 +198,7 @@ Public Class frmSplashScreen
                             If re.IsSuccess = True Then
                                 trans.CommitTransaction()
 
-                                SetProgressStatus("กำลังดาวน์โหลดข้อมูลตั้งต้น กรุณารอสักครู่")
+                                SetProgressStatus("กำลังดาวน์โหลดข้อมูลตั้งต้น กรุณารอสักครู่...")
                                 Engine.SyncMasterDataENG.SyncAllKioskMaster(ret.KioskID)
 
                                 SetProgressStatus("ดาวน์โหลดข้อมูลสำเร็จ คลิกปุ่ม OK เพื่อเข้าสู่โปรแกรม")

@@ -426,6 +426,7 @@
     <None Include="App.config">
       <SubType>Designer</SubType>
     </None>
+    <None Include="Resources\IDAutomationHC39M_Free.ttf" />
     <None Include="Web References\Webservice_Locker\ATBLockerWebService.wsdl" />
     <None Include="Web References\Webservice_Locker\CheckConnectionData.datasource">
       <DependentUpon>Reference.map</DependentUpon>
@@ -569,15 +570,6 @@
     <None Include="Resources\bgMainHeader.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\IconPrintQRCode.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\IconDepositTime.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\IconPickupTime.png" />
-  </ItemGroup>
-  <ItemGroup>
     <None Include="Resources\IconProcessing.gif" />
   </ItemGroup>
   <ItemGroup>
@@ -622,7 +614,6 @@
     <None Include="Resources\bgCollectScanQRCode.png" />
     <None Include="Resources\bgDepositThankyou.png" />
     <None Include="Resources\bgDepositPrintQRCode.png" />
-    <None Include="Resources\frmDepositPrintQRCode.png" />
     <None Include="Resources\bgCollectPayment.png" />
     <None Include="Resources\bgDepositPayment.png" />
     <None Include="Resources\bgDepositSetPINCode.png" />
@@ -632,25 +623,9 @@
     <None Include="Resources\pbIconCloseLocker.png" />
     <None Include="Resources\imgCollectSelectDocument.png" />
     <None Include="Resources\pbIconOpenLocker.png" />
-    <None Include="Resources\imgHorizontalLine.png" />
     <None Include="Resources\imgTextPincode.png" />
     <None Include="Resources\bgLayoutSelectLocker.png" />
-    <None Include="Resources\imgButtonOK.png" />
-    <None Include="Resources\imgButtonNumber9.png" />
-    <None Include="Resources\imgButtonNumber8.png" />
-    <None Include="Resources\imgButtonNumber7.png" />
-    <None Include="Resources\imgButtonNumber6.png" />
-    <None Include="Resources\imgButtonNumber5.png" />
-    <None Include="Resources\imgButtonNumber4.png" />
-    <None Include="Resources\imgButtonNumber3.png" />
-    <None Include="Resources\imgButtonNumber2.png" />
-    <None Include="Resources\imgButtonNumber1.png" />
-    <None Include="Resources\imgButtonNumber0.png" />
-    <None Include="Resources\imgButtonClear.png" />
-    <None Include="Resources\IconRedTriangle.png" />
     <None Include="Resources\IconDepositFull.png" />
-    <None Include="Resources\IconRods.png" />
-    <None Include="Resources\IconPayment.png" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="bin\Debug\" />

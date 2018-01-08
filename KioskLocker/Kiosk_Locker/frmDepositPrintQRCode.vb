@@ -6,6 +6,7 @@ Imports KioskLinqDB.ConnectDB
 Imports KioskLinqDB.TABLE
 Imports System.Drawing.Printing
 Imports System.Drawing.Drawing2D
+Imports System.Drawing.Text.PrivateFontCollection
 'Imports PrinterClassDll
 
 Public Class frmDepositPrintQRCode
@@ -85,6 +86,13 @@ Public Class frmDepositPrintQRCode
 
     End Sub
 
+    Private ReadOnly Property GetFrontIDAutomation3of9(ByVal Size As Single, ByVal style As FontStyle) As Font
+        Get
+            Return New Font(FontIDAutomation.Families(0), Size, style)
+        End Get
+
+    End Property
+
     Private Sub p_PrintPage(sender As System.Object, e As System.Drawing.Printing.PrintPageEventArgs)
         Dim fn5 As New Font("Calibri", 5, FontStyle.Regular)
         Dim fn7 As New Font("Calibri", 7, FontStyle.Regular)
@@ -93,6 +101,7 @@ Public Class frmDepositPrintQRCode
         Dim fn8b As New Font("Calibri", 8, FontStyle.Bold)
         Dim fn10b As New Font("Calibri", 9.5, FontStyle.Bold)
         Dim fn15b As New Font("Calibri", 15, FontStyle.Bold)
+        Dim fnBarcode As Font = GetFrontIDAutomation3of9(12, FontStyle.Regular)
 
         'Dim imgLogo As Image = Image.FromFile("SlipLogo.bmp")
         Dim imgLogo As Image = Image.FromFile("SlipLogo.png")
@@ -116,16 +125,20 @@ Public Class frmDepositPrintQRCode
 
         PrintText(txtLine, fn10b, Align.Center, e)
 
-        Dim qrCode As String = GenerateQRCode()
-        If qrCode.Trim <> "" Then
-            PrintImage(Image.FromFile(qrCode), Align.Center, e)
-        End If
+        'Print Barcode
+        Dim BarCode As String = Deposit.DepositTransactionID & Deposit.DepositTransNo & "ID" & Deposit.DepositTransactionID.ToString.Length
+        PrintText(BarCode, fnBarcode, Align.Center, e)
+
+        'Dim qrCode As String = GenerateQRCode()
+        'If qrCode.Trim <> "" Then
+        '    PrintImage(Image.FromFile(qrCode), Align.Center, e)
+        'End If
         PrintText(" ", fn5, Align.Left, e)
 
         'วาดกรอบให้กับ 2 บรรทัดข้างล่างนี้
         Dim borderTop As Integer = _lastPrintY - 2
-        PrintText("Use this QR-code to collect your luggage", fn8b, Align.Center, e)
-        PrintText("Warning : This QR-Code can be used only 1 time", fn8b, Align.Center, e)
+        PrintText("Use this barcode to collect your luggage", fn8b, Align.Center, e)
+        PrintText("Warning : This barode can be used only 1 time", fn8b, Align.Center, e)
         Dim borderH As Integer = (_lastPrintY + 2 - borderTop)
         PrintRectankle(0, borderTop, borderH, e)
         PrintText(" ", fn5, Align.Left, e)
@@ -136,7 +149,7 @@ Public Class frmDepositPrintQRCode
 
         PrintText("For any help, please contact our service center", fn8, Align.Center, e)
         PrintText("Tel. " & KioskConfig.ContactCenterTelno & " (in service time)", fn8, Align.Center, e)
-        PrintText("Thank you for using our service & have a nice trip", fn8b, Align.Center, e)
+        PrintText("Thank you for using our service", fn8b, Align.Center, e)
         e.HasMorePages = False
     End Sub
 

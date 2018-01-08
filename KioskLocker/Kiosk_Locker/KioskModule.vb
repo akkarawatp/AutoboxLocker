@@ -8,6 +8,7 @@ Imports KioskLinqDB.ConnectDB
 Imports KioskLinqDB.TABLE
 Imports System.Net
 Imports WebCamera
+Imports System.Drawing.Text.PrivateFontCollection
 
 Module KioskModule
 
@@ -32,7 +33,7 @@ Module KioskModule
     Public THB_JP As String = "THB"
     Public THB_EN As String = "THB"
     Public IsNoCheckDevice As Boolean = False   'ใช้ระหว่าง Debug ถ้าเป็น True ให้ข้ามฟังค์ชั่นการเช็ค HW ไปเลย
-
+    Public FontIDAutomation As System.Drawing.Text.PrivateFontCollection
     Public OutOfService As Boolean
 
     'Hardware Interface
@@ -1974,11 +1975,9 @@ Module KioskModule
 
 #Region "Font Setting"
     'PRIVATE FONT COLLECTION TO HOLD THE DYNAMIC FONT
-
-
-    'Public ReadOnly Property GetFont_DB_HelvethaicaAIS_X_65_Med(ByVal Size As Single, ByVal style As FontStyle) As Font
+    'Public ReadOnly Property GetFrontIDAutomation3of9(ByVal Size As Single, ByVal style As FontStyle) As Font
     '    Get
-    '        Return New Font(Kiosk.DB_HelvethaicaAIS_X_65_Med.Families(0), Size, style)
+    '        Return New Font(FontIDAutomation.Families(0), Size, style)
     '    End Get
 
     'End Property
