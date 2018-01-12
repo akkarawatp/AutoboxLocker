@@ -45,7 +45,7 @@ Partial Class frmDepositPayment
         'btn1000
         '
         Me.btn1000.Anchor = System.Windows.Forms.AnchorStyles.Top
-        Me.btn1000.Location = New System.Drawing.Point(6, 176)
+        Me.btn1000.Location = New System.Drawing.Point(6, 25)
         Me.btn1000.Name = "btn1000"
         Me.btn1000.Size = New System.Drawing.Size(75, 23)
         Me.btn1000.TabIndex = 68
@@ -56,7 +56,7 @@ Partial Class frmDepositPayment
         'btn500
         '
         Me.btn500.Anchor = System.Windows.Forms.AnchorStyles.Top
-        Me.btn500.Location = New System.Drawing.Point(87, 176)
+        Me.btn500.Location = New System.Drawing.Point(87, 25)
         Me.btn500.Name = "btn500"
         Me.btn500.Size = New System.Drawing.Size(75, 23)
         Me.btn500.TabIndex = 69
@@ -67,7 +67,7 @@ Partial Class frmDepositPayment
         'btn100
         '
         Me.btn100.Anchor = System.Windows.Forms.AnchorStyles.Top
-        Me.btn100.Location = New System.Drawing.Point(168, 176)
+        Me.btn100.Location = New System.Drawing.Point(168, 25)
         Me.btn100.Name = "btn100"
         Me.btn100.Size = New System.Drawing.Size(75, 23)
         Me.btn100.TabIndex = 70
@@ -78,7 +78,7 @@ Partial Class frmDepositPayment
         'btn50
         '
         Me.btn50.Anchor = System.Windows.Forms.AnchorStyles.Top
-        Me.btn50.Location = New System.Drawing.Point(249, 176)
+        Me.btn50.Location = New System.Drawing.Point(249, 25)
         Me.btn50.Name = "btn50"
         Me.btn50.Size = New System.Drawing.Size(75, 23)
         Me.btn50.TabIndex = 71
@@ -89,7 +89,7 @@ Partial Class frmDepositPayment
         'btn20
         '
         Me.btn20.Anchor = System.Windows.Forms.AnchorStyles.Top
-        Me.btn20.Location = New System.Drawing.Point(330, 176)
+        Me.btn20.Location = New System.Drawing.Point(330, 25)
         Me.btn20.Name = "btn20"
         Me.btn20.Size = New System.Drawing.Size(75, 23)
         Me.btn20.TabIndex = 72
@@ -100,7 +100,7 @@ Partial Class frmDepositPayment
         'btn10
         '
         Me.btn10.Anchor = System.Windows.Forms.AnchorStyles.Top
-        Me.btn10.Location = New System.Drawing.Point(411, 176)
+        Me.btn10.Location = New System.Drawing.Point(411, 25)
         Me.btn10.Name = "btn10"
         Me.btn10.Size = New System.Drawing.Size(75, 23)
         Me.btn10.TabIndex = 73
@@ -111,7 +111,7 @@ Partial Class frmDepositPayment
         'btn5
         '
         Me.btn5.Anchor = System.Windows.Forms.AnchorStyles.Top
-        Me.btn5.Location = New System.Drawing.Point(492, 176)
+        Me.btn5.Location = New System.Drawing.Point(492, 25)
         Me.btn5.Name = "btn5"
         Me.btn5.Size = New System.Drawing.Size(75, 23)
         Me.btn5.TabIndex = 74
@@ -122,7 +122,7 @@ Partial Class frmDepositPayment
         'btn2
         '
         Me.btn2.Anchor = System.Windows.Forms.AnchorStyles.Top
-        Me.btn2.Location = New System.Drawing.Point(573, 176)
+        Me.btn2.Location = New System.Drawing.Point(573, 25)
         Me.btn2.Name = "btn2"
         Me.btn2.Size = New System.Drawing.Size(75, 23)
         Me.btn2.TabIndex = 75
@@ -133,7 +133,7 @@ Partial Class frmDepositPayment
         'btn1
         '
         Me.btn1.Anchor = System.Windows.Forms.AnchorStyles.Top
-        Me.btn1.Location = New System.Drawing.Point(654, 176)
+        Me.btn1.Location = New System.Drawing.Point(654, 25)
         Me.btn1.Name = "btn1"
         Me.btn1.Size = New System.Drawing.Size(75, 23)
         Me.btn1.TabIndex = 76

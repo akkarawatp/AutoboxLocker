@@ -30,13 +30,13 @@ Partial Class frmSplashScreen
         Me.txtProcessorID = New System.Windows.Forms.TextBox()
         Me.Label3 = New System.Windows.Forms.Label()
         Me.pnlDBLogin = New System.Windows.Forms.Panel()
+        Me.cbUnRegisLocker = New System.Windows.Forms.ComboBox()
+        Me.Label8 = New System.Windows.Forms.Label()
         Me.txtDatabaseName = New System.Windows.Forms.TextBox()
         Me.Label5 = New System.Windows.Forms.Label()
         Me.txtDBPassword = New System.Windows.Forms.TextBox()
         Me.Label4 = New System.Windows.Forms.Label()
         Me.txtProgressStatus = New System.Windows.Forms.TextBox()
-        Me.cbUnRegisLocker = New System.Windows.Forms.ComboBox()
-        Me.Label8 = New System.Windows.Forms.Label()
         Me.pnlDBLogin.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -114,6 +114,24 @@ Partial Class frmSplashScreen
         Me.pnlDBLogin.TabIndex = 10
         Me.pnlDBLogin.Visible = False
         '
+        'cbUnRegisLocker
+        '
+        Me.cbUnRegisLocker.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.cbUnRegisLocker.FormattingEnabled = True
+        Me.cbUnRegisLocker.Location = New System.Drawing.Point(230, 29)
+        Me.cbUnRegisLocker.Name = "cbUnRegisLocker"
+        Me.cbUnRegisLocker.Size = New System.Drawing.Size(412, 21)
+        Me.cbUnRegisLocker.TabIndex = 4
+        '
+        'Label8
+        '
+        Me.Label8.AutoSize = True
+        Me.Label8.Location = New System.Drawing.Point(127, 29)
+        Me.Label8.Name = "Label8"
+        Me.Label8.Size = New System.Drawing.Size(79, 13)
+        Me.Label8.TabIndex = 3
+        Me.Label8.Text = "Minibox Locker"
+        '
         'txtDatabaseName
         '
         Me.txtDatabaseName.Enabled = False
@@ -139,7 +157,7 @@ Partial Class frmSplashScreen
         Me.txtDBPassword.PasswordChar = Global.Microsoft.VisualBasic.ChrW(42)
         Me.txtDBPassword.Size = New System.Drawing.Size(232, 20)
         Me.txtDBPassword.TabIndex = 1
-        Me.txtDBPassword.Text = "1qaz@WSX"
+        Me.txtDBPassword.Text = "vvF9h[vd:N"
         '
         'Label4
         '
@@ -158,24 +176,6 @@ Partial Class frmSplashScreen
         Me.txtProgressStatus.ReadOnly = True
         Me.txtProgressStatus.Size = New System.Drawing.Size(647, 210)
         Me.txtProgressStatus.TabIndex = 12
-        '
-        'cbUnRegisLocker
-        '
-        Me.cbUnRegisLocker.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-        Me.cbUnRegisLocker.FormattingEnabled = True
-        Me.cbUnRegisLocker.Location = New System.Drawing.Point(230, 29)
-        Me.cbUnRegisLocker.Name = "cbUnRegisLocker"
-        Me.cbUnRegisLocker.Size = New System.Drawing.Size(412, 21)
-        Me.cbUnRegisLocker.TabIndex = 4
-        '
-        'Label8
-        '
-        Me.Label8.AutoSize = True
-        Me.Label8.Location = New System.Drawing.Point(127, 29)
-        Me.Label8.Name = "Label8"
-        Me.Label8.Size = New System.Drawing.Size(79, 13)
-        Me.Label8.TabIndex = 3
-        Me.Label8.Text = "Minibox Locker"
         '
         'frmSplashScreen
         '

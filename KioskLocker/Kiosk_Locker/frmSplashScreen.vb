@@ -3,15 +3,12 @@ Imports System.Management
 Imports Microsoft.Win32
 Imports KioskLinqDB.ConnectDB
 Imports System.Data.SqlClient
-Imports Microsoft.SqlServer.Management.Smo
-Imports Microsoft.SqlServer.Management.Common
 Imports System.IO
 
 Public Class frmSplashScreen
     Dim CurrentStep As Int16 = 0
 
     Private Sub frmSplashScreen_Shown(sender As Object, e As EventArgs) Handles Me.Shown
-        'Me.WindowState = FormWindowState.Minimized
         Me.Visible = False
         txtCPUID.Text = GetCPU_ID()
         txtProcessorID.Text = GetProcessorId()
@@ -34,6 +31,8 @@ Public Class frmSplashScreen
                 StartNewMachineKey()
             Else
                 If reg.ReadInfoKioskID() <> 0 Then
+
+
                     'ถ้า Key ตรงกัน ให้เข้าโปรแกรมได้
                     frmMain.Show()
                     Me.Close()
@@ -88,6 +87,11 @@ Public Class frmSplashScreen
             Return False
         End If
 
+        If KioskDB.DBServerName <> "(local)" Or KioskDB.DBDatabaseName <> "Minibox" Or KioskDB.DBDbUserID <> "autobox" Or KioskDB.DBDbPwd <> "vvF9h[vd:N" Then
+            MessageBox.Show("การ Config Database ใน C:\Windows\ATBLockerDB.ini ไม่ถูกต้อง", "Alert", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+            Return False
+        End If
+
         Return ret
     End Function
 
@@ -117,14 +121,24 @@ Public Class frmSplashScreen
                     Directory.CreateDirectory("C:\DbData\Minibox")
                 End If
                 SetProgressStatus("Create Login Autobox")
+                'Dim DbScriptPath As String = Application.StartupPath & "\DbScript\"
+                'RunDBScriptFile(conn, DbScriptPath & "01_CreateLoginAutobox.sql")
+                RunScriptCreateLoginAutobox(conn)
+
                 Dim DbScriptPath As String = Application.StartupPath & "\DbScript\"
-                RunDBScriptFile(conn, DbScriptPath & "01_CreateLoginAutobox.sql")
+                Dim ScriptFile As String = DbScriptPath & "02_CreateMiniboxDB.sql"
+                Dim OutputFile As String = DbScriptPath & "02_Output_CreateMiniboxDB.txt"
 
                 SetProgressStatus("Create Database Minibox")
-                RunDBScriptFile(conn, DbScriptPath & "02_CreateMiniboxDB.sql")
+                RunScriptCreateMiniboxDB(conn, ScriptFile, OutputFile)
+                'RunDBScriptFile(conn, DbScriptPath & "02_CreateMiniboxDB.sql")
 
-                conn.ChangeDatabase("Minibox")
-                RunDBScriptFile(conn, DbScriptPath & "03_CreateDatabaseObject.sql")
+                'conn.ChangeDatabase("Minibox")
+                'RunDBScriptFile(conn, DbScriptPath & "03_CreateDatabaseObject.sql")
+                SetProgressStatus("Create Object")
+                ScriptFile = DbScriptPath & "03_CreateDatabaseObject.sql"
+                OutputFile = DbScriptPath & "03_Output_CreateDatabaseObject.txt"
+                RunScriptCreateDatabaseObject(conn, ScriptFile, OutputFile)
 
                 conn.Close()
                 SqlConnection.ClearAllPools()
@@ -224,6 +238,125 @@ Public Class frmSplashScreen
         Me.Cursor = Cursors.Default
     End Sub
 
+    Private Function RunScriptCreateLoginAutobox(conn As SqlConnection) As Boolean
+        Dim ret As Boolean = False
+        Try
+            If conn.State = ConnectionState.Open Then
+                conn.ChangeDatabase("master")
+
+                Dim sql As String = "CREATE LOGIN [autobox] WITH PASSWORD=N'vvF9h[vd:N', DEFAULT_DATABASE=[master], DEFAULT_LANGUAGE=[us_english], CHECK_EXPIRATION=OFF, CHECK_POLICY=OFF"
+                ret = ExecuteNonQuery(conn, sql, Nothing)
+            Else
+                ret = False
+            End If
+        Catch ex As Exception
+            ret = False
+        End Try
+
+        Return ret
+    End Function
+
+    Private Function RunScriptCreateMiniboxDB(conn As SqlConnection, ScriptFile As String, OutputFile As String) As Boolean
+        Dim ret As Boolean = False
+        Try
+            If conn.State = ConnectionState.Open Then
+                conn.ChangeDatabase("master")
+                Dim sqlcmd As New ProcessStartInfo
+                sqlcmd.CreateNoWindow = False
+                sqlcmd.UseShellExecute = False
+                sqlcmd.FileName = "sqlcmd.exe"
+                sqlcmd.WindowStyle = ProcessWindowStyle.Hidden
+                sqlcmd.Arguments = "-S " & conn.DataSource & " -U sa -P " & txtDBPassword.Text & " -i " & ScriptFile & " -o " & OutputFile
+
+                Using p As Process = Process.Start(sqlcmd)
+                    p.WaitForExit()
+                    ret = True
+                End Using
+
+
+
+                'Dim sql As String = "CREATE DATABASE [Minibox] CONTAINMENT = NONE ON  PRIMARY " & Environment.NewLine
+                'sql += " ( NAME = N'Minibox', FILENAME = N'C:\DbData\Minibox\Minibox.mdf' , SIZE = 5120KB , MAXSIZE = UNLIMITED, FILEGROWTH = 1024KB ), "
+                'sql += " FILEGROUP [MS_MasterData] ( NAME = N'F_MasterData', FILENAME = N'C:\DbData\Minibox\F_MasterData.ndf' , SIZE = 5120KB , MAXSIZE = UNLIMITED, FILEGROWTH = 1024KB ), "
+                'sql += " FILEGROUP [MS_MasterIndex] ( NAME = N'F_MasterIndex', FILENAME = N'C:\DbData\Minibox\F_MasterIndex.ndf' , SIZE = 5120KB , MAXSIZE = UNLIMITED, FILEGROWTH = 1024KB ), "
+                'sql += " FILEGROUP [TS_Data] ( NAME = N'F_Data', FILENAME = N'C:\DbData\Minibox\F_Data.ndf' , SIZE = 5120KB , MAXSIZE = UNLIMITED, FILEGROWTH = 1024KB ), "
+                'sql += " FILEGROUP [TS_Index] ( NAME = N'F_Index', FILENAME = N'C:\DbData\Minibox\F_Index.ndf' , SIZE = 5120KB , MAXSIZE = UNLIMITED, FILEGROWTH = 1024KB )"
+                'sql += " LOG ON ( NAME = N'Minibox_log', FILENAME = N'C:\DbData\Minibox\Minibox_log.ldf' , SIZE = 2048KB , MAXSIZE = 2GB , FILEGROWTH = 10%)"
+                'ret = ExecuteNonQuery(conn, sql, Nothing)
+
+                'If ret = True Then
+                '    sql = "ALTER DATABASE [Minibox] SET COMPATIBILITY_LEVEL = 120"
+                '    ret = ExecuteNonQuery(conn, sql, Nothing)
+
+                '    If ret = True Then
+                '        sql = " IF (1 = FULLTEXTSERVICEPROPERTY('IsFullTextInstalled')) begin EXEC [Minibox].[dbo].[sp_fulltext_database] @action = 'enable' end "
+                '        ret = ExecuteNonQuery(conn, sql, Nothing)
+
+                '        If ret = True Then
+                '            sql = " ALTER DATABASE [Minibox] SET ANSI_NULL_DEFAULT OFF;"
+                '            sql += " ALTER DATABASE [Minibox] SET ANSI_NULLS OFF;"
+                '            sql += " ALTER DATABASE [Minibox] SET ANSI_PADDING OFF;"
+                '            sql += " ALTER DATABASE [Minibox] SET ANSI_WARNINGS OFF;"
+                '            sql += " ALTER DATABASE [Minibox] SET ARITHABORT OFF;"
+                '            sql += " ALTER DATABASE [Minibox] SET AUTO_CLOSE ON;"
+                '            sql += " ALTER DATABASE [Minibox] SET AUTO_SHRINK ON; "
+                '            sql += " ALTER DATABASE [Minibox] SET AUTO_UPDATE_STATISTICS ON;"
+                '            sql += " ALTER DATABASE [Minibox] SET CURSOR_CLOSE_ON_COMMIT ON;"
+                '            sql += " ALTER DATABASE [Minibox] SET CURSOR_DEFAULT  GLOBAL ;"
+                '            sql += " ALTER DATABASE [Minibox] SET CONCAT_NULL_YIELDS_NULL OFF ;"
+                '            sql += " ALTER DATABASE [Minibox] SET NUMERIC_ROUNDABORT OFF ;"
+                '            sql += " ALTER DATABASE [Minibox] SET QUOTED_IDENTIFIER OFF ;"
+                '            sql += " ALTER DATABASE [Minibox] SET RECURSIVE_TRIGGERS OFF ;"
+                '            sql += " ALTER DATABASE [Minibox] SET  DISABLE_BROKER ;"
+                '            sql += " ALTER DATABASE [Minibox] SET AUTO_UPDATE_STATISTICS_ASYNC ON ;"
+                '            sql += " ALTER DATABASE [Minibox] SET DATE_CORRELATION_OPTIMIZATION OFF ;"
+                '            sql += " ALTER DATABASE [Minibox] SET TRUSTWORTHY OFF ;"
+                '            sql += " ALTER DATABASE [Minibox] SET ALLOW_SNAPSHOT_ISOLATION OFF ;"
+                '            sql += " ALTER DATABASE [Minibox] SET PARAMETERIZATION SIMPLE ;"
+                '            sql += " ALTER DATABASE [Minibox] SET READ_COMMITTED_SNAPSHOT OFF ;"
+                '            sql += " ALTER DATABASE [Minibox] SET HONOR_BROKER_PRIORITY OFF ;"
+                '            sql += " ALTER DATABASE [Minibox] SET RECOVERY SIMPLE; "
+                '            sql += " ALTER DATABASE [Minibox] SET  MULTI_USER ;"
+                '            sql += " ALTER DATABASE [Minibox] SET PAGE_VERIFY CHECKSUM; "
+                '            sql += " ALTER DATABASE [Minibox] SET DB_CHAINING OFF ;"
+                '            sql += " ALTER DATABASE [Minibox] SET FILESTREAM( NON_TRANSACTED_ACCESS = OFF ) ;"
+                '            sql += " ALTER DATABASE [Minibox] SET TARGET_RECOVERY_TIME = 0 SECONDS; "
+                '            sql += " ALTER DATABASE [Minibox] SET DELAYED_DURABILITY = DISABLED ;"
+                '            sql += " ALTER DATABASE [Minibox] SET  READ_WRITE ;"
+                '            sql += " ALTER AUTHORIZATION ON DATABASE::[Minibox] TO [Autobox];"
+
+                '            ret = ExecuteNonQuery(conn, sql, Nothing)
+                '        End If
+                '    End If
+                'End If
+            End If
+        Catch ex As Exception
+            ret = False
+        End Try
+        Return ret
+    End Function
+
+    Private Function RunScriptCreateDatabaseObject(conn As SqlConnection, ScriptFile As String, OutputFile As String) As Boolean
+        Dim ret As Boolean = False
+        Try
+            Dim sqlcmd As New ProcessStartInfo
+            sqlcmd.CreateNoWindow = False
+            sqlcmd.UseShellExecute = False
+            sqlcmd.FileName = "sqlcmd.exe"
+            sqlcmd.WindowStyle = ProcessWindowStyle.Hidden
+            sqlcmd.Arguments = "-S " & conn.DataSource & " -U sa -P " & txtDBPassword.Text & " -i " & ScriptFile & " -o " & OutputFile
+
+            Using p As Process = Process.Start(sqlcmd)
+                p.WaitForExit()
+                ret = True
+            End Using
+        Catch ex As Exception
+            ret = False
+        End Try
+
+        Return ret
+    End Function
+
     Private Sub btnNext_Click(sender As Object, e As EventArgs) Handles btnNext.Click
         'Check Internet Connection
         Dim ws As New Webservice_Locker.ATBLockerWebService
@@ -251,18 +384,19 @@ Public Class frmSplashScreen
         Next
     End Sub
 
-    Private Sub RunDBScriptFile(conn As SqlConnection, ScriptFile As String)
-        If File.Exists(ScriptFile) = True Then
-            Try
-                Dim server As New Server(New ServerConnection(conn))
-                server.ConnectionContext.ExecuteNonQuery(File.ReadAllText(ScriptFile))
-            Catch ex As Exception
-                SetProgressStatus(ex.Message)
-            End Try
-        End If
-    End Sub
+    'Private Sub RunDBScriptFile(conn As SqlConnection, ScriptFile As String)
+    '    If File.Exists(ScriptFile) = True Then
+    '        Try
+    '            Dim server As New Server(New ServerConnection(conn))
+    '            server.ConnectionContext.ExecuteNonQuery(File.ReadAllText(ScriptFile))
+    '        Catch ex As Exception
+    '            SetProgressStatus(ex.Message)
+    '        End Try
+    '    End If
+    'End Sub
 
-    Private Sub ExecuteNonQuery(conn As SqlConnection, sql As String)
+    Private Function ExecuteNonQuery(conn As SqlConnection, sql As String, cmdParms() As SqlParameter) As Boolean
+        Dim ret As Boolean = False
         If conn.State = ConnectionState.Open Then
             Dim cmd As New SqlCommand
             Try
@@ -270,15 +404,38 @@ Public Class frmSplashScreen
                 cmd.CommandType = CommandType.Text
                 cmd.CommandTimeout = 300
                 cmd.CommandText = sql
+
+                If cmdParms IsNot Nothing Then
+                    For Each parm As SqlParameter In cmdParms
+
+                        Try
+                            If parm IsNot Nothing Then
+                                cmd.Parameters.Add(parm)
+                            End If
+                        Catch ex As ArgumentNullException
+                            Return False
+                            'Throw New ApplicationException(ErrorNullParameter, ex)
+                            '_err = ex.Message
+                        Catch ex As ArgumentException
+                            Return False
+                            'Throw New ApplicationException(ErrorDuplicateParameter, ex)
+                            '_err = ex.Message
+                        End Try
+                    Next
+                End If
+
                 cmd.ExecuteNonQuery()
+                ret = True
             Catch ex As Exception
+                ret = False
                 MessageBox.Show(ex.Message)
             End Try
         Else
+            ret = False
             MessageBox.Show("Connection Not Open")
         End If
-
-    End Sub
+        Return ret
+    End Function
 
 
     Private Sub SetProgressStatus(txt As String)
@@ -355,14 +512,14 @@ Public Class frmSplashScreen
     End Function
 
     Private Sub btnDeleteKey_Click(sender As Object, e As EventArgs) Handles btnDeleteKey.Click
-        Dim conn As SqlConnection = ConnectDB("sa", "1qaz@WSX")
+        Dim conn As SqlConnection = ConnectDB("sa", txtDBPassword.Text)
         conn.ChangeDatabase("master")
 
-        ExecuteNonQuery(conn, "EXEC msdb.dbo.sp_delete_database_backuphistory @database_name = N'Minibox'")
-        ExecuteNonQuery(conn, "ALTER DATABASE [Minibox] SET  SINGLE_USER WITH ROLLBACK IMMEDIATE")
-        ExecuteNonQuery(conn, "DROP DATABASE [Minibox]")
+        ExecuteNonQuery(conn, "EXEC msdb.dbo.sp_delete_database_backuphistory @database_name = N'Minibox'", Nothing)
+        ExecuteNonQuery(conn, "ALTER DATABASE [Minibox] SET  SINGLE_USER WITH ROLLBACK IMMEDIATE", Nothing)
+        ExecuteNonQuery(conn, "DROP DATABASE [Minibox]", Nothing)
 
-        ExecuteNonQuery(conn, "DROP LOGIN [autobox]")
+        ExecuteNonQuery(conn, "DROP LOGIN [autobox]", Nothing)
 
         conn.Close()
         SqlConnection.ClearAllPools()
