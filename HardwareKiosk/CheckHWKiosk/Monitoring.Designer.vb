@@ -22,6 +22,7 @@ Partial Class Monitoring
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
+        Me.components = New System.ComponentModel.Container()
         Me.TestSensor1 = New BoardSensor.TestSensor()
         Me.BarcodeScannerConnectDavice1 = New QRCodeScanner.BarcodeScannerConnectDavice()
         Me.PrinterConnectDevice1 = New Printer.PrinterConnectDevice()
@@ -33,11 +34,12 @@ Partial Class Monitoring
         Me.TestLED1 = New BoardLED.TestLED()
         Me.TestSolenoid1 = New BoardSolenoid.TestSolenoid()
         Me.Panel1 = New System.Windows.Forms.Panel()
+        Me.pbCaptureImage = New System.Windows.Forms.PictureBox()
         Me.cbCamera = New System.Windows.Forms.ComboBox()
         Me.Label7 = New System.Windows.Forms.Label()
         Me.btnTest = New System.Windows.Forms.Button()
         Me.lblHead = New System.Windows.Forms.Label()
-        Me.pbCaptureImage = New System.Windows.Forms.PictureBox()
+        Me.TimerCheckCamera = New System.Windows.Forms.Timer(Me.components)
         Me.Panel1.SuspendLayout()
         CType(Me.pbCaptureImage, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
@@ -167,6 +169,15 @@ Partial Class Monitoring
         Me.Panel1.Size = New System.Drawing.Size(320, 160)
         Me.Panel1.TabIndex = 11
         '
+        'pbCaptureImage
+        '
+        Me.pbCaptureImage.Location = New System.Drawing.Point(87, 64)
+        Me.pbCaptureImage.Name = "pbCaptureImage"
+        Me.pbCaptureImage.Size = New System.Drawing.Size(159, 90)
+        Me.pbCaptureImage.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
+        Me.pbCaptureImage.TabIndex = 33
+        Me.pbCaptureImage.TabStop = False
+        '
         'cbCamera
         '
         Me.cbCamera.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
@@ -187,7 +198,7 @@ Partial Class Monitoring
         '
         'btnTest
         '
-        Me.btnTest.BackgroundImage = Global.CheckHardware.My.Resources.Resources.Setting
+        Me.btnTest.BackgroundImage = Global.CheckHardware.My.Resources.Resources.buttonPlay
         Me.btnTest.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
         Me.btnTest.Cursor = System.Windows.Forms.Cursors.Hand
         Me.btnTest.FlatAppearance.BorderSize = 0
@@ -210,13 +221,8 @@ Partial Class Monitoring
         Me.lblHead.Text = "Camera"
         Me.lblHead.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
-        'pbCaptureImage
+        'TimerCheckCamera
         '
-        Me.pbCaptureImage.Location = New System.Drawing.Point(87, 64)
-        Me.pbCaptureImage.Name = "pbCaptureImage"
-        Me.pbCaptureImage.Size = New System.Drawing.Size(159, 90)
-        Me.pbCaptureImage.TabIndex = 33
-        Me.pbCaptureImage.TabStop = False
         '
         'Monitoring
         '
@@ -262,4 +268,5 @@ Partial Class Monitoring
     Friend WithEvents cbCamera As ComboBox
     Friend WithEvents Label7 As Label
     Friend WithEvents pbCaptureImage As PictureBox
+    Friend WithEvents TimerCheckCamera As Timer
 End Class

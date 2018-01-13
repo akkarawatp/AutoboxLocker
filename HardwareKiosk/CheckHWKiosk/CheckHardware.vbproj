@@ -209,6 +209,8 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="buttonPlay.png" />
+    <Content Include="buttonStop.png" />
     <Content Include="IconProcessing.gif">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

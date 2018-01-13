@@ -137,83 +137,83 @@ Public Class PrinterTestDevice
     End Enum
 #End Region
 
-#Region "QR Code Processing"
-    Private Function GenerateQRCode() As String
-        Dim ret As String = ""
-        '## QRCode Format TransactionID + TransactionNo + ID + Len(TransactionID)
-        Dim QRCode As String = "123400120160521163218ID4"
+    '#Region "QR Code Processing"
+    '    Private Function GenerateQRCode() As String
+    '        Dim ret As String = ""
+    '        '## QRCode Format TransactionID + TransactionNo + ID + Len(TransactionID)
+    '        Dim QRCode As String = "123400120160521163218ID4"
 
-        Dim obj As New WolfSoftware.Library_NET.BarcodeControl
-        obj.Unlock("Phantom 2008", "WSFCX-0100-100883561")
-        obj.CurrentCode = 1014
-        obj.DataToEncode = QRCode  'ขนาดของ QR จะขึ้นอยู่กับความยาวของ Data
-        Dim pic As New Bitmap(obj.GetCode(1080)) 'The bitmap you created
-        pic.SetResolution(1080, 1080)
-        Dim path As String = Application.StartupPath() & "\QRCode"
-        If IO.Directory.Exists(path) = False Then
-            IO.Directory.CreateDirectory(path)
-        End If
+    '        Dim obj As New WolfSoftware.Library_NET.BarcodeControl
+    '        obj.Unlock("Phantom 2008", "WSFCX-0100-100883561")
+    '        obj.CurrentCode = 1014
+    '        obj.DataToEncode = QRCode  'ขนาดของ QR จะขึ้นอยู่กับความยาวของ Data
+    '        Dim pic As New Bitmap(obj.GetCode(1080)) 'The bitmap you created
+    '        pic.SetResolution(1080, 1080)
+    '        Dim path As String = Application.StartupPath() & "\QRCode"
+    '        If IO.Directory.Exists(path) = False Then
+    '            IO.Directory.CreateDirectory(path)
+    '        End If
 
-        Try
-            For Each f As String In Directory.GetFiles(path)
-                File.Delete(f)
-            Next
+    '        Try
+    '            For Each f As String In Directory.GetFiles(path)
+    '                File.Delete(f)
+    '            Next
 
-            Dim FileName As String = path & "\" & QRCode & ".bmp"
-            pic.Save(FileName, Imaging.ImageFormat.Bmp)
+    '            Dim FileName As String = path & "\" & QRCode & ".bmp"
+    '            pic.Save(FileName, Imaging.ImageFormat.Bmp)
 
-            If IO.File.Exists(FileName) = True Then
-                ret = CropImage(FileName)
-            End If
-        Catch ex As Exception
+    '            If IO.File.Exists(FileName) = True Then
+    '                ret = CropImage(FileName)
+    '            End If
+    '        Catch ex As Exception
 
-        End Try
+    '        End Try
 
-        Return ret
-    End Function
+    '        Return ret
+    '    End Function
 
-    Private Function CropImage(fileName As String) As String
-        'Dim fileName = "C:\file.jpg"
-        Dim ret As String = fileName
-        Dim CropRect As New Rectangle(300, 170, 530, 530)   'กำหนด Area ที่จะทำการ Crop
-        Dim OriginalImage = Image.FromFile(ret)
-        Dim crpImg = New Bitmap(CropRect.Width, CropRect.Height)
-        Using grp = Graphics.FromImage(crpImg)
-            grp.DrawImage(OriginalImage, New Rectangle(0, 0, CropRect.Width, CropRect.Height), CropRect, GraphicsUnit.Pixel)
-            OriginalImage.Dispose()
+    '    Private Function CropImage(fileName As String) As String
+    '        'Dim fileName = "C:\file.jpg"
+    '        Dim ret As String = fileName
+    '        Dim CropRect As New Rectangle(300, 170, 530, 530)   'กำหนด Area ที่จะทำการ Crop
+    '        Dim OriginalImage = Image.FromFile(ret)
+    '        Dim crpImg = New Bitmap(CropRect.Width, CropRect.Height)
+    '        Using grp = Graphics.FromImage(crpImg)
+    '            grp.DrawImage(OriginalImage, New Rectangle(0, 0, CropRect.Width, CropRect.Height), CropRect, GraphicsUnit.Pixel)
+    '            OriginalImage.Dispose()
 
-            crpImg = ResizeImage(crpImg, New Drawing.Size(200, 200))
-            crpImg.Save(ret, Imaging.ImageFormat.Bmp)
-        End Using
+    '            crpImg = ResizeImage(crpImg, New Drawing.Size(200, 200))
+    '            crpImg.Save(ret, Imaging.ImageFormat.Bmp)
+    '        End Using
 
-        Return ret
-    End Function
+    '        Return ret
+    '    End Function
 
 
-    Public Shared Function ResizeImage(ByVal image As Image, ByVal size As Size, Optional ByVal preserveAspectRatio As Boolean = True) As Image
-        Dim newWidth As Integer
-        Dim newHeight As Integer
-        If preserveAspectRatio Then
-            Dim originalWidth As Integer = image.Width
-            Dim originalHeight As Integer = image.Height
-            Dim percentWidth As Single = CSng(size.Width) / CSng(originalWidth)
-            Dim percentHeight As Single = CSng(size.Height) / CSng(originalHeight)
-            Dim percent As Single = If(percentHeight < percentWidth,
-                    percentHeight, percentWidth)
-            newWidth = CInt(originalWidth * percent)
-            newHeight = CInt(originalHeight * percent)
-        Else
-            newWidth = size.Width
-            newHeight = size.Height
-        End If
-        Dim newImage As Image = New Bitmap(newWidth, newHeight)
-        Using graphicsHandle As Graphics = Graphics.FromImage(newImage)
-            graphicsHandle.InterpolationMode = InterpolationMode.HighQualityBicubic
-            graphicsHandle.DrawImage(image, 0, 0, newWidth, newHeight)
-        End Using
-        Return newImage
-    End Function
-#End Region
+    '    Public Shared Function ResizeImage(ByVal image As Image, ByVal size As Size, Optional ByVal preserveAspectRatio As Boolean = True) As Image
+    '        Dim newWidth As Integer
+    '        Dim newHeight As Integer
+    '        If preserveAspectRatio Then
+    '            Dim originalWidth As Integer = image.Width
+    '            Dim originalHeight As Integer = image.Height
+    '            Dim percentWidth As Single = CSng(size.Width) / CSng(originalWidth)
+    '            Dim percentHeight As Single = CSng(size.Height) / CSng(originalHeight)
+    '            Dim percent As Single = If(percentHeight < percentWidth,
+    '                    percentHeight, percentWidth)
+    '            newWidth = CInt(originalWidth * percent)
+    '            newHeight = CInt(originalHeight * percent)
+    '        Else
+    '            newWidth = size.Width
+    '            newHeight = size.Height
+    '        End If
+    '        Dim newImage As Image = New Bitmap(newWidth, newHeight)
+    '        Using graphicsHandle As Graphics = Graphics.FromImage(newImage)
+    '            graphicsHandle.InterpolationMode = InterpolationMode.HighQualityBicubic
+    '            graphicsHandle.DrawImage(image, 0, 0, newWidth, newHeight)
+    '        End Using
+    '        Return newImage
+    '    End Function
+    '#End Region
 
 
     Sub CheckStatusPrinter()
@@ -261,10 +261,13 @@ Public Class PrinterTestDevice
             prn.SetDeviceFont(11, "Calibri", True, False)
             prn.PrintText("    Use this QR-code to collect your luggage")
 
-            Dim qrCode As String = GenerateQRCode()
-            If qrCode.Trim <> "" Then
-                prn.PrintImage(qrCode)
-            End If
+            'Dim qrCode As String = GenerateQRCode()
+            'If qrCode.Trim <> "" Then
+            '    prn.PrintImage(qrCode)
+            'End If
+
+            'Dim BarCode As String = Deposit.DepositTransactionID & Deposit.DepositTransNo & "ID" & Deposit.DepositTransactionID.ToString.Length
+            'PrintText(BarCode, fnBarcode, Align.Center, e)
 
             prn.PrintText("  Caution : This QR-Code can be used only 1 time")
             prn.PrintImage(Application.StartupPath & "\SlipLine.bmp")

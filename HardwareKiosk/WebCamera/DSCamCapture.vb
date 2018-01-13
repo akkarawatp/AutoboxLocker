@@ -419,6 +419,7 @@ Public Class DSCamCapture
                 buf = Nothing
 
                 capturedPic.RotateFlip(RotateFlipType.RotateNoneFlipY)
+                'capturedPic.RotateFlip(RotateFlipType.RotateNoneFlipNone)
 
                 getImage = False
                 saveImage = False

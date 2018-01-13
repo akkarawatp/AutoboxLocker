@@ -66,9 +66,6 @@
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
-    <Reference Include="Wolf Software.Library NET">
-      <HintPath>..\..\KioskLocker\Kiosk_Locker\bin\Debug\Wolf Software.Library NET.dll</HintPath>
-    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Import Include="Microsoft.VisualBasic" />
