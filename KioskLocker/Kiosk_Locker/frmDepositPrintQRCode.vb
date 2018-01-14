@@ -140,7 +140,7 @@ Public Class frmDepositPrintQRCode
 
         'วาดกรอบให้กับ 2 บรรทัดข้างล่างนี้
         Dim borderTop As Integer = _lastPrintY - 2
-        PrintText("Use this barcode to collect your luggage", fn7b, Align.Center, e)
+        PrintText("Use this slip to take back your luggage", fn7b, Align.Center, e)
         PrintText("Warning : This barode can be used only 1 time", fn7b, Align.Center, e)
         Dim borderH As Integer = (_lastPrintY + 2 - borderTop)
         PrintRectankle(0, borderTop, borderH, e)

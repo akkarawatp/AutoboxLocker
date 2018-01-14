@@ -48,7 +48,7 @@ Partial Class Monitoring
         '
         Me.TestSensor1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.TestSensor1.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(222, Byte))
-        Me.TestSensor1.Location = New System.Drawing.Point(3, 376)
+        Me.TestSensor1.Location = New System.Drawing.Point(38, 376)
         Me.TestSensor1.Margin = New System.Windows.Forms.Padding(4)
         Me.TestSensor1.Name = "TestSensor1"
         Me.TestSensor1.Size = New System.Drawing.Size(320, 157)
@@ -59,7 +59,7 @@ Partial Class Monitoring
         Me.BarcodeScannerConnectDavice1.BackColor = System.Drawing.Color.White
         Me.BarcodeScannerConnectDavice1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.BarcodeScannerConnectDavice1.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(222, Byte))
-        Me.BarcodeScannerConnectDavice1.Location = New System.Drawing.Point(648, 166)
+        Me.BarcodeScannerConnectDavice1.Location = New System.Drawing.Point(363, 376)
         Me.BarcodeScannerConnectDavice1.Margin = New System.Windows.Forms.Padding(4)
         Me.BarcodeScannerConnectDavice1.Name = "BarcodeScannerConnectDavice1"
         Me.BarcodeScannerConnectDavice1.Size = New System.Drawing.Size(320, 96)
@@ -70,7 +70,7 @@ Partial Class Monitoring
         Me.PrinterConnectDevice1.BackColor = System.Drawing.Color.White
         Me.PrinterConnectDevice1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.PrinterConnectDevice1.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(222, Byte))
-        Me.PrinterConnectDevice1.Location = New System.Drawing.Point(648, 266)
+        Me.PrinterConnectDevice1.Location = New System.Drawing.Point(360, 269)
         Me.PrinterConnectDevice1.Margin = New System.Windows.Forms.Padding(4)
         Me.PrinterConnectDevice1.Name = "PrinterConnectDevice1"
         Me.PrinterConnectDevice1.Size = New System.Drawing.Size(320, 99)
@@ -83,7 +83,7 @@ Partial Class Monitoring
         Me.CoinOutConnectDevice1.CoinID = 5
         Me.CoinOutConnectDevice1.CoinValue = 5
         Me.CoinOutConnectDevice1.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(222, Byte))
-        Me.CoinOutConnectDevice1.Location = New System.Drawing.Point(325, 166)
+        Me.CoinOutConnectDevice1.Location = New System.Drawing.Point(360, 166)
         Me.CoinOutConnectDevice1.Margin = New System.Windows.Forms.Padding(4)
         Me.CoinOutConnectDevice1.Name = "CoinOutConnectDevice1"
         Me.CoinOutConnectDevice1.Size = New System.Drawing.Size(320, 99)
@@ -96,7 +96,7 @@ Partial Class Monitoring
         Me.CashOutConnectDevice2.CashID = 3
         Me.CashOutConnectDevice2.CashValue = 100
         Me.CashOutConnectDevice2.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(222, Byte))
-        Me.CashOutConnectDevice2.Location = New System.Drawing.Point(3, 269)
+        Me.CashOutConnectDevice2.Location = New System.Drawing.Point(38, 269)
         Me.CashOutConnectDevice2.Margin = New System.Windows.Forms.Padding(4)
         Me.CashOutConnectDevice2.Name = "CashOutConnectDevice2"
         Me.CashOutConnectDevice2.Size = New System.Drawing.Size(320, 99)
@@ -109,7 +109,7 @@ Partial Class Monitoring
         Me.CashOutConnectDevice1.CashID = 18
         Me.CashOutConnectDevice1.CashValue = 20
         Me.CashOutConnectDevice1.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(222, Byte))
-        Me.CashOutConnectDevice1.Location = New System.Drawing.Point(3, 166)
+        Me.CashOutConnectDevice1.Location = New System.Drawing.Point(38, 166)
         Me.CashOutConnectDevice1.Margin = New System.Windows.Forms.Padding(4)
         Me.CashOutConnectDevice1.Name = "CashOutConnectDevice1"
         Me.CashOutConnectDevice1.Size = New System.Drawing.Size(320, 99)
@@ -120,7 +120,7 @@ Partial Class Monitoring
         Me.CoinInConnectDevice1.BackColor = System.Drawing.Color.White
         Me.CoinInConnectDevice1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.CoinInConnectDevice1.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(222, Byte))
-        Me.CoinInConnectDevice1.Location = New System.Drawing.Point(325, 3)
+        Me.CoinInConnectDevice1.Location = New System.Drawing.Point(360, 3)
         Me.CoinInConnectDevice1.Margin = New System.Windows.Forms.Padding(4)
         Me.CoinInConnectDevice1.Name = "CoinInConnectDevice1"
         Me.CoinInConnectDevice1.Size = New System.Drawing.Size(320, 160)
@@ -131,7 +131,7 @@ Partial Class Monitoring
         Me.CashInConnectDevice1.BackColor = System.Drawing.Color.White
         Me.CashInConnectDevice1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.CashInConnectDevice1.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(222, Byte))
-        Me.CashInConnectDevice1.Location = New System.Drawing.Point(3, 3)
+        Me.CashInConnectDevice1.Location = New System.Drawing.Point(38, 3)
         Me.CashInConnectDevice1.Margin = New System.Windows.Forms.Padding(4)
         Me.CashInConnectDevice1.Name = "CashInConnectDevice1"
         Me.CashInConnectDevice1.Size = New System.Drawing.Size(320, 160)
@@ -141,7 +141,7 @@ Partial Class Monitoring
         '
         Me.TestLED1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.TestLED1.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(222, Byte))
-        Me.TestLED1.Location = New System.Drawing.Point(325, 376)
+        Me.TestLED1.Location = New System.Drawing.Point(38, 706)
         Me.TestLED1.Margin = New System.Windows.Forms.Padding(4)
         Me.TestLED1.Name = "TestLED1"
         Me.TestLED1.Size = New System.Drawing.Size(320, 157)
@@ -151,7 +151,7 @@ Partial Class Monitoring
         '
         Me.TestSolenoid1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.TestSolenoid1.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(222, Byte))
-        Me.TestSolenoid1.Location = New System.Drawing.Point(648, 376)
+        Me.TestSolenoid1.Location = New System.Drawing.Point(38, 541)
         Me.TestSolenoid1.Margin = New System.Windows.Forms.Padding(4)
         Me.TestSolenoid1.Name = "TestSolenoid1"
         Me.TestSolenoid1.Size = New System.Drawing.Size(320, 157)
@@ -164,16 +164,16 @@ Partial Class Monitoring
         Me.Panel1.Controls.Add(Me.Label7)
         Me.Panel1.Controls.Add(Me.btnTest)
         Me.Panel1.Controls.Add(Me.lblHead)
-        Me.Panel1.Location = New System.Drawing.Point(648, 3)
+        Me.Panel1.Location = New System.Drawing.Point(363, 479)
         Me.Panel1.Name = "Panel1"
-        Me.Panel1.Size = New System.Drawing.Size(320, 160)
+        Me.Panel1.Size = New System.Drawing.Size(320, 299)
         Me.Panel1.TabIndex = 11
         '
         'pbCaptureImage
         '
-        Me.pbCaptureImage.Location = New System.Drawing.Point(87, 64)
+        Me.pbCaptureImage.Location = New System.Drawing.Point(10, 64)
         Me.pbCaptureImage.Name = "pbCaptureImage"
-        Me.pbCaptureImage.Size = New System.Drawing.Size(159, 90)
+        Me.pbCaptureImage.Size = New System.Drawing.Size(300, 225)
         Me.pbCaptureImage.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
         Me.pbCaptureImage.TabIndex = 33
         Me.pbCaptureImage.TabStop = False
@@ -230,7 +230,7 @@ Partial Class Monitoring
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.AutoScroll = True
         Me.BackColor = System.Drawing.Color.White
-        Me.ClientSize = New System.Drawing.Size(1012, 733)
+        Me.ClientSize = New System.Drawing.Size(752, 985)
         Me.Controls.Add(Me.Panel1)
         Me.Controls.Add(Me.TestSolenoid1)
         Me.Controls.Add(Me.TestLED1)
@@ -244,8 +244,8 @@ Partial Class Monitoring
         Me.Controls.Add(Me.CashInConnectDevice1)
         Me.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(222, Byte))
         Me.Name = "Monitoring"
+        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "Monitoring"
-        Me.WindowState = System.Windows.Forms.FormWindowState.Maximized
         Me.Panel1.ResumeLayout(False)
         Me.Panel1.PerformLayout()
         CType(Me.pbCaptureImage, System.ComponentModel.ISupportInitialize).EndInit()

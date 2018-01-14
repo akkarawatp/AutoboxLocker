@@ -77,18 +77,22 @@ Public Class PrinterTestDevice
 
 
         'Dim imgLogo As Image = Image.FromFile("SlipLogo.bmp")
-
         PrintImage(Image.FromFile("SlipLogo.png"), Align.Center, e)
-        PrintText("Document No : 00120160521163218", fn10, Align.Left, e)
-        PrintText("Your Locker Number : M01", fn16b, Align.Center, e)
-        PrintText("Location:Airport Rail link Suvanabhumi Airport", fn10, Align.Left, e)
+        PrintText("Transaction No : 00120160521163218", fn10, Align.Left, e)
+        PrintText("Box Number : M01", fn16b, Align.Center, e)
+        PrintText("Location : Pattaya", fn10, Align.Left, e)
 
-        Dim BarcodeText As String = "00120160521163218"
-        PrintText(BarcodeText, GetFrontIDAutomation3of9(8, FontStyle.Regular), Align.Center, e)
-        'PrintBarcodeText(BarcodeText, GetFrontIDAutomation3of9(8, FontStyle.Regular), e)
-        PrintImage(GenerateBarcodeImage(BarcodeText, e), Align.Center, e)
+        'Dim BarcodeText As String = "123400120160521163218ID4"
+        'PrintText(BarcodeText, GetFrontIDAutomation3of9(8, FontStyle.Regular), Align.Center, e)
+        'PrintBarcodeVertical(e.Graphics, 90, BarcodeText, GetFrontIDAutomation3of9(10, FontStyle.Regular), e)
+        'PrintImage(GenerateBarcodeImage(BarcodeText, e), Align.Center, e)
 
+        Dim qrCode As String = GenerateQRCode()
+        If qrCode.Trim <> "" Then
+            PrintImage(Image.FromFile(qrCode), Align.Center, e)
+        End If
 
+        PrintText(" ", fn10, Align.Left, e)
         Dim borderTop As Integer = _lastPrintY - 2
         PrintText("Use this QR-code to collect your luggage", fn10B, Align.Center, e)
         PrintText("Warning : This QR-Code can be used only 1 time", fn10B, Align.Center, e)
@@ -96,8 +100,7 @@ Public Class PrinterTestDevice
         Dim borderH As Integer = (_lastPrintY + 2 - borderTop)
         PrintRectankle(0, borderTop, borderH, e)
 
-        PrintText("In case of lost QR code and cannot open your locker", fn10, Align.Center, e)
-        'PrintImage(Image.FromFile("SlipWarning.bmp"), Align.Left, e)
+        'PrintText("In case of lost QR code and cannot open your locker", fn10, Align.Center, e)
         e.HasMorePages = False
     End Sub
 
@@ -122,24 +125,27 @@ Public Class PrinterTestDevice
         e.Graphics.DrawRectangle(vPen, vRect)
     End Sub
 
-    'Protected Sub PrintBarcodeText(ByVal BarcodeText As String, ByVal fnt As System.Drawing.Font, ByRef e As System.Drawing.Printing.PrintPageEventArgs, Optional AddNewLine As Boolean = True)
-    '    Dim w As Integer = e.Graphics.MeasureString(BarcodeText, fnt).Width
-    '    Dim h As Integer = e.Graphics.MeasureString(BarcodeText, fnt).Height
-    '    Dim x As Integer = 0
-    '    'Dim y As Integer = e.PageSettings.PrintableArea.Top + lastPrintY
-    '    Dim y As Integer = 0
-    '    Dim brsh As New System.Drawing.SolidBrush(System.Drawing.Color.FromArgb(0, 0, 0))
+    Protected Sub PrintBarcodeVertical(gr As Graphics, angle As Double, ByVal txt As String, ByVal fnt As System.Drawing.Font, ByRef e As System.Drawing.Printing.PrintPageEventArgs)
+        Dim w As Integer = e.Graphics.MeasureString(txt, fnt).Width
+        Dim h As Integer = e.Graphics.MeasureString(txt, fnt).Height
+        Dim x As Integer = 0
+        Dim y As Integer = 0
+        x = e.PageSettings.PrintableArea.Width / 2 - h / 2
+        y = e.PageSettings.PrintableArea.Top + lastPrintY
 
-    '    x = e.PageSettings.PrintableArea.Width / 2 - h / 2
-    '    'y = lastPrintY
-    '    e.Graphics.TranslateTransform(0, 0)
-    '    e.Graphics.RotateTransform(90)
-    '    e.Graphics.DrawString(BarcodeText, fnt, brsh, x, y)
-    '    If AddNewLine = True Then
-    '        _lastPrintY = y + w
-    '    End If
-    '    e.Graphics.RotateTransform(-90)
-    'End Sub
+        Dim state As GraphicsState = gr.Save
+        gr.ResetTransform()
+
+        gr.RotateTransform(angle)
+
+        gr.TranslateTransform(x, y, MatrixOrder.Append)
+
+        Dim brsh As New System.Drawing.SolidBrush(System.Drawing.Color.FromArgb(0, 0, 0))
+        gr.DrawString(txt, fnt, brsh, 0, 0)
+
+        gr.Restore(state)
+        _lastPrintY = y + w + 5
+    End Sub
 
     Protected Sub PrintText(ByVal txt As String, ByVal fnt As System.Drawing.Font, ByVal align As Align, ByRef e As System.Drawing.Printing.PrintPageEventArgs)
         Dim w As Integer = e.Graphics.MeasureString(txt, fnt).Width
@@ -191,101 +197,84 @@ Public Class PrinterTestDevice
     End Enum
 #End Region
 
-    '#Region "QR Code Processing"
-    '    Private Function GenerateQRCode() As String
-    '        Dim ret As String = ""
-    '        '## QRCode Format TransactionID + TransactionNo + ID + Len(TransactionID)
-    '        Dim QRCode As String = "123400120160521163218ID4"
+#Region "QR Code Processing"
+    Private Function GenerateQRCode() As String
+        Dim ret As String = ""
+        '## QRCode Format TransactionID + TransactionNo + ID + Len(TransactionID)
+        Dim QRCode As String = "123400120160521163218ID4"
 
-    '        Dim obj As New WolfSoftware.Library_NET.BarcodeControl
-    '        obj.Unlock("Phantom 2008", "WSFCX-0100-100883561")
-    '        obj.CurrentCode = 1014
-    '        obj.DataToEncode = QRCode  'ขนาดของ QR จะขึ้นอยู่กับความยาวของ Data
-    '        Dim pic As New Bitmap(obj.GetCode(1080)) 'The bitmap you created
-    '        pic.SetResolution(1080, 1080)
-    '        Dim path As String = Application.StartupPath() & "\QRCode"
-    '        If IO.Directory.Exists(path) = False Then
-    '            IO.Directory.CreateDirectory(path)
-    '        End If
+        Dim obj As New WolfSoftware.Library_NET.BarcodeControl
+        obj.Unlock("Phantom 2008", "WSFCX-0100-100883561")
+        obj.CurrentCode = 1014
+        obj.DataToEncode = QRCode  'ขนาดของ QR จะขึ้นอยู่กับความยาวของ Data
+        Dim pic As New Bitmap(obj.GetCode(1080)) 'The bitmap you created
+        pic.SetResolution(1080, 1080)
+        Dim path As String = Application.StartupPath() & "\QRCode"
+        If IO.Directory.Exists(path) = False Then
+            IO.Directory.CreateDirectory(path)
+        End If
 
-    '        Try
-    '            For Each f As String In Directory.GetFiles(path)
-    '                File.Delete(f)
-    '            Next
+        Try
+            For Each f As String In Directory.GetFiles(path)
+                File.Delete(f)
+            Next
 
-    '            Dim FileName As String = path & "\" & QRCode & ".bmp"
-    '            pic.Save(FileName, Imaging.ImageFormat.Bmp)
+            Dim FileName As String = path & "\" & QRCode & ".bmp"
+            pic.Save(FileName, Imaging.ImageFormat.Bmp)
 
-    '            If IO.File.Exists(FileName) = True Then
-    '                ret = CropImage(FileName)
-    '            End If
-    '        Catch ex As Exception
+            If IO.File.Exists(FileName) = True Then
+                ret = CropImage(FileName)
+            End If
+        Catch ex As Exception
 
-    '        End Try
+        End Try
 
-    '        Return ret
-    '    End Function
-
-    '    Private Function CropImage(fileName As String) As String
-    '        'Dim fileName = "C:\file.jpg"
-    '        Dim ret As String = fileName
-    '        Dim CropRect As New Rectangle(300, 170, 530, 530)   'กำหนด Area ที่จะทำการ Crop
-    '        Dim OriginalImage = Image.FromFile(ret)
-    '        Dim crpImg = New Bitmap(CropRect.Width, CropRect.Height)
-    '        Using grp = Graphics.FromImage(crpImg)
-    '            grp.DrawImage(OriginalImage, New Rectangle(0, 0, CropRect.Width, CropRect.Height), CropRect, GraphicsUnit.Pixel)
-    '            OriginalImage.Dispose()
-
-    '            crpImg = ResizeImage(crpImg, New Drawing.Size(200, 200))
-    '            crpImg.Save(ret, Imaging.ImageFormat.Bmp)
-    '        End Using
-
-    '        Return ret
-    '    End Function
-
-
-    '    Public Shared Function ResizeImage(ByVal image As Image, ByVal size As Size, Optional ByVal preserveAspectRatio As Boolean = True) As Image
-    '        Dim newWidth As Integer
-    '        Dim newHeight As Integer
-    '        If preserveAspectRatio Then
-    '            Dim originalWidth As Integer = image.Width
-    '            Dim originalHeight As Integer = image.Height
-    '            Dim percentWidth As Single = CSng(size.Width) / CSng(originalWidth)
-    '            Dim percentHeight As Single = CSng(size.Height) / CSng(originalHeight)
-    '            Dim percent As Single = If(percentHeight < percentWidth,
-    '                    percentHeight, percentWidth)
-    '            newWidth = CInt(originalWidth * percent)
-    '            newHeight = CInt(originalHeight * percent)
-    '        Else
-    '            newWidth = size.Width
-    '            newHeight = size.Height
-    '        End If
-    '        Dim newImage As Image = New Bitmap(newWidth, newHeight)
-    '        Using graphicsHandle As Graphics = Graphics.FromImage(newImage)
-    '            graphicsHandle.InterpolationMode = InterpolationMode.HighQualityBicubic
-    '            graphicsHandle.DrawImage(image, 0, 0, newWidth, newHeight)
-    '        End Using
-    '        Return newImage
-    '    End Function
-    '#End Region
-
-
-    Private Function GenerateBarcodeImage(BarcodeText As String, ByRef e As System.Drawing.Printing.PrintPageEventArgs) As Image
-        Dim font As Font = GetFrontIDAutomation3of9(8, FontStyle.Regular)
-        Dim width As Integer = CInt(e.Graphics.MeasureString(BarcodeText, font).Width)
-        Dim height As Integer = CInt(e.Graphics.MeasureString(BarcodeText, font).Height)
-        Dim bitmap = New Bitmap(width + 3, height)
-        Dim graphics As Graphics = Graphics.FromImage(bitmap)
-        graphics.Clear(Color.White)
-        graphics.SmoothingMode = SmoothingMode.HighQuality
-        'graphics.TextRenderingHint = Drawing.Text.TextRenderingHint.SingleBitPerPixel
-        graphics.TextContrast = 0
-        graphics.DrawString(BarcodeText, font, New SolidBrush(Color.FromArgb(0, 0, 0)), 0, 0)
-        graphics.Flush()
-        graphics.Dispose()
-        bitmap.RotateFlip(RotateFlipType.Rotate90FlipNone)
-        Return bitmap
+        Return ret
     End Function
+
+    Private Function CropImage(fileName As String) As String
+        'Dim fileName = "C:\file.jpg"
+        Dim ret As String = fileName
+        Dim CropRect As New Rectangle(300, 170, 530, 530)   'กำหนด Area ที่จะทำการ Crop
+        Dim OriginalImage = Image.FromFile(ret)
+        Dim crpImg = New Bitmap(CropRect.Width, CropRect.Height)
+        Using grp = Graphics.FromImage(crpImg)
+            grp.DrawImage(OriginalImage, New Rectangle(0, 0, CropRect.Width, CropRect.Height), CropRect, GraphicsUnit.Pixel)
+            OriginalImage.Dispose()
+
+            crpImg = ResizeImage(crpImg, New Drawing.Size(200, 200))
+            crpImg.Save(ret, Imaging.ImageFormat.Bmp)
+        End Using
+
+        Return ret
+    End Function
+
+
+    Public Shared Function ResizeImage(ByVal image As Image, ByVal size As Size, Optional ByVal preserveAspectRatio As Boolean = True) As Image
+        Dim newWidth As Integer
+        Dim newHeight As Integer
+        If preserveAspectRatio Then
+            Dim originalWidth As Integer = image.Width
+            Dim originalHeight As Integer = image.Height
+            Dim percentWidth As Single = CSng(size.Width) / CSng(originalWidth)
+            Dim percentHeight As Single = CSng(size.Height) / CSng(originalHeight)
+            Dim percent As Single = If(percentHeight < percentWidth,
+                    percentHeight, percentWidth)
+            newWidth = CInt(originalWidth * percent)
+            newHeight = CInt(originalHeight * percent)
+        Else
+            newWidth = size.Width
+            newHeight = size.Height
+        End If
+        Dim newImage As Image = New Bitmap(newWidth, newHeight)
+        Using graphicsHandle As Graphics = Graphics.FromImage(newImage)
+            graphicsHandle.InterpolationMode = InterpolationMode.HighQualityBicubic
+            graphicsHandle.DrawImage(image, 0, 0, newWidth, newHeight)
+        End Using
+        Return newImage
+    End Function
+#End Region
+
 
     Sub CheckStatusPrinter()
         Dim Status As String = Printer.CheckPrinterStatus("")
