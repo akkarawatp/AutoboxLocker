@@ -101,7 +101,7 @@ Public Class frmDepositPrintQRCode
         Dim fn8b As New Font("Calibri", 8, FontStyle.Bold)
         Dim fn10b As New Font("Calibri", 9.5, FontStyle.Bold)
         Dim fn15b As New Font("Calibri", 15, FontStyle.Bold)
-        Dim fnBarcode As Font = GetFrontIDAutomation3of9(12, FontStyle.Regular)
+        Dim fnBarcode As Font = GetFrontIDAutomation3of9(8, FontStyle.Regular)
 
         'Dim imgLogo As Image = Image.FromFile("SlipLogo.bmp")
         Dim imgLogo As Image = Image.FromFile("SlipLogo.png")
@@ -111,34 +111,37 @@ Public Class frmDepositPrintQRCode
         PrintText(" ", fn5, Align.Left, e)
 
         Dim DepositTime As String = Deposit.PaidTime.ToString("dd-MMM-yy, HH:mm", New Globalization.CultureInfo("en-US"))
-        PrintText("Document No :", fn8, Align.Left, e, False)
-        PrintText(Deposit.DepositTransNo & " ", fn8, Align.Right, e)
+        PrintText("Transaction No : " & Deposit.DepositTransNo, fn8, Align.Center, e)
+        'PrintText(Deposit.DepositTransNo & " ", fn8, Align.Right, e)
 
-        PrintText("Locker Number :", fn15b, Align.Left, e, False)
-        PrintText(Deposit.LockerName & " ", fn15b, Align.Right, e)
+        PrintText("Box Number : " & Deposit.LockerName, fn15b, Align.Center, e)
+        'PrintText(Deposit.LockerName & " ", fn15b, Align.Right, e)
 
-        PrintText("Location :", fn8, Align.Left, e, False)
-        PrintText(KioskConfig.LocationName & " ", fn8, Align.Right, e)
+        PrintText("Location : " & KioskConfig.LocationName, fn8, Align.Center, e)
+        'PrintText(KioskConfig.LocationName & " ", fn8, Align.Right, e)
 
-        PrintText("Deposit Date & Time :", fn8, Align.Left, e, False)
-        PrintText(DepositTime.ToUpper & " ", fn8, Align.Right, e)
+        PrintText("Date & Time : " & DepositTime.ToUpper, fn8, Align.Center, e)
+        'PrintText(DepositTime.ToUpper & " ", fn8, Align.Right, e)
 
         PrintText(txtLine, fn10b, Align.Center, e)
 
         'Print Barcode
-        Dim BarCode As String = Deposit.DepositTransactionID & Deposit.DepositTransNo & "ID" & Deposit.DepositTransactionID.ToString.Length
-        PrintText(BarCode, fnBarcode, Align.Center, e)
+        'Dim BarCodeImg As Image = GenerateBarcodeImage(Deposit.DepositTransactionID & Deposit.DepositTransNo & "ID" & Deposit.DepositTransactionID.ToString.Length)
+        'PrintImage(BarCodeImg, Align.Center, e)
 
-        'Dim qrCode As String = GenerateQRCode()
-        'If qrCode.Trim <> "" Then
-        '    PrintImage(Image.FromFile(qrCode), Align.Center, e)
-        'End If
+        'Dim BarcodeText As String = Deposit.DepositTransactionID & Deposit.DepositTransNo & "ID" & Deposit.DepositTransactionID.ToString.Length
+        'PrintText(BarcodeText, GetFrontIDAutomation3of9(6, FontStyle.Regular), Align.Center, e)
+
+        Dim qrCode As String = GenerateQRCode()
+        If qrCode.Trim <> "" Then
+            PrintImage(Image.FromFile(qrCode), Align.Center, e)
+        End If
         PrintText(" ", fn5, Align.Left, e)
 
         'วาดกรอบให้กับ 2 บรรทัดข้างล่างนี้
         Dim borderTop As Integer = _lastPrintY - 2
-        PrintText("Use this barcode to collect your luggage", fn8b, Align.Center, e)
-        PrintText("Warning : This barode can be used only 1 time", fn8b, Align.Center, e)
+        PrintText("Use this barcode to collect your luggage", fn7b, Align.Center, e)
+        PrintText("Warning : This barode can be used only 1 time", fn7b, Align.Center, e)
         Dim borderH As Integer = (_lastPrintY + 2 - borderTop)
         PrintRectankle(0, borderTop, borderH, e)
         PrintText(" ", fn5, Align.Left, e)
@@ -147,8 +150,8 @@ Public Class frmDepositPrintQRCode
         'PrintText("500 THB will be fined on top of your storage costs.", fn8, Align.Center, e)
         'PrintText(txtLine, fn10b, Align.Center, e)
 
-        PrintText("For any help, please contact our service center", fn8, Align.Center, e)
-        PrintText("Tel. " & KioskConfig.ContactCenterTelno & " (in service time)", fn8, Align.Center, e)
+        PrintText("For any help, please contact our service center", fn7, Align.Center, e)
+        PrintText("Tel. " & KioskConfig.ContactCenterTelno & " (in service time)", fn7, Align.Center, e)
         PrintText("Thank you for using our service", fn8b, Align.Center, e)
         e.HasMorePages = False
     End Sub
@@ -187,12 +190,30 @@ Public Class frmDepositPrintQRCode
                 y = e.PageSettings.PrintableArea.Top + lastPrintY
         End Select
         e.Graphics.DrawString(txt, fnt, brsh, x, y)
-        'TextRenderer.DrawText(e.Graphics, txt, fnt, New Point(x, y), SystemColors.ControlText)
         If AddNewLine = True Then
             _lastPrintY = y + h
         End If
 
     End Sub
+
+    'Protected Sub PrintBarcodeText(ByVal BarcodeText As String, ByVal fnt As System.Drawing.Font, ByRef e As System.Drawing.Printing.PrintPageEventArgs, Optional AddNewLine As Boolean = True)
+    '    Dim w As Integer = e.Graphics.MeasureString(BarcodeText, fnt).Width
+    '    Dim h As Integer = e.Graphics.MeasureString(BarcodeText, fnt).Height
+    '    Dim x As Integer = 0
+    '    Dim y As Integer = 0
+    '    Dim brsh As New System.Drawing.SolidBrush(System.Drawing.Color.FromArgb(0, 0, 0))
+
+    '    Dim RotateDx As Integer = 80
+    '    x = e.PageSettings.PrintableArea.Width / 2 - w / 2
+    '    y = e.PageSettings.PrintableArea.Top + lastPrintY
+    '    e.Graphics.TranslateTransform(RotateDx, RotateDx)
+    '    e.Graphics.RotateTransform(90)
+    '    e.Graphics.DrawString(BarcodeText, fnt, brsh, x, y)
+    '    If AddNewLine = True Then
+    '        _lastPrintY = y + h + RotateDx
+    '    End If
+
+    'End Sub
 
     Protected Sub PrintImage(ByVal img As System.Drawing.Image, ByVal align As Int16, ByRef e As System.Drawing.Printing.PrintPageEventArgs)
         Dim w As Integer = img.Width
@@ -222,80 +243,98 @@ Public Class frmDepositPrintQRCode
     End Enum
 #End Region
 
-    '#Region "Generate QR Code"
-    '    Private Function GenerateQRCode() As String
-    '        Dim ret As String = ""
-    '        '## QRCode Format TransactionID + TransactionNo + ID + Len(TransactionID)
-    '        Dim QRCode As String = Deposit.DepositTransactionID & Deposit.DepositTransNo & "ID" & Deposit.DepositTransactionID.ToString.Length
-
-    '        Dim obj As New WolfSoftware.Library_NET.BarcodeControl
-    '        obj.Unlock("Phantom 2008", "WSFCX-0100-100883561")
-    '        obj.CurrentCode = 1014
-    '        obj.DataToEncode = QRCode  'ขนาดของ QR จะขึ้นอยู่กับความยาวของ Data
-    '        Dim pic As New Bitmap(obj.GetCode(1080)) 'The bitmap you created
-    '        pic.SetResolution(1080, 1080)
-    '        Dim path As String = Application.StartupPath() & "\QRCode"
-    '        If IO.Directory.Exists(path) = False Then
-    '            IO.Directory.CreateDirectory(path)
-    '        End If
-
-    '        Try
-    '            For Each f As String In Directory.GetFiles(path)
-    '                File.Delete(f)
-    '            Next
-
-    '            Dim FileName As String = path & "\" & QRCode & ".bmp"
-    '            pic.Save(FileName, Imaging.ImageFormat.Bmp)
-
-    '            If IO.File.Exists(FileName) = True Then
-    '                ret = CropImage(FileName)
-    '            End If
-    '        Catch ex As Exception
-
-    '        End Try
-
-    '        Return ret
-    '    End Function
-
-    '    Private Function CropImage(fileName As String) As String
-    '        'Dim fileName = "C:\file.jpg"
-    '        Dim ret As String = fileName
-    '        Dim CropRect As New Rectangle(300, 170, 600, 600)   'กำหนด Area ที่จะทำการ Crop
-    '        Dim OriginalImage = Image.FromFile(ret)
-    '        Dim crpImg = New Bitmap(CropRect.Width, CropRect.Height)
-    '        Using grp = Graphics.FromImage(crpImg)
-    '            grp.DrawImage(OriginalImage, New Rectangle(0, 0, CropRect.Width, CropRect.Height), CropRect, GraphicsUnit.Pixel)
-    '            OriginalImage.Dispose()
-
-    '            crpImg = ResizeImage(crpImg, New Drawing.Size(140, 140))
-    '            crpImg.Save(ret, Imaging.ImageFormat.Bmp)
-    '        End Using
-
-    '        Return ret
-    '    End Function
-
-    '    Private Function ResizeImage(ByVal image As Image, ByVal size As Size, Optional ByVal preserveAspectRatio As Boolean = True) As Image
-    '        Dim newWidth As Integer
-    '        Dim newHeight As Integer
-    '        If preserveAspectRatio Then
-    '            Dim originalWidth As Integer = image.Width
-    '            Dim originalHeight As Integer = image.Height
-    '            Dim percentWidth As Single = CSng(size.Width) / CSng(originalWidth)
-    '            Dim percentHeight As Single = CSng(size.Height) / CSng(originalHeight)
-    '            Dim percent As Single = If(percentHeight < percentWidth,
-    '                    percentHeight, percentWidth)
-    '            newWidth = CInt(originalWidth * percent)
-    '            newHeight = CInt(originalHeight * percent)
-    '        Else
-    '            newWidth = size.Width
-    '            newHeight = size.Height
-    '        End If
-    '        Dim newImage As Image = New Bitmap(newWidth, newHeight)
-    '        Using graphicsHandle As Graphics = Graphics.FromImage(newImage)
-    '            graphicsHandle.InterpolationMode = InterpolationMode.HighQualityBicubic
-    '            graphicsHandle.DrawImage(image, 0, 0, newWidth, newHeight)
-    '        End Using
-    '        Return newImage
+    '#Region "Generate Barcode Image"
+    '    Private Function GenerateBarcodeImage(BarcodeText As String, ByRef e As System.Drawing.Printing.PrintPageEventArgs) As Image
+    '        Dim font As Font = GetFrontIDAutomation3of9(8, FontStyle.Regular)
+    '        Dim width As Integer = CInt(e.Graphics.MeasureString(BarcodeText, font).Width)
+    '        Dim height As Integer = CInt(e.Graphics.MeasureString(BarcodeText, font).Height)
+    '        Dim bitmap = New Bitmap(width + 3, height)
+    '        Dim graphics As Graphics = Graphics.FromImage(bitmap)
+    '        graphics.Clear(Color.White)
+    '        graphics.SmoothingMode = SmoothingMode.HighQuality
+    '        graphics.TextRenderingHint = Drawing.Text.TextRenderingHint.AntiAlias
+    '        graphics.DrawString(BarcodeText, font, New SolidBrush(Color.FromArgb(255, 255, 255)), 0, 0)
+    '        graphics.Flush()
+    '        graphics.Dispose()
+    '        bitmap.RotateFlip(RotateFlipType.Rotate90FlipNone)
+    '        Return bitmap
     '    End Function
     '#End Region
+
+#Region "Generate QR Code"
+    Private Function GenerateQRCode() As String
+        Dim ret As String = ""
+        '## QRCode Format TransactionID + TransactionNo + ID + Len(TransactionID)
+        Dim QRCode As String = Deposit.DepositTransactionID & Deposit.DepositTransNo & "ID" & Deposit.DepositTransactionID.ToString.Length
+
+        Dim obj As New WolfSoftware.Library_NET.BarcodeControl
+        obj.Unlock("Phantom 2008", "WSFCX-0100-100883561")
+        obj.CurrentCode = 1014
+        obj.DataToEncode = QRCode  'ขนาดของ QR จะขึ้นอยู่กับความยาวของ Data
+        Dim pic As New Bitmap(obj.GetCode(1080)) 'The bitmap you created
+        pic.SetResolution(1080, 1080)
+        Dim path As String = Application.StartupPath() & "\QRCode"
+        If IO.Directory.Exists(path) = False Then
+            IO.Directory.CreateDirectory(path)
+        End If
+
+        Try
+            For Each f As String In Directory.GetFiles(path)
+                File.Delete(f)
+            Next
+
+            Dim FileName As String = path & "\" & QRCode & ".bmp"
+            pic.Save(FileName, Imaging.ImageFormat.Bmp)
+
+            If IO.File.Exists(FileName) = True Then
+                ret = CropImage(FileName)
+            End If
+        Catch ex As Exception
+
+        End Try
+
+        Return ret
+    End Function
+
+    Private Function CropImage(fileName As String) As String
+        'Dim fileName = "C:\file.jpg"
+        Dim ret As String = fileName
+        Dim CropRect As New Rectangle(300, 170, 600, 600)   'กำหนด Area ที่จะทำการ Crop
+        Dim OriginalImage = Image.FromFile(ret)
+        Dim crpImg = New Bitmap(CropRect.Width, CropRect.Height)
+        Using grp = Graphics.FromImage(crpImg)
+            grp.DrawImage(OriginalImage, New Rectangle(0, 0, CropRect.Width, CropRect.Height), CropRect, GraphicsUnit.Pixel)
+            OriginalImage.Dispose()
+
+            crpImg = ResizeImage(crpImg, New Drawing.Size(140, 140))
+            crpImg.Save(ret, Imaging.ImageFormat.Bmp)
+        End Using
+
+        Return ret
+    End Function
+
+    Private Function ResizeImage(ByVal image As Image, ByVal size As Size, Optional ByVal preserveAspectRatio As Boolean = True) As Image
+        Dim newWidth As Integer
+        Dim newHeight As Integer
+        If preserveAspectRatio Then
+            Dim originalWidth As Integer = image.Width
+            Dim originalHeight As Integer = image.Height
+            Dim percentWidth As Single = CSng(size.Width) / CSng(originalWidth)
+            Dim percentHeight As Single = CSng(size.Height) / CSng(originalHeight)
+            Dim percent As Single = If(percentHeight < percentWidth,
+                    percentHeight, percentWidth)
+            newWidth = CInt(originalWidth * percent)
+            newHeight = CInt(originalHeight * percent)
+        Else
+            newWidth = size.Width
+            newHeight = size.Height
+        End If
+        Dim newImage As Image = New Bitmap(newWidth, newHeight)
+        Using graphicsHandle As Graphics = Graphics.FromImage(newImage)
+            graphicsHandle.InterpolationMode = InterpolationMode.HighQualityBicubic
+            graphicsHandle.DrawImage(image, 0, 0, newWidth, newHeight)
+        End Using
+        Return newImage
+    End Function
+#End Region
 End Class

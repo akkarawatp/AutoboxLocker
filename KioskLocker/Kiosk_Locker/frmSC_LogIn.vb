@@ -85,12 +85,10 @@ Public Class frmSC_LogIn
                 End If
                 StaffConsole.AuthorizeInfo = aDt
 
-                If IsNoCheckDevice = False Then
-                    InsertLogTransactionActivity(StaffConsole.TransNo, KioskConfig.SelectForm, KioskLockerStep.StaffConsoleLogin_UpdateHardwareAndStock, "", False)
-                    'ตรวจสอบและส่ง Alarm เมื่อเครื่องเชื่อมอินเตอร์เน็ตได้
-                    UpdateAllDeviceStatusByComPort()
-                    UpdateAllDeviceStatusByUsbPort()
-                End If
+                InsertLogTransactionActivity(StaffConsole.TransNo, KioskConfig.SelectForm, KioskLockerStep.StaffConsoleLogin_UpdateHardwareAndStock, "", False)
+                'ตรวจสอบและส่ง Alarm เมื่อเครื่องเชื่อมอินเตอร์เน็ตได้
+                UpdateAllDeviceStatusByComPort()
+                UpdateAllDeviceStatusByUsbPort()
 
                 txtUsername.Text = ""
                 txtPassword.Text = ""

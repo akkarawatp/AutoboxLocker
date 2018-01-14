@@ -31,9 +31,9 @@ Public Class frmCollectThankyou
         End If
 
         Dim ConnectSensor As Boolean = False
-        If IsNoCheckDevice = True Then
+        If IsNoCheckAdruno = True Then
             ConnectSensor = True
-            btnOpenLocker.Visible = True
+            btnCloseLocker.Visible = True
         Else
             ConnectSensor = BoardSensor.ConnectSensorDevice(KioskConfig.SensorComport)
             'ใช้ Sensor เพื่อตรวจจับว่าลูกค้าได้ปิดตู้แล้วจริงๆ จึงกลับหน้าแรก
@@ -79,10 +79,10 @@ Public Class frmCollectThankyou
         Application.DoEvents()
     End Sub
 
-    Private Sub btnCloseLocker_Click(sender As Object, e As EventArgs)
-        '_CallOpenLocker = False
-        SensorDataReceived("1")
-    End Sub
+    'Private Sub btnCloseLocker_Click(sender As Object, e As EventArgs)
+    '    '_CallOpenLocker = False
+    '    SensorDataReceived("1")
+    'End Sub
 
     Private Sub frmPickupThankyou_Closing(sender As Object, e As CancelEventArgs) Handles Me.Closing
         RemoveHandler BoardSensor.SensorReceiveData, AddressOf SensorDataReceived
@@ -173,7 +173,28 @@ Public Class frmCollectThankyou
         End If
     End Sub
 
-    Private Sub btnOpenLocker_Click(sender As Object, e As EventArgs) Handles btnOpenLocker.Click
+    Private Sub btnCloseLocker_Click(sender As Object, e As EventArgs) Handles btnCloseLocker.Click
         _IsCloseLocker = True
+    End Sub
+
+    Private Sub btnOpenLocker_Click(sender As Object, e As EventArgs)
+        InsertLogTransactionActivity(Collect.DepositTransNo, Collect.TransactionNo, StaffConsole.TransNo, KioskConfig.SelectForm, KioskLockerStep.PickupThankYou_ClickOpenLocker, Collect.LockerName, False)
+        If OpenLocker(Collect.LockerID, Collect.LockerPinSolenoid, Collect.LockerPinSendor, KioskLockerStep.PickupPayment_OpenLocker) = True Then
+            InsertLogTransactionActivity(Collect.DepositTransNo, Collect.TransactionNo, StaffConsole.TransNo, KioskConfig.SelectForm, KioskLockerStep.PickupThankYou_ClickOpenLocker, "ช่องฝาก " & Collect.LockerName & " ถูกเปิดออก", False)
+
+            'Dim f As New frmCollectThankyou
+            'f.MdiParent = frmMain
+            'f.Show()
+            'Application.DoEvents()
+
+            'frmMain.CloseAllChildForm(f)
+        Else
+            InsertLogTransactionActivity(Collect.DepositTransNo, Collect.TransactionNo, StaffConsole.TransNo, KioskConfig.SelectForm, KioskLockerStep.PickupPayment_OpenLockerFailReturnMoney, Collect.PaidAmount & " บาท", True)
+
+            'เปิดตู้ไม่ได้ คืนเงินเต็มจำนวน
+            ReturnMoney(Collect.PaidAmount, Deposit, Collect)
+            BoardLED.LEDStop(Collect.LockerPinLED)
+            ShowFormError("Out of Service", "Cannot open Locker " & Collect.LockerName, KioskConfig.SelectForm, KioskLockerStep.PickupPayment_OpenLockerFailReturnMoney, True)
+        End If
     End Sub
 End Class

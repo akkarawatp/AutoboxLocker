@@ -124,13 +124,12 @@ Public Class frmHome
     Private Sub SetLockerHomeData()
         Try
             Dim chk As String = ""
-            If IsNoCheckDevice = False Then
-                'Update Current Status ลง DB
-                UpdateAllDeviceStatusByComPort()
-                UpdateAllDeviceStatusByUsbPort()
-                'ตรวจสอบ Status จาก DB
-                chk += CheckStockAndStatusAllDevice()
-            End If
+
+            'Update Current Status ลง DB
+            UpdateAllDeviceStatusByComPort()
+            UpdateAllDeviceStatusByUsbPort()
+            'ตรวจสอบ Status จาก DB
+            chk += CheckStockAndStatusAllDevice()
 
             If chk.Trim <> "" Then
                 'Out Of Service

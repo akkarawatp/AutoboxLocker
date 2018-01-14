@@ -80,7 +80,7 @@ Partial Class frmMain
         '
         'btnPointer
         '
-        Me.btnPointer.BackColor = System.Drawing.Color.Gray
+        Me.btnPointer.BackColor = System.Drawing.Color.White
         Me.btnPointer.FlatAppearance.MouseDownBackColor = System.Drawing.Color.White
         Me.btnPointer.FlatAppearance.MouseOverBackColor = System.Drawing.Color.White
         Me.btnPointer.FlatStyle = System.Windows.Forms.FlatStyle.Flat

@@ -17,8 +17,8 @@ Public Class frmMain
 
     Private Sub frmMain_Load(sender As Object, e As EventArgs) Handles Me.Load
         If My.Application.CommandLineArgs.Count > 0 Then
-            'ถ้าเปิดโปรแกรมมาจากตอนเริ่ม Boot เครื่อง ให้รอก่อน 3 นาที
-            Threading.Thread.Sleep(3 * 1000 * 60)
+            'ถ้าเปิดโปรแกรมมาจากตอนเริ่ม Boot เครื่อง ให้รอก่อน 2 นาที
+            Threading.Thread.Sleep(2 * 1000 * 60)
         End If
     End Sub
 
@@ -270,7 +270,8 @@ Public Class frmMain
         Try
             KioskData.ComputerName = Environment.MachineName
             KioskData.CardLanDesc = GetCardLanDesc()
-            IsNoCheckDevice = GetNoCheckDevice()
+            IsNoCheckAdruno = GetNoCheckAdruno()
+            IsNoCheckMoneyDevice = GetNoCheckMoneyDevice()
             FontIDAutomation = LoadFont(My.Resources.IDAutomationHC39M_Free, FontIDAutomation)
             Dim IsNetworkDevice As Boolean = False
 

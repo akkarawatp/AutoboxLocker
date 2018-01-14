@@ -3,10 +3,12 @@ Imports System.Drawing.Printing
 Imports System.Runtime.InteropServices
 Imports System.Drawing
 Imports System.Drawing.Drawing2D
+Imports System.Drawing.Text
 
 Public Class PrinterTestDevice
 
     Dim Printer As New PrinterClass
+    Dim FontIDAutomation As System.Drawing.Text.PrivateFontCollection
 
     Private Sub CashInTestDevice_FormClosed(sender As Object, e As System.Windows.Forms.FormClosedEventArgs) Handles Me.FormClosed
         sp.Close()
@@ -16,13 +18,34 @@ Public Class PrinterTestDevice
     Private Sub FormTestDevice_Shown(sender As Object, e As System.EventArgs) Handles Me.Shown
         lblPrinterName.Focus()
         CheckStatusPrinter()
+
+        FontIDAutomation = LoadFont(My.Resources.IDAutomationHC39M_Free, FontIDAutomation)
     End Sub
+
+    Public Function LoadFont(FontResources() As Byte, _pfc As PrivateFontCollection) As PrivateFontCollection
+        Try
+            If _pfc Is Nothing Then _pfc = New PrivateFontCollection
+            ''INIT THE FONT COLLECTION
+            'LOAD MEMORY POINTER FOR FONT RESOURCE
+            Dim fontMemPointer As IntPtr = Marshal.AllocCoTaskMem(FontResources.Length)
+            'COPY THE DATA TO THE MEMORY LOCATION
+            Marshal.Copy(FontResources, 0, fontMemPointer, FontResources.Length)
+            'LOAD THE MEMORY FONT INTO THE PRIVATE FONT COLLECTION
+            _pfc.AddMemoryFont(fontMemPointer, FontResources.Length)
+            'FREE UNSAFE MEMORY
+            Marshal.FreeCoTaskMem(fontMemPointer)
+        Catch ex As Exception
+            'ERROR LOADING FONT. HANDLE EXCEPTION HERE
+            _pfc = New PrivateFontCollection
+        End Try
+        Return _pfc
+    End Function
 
     Private Sub btnPrint_Click(sender As System.Object, e As System.EventArgs) Handles btnPrint.Click
         ' Printer.PrintConfirmationSlipNewSim(lblPrinterName.Text, "AUTOBOX", "AUTOBOX", "49", "150", "100", "0897682500", "000", "001")
 
         'PrintSlip(lblPrinterName.Text, "00120160521163218", "M01", "Airport Rail link Suvanabhumi Airport")
-
+        _lastPrintY = 0
         Dim p As New PrintDocument
         p.PrintController = New Printing.StandardPrintController
         p.PrinterSettings.PrinterName = lblPrinterName.Text
@@ -31,12 +54,16 @@ Public Class PrinterTestDevice
         p.DefaultPageSettings.Margins = mgn
         'Dim pkCustomSize1 As New PaperSize("Custom Paper Size", 100, 50)
         'p.DefaultPageSettings.PaperSize = pkCustomSize1
-
-
-
         AddHandler p.PrintPage, AddressOf p_PrintPage
         p.Print()
     End Sub
+
+    Private ReadOnly Property GetFrontIDAutomation3of9(ByVal Size As Single, ByVal style As FontStyle) As Font
+        Get
+            Return New Font(FontIDAutomation.Families(0), Size, style)
+        End Get
+
+    End Property
 
     Private Sub p_PrintPage(sender As System.Object, e As System.Drawing.Printing.PrintPageEventArgs)
         Dim fn10 As New Font("Calibri", 10, FontStyle.Regular)
@@ -56,6 +83,12 @@ Public Class PrinterTestDevice
         PrintText("Your Locker Number : M01", fn16b, Align.Center, e)
         PrintText("Location:Airport Rail link Suvanabhumi Airport", fn10, Align.Left, e)
 
+        Dim BarcodeText As String = "00120160521163218"
+        PrintText(BarcodeText, GetFrontIDAutomation3of9(8, FontStyle.Regular), Align.Center, e)
+        'PrintBarcodeText(BarcodeText, GetFrontIDAutomation3of9(8, FontStyle.Regular), e)
+        PrintImage(GenerateBarcodeImage(BarcodeText, e), Align.Center, e)
+
+
         Dim borderTop As Integer = _lastPrintY - 2
         PrintText("Use this QR-code to collect your luggage", fn10B, Align.Center, e)
         PrintText("Warning : This QR-Code can be used only 1 time", fn10B, Align.Center, e)
@@ -67,6 +100,8 @@ Public Class PrinterTestDevice
         'PrintImage(Image.FromFile("SlipWarning.bmp"), Align.Left, e)
         e.HasMorePages = False
     End Sub
+
+
 
 
 #Region "Print With PrintDocument"
@@ -86,6 +121,25 @@ Public Class PrinterTestDevice
 
         e.Graphics.DrawRectangle(vPen, vRect)
     End Sub
+
+    'Protected Sub PrintBarcodeText(ByVal BarcodeText As String, ByVal fnt As System.Drawing.Font, ByRef e As System.Drawing.Printing.PrintPageEventArgs, Optional AddNewLine As Boolean = True)
+    '    Dim w As Integer = e.Graphics.MeasureString(BarcodeText, fnt).Width
+    '    Dim h As Integer = e.Graphics.MeasureString(BarcodeText, fnt).Height
+    '    Dim x As Integer = 0
+    '    'Dim y As Integer = e.PageSettings.PrintableArea.Top + lastPrintY
+    '    Dim y As Integer = 0
+    '    Dim brsh As New System.Drawing.SolidBrush(System.Drawing.Color.FromArgb(0, 0, 0))
+
+    '    x = e.PageSettings.PrintableArea.Width / 2 - h / 2
+    '    'y = lastPrintY
+    '    e.Graphics.TranslateTransform(0, 0)
+    '    e.Graphics.RotateTransform(90)
+    '    e.Graphics.DrawString(BarcodeText, fnt, brsh, x, y)
+    '    If AddNewLine = True Then
+    '        _lastPrintY = y + w
+    '    End If
+    '    e.Graphics.RotateTransform(-90)
+    'End Sub
 
     Protected Sub PrintText(ByVal txt As String, ByVal fnt As System.Drawing.Font, ByVal align As Align, ByRef e As System.Drawing.Printing.PrintPageEventArgs)
         Dim w As Integer = e.Graphics.MeasureString(txt, fnt).Width
@@ -215,6 +269,23 @@ Public Class PrinterTestDevice
     '    End Function
     '#End Region
 
+
+    Private Function GenerateBarcodeImage(BarcodeText As String, ByRef e As System.Drawing.Printing.PrintPageEventArgs) As Image
+        Dim font As Font = GetFrontIDAutomation3of9(8, FontStyle.Regular)
+        Dim width As Integer = CInt(e.Graphics.MeasureString(BarcodeText, font).Width)
+        Dim height As Integer = CInt(e.Graphics.MeasureString(BarcodeText, font).Height)
+        Dim bitmap = New Bitmap(width + 3, height)
+        Dim graphics As Graphics = Graphics.FromImage(bitmap)
+        graphics.Clear(Color.White)
+        graphics.SmoothingMode = SmoothingMode.HighQuality
+        'graphics.TextRenderingHint = Drawing.Text.TextRenderingHint.SingleBitPerPixel
+        graphics.TextContrast = 0
+        graphics.DrawString(BarcodeText, font, New SolidBrush(Color.FromArgb(0, 0, 0)), 0, 0)
+        graphics.Flush()
+        graphics.Dispose()
+        bitmap.RotateFlip(RotateFlipType.Rotate90FlipNone)
+        Return bitmap
+    End Function
 
     Sub CheckStatusPrinter()
         Dim Status As String = Printer.CheckPrinterStatus("")

@@ -120,7 +120,7 @@ Public Class frmDepositPayment
     End Sub
 
     Public Sub StartPaymentInitialDevice()
-        If IsNoCheckDevice = True Then
+        If IsNoCheckMoneyDevice = True Then
             btn1.Visible = True
             btn2.Visible = True
             btn5.Visible = True

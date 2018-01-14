@@ -215,6 +215,9 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <None Include="Setting.png" />
+    <Content Include="SlipLogo.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="VM.ico" />
   </ItemGroup>
   <ItemGroup>

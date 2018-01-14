@@ -32,7 +32,8 @@ Module KioskModule
     Public THB_CH As String = "泰铢"
     Public THB_JP As String = "THB"
     Public THB_EN As String = "THB"
-    Public IsNoCheckDevice As Boolean = False   'ใช้ระหว่าง Debug ถ้าเป็น True ให้ข้ามฟังค์ชั่นการเช็ค HW ไปเลย
+    Public IsNoCheckAdruno As Boolean = False   'ใช้ระหว่าง Debug ถ้าเป็น True ให้ข้ามฟังค์ชั่นการเช็ค Solinoid, LED, Sensor ไปเลย
+    Public IsNoCheckMoneyDevice As Boolean = False   'ใช้ระหว่าง Debug ถ้าเป็น True ให้ข้ามฟังก์ชั่นการเช็คอุปกรณ์รับ-ทอน เงินไปเลย
     Public FontIDAutomation As System.Drawing.Text.PrivateFontCollection
     Public OutOfService As Boolean
 
@@ -522,153 +523,169 @@ Module KioskModule
                     Dim vDeviceID As Long = Convert.ToInt64(Dt.Rows(i)("device_id"))
                     Select Case Dt.Rows(i).Item("device_type_id")
                         Case DeviceType.BanknoteIn
-                            If BanknoteIn.ConnectBanknoteInDevice(Comport) = True Then
-                                AddHandler BanknoteIn.ReceiveEvent, AddressOf DataReceivedCashIn
-                                UpdateDeviceStatus(vDeviceID, BanknoteInStatus.Ready)
-                                SendKioskAlarm("CASH_IN_Disconnected", False)
+                            If IsNoCheckMoneyDevice = False Then 'ถ้า Config ว่า ไม่ต้องตรวจสอบอุปกรณ์รับ ทอน เงิน
+                                If BanknoteIn.ConnectBanknoteInDevice(Comport) = True Then
+                                    AddHandler BanknoteIn.ReceiveEvent, AddressOf DataReceivedCashIn
+                                    UpdateDeviceStatus(vDeviceID, BanknoteInStatus.Ready)
+                                    SendKioskAlarm("CASH_IN_Disconnected", False)
 
-                                BanknoteIn.CheckStatusDeviceCashIn()
-                            Else
-                                UpdateDeviceStatus(vDeviceID, BanknoteInStatus.Disconnected)
-                                SendKioskAlarm("CASH_IN_Disconnected", True)
+                                    BanknoteIn.CheckStatusDeviceCashIn()
+                                Else
+                                    UpdateDeviceStatus(vDeviceID, BanknoteInStatus.Disconnected)
+                                    SendKioskAlarm("CASH_IN_Disconnected", True)
+                                End If
                             End If
                         Case DeviceType.CoinIn
-                            If CoinIn.ConnectCoinInDevice(Comport) = True Then
-                                'AddHandler CoinIn.MySerialPort.DataReceived, AddressOf CoinIn.MySerialPortDataReceived
-                                AddHandler CoinIn.ReceiveEvent, AddressOf DataReceivedCoinIn
-                                UpdateDeviceStatus(vDeviceID, CoinInStatus.Ready)
-                                SendKioskAlarm("COIN_IN_DISCONNECTED", False)
+                            If IsNoCheckMoneyDevice = False Then 'ถ้า Config ว่า ไม่ต้องตรวจสอบอุปกรณ์รับ ทอน เงิน
+                                If CoinIn.ConnectCoinInDevice(Comport) = True Then
+                                    'AddHandler CoinIn.MySerialPort.DataReceived, AddressOf CoinIn.MySerialPortDataReceived
+                                    AddHandler CoinIn.ReceiveEvent, AddressOf DataReceivedCoinIn
+                                    UpdateDeviceStatus(vDeviceID, CoinInStatus.Ready)
+                                    SendKioskAlarm("COIN_IN_DISCONNECTED", False)
 
-                                CoinIn.CheckStatusDeviceCoinIn()
-                            Else
-                                UpdateDeviceStatus(vDeviceID, CoinInStatus.Disconnected)
-                                SendKioskAlarm("COIN_IN_DISCONNECTED", True)
+                                    CoinIn.CheckStatusDeviceCoinIn()
+                                Else
+                                    UpdateDeviceStatus(vDeviceID, CoinInStatus.Disconnected)
+                                    SendKioskAlarm("COIN_IN_DISCONNECTED", True)
+                                End If
                             End If
                         Case DeviceType.BanknoteOut
-                            Select Case vDeviceID
-                                Case DeviceID.BankNoteOut_20
-                                    If BanknoteOut_20.ConnectBanknoteOutDevice(Comport) = True Then
-                                        AddHandler BanknoteOut_20.MySerialPort.DataReceived, AddressOf BanknoteOut_20.MySerialPortDataReceived
-                                        AddHandler BanknoteOut_20.ReceiveEvent, AddressOf DataReceivedCashOut20
-                                        UpdateDeviceStatus(vDeviceID, BanknoteOutStatus.Ready)
-                                        SendKioskAlarm("CASH_OUT_DISCONNECTED", False)
+                            If IsNoCheckMoneyDevice = False Then 'ถ้า Config ว่า ไม่ต้องตรวจสอบอุปกรณ์รับ ทอน เงิน
+                                Select Case vDeviceID
+                                    Case DeviceID.BankNoteOut_20
+                                        If BanknoteOut_20.ConnectBanknoteOutDevice(Comport) = True Then
+                                            AddHandler BanknoteOut_20.MySerialPort.DataReceived, AddressOf BanknoteOut_20.MySerialPortDataReceived
+                                            AddHandler BanknoteOut_20.ReceiveEvent, AddressOf DataReceivedCashOut20
+                                            UpdateDeviceStatus(vDeviceID, BanknoteOutStatus.Ready)
+                                            SendKioskAlarm("CASH_OUT_DISCONNECTED", False)
 
-                                        BanknoteOut_20.CheckStatusDeviceCashOut()
-                                    Else
-                                        UpdateDeviceStatus(vDeviceID, BanknoteOutStatus.Disconnected)
-                                        SendKioskAlarm("CASH_OUT_DISCONNECTED", True)
-                                    End If
-                                Case DeviceID.BankNoteOut_50
-                                    If BanknoteOut_50.ConnectBanknoteOutDevice(Comport) = True Then
-                                        AddHandler BanknoteOut_50.MySerialPort.DataReceived, AddressOf BanknoteOut_50.MySerialPortDataReceived
-                                        AddHandler BanknoteOut_50.ReceiveEvent, AddressOf DataReceivedCashOut50
-                                        UpdateDeviceStatus(vDeviceID, BanknoteOutStatus.Ready)
-                                        SendKioskAlarm("CASH_OUT_DISCONNECTED", False)
+                                            BanknoteOut_20.CheckStatusDeviceCashOut()
+                                        Else
+                                            UpdateDeviceStatus(vDeviceID, BanknoteOutStatus.Disconnected)
+                                            SendKioskAlarm("CASH_OUT_DISCONNECTED", True)
+                                        End If
+                                    Case DeviceID.BankNoteOut_50
+                                        If BanknoteOut_50.ConnectBanknoteOutDevice(Comport) = True Then
+                                            AddHandler BanknoteOut_50.MySerialPort.DataReceived, AddressOf BanknoteOut_50.MySerialPortDataReceived
+                                            AddHandler BanknoteOut_50.ReceiveEvent, AddressOf DataReceivedCashOut50
+                                            UpdateDeviceStatus(vDeviceID, BanknoteOutStatus.Ready)
+                                            SendKioskAlarm("CASH_OUT_DISCONNECTED", False)
 
-                                        BanknoteOut_50.CheckStatusDeviceCashOut()
-                                    Else
-                                        UpdateDeviceStatus(vDeviceID, BanknoteOutStatus.Disconnected)
-                                        SendKioskAlarm("CASH_OUT_DISCONNECTED", True)
-                                    End If
-                                Case DeviceID.BankNoteOut_100
-                                    If BanknoteOut_100.ConnectBanknoteOutDevice(Comport) = True Then
-                                        AddHandler BanknoteOut_100.MySerialPort.DataReceived, AddressOf BanknoteOut_100.MySerialPortDataReceived
-                                        AddHandler BanknoteOut_100.ReceiveEvent, AddressOf DataReceivedCashOut100
-                                        UpdateDeviceStatus(vDeviceID, BanknoteOutStatus.Ready)
-                                        SendKioskAlarm("CASH_OUT_DISCONNECTED", False)
+                                            BanknoteOut_50.CheckStatusDeviceCashOut()
+                                        Else
+                                            UpdateDeviceStatus(vDeviceID, BanknoteOutStatus.Disconnected)
+                                            SendKioskAlarm("CASH_OUT_DISCONNECTED", True)
+                                        End If
+                                    Case DeviceID.BankNoteOut_100
+                                        If BanknoteOut_100.ConnectBanknoteOutDevice(Comport) = True Then
+                                            AddHandler BanknoteOut_100.MySerialPort.DataReceived, AddressOf BanknoteOut_100.MySerialPortDataReceived
+                                            AddHandler BanknoteOut_100.ReceiveEvent, AddressOf DataReceivedCashOut100
+                                            UpdateDeviceStatus(vDeviceID, BanknoteOutStatus.Ready)
+                                            SendKioskAlarm("CASH_OUT_DISCONNECTED", False)
 
-                                        BanknoteOut_100.CheckStatusDeviceCashOut()
-                                    Else
-                                        UpdateDeviceStatus(vDeviceID, BanknoteOutStatus.Disconnected)
-                                        SendKioskAlarm("CASH_OUT_DISCONNECTED", True)
-                                    End If
-                                Case DeviceID.BankNoteOut_500
-                                    If BanknoteOut_500.ConnectBanknoteOutDevice(Comport) = True Then
-                                        AddHandler BanknoteOut_500.MySerialPort.DataReceived, AddressOf BanknoteOut_500.MySerialPortDataReceived
-                                        AddHandler BanknoteOut_500.ReceiveEvent, AddressOf DataReceivedCashOut500
-                                        UpdateDeviceStatus(vDeviceID, BanknoteOutStatus.Ready)
-                                        SendKioskAlarm("CASH_OUT_DISCONNECTED", False)
+                                            BanknoteOut_100.CheckStatusDeviceCashOut()
+                                        Else
+                                            UpdateDeviceStatus(vDeviceID, BanknoteOutStatus.Disconnected)
+                                            SendKioskAlarm("CASH_OUT_DISCONNECTED", True)
+                                        End If
+                                    Case DeviceID.BankNoteOut_500
+                                        If BanknoteOut_500.ConnectBanknoteOutDevice(Comport) = True Then
+                                            AddHandler BanknoteOut_500.MySerialPort.DataReceived, AddressOf BanknoteOut_500.MySerialPortDataReceived
+                                            AddHandler BanknoteOut_500.ReceiveEvent, AddressOf DataReceivedCashOut500
+                                            UpdateDeviceStatus(vDeviceID, BanknoteOutStatus.Ready)
+                                            SendKioskAlarm("CASH_OUT_DISCONNECTED", False)
 
-                                        BanknoteOut_500.CheckStatusDeviceCashOut()
-                                    Else
-                                        UpdateDeviceStatus(vDeviceID, BanknoteOutStatus.Disconnected)
-                                        SendKioskAlarm("CASH_OUT_DISCONNECTED", True)
-                                    End If
-                            End Select
+                                            BanknoteOut_500.CheckStatusDeviceCashOut()
+                                        Else
+                                            UpdateDeviceStatus(vDeviceID, BanknoteOutStatus.Disconnected)
+                                            SendKioskAlarm("CASH_OUT_DISCONNECTED", True)
+                                        End If
+                                End Select
+                            End If
+
                         Case DeviceType.CoinOut
-                            Select Case vDeviceID
-                                Case DeviceID.CoinOut_1
-                                    If CoinOut_1.ConnectCoinOutDevice(Comport) = True Then
-                                        AddHandler CoinOut_1.MySerialPort.DataReceived, AddressOf CoinOut_1.MySerialPortDataReceived
-                                        AddHandler CoinOut_1.ReceiveEvent, AddressOf DataReceivedCoinOut1
-                                        UpdateDeviceStatus(vDeviceID, CoinOutStatus.Ready)
-                                        SendKioskAlarm("COIN_OUT_DISCONNECTED", False)
+                            If IsNoCheckMoneyDevice = False Then 'ถ้า Config ว่า ไม่ต้องตรวจสอบอุปกรณ์รับ ทอน เงิน
+                                Select Case vDeviceID
+                                    Case DeviceID.CoinOut_1
+                                        If CoinOut_1.ConnectCoinOutDevice(Comport) = True Then
+                                            AddHandler CoinOut_1.MySerialPort.DataReceived, AddressOf CoinOut_1.MySerialPortDataReceived
+                                            AddHandler CoinOut_1.ReceiveEvent, AddressOf DataReceivedCoinOut1
+                                            UpdateDeviceStatus(vDeviceID, CoinOutStatus.Ready)
+                                            SendKioskAlarm("COIN_OUT_DISCONNECTED", False)
 
-                                        CoinOut_1.CheckStatusDeviceCoinOut()
-                                    Else
-                                        UpdateDeviceStatus(vDeviceID, CoinOutStatus.Disconnected)
-                                        SendKioskAlarm("COIN_OUT_DISCONNECTED", True)
-                                    End If
-                                Case DeviceID.CoinOut_2
-                                    If CoinOut_2.ConnectCoinOutDevice(Comport) = True Then
-                                        AddHandler CoinOut_2.MySerialPort.DataReceived, AddressOf CoinOut_2.MySerialPortDataReceived
-                                        AddHandler CoinOut_2.ReceiveEvent, AddressOf DataReceivedCoinOut2
-                                        UpdateDeviceStatus(vDeviceID, CoinOutStatus.Ready)
-                                        SendKioskAlarm("COIN_OUT_DISCONNECTED", False)
+                                            CoinOut_1.CheckStatusDeviceCoinOut()
+                                        Else
+                                            UpdateDeviceStatus(vDeviceID, CoinOutStatus.Disconnected)
+                                            SendKioskAlarm("COIN_OUT_DISCONNECTED", True)
+                                        End If
+                                    Case DeviceID.CoinOut_2
+                                        If CoinOut_2.ConnectCoinOutDevice(Comport) = True Then
+                                            AddHandler CoinOut_2.MySerialPort.DataReceived, AddressOf CoinOut_2.MySerialPortDataReceived
+                                            AddHandler CoinOut_2.ReceiveEvent, AddressOf DataReceivedCoinOut2
+                                            UpdateDeviceStatus(vDeviceID, CoinOutStatus.Ready)
+                                            SendKioskAlarm("COIN_OUT_DISCONNECTED", False)
 
-                                        CoinOut_2.CheckStatusDeviceCoinOut()
-                                    Else
-                                        UpdateDeviceStatus(vDeviceID, CoinOutStatus.Disconnected)
-                                        SendKioskAlarm("COIN_OUT_DISCONNECTED", True)
-                                    End If
-                                Case DeviceID.CoinOut_5
-                                    If CoinOut_5.ConnectCoinOutDevice(Comport) = True Then
-                                        AddHandler CoinOut_5.MySerialPort.DataReceived, AddressOf CoinOut_5.MySerialPortDataReceived
-                                        AddHandler CoinOut_5.ReceiveEvent, AddressOf DataReceivedCoinOut5
-                                        UpdateDeviceStatus(vDeviceID, CoinOutStatus.Ready)
-                                        SendKioskAlarm("COIN_OUT_DISCONNECTED", False)
+                                            CoinOut_2.CheckStatusDeviceCoinOut()
+                                        Else
+                                            UpdateDeviceStatus(vDeviceID, CoinOutStatus.Disconnected)
+                                            SendKioskAlarm("COIN_OUT_DISCONNECTED", True)
+                                        End If
+                                    Case DeviceID.CoinOut_5
+                                        If CoinOut_5.ConnectCoinOutDevice(Comport) = True Then
+                                            AddHandler CoinOut_5.MySerialPort.DataReceived, AddressOf CoinOut_5.MySerialPortDataReceived
+                                            AddHandler CoinOut_5.ReceiveEvent, AddressOf DataReceivedCoinOut5
+                                            UpdateDeviceStatus(vDeviceID, CoinOutStatus.Ready)
+                                            SendKioskAlarm("COIN_OUT_DISCONNECTED", False)
 
-                                        CoinOut_5.CheckStatusDeviceCoinOut()
-                                    Else
-                                        UpdateDeviceStatus(vDeviceID, CoinOutStatus.Disconnected)
-                                        SendKioskAlarm("COIN_OUT_DISCONNECTED", True)
-                                    End If
-                                Case DeviceID.CoinOut_10
-                                    If CoinOut_10.ConnectCoinOutDevice(Comport) = True Then
-                                        AddHandler CoinOut_10.MySerialPort.DataReceived, AddressOf CoinOut_10.MySerialPortDataReceived
-                                        AddHandler CoinOut_10.ReceiveEvent, AddressOf DataReceivedCoinOut10
-                                        UpdateDeviceStatus(vDeviceID, CoinOutStatus.Ready)
-                                        SendKioskAlarm("COIN_OUT_DISCONNECTED", False)
+                                            CoinOut_5.CheckStatusDeviceCoinOut()
+                                        Else
+                                            UpdateDeviceStatus(vDeviceID, CoinOutStatus.Disconnected)
+                                            SendKioskAlarm("COIN_OUT_DISCONNECTED", True)
+                                        End If
+                                    Case DeviceID.CoinOut_10
+                                        If CoinOut_10.ConnectCoinOutDevice(Comport) = True Then
+                                            AddHandler CoinOut_10.MySerialPort.DataReceived, AddressOf CoinOut_10.MySerialPortDataReceived
+                                            AddHandler CoinOut_10.ReceiveEvent, AddressOf DataReceivedCoinOut10
+                                            UpdateDeviceStatus(vDeviceID, CoinOutStatus.Ready)
+                                            SendKioskAlarm("COIN_OUT_DISCONNECTED", False)
 
-                                        CoinOut_10.CheckStatusDeviceCoinOut()
-                                    Else
-                                        UpdateDeviceStatus(vDeviceID, CoinOutStatus.Disconnected)
-                                        SendKioskAlarm("COIN_OUT_DISCONNECTED", True)
-                                    End If
-                            End Select
+                                            CoinOut_10.CheckStatusDeviceCoinOut()
+                                        Else
+                                            UpdateDeviceStatus(vDeviceID, CoinOutStatus.Disconnected)
+                                            SendKioskAlarm("COIN_OUT_DISCONNECTED", True)
+                                        End If
+                                End Select
+                            End If
+
                         Case DeviceType.LEDBoard
-                            If BoardLED.ConnectLEDDevice(Comport) = True Then
-                                UpdateDeviceStatus(vDeviceID, BoardStatus.Ready)
-                                SendKioskAlarm("BOARD_LED_DISCONNECTED", False)
-                            Else
-                                UpdateDeviceStatus(vDeviceID, BoardStatus.Disconnected)
-                                SendKioskAlarm("BOARD_LED_DISCONNECTED", True)
+                            If IsNoCheckAdruno = False Then  'ถ้า Config ว่า ไม่ต้องตรวจสอบ AdrunoBoard
+                                If BoardLED.ConnectLEDDevice(Comport) = True Then
+                                    UpdateDeviceStatus(vDeviceID, BoardStatus.Ready)
+                                    SendKioskAlarm("BOARD_LED_DISCONNECTED", False)
+                                Else
+                                    UpdateDeviceStatus(vDeviceID, BoardStatus.Disconnected)
+                                    SendKioskAlarm("BOARD_LED_DISCONNECTED", True)
+                                End If
                             End If
                         Case DeviceType.SolenoidBoard
-                            If BoardSolenoid.ConnectSolenoidDevice(Comport) = True Then
-                                UpdateDeviceStatus(vDeviceID, BoardStatus.Ready)
-                                SendKioskAlarm("BOARD_SOLENOID_DISCONNECTED", False)
-                            Else
-                                UpdateDeviceStatus(vDeviceID, BoardStatus.Disconnected)
-                                SendKioskAlarm("BOARD_SOLENOID_DISCONNECTED", True)
+                            If IsNoCheckAdruno = False Then
+                                If BoardSolenoid.ConnectSolenoidDevice(Comport) = True Then
+                                    UpdateDeviceStatus(vDeviceID, BoardStatus.Ready)
+                                    SendKioskAlarm("BOARD_SOLENOID_DISCONNECTED", False)
+                                Else
+                                    UpdateDeviceStatus(vDeviceID, BoardStatus.Disconnected)
+                                    SendKioskAlarm("BOARD_SOLENOID_DISCONNECTED", True)
+                                End If
                             End If
                         Case DeviceType.SensorBoard
-                            If BoardSensor.ConnectSensorDevice(Comport) = True Then
-                                UpdateDeviceStatus(vDeviceID, BoardStatus.Ready)
-                                SendKioskAlarm("BOARD_SENSOR_DISCONNECTED", False)
-                            Else
-                                UpdateDeviceStatus(vDeviceID, BoardStatus.Disconnected)
-                                SendKioskAlarm("BOARD_SENSOR_DISCONNECTED", True)
+                            If IsNoCheckAdruno = False Then  'ถ้า Config ว่า ไม่ต้องตรวจสอบ AdrunoBoard
+                                If BoardSensor.ConnectSensorDevice(Comport) = True Then
+                                    UpdateDeviceStatus(vDeviceID, BoardStatus.Ready)
+                                    SendKioskAlarm("BOARD_SENSOR_DISCONNECTED", False)
+                                Else
+                                    UpdateDeviceStatus(vDeviceID, BoardStatus.Disconnected)
+                                    SendKioskAlarm("BOARD_SENSOR_DISCONNECTED", True)
+                                End If
                             End If
                     End Select
                 Next
@@ -2020,7 +2037,7 @@ Module KioskModule
         End If
 
         Try
-            If IsNoCheckDevice = False Then
+            If IsNoCheckAdruno = False Then
                 ''ต้องสั่ง Connect เพื่อ Check Hardware Status มาแล้วตั้งแต่หน้า Home
                 BoardSolenoid.SolenoidOpen(PinSolenoid)
             End If
@@ -2044,7 +2061,7 @@ Module KioskModule
             End If
             lnq = Nothing
 
-            If IsNoCheckDevice = False Then
+            If IsNoCheckAdruno = False Then
                 'สั่งเปิดตู้ซ้ำ เผื่อกรณีตู้ไม่เปิดออกในครั้งแรก
                 Thread.Sleep(2000)
                 BoardSolenoid.SolenoidOpen(PinSolenoid)
@@ -2232,11 +2249,19 @@ Module KioskModule
         Return CardLanDesc
     End Function
 
-    Public Function GetNoCheckDevice() As Boolean
+    Public Function GetNoCheckAdruno() As Boolean
         Dim ret As Boolean = False
         Dim ini As New IniReader(INIFileName)
         ini.Section = "Setting"
-        ret = IIf(ini.ReadString("IsNoCheckDevice") = "Y", True, False)
+        ret = IIf(ini.ReadString("IsNoCheckAdruno") = "Y", True, False)
+        ini = Nothing
+        Return ret
+    End Function
+    Public Function GetNoCheckMoneyDevice() As Boolean
+        Dim ret As Boolean = False
+        Dim ini As New IniReader(INIFileName)
+        ini.Section = "Setting"
+        ret = IIf(ini.ReadString("IsNoCheckMoneyDevice") = "Y", True, False)
         ini = Nothing
         Return ret
     End Function

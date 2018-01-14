@@ -57,7 +57,7 @@ Public Class frmDepositSetPINCode
             txtPincode4.Text = ""
             txtPincode5.Text = ""
             txtPincode6.Text = ""
-            lblLabelNotification.Text = "กรุณายืนยันรหัสส่วนตัว"
+            lblLabelNotification.Text = "Confirm Password"
         Else
             If Deposit.PinCode = TmpPinCode Then
                 frmLoading.Show(frmMain)

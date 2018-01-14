@@ -556,6 +556,7 @@ Namespace Data
             PickupThankYou_LEDStart = 1204
             PickupThankYou_ChangeMoney = 1205
             PickupThankYou_BackToHome = 1206
+            PickupThankYou_ClickOpenLocker = 1207
 
             StaffConsoleLogin_OpenFOrm = 1501
 			StaffConsoleLogin_ClickLogin = 1502

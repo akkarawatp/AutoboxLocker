@@ -24,22 +24,22 @@ Partial Class frmCollectThankyou
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
         Me.TimerCheckCloseLocker = New System.Windows.Forms.Timer(Me.components)
-        Me.btnOpenLocker = New System.Windows.Forms.Button()
+        Me.btnCloseLocker = New System.Windows.Forms.Button()
         Me.SuspendLayout()
         '
         'TimerCheckCloseLocker
         '
         Me.TimerCheckCloseLocker.Interval = 500
         '
-        'btnOpenLocker
+        'btnCloseLocker
         '
-        Me.btnOpenLocker.Location = New System.Drawing.Point(38, 477)
-        Me.btnOpenLocker.Name = "btnOpenLocker"
-        Me.btnOpenLocker.Size = New System.Drawing.Size(75, 23)
-        Me.btnOpenLocker.TabIndex = 99
-        Me.btnOpenLocker.Text = "ปิดตู้"
-        Me.btnOpenLocker.UseVisualStyleBackColor = True
-        Me.btnOpenLocker.Visible = False
+        Me.btnCloseLocker.Location = New System.Drawing.Point(55, 373)
+        Me.btnCloseLocker.Name = "btnCloseLocker"
+        Me.btnCloseLocker.Size = New System.Drawing.Size(75, 23)
+        Me.btnCloseLocker.TabIndex = 99
+        Me.btnCloseLocker.Text = "ปิดตู้"
+        Me.btnCloseLocker.UseVisualStyleBackColor = True
+        Me.btnCloseLocker.Visible = False
         '
         'frmCollectThankyou
         '
@@ -49,8 +49,8 @@ Partial Class frmCollectThankyou
         Me.BackColor = System.Drawing.Color.White
         Me.BackgroundImage = Global.MiniboxLocker.My.Resources.Resources.bgCollectThankyou
         Me.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
-        Me.ClientSize = New System.Drawing.Size(768, 1024)
-        Me.Controls.Add(Me.btnOpenLocker)
+        Me.ClientSize = New System.Drawing.Size(768, 780)
+        Me.Controls.Add(Me.btnCloseLocker)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None
         Me.Name = "frmCollectThankyou"
         Me.Text = "ขอบคุณที่ใช้บริการ"
@@ -59,5 +59,5 @@ Partial Class frmCollectThankyou
     End Sub
     Friend WithEvents Label3 As Label
     Friend WithEvents TimerCheckCloseLocker As Timer
-    Friend WithEvents btnOpenLocker As Button
+    Friend WithEvents btnCloseLocker As Button
 End Class

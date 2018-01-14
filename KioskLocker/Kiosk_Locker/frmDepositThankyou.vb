@@ -41,7 +41,7 @@ Public Class frmDepositThankyou
         If DepositOpenLocker() = True Then
             'Open Sensor
             Dim ConnectSensor As Boolean = False
-            If IsNoCheckDevice = True Then
+            If IsNoCheckAdruno = True Then
                 ConnectSensor = True
                 btnCloseLocker.Visible = True
             Else
@@ -140,8 +140,6 @@ Public Class frmDepositThankyou
     Private Sub TimerCheckCloseLocker_Tick(sender As Object, e As EventArgs) Handles TimerCheckCloseLocker.Tick
         TimerCheckCloseLocker.Enabled = False
         If _IsCloseLocker = True Then
-
-
             InsertLogTransactionActivity(Deposit.DepositTransNo, "", "", KioskConfig.SelectForm, KioskLockerStep.DepositThankYou_CloseLocker, "", False)
 
             'Update เวลาที่จบ Transaction เมื่อเปิดตู้สำเร็จ
