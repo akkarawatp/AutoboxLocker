@@ -62,7 +62,7 @@ Public Class frmCollectThankyou
             ShowFormError("Out of Service", "Sensor ไม่สามารถใช้งานได้", KioskConfig.SelectForm, KioskLockerStep.PickupThankYou_StartSensor, True)
             Exit Sub
         End If
-
+        frmLoading.Close()
         Application.DoEvents()
     End Sub
 
@@ -91,6 +91,8 @@ Public Class frmCollectThankyou
     Private Sub TimerCheckCloseLocker_Tick(sender As Object, e As EventArgs) Handles TimerCheckCloseLocker.Tick
         TimerCheckCloseLocker.Enabled = False
         If _IsCloseLocker = True And _CallOpenLocker = True Then
+            frmLoading.Show(frmMain)
+            Application.DoEvents()
             InsertLogTransactionActivity(Collect.DepositTransNo, Collect.TransactionNo, StaffConsole.TransNo, KioskConfig.SelectForm, KioskLockerStep.PickupThankYou_CloseLocker, Collect.LockerName, False)
 
             'เมื่อปิดตู้ ก็อัพเดท Status ว่าปิดตู้แล้วด้วยนะ

@@ -28,6 +28,7 @@ Public Class frmDepositPrintQRCode
         Me.WindowState = FormWindowState.Maximized
         Application.DoEvents()
         InsertLogTransactionActivity(Deposit.DepositTransNo, "", "", KioskConfig.SelectForm, KioskLockerStep.DepositPrintQRCode_OpenForm, "", False)
+        frmLoading.Close()
     End Sub
 
     Public Sub PaymentCompletePrintQRCode()
@@ -60,6 +61,7 @@ Public Class frmDepositPrintQRCode
     Private Sub CheckTimeOpenLocker()
         '    'หน่วงเวลาตาม Timeout
         Threading.Thread.Sleep(TimeOut * 1000)
+        frmLoading.Show(frmMain)
         Me.Close()
         frmDepositThankyou.MdiParent = frmMain
         frmDepositThankyou.Show()

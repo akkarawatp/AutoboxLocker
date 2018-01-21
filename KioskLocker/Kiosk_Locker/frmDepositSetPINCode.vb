@@ -30,16 +30,19 @@ Public Class frmDepositSetPINCode
 
     Private Sub TimerTimeOut_Tick(sender As Object, e As EventArgs) Handles TimerTimeOut.Tick
         If KioskConfig.SelectForm = KioskLockerForm.DepositSetPinCode Then
-            Application.DoEvents()
+
             'lblTimeOut.Text = TimeOut
             If TimeOutCheckTime.AddSeconds(TimeOut) <= DateTime.Now Then
+                frmLoading.Show(frmMain)
+                Application.DoEvents()
+
                 TimerTimeOut.Enabled = False
                 TimerTimeOut.Stop()
 
                 UpdateDepositStatus(Deposit.DepositTransactionID, DepositTransactionData.TransactionStatus.TimeOut, KioskLockerStep.DepositSetPinCode_Timeout)
                 InsertLogTransactionActivity(Deposit.DepositTransNo, "", "", KioskConfig.SelectForm, KioskLockerStep.DepositSetPinCode_Timeout, "", False)
 
-                frmMain.CloseAllChildForm()
+                frmMain.CloseAllChildForm(frmLoading)
                 Dim f As New frmHome
                 f.MdiParent = frmMain
                 f.Show()

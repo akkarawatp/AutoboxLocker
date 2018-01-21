@@ -25,10 +25,6 @@ Public Class frmHome
         frmMain.pnlCancel.Visible = False
         frmMain.btnPointer.Visible = True
         frmMain.TimerCheckOpenClose.Enabled = True
-        frmMain.CloseAllChildForm(Me)
-
-        frmLoading.Show(frmMain)
-        Application.DoEvents()
 
         'ต้อง Clear Transaction ทุกครั้งที่เข้าหน้า Home
         ServiceID = 0
@@ -54,7 +50,9 @@ Public Class frmHome
         pbCollect.Enabled = True
 
         frmLoading.Close()
+        Application.DoEvents()
     End Sub
+
 
     Public Sub SetLabelNotificationText()
         Dim IsStorageFull As Boolean = False
@@ -210,6 +208,8 @@ Public Class frmHome
             ShowDialogErrorMessage("Cannot create transaction")
         End If
     End Sub
+
+
 
 #End Region
 End Class

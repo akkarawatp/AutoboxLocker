@@ -130,6 +130,7 @@ Public Class frmDepositPayment
             btn100.Visible = True
             btn500.Visible = True
             btn1000.Visible = True
+            tmPaymentTimeOut.Enabled = True
             Exit Sub
         End If
 
@@ -551,6 +552,9 @@ Public Class frmDepositPayment
 
     Private Sub OpenFormDepositPrintQRCode(data As String)
         'กรณีฝาก เมื่อจ่ายครบแล้ว
+        frmLoading.Show(frmMain)
+        Application.DoEvents()
+
         BanknoteIn.DisableDeviceCashIn()
         CoinIn.DisableDeviceCoinIn()
         RemoveHandler BanknoteIn.ReceiveEvent, AddressOf BanknoteInDataReceived
@@ -589,7 +593,7 @@ Public Class frmDepositPayment
 
         'Open Locker
         CollectConfirmOpenLocker()
-        frmLoading.Close()
+
     End Sub
 
     Private Sub CollectConfirmOpenLocker()
@@ -642,6 +646,10 @@ Public Class frmDepositPayment
                     BanknoteIn.EnableDeviceCashIn()
                     CoinIn.EnableDeviceCoinIn()
                 Else
+                    frmLoading.Show(frmMain)
+                    Application.DoEvents()
+
+
                     Dim RtnMsg As String = ""
                     If ServiceID = TransactionType.DepositBelonging Then
                         If Deposit.PaidAmount > 0 Then

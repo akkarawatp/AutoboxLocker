@@ -146,16 +146,14 @@ Public Class frmDepositSelectLocker
 
         If ServiceID = Data.ConstantsData.TransactionType.DepositBelonging Then
             If f.LockerAvailable = ucLockerInfo.AvailableStatus.Availabled Then
+                frmLoading.Show(frmMain)
+                Application.DoEvents()
+
                 TimeOutCheckTime = DateTime.Now
                 TimerTimeOut.Enabled = False
                 TimerTimeOut.Stop()
 
-                frmLoading.Show(frmMain)
-
                 InsertLogTransactionActivity(Deposit.DepositTransNo, "", "", KioskConfig.SelectForm, KioskLockerStep.DepositSelectLocker_SelectLocker, " " & f.txtLockerName.Text, False)
-
-                Application.DoEvents()
-
                 Deposit.LockerID = f.LockerID
                 Deposit.LockerName = f.txtLockerName.Text
                 Deposit.CabinetID = f.CabinetID
@@ -179,11 +177,12 @@ Public Class frmDepositSelectLocker
             'กรณีรับคืนจาก StaffConsole ให้คำนวณค่าฝาก และแสดงหน้าจอชำระเงิน
 
             If f.LockerAvailable = ucLockerInfo.AvailableStatus.NotAvailable Then
+                frmLoading.Show(frmMain)
+                Application.DoEvents()
+
                 TimeOutCheckTime = DateTime.Now
                 TimerTimeOut.Enabled = False
                 TimerTimeOut.Stop()
-
-                frmLoading.Show(frmMain)
 
                 If SetPickupInitialInformation(f.LockerID) = True Then
                     InsertLogTransactionActivity(Collect.DepositTransNo, Collect.TransactionNo, StaffConsole.TransNo, KioskConfig.SelectForm, KioskLockerStep.StaffConsoleCollectSelectLocker_SelectLocker, " " & f.txtLockerName.Text, False)
@@ -275,16 +274,17 @@ Public Class frmDepositSelectLocker
 
     Private Sub TimerTimeOut_Tick(sender As Object, e As EventArgs) Handles TimerTimeOut.Tick
         If KioskConfig.SelectForm = KioskLockerForm.DepositSelectLocker Then
-            Application.DoEvents()
-            'lblTimeOut.Text = TimeOut
             If TimeOutCheckTime.AddSeconds(TimeOut) <= DateTime.Now Then
+                frmLoading.Show(frmMain)
+                Application.DoEvents()
+
                 TimerTimeOut.Enabled = False
                 TimerTimeOut.Stop()
 
                 UpdateDepositStatus(Deposit.DepositTransactionID, DepositTransactionData.TransactionStatus.TimeOut, KioskLockerStep.DepositSelectLocker_SelectLocker)
                 InsertLogTransactionActivity(Deposit.DepositTransNo, "", "", KioskConfig.SelectForm, KioskLockerStep.DepositSelectLocker_SelectLocker, " ลูกค้าไม่ทำรายการภายในเวลาที่กำหนด", False)
 
-                frmMain.CloseAllChildForm()
+                frmMain.CloseAllChildForm(frmLoading)
                 Dim f As New frmHome
                 f.MdiParent = frmMain
                 f.Show()

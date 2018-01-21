@@ -41,6 +41,9 @@ Public Class frmMain
             End If
         Loop Until IsConnect = True
 
+        frmLoading.Show(Me)
+        Application.DoEvents()
+
         tmKioskHeartbeat_Tick(Nothing, Nothing)
         StartupHeartbeat()
 
@@ -69,18 +72,21 @@ Public Class frmMain
 
             CheckKioskScreenSaver()
         Else
+            frmLoading.Close()
             InsertErrorLog("Cannot Load Device Infomation List", 0, 0, 0, KioskConfig.SelectForm, 0)
             ShowFormError("Out of service", "Load Device Fail", KioskConfig.SelectForm, 0, True)
         End If
     End Sub
 
     Public Sub GoToHome()
+
         Application.DoEvents()
         Dim fHome As New frmHome
         fHome.MdiParent = Me
         fHome.StartPosition = FormStartPosition.WindowsDefaultLocation
         fHome.WindowState = FormWindowState.Normal
         fHome.Show()
+
     End Sub
 
     Public Sub ShowChildForm(frm As Form)
@@ -377,6 +383,8 @@ Public Class frmMain
                 End If
             End If
         Next i
+
+        ShowFrm.Activate()
     End Sub
 
 #Region "Download Screen Saver"
@@ -480,11 +488,16 @@ Public Class frmMain
 
     Private Sub btnCancel_Click(sender As Object, e As EventArgs) Handles btnCancel.Click, pnlCancel.Click
         InsertLogTransactionActivity(Deposit.DepositTransNo, Collect.TransactionNo, "", KioskConfig.SelectForm, KioskConfig.KioskLockerStep.Main_Cancel, "", False)
+        frmLoading.Show(Me)
+        CloseAllChildForm(frmLoading)
+        Application.DoEvents()
+
         If ServiceID = Data.ConstantsData.TransactionType.DepositBelonging Then
             'กรณีฝาก
             If KioskConfig.SelectForm = Data.KioskConfigData.KioskLockerForm.DepositSelectLocker Then
                 'เมื่อกดปุ่มยกเลิกในหน้าจอเลือกช่องฝาก
                 Deposit.TransStatus = DepositTransactionData.TransactionStatus.Inprogress
+
             ElseIf KioskConfig.SelectForm = Data.KioskConfigData.KioskLockerForm.DepositSetPinCode Then
                 'เมื่อกดปุ่มยกเลิกในหน้าจอกำหนดรหัสส่วนตัว
                 Deposit.TransStatus = DepositTransactionData.TransactionStatus.Inprogress
@@ -535,7 +548,9 @@ Public Class frmMain
         End If
 
         Try
-            CloseAllChildForm()
+
+
+
 
             'ไม่ว่าจะยกเลิกที่หน้าจอไหน ก็แค่ Update Transaction เป็น Cancel แล้วก็กลับหน้าแรก
             InsertLogTransactionActivity(Deposit.DepositTransNo, Collect.TransactionNo, "", KioskConfig.SelectForm, KioskConfig.KioskLockerStep.Main_BackToHome, "", False)

@@ -65,7 +65,7 @@ Public Class frmDepositThankyou
                 UpdateDeviceStatus(Data.ConstantsData.DeviceID.SensorBoard, Data.ConstantsData.BoardStatus.Disconnected)
             End If
         End If
-
+        frmLoading.Close()
         Application.DoEvents()
     End Sub
 
@@ -140,6 +140,8 @@ Public Class frmDepositThankyou
     Private Sub TimerCheckCloseLocker_Tick(sender As Object, e As EventArgs) Handles TimerCheckCloseLocker.Tick
         TimerCheckCloseLocker.Enabled = False
         If _IsCloseLocker = True Then
+            frmLoading.Show(frmMain)
+            Application.DoEvents()
             InsertLogTransactionActivity(Deposit.DepositTransNo, "", "", KioskConfig.SelectForm, KioskLockerStep.DepositThankYou_CloseLocker, "", False)
 
             'Update เวลาที่จบ Transaction เมื่อเปิดตู้สำเร็จ
@@ -206,7 +208,6 @@ Public Class frmDepositThankyou
 
                 Me.Close()
                 frmMain.GoToHome()
-                'frmLoading.Close()
             End If
         Else
             TimerCheckCloseLocker.Enabled = True

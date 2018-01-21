@@ -90,9 +90,7 @@ Module KioskModule
     End Function
 
     Public Sub ProcessTimeOut()
-
-
-        frmMain.CloseAllChildForm()
+        frmMain.CloseAllChildForm(frmLoading)
         Dim f As New frmHome
         f.MdiParent = frmMain
         f.Show()
@@ -2401,7 +2399,14 @@ Module KioskModule
         SetLockerList()
 
         If LockerList.Rows.Count > 0 Then
-            If BoardLED.ConnectLEDDevice(KioskConfig.LEDComport) = True Then
+            Dim CheckLED As Boolean = False
+            If IsNoCheckAdruno = True Then
+                CheckLED = True
+            Else
+                CheckLED = BoardLED.ConnectLEDDevice(KioskConfig.LEDComport)
+            End If
+
+            If CheckLED = True Then
                 UpdateDeviceStatus(DeviceID.LEDBoard, BoardStatus.Ready)
                 SendKioskAlarm("BOARD_LED_DISCONNECTED", False)
 
