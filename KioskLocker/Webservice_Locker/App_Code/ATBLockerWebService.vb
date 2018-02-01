@@ -441,7 +441,19 @@ Public Class ATBLockerWebService
                         sRet = sLnq.InsertData(KioskName, sTrans.Trans)
                     End If
 
-                    If sRet.IsSuccess = False Then
+                    If sRet.IsSuccess = True Then
+                        Dim koLnq As New MsKioskServerLinqDB
+                        koLnq.GetDataByPK(sLnq.MS_KIOSK_ID, sTrans.Trans)
+                        If koLnq.COM_NAME <> KioskName Then
+                            koLnq.COM_NAME = KioskName
+                            sRet = koLnq.UpdateData(KioskName, sTrans.Trans)
+
+                            If sRet.IsSuccess = False Then
+                                Exit For
+                            End If
+                        End If
+                        koLnq = Nothing
+                    Else
                         Exit For
                     End If
                     sLnq = Nothing
@@ -450,7 +462,6 @@ Public Class ATBLockerWebService
                 If sRet.IsSuccess = True Then
                     sTrans.CommitTransaction()
                     ret = "true"
-
                     Engine.LogFileENG.CreateServerLogAgent("SyncKioskSysconfig from " & KioskName & " Success " & dt.Rows.Count & " Records")
                 Else
                     sTrans.RollbackTransaction()
