@@ -146,7 +146,8 @@ Public Class frmMasterLocation
 
         rptServiceRateHour.DataSource = hourDt
         rptServiceRateHour.DataBind()
-        rptFineRate.DataSource = srfDt
+
+        rptFineRate.DataSource = cmDt
         rptFineRate.DataBind()
     End Sub
 
