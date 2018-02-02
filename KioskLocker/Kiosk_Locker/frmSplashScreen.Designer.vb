@@ -37,6 +37,7 @@ Partial Class frmSplashScreen
         Me.txtDBPassword = New System.Windows.Forms.TextBox()
         Me.Label4 = New System.Windows.Forms.Label()
         Me.txtProgressStatus = New System.Windows.Forms.TextBox()
+        Me.btnTest = New System.Windows.Forms.Button()
         Me.pnlDBLogin.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -102,6 +103,7 @@ Partial Class frmSplashScreen
         '
         'pnlDBLogin
         '
+        Me.pnlDBLogin.Controls.Add(Me.btnTest)
         Me.pnlDBLogin.Controls.Add(Me.cbUnRegisLocker)
         Me.pnlDBLogin.Controls.Add(Me.Label8)
         Me.pnlDBLogin.Controls.Add(Me.txtDatabaseName)
@@ -177,6 +179,15 @@ Partial Class frmSplashScreen
         Me.txtProgressStatus.Size = New System.Drawing.Size(647, 210)
         Me.txtProgressStatus.TabIndex = 12
         '
+        'btnTest
+        '
+        Me.btnTest.Location = New System.Drawing.Point(468, 4)
+        Me.btnTest.Name = "btnTest"
+        Me.btnTest.Size = New System.Drawing.Size(75, 23)
+        Me.btnTest.TabIndex = 13
+        Me.btnTest.Text = "Test"
+        Me.btnTest.UseVisualStyleBackColor = True
+        '
         'frmSplashScreen
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -215,4 +226,5 @@ Partial Class frmSplashScreen
     Friend WithEvents txtProgressStatus As TextBox
     Friend WithEvents Label8 As Label
     Friend WithEvents cbUnRegisLocker As ComboBox
+    Friend WithEvents btnTest As Button
 End Class

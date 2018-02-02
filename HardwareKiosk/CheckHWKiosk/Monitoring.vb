@@ -7,13 +7,17 @@ Public Class Monitoring
     Private TmpPb As PictureBox
 
     Private Sub Monitoring_Shown(sender As Object, e As EventArgs) Handles Me.Shown
-        Dim ini As New IniReader(INIFileName)
-        ini.Section = "CaptureSetting"
-        cbCamera.Items.AddRange(cam.GetCaptureDevices)
-        cbCamera.SelectedIndex = ini.ReadString("CameraIndex")
-        ini = Nothing
+        Try
+            Dim ini As New IniReader(INIFileName)
+            ini.Section = "CaptureSetting"
+            cbCamera.Items.AddRange(cam.GetCaptureDevices)
+            cbCamera.SelectedIndex = ini.ReadString("CameraIndex")
+            ini = Nothing
 
-        cam = New DSCamCapture
+            cam = New DSCamCapture
+        Catch ex As Exception
+
+        End Try
     End Sub
 
     Private Sub cbCamera_SelectionChangeCommitted(sender As Object, e As EventArgs) Handles cbCamera.SelectionChangeCommitted

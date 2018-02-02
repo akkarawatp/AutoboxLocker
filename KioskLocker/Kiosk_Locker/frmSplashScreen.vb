@@ -58,21 +58,25 @@ Public Class frmSplashScreen
     End Sub
 
     Private Sub SetDDLLockerList()
-        Dim ws As New Webservice_Locker.ATBLockerWebService
-        Dim dt As DataTable = ws.GetLockerUnRegister(Environment.MachineName)
-        If dt Is Nothing Then
-            dt.Columns.Add("id", GetType(Long))
-            dt.Columns.Add("com_name")
-        End If
+        Try
+            Dim ws As New Webservice_Locker.ATBLockerWebService
+            Dim dt As DataTable = ws.GetLockerUnRegister(Environment.MachineName)
+            If dt Is Nothing Then
+                dt.Columns.Add("id", GetType(Long))
+                dt.Columns.Add("com_name")
+            End If
 
-        Dim dr As DataRow = dt.NewRow
-        dr("id") = 0
-        dr("com_name") = ""
-        dt.Rows.InsertAt(dr, 0)
+            Dim dr As DataRow = dt.NewRow
+            dr("id") = 0
+            dr("com_name") = ""
+            dt.Rows.InsertAt(dr, 0)
 
-        cbUnRegisLocker.ValueMember = "id"
-        cbUnRegisLocker.DisplayMember = "com_name"
-        cbUnRegisLocker.DataSource = dt
+            cbUnRegisLocker.ValueMember = "id"
+            cbUnRegisLocker.DisplayMember = "com_name"
+            cbUnRegisLocker.DataSource = dt
+        Catch ex As Exception
+            MessageBox.Show("SetDDLLockerList Exception : " & ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+        End Try
     End Sub
 
     Private Function ValidateData() As Boolean
@@ -545,5 +549,25 @@ Public Class frmSplashScreen
         reg = Nothing
     End Sub
 
+    Private Sub btnTest_Click(sender As Object, e As EventArgs) Handles btnTest.Click
+        Try
+            Dim ws As New Webservice_Locker.ATBLockerWebService
+            Dim ret As Webservice_Locker.CheckConnectionData = ws.CheckWebserviceConnection()
+            If ret.IsSuccess = True Then
+                SetDDLLockerList()
 
+                Dim conn As SqlConnection = ConnectDB("sa", txtDBPassword.Text)
+                If conn IsNot Nothing AndAlso conn.State = ConnectionState.Open Then
+                    MessageBox.Show("Connection Success", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information)
+                Else
+                    MessageBox.Show("Connect Database Fail", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                End If
+            Else
+                MessageBox.Show("Webservice Conection Fail", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            End If
+            ws.Dispose()
+        Catch ex As Exception
+            MessageBox.Show("Test Exception : " & ex.Message & vbCrLf & ex.StackTrace, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+        End Try
+    End Sub
 End Class
