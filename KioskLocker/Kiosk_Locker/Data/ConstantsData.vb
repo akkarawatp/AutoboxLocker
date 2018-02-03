@@ -17,6 +17,11 @@
             CollectBelonging = 2
             StaffConsole = 3
         End Enum
+        Public Enum CabinetModelId
+            SR = 1
+            MR = 2
+            LR = 3
+        End Enum
 
 #Region "Device Info"
         Public Enum DeviceID

@@ -68,6 +68,8 @@ Partial Class frmSC_StockAndHardware
         Me.pgStockBanknoteIn = New MiniboxLocker.ucStockProgress()
         Me.pgStockBanknote100 = New MiniboxLocker.ucStockProgress()
         Me.pgStockPrinter = New MiniboxLocker.ucStockProgress()
+        Me.btnServiceRate = New System.Windows.Forms.Panel()
+        Me.lblServiceRate = New System.Windows.Forms.Label()
         Me.btnOpenAll.SuspendLayout()
         Me.btnLockerSetting.SuspendLayout()
         Me.btnDeviceSetting.SuspendLayout()
@@ -87,6 +89,7 @@ Partial Class frmSC_StockAndHardware
         CType(Me.pbStatusSolenoid, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.pbStatusLED, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.pbStatusSensor, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.btnServiceRate.SuspendLayout()
         Me.SuspendLayout()
         '
         'TimerCheckDoorClose
@@ -257,7 +260,7 @@ Partial Class frmSC_StockAndHardware
         Me.btnCollect.BackgroundImage = Global.MiniboxLocker.My.Resources.Resources.btnButtonOrange
         Me.btnCollect.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
         Me.btnCollect.Controls.Add(Me.lblCollect)
-        Me.btnCollect.Location = New System.Drawing.Point(401, 680)
+        Me.btnCollect.Location = New System.Drawing.Point(586, 680)
         Me.btnCollect.Name = "btnCollect"
         Me.btnCollect.Size = New System.Drawing.Size(157, 53)
         Me.btnCollect.TabIndex = 65
@@ -586,6 +589,30 @@ Partial Class frmSC_StockAndHardware
         Me.pgStockPrinter.TabIndex = 98
         Me.pgStockPrinter.Value = 0
         '
+        'btnServiceRate
+        '
+        Me.btnServiceRate.Anchor = System.Windows.Forms.AnchorStyles.Top
+        Me.btnServiceRate.BackgroundImage = Global.MiniboxLocker.My.Resources.Resources.btnButtonOrange
+        Me.btnServiceRate.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
+        Me.btnServiceRate.Controls.Add(Me.lblServiceRate)
+        Me.btnServiceRate.Location = New System.Drawing.Point(401, 678)
+        Me.btnServiceRate.Name = "btnServiceRate"
+        Me.btnServiceRate.Size = New System.Drawing.Size(157, 53)
+        Me.btnServiceRate.TabIndex = 66
+        '
+        'lblServiceRate
+        '
+        Me.lblServiceRate.Anchor = System.Windows.Forms.AnchorStyles.Top
+        Me.lblServiceRate.BackColor = System.Drawing.Color.Transparent
+        Me.lblServiceRate.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.25!, System.Drawing.FontStyle.Bold)
+        Me.lblServiceRate.ForeColor = System.Drawing.Color.White
+        Me.lblServiceRate.Location = New System.Drawing.Point(23, 14)
+        Me.lblServiceRate.Name = "lblServiceRate"
+        Me.lblServiceRate.Size = New System.Drawing.Size(109, 26)
+        Me.lblServiceRate.TabIndex = 35
+        Me.lblServiceRate.Text = "Service Rate"
+        Me.lblServiceRate.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
         'frmSC_StockAndHardware
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -594,6 +621,7 @@ Partial Class frmSC_StockAndHardware
         Me.BackgroundImage = Global.MiniboxLocker.My.Resources.Resources.bgSCStockAndHardware
         Me.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
         Me.ClientSize = New System.Drawing.Size(768, 1024)
+        Me.Controls.Add(Me.btnServiceRate)
         Me.Controls.Add(Me.pgStockPrinter)
         Me.Controls.Add(Me.pgStockBanknote100)
         Me.Controls.Add(Me.pgStockBanknoteIn)
@@ -653,6 +681,7 @@ Partial Class frmSC_StockAndHardware
         CType(Me.pbStatusSolenoid, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.pbStatusLED, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.pbStatusSensor, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.btnServiceRate.ResumeLayout(False)
         Me.ResumeLayout(False)
 
     End Sub
@@ -701,4 +730,6 @@ Partial Class frmSC_StockAndHardware
     Friend WithEvents pgStockBanknoteIn As ucStockProgress
     Friend WithEvents pgStockBanknote100 As ucStockProgress
     Friend WithEvents pgStockPrinter As ucStockProgress
+    Friend WithEvents btnServiceRate As Panel
+    Friend WithEvents lblServiceRate As Label
 End Class

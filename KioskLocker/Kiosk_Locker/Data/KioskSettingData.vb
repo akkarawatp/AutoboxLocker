@@ -419,6 +419,7 @@ Namespace Data
             StaffConsoleDeviceSetting = 20
             StaffConsoleLockerSetting = 21
             StaffConsoleCollectSelectLocker = 24
+            StaffConsoleServiceRate = 25
 
             ScreenSaver = 22
         End Enum
@@ -581,6 +582,7 @@ Namespace Data
             '-------------------
             StaffConsoleLoadLockList_LoadLockerList = 1613
             StaffConsoleLoadLockList_ClickCollect = 1614
+            StaffConsoleStockAndHardware_ClickServiceRate = 1615
 
 
             StaffConsoleFillPaper_OpenForm = 1701
@@ -623,6 +625,12 @@ Namespace Data
             StaffConsoleCollectSelectLocker_OpenForm = 2401
             StaffConsoleCollectSelectLocker_LoadLockerList = 2402
             StaffConsoleCollectSelectLocker_SelectLocker = 2403
+
+            StaffConsoleServiceRate_OpenForm = 2501
+            StaffConsoleServiceRate_ClickSave = 2502
+            StaffConsoleServiceRate_ClickCancel = 2503
+            StaffConsoleServiceRate_ClickSyncData = 2504
+            StaffConsoleServiceRate_CheckAuthorize = 2505
 
         End Enum
     End Class

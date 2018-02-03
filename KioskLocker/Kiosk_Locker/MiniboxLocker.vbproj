@@ -151,6 +151,12 @@
     <Compile Include="frmCollectThankyou.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="frmSC_ServiceRate.Designer.vb">
+      <DependentUpon>frmSC_ServiceRate.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmSC_ServiceRate.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="frmSC_Main.Designer.vb">
       <DependentUpon>frmSC_Main.vb</DependentUpon>
     </Compile>
@@ -329,6 +335,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="frmCollectThankyou.resx">
       <DependentUpon>frmCollectThankyou.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmSC_ServiceRate.resx">
+      <DependentUpon>frmSC_ServiceRate.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmSC_Main.resx">
       <DependentUpon>frmSC_Main.vb</DependentUpon>

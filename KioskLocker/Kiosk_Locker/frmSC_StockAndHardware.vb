@@ -422,4 +422,14 @@ Public Class frmSC_StockAndHardware
         End If
         frmLoading.Close()
     End Sub
+
+    Private Sub lblServiceRate_Click(sender As Object, e As EventArgs) Handles lblServiceRate.Click, btnServiceRate.Click
+        frmLoading.Show(frmSC_Main)
+        Application.DoEvents()
+
+        InsertLogTransactionActivity("", "", StaffConsole.TransNo, KioskConfig.SelectForm, KioskLockerStep.StaffConsoleStockAndHardware_ClickServiceRate, "", False)
+        Me.Close()
+        frmSC_ServiceRate.MdiParent = frmSC_Main
+        frmSC_ServiceRate.Show()
+    End Sub
 End Class
