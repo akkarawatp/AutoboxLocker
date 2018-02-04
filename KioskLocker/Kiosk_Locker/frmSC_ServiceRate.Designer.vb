@@ -349,6 +349,7 @@ Partial Class frmSC_ServiceRate
         Me.btnSyncData.Name = "btnSyncData"
         Me.btnSyncData.Size = New System.Drawing.Size(157, 62)
         Me.btnSyncData.TabIndex = 82
+        Me.btnSyncData.Visible = False
         '
         'lblSyncData
         '
