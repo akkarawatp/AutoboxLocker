@@ -38,7 +38,12 @@ Public Class ServerUpdateMonitorENG
                             Dim kdLnq As New MsKioskDeviceServerLinqDB
                             kdLnq.ChkDataByMS_DEVICE_ID_MS_KIOSK_ID(Engine.ConstantENG.MS_DEVICE.NetworkConnection, kLnq.ID, trans.Trans)
                             If kdLnq.ID > 0 Then
+                                Dim OldStatusId As Long = kdLnq.MS_DEVICE_STATUS_ID
+
                                 kdLnq.MS_DEVICE_STATUS_ID = IIf(kLnq.ONLINE_STATUS = "Y", Engine.ConstantENG.DeviceStatus.Ready, Engine.ConstantENG.DeviceStatus.Disconnected)
+                                If kdLnq.MS_DEVICE_STATUS_ID <> OldStatusId Then
+                                    kdLnq.SYNC_TO_KIOSK = "N"
+                                End If
 
                                 ret = kdLnq.UpdateData(Environment.MachineName, trans.Trans)
                             End If
@@ -48,11 +53,11 @@ Public Class ServerUpdateMonitorENG
                                 trans.CommitTransaction()
                             Else
                                 trans.RollbackTransaction()
-                                CreateErrorLogAgent(kLnq.ID, ret.ErrorMessage)
+                                CreateServerLogAgent(ret.ErrorMessage & "KioskID=" & kLnq.ID)
                             End If
                         Else
                             trans.RollbackTransaction()
-                            CreateErrorLogAgent(kLnq.ID, ret.ErrorMessage)
+                            CreateServerLogAgent(ret.ErrorMessage & "KioskID=" & kLnq.ID)
                         End If
 
                         kLnq = Nothing

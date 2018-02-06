@@ -18,7 +18,7 @@ Public Class TestFunctionServerWindowService
 
         'Engine.SyncMasterDataENG.SyncLocationPromotion()
 
-        'ServerUpdateMonitorENG.UpdateKioskOnlineStatus()
+        ServerUpdateMonitorENG.UpdateKioskOnlineStatus()
     End Sub
 
 

@@ -57,7 +57,7 @@ Namespace My
         <Global.System.Configuration.ApplicationScopedSettingAttribute(),  _
          Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.Configuration.SpecialSettingAttribute(Global.System.Configuration.SpecialSetting.WebServiceUrl),  _
-         Global.System.Configuration.DefaultSettingValueAttribute("http://103.253.72.87/TITApp/TIT-MonitorWebservice/MonitorInfoWebService.asmx")>  _
+         Global.System.Configuration.DefaultSettingValueAttribute("http://103.22.183.183/MonitorWebservice/MonitorInfoWebService.asmx")>  _
         Public ReadOnly Property KioskServerWindowService_MonitorWebService_MonitorInfoWebService() As String
             Get
                 Return CType(Me("KioskServerWindowService_MonitorWebService_MonitorInfoWebService"),String)

@@ -444,13 +444,16 @@ Public Class ATBLockerWebService
                     If sRet.IsSuccess = True Then
                         Dim koLnq As New MsKioskServerLinqDB
                         koLnq.GetDataByPK(sLnq.MS_KIOSK_ID, sTrans.Trans)
+                        koLnq.IP_ADDRESS = sLnq.IP_ADDRESS
+                        koLnq.MAC_ADDRESS = sLnq.MAC_ADDRESS
+
                         If koLnq.COM_NAME <> KioskName Then
                             koLnq.COM_NAME = KioskName
-                            sRet = koLnq.UpdateData(KioskName, sTrans.Trans)
+                        End If
 
-                            If sRet.IsSuccess = False Then
-                                Exit For
-                            End If
+                        sRet = koLnq.UpdateData(KioskName, sTrans.Trans)
+                        If sRet.IsSuccess = False Then
+                            Exit For
                         End If
                         koLnq = Nothing
                     Else
