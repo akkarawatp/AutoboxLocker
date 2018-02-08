@@ -31,6 +31,7 @@ Partial Class PrinterTestDevice
         Me.pnlConnection = New System.Windows.Forms.Panel()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.lblStatus = New System.Windows.Forms.Label()
+        Me.btnPrintWithPrinterClass = New System.Windows.Forms.Button()
         Me.pnlConnection.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -121,11 +122,24 @@ Partial Class PrinterTestDevice
         Me.lblStatus.Text = "Status : Online"
         Me.lblStatus.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
+        'btnPrintWithPrinterClass
+        '
+        Me.btnPrintWithPrinterClass.BackColor = System.Drawing.SystemColors.HotTrack
+        Me.btnPrintWithPrinterClass.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnPrintWithPrinterClass.ForeColor = System.Drawing.Color.White
+        Me.btnPrintWithPrinterClass.Location = New System.Drawing.Point(12, 204)
+        Me.btnPrintWithPrinterClass.Name = "btnPrintWithPrinterClass"
+        Me.btnPrintWithPrinterClass.Size = New System.Drawing.Size(364, 27)
+        Me.btnPrintWithPrinterClass.TabIndex = 52
+        Me.btnPrintWithPrinterClass.Text = "Print With Printer Class"
+        Me.btnPrintWithPrinterClass.UseVisualStyleBackColor = False
+        '
         'PrinterTestDevice
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(388, 249)
+        Me.Controls.Add(Me.btnPrintWithPrinterClass)
         Me.Controls.Add(Me.pnlConnection)
         Me.Controls.Add(Me.lblHead)
         Me.Controls.Add(Me.btnPrint)
@@ -151,4 +165,5 @@ Partial Class PrinterTestDevice
     Friend WithEvents pnlConnection As System.Windows.Forms.Panel
     Friend WithEvents Label1 As System.Windows.Forms.Label
     Friend WithEvents lblStatus As System.Windows.Forms.Label
+    Friend WithEvents btnPrintWithPrinterClass As Button
 End Class

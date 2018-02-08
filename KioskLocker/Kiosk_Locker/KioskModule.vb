@@ -89,6 +89,13 @@ Module KioskModule
         Return KioskData.KioskID.PadLeft(3, "0") & CurrTime
     End Function
 
+    Public Function genNewDepositTransectionNo() As String
+
+        Dim CurrYear As String = DateTime.Now.ToString("yyyy", New Globalization.CultureInfo("en-US"))
+
+        Return KioskData.KioskID.PadLeft(3, "0") & CurrYear
+    End Function
+
     Public Sub ProcessTimeOut()
         frmMain.CloseAllChildForm(frmLoading)
         Dim f As New frmHome

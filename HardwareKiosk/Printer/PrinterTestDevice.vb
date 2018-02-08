@@ -42,13 +42,11 @@ Public Class PrinterTestDevice
     End Function
 
     Private Sub btnPrint_Click(sender As System.Object, e As System.EventArgs) Handles btnPrint.Click
-        ' Printer.PrintConfirmationSlipNewSim(lblPrinterName.Text, "AUTOBOX", "AUTOBOX", "49", "150", "100", "0897682500", "000", "001")
-
-        'PrintSlip(lblPrinterName.Text, "00120160521163218", "M01", "Airport Rail link Suvanabhumi Airport")
         _lastPrintY = 0
         Dim p As New PrintDocument
         p.PrintController = New Printing.StandardPrintController
         p.PrinterSettings.PrinterName = lblPrinterName.Text
+
 
         Dim mgn As New Margins(0, 0, 0, 0)
         p.DefaultPageSettings.Margins = mgn
@@ -62,45 +60,46 @@ Public Class PrinterTestDevice
         Get
             Return New Font(FontIDAutomation.Families(0), Size, style)
         End Get
-
     End Property
 
+    'Private ReadOnly Property GetFrontCode128(ByVal Size As Single, ByVal style As FontStyle) As Font
+    '    Get
+    '        Return New Font(Font128.Families(0), Size, style)
+    '    End Get
+
+    'End Property
+
     Private Sub p_PrintPage(sender As System.Object, e As System.Drawing.Printing.PrintPageEventArgs)
-        Dim fn10 As New Font("Calibri", 10, FontStyle.Regular)
-        Dim fn10B As New Font("Calibri", 10, FontStyle.Bold)
+        Dim fn6 As New Font("Calibri", 6, FontStyle.Regular)
+        Dim fn8 As New Font("Calibri", 8, FontStyle.Regular)
+        Dim fn8B As New Font("Calibri", 8, FontStyle.Bold)
         Dim fn11b As New Font("Calibri", 11, FontStyle.Bold)
         Dim fn16b As New Font("Calibri", 16, FontStyle.Bold)
 
-        'e.PageSettings.PaperSize.Width = 80
-        'e.PageSettings.Margins.Left = 0
-        'e.PageSettings.Margins.Right = 0
-
-
         'Dim imgLogo As Image = Image.FromFile("SlipLogo.bmp")
-        PrintImage(Image.FromFile("SlipLogo.png"), Align.Center, e)
-        PrintText("Transaction No : 00120160521163218", fn10, Align.Left, e)
-        PrintText("Box Number : M01", fn16b, Align.Center, e)
-        PrintText("Location : Pattaya", fn10, Align.Left, e)
+        PrintImage(Image.FromFile("SlipLogo.png"), Align.Left, e, 50, 0)
+        'PrintText("Trans No : 00120160521163218", fn8, Align.Left, e)
+        PrintText(DateTime.Now.ToString("dd MMM yyyy HH:mm:ss"), fn8, Align.Left, e, 50, 50)
+        PrintText("M01", fn16b, Align.Left, e, 50, 70)
+        PrintText("Pattaya", fn8, Align.Left, e, 50, 100)
 
-        'Dim BarcodeText As String = "123400120160521163218ID4"
-        'PrintText(BarcodeText, GetFrontIDAutomation3of9(8, FontStyle.Regular), Align.Center, e)
-        'PrintBarcodeVertical(e.Graphics, 90, BarcodeText, GetFrontIDAutomation3of9(10, FontStyle.Regular), e)
+        Dim BarcodeText As String = "*001201802092356*"
+        PrintBarcodeVertical(e.Graphics, 90, BarcodeText, GetFrontIDAutomation3of9(10, FontStyle.Regular), e)
+        'PrintText(BarcodeText, GetFrontCode128(40, FontStyle.Regular), Align.Center, e)
         'PrintImage(GenerateBarcodeImage(BarcodeText, e), Align.Center, e)
 
-        Dim qrCode As String = GenerateQRCode()
-        If qrCode.Trim <> "" Then
-            PrintImage(Image.FromFile(qrCode), Align.Center, e)
-        End If
+        'Dim qrCode As String = GenerateQRCode()
+        'If qrCode.Trim <> "" Then
+        '    PrintImage(Image.FromFile(qrCode), Align.Center, e)
+        'End If
 
-        PrintText(" ", fn10, Align.Left, e)
-        Dim borderTop As Integer = _lastPrintY - 2
-        PrintText("Use this QR-code to collect your luggage", fn10B, Align.Center, e)
-        PrintText("Warning : This QR-Code can be used only 1 time", fn10B, Align.Center, e)
+        ''Dim borderTop As Integer = _lastPrintY - 2
+        PrintText("Use this QR-code to collect your luggage", fn6, Align.Center, e, 50, 200)
+        PrintText("This QR-Code can be used only 1 time", fn6, Align.Center, e, 50, 210)
 
-        Dim borderH As Integer = (_lastPrintY + 2 - borderTop)
-        PrintRectankle(0, borderTop, borderH, e)
+        'Dim borderH As Integer = (_lastPrintY + 2 - borderTop)
+        'PrintRectankle(0, borderTop, borderH, e)
 
-        'PrintText("In case of lost QR code and cannot open your locker", fn10, Align.Center, e)
         e.HasMorePages = False
     End Sub
 
@@ -130,8 +129,8 @@ Public Class PrinterTestDevice
         Dim h As Integer = e.Graphics.MeasureString(txt, fnt).Height
         Dim x As Integer = 0
         Dim y As Integer = 0
-        x = e.PageSettings.PrintableArea.Width / 2 - h / 2
-        y = e.PageSettings.PrintableArea.Top + lastPrintY
+        x = (e.PageSettings.PrintableArea.Width / 2 - h / 2) - 25
+        y = 0 ' e.PageSettings.PrintableArea.Top
 
         Dim state As GraphicsState = gr.Save
         gr.ResetTransform()
@@ -144,7 +143,6 @@ Public Class PrinterTestDevice
         gr.DrawString(txt, fnt, brsh, 0, 0)
 
         gr.Restore(state)
-        _lastPrintY = y + w + 5
     End Sub
 
     Protected Sub PrintText(ByVal txt As String, ByVal fnt As System.Drawing.Font, ByVal align As Align, ByRef e As System.Drawing.Printing.PrintPageEventArgs)
@@ -166,7 +164,7 @@ Public Class PrinterTestDevice
         End Select
         e.Graphics.DrawString(txt, fnt, brsh, x, y)
         'TextRenderer.DrawText(e.Graphics, txt, fnt, New Point(x, y), SystemColors.ControlText)
-        _lastPrintY = y + h
+        _lastPrintY = y '+ h
     End Sub
 
     Protected Sub PrintImage(ByVal img As System.Drawing.Image, ByVal align As Int16, ByRef e As System.Drawing.Printing.PrintPageEventArgs)
@@ -179,14 +177,27 @@ Public Class PrinterTestDevice
                 x = e.PageSettings.PrintableArea.Left
                 y = e.PageSettings.PrintableArea.Top + lastPrintY
             Case 1 'CENTER
-                x = e.PageSettings.PrintableArea.Width / 2 - w / 2
+                x = (e.PageSettings.PrintableArea.Width / 2 - w / 2)
                 y = e.PageSettings.PrintableArea.Top + lastPrintY
             Case 2 'RIGHT
                 x = e.PageSettings.PrintableArea.Right - w
                 y = e.PageSettings.PrintableArea.Top + lastPrintY
         End Select
         e.Graphics.DrawImage(img, x, y)
-        _lastPrintY = y + h
+        img.Dispose()
+    End Sub
+
+    Protected Sub PrintText(ByVal txt As String, ByVal fnt As System.Drawing.Font, ByVal align As Align, ByRef e As System.Drawing.Printing.PrintPageEventArgs, x As Integer, y As Integer)
+        Dim w As Integer = e.Graphics.MeasureString(txt, fnt).Width
+        Dim h As Integer = e.Graphics.MeasureString(txt, fnt).Height
+        Dim brsh As New System.Drawing.SolidBrush(System.Drawing.Color.FromArgb(0, 0, 0))
+        e.Graphics.DrawString(txt, fnt, brsh, x, y)
+    End Sub
+
+    Protected Sub PrintImage(ByVal img As System.Drawing.Image, ByVal align As Int16, ByRef e As System.Drawing.Printing.PrintPageEventArgs, x As Integer, y As Integer)
+        Dim w As Integer = img.Width
+        Dim h As Integer = img.Height
+        e.Graphics.DrawImage(img, x, y)
         img.Dispose()
     End Sub
 
@@ -294,12 +305,10 @@ Public Class PrinterTestDevice
 
 
 #Region "Print With Printer Class"
-    Private Sub PrintSlip(PrinterDeviceName As String, TransNo As String, LockerName As String, LocationName As String)
+    Private Sub PrintWithPrinterClass(PrinterDeviceName As String, TransNo As String, LockerName As String, LocationName As String)
         Try
             Dim prn As New PrinterClassDll.Win32Print
             prn.SetPrinterName(PrinterDeviceName)
-
-
 
             prn.PrintText(" ")
             prn.PrintImage(Application.StartupPath & "\SlipLogo.bmp")
@@ -349,10 +358,81 @@ Public Class PrinterTestDevice
         End Try
     End Sub
 
-
+    Private Sub btnPrintWithPrinterClass_Click(sender As Object, e As EventArgs) Handles btnPrintWithPrinterClass.Click
+        PrintWithPrinterClass("ICT GP58-3", "1234567890", "L15", "BUSSTATION")
+    End Sub
 
 #End Region
 
+    '#Region "Print With RawPrinterHelper"
 
+    '    Public Const eClear As String = Chr(27) + "@"
+    '    Public Const eCentre As String = Chr(27) + Chr(97) + "1"
+    '    Public Const eLeft As String = Chr(27) + Chr(97) + "0"
+    '    Public Const eRight As String = Chr(27) + Chr(97) + "2"
+    '    Public Const eDrawer As String = eClear + Chr(27) + "p" + Chr(0) + ".}"
+    '    Public Const eCut As String = Chr(27) + "i" + vbCrLf
+    '    Public Const eSmlText As String = Chr(27) + "!" + Chr(1)
+    '    Public Const eNmlText As String = Chr(27) + "!" + Chr(0)
+    '    Public Const eInit As String = eNmlText + Chr(13) + Chr(27) +
+    '    "c6" + Chr(1) + Chr(27) + "R3" + vbCrLf
+    '    Public Const eBigCharOn As String = Chr(27) + "!" + Chr(56)
+    '    Public Const eBigCharOff As String = Chr(27) + "!" + Chr(0)
 
+    '    Private prn As New RawPrinterHelper
+
+    '    'Private PrinterName As String = lblPrinterName.Text
+    '    Public Sub StartPrint(PrinterName As String)
+    '        prn.OpenPrint(PrinterName)
+    '    End Sub
+
+    '    Public Sub PrintHeader()
+    '        Print(eInit + eCentre + "My Shop")
+    '        Print("Tel:0123 456 7890")
+    '        Print("Web: www.????.com")
+    '        Print("sales@????.com")
+    '        Print("VAT Reg No:123 4567 89" + eLeft)
+    '        PrintDashes()
+    '    End Sub
+
+    '    Public Sub PrintBody()
+    '        Print(eSmlText + "Tea                                          T1   1.30")
+
+    '        PrintDashes()
+
+    '        Print(eSmlText + "                                         Total:   1.30")
+
+    '        Print("                                     Paid Card:   1.30")
+    '    End Sub
+
+    '    Public Sub PrintFooter()
+    '        Print(eCentre + "Thank You For Your Support!" + eLeft)
+    '        Print(vbLf + vbLf + vbLf + vbLf + vbLf + eCut + eDrawer)
+    '    End Sub
+
+    '    Public Sub Print(Line As String)
+    '        prn.SendStringToPrinter(lblPrinterName.Text, Line + vbLf)
+    '    End Sub
+
+    '    Public Sub PrintDashes()
+    '        Print(eLeft + eNmlText + "-".PadRight(42, "-"))
+    '    End Sub
+
+    '    Public Sub EndPrint()
+    '        prn.ClosePrint()
+    '    End Sub
+    '    Private Sub btnPrint1_Click(sender As Object, e As EventArgs)
+    '        StartPrint(lblPrinterName.Text)
+
+    '        If prn.PrinterIsOpen = True Then
+    '            PrintHeader()
+
+    '            PrintBody()
+
+    '            PrintFooter()
+
+    '            EndPrint()
+    '        End If
+    '    End Sub
+    '#End Region
 End Class
