@@ -71,17 +71,18 @@ Public Class PrinterTestDevice
 
     Private Sub p_PrintPage(sender As System.Object, e As System.Drawing.Printing.PrintPageEventArgs)
         Dim fn6 As New Font("Calibri", 6, FontStyle.Regular)
+        Dim fn7 As New Font("Calibri", 7, FontStyle.Regular)
         Dim fn8 As New Font("Calibri", 8, FontStyle.Regular)
         Dim fn8B As New Font("Calibri", 8, FontStyle.Bold)
         Dim fn11b As New Font("Calibri", 11, FontStyle.Bold)
         Dim fn16b As New Font("Calibri", 16, FontStyle.Bold)
 
         'Dim imgLogo As Image = Image.FromFile("SlipLogo.bmp")
-        PrintImage(Image.FromFile("SlipLogo.png"), Align.Left, e, 50, 0)
+        PrintImage(Image.FromFile("SlipLogo.png"), e, 50, 0)
         'PrintText("Trans No : 00120160521163218", fn8, Align.Left, e)
-        PrintText(DateTime.Now.ToString("dd MMM yyyy HH:mm:ss"), fn8, Align.Left, e, 50, 50)
-        PrintText("M01", fn16b, Align.Left, e, 50, 70)
-        PrintText("Pattaya", fn8, Align.Left, e, 50, 100)
+        PrintText(DateTime.Now.ToString("dd MMM yyyy HH:mm:ss"), fn8, e, 50, 50)
+        PrintText("M01", fn16b, e, 50, 70)
+        PrintText("Pattaya", fn8, e, 50, 100)
 
         Dim BarcodeText As String = "*001201802092356*"
         PrintBarcodeVertical(e.Graphics, 90, BarcodeText, GetFrontIDAutomation3of9(10, FontStyle.Regular), e)
@@ -94,11 +95,14 @@ Public Class PrinterTestDevice
         'End If
 
         ''Dim borderTop As Integer = _lastPrintY - 2
-        PrintText("Use this QR-code to collect your luggage", fn6, Align.Center, e, 50, 200)
-        PrintText("This QR-Code can be used only 1 time", fn6, Align.Center, e, 50, 210)
+        PrintText("Use this QR-code to collect your luggage", fn6, e, 50, 200)
+        PrintText("This QR-Code can be used only 1 time", fn6, e, 50, 210)
 
         'Dim borderH As Integer = (_lastPrintY + 2 - borderTop)
         'PrintRectankle(0, borderTop, borderH, e)
+        PrintText("For any help, please contact our service center", fn7, Align.Center, e, 250)
+        PrintText("Tel. 089-999-9999 (in service time)", fn7, Align.Center, e, 265)
+        PrintText("Thank you for using our service", fn8B, Align.Center, e, 280)
 
         e.HasMorePages = False
     End Sub
@@ -145,26 +149,20 @@ Public Class PrinterTestDevice
         gr.Restore(state)
     End Sub
 
-    Protected Sub PrintText(ByVal txt As String, ByVal fnt As System.Drawing.Font, ByVal align As Align, ByRef e As System.Drawing.Printing.PrintPageEventArgs)
+    Protected Sub PrintText(ByVal txt As String, ByVal fnt As System.Drawing.Font, ByVal align As Align, ByRef e As System.Drawing.Printing.PrintPageEventArgs, y As Integer)
         Dim w As Integer = e.Graphics.MeasureString(txt, fnt).Width
         Dim h As Integer = e.Graphics.MeasureString(txt, fnt).Height
         Dim x As Integer = 0
-        Dim y As Integer = 0
         Dim brsh As New System.Drawing.SolidBrush(System.Drawing.Color.FromArgb(0, 0, 0))
         Select Case align
             Case 0 'Default, LEFT
                 x = e.PageSettings.PrintableArea.Left
-                y = e.PageSettings.PrintableArea.Top + lastPrintY
             Case 1 'CENTER
                 x = e.PageSettings.PrintableArea.Width / 2 - w / 2
-                y = e.PageSettings.PrintableArea.Top + lastPrintY
             Case 2 'RIGHT
                 x = e.PageSettings.PrintableArea.Right - w
-                y = e.PageSettings.PrintableArea.Top + lastPrintY
         End Select
         e.Graphics.DrawString(txt, fnt, brsh, x, y)
-        'TextRenderer.DrawText(e.Graphics, txt, fnt, New Point(x, y), SystemColors.ControlText)
-        _lastPrintY = y '+ h
     End Sub
 
     Protected Sub PrintImage(ByVal img As System.Drawing.Image, ByVal align As Int16, ByRef e As System.Drawing.Printing.PrintPageEventArgs)
@@ -187,14 +185,14 @@ Public Class PrinterTestDevice
         img.Dispose()
     End Sub
 
-    Protected Sub PrintText(ByVal txt As String, ByVal fnt As System.Drawing.Font, ByVal align As Align, ByRef e As System.Drawing.Printing.PrintPageEventArgs, x As Integer, y As Integer)
+    Protected Sub PrintText(ByVal txt As String, ByVal fnt As System.Drawing.Font, ByRef e As System.Drawing.Printing.PrintPageEventArgs, x As Integer, y As Integer)
         Dim w As Integer = e.Graphics.MeasureString(txt, fnt).Width
         Dim h As Integer = e.Graphics.MeasureString(txt, fnt).Height
         Dim brsh As New System.Drawing.SolidBrush(System.Drawing.Color.FromArgb(0, 0, 0))
         e.Graphics.DrawString(txt, fnt, brsh, x, y)
     End Sub
 
-    Protected Sub PrintImage(ByVal img As System.Drawing.Image, ByVal align As Int16, ByRef e As System.Drawing.Printing.PrintPageEventArgs, x As Integer, y As Integer)
+    Protected Sub PrintImage(ByVal img As System.Drawing.Image, ByRef e As System.Drawing.Printing.PrintPageEventArgs, x As Integer, y As Integer)
         Dim w As Integer = img.Width
         Dim h As Integer = img.Height
         e.Graphics.DrawImage(img, x, y)

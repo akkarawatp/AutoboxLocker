@@ -26,7 +26,6 @@ Partial Class frmDepositSelectLocker
         Me.pnlCabinetLayout = New System.Windows.Forms.Panel()
         Me.pnlLayoutPC = New System.Windows.Forms.Panel()
         Me.PictureBox2 = New System.Windows.Forms.PictureBox()
-        Me.TimerTimeOut = New System.Windows.Forms.Timer(Me.components)
         Me.UcCabinet10 = New MiniboxLocker.ucCabinet()
         Me.UcCabinet9 = New MiniboxLocker.ucCabinet()
         Me.UcCabinet8 = New MiniboxLocker.ucCabinet()
@@ -37,6 +36,7 @@ Partial Class frmDepositSelectLocker
         Me.UcCabinet3 = New MiniboxLocker.ucCabinet()
         Me.UcCabinet2 = New MiniboxLocker.ucCabinet()
         Me.UcCabinet1 = New MiniboxLocker.ucCabinet()
+        Me.TimerTimeOut = New System.Windows.Forms.Timer(Me.components)
         Me.pnlCabinetLayout.SuspendLayout()
         Me.pnlLayoutPC.SuspendLayout()
         CType(Me.PictureBox2, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -82,10 +82,6 @@ Partial Class frmDepositSelectLocker
         Me.PictureBox2.Size = New System.Drawing.Size(62, 31)
         Me.PictureBox2.TabIndex = 0
         Me.PictureBox2.TabStop = False
-        '
-        'TimerTimeOut
-        '
-        Me.TimerTimeOut.Interval = 1000
         '
         'UcCabinet10
         '
@@ -257,6 +253,10 @@ Partial Class frmDepositSelectLocker
         Me.UcCabinet1.Size = New System.Drawing.Size(68, 380)
         Me.UcCabinet1.TabIndex = 0
         '
+        'TimerTimeOut
+        '
+        Me.TimerTimeOut.Interval = 1000
+        '
         'frmDepositSelectLocker
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
@@ -264,7 +264,7 @@ Partial Class frmDepositSelectLocker
         Me.BackColor = System.Drawing.Color.White
         Me.BackgroundImage = Global.MiniboxLocker.My.Resources.Resources.bgDepositSelectLocker
         Me.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
-        Me.ClientSize = New System.Drawing.Size(768, 780)
+        Me.ClientSize = New System.Drawing.Size(768, 1024)
         Me.Controls.Add(Me.pnlCabinetLayout)
         Me.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(222, Byte))
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None

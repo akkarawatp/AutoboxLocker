@@ -20,9 +20,9 @@ Public Class frmCollectScanQRCode
         frmMain.pnlCancel.Visible = True
         Me.WindowState = FormWindowState.Maximized
 
-        txtQRCode.Text = ""
-        txtQRCode.Focus()
-        txtQRCode.Select()
+        txtBarode.Text = ""
+        txtBarode.Focus()
+        txtBarode.Select()
 
         frmDepositPayment.MdiParent = frmMain
         SetDDLLocker()
@@ -52,14 +52,14 @@ Public Class frmCollectScanQRCode
 
 
 
-    Private Sub txtQRCode_KeyPress(sender As Object, e As KeyPressEventArgs) Handles txtQRCode.KeyPress
+    Private Sub txtBarode_KeyPress(sender As Object, e As KeyPressEventArgs) Handles txtBarode.KeyPress
         If Asc(e.KeyChar) = 13 Then
             TimerTimeOut.Enabled = False
             frmLoading.Show(frmMain)
             Application.DoEvents()
 
             InsertLogTransactionActivity("", Collect.TransactionNo, "", KioskConfig.SelectForm, KioskLockerStep.PickupScanQRCode_CheckDataQRCode, "", False)
-            If CheckDataQRCode(txtQRCode.Text) = True Then
+            If CheckDataBarcode(txtBarode.Text) = True Then
                 Collect.LostQRCode = "N"
                 UpdateCollectTransaction(Collect)
 
@@ -67,7 +67,7 @@ Public Class frmCollectScanQRCode
                 frmDepositPayment.Show()
             Else
                 InsertLogTransactionActivity(Collect.DepositTransNo, Collect.TransactionNo, "", KioskConfig.SelectForm, KioskLockerStep.PickupScanQRCode_CheckDataQRCode, "QR Code ไม่ถูกต้อง Deposit Trans No=" & Collect.DepositTransNo, True)
-                txtQRCode.Text = ""
+                txtBarode.Text = ""
                 frmLoading.Close()
 
                 Dim frm As New frmDialog_OK
@@ -79,16 +79,14 @@ Public Class frmCollectScanQRCode
         End If
     End Sub
 
-    Private Function CheckDataQRCode(QRCode As String) As Boolean
+    Private Function CheckDataBarcode(Barcode As String) As Boolean
         Dim ret As Boolean = False
         Try
-            'Check QR Code Digit
-            '## QRCode Format TransactionID + TransactionNo + ID + Len(TransactionID)
-            Dim str() As String = Split(QRCode, "ID")
-            If str.Length = 2 Then
-                Dim idLen As Int16 = Convert.ToInt16(str(1))
-                Dim ServiceTransactionID As Long = Convert.ToInt64(str(0).Substring(0, idLen))
-                Dim TransactionNo As String = str(0).Substring(idLen)
+            'บาร์โค้ดต้องมี 15 ดิจิต
+            If Barcode.Length = 15 Then
+                'Dim idLen As Int16 = Convert.ToInt16(Str(1))
+                'Dim ServiceTransactionID As Long = Convert.ToInt64(Str(0).Substring(0, idLen))
+                Dim TransactionNo As String = Barcode
                 Collect.DepositTransNo = TransactionNo
 
                 Dim sql As String = "select t.id, t.trans_no, t.ms_locker_id, l.locker_name, l.pin_solenoid, l.pin_led, l.pin_sensor,  "
@@ -96,14 +94,13 @@ Public Class frmCollectScanQRCode
                 sql += " from TB_DEPOSIT_TRANSACTION t"
                 sql += " inner join MS_LOCKER l on l.id=t.ms_locker_id"
                 sql += " inner join MS_CABINET c on c.id=l.ms_cabinet_id"
-                sql += " where t.id=@_ID and t.trans_no=@_TRANSACTION_NO "
+                sql += " where t.trans_no=@_TRANSACTION_NO "
                 sql += " and t.trans_status=@_TRANS_STATUS"
                 sql += " and t.paid_time is not null "
 
-                Dim p(3) As SqlParameter
-                p(0) = KioskDB.SetBigInt("@_ID", ServiceTransactionID)
-                p(1) = KioskDB.SetText("@_TRANSACTION_NO", TransactionNo)
-                p(2) = KioskDB.SetText("@_TRANS_STATUS", Convert.ToInt16(DepositTransactionData.TransactionStatus.Success))
+                Dim p(2) As SqlParameter
+                p(0) = KioskDB.SetText("@_TRANSACTION_NO", TransactionNo)
+                p(1) = KioskDB.SetText("@_TRANS_STATUS", Convert.ToInt16(DepositTransactionData.TransactionStatus.Success))
 
                 Dim dt As DataTable = KioskDB.ExecuteTable(sql, p)
                 If dt.Rows.Count > 0 Then
@@ -134,15 +131,14 @@ Public Class frmCollectScanQRCode
                     sql += " from TB_DEPOSIT_TRANSACTION t"
                     sql += " inner join MS_LOCKER l on l.id=t.ms_locker_id"
                     sql += " inner join MS_CABINET c on c.id=l.ms_cabinet_id"
-                    sql += " where t.id=@_ID and t.trans_no=@_TRANSACTION_NO "
+                    sql += " where t.trans_no=@_TRANSACTION_NO "
                     sql += " and t.trans_status=@_TRANS_STATUS"
 
-                    Dim pp(3) As SqlParameter
-                    pp(0) = KioskDB.SetBigInt("@_ID", ServiceTransactionID)
-                    pp(1) = KioskDB.SetText("@_TRANSACTION_NO", TransactionNo)
-                    p(2) = KioskDB.SetText("@_TRANS_STATUS", Convert.ToInt16(DepositTransactionData.TransactionStatus.Inprogress))
+                    ReDim p(2)
+                    p(0) = KioskDB.SetText("@_TRANSACTION_NO", TransactionNo)
+                    p(1) = KioskDB.SetText("@_TRANS_STATUS", Convert.ToInt16(DepositTransactionData.TransactionStatus.Inprogress))
 
-                    dt = KioskDB.ExecuteTable(sql, pp)
+                    dt = KioskDB.ExecuteTable(sql, p)
                     If dt.Rows.Count > 0 Then
                         Dim dr As DataRow = dt.Rows(0)
                         ret = SetPickupInitialInformation(dr)
@@ -163,11 +159,10 @@ Public Class frmCollectScanQRCode
                         '#################################################################################
                         'ถ้าไม่เจออีก ให้หาจาก Service Transaction ที่ Server เลยโลด
                         '#################################################################################
-                        Dim sP(2) As SqlParameter
-                        sP(0) = ServerLinqDB.ConnectDB.ServerDB.SetBigInt("@_ID", ServiceTransactionID)
-                        sP(1) = ServerLinqDB.ConnectDB.ServerDB.SetText("@_TRANSACTION_NO", TransactionNo)
+                        ReDim p(1)
+                        p(0) = ServerLinqDB.ConnectDB.ServerDB.SetText("@_TRANSACTION_NO", TransactionNo)
 
-                        dt = ServerLinqDB.ConnectDB.ServerDB.ExecuteTable(sql, sP)
+                        dt = ServerLinqDB.ConnectDB.ServerDB.ExecuteTable(sql, p)
                         If dt.Rows.Count > 0 Then
                             Dim dr As DataRow = dt.Rows(0)
                             ret = SetPickupInitialInformation(dr)
@@ -273,11 +268,11 @@ Public Class frmCollectScanQRCode
     End Sub
 
     Private Sub frmPickupScanQRCode_MouseMove(sender As Object, e As MouseEventArgs) Handles Me.MouseMove
-        txtQRCode.Focus()
+        txtBarode.Focus()
     End Sub
 
     Private Sub frmPickupScanQRCode_LostFocus(sender As Object, e As EventArgs) Handles Me.LostFocus
-        txtQRCode.Focus()
+        txtBarode.Focus()
     End Sub
 #Region "Input Pin Code"
 
@@ -406,24 +401,24 @@ Public Class frmCollectScanQRCode
             frmDepositPayment.Show()
         Else
             InsertLogTransactionActivity(Collect.DepositTransNo, Collect.TransactionNo, "", KioskConfig.SelectForm, KioskLockerStep.PickupScanQRCode_GetPickupWithPinCode, "Pin Code ไม่ถูกต้อง Deposit Trans No=" & Collect.DepositTransNo, True)
-            txtQRCode.Text = ""
+            txtBarode.Text = ""
             frmLoading.Close()
 
             ShowDialogErrorMessage("Invalid PIN Code")
             txtPincode.Text = ""
             TimerTimeOut.Enabled = True
-            txtQRCode.Focus()
+            txtBarode.Focus()
         End If
     End Sub
     Private Sub InsertNumber(ByVal Num As Int16)
         txtPincode.Text = txtPincode.Text & Num
         TimeOutCheckTime = DateTime.Now
-        txtQRCode.Focus()
+        txtBarode.Focus()
     End Sub
     Private Sub btnDel_Click(sender As Object, e As EventArgs) Handles btnDel.Click
         txtPincode.Text = ""
         TimeOutCheckTime = DateTime.Now
-        txtQRCode.Focus()
+        txtBarode.Focus()
     End Sub
 
     Private Sub btnNumber0_Click(sender As Object, e As EventArgs) Handles btnNumber0.Click

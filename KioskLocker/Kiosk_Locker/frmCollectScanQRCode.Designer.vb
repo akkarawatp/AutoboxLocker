@@ -23,7 +23,7 @@ Partial Class frmCollectScanQRCode
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
-        Me.txtQRCode = New System.Windows.Forms.TextBox()
+        Me.txtBarode = New System.Windows.Forms.TextBox()
         Me.TimerTimeOut = New System.Windows.Forms.Timer(Me.components)
         Me.txtPincode = New System.Windows.Forms.TextBox()
         Me.btnNumber0 = New System.Windows.Forms.PictureBox()
@@ -54,15 +54,15 @@ Partial Class frmCollectScanQRCode
         CType(Me.btnOK, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
-        'txtQRCode
+        'txtBarode
         '
-        Me.txtQRCode.Anchor = System.Windows.Forms.AnchorStyles.Top
-        Me.txtQRCode.BorderStyle = System.Windows.Forms.BorderStyle.None
-        Me.txtQRCode.ForeColor = System.Drawing.Color.White
-        Me.txtQRCode.Location = New System.Drawing.Point(250, 248)
-        Me.txtQRCode.Name = "txtQRCode"
-        Me.txtQRCode.Size = New System.Drawing.Size(249, 16)
-        Me.txtQRCode.TabIndex = 0
+        Me.txtBarode.Anchor = System.Windows.Forms.AnchorStyles.Top
+        Me.txtBarode.BorderStyle = System.Windows.Forms.BorderStyle.None
+        Me.txtBarode.ForeColor = System.Drawing.Color.White
+        Me.txtBarode.Location = New System.Drawing.Point(250, 248)
+        Me.txtBarode.Name = "txtBarode"
+        Me.txtBarode.Size = New System.Drawing.Size(249, 16)
+        Me.txtBarode.TabIndex = 0
         '
         'TimerTimeOut
         '
@@ -222,7 +222,7 @@ Partial Class frmCollectScanQRCode
         Me.Controls.Add(Me.btnNumber0)
         Me.Controls.Add(Me.btnDel)
         Me.Controls.Add(Me.btnNumber9)
-        Me.Controls.Add(Me.txtQRCode)
+        Me.Controls.Add(Me.txtBarode)
         Me.Controls.Add(Me.btnNumber8)
         Me.Controls.Add(Me.btnOK)
         Me.Controls.Add(Me.btnNumber7)
@@ -253,7 +253,7 @@ Partial Class frmCollectScanQRCode
         Me.PerformLayout()
 
     End Sub
-    Friend WithEvents txtQRCode As TextBox
+    Friend WithEvents txtBarode As TextBox
     Friend WithEvents TimerTimeOut As Timer
     Friend WithEvents cbLocker As ComboBox
     Friend WithEvents btnOK As PictureBox

@@ -90,11 +90,46 @@ Module KioskModule
     End Function
 
     Public Function genNewDepositTransectionNo() As String
+        Dim ret As String = ""
+        Try
+            Dim RunningNo As Int32 = 0
+            Dim CurrYear As String = DateTime.Now.ToString("yyyy", New Globalization.CultureInfo("en-US"))
+            Dim lnq As New CfKioskSysconfigKioskLinqDB
+            lnq.ChkDataByMS_KIOSK_ID(KioskData.KioskID, Nothing)
+            If lnq.ID > 0 Then
+                If lnq.DEPOSIT_RUNNING_NO.Length > 4 Then
+                    If lnq.DEPOSIT_RUNNING_NO.Substring(0, 4) = CurrYear Then
+                        RunningNo = Convert.ToInt32(lnq.DEPOSIT_RUNNING_NO.Substring(4)) + 1
+                    Else
+                        RunningNo = 1
+                    End If
+                Else
+                    RunningNo = 1
+                End If
+            Else
+                RunningNo = 1
+            End If
+            ret = CurrYear & RunningNo.ToString.PadLeft(8, "0")
 
-        Dim CurrYear As String = DateTime.Now.ToString("yyyy", New Globalization.CultureInfo("en-US"))
+            Dim trans As New KioskTransactionDB
+            lnq.DEPOSIT_RUNNING_NO = ret
+            Dim re As ExecuteDataInfo = lnq.UpdateData(Environment.MachineName, trans.Trans)
+            If re.IsSuccess = True Then
+                ret = KioskData.KioskID.PadLeft(3, "0") & ret
+                trans.CommitTransaction()
+            Else
+                trans.RollbackTransaction()
+                ret = ""
+            End If
+            lnq = Nothing
+        Catch ex As Exception
 
-        Return KioskData.KioskID.PadLeft(3, "0") & CurrYear
+        End Try
+
+        Return ret
     End Function
+
+
 
     Public Sub ProcessTimeOut()
         frmMain.CloseAllChildForm(frmLoading)
@@ -1224,7 +1259,7 @@ Module KioskModule
         Dim ret As New ExecuteDataInfo
         Try
             Dim lnq As New TbDepositTransactionKioskLinqDB
-            lnq.TRANS_NO = genNewTransectionNo()
+            lnq.TRANS_NO = genNewDepositTransectionNo()
             lnq.TRANS_START_TIME = DateTime.Now
             lnq.MS_KIOSK_ID = KioskData.KioskID
             'lnq.TRANSACTION_SERVICE = "1"  'Deposit Belonging
