@@ -115,7 +115,7 @@ Public Class frmSC_ServiceRate
                             lblLRRate.TextAlign = ContentAlignment.MiddleCenter
                             lblLRRate.BorderStyle = BorderStyle.FixedSingle
                             lblLRRate.Size = New Size(100, 30)
-                            lblLRRate.Location = New Point(180, 0)
+                            lblLRRate.Location = New Point(280, 0)
                             lblLRRate.Margin = New Padding(0)
                             flpServiceRateHour.Controls.Add(lblLRRate)
                         End If
