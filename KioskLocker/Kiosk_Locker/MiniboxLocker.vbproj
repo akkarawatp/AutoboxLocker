@@ -592,6 +592,9 @@
     </Content>
     <Content Include="LogoIcon.ico" />
     <Content Include="Logo.ico" />
+    <Content Include="SlipLogo.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <None Include="Resources\iconButtonStepLeft.png" />
     <None Include="Resources\iconButtonStepRight.png" />
     <None Include="Resources\btnButtonAdd.png" />
