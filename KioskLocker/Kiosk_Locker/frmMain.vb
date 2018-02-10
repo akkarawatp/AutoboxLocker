@@ -278,7 +278,7 @@ Public Class frmMain
             KioskData.CardLanDesc = GetCardLanDesc()
             IsNoCheckAdruno = GetNoCheckAdruno()
             IsNoCheckMoneyDevice = GetNoCheckMoneyDevice()
-            FontIDAutomation = LoadFont(My.Resources.IDAutomationHC39M_Free, FontIDAutomation)
+            'FontIDAutomation = LoadFont(My.Resources.IDAutomationHC39M_Free, FontIDAutomation)
             Dim IsNetworkDevice As Boolean = False
 
             Try
@@ -348,6 +348,7 @@ Public Class frmMain
 
                 If kdLnq.ID > 0 Then
                     kdLnq.DRIVER_NAME1 = KioskData.CardLanDesc
+                    kdLnq.MS_DEVICE_STATUS_ID = ConstantsData.NetworkStatus.Ready
                     Dim trans As New KioskTransactionDB
                     Dim koRe As ExecuteDataInfo = kdLnq.UpdateData(KioskData.ComputerName, trans.Trans)
                     If koRe.IsSuccess = True Then

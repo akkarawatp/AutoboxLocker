@@ -87,6 +87,13 @@ Public Class frmSC_StockAndHardware
                 lblCollect.Visible = False
             End If
             StaffConsole.AuthorizeInfo.DefaultView.RowFilter = ""
+
+            'Service Rate
+            StaffConsole.AuthorizeInfo.DefaultView.RowFilter = "ms_functional_id=30"
+            If StaffConsole.AuthorizeInfo.DefaultView.Count = 0 Then
+                lblServiceRate.Visible = False
+            End If
+            StaffConsole.AuthorizeInfo.DefaultView.RowFilter = ""
         End If
     End Sub
 

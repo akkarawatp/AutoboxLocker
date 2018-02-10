@@ -88,13 +88,6 @@ Public Class frmDepositPrintQRCode
 
     End Sub
 
-    Private ReadOnly Property GetFrontIDAutomation3of9(ByVal Size As Single, ByVal style As FontStyle) As Font
-        Get
-            Return New Font(FontIDAutomation.Families(0), Size, style)
-        End Get
-
-    End Property
-
     Private Sub p_PrintPage(sender As System.Object, e As System.Drawing.Printing.PrintPageEventArgs)
         Dim fn5 As New Font("Calibri", 5, FontStyle.Regular)
         Dim fn7 As New Font("Calibri", 7, FontStyle.Regular)
@@ -103,7 +96,6 @@ Public Class frmDepositPrintQRCode
         Dim fn8b As New Font("Calibri", 8, FontStyle.Bold)
         Dim fn10b As New Font("Calibri", 9.5, FontStyle.Bold)
         Dim fn15b As New Font("Calibri", 15, FontStyle.Bold)
-        Dim fnBarcode As Font = GetFrontIDAutomation3of9(8, FontStyle.Regular)
 
         'Dim imgLogo As Image = Image.FromFile("SlipLogo.bmp")
         Dim imgLogo As Image = Image.FromFile("SlipLogo.png")

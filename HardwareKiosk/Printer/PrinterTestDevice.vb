@@ -8,38 +8,38 @@ Imports System.Drawing.Text
 Public Class PrinterTestDevice
 
     Dim Printer As New PrinterClass
-    Dim FontIDAutomation As System.Drawing.Text.PrivateFontCollection
+    'Dim FontIDAutomation As System.Drawing.Text.PrivateFontCollection
 
     Private Sub CashInTestDevice_FormClosed(sender As Object, e As System.Windows.Forms.FormClosedEventArgs) Handles Me.FormClosed
         sp.Close()
         Me.DialogResult = DialogResult.OK
     End Sub
 
-    Private Sub FormTestDevice_Shown(sender As Object, e As System.EventArgs) Handles Me.Shown
-        lblPrinterName.Focus()
-        CheckStatusPrinter()
+    'Private Sub FormTestDevice_Shown(sender As Object, e As System.EventArgs) Handles Me.Shown
+    '    lblPrinterName.Focus()
+    '    CheckStatusPrinter()
 
-        FontIDAutomation = LoadFont(My.Resources.IDAutomationHC39M_Free, FontIDAutomation)
-    End Sub
+    '    FontIDAutomation = LoadFont(My.Resources.IDAutomationHC39M_Free, FontIDAutomation)
+    'End Sub
 
-    Public Function LoadFont(FontResources() As Byte, _pfc As PrivateFontCollection) As PrivateFontCollection
-        Try
-            If _pfc Is Nothing Then _pfc = New PrivateFontCollection
-            ''INIT THE FONT COLLECTION
-            'LOAD MEMORY POINTER FOR FONT RESOURCE
-            Dim fontMemPointer As IntPtr = Marshal.AllocCoTaskMem(FontResources.Length)
-            'COPY THE DATA TO THE MEMORY LOCATION
-            Marshal.Copy(FontResources, 0, fontMemPointer, FontResources.Length)
-            'LOAD THE MEMORY FONT INTO THE PRIVATE FONT COLLECTION
-            _pfc.AddMemoryFont(fontMemPointer, FontResources.Length)
-            'FREE UNSAFE MEMORY
-            Marshal.FreeCoTaskMem(fontMemPointer)
-        Catch ex As Exception
-            'ERROR LOADING FONT. HANDLE EXCEPTION HERE
-            _pfc = New PrivateFontCollection
-        End Try
-        Return _pfc
-    End Function
+    'Public Function LoadFont(FontResources() As Byte, _pfc As PrivateFontCollection) As PrivateFontCollection
+    '    Try
+    '        If _pfc Is Nothing Then _pfc = New PrivateFontCollection
+    '        ''INIT THE FONT COLLECTION
+    '        'LOAD MEMORY POINTER FOR FONT RESOURCE
+    '        Dim fontMemPointer As IntPtr = Marshal.AllocCoTaskMem(FontResources.Length)
+    '        'COPY THE DATA TO THE MEMORY LOCATION
+    '        Marshal.Copy(FontResources, 0, fontMemPointer, FontResources.Length)
+    '        'LOAD THE MEMORY FONT INTO THE PRIVATE FONT COLLECTION
+    '        _pfc.AddMemoryFont(fontMemPointer, FontResources.Length)
+    '        'FREE UNSAFE MEMORY
+    '        Marshal.FreeCoTaskMem(fontMemPointer)
+    '    Catch ex As Exception
+    '        'ERROR LOADING FONT. HANDLE EXCEPTION HERE
+    '        _pfc = New PrivateFontCollection
+    '    End Try
+    '    Return _pfc
+    'End Function
 
     Private Sub btnPrint_Click(sender As System.Object, e As System.EventArgs) Handles btnPrint.Click
         ' Printer.PrintConfirmationSlipNewSim(lblPrinterName.Text, "AUTOBOX", "AUTOBOX", "49", "150", "100", "0897682500", "000", "001")
@@ -58,12 +58,12 @@ Public Class PrinterTestDevice
         p.Print()
     End Sub
 
-    Private ReadOnly Property GetFrontIDAutomation3of9(ByVal Size As Single, ByVal style As FontStyle) As Font
-        Get
-            Return New Font(FontIDAutomation.Families(0), Size, style)
-        End Get
+    'Private ReadOnly Property GetFrontIDAutomation3of9(ByVal Size As Single, ByVal style As FontStyle) As Font
+    '    Get
+    '        Return New Font(FontIDAutomation.Families(0), Size, style)
+    '    End Get
 
-    End Property
+    'End Property
 
     Private Sub p_PrintPage(sender As System.Object, e As System.Drawing.Printing.PrintPageEventArgs)
         Dim fn10 As New Font("Calibri", 10, FontStyle.Regular)

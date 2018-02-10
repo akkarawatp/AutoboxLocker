@@ -34,7 +34,7 @@ Module KioskModule
     Public THB_EN As String = "THB"
     Public IsNoCheckAdruno As Boolean = False   'ใช้ระหว่าง Debug ถ้าเป็น True ให้ข้ามฟังค์ชั่นการเช็ค Solinoid, LED, Sensor ไปเลย
     Public IsNoCheckMoneyDevice As Boolean = False   'ใช้ระหว่าง Debug ถ้าเป็น True ให้ข้ามฟังก์ชั่นการเช็คอุปกรณ์รับ-ทอน เงินไปเลย
-    Public FontIDAutomation As System.Drawing.Text.PrivateFontCollection
+    'Public FontIDAutomation As System.Drawing.Text.PrivateFontCollection
     Public OutOfService As Boolean
 
     'Hardware Interface
@@ -708,19 +708,6 @@ Module KioskModule
                     Dim VID As String = dr("comport_vid").ToString
 
                     Select Case DeviceTypeID
-                        'Case DeviceType.IdCardAndPassportScanner
-                        '    If PassportScanner.StartPassportDevice(KioskConfig.PassportDeviceName) = True Then
-                        '        If PassportScanner.ConnectPassportDevice(VID) = True Then
-                        '            UpdateDeviceStatus(DeviceID.ToString, PassportScanerStatus.Ready)
-                        '            SendKioskAlarm("PASSPORT_SCANNER_DISCONNECTED", False)
-                        '        Else
-                        '            UpdateDeviceStatus(DeviceID.ToString, PassportScanerStatus.Disconnected)
-                        '            SendKioskAlarm("PASSPORT_SCANNER_DISCONNECTED", True)
-                        '        End If
-                        '    Else
-                        '        UpdateDeviceStatus(DeviceID.ToString, PassportScanerStatus.Disconnected)
-                        '        SendKioskAlarm("PASSPORT_SCANNER_DISCONNECTED", True)
-                        '    End If
                         Case DeviceType.WebCamera
                             If Convert.IsDBNull(dr("driver_name1")) = False Then
                                 Dim CamIndex As Integer = Convert.ToInt16(dr("driver_name2"))
