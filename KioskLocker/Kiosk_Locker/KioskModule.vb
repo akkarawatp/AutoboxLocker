@@ -93,13 +93,14 @@ Module KioskModule
         Dim ret As String = ""
         Try
             Dim RunningNo As Int32 = 0
-            Dim CurrYear As String = DateTime.Now.ToString("yyyy", New Globalization.CultureInfo("en-US"))
+            Dim YearDigit As Int16 = 2
+            Dim CurrYear As String = Right(DateTime.Now.ToString("yyyy", New Globalization.CultureInfo("en-US")), YearDigit)
             Dim lnq As New CfKioskSysconfigKioskLinqDB
             lnq.ChkDataByMS_KIOSK_ID(KioskData.KioskID, Nothing)
             If lnq.ID > 0 Then
-                If lnq.DEPOSIT_RUNNING_NO.Length > 4 Then
-                    If lnq.DEPOSIT_RUNNING_NO.Substring(0, 4) = CurrYear Then
-                        RunningNo = Convert.ToInt32(lnq.DEPOSIT_RUNNING_NO.Substring(4)) + 1
+                If lnq.DEPOSIT_RUNNING_NO.Length > YearDigit Then
+                    If lnq.DEPOSIT_RUNNING_NO.Substring(0, YearDigit) = CurrYear Then
+                        RunningNo = Convert.ToInt32(lnq.DEPOSIT_RUNNING_NO.Substring(YearDigit)) + 1
                     Else
                         RunningNo = 1
                     End If
@@ -109,7 +110,7 @@ Module KioskModule
             Else
                 RunningNo = 1
             End If
-            ret = CurrYear & RunningNo.ToString.PadLeft(8, "0")
+            ret = CurrYear & RunningNo.ToString.PadLeft(5, "0")
 
             Dim trans As New KioskTransactionDB
             lnq.DEPOSIT_RUNNING_NO = ret

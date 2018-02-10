@@ -82,8 +82,8 @@ Public Class frmCollectScanQRCode
     Private Function CheckDataBarcode(Barcode As String) As Boolean
         Dim ret As Boolean = False
         Try
-            'บาร์โค้ดต้องมี 15 ดิจิต
-            If Barcode.Length = 15 Then
+            'บาร์โค้ดต้องมี 10 ดิจิต
+            If Barcode.Length = 10 Then
                 'Dim idLen As Int16 = Convert.ToInt16(Str(1))
                 'Dim ServiceTransactionID As Long = Convert.ToInt64(Str(0).Substring(0, idLen))
                 Dim TransactionNo As String = Barcode
