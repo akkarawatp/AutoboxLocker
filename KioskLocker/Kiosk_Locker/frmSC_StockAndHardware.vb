@@ -439,4 +439,12 @@ Public Class frmSC_StockAndHardware
         frmSC_ServiceRate.MdiParent = frmSC_Main
         frmSC_ServiceRate.Show()
     End Sub
+
+    Private Sub btnClose_Click(sender As Object, e As EventArgs) Handles btnClose.Click
+        InsertLogTransactionActivity(StaffConsole.TransNo, KioskConfig.SelectForm, KioskLockerStep.StaffConsoleStockAndHardware_ClickClose, "", False)
+
+        frmSC_Main.Close()
+        frmMain.TimerCheckOpenClose.Enabled = True
+        frmMain.Show()
+    End Sub
 End Class
