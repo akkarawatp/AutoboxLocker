@@ -60,6 +60,8 @@ Namespace SyncDataWebservice
         
         Private GetLockerServiceRateOperationCompleted As System.Threading.SendOrPostCallback
         
+        Private GetMasterNotUsePincodeOperationCompleted As System.Threading.SendOrPostCallback
+        
         Private SyncKioskSysconfigOperationCompleted As System.Threading.SendOrPostCallback
         
         Private SyncMasterKioskCabinetOperationCompleted As System.Threading.SendOrPostCallback
@@ -191,6 +193,9 @@ Namespace SyncDataWebservice
         
         '''<remarks/>
         Public Event GetLockerServiceRateCompleted As GetLockerServiceRateCompletedEventHandler
+        
+        '''<remarks/>
+        Public Event GetMasterNotUsePincodeCompleted As GetMasterNotUsePincodeCompletedEventHandler
         
         '''<remarks/>
         Public Event SyncKioskSysconfigCompleted As SyncKioskSysconfigCompletedEventHandler
@@ -645,6 +650,33 @@ Namespace SyncDataWebservice
             If (Not (Me.GetLockerServiceRateCompletedEvent) Is Nothing) Then
                 Dim invokeArgs As System.Web.Services.Protocols.InvokeCompletedEventArgs = CType(arg,System.Web.Services.Protocols.InvokeCompletedEventArgs)
                 RaiseEvent GetLockerServiceRateCompleted(Me, New GetLockerServiceRateCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState))
+            End If
+        End Sub
+        
+        '''<remarks/>
+        <System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/GetMasterNotUsePincode", RequestNamespace:="http://tempuri.org/", ResponseNamespace:="http://tempuri.org/", Use:=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle:=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)>  _
+        Public Function GetMasterNotUsePincode() As System.Data.DataTable
+            Dim results() As Object = Me.Invoke("GetMasterNotUsePincode", New Object(-1) {})
+            Return CType(results(0),System.Data.DataTable)
+        End Function
+        
+        '''<remarks/>
+        Public Overloads Sub GetMasterNotUsePincodeAsync()
+            Me.GetMasterNotUsePincodeAsync(Nothing)
+        End Sub
+        
+        '''<remarks/>
+        Public Overloads Sub GetMasterNotUsePincodeAsync(ByVal userState As Object)
+            If (Me.GetMasterNotUsePincodeOperationCompleted Is Nothing) Then
+                Me.GetMasterNotUsePincodeOperationCompleted = AddressOf Me.OnGetMasterNotUsePincodeOperationCompleted
+            End If
+            Me.InvokeAsync("GetMasterNotUsePincode", New Object(-1) {}, Me.GetMasterNotUsePincodeOperationCompleted, userState)
+        End Sub
+        
+        Private Sub OnGetMasterNotUsePincodeOperationCompleted(ByVal arg As Object)
+            If (Not (Me.GetMasterNotUsePincodeCompletedEvent) Is Nothing) Then
+                Dim invokeArgs As System.Web.Services.Protocols.InvokeCompletedEventArgs = CType(arg,System.Web.Services.Protocols.InvokeCompletedEventArgs)
+                RaiseEvent GetMasterNotUsePincodeCompleted(Me, New GetMasterNotUsePincodeCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState))
             End If
         End Sub
         
@@ -2564,6 +2596,33 @@ Namespace SyncDataWebservice
             Get
                 Me.RaiseExceptionIfNecessary
                 Return CType(Me.results(0),MasterServiceRateData)
+            End Get
+        End Property
+    End Class
+    
+    '''<remarks/>
+    <System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1055.0")>  _
+    Public Delegate Sub GetMasterNotUsePincodeCompletedEventHandler(ByVal sender As Object, ByVal e As GetMasterNotUsePincodeCompletedEventArgs)
+    
+    '''<remarks/>
+    <System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1055.0"),  _
+     System.Diagnostics.DebuggerStepThroughAttribute(),  _
+     System.ComponentModel.DesignerCategoryAttribute("code")>  _
+    Partial Public Class GetMasterNotUsePincodeCompletedEventArgs
+        Inherits System.ComponentModel.AsyncCompletedEventArgs
+        
+        Private results() As Object
+        
+        Friend Sub New(ByVal results() As Object, ByVal exception As System.Exception, ByVal cancelled As Boolean, ByVal userState As Object)
+            MyBase.New(exception, cancelled, userState)
+            Me.results = results
+        End Sub
+        
+        '''<remarks/>
+        Public ReadOnly Property Result() As System.Data.DataTable
+            Get
+                Me.RaiseExceptionIfNecessary
+                Return CType(Me.results(0),System.Data.DataTable)
             End Get
         End Property
     End Class

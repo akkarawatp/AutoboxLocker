@@ -42,7 +42,8 @@ Public Class TestFunctionWindowService
         'Engine.SyncMasterDataENG.PullMasterDevice(2)
         'Engine.SyncMasterDataENG.PullMasterKioskNotificationText(23)
         'Engine.SyncMasterDataENG.PullMasterMonitoringAlarm(KioskInfoENG.KioskID)
-        Engine.SyncMasterDataENG.PullMasterServiceRate(KioskInfoENG.KioskID)
+        'Engine.SyncMasterDataENG.PullMasterServiceRate(KioskInfoENG.KioskID)
+        'Engine.SyncMasterDataENG.PullMasterNotUserPincode(KioskInfoENG.KioskID)
 
         'SyncTransactionDataENG.ConvertCollectTransationCustImage(KioskInfoENG.KioskID)
         'SyncTransactionDataENG.SyncCollectTransactionCustImage(KioskInfoENG.KioskID)

@@ -21,11 +21,11 @@ Public Class SyncMasterDataENG
         SyncMasterCabinet(MsKioskID)
         SyncMasterKioskDevice(MsKioskID)
         SyncMasterKioskLocker(MsKioskID)
-
+        PullMasterNotUserPincode(MsKioskID)
     End Sub
 
 #Region "Pull Master Data"
-    Public Shared Sub PullMasterAppScreen(MsKioskID As Long)
+    Private Shared Sub PullMasterAppScreen(MsKioskID As Long)
         Try
             Dim ws As New SyncDataWebservice.ATBLockerWebService
             ws.Timeout = 10000
@@ -79,7 +79,7 @@ Public Class SyncMasterDataENG
         End Try
     End Sub
 
-    Public Shared Sub PullMasterAppStep(MsKioskID As Long)
+    Private Shared Sub PullMasterAppStep(MsKioskID As Long)
         Try
             Dim ws As New SyncDataWebservice.ATBLockerWebService
             ws.Timeout = 10000
@@ -270,7 +270,7 @@ Public Class SyncMasterDataENG
         End Try
     End Sub
 
-    Public Shared Sub PullMasterDeviceStatus(MsKioskID As Long)
+    Private Shared Sub PullMasterDeviceStatus(MsKioskID As Long)
         Try
             Dim ws As New SyncDataWebservice.ATBLockerWebService
             ws.Timeout = 10000
@@ -401,7 +401,7 @@ Public Class SyncMasterDataENG
         End Try
     End Sub
 
-    Public Shared Sub PullMasterMonitoringAlarm(MsKioskID As Long)
+    Private Shared Sub PullMasterMonitoringAlarm(MsKioskID As Long)
         Try
             Dim ws As New SyncDataWebservice.ATBLockerWebService
             ws.Timeout = 10000
@@ -445,6 +445,57 @@ Public Class SyncMasterDataENG
                         p(5) = KioskDB.SetText("@_ENG_DESC", dr("ENG_DESC"))
                         p(6) = KioskDB.SetText("@_THA_DESC", dr("THA_DESC"))
                         p(7) = KioskDB.SetText("@_SMS_MESSAGE", dr("SMS_MESSAGE"))
+
+                        Dim kTrans As New KioskTransactionDB
+                        Dim ret As KioskLinqDB.ConnectDB.ExecuteDataInfo = KioskDB.ExecuteNonQuery(sql, kTrans.Trans, p)
+                        If ret.IsSuccess = True Then
+                            kTrans.CommitTransaction()
+                        Else
+                            kTrans.RollbackTransaction()
+                            LogFileENG.CreateErrorLogAgent(MsKioskID, ret.ErrorMessage)
+                        End If
+                    End If
+                    kLnq = Nothing
+                Next
+            End If
+            dt.Dispose()
+            ws.Dispose()
+        Catch ex As Exception
+            LogFileENG.CreateExceptionLogAgent(MsKioskID, ex.Message, ex.StackTrace)
+        End Try
+    End Sub
+
+    Private Shared Sub PullMasterNotUserPincode(MsKioskID As Long)
+        Try
+            Dim ws As New SyncDataWebservice.ATBLockerWebService
+            ws.Timeout = 10000
+            ws.Url = KioskInfoENG.GetLockerSysconfig(MsKioskID).LOCKER_WEBSERVICE_URL
+            Dim dt As DataTable = ws.GetMasterNotUsePincode()
+            If dt.Rows.Count > 0 Then
+                For Each dr As DataRow In dt.Rows
+                    Dim kLnq As New MsNotUsePincodeKioskLinqDB
+                    kLnq.GetDataByPK(dr("ID"), Nothing)
+                    If kLnq.ID > 0 Then
+                        kLnq.NOT_USE_PINCODE = dr("NOT_USE_PINCODE")
+
+                        Dim kTrans As New KioskTransactionDB
+                        Dim ret As KioskLinqDB.ConnectDB.ExecuteDataInfo = kLnq.UpdateData(Environment.MachineName, kTrans.Trans)
+                        If ret.IsSuccess = True Then
+                            kTrans.CommitTransaction()
+                        Else
+                            kTrans.RollbackTransaction()
+                            LogFileENG.CreateErrorLogAgent(MsKioskID, ret.ErrorMessage)
+                        End If
+                    Else
+                        Dim sql As String = "set identity_insert [MS_NOT_USE_PINCODE] on; " & vbNewLine
+                        sql += " insert into [MS_NOT_USE_PINCODE] (id,created_by,created_date,not_use_pincode)" & vbNewLine
+                        sql += " values(@_ID,@_CREATED_BY,getdate(),@_NOT_USE_PINCODE)"
+                        sql += " set identity_insert [MS_NOT_USE_PINCODE] off;"
+
+                        Dim p(3) As SqlParameter
+                        p(0) = KioskDB.SetBigInt("@_ID", dr("ID"))
+                        p(1) = KioskDB.SetText("@_CREATED_BY", Environment.MachineName)
+                        p(2) = KioskDB.SetText("@_NOT_USE_PINCODE", dr("NOT_USE_PINCODE"))
 
                         Dim kTrans As New KioskTransactionDB
                         Dim ret As KioskLinqDB.ConnectDB.ExecuteDataInfo = KioskDB.ExecuteNonQuery(sql, kTrans.Trans, p)
@@ -675,6 +726,8 @@ Public Class SyncMasterDataENG
             LogFileENG.CreateExceptionLogAgent(MsKioskID, ex.Message, ex.StackTrace)
         End Try
     End Sub
+
+
 #End Region
 
 #Region "Sync Kiosk Master Data"
