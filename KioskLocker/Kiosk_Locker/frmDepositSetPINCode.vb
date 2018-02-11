@@ -82,7 +82,7 @@ Public Class frmDepositSetPINCode
                 btnClear_Click(Nothing, Nothing)
 
                 InsertLogTransactionActivity(Deposit.DepositTransNo, "", "", KioskConfig.SelectForm, KioskLockerStep.DepositSetPinCode_ConfirmPinCodeFail, "รหัสผ่านห้ามใช้งาน", False)
-                ShowDialogErrorMessage(String.Format("รหัสผ่านไม่ถูกต้อง กรุณากำหนดรหัสใหม่" & vbNewLine & "Incorrect password. Please enter new password", KioskConfig.PincodeLen))
+                ShowDialogErrorMessage(String.Format("ไม่สามารถใช้ 123456 และเลขซ้ำกัน 6 หลักได้ เช่น 000000, 999999" & vbNewLine & "Password cannot use 123456 or 6 same digital example 000000 or 999999", KioskConfig.PincodeLen))
             End If
         Else
             If Deposit.PinCode = TmpPinCode Then
