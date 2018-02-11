@@ -72,141 +72,164 @@
       </div>      
       <!-- main navigation -->
       <nav role="navigation" id="leftMenu" runat="Server">
-        <ul class="nav">    
-          <!-- dashboard -->
-          <li id="mnu_Dashboard" runat="server">
-            <a href="frmDashboardOverview.aspx">
-              <i class="icon-bar-chart"></i>
-              <span>Dashboard</span>
-            </a>
-          </li>
-          <li class="menu-accordion" id="mnu_Report" runat="server">
-            <a href="javascript:;">
-              <span class="badge pull-right" id="badge_Report" runat="server">5</span>
-              <i class="icon-docs"></i>
-              <span>Reports</span>
-            </a>
-            <ul class="sub-menu">
-              <li class="menu-accordion" id="mnu_Transaction_Reports" runat="server">
+        <ul class="nav">
+            <!-- dashboard -->
+            <li id="mnu_Dashboard" runat="server">
+                <a href="frmDashboardOverview.aspx">
+                    <i class="icon-bar-chart"></i>
+                    <span>Dashboard</span>
+                </a>
+            </li>
+            <li class="menu-accordion" id="mnu_Report" runat="server">
                 <a href="javascript:;">
-                  <span class="badge pull-right" id="badge_Transaction_Reports" runat="server">2</span>
-                  <i class="icon-users"></i>
-                  <span>Transaction Reports</span>
+                    <span class="badge pull-right" id="badge_Report" runat="server">5</span>
+                    <i class="icon-docs"></i>
+                    <span>Reports</span>
                 </a>
                 <ul class="sub-menu">
-                  <li id="mnu_Transaction_Log" runat="server">
-                    <a href="Report_Transaction_Log.aspx">
-                      <i class="icon-user"></i>
-                      <span>Transaction Log</span>
-                    </a>
-                  </li>
-                  <li id="mnu_Transaction_Performance" runat="server">
-                    <a href="Report_Transaction_Performance.aspx">
-                      <i class="icon-wrench"></i>
-                      <span>Transaction Performance</span>
-                    </a>
-                  </li>
-                </ul>
-              </li>
-              <li class="menu-accordion" id="mnu_Summary_Report" runat="server">
-                <a href="javascript:;">
-                  <span class="badge pull-right" id="badge_Summary_Report" runat="server">2</span>
-                  <i class="icon-handbag"></i>
-                  <span>Summary Report</span>
-                </a>
-                <ul class="sub-menu">
-                  <li id="mnu_Summary_byLocation" runat="server">
-                    <a href="Report_SummaryByLocation.aspx">
-                      <i class="icon-user"></i>
-                      <span>By Location</span>
-                    </a>
-                  </li>
-                  <li id="mnu_MoneyStock_byLocation" runat="server">
-                    <a href="Report_MoneyStockByLocation.aspx">
-                      <i class="icon-wrench"></i>
-                      <span>Money Stock</span>
-                    </a>
-                  </li>
-                </ul>
+                    <li class="menu-accordion" id="mnu_Transaction_Reports" runat="server">
+                        <a href="javascript:;">
+                            <span class="badge pull-right" id="badge_Transaction_Reports" runat="server">2</span>
+                            <i class="icon-users"></i>
+                            <span>Transaction Reports</span>
+                        </a>
+                        <ul class="sub-menu">
+                            <li id="mnu_Transaction_Log" runat="server">
+                                <a href="Report_Transaction_Log.aspx">
+                                    <i class="icon-user"></i>
+                                    <span>Transaction Log</span>
+                                </a>
+                            </li>
+                            <li id="mnu_Transaction_Performance" runat="server">
+                                <a href="Report_Transaction_Performance.aspx">
+                                    <i class="icon-wrench"></i>
+                                    <span>Transaction Performance</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="menu-accordion" id="mnu_Summary_Report" runat="server">
+                        <a href="javascript:;">
+                            <span class="badge pull-right" id="badge_Summary_Report" runat="server">2</span>
+                            <i class="icon-handbag"></i>
+                            <span>Summary Report</span>
+                        </a>
+                        <ul class="sub-menu">
+                            <li id="mnu_Summary_byLocation" runat="server">
+                                <a href="Report_SummaryByLocation.aspx">
+                                    <i class="icon-user"></i>
+                                    <span>By Location</span>
+                                </a>
+                            </li>
+                            <li id="mnu_MoneyStock_byLocation" runat="server">
+                                <a href="Report_MoneyStockByLocation.aspx">
+                                    <i class="icon-wrench"></i>
+                                    <span>Money Stock</span>
+                                </a>
+                            </li>
+                        </ul>
 
-              </li>
-              <li id="mnu_MailGroup_Report" runat="server">
-                <a href="frmSettingMailGroup.aspx">
-                  <i class="icon-envelope"></i>
-                  <span>Mail Group Reports</span>
-                </a>
-              </li>            
-            </ul>
-          </li>
-          <li id="mnu_Setting_Alarm_Monitoring" runat="server">
-            <a href="javascript:;">
-                <span class="badge pull-right" id="badge_Alarm" runat="server">2</span>
-                <i class="icon-info"></i>
-                <span>Alarm & Monitoring</span>
-            </a>
-            <ul class="sub-menu">
-                <li id="mnu_Kiosk_Monitoring" runat="server">
-                    <a href="frmAlarmMonitoring.aspx">
-                        <i class="icon-info"></i>
-                        <span>Kiosk Monitoring</span>
-                    </a>                        
-                </li>
-                <li id="mnu_Alarm_Setting" runat="server">
-                    <a href="frmSettingAlarm.aspx">
-                        <i class="icon-settings"></i>
-                        <span>Setting Alarm</span>
-                    </a>
-                </li>
-             </ul>
-          </li>
-          <li class="menu-accordion" id="mnu_Master_Data" runat="server">
-            <a href="javascript:;">
-              <span class="badge pull-right" id="badge_Master_Data" runat="server">4</span>
-              <i class="icon-settings"></i>
-              <span>Master Data</span>
-            </a>
-            <ul class="sub-menu">
-              <li id="mnu_Setting_Location" runat="server">
-                <a href="frmMasterLocation.aspx">
-                  <i class="icon-pointer"></i>
-                  <span>Location</span>
-                </a>
-              </li>
-              <li id="mnu_Setting_Kiosk" runat="server">
-                <a href="frmMasterKiosk.aspx">
-                  <i class="icon-screen-desktop"></i>
-                  <span>Locker</span>
-                </a>
-              </li>              
-              <li id="mnu_Setting_Authorize" runat="server">
+                    </li>
+                    <li id="mnu_MailGroup_Report" runat="server">
+                        <a href="frmSettingMailGroup.aspx">
+                            <i class="icon-envelope"></i>
+                            <span>Mail Group Reports</span>
+                        </a>
+                    </li>
+                </ul>
+            </li>
+            <li id="mnu_Setting_Alarm_Monitoring" runat="server">
                 <a href="javascript:;">
-                  <span class="badge pull-right" id="badge_Setting_Authorize" runat="server">2</span>
-                  <i class="icon-key"></i>
-                  <span>User Authorization</span>
+                    <span class="badge pull-right" id="badge_Alarm" runat="server">2</span>
+                    <i class="icon-info"></i>
+                    <span>Alarm & Monitoring</span>
                 </a>
                 <ul class="sub-menu">
-                     <li id="mnu_Setting_Authorize_Role" runat="server">
-                        <a href="frmSettingRole.aspx">
-                          <i class="icon-users"></i>
-                          <span>Role</span>
+                    <li id="mnu_Kiosk_Monitoring" runat="server">
+                        <a href="frmAlarmMonitoring.aspx">
+                            <i class="icon-info"></i>
+                            <span>Kiosk Monitoring</span>
                         </a>
-                     </li>
-                     <li id="mnu_Setting_Authorize_User" runat="server">
-                        <a href="frmSettingUser.aspx">
-                          <i class="icon-user"></i>
-                          <span>User</span>
+                    </li>
+                    <li id="mnu_Alarm_Setting" runat="server">
+                        <a href="frmSettingAlarm.aspx">
+                            <i class="icon-settings"></i>
+                            <span>Setting Alarm</span>
                         </a>
-                     </li>
+                    </li>
                 </ul>
-              </li>   
-               <li id="mnu_Setting_Promotions" runat="server">
-                <a href="frmSettingPromotions.aspx">
-                  <i class="icon-badge"></i>
-                  <span>Promotions</span>
+            </li>
+            <li class="menu-accordion" id="mnu_Master_Data" runat="server">
+                <a href="javascript:;">
+                    <span class="badge pull-right" id="badge_Master_Data" runat="server">4</span>
+                    <i class="icon-settings"></i>
+                    <span>Master Data</span>
                 </a>
-              </li>              
-            </ul>
-          </li>
+                <ul class="sub-menu">
+                    <li id="mnu_Setting_Location" runat="server">
+                        <a href="frmMasterLocation.aspx">
+                            <i class="icon-pointer"></i>
+                            <span>Location</span>
+                        </a>
+                    </li>
+                    <li id="mnu_Setting_Kiosk" runat="server">
+                        <a href="frmMasterKiosk.aspx">
+                            <i class="icon-screen-desktop"></i>
+                            <span>Locker</span>
+                        </a>
+                    </li>
+                    <li id="mnu_Setting_Authorize" runat="server">
+                        <a href="javascript:;">
+                            <span class="badge pull-right" id="badge_Setting_Authorize" runat="server">2</span>
+                            <i class="icon-key"></i>
+                            <span>User Authorization</span>
+                        </a>
+                        <ul class="sub-menu">
+                            <li id="mnu_Setting_Authorize_Role" runat="server">
+                                <a href="frmSettingRole.aspx">
+                                    <i class="icon-users"></i>
+                                    <span>Role</span>
+                                </a>
+                            </li>
+                            <li id="mnu_Setting_Authorize_User" runat="server">
+                                <a href="frmSettingUser.aspx">
+                                    <i class="icon-user"></i>
+                                    <span>User</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li id="mnu_Setting_Promotions" runat="server">
+                        <a href="frmSettingPromotions.aspx">
+                            <i class="icon-badge"></i>
+                            <span>Promotions</span>
+                        </a>
+                    </li>
+                </ul>
+            </li>
+
+            <li class="menu-accordion" id="mnu_user_profile" runat="server">
+                <a href="#">
+                    <span class="badge pull-right">2</span>
+                    <i class="icon-user"></i>
+                    <span id="lblUserName" runat="server">Autobox</span>
+                </a>
+                <ul class="sub-menu">
+                    <li>
+                        <a href="frmChangePassword.aspx">
+                            <i class="icon-settings"></i>
+                            <span>Change Password</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="frmLogin.aspx">
+                            <i class="icon-logout"></i>
+                            <span>Log Out</span>
+                        </a>
+                    </li>
+                    
+                </ul>
+            </li>
         </ul>
       </nav>
       <!-- /main navigation -->
@@ -241,22 +264,7 @@
             </a>
           </li>
         </ul>
-        <ul class="nav navbar-nav navbar-right ">
-          <li>
-            <a href="javascript:;" class="ripple" data-toggle="dropdown">
-              <span id="lblUserName" runat="server">Autobox</span>
-              <span class="caret"></span>
-            </a>
-            <ul class="dropdown-menu">
-              <li>
-                <asp:LinkButton id="btnLogout" runat="server" Text='Log Out'  ></asp:LinkButton>
-              </li>
-               <li>
-                <asp:LinkButton id="btnChangePassword" runat="server" Text='Change Password'  ></asp:LinkButton>
-              </li>
-            </ul>
-          </li>
-        </ul>
+        
       </div>
       <!-- /top header -->
       <!-- main area -->

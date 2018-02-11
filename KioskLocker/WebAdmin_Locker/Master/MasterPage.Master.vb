@@ -98,15 +98,15 @@ Public Class MasterPage
     End Sub
 
 
-    Private Sub btnLogout_Click(sender As Object, e As EventArgs) Handles btnLogout.Click
-        Session.Remove("List_User_Functional")
-        Session.Remove("List_User_Location")
-        Session.Remove("UserName")
+    'Private Sub btnLogout_Click(sender As Object, e As EventArgs) Handles btnLogout.Click
+    '    Session.Remove("List_User_Functional")
+    '    Session.Remove("List_User_Location")
+    '    Session.Remove("UserName")
 
-        Response.Redirect("frmLogin.aspx")
-    End Sub
+    '    Response.Redirect("frmLogin.aspx")
+    'End Sub
 
-    Private Sub btnChangePassword_Click(sender As Object, e As EventArgs) Handles btnChangePassword.Click
-        Response.Redirect("frmChangePassword.aspx")
-    End Sub
+    'Private Sub btnChangePassword_Click(sender As Object, e As EventArgs) Handles btnChangePassword.Click
+    '    Response.Redirect("frmChangePassword.aspx")
+    'End Sub
 End Class

@@ -72,4 +72,11 @@ Partial Class frmLogin
 
     End Sub
 
+    Private Sub frmLogin_Load(sender As Object, e As EventArgs) Handles Me.Load
+        If IsPostBack = False Then
+            Session.Remove("List_User_Functional")
+            Session.Remove("List_User_Location")
+            Session.Remove("UserName")
+        End If
+    End Sub
 End Class
