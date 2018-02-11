@@ -67,7 +67,7 @@ Public Class frmSC_ServiceRate
                         lblHours.AutoSize = False
                         lblHours.TextAlign = ContentAlignment.MiddleCenter
                         lblHours.Size = New Size(80, 30)
-                        lblHours.Location = New Point(0, 0)
+                        'lblHours.Location = New Point(0, 0)
                         lblHours.Margin = New Padding(0)
                         lblHours.BorderStyle = BorderStyle.FixedSingle
                         flpServiceRateHour.Controls.Add(lblHours)
@@ -82,7 +82,7 @@ Public Class frmSC_ServiceRate
                             lblSRRate.TextAlign = ContentAlignment.MiddleCenter
                             lblSRRate.BorderStyle = BorderStyle.FixedSingle
                             lblSRRate.Size = New Size(100, 30)
-                            lblSRRate.Location = New Point(80, 0)
+                            ' lblSRRate.Location = New Point(80, 0)
                             lblSRRate.Margin = New Padding(0)
                             flpServiceRateHour.Controls.Add(lblSRRate)
                         End If
@@ -98,7 +98,7 @@ Public Class frmSC_ServiceRate
                             lblMRRate.TextAlign = ContentAlignment.MiddleCenter
                             lblMRRate.BorderStyle = BorderStyle.FixedSingle
                             lblMRRate.Size = New Size(100, 30)
-                            lblMRRate.Location = New Point(180, 0)
+                            'lblMRRate.Location = New Point(180, 0)
                             lblMRRate.Margin = New Padding(0)
                             flpServiceRateHour.Controls.Add(lblMRRate)
                         End If
@@ -114,7 +114,7 @@ Public Class frmSC_ServiceRate
                             lblLRRate.TextAlign = ContentAlignment.MiddleCenter
                             lblLRRate.BorderStyle = BorderStyle.FixedSingle
                             lblLRRate.Size = New Size(100, 30)
-                            lblLRRate.Location = New Point(280, 0)
+                            'lblLRRate.Location = New Point(280, 0)
                             lblLRRate.Margin = New Padding(0)
                             flpServiceRateHour.Controls.Add(lblLRRate)
                         End If
@@ -154,7 +154,7 @@ Public Class frmSC_ServiceRate
         frmSC_StockAndHardware.Show()
     End Sub
 
-    Private Sub lblSyncData_Click(sender As Object, e As EventArgs) Handles lblSyncData.Click
+    Private Sub lblSyncData_Click(sender As Object, e As EventArgs) Handles lblSyncData.Click, btnSyncData.Click
         If MessageBox.Show("การทำงานนี้อาจใช้เวลานาน และจำเป็นต้องมีการเชื่อมต่ออินเตอร์เน็ต" & vbCrLf & "ต้องการทำรายการต่อไปหรือไม่?", "Confirm", MessageBoxButtons.OKCancel, MessageBoxIcon.Question) = DialogResult.OK Then
             frmLoading.Show(frmSC_Main)
             Application.DoEvents()

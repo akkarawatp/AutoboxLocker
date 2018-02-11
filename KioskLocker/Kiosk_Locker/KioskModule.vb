@@ -751,19 +751,6 @@ Module KioskModule
                     Dim VID As String = dr("comport_vid").ToString
 
                     Select Case DeviceTypeID
-                        'Case DeviceType.IdCardAndPassportScanner
-                        '    If PassportScanner.StartPassportDevice(KioskConfig.PassportDeviceName) = True Then
-                        '        If PassportScanner.ConnectPassportDevice(VID) = True Then
-                        '            UpdateDeviceStatus(DeviceID.ToString, PassportScanerStatus.Ready)
-                        '            SendKioskAlarm("PASSPORT_SCANNER_DISCONNECTED", False)
-                        '        Else
-                        '            UpdateDeviceStatus(DeviceID.ToString, PassportScanerStatus.Disconnected)
-                        '            SendKioskAlarm("PASSPORT_SCANNER_DISCONNECTED", True)
-                        '        End If
-                        '    Else
-                        '        UpdateDeviceStatus(DeviceID.ToString, PassportScanerStatus.Disconnected)
-                        '        SendKioskAlarm("PASSPORT_SCANNER_DISCONNECTED", True)
-                        '    End If
                         Case DeviceType.WebCamera
                             If Convert.IsDBNull(dr("driver_name1")) = False Then
                                 Dim CamIndex As Integer = Convert.ToInt16(dr("driver_name2"))

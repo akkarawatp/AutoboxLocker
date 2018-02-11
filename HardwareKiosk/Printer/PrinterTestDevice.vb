@@ -62,13 +62,6 @@ Public Class PrinterTestDevice
         End Get
     End Property
 
-    'Private ReadOnly Property GetFrontCode128(ByVal Size As Single, ByVal style As FontStyle) As Font
-    '    Get
-    '        Return New Font(Font128.Families(0), Size, style)
-    '    End Get
-
-    'End Property
-
     Private Sub p_PrintPage(sender As System.Object, e As System.Drawing.Printing.PrintPageEventArgs)
         Dim fn6 As New Font("Calibri", 6, FontStyle.Regular)
         Dim fn7 As New Font("Calibri", 7, FontStyle.Regular)

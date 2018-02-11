@@ -103,7 +103,6 @@ Public Class frmDepositPrintQRCode
         Dim fn8b As New Font("Calibri", 8, FontStyle.Bold)
         Dim fn10b As New Font("Calibri", 9.5, FontStyle.Bold)
         Dim fn15b As New Font("Calibri", 15, FontStyle.Bold)
-        'Dim fnBarcode As Font = GetFrontIDAutomation3of9(8, FontStyle.Regular)
 
         'Dim imgLogo As Image = Image.FromFile("SlipLogo.bmp")
         Dim imgLogo As Image = Image.FromFile("SlipLogo.png")
