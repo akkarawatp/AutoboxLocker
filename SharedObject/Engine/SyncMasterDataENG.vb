@@ -16,12 +16,12 @@ Public Class SyncMasterDataENG
         PullMasterDeviceStatus(MsKioskID)
         PullMasterDevice(MsKioskID)
         PullMasterMonitoringAlarm(MsKioskID)
+        PullMasterNotUserPincode(MsKioskID)
 
         SyncMasterKioskSysconfig(MsKioskID)
         SyncMasterCabinet(MsKioskID)
         SyncMasterKioskDevice(MsKioskID)
         SyncMasterKioskLocker(MsKioskID)
-        PullMasterNotUserPincode(MsKioskID)
     End Sub
 
 #Region "Pull Master Data"
