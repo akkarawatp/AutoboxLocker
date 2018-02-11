@@ -70,6 +70,7 @@ Public Class frmSC_LogIn
                 InsertLogTransactionActivity(StaffConsole.TransNo, KioskConfig.SelectForm, KioskLockerStep.StaffConsoleLogin_GetAuthorize, "", False)
                 Dim aDt As DataTable = WS.GetKioskStaffConsoleAuthorize(txtUsername.Text, KioskData.KioskID)
                 If aDt.Rows.Count = 0 Then
+                    frmLoading.Close()
                     InsertLogTransactionActivity(StaffConsole.TransNo, KioskConfig.SelectForm, KioskLockerStep.StaffConsoleLogin_GetAuthorize, "You not have authorization", True)
                     ShowDialogErrorMessageSC("You not have authorization")
                     Exit Sub
@@ -78,6 +79,7 @@ Public Class frmSC_LogIn
                 InsertLogTransactionActivity(StaffConsole.TransNo, KioskConfig.SelectForm, KioskLockerStep.StaffConsoleLogin_CreateTransaction, "", False)
                 Dim ret As ExecuteDataInfo = CreateNewStaffConsoleTransaction(txtUsername.Text, SSOLogin.LoginFirstName, SSOLogin.LoginLastName, SSOLogin.LoginCompanyName, "1")
                 If ret.IsSuccess = False Then
+                    frmLoading.Close()
                     InsertLogTransactionActivity(StaffConsole.TransNo, KioskConfig.SelectForm, KioskLockerStep.StaffConsoleLogin_CreateTransaction, "Cannot Create Staff Console Transaction", True)
                     ShowDialogErrorMessageSC("Cannot Create Staff Console Transection")
                     InsertErrorLog(ret.ErrorMessage, 0, 0, 0, KioskConfig.SelectForm, 0)

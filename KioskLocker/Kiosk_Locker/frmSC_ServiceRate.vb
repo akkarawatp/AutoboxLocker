@@ -73,11 +73,10 @@ Public Class frmSC_ServiceRate
                         flpServiceRateHour.Controls.Add(lblHours)
 
                         dt.DefaultView.RowFilter = "ms_cabinet_model_id = " & ConstantsData.CabinetModelId.SR
-                        Dim dv As DataView = dt.DefaultView
-                        If dv.Count > 0 Then
+                        If dt.DefaultView.Count > 0 Then
                             'New Label Service Rate by Locker Size
                             Dim lblSRRate As New Label
-                            lblSRRate.Text = dt(0)("service_rate")
+                            lblSRRate.Text = dt.DefaultView(0)("service_rate")
                             lblSRRate.Font = New Font("Microsoft Sans Serif", 14, FontStyle.Bold)
                             lblSRRate.AutoSize = False
                             lblSRRate.TextAlign = ContentAlignment.MiddleCenter
@@ -90,10 +89,10 @@ Public Class frmSC_ServiceRate
                         dt.DefaultView.RowFilter = ""
 
                         dt.DefaultView.RowFilter = "ms_cabinet_model_id = " & ConstantsData.CabinetModelId.MR
-                        If dv.Count > 0 Then
+                        If dt.DefaultView.Count > 0 Then
                             'New Label Service Rate by Locker Size
                             Dim lblMRRate As New Label
-                            lblMRRate.Text = dt(0)("service_rate")
+                            lblMRRate.Text = dt.DefaultView(0)("service_rate")
                             lblMRRate.Font = New Font("Microsoft Sans Serif", 14, FontStyle.Bold)
                             lblMRRate.AutoSize = False
                             lblMRRate.TextAlign = ContentAlignment.MiddleCenter
@@ -106,10 +105,10 @@ Public Class frmSC_ServiceRate
                         dt.DefaultView.RowFilter = ""
 
                         dt.DefaultView.RowFilter = "ms_cabinet_model_id = " & ConstantsData.CabinetModelId.LR
-                        If dv.Count > 0 Then
+                        If dt.DefaultView.Count > 0 Then
                             'New Label Service Rate by Locker Size
                             Dim lblLRRate As New Label
-                            lblLRRate.Text = dt(0)("service_rate")
+                            lblLRRate.Text = dt.DefaultView(0)("service_rate")
                             lblLRRate.Font = New Font("Microsoft Sans Serif", 14, FontStyle.Bold)
                             lblLRRate.AutoSize = False
                             lblLRRate.TextAlign = ContentAlignment.MiddleCenter
