@@ -80,7 +80,7 @@ Partial Class frmDepositSetPINCode
         Me.lblLabelNotification.Anchor = System.Windows.Forms.AnchorStyles.Top
         Me.lblLabelNotification.Font = New System.Drawing.Font("Thai Sans Lite", 24.0!, System.Drawing.FontStyle.Bold)
         Me.lblLabelNotification.ForeColor = System.Drawing.Color.Red
-        Me.lblLabelNotification.Location = New System.Drawing.Point(311, 474)
+        Me.lblLabelNotification.Location = New System.Drawing.Point(315, 459)
         Me.lblLabelNotification.Name = "lblLabelNotification"
         Me.lblLabelNotification.Size = New System.Drawing.Size(402, 43)
         Me.lblLabelNotification.TabIndex = 93
@@ -379,7 +379,7 @@ Partial Class frmDepositSetPINCode
         Me.BackColor = System.Drawing.Color.White
         Me.BackgroundImage = Global.MiniboxLocker.My.Resources.Resources.bgDepositSetPINCode
         Me.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
-        Me.ClientSize = New System.Drawing.Size(785, 741)
+        Me.ClientSize = New System.Drawing.Size(768, 1024)
         Me.Controls.Add(Me.PictureBox1)
         Me.Controls.Add(Me.Panel6)
         Me.Controls.Add(Me.Panel5)

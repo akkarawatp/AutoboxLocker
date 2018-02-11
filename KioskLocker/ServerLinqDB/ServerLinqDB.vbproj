@@ -110,6 +110,7 @@
     <Compile Include="TABLE\MsLockerServerLinqDB.vb" />
     <Compile Include="TABLE\MsMasterMonitoringAlarmServerLinqDB.vb" />
     <Compile Include="TABLE\MsMasterMonitoringTypeServerLinqDB.vb" />
+    <Compile Include="TABLE\MsNotUsePincodeServerLinqDB.vb" />
     <Compile Include="TABLE\MsPromotionHourServerLinqDB.vb" />
     <Compile Include="TABLE\MsPromotionLocationServerLinqDB.vb" />
     <Compile Include="TABLE\MsPromotionServerLinqDB.vb" />
