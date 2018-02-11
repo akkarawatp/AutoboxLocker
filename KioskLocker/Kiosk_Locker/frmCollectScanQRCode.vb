@@ -71,7 +71,7 @@ Public Class frmCollectScanQRCode
                 frmLoading.Close()
 
                 Dim frm As New frmDialog_OK
-                frm.lblMessage.Text = "Invalid QR Code"
+                frm.lblMessage.Text = "Invalid Barode"
                 frm.ShowDialog(Me)
                 TimerTimeOut.Enabled = True
             End If
