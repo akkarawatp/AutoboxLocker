@@ -304,6 +304,23 @@
           </s:element>
         </s:sequence>
       </s:complexType>
+      <s:element name="GetMasterNotUsePincode">
+        <s:complexType />
+      </s:element>
+      <s:element name="GetMasterNotUsePincodeResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetMasterNotUsePincodeResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:any minOccurs="0" maxOccurs="unbounded" namespace="http://www.w3.org/2001/XMLSchema" processContents="lax" />
+                  <s:any minOccurs="1" namespace="urn:schemas-microsoft-com:xml-diffgram-v1" processContents="lax" />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
       <s:element name="SyncKioskSysconfig">
         <s:complexType>
           <s:sequence>
@@ -1013,6 +1030,12 @@
   <wsdl:message name="GetLockerServiceRateSoapOut">
     <wsdl:part name="parameters" element="tns:GetLockerServiceRateResponse" />
   </wsdl:message>
+  <wsdl:message name="GetMasterNotUsePincodeSoapIn">
+    <wsdl:part name="parameters" element="tns:GetMasterNotUsePincode" />
+  </wsdl:message>
+  <wsdl:message name="GetMasterNotUsePincodeSoapOut">
+    <wsdl:part name="parameters" element="tns:GetMasterNotUsePincodeResponse" />
+  </wsdl:message>
   <wsdl:message name="SyncKioskSysconfigSoapIn">
     <wsdl:part name="parameters" element="tns:SyncKioskSysconfig" />
   </wsdl:message>
@@ -1225,6 +1248,10 @@
     <wsdl:operation name="GetLockerServiceRate">
       <wsdl:input message="tns:GetLockerServiceRateSoapIn" />
       <wsdl:output message="tns:GetLockerServiceRateSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetMasterNotUsePincode">
+      <wsdl:input message="tns:GetMasterNotUsePincodeSoapIn" />
+      <wsdl:output message="tns:GetMasterNotUsePincodeSoapOut" />
     </wsdl:operation>
     <wsdl:operation name="SyncKioskSysconfig">
       <wsdl:input message="tns:SyncKioskSysconfigSoapIn" />
@@ -1452,6 +1479,15 @@
     </wsdl:operation>
     <wsdl:operation name="GetLockerServiceRate">
       <soap:operation soapAction="http://tempuri.org/GetLockerServiceRate" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetMasterNotUsePincode">
+      <soap:operation soapAction="http://tempuri.org/GetMasterNotUsePincode" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
@@ -1815,6 +1851,15 @@
     </wsdl:operation>
     <wsdl:operation name="GetLockerServiceRate">
       <soap12:operation soapAction="http://tempuri.org/GetLockerServiceRate" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetMasterNotUsePincode">
+      <soap12:operation soapAction="http://tempuri.org/GetMasterNotUsePincode" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>

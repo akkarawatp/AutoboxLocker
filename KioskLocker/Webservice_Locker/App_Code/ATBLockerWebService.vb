@@ -216,40 +216,6 @@ Public Class ATBLockerWebService
         Return dt
     End Function
 
-    '<WebMethod()>
-    'Public Function GetMasterKioskScreenControl() As DataTable
-    '    Dim dt As DataTable
-    '    Try
-    '        Engine.LogFileENG.CreateServerLogAgent("GetMasterKioskScreenControl from " & HttpContext.Current.Request.UserHostAddress)
-
-    '        Dim lnq As New MsKioskScreenControlServerLinqDB
-    '        dt = lnq.GetDataList("", "", Nothing, Nothing)
-    '        lnq = Nothing
-    '    Catch ex As Exception
-    '        dt = New DataTable
-    '    End Try
-
-    '    dt.TableName = "GetMasterKioskScreenControl"
-    '    Return dt
-    'End Function
-
-    '<WebMethod()>
-    'Public Function GetMasterKioskNotificationText() As DataTable
-    '    Dim dt As DataTable
-    '    Try
-    '        Engine.LogFileENG.CreateServerLogAgent("GetMasterKioskNotificationText from " & HttpContext.Current.Request.UserHostAddress)
-
-    '        Dim lnq As New MsKioskNotificationTextServerLinqDB
-    '        dt = lnq.GetDataList("", "", Nothing, Nothing)
-    '        lnq = Nothing
-    '    Catch ex As Exception
-    '        dt = New DataTable
-    '    End Try
-
-    '    dt.TableName = "GetMasterCabinetModel"
-    '    Return dt
-    'End Function
-
     <WebMethod()>
     Public Function GetMasterCabinetModel() As DataTable
         Dim dt As DataTable
@@ -395,6 +361,23 @@ Public Class ATBLockerWebService
         End Try
 
         Return sr
+    End Function
+
+    <WebMethod()>
+    Public Function GetMasterNotUsePincode() As DataTable
+        Dim dt As DataTable
+        Try
+            Engine.LogFileENG.CreateServerLogAgent("GetMasterNotUsePincode from " & HttpContext.Current.Request.UserHostAddress)
+
+            Dim lnq As New MsNotUsePincodeServerLinqDB
+            dt = lnq.GetDataList("", "", Nothing, Nothing)
+            lnq = Nothing
+        Catch ex As Exception
+            dt = New DataTable
+        End Try
+
+        dt.TableName = "GetMasterNotUsePincode"
+        Return dt
     End Function
 #End Region
 
