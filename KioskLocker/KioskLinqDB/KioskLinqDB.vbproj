@@ -102,6 +102,7 @@
     <Compile Include="TABLE\MsKioskPromotionKioskLinqDB.vb" />
     <Compile Include="TABLE\MsLockerKioskLinqDB.vb" />
     <Compile Include="TABLE\MsMasterMonitoringAlarmKioskLinqDB.vb" />
+    <Compile Include="TABLE\MsNotUsePincodeKioskLinqDB.vb" />
     <Compile Include="TABLE\MsServiceRateDepositKioskLinqDB.vb" />
     <Compile Include="TABLE\MsServiceRateFineKioskLinqDB.vb" />
     <Compile Include="TABLE\MsServiceRateHourKioskLinqDB.vb" />

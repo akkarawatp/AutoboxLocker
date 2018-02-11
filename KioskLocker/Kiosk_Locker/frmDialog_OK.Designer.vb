@@ -39,16 +39,15 @@ Partial Class frmDialog_OK
         Me.pnlDialog.Controls.Add(Me.lblMessage)
         Me.pnlDialog.Location = New System.Drawing.Point(12, 12)
         Me.pnlDialog.Name = "pnlDialog"
-        Me.pnlDialog.Size = New System.Drawing.Size(767, 352)
+        Me.pnlDialog.Size = New System.Drawing.Size(767, 435)
         Me.pnlDialog.TabIndex = 1
         '
         'btnOK
         '
         Me.btnOK.Anchor = System.Windows.Forms.AnchorStyles.Bottom
-        'Me.btnOK.BackgroundImage = Global.MiniboxLocker.My.Resources.Resources.btnColWhite
         Me.btnOK.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
         Me.btnOK.Controls.Add(Me.lblOK)
-        Me.btnOK.Location = New System.Drawing.Point(283, 249)
+        Me.btnOK.Location = New System.Drawing.Point(283, 332)
         Me.btnOK.Name = "btnOK"
         Me.btnOK.Size = New System.Drawing.Size(200, 71)
         Me.btnOK.TabIndex = 38
@@ -56,7 +55,7 @@ Partial Class frmDialog_OK
         'lblOK
         '
         Me.lblOK.BackColor = System.Drawing.Color.Transparent
-        Me.lblOK.Font = New System.Drawing.Font("DB HelvethaicaAIS X 55 Regular", 30.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(222, Byte))
+        Me.lblOK.Font = New System.Drawing.Font("Microsoft Sans Serif", 30.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(222, Byte))
         Me.lblOK.ForeColor = System.Drawing.Color.Black
         Me.lblOK.Location = New System.Drawing.Point(45, 12)
         Me.lblOK.Name = "lblOK"
@@ -67,11 +66,11 @@ Partial Class frmDialog_OK
         '
         'lblMessage
         '
-        Me.lblMessage.Font = New System.Drawing.Font("DB HelvethaicaAIS X 55 Regular", 35.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(222, Byte))
+        Me.lblMessage.Font = New System.Drawing.Font("Microsoft Sans Serif", 30.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(222, Byte))
         Me.lblMessage.ForeColor = System.Drawing.Color.White
         Me.lblMessage.Location = New System.Drawing.Point(17, 32)
         Me.lblMessage.Name = "lblMessage"
-        Me.lblMessage.Size = New System.Drawing.Size(747, 207)
+        Me.lblMessage.Size = New System.Drawing.Size(747, 297)
         Me.lblMessage.TabIndex = 33
         Me.lblMessage.Text = "Scanning Unsuccessful  !!!"
         '
@@ -80,7 +79,7 @@ Partial Class frmDialog_OK
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.SystemColors.ControlDarkDark
-        Me.ClientSize = New System.Drawing.Size(791, 376)
+        Me.ClientSize = New System.Drawing.Size(791, 459)
         Me.Controls.Add(Me.pnlDialog)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None
         Me.Name = "frmDialog_OK"

@@ -50,17 +50,40 @@ Public Class frmDepositSetPINCode
         End If
     End Sub
 
+    Private Function CheckNotUserPincode() As Boolean
+        Dim ret As Boolean = False
+        Try
+            Dim lnq As New KioskLinqDB.TABLE.MsNotUsePincodeKioskLinqDB
+            lnq.ChkDataByNOT_USE_PINCODE(TmpPinCode, Nothing)
+            If lnq.ID > 0 Then
+                ret = True
+            End If
+            lnq = Nothing
+        Catch ex As Exception
+            ret = False
+        End Try
+        Return ret
+    End Function
+
     Private Sub ClearAndConfirmPin()
         If Deposit.PinCode = "" Then
-            Deposit.PinCode = TmpPinCode
-            TmpPinCode = ""
-            txtPincode1.Text = ""
-            txtPincode2.Text = ""
-            txtPincode3.Text = ""
-            txtPincode4.Text = ""
-            txtPincode5.Text = ""
-            txtPincode6.Text = ""
-            lblLabelNotification.Text = "Confirm Password"
+            If CheckNotUserPincode() = False Then
+                Deposit.PinCode = TmpPinCode
+                TmpPinCode = ""
+                txtPincode1.Text = ""
+                txtPincode2.Text = ""
+                txtPincode3.Text = ""
+                txtPincode4.Text = ""
+                txtPincode5.Text = ""
+                txtPincode6.Text = ""
+                lblLabelNotification.Text = "ยืนยันรหัสผ่าน / Confirm Password"
+            Else
+                lblLabelNotification.Text = DefaultNotictText
+                btnClear_Click(Nothing, Nothing)
+
+                InsertLogTransactionActivity(Deposit.DepositTransNo, "", "", KioskConfig.SelectForm, KioskLockerStep.DepositSetPinCode_ConfirmPinCodeFail, "รหัสผ่านห้ามใช้งาน", False)
+                ShowDialogErrorMessage(String.Format("รหัสผ่านไม่ถูกต้อง กรุณากำหนดรหัสใหม่" & vbNewLine & "Incorrect password. Please enter new password", KioskConfig.PincodeLen))
+            End If
         Else
             If Deposit.PinCode = TmpPinCode Then
                 frmLoading.Show(frmMain)
@@ -73,67 +96,16 @@ Public Class frmDepositSetPINCode
                 frmDepositPayment.Show()
             Else
                 'ยืนยันรหัสส่วนตัวไม่ตรงกัน ให้เริ่มขั้นตอนใหม่
-                TimeOutCheckTime = DateTime.Now
 
                 lblLabelNotification.Text = DefaultNotictText
-                Deposit.PinCode = ""
-                TmpPinCode = ""
-                txtPincode1.Text = ""
-                txtPincode2.Text = ""
-                txtPincode3.Text = ""
-                txtPincode4.Text = ""
-                txtPincode5.Text = ""
-                txtPincode6.Text = ""
+                btnClear_Click(Nothing, Nothing)
 
                 InsertLogTransactionActivity(Deposit.DepositTransNo, "", "", KioskConfig.SelectForm, KioskLockerStep.DepositSetPinCode_ConfirmPinCodeFail, "", False)
-                ShowDialogErrorMessage(String.Format("คุณยืนยันรหัสส่วนตัวไม่ถูกต้อง กรุณากำหนดรหัสส่วนตัว {0} หลัก", KioskConfig.PincodeLen))
+                ShowDialogErrorMessage(String.Format("คุณยืนยันรหัสส่วนตัวไม่ถูกต้อง กรุณากำหนดรหัสใหม่" & vbNewLine & "Incorrect password. Please enter new password", KioskConfig.PincodeLen))
             End If
         End If
         Application.DoEvents()
     End Sub
-
-    'Private Function CheckDuplicatePinCode(PinCode As String) As Boolean
-    '    Dim ret As Boolean = False
-    '    Try
-    '        'ตรวจสอบว่า PIN CODE ที่กรอกมานั้น จะต้องไม่ซ้ำกับตู้อื่น ที่ไม่ว่าง
-    '        Dim sql As String = "select t.id, t.trans_no "
-    '        sql += " from TB_DEPOSIT_TRANSACTION t"
-    '        sql += " inner join MS_LOCKER l on l.id=t.ms_locker_id"
-    '        sql += " inner join MS_CABINET c on c.id=l.ms_cabinet_id"
-    '        sql += " where t.pin_code=@_PIN_CODE "
-    '        sql += " and t.trans_status=@_TRANS_STATUS"
-    '        sql += " and t.paid_time is not null "
-
-    '        Dim p(2) As SqlParameter
-    '        p(0) = KioskDB.SetBigInt("@_PIN_CODE", PinCode)
-    '        p(1) = KioskDB.SetText("@_TRANS_STATUS", Convert.ToInt16(DepositTransactionData.TransactionStatus.Success))
-
-    '        Dim dt As DataTable = KioskDB.ExecuteTable(sql, p)
-    '        If dt.Rows.Count > 0 Then
-    '            'กรณีพบข้อมูล ให้ตรวจสอบจะต้องไม่มีรายการรับคืนที่ Success แล้ว
-    '            sql = "select top 1 id "
-    '            sql += " from TB_PICKUP_TRANSACTION "
-    '            sql += " where deposit_trans_no=@_DEPOSIT_TRANS_NO "
-    '            sql += " and trans_status=@_PICKUP_TRANS_STATUS "
-
-    '            ReDim p(2)
-    '            p(0) = KioskDB.SetText("@_DEPOSIT_TRANS_NO", dt.Rows(0)("trans_no"))
-    '            p(1) = KioskDB.SetText("@_PICKUP_TRANS_STATUS", Convert.ToInt16(CollectTransactionData.TransactionStatus.Success))
-
-    '            Dim pDt As DataTable = KioskDB.ExecuteTable(sql, p)
-    '            If pDt.Rows.Count > 0 Then
-    '                ret = False
-    '            Else
-    '                ret = True
-    '            End If
-    '            pDt.Dispose()
-    '        End If
-    '        dt.Dispose()
-    '    Catch ex As Exception
-    '        ret = False
-    '    End Try
-    '    Return ret
-    'End Function
 
 #Region "Fill in PIN CODE"
 
@@ -205,6 +177,7 @@ Public Class frmDepositSetPINCode
     Private Sub btnOK_Click(sender As Object, e As EventArgs) Handles btnOK.Click
         If TmpPinCode.Length <> KioskConfig.PincodeLen Then
             ShowDialogErrorMessage(String.Format("กรุณากำหนดรหัสส่วนตัว {0} หลัก", KioskConfig.PincodeLen))
+            btnClear_Click(Nothing, Nothing)
             Exit Sub
         End If
 
@@ -213,6 +186,7 @@ Public Class frmDepositSetPINCode
     End Sub
 
     Private Sub btnClear_Click(sender As Object, e As EventArgs) Handles btnClear.Click
+        Deposit.PinCode = ""
         TmpPinCode = ""
         txtPincode1.Text = ""
         txtPincode2.Text = ""

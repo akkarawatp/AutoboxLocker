@@ -80,7 +80,7 @@ Partial Class frmDepositSetPINCode
         Me.lblLabelNotification.Anchor = System.Windows.Forms.AnchorStyles.Top
         Me.lblLabelNotification.Font = New System.Drawing.Font("Thai Sans Lite", 24.0!, System.Drawing.FontStyle.Bold)
         Me.lblLabelNotification.ForeColor = System.Drawing.Color.Red
-        Me.lblLabelNotification.Location = New System.Drawing.Point(303, 474)
+        Me.lblLabelNotification.Location = New System.Drawing.Point(315, 459)
         Me.lblLabelNotification.Name = "lblLabelNotification"
         Me.lblLabelNotification.Size = New System.Drawing.Size(402, 43)
         Me.lblLabelNotification.TabIndex = 93

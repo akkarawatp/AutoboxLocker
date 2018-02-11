@@ -133,7 +133,7 @@ Partial Class GenerateCode
         Me.txtPassword.Name = "txtPassword"
         Me.txtPassword.Size = New System.Drawing.Size(181, 22)
         Me.txtPassword.TabIndex = 15
-        Me.txtPassword.Text = "vvF9h[vd:N"
+        Me.txtPassword.Text = ",bob[vd:N"
         '
         'txtDatabaseName
         '
@@ -151,7 +151,7 @@ Partial Class GenerateCode
         Me.txtUserID.Name = "txtUserID"
         Me.txtUserID.Size = New System.Drawing.Size(181, 22)
         Me.txtUserID.TabIndex = 13
-        Me.txtUserID.Text = "autobox"
+        Me.txtUserID.Text = "minibox"
         '
         'txtDataSource
         '
@@ -160,7 +160,7 @@ Partial Class GenerateCode
         Me.txtDataSource.Name = "txtDataSource"
         Me.txtDataSource.Size = New System.Drawing.Size(158, 22)
         Me.txtDataSource.TabIndex = 12
-        Me.txtDataSource.Text = "103.253.72.223"
+        Me.txtDataSource.Text = "103.22.183.183"
         '
         'txtProjectCode
         '
