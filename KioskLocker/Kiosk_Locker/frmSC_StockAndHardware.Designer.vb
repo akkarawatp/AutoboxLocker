@@ -70,6 +70,7 @@ Partial Class frmSC_StockAndHardware
         Me.pgStockPrinter = New MiniboxLocker.ucStockProgress()
         Me.btnServiceRate = New System.Windows.Forms.Panel()
         Me.lblServiceRate = New System.Windows.Forms.Label()
+        Me.btnClose = New System.Windows.Forms.PictureBox()
         Me.btnOpenAll.SuspendLayout()
         Me.btnLockerSetting.SuspendLayout()
         Me.btnDeviceSetting.SuspendLayout()
@@ -90,6 +91,7 @@ Partial Class frmSC_StockAndHardware
         CType(Me.pbStatusLED, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.pbStatusSensor, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.btnServiceRate.SuspendLayout()
+        CType(Me.btnClose, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'TimerCheckDoorClose
@@ -613,6 +615,16 @@ Partial Class frmSC_StockAndHardware
         Me.lblServiceRate.Text = "Service Rate"
         Me.lblServiceRate.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
+        'btnClose
+        '
+        Me.btnClose.BackgroundImage = Global.MiniboxLocker.My.Resources.Resources.IconClose
+        Me.btnClose.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
+        Me.btnClose.Location = New System.Drawing.Point(700, 962)
+        Me.btnClose.Name = "btnClose"
+        Me.btnClose.Size = New System.Drawing.Size(50, 50)
+        Me.btnClose.TabIndex = 99
+        Me.btnClose.TabStop = False
+        '
         'frmSC_StockAndHardware
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -621,6 +633,7 @@ Partial Class frmSC_StockAndHardware
         Me.BackgroundImage = Global.MiniboxLocker.My.Resources.Resources.bgSCStockAndHardware
         Me.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
         Me.ClientSize = New System.Drawing.Size(768, 1024)
+        Me.Controls.Add(Me.btnClose)
         Me.Controls.Add(Me.btnServiceRate)
         Me.Controls.Add(Me.pgStockPrinter)
         Me.Controls.Add(Me.pgStockBanknote100)
@@ -682,6 +695,7 @@ Partial Class frmSC_StockAndHardware
         CType(Me.pbStatusLED, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.pbStatusSensor, System.ComponentModel.ISupportInitialize).EndInit()
         Me.btnServiceRate.ResumeLayout(False)
+        CType(Me.btnClose, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
     End Sub
@@ -732,4 +746,5 @@ Partial Class frmSC_StockAndHardware
     Friend WithEvents pgStockPrinter As ucStockProgress
     Friend WithEvents btnServiceRate As Panel
     Friend WithEvents lblServiceRate As Label
+    Friend WithEvents btnClose As PictureBox
 End Class
