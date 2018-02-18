@@ -73,6 +73,9 @@ Public Class frmAlarmMonitoringView
         lblMacAddress.Text = DT.Rows(0).Item("mac_address").ToString
         lblComputerName.Text = DT.Rows(0).Item("com_name").ToString
         lblLocation.Text = DT.Rows(0).Item("location_name").ToString
+        If Convert.IsDBNull(DT.Rows(0)("last_sync_time")) = False Then
+            lblLastSyncTime.Text = Convert.ToDateTime(DT.Rows(0)("last_sync_time")).ToString("dd MMM yyyy HH:mm:ss")
+        End If
     End Sub
 
     Private Sub BindHardware()

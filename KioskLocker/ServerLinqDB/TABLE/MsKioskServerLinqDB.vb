@@ -8,7 +8,7 @@ Imports ServerLinqDB.ConnectDB
 
 Namespace TABLE
     'Represents a transaction for MS_KIOSK table ServerLinqDB.
-    '[Create by  on November, 17 2017]
+    '[Create by  on Febuary, 18 2018]
     Public Class MsKioskServerLinqDB
         Public sub MsKioskServerLinqDB()
 
@@ -57,6 +57,7 @@ Namespace TABLE
         Dim _ACTIVE_STATUS As Char = "Y"
         Dim _VALID_START_DATE As DateTime = New DateTime(1,1,1)
         Dim _VALID_EXPIRE_DATE As DateTime = New DateTime(1,1,1)
+        Dim _LAST_SYNC_TIME As  System.Nullable(Of DateTime)  = New DateTime(1,1,1)
 
         'Generate Field Property 
         <Column(Storage:="_ID", DbType:="BigInt NOT NULL ",CanBeNull:=false)>  _
@@ -221,6 +222,15 @@ Namespace TABLE
                _VALID_EXPIRE_DATE = value
             End Set
         End Property 
+        <Column(Storage:="_LAST_SYNC_TIME", DbType:="DateTime")>  _
+        Public Property LAST_SYNC_TIME() As  System.Nullable(Of DateTime) 
+            Get
+                Return _LAST_SYNC_TIME
+            End Get
+            Set(ByVal value As  System.Nullable(Of DateTime) )
+               _LAST_SYNC_TIME = value
+            End Set
+        End Property 
 
 
         'Clear All Data
@@ -243,6 +253,7 @@ Namespace TABLE
             _ACTIVE_STATUS = "Y"
             _VALID_START_DATE = New DateTime(1,1,1)
             _VALID_EXPIRE_DATE = New DateTime(1,1,1)
+            _LAST_SYNC_TIME = New DateTime(1,1,1)
         End Sub
 
        'Define Public Method 
@@ -563,7 +574,7 @@ Namespace TABLE
         End Function
 
         Private Function SetParameterData() As SqlParameter()
-            Dim cmbParam(17) As SqlParameter
+            Dim cmbParam(18) As SqlParameter
             cmbParam(0) = New SqlParameter("@_ID", SqlDbType.BigInt)
             cmbParam(0).Value = _ID
 
@@ -626,6 +637,13 @@ Namespace TABLE
             cmbParam(17) = New SqlParameter("@_VALID_EXPIRE_DATE", SqlDbType.DateTime)
             cmbParam(17).Value = _VALID_EXPIRE_DATE
 
+            cmbParam(18) = New SqlParameter("@_LAST_SYNC_TIME", SqlDbType.DateTime)
+            If _LAST_SYNC_TIME.Value.Year > 1 Then 
+                cmbParam(18).Value = _LAST_SYNC_TIME.Value
+            Else
+                cmbParam(18).Value = DBNull.value
+            End If
+
             Return cmbParam
         End Function
 
@@ -663,6 +681,7 @@ Namespace TABLE
                         If Convert.IsDBNull(Rdr("active_status")) = False Then _active_status = Rdr("active_status").ToString()
                         If Convert.IsDBNull(Rdr("valid_start_date")) = False Then _valid_start_date = Convert.ToDateTime(Rdr("valid_start_date"))
                         If Convert.IsDBNull(Rdr("valid_expire_date")) = False Then _valid_expire_date = Convert.ToDateTime(Rdr("valid_expire_date"))
+                        If Convert.IsDBNull(Rdr("last_sync_time")) = False Then _last_sync_time = Convert.ToDateTime(Rdr("last_sync_time"))
                     Else
                         ret = False
                         _error = MessageResources.MSGEV002
@@ -715,6 +734,7 @@ Namespace TABLE
                         If Convert.IsDBNull(Rdr("active_status")) = False Then _active_status = Rdr("active_status").ToString()
                         If Convert.IsDBNull(Rdr("valid_start_date")) = False Then _valid_start_date = Convert.ToDateTime(Rdr("valid_start_date"))
                         If Convert.IsDBNull(Rdr("valid_expire_date")) = False Then _valid_expire_date = Convert.ToDateTime(Rdr("valid_expire_date"))
+                        If Convert.IsDBNull(Rdr("last_sync_time")) = False Then _last_sync_time = Convert.ToDateTime(Rdr("last_sync_time"))
                     Else
                         _error = MessageResources.MSGEV002
                     End If
@@ -739,8 +759,8 @@ Namespace TABLE
         Private ReadOnly Property SqlInsert() As String 
             Get
                 Dim Sql As String=""
-                Sql += "INSERT INTO " & tableName  & " (CREATED_BY, CREATED_DATE, MS_LOCATION_ID, COM_NAME, IP_ADDRESS, MAC_ADDRESS, ONLINE_STATUS, TODAY_AVAILABLE, HW_ISPROBLEM, CPU_USAGE, RAM_USAGE, DISK_USAGE, ACTIVE_STATUS, VALID_START_DATE, VALID_EXPIRE_DATE)"
-                Sql += " OUTPUT INSERTED.ID, INSERTED.CREATED_BY, INSERTED.CREATED_DATE, INSERTED.UPDATED_BY, INSERTED.UPDATED_DATE, INSERTED.MS_LOCATION_ID, INSERTED.COM_NAME, INSERTED.IP_ADDRESS, INSERTED.MAC_ADDRESS, INSERTED.ONLINE_STATUS, INSERTED.TODAY_AVAILABLE, INSERTED.HW_ISPROBLEM, INSERTED.CPU_USAGE, INSERTED.RAM_USAGE, INSERTED.DISK_USAGE, INSERTED.ACTIVE_STATUS, INSERTED.VALID_START_DATE, INSERTED.VALID_EXPIRE_DATE"
+                Sql += "INSERT INTO " & tableName  & " (CREATED_BY, CREATED_DATE, MS_LOCATION_ID, COM_NAME, IP_ADDRESS, MAC_ADDRESS, ONLINE_STATUS, TODAY_AVAILABLE, HW_ISPROBLEM, CPU_USAGE, RAM_USAGE, DISK_USAGE, ACTIVE_STATUS, VALID_START_DATE, VALID_EXPIRE_DATE, LAST_SYNC_TIME)"
+                Sql += " OUTPUT INSERTED.ID, INSERTED.CREATED_BY, INSERTED.CREATED_DATE, INSERTED.UPDATED_BY, INSERTED.UPDATED_DATE, INSERTED.MS_LOCATION_ID, INSERTED.COM_NAME, INSERTED.IP_ADDRESS, INSERTED.MAC_ADDRESS, INSERTED.ONLINE_STATUS, INSERTED.TODAY_AVAILABLE, INSERTED.HW_ISPROBLEM, INSERTED.CPU_USAGE, INSERTED.RAM_USAGE, INSERTED.DISK_USAGE, INSERTED.ACTIVE_STATUS, INSERTED.VALID_START_DATE, INSERTED.VALID_EXPIRE_DATE, INSERTED.LAST_SYNC_TIME"
                 Sql += " VALUES("
                 sql += "@_CREATED_BY" & ", "
                 sql += "@_CREATED_DATE" & ", "
@@ -756,7 +776,8 @@ Namespace TABLE
                 sql += "@_DISK_USAGE" & ", "
                 sql += "@_ACTIVE_STATUS" & ", "
                 sql += "@_VALID_START_DATE" & ", "
-                sql += "@_VALID_EXPIRE_DATE"
+                sql += "@_VALID_EXPIRE_DATE" & ", "
+                sql += "@_LAST_SYNC_TIME"
                 sql += ")"
                 Return sql
             End Get
@@ -782,7 +803,8 @@ Namespace TABLE
                 Sql += "DISK_USAGE = " & "@_DISK_USAGE" & ", "
                 Sql += "ACTIVE_STATUS = " & "@_ACTIVE_STATUS" & ", "
                 Sql += "VALID_START_DATE = " & "@_VALID_START_DATE" & ", "
-                Sql += "VALID_EXPIRE_DATE = " & "@_VALID_EXPIRE_DATE" + ""
+                Sql += "VALID_EXPIRE_DATE = " & "@_VALID_EXPIRE_DATE" & ", "
+                Sql += "LAST_SYNC_TIME = " & "@_LAST_SYNC_TIME" + ""
                 Return Sql
             End Get
         End Property
@@ -800,7 +822,7 @@ Namespace TABLE
         'Get Select Statement for table MS_KIOSK
         Private ReadOnly Property SqlSelect() As String
             Get
-                Dim Sql As String = "SELECT ID, CREATED_BY, CREATED_DATE, UPDATED_BY, UPDATED_DATE, MS_LOCATION_ID, COM_NAME, IP_ADDRESS, MAC_ADDRESS, ONLINE_STATUS, TODAY_AVAILABLE, HW_ISPROBLEM, CPU_USAGE, RAM_USAGE, DISK_USAGE, ACTIVE_STATUS, VALID_START_DATE, VALID_EXPIRE_DATE FROM " & tableName
+                Dim Sql As String = "SELECT ID, CREATED_BY, CREATED_DATE, UPDATED_BY, UPDATED_DATE, MS_LOCATION_ID, COM_NAME, IP_ADDRESS, MAC_ADDRESS, ONLINE_STATUS, TODAY_AVAILABLE, HW_ISPROBLEM, CPU_USAGE, RAM_USAGE, DISK_USAGE, ACTIVE_STATUS, VALID_START_DATE, VALID_EXPIRE_DATE, LAST_SYNC_TIME FROM " & tableName
                 Return Sql
             End Get
         End Property

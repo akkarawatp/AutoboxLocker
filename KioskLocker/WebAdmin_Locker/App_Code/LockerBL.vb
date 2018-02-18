@@ -432,7 +432,7 @@ Public Class LockerBL
     Public Function Alarm_Overview(ByVal kiosk_id As Integer, username As String) As DataTable
         Dim sql As String = "select k.id, k.com_name, l.location_name, k.ip_address, k.mac_address," & vbNewLine
         sql &= " k.online_status available_status, k.today_available, k.hw_isproblem, " & vbNewLine
-        sql &= " k.cpu_usage, k.ram_usage, k.disk_usage," & vbNewLine
+        sql &= " k.cpu_usage, k.ram_usage, k.disk_usage, k.last_sync_time, " & vbNewLine
         sql &= " 	 isnull((select top 1 is_problem " & vbNewLine
         sql &= " 	 from v_kiosk_device_info " & vbNewLine
         sql &= " 	 where ms_kiosk_id=k.id" & vbNewLine

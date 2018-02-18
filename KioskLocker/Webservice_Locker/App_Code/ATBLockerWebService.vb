@@ -92,6 +92,8 @@ Public Class ATBLockerWebService
                 End If
                 dt.Dispose()
             End If
+
+            UpdateKioskLastSyncTime(MsKioskID)
         Catch ex As Exception
             ret = New LoginReturnData
             ret.LoginStatus = False
@@ -122,7 +124,7 @@ Public Class ATBLockerWebService
             p(1) = ServerDB.SetBigInt("@_KIOSK_ID", MsKioskID)
 
             ret = ServerDB.ExecuteTable(sql, p)
-
+            UpdateKioskLastSyncTime(MsKioskID)
         Catch ex As Exception
             ret = New DataTable
         End Try
@@ -356,6 +358,7 @@ Public Class ATBLockerWebService
                 sr.ServiceRateFine = ServerDB.ExecuteTable(sql, p)
                 sr.ServiceRateFine.TableName = "ServiceRateFine"
             End If
+            UpdateKioskLastSyncTime(MsKioskID)
         Catch ex As Exception
             sr = New MasterServiceRateData
         End Try
@@ -391,6 +394,7 @@ Public Class ATBLockerWebService
             If dt.Rows.Count > 0 Then
                 Dim sTrans As New ServerTransactionDB
                 Dim sRet As New ExecuteDataInfo
+                Dim KioskId As Long = 0
                 For Each dr As DataRow In dt.Rows
                     Dim sLnq As New CfKioskSysconfigServerLinqDB
                     sLnq.ChkDataByMS_KIOSK_ID(dr("ms_kiosk_id"), sTrans.Trans)
@@ -417,6 +421,7 @@ Public Class ATBLockerWebService
                     sLnq.INTERVAL_SYNC_LOG_MIN = dr("INTERVAL_SYNC_LOG_MIN")
                     sLnq.INTERVAL_SYNC_MASTER_MIN = dr("INTERVAL_SYNC_MASTER_MIN")
                     sLnq.SYNC_TO_SERVER = "Y"
+                    KioskId = sLnq.MS_KIOSK_ID
 
                     If sLnq.ID > 0 Then
                         sRet = sLnq.UpdateData(KioskName, sTrans.Trans)
@@ -449,6 +454,9 @@ Public Class ATBLockerWebService
                     sTrans.CommitTransaction()
                     ret = "true"
                     Engine.LogFileENG.CreateServerLogAgent("SyncKioskSysconfig from " & KioskName & " Success " & dt.Rows.Count & " Records")
+                    If KioskId > 0 Then
+                        UpdateKioskLastSyncTime(KioskId)
+                    End If
                 Else
                     sTrans.RollbackTransaction()
                     ret = "false|" & sRet.ErrorMessage
@@ -473,6 +481,7 @@ Public Class ATBLockerWebService
             If dt.Rows.Count > 0 Then
                 Dim sRet As New ExecuteDataInfo
                 Dim sTrans As New ServerTransactionDB
+                Dim KioskId As Long = 0
                 For Each dr As DataRow In dt.Rows
                     Dim sLnq As New MsCabinetServerLinqDB
                     sLnq.GetDataByPK(dr("MS_CABINET_ID"), sTrans.Trans)
@@ -485,6 +494,7 @@ Public Class ATBLockerWebService
                     sLnq.DEPOSIT_AMT = dr("DEPOSIT_AMT")
                     sLnq.ACTIVE_STATUS = dr("ACTIVE_STATUS")
                     sLnq.SYNC_TO_SERVER = "Y"
+                    KioskId = sLnq.MS_KIOSK_ID
 
                     If sLnq.ID > 0 Then
                         sRet = sLnq.UpdateData(KioskName, sTrans.Trans)
@@ -503,6 +513,9 @@ Public Class ATBLockerWebService
                     ret = "true"
 
                     Engine.LogFileENG.CreateServerLogAgent("SyncMasterKioskCabinet from " & KioskName & " Success " & dt.Rows.Count & " Records")
+                    If KioskId > 0 Then
+                        UpdateKioskLastSyncTime(KioskId)
+                    End If
                 Else
                     sTrans.RollbackTransaction()
                     ret = "false|" & sRet.ErrorMessage
@@ -526,16 +539,12 @@ Public Class ATBLockerWebService
             If dt.Rows.Count > 0 Then
                 Dim sRe As New ExecuteDataInfo
                 Dim sTrans As New ServerTransactionDB
+                Dim KioskId As Long = 0
                 For Each dr As DataRow In dt.Rows
                     Dim sLnq As New MsKioskDeviceServerLinqDB
                     sLnq.ChkDataByMS_DEVICE_ID_MS_KIOSK_ID(dr("MS_DEVICE_ID"), dr("ms_kiosk_id"), sTrans.Trans)
                     sLnq.MS_KIOSK_ID = dr("ms_kiosk_id")
                     sLnq.MS_DEVICE_ID = dr("MS_DEVICE_ID")
-
-                    '############## ข้อมูล MAX_QTY, WARNING_QTY, CRITICAL_QTY ไม่ต้อง Sync จากตู้มาหา Server #################
-                    'If Convert.IsDBNull(dr("MAX_QTY")) = False Then sLnq.MAX_QTY = dr("MAX_QTY")
-                    'If Convert.IsDBNull(dr("WARNING_QTY")) = False Then sLnq.WARNING_QTY = dr("WARNING_QTY")
-                    'If Convert.IsDBNull(dr("CRITICAL_QTY")) = False Then sLnq.CRITICAL_QTY = dr("CRITICAL_QTY")
                     If Convert.IsDBNull(dr("CURRENT_QTY")) = False Then sLnq.CURRENT_QTY = dr("CURRENT_QTY")
                     If Convert.IsDBNull(dr("CURRENT_MONEY")) = False Then sLnq.CURRENT_MONEY = Convert.ToInt64(dr("CURRENT_MONEY"))
                     sLnq.MS_DEVICE_STATUS_ID = dr("MS_DEVICE_STATUS_ID")
@@ -543,6 +552,7 @@ Public Class ATBLockerWebService
                     If Convert.IsDBNull(dr("DRIVER_NAME1")) = False Then sLnq.DRIVER_NAME1 = dr("DRIVER_NAME1")
                     If Convert.IsDBNull(dr("DRIVER_NAME2")) = False Then sLnq.DRIVER_NAME2 = dr("DRIVER_NAME2")
                     sLnq.SYNC_TO_SERVER = "Y"
+                    KioskId = sLnq.MS_KIOSK_ID
 
                     If sLnq.ID > 0 Then
                         sRe = sLnq.UpdateData(KioskName, sTrans.Trans)
@@ -558,6 +568,10 @@ Public Class ATBLockerWebService
                     sTrans.CommitTransaction()
                     ret = "true"
                     Engine.LogFileENG.CreateServerLogAgent("SyncMasterKioskDevice from " & KioskName & " Success " & dt.Rows.Count & " Records")
+
+                    If KioskId > 0 Then
+                        UpdateKioskLastSyncTime(KioskId)
+                    End If
                 Else
                     sTrans.RollbackTransaction()
                     ret = "false|" & sRe.ErrorMessage
@@ -582,7 +596,7 @@ Public Class ATBLockerWebService
             If dt.Rows.Count Then
                 Dim sRet As New ExecuteDataInfo
                 Dim sTrans As New ServerTransactionDB
-
+                Dim KioskId As Long = 0
                 For Each dr As DataRow In dt.Rows
                     Dim sLnq As New MsLockerServerLinqDB
                     sLnq.GetDataByPK(dr("MS_LOCKER_ID"), sTrans.Trans)
@@ -598,6 +612,7 @@ Public Class ATBLockerWebService
                     sLnq.CURRENT_AVAILABLE = dr("CURRENT_AVAILABLE")
                     sLnq.ACTIVE_STATUS = dr("ACTIVE_STATUS")
                     sLnq.SYNC_TO_SERVER = "Y"
+                    KioskId = sLnq.MS_KIOSK_ID
 
                     If sLnq.ID > 0 Then
                         sRet = sLnq.UpdateData(KioskName, sTrans.Trans)
@@ -615,6 +630,10 @@ Public Class ATBLockerWebService
                     ret = "true"
 
                     Engine.LogFileENG.CreateServerLogAgent("SyncMasterKioskLocker from " & KioskName & " Success " & dt.Rows.Count & " Records")
+
+                    If KioskId > 0 Then
+                        UpdateKioskLastSyncTime(KioskId)
+                    End If
                 Else
                     sTrans.RollbackTransaction()
                     ret = "false|" & sRet.ErrorMessage
@@ -645,6 +664,7 @@ Public Class ATBLockerWebService
 
             dt = ServerDB.ExecuteTable(sql, p)
             Engine.LogFileENG.CreateServerLogAgent("GetServerKioskSysconfig from KioskID " & MsKioskID & " " & dt.Rows.Count & " Records")
+            UpdateKioskLastSyncTime(MsKioskID)
         Catch ex As Exception
             dt = New DataTable
         End Try
@@ -666,6 +686,7 @@ Public Class ATBLockerWebService
 
             dt = ServerDB.ExecuteTable(sql, p)
             Engine.LogFileENG.CreateServerLogAgent("GetServerKioskCabinet from KioskID " & MsKioskID & " " & dt.Rows.Count & " Records")
+            UpdateKioskLastSyncTime(MsKioskID)
         Catch ex As Exception
             dt = New DataTable
         End Try
@@ -686,6 +707,7 @@ Public Class ATBLockerWebService
 
             dt = ServerDB.ExecuteTable(sql, p)
             Engine.LogFileENG.CreateServerLogAgent("GetServeKioskDevice from KioskID " & MsKioskID & " " & dt.Rows.Count & " Records")
+            UpdateKioskLastSyncTime(MsKioskID)
         Catch ex As Exception
             dt = New DataTable
         End Try
@@ -706,6 +728,7 @@ Public Class ATBLockerWebService
             p(0) = ServerDB.SetBigInt("@_KIOSK_ID", MsKioskID)
             dt = ServerDB.ExecuteTable(sql, p)
             Engine.LogFileENG.CreateServerLogAgent("GetServerKioskLocker from KioskID " & MsKioskID & " " & dt.Rows.Count & " Records")
+            UpdateKioskLastSyncTime(MsKioskID)
         Catch ex As Exception
             dt = New DataTable
         End Try
@@ -724,12 +747,13 @@ Public Class ATBLockerWebService
             If dt.Rows.Count > 0 Then
                 Dim sTrans As New ServerTransactionDB
                 Dim sRet As New ExecuteDataInfo
+                Dim KioskId As Long = 0
                 For Each dr As DataRow In dt.Rows
                     Dim sLnq As New CfKioskSysconfigServerLinqDB
                     sLnq.GetDataByPK(dr("id"), sTrans.Trans)
                     If sLnq.ID > 0 Then
                         sLnq.SYNC_TO_KIOSK = "Y"
-
+                        KioskId = sLnq.MS_KIOSK_ID
                         sRet = sLnq.UpdateData(KioskName, sTrans.Trans)
                         If sRet.IsSuccess = False Then
                             Exit For
@@ -742,6 +766,10 @@ Public Class ATBLockerWebService
                     ret = "true"
 
                     Engine.LogFileENG.CreateServerLogAgent("UpdateServerSyncKioskSysconfig from " & KioskName & " Success " & dt.Rows.Count & " Records")
+
+                    If KioskId > 0 Then
+                        UpdateKioskLastSyncTime(KioskId)
+                    End If
                 Else
                     sTrans.RollbackTransaction()
                     ret = "false|" & sRet.ErrorMessage
@@ -764,11 +792,13 @@ Public Class ATBLockerWebService
             If dt.Rows.Count > 0 Then
                 Dim sTrans As New ServerTransactionDB
                 Dim sRet As New ExecuteDataInfo
+                Dim KioskId As Long = 0
                 For Each dr As DataRow In dt.Rows
                     Dim sLnq As New MsCabinetServerLinqDB
                     sLnq.GetDataByPK(dr("id"), sTrans.Trans)
                     If sLnq.ID > 0 Then
                         sLnq.SYNC_TO_KIOSK = "Y"
+                        KioskId = sLnq.MS_KIOSK_ID
 
                         sRet = sLnq.UpdateData(KioskName, sTrans.Trans)
                         If sRet.IsSuccess = False Then
@@ -782,6 +812,10 @@ Public Class ATBLockerWebService
                     sTrans.CommitTransaction()
                     ret = "true"
                     Engine.LogFileENG.CreateServerLogAgent("UpdateServerSyncKioskCabinet from " & KioskName & " Success " & dt.Rows.Count & " Records")
+
+                    If KioskId > 0 Then
+                        UpdateKioskLastSyncTime(KioskId)
+                    End If
                 Else
                     sTrans.RollbackTransaction()
                     ret = "false|" & sRet.ErrorMessage
@@ -804,11 +838,13 @@ Public Class ATBLockerWebService
             If dt.Rows.Count > 0 Then
                 Dim sTrans As New ServerTransactionDB
                 Dim sRet As New ExecuteDataInfo
+                Dim KioskId As Long = 0
                 For Each dr As DataRow In dt.Rows
                     Dim sLnq As New MsKioskDeviceServerLinqDB
                     sLnq.GetDataByPK(dr("id"), sTrans.Trans)
                     If sLnq.ID > 0 Then
                         sLnq.SYNC_TO_KIOSK = "Y"
+                        KioskId = sLnq.MS_KIOSK_ID
 
                         sRet = sLnq.UpdateData(KioskName, sTrans.Trans)
                         If sRet.IsSuccess = False Then
@@ -822,6 +858,10 @@ Public Class ATBLockerWebService
                     sTrans.CommitTransaction()
                     ret = "true"
                     Engine.LogFileENG.CreateServerLogAgent("UpdateServerSyncKioskDevice from " & KioskName & " Success " & dt.Rows.Count & " Records")
+
+                    If KioskId > 0 Then
+                        UpdateKioskLastSyncTime(KioskId)
+                    End If
                 Else
                     sTrans.RollbackTransaction()
                     ret = "false|" & sRet.ErrorMessage
@@ -844,11 +884,13 @@ Public Class ATBLockerWebService
             If dt.Rows.Count > 0 Then
                 Dim sTrans As New ServerTransactionDB
                 Dim sRet As New ExecuteDataInfo
+                Dim KioskId As Long = 0
                 For Each dr As DataRow In dt.Rows
                     Dim sLnq As New MsLockerServerLinqDB
                     sLnq.GetDataByPK(dr("id"), sTrans.Trans)
                     If sLnq.ID > 0 Then
                         sLnq.SYNC_TO_KIOSK = "Y"
+                        KioskId = sLnq.MS_KIOSK_ID
 
                         sRet = sLnq.UpdateData(KioskName, sTrans.Trans)
                         If sRet.IsSuccess = False Then
@@ -863,6 +905,10 @@ Public Class ATBLockerWebService
                     ret = "true"
 
                     Engine.LogFileENG.CreateServerLogAgent("UpdateSyncKioskLocker from " & KioskName & " Success " & dt.Rows.Count & " Records")
+
+                    If KioskId > 0 Then
+                        UpdateKioskLastSyncTime(KioskId)
+                    End If
                 Else
                     sTrans.RollbackTransaction()
                     ret = "false|" & sRet.ErrorMessage
@@ -898,6 +944,7 @@ Public Class ATBLockerWebService
                 sTrans.CommitTransaction()
                 ret = "true"
                 Engine.LogFileENG.CreateServerLogAgent("SysnKioskDepositTransactionCustomerImage from " & KioskName & " TransactionNo " & TransNo)
+                UpdateKioskLastSyncTime(sLnq.MS_KIOSK_ID)
             Else
                 sTrans.RollbackTransaction()
                 ret = "false|" & sRet.ErrorMessage
@@ -975,7 +1022,7 @@ Public Class ATBLockerWebService
                 ret = "false|" & sRet.ErrorMessage
                 Engine.LogFileENG.CreateServerErrorLogAgent(ret)
             End If
-
+            UpdateKioskLastSyncTime(MsKioskID)
         Catch ex As Exception
             ret = "false|" & ex.Message
             Engine.LogFileENG.CreateServerExceptionLogAgent(ex.Message, ex.StackTrace)
@@ -1082,9 +1129,12 @@ Public Class ATBLockerWebService
             Dim sTrans As New ServerTransactionDB
             Dim sRet As New ExecuteDataInfo
             Dim sLnq As New TbPickupTransactionServerLinqDB
+            Dim KioskId As Long = 0
+
             sLnq.ChkDataByTRANSACTION_NO(TransactionNo, sTrans.Trans)
             If sLnq.ID > 0 Then
                 sLnq.CUST_IMAGE = CustImage
+                KioskId = sLnq.MS_KIOSK_ID
 
                 sRet = sLnq.UpdateData(KioskName, sTrans.Trans)
             End If
@@ -1097,6 +1147,9 @@ Public Class ATBLockerWebService
                 sTrans.RollbackTransaction()
                 ret = "false|" & sRet.ErrorMessage
                 Engine.LogFileENG.CreateServerErrorLogAgent(ret)
+            End If
+            If KioskId > 0 Then
+                UpdateKioskLastSyncTime(KioskId)
             End If
 
             sLnq = Nothing
@@ -1116,7 +1169,7 @@ Public Class ATBLockerWebService
             If dt.Rows.Count > 0 Then
                 Dim sTrans As New ServerLinqDB.ConnectDB.ServerTransactionDB
                 Dim sRet As New ExecuteDataInfo
-
+                Dim KioskId As Long = 0
                 For Each dr As DataRow In dt.Rows
                     Dim sLnq As New TbPickupTransactionServerLinqDB
                     sLnq.ChkDataByTRANSACTION_NO(dr("TRANSACTION_NO"), sTrans.Trans)
@@ -1158,6 +1211,7 @@ Public Class ATBLockerWebService
                     If Convert.IsDBNull(dr("MS_APP_SCREEN_ID")) = False Then sLnq.MS_APP_SCREEN_ID = dr("MS_APP_SCREEN_ID")
                     If Convert.IsDBNull(dr("MS_APP_STEP_ID")) = False Then sLnq.MS_APP_STEP_ID = dr("MS_APP_STEP_ID")
                     sLnq.SYNC_TO_SERVER = "Y"
+                    KioskId = sLnq.MS_KIOSK_ID
 
                     If sLnq.ID > 0 Then
                         sRet = sLnq.UpdateData(KioskName, sTrans.Trans)
@@ -1173,6 +1227,10 @@ Public Class ATBLockerWebService
                     sTrans.CommitTransaction()
                     ret = "true"
                     Engine.LogFileENG.CreateServerLogAgent("SyncKioskCollectTransaction from " & KioskName & " Success " & dt.Rows.Count & " Records")
+
+                    If KioskId > 0 Then
+                        UpdateKioskLastSyncTime(KioskId)
+                    End If
                 Else
                     sTrans.RollbackTransaction()
                     ret = "false|" & sRet.ErrorMessage
@@ -1210,6 +1268,7 @@ Public Class ATBLockerWebService
             If dt.Rows.Count > 0 Then
                 Dim sTrans As New ServerTransactionDB
                 Dim sRet As New ExecuteDataInfo
+                Dim KioskId As Long = 0
                 For Each dr As DataRow In dt.Rows
                     Dim sLnq As New TbStaffConsoleTransactionServerLinqDB
                     sLnq.ChkDataByTRANS_NO(dr("TRANS_NO"), sTrans.Trans)
@@ -1225,6 +1284,7 @@ Public Class ATBLockerWebService
                     If Convert.IsDBNull(dr("LOGIN_BY")) = False Then sLnq.LOGIN_BY = Convert.ToString(dr("LOGIN_BY"))
                     If Convert.IsDBNull(dr("MS_APP_STEP_ID")) = False Then sLnq.MS_APP_STEP_ID = Convert.ToInt64(dr("MS_APP_STEP_ID"))
                     sLnq.SYNC_TO_SERVER = "Y"
+                    KioskId = sLnq.MS_KIOSK_ID
 
                     If sLnq.ID > 0 Then
                         sRet = sLnq.UpdateData(KioskName, sTrans.Trans)
@@ -1241,6 +1301,10 @@ Public Class ATBLockerWebService
                     sTrans.CommitTransaction()
                     ret = "true"
                     Engine.LogFileENG.CreateServerLogAgent("SyncKioskStaffConsoleTransaction from " & KioskName & " Success " & dt.Rows.Count & " Records")
+
+                    If KioskId > 0 Then
+                        UpdateKioskLastSyncTime(KioskId)
+                    End If
                 Else
                     sTrans.RollbackTransaction()
                     ret = "false|" & sRet.ErrorMessage
@@ -1293,6 +1357,7 @@ Public Class ATBLockerWebService
                 pd.PromotionHour.TableName = "PromotionHour"
 
             End If
+            UpdateKioskLastSyncTime(MsKioskID)
         Catch ex As Exception
             pd = New MasterPromotionData
         End Try
@@ -1335,6 +1400,7 @@ Public Class ATBLockerWebService
             If dt.Rows.Count > 0 Then
                 Dim sTrans As New ServerTransactionDB
                 Dim sRet As New ExecuteDataInfo
+                Dim KioskId As Long = 0
                 For Each dr As DataRow In dt.Rows
                     Dim sLnq As New TbLogTransactionActivityServerLinqDB
                     sLnq.MS_KIOSK_ID = dr("ms_kiosk_id")
@@ -1347,6 +1413,7 @@ Public Class ATBLockerWebService
                     sLnq.LOG_DESC = dr("LOG_DESC")
                     sLnq.IS_PROBLEM = dr("IS_PROBLEM")
                     sLnq.SYNC_TO_SERVER = "Y"
+                    KioskId = sLnq.MS_KIOSK_ID
                     sRet = sLnq.InsertData(KioskName, sTrans.Trans)
                     If sRet.IsSuccess = False Then
                         Exit For
@@ -1357,6 +1424,10 @@ Public Class ATBLockerWebService
                     sTrans.CommitTransaction()
                     ret = "true"
                     Engine.LogFileENG.CreateServerLogAgent("SyncLogTransactionActivity from " & KioskName & " Success " & dt.Rows.Count & " Records")
+
+                    If KioskId > 0 Then
+                        UpdateKioskLastSyncTime(KioskId)
+                    End If
                 Else
                     sTrans.RollbackTransaction()
                     ret = "false|" & sRet.ErrorMessage
@@ -1379,7 +1450,7 @@ Public Class ATBLockerWebService
             If dt.Rows.Count > 0 Then
                 Dim sTrans As New ServerTransactionDB
                 Dim sRet As New ExecuteDataInfo
-
+                Dim KioskId As Long = 0
                 For Each dr As DataRow In dt.Rows
                     Dim sLnq As New TbFillMoneyServerLinqDB
                     sLnq.MS_KIOSK_ID = dr("ms_kiosk_id")
@@ -1409,6 +1480,7 @@ Public Class ATBLockerWebService
                     sLnq.CHANGE100_QTY = dr("CHANGE100_QTY")
                     sLnq.CHANGE500_QTY = dr("CHANGE500_QTY")
                     sLnq.SYNC_TO_SERVER = "Y"
+                    KioskId = sLnq.MS_KIOSK_ID
 
                     sRet = sLnq.InsertData(KioskName, sTrans.Trans)
                     If sRet.IsSuccess = False Then
@@ -1421,6 +1493,10 @@ Public Class ATBLockerWebService
                     sTrans.CommitTransaction()
                     ret = "true"
                     Engine.LogFileENG.CreateServerLogAgent("SyncLogFillMoneyData from " & KioskName & " Success " & dt.Rows.Count & " Records")
+
+                    If KioskId > 0 Then
+                        UpdateKioskLastSyncTime(KioskId)
+                    End If
                 Else
                     sTrans.RollbackTransaction()
                     ret = "false|" & sRet.ErrorMessage
@@ -1443,6 +1519,7 @@ Public Class ATBLockerWebService
             If dt.Rows.Count > 0 Then
                 Dim sTrans As New ServerTransactionDB
                 Dim sRet As New ExecuteDataInfo
+                Dim KioskId As Long = 0
                 For Each dr As DataRow In dt.Rows
                     Dim sLnq As New TbLogErrorServerLinqDB
                     sLnq.MS_KIOSK_ID = dr("MS_KIOSK_ID")
@@ -1456,6 +1533,7 @@ Public Class ATBLockerWebService
                     If Convert.IsDBNull(dr("MS_APP_SCREEN_ID")) = False Then sLnq.MS_APP_SCREEN_ID = dr("MS_APP_SCREEN_ID")
                     If Convert.IsDBNull(dr("MS_APP_STEP_ID")) = False Then sLnq.MS_APP_STEP_ID = dr("MS_APP_STEP_ID")
                     sLnq.SYNC_TO_SERVER = "Y"
+                    KioskId = sLnq.MS_KIOSK_ID
 
                     sRet = sLnq.InsertData(KioskName, sTrans.Trans)
                     If sRet.IsSuccess = False Then
@@ -1466,6 +1544,10 @@ Public Class ATBLockerWebService
                     sTrans.CommitTransaction()
                     ret = "true"
                     Engine.LogFileENG.CreateServerLogAgent("SyncLogErrorData from " & KioskName & " Success " & dt.Rows.Count & " Records")
+
+                    If KioskId > 0 Then
+                        UpdateKioskLastSyncTime(KioskId)
+                    End If
                 Else
                     sTrans.RollbackTransaction()
                     ret = "false|" & sRet.ErrorMessage
@@ -1488,6 +1570,7 @@ Public Class ATBLockerWebService
             If dt.Rows.Count > 0 Then
                 Dim sTrans As New ServerTransactionDB
                 Dim sRet As New ExecuteDataInfo
+                Dim KioskId As Long = 0
                 For Each dr As DataRow In dt.Rows
                     Dim sLnq As New TbLogKioskAgentServerLinqDB
                     sLnq.MS_KIOSK_ID = dr("ms_kiosk_id")
@@ -1498,6 +1581,7 @@ Public Class ATBLockerWebService
                     sLnq.FUNCTION_NAME = dr("FUNCTION_NAME")
                     sLnq.LINE_NO = dr("LINE_NO")
                     sLnq.SYNC_TO_SERVER = "Y"
+                    KioskId = sLnq.MS_KIOSK_ID
 
                     sRet = sLnq.InsertData(KioskName, sTrans.Trans)
                     If sRet.IsSuccess = False Then
@@ -1508,6 +1592,10 @@ Public Class ATBLockerWebService
                     sTrans.CommitTransaction()
                     ret = "true"
                     Engine.LogFileENG.CreateServerLogAgent("SyncLogKioskAgentData from " & KioskName & " Success " & dt.Rows.Count & " Records")
+
+                    If KioskId > 0 Then
+                        UpdateKioskLastSyncTime(KioskId)
+                    End If
                 Else
                     sTrans.RollbackTransaction()
                     ret = "false|" & sRet.ErrorMessage
@@ -1525,6 +1613,28 @@ Public Class ATBLockerWebService
 
 
 #End Region
+    Private Sub UpdateKioskLastSyncTime(MsKioskID As Long)
+        Try
+            Dim sql As String = "update ms_kiosk "
+            sql += " set last_sync_time=getdate() "
+            sql += " where id=@_KIOSK_ID"
+
+            Dim p(1) As SqlParameter
+            p(0) = ServerDB.SetBigInt("@_KIOSK_ID", MsKioskID)
+
+            Dim trans As New ServerTransactionDB
+            Dim re As ExecuteDataInfo = ServerDB.ExecuteNonQuery(sql, trans.Trans, p)
+            If re.IsSuccess = True Then
+                trans.CommitTransaction()
+            Else
+                trans.RollbackTransaction()
+                Engine.LogFileENG.CreateServerErrorLogAgent(re.ErrorMessage)
+            End If
+
+        Catch ex As Exception
+            Engine.LogFileENG.CreateServerExceptionLogAgent(ex.Message, ex.StackTrace)
+        End Try
+    End Sub
 
 #Region "Setup New Locker"
     <WebMethod()>

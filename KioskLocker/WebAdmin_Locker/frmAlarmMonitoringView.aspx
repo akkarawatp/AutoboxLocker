@@ -6,39 +6,49 @@
 <ContentTemplate>
 
     <div class="row">
-        <div class="col-sm-6  table-responsive">  
-              <table class="table m-b">
+        <div class="col-sm-6  table-responsive">
+            <table class="table m-b">
                 <thead>
-                  <tr>
-                    <th colspan="2" class="h4 text-left">Kiosk Info</th>                   
-                  </tr>
+                    <tr>
+                        <th colspan="2" class="h4 text-left">Kiosk Info</th>
+                    </tr>
                 </thead>
                 <tbody>
-                  <tr>
-                    <td>
-                      <span></span>Computer Name :</td>
-                    <td class="h5 col-sm-6"><asp:Label ID="lblComputerName" runat="server"></asp:Label></td>                    
-                  </tr>
-                 <tr>
-                    <td>
-                      <span></span>Location :</td>
-                    <td class="h5 col-sm-6"><asp:Label ID="lblLocation" runat="server"></asp:Label></td>                    
-                  </tr>
                     <tr>
-                    <td>
-                      <span></span>IP Address :</td>
-                    <td class="h5 col-sm-6"><asp:Label ID="lblIPAddress" runat="server"></asp:Label></td>                    
-                  </tr>
+                        <td>
+                            <span></span>Computer Name :</td>
+                        <td class="h5 col-sm-6">
+                            <asp:Label ID="lblComputerName" runat="server"></asp:Label></td>
+                    </tr>
                     <tr>
-                    <td>
-                      <span></span>Mac Address :</td>
-                    <td class="h5 col-sm-6"><asp:Label ID="lblMacAddress" runat="server"></asp:Label></td>                    
-                  </tr>
+                        <td>
+                            <span></span>Location :</td>
+                        <td class="h5 col-sm-6">
+                            <asp:Label ID="lblLocation" runat="server"></asp:Label></td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <span></span>IP Address :</td>
+                        <td class="h5 col-sm-6">
+                            <asp:Label ID="lblIPAddress" runat="server"></asp:Label></td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <span></span>Mac Address :</td>
+                        <td class="h5 col-sm-6">
+                            <asp:Label ID="lblMacAddress" runat="server"></asp:Label></td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <span></span>Last Sync Time :</td>
+                        <td class="h5 col-sm-6">
+                            <asp:Label ID="lblLastSyncTime" runat="server"></asp:Label></td>
+                    </tr>
                 </tbody>
-              </table>
-                         
-         </div>
-          <div class="col-md-6">
+            </table>
+
+        </div>
+        <div class="col-md-6">
             <div class="card bg-white">
                 <div class="row m-a-0 m-t text-uppercase bold mobile_group_head m-b h5 text-center">
                     Today Avaliable
@@ -52,7 +62,7 @@
                         </div>
                     </div>
                 </div>
-              
+
             </div>
         </div>
     </div>
