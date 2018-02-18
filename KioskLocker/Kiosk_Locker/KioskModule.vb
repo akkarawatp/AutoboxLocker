@@ -8,7 +8,6 @@ Imports KioskLinqDB.ConnectDB
 Imports KioskLinqDB.TABLE
 Imports System.Net
 Imports WebCamera
-Imports System.Drawing.Text.PrivateFontCollection
 
 Module KioskModule
 
