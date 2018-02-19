@@ -9,43 +9,44 @@ Public Class frmSplashScreen
     Dim CurrentStep As Int16 = 0
 
     Private Sub frmSplashScreen_Shown(sender As Object, e As EventArgs) Handles Me.Shown
-        Me.Visible = False
+        'Me.Visible = False
         txtCPUID.Text = GetCPU_ID()
         txtProcessorID.Text = GetProcessorId()
+        txtSerialNumber.Text = GetMainBoardSerialNumber()
 
-        Dim IdenKey As String = KioskDB.EnCripPwd(txtCPUID.Text & txtProcessorID.Text)
+        Dim IdenKey As String = KioskDB.EnCripPwd(txtCPUID.Text & txtProcessorID.Text & txtSerialNumber.Text)
         Dim reg As New ModifyMachineKey
-        reg.ShowError = True
+        'reg.ShowError = True
 
-        Dim MachingKey As String = reg.Read()
-        If String.IsNullOrEmpty(MachingKey) = True Then
-            'ถ้าไม่เคยมีการ Gen Key ให้เริ่มขั้นตอนการ Gen ใหม่
-            lblReadingKey.Text = IdenKey
-            StartNewMachineKey()
-        Else
-            'ถ้ามีการ Gen Key มาแล้ว ให้ตรวจสอบว่า Key ที่เก็บไว้ตรงกับ Key ที่ Gen หรือไม่
-            lblReadingKey.Text = reg.Read()
-            If IdenKey <> lblReadingKey.Text Then
-                'ถ้า Key ไม่ตรงกัน ก็ให้ Gen ใหม่โลด
-                btnDeleteKey_Click(Nothing, Nothing)
-                StartNewMachineKey()
-            Else
-                If reg.ReadInfoKioskID() <> 0 Then
+        'Dim MachingKey As String = reg.Read()
+        'If String.IsNullOrEmpty(MachingKey) = True Then
+        '    'ถ้าไม่เคยมีการ Gen Key ให้เริ่มขั้นตอนการ Gen ใหม่
+        '    lblReadingKey.Text = IdenKey
+        '    StartNewMachineKey()
+        'Else
+        '    'ถ้ามีการ Gen Key มาแล้ว ให้ตรวจสอบว่า Key ที่เก็บไว้ตรงกับ Key ที่ Gen หรือไม่
+        '    lblReadingKey.Text = reg.Read()
+        '    If IdenKey <> lblReadingKey.Text Then
+        '        'ถ้า Key ไม่ตรงกัน ก็ให้ Gen ใหม่โลด
+        '        btnDeleteKey_Click(Nothing, Nothing)
+        '        StartNewMachineKey()
+        '    Else
+        '        If reg.ReadInfoKioskID() <> 0 Then
 
 
-                    'ถ้า Key ตรงกัน ให้เข้าโปรแกรมได้
-                    frmMain.Show()
-                    Me.Close()
-                    Application.DoEvents()
-                Else
-                    'ถ้าไม่มี Locker Info ให้ลบออกก่อน เพื่อให้เริ่ม Setup ใหม่
-                    btnDeleteKey_Click(Nothing, Nothing)
-                    StartNewMachineKey()
-                End If
-            End If
-        End If
+        '            'ถ้า Key ตรงกัน ให้เข้าโปรแกรมได้
+        '            frmMain.Show()
+        '            Me.Close()
+        '            Application.DoEvents()
+        '        Else
+        '            'ถ้าไม่มี Locker Info ให้ลบออกก่อน เพื่อให้เริ่ม Setup ใหม่
+        '            btnDeleteKey_Click(Nothing, Nothing)
+        '            StartNewMachineKey()
+        '        End If
+        '    End If
+        'End If
 
-        reg = Nothing
+        'reg = Nothing
     End Sub
 
     Private Sub StartNewMachineKey()
@@ -468,6 +469,18 @@ Public Class frmSplashScreen
         End Try
 
         Return Nothing
+    End Function
+
+    Private Function GetMainBoardSerialNumber() As String
+
+        Dim SerialNumber As String = ""
+        Dim searcher As New ManagementObjectSearcher("select * FROM Win32_BaseBoard")
+        For Each info As ManagementObject In searcher.Get()
+            SerialNumber = info.GetPropertyValue("SerialNumber").ToString
+        Next
+
+        Return SerialNumber
+
     End Function
 
     Public Function GetCPU_ID() As String

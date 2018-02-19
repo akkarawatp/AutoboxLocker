@@ -30,6 +30,7 @@ Partial Class frmSplashScreen
         Me.txtProcessorID = New System.Windows.Forms.TextBox()
         Me.Label3 = New System.Windows.Forms.Label()
         Me.pnlDBLogin = New System.Windows.Forms.Panel()
+        Me.btnTest = New System.Windows.Forms.Button()
         Me.cbUnRegisLocker = New System.Windows.Forms.ComboBox()
         Me.Label8 = New System.Windows.Forms.Label()
         Me.txtDatabaseName = New System.Windows.Forms.TextBox()
@@ -37,14 +38,15 @@ Partial Class frmSplashScreen
         Me.txtDBPassword = New System.Windows.Forms.TextBox()
         Me.Label4 = New System.Windows.Forms.Label()
         Me.txtProgressStatus = New System.Windows.Forms.TextBox()
-        Me.btnTest = New System.Windows.Forms.Button()
+        Me.txtSerialNumber = New System.Windows.Forms.TextBox()
+        Me.Label2 = New System.Windows.Forms.Label()
         Me.pnlDBLogin.SuspendLayout()
         Me.SuspendLayout()
         '
         'Label1
         '
         Me.Label1.AutoSize = True
-        Me.Label1.Location = New System.Drawing.Point(20, 41)
+        Me.Label1.Location = New System.Drawing.Point(23, 9)
         Me.Label1.Name = "Label1"
         Me.Label1.Size = New System.Drawing.Size(43, 13)
         Me.Label1.TabIndex = 0
@@ -52,7 +54,7 @@ Partial Class frmSplashScreen
         '
         'txtCPUID
         '
-        Me.txtCPUID.Location = New System.Drawing.Point(123, 38)
+        Me.txtCPUID.Location = New System.Drawing.Point(126, 6)
         Me.txtCPUID.Name = "txtCPUID"
         Me.txtCPUID.Size = New System.Drawing.Size(538, 20)
         Me.txtCPUID.TabIndex = 1
@@ -87,7 +89,7 @@ Partial Class frmSplashScreen
         '
         'txtProcessorID
         '
-        Me.txtProcessorID.Location = New System.Drawing.Point(123, 61)
+        Me.txtProcessorID.Location = New System.Drawing.Point(126, 29)
         Me.txtProcessorID.Name = "txtProcessorID"
         Me.txtProcessorID.Size = New System.Drawing.Size(538, 20)
         Me.txtProcessorID.TabIndex = 8
@@ -95,7 +97,7 @@ Partial Class frmSplashScreen
         'Label3
         '
         Me.Label3.AutoSize = True
-        Me.Label3.Location = New System.Drawing.Point(20, 64)
+        Me.Label3.Location = New System.Drawing.Point(23, 32)
         Me.Label3.Name = "Label3"
         Me.Label3.Size = New System.Drawing.Size(68, 13)
         Me.Label3.TabIndex = 7
@@ -110,11 +112,20 @@ Partial Class frmSplashScreen
         Me.pnlDBLogin.Controls.Add(Me.Label5)
         Me.pnlDBLogin.Controls.Add(Me.txtDBPassword)
         Me.pnlDBLogin.Controls.Add(Me.Label4)
-        Me.pnlDBLogin.Location = New System.Drawing.Point(17, 12)
+        Me.pnlDBLogin.Location = New System.Drawing.Point(12, 12)
         Me.pnlDBLogin.Name = "pnlDBLogin"
         Me.pnlDBLogin.Size = New System.Drawing.Size(647, 82)
         Me.pnlDBLogin.TabIndex = 10
         Me.pnlDBLogin.Visible = False
+        '
+        'btnTest
+        '
+        Me.btnTest.Location = New System.Drawing.Point(468, 4)
+        Me.btnTest.Name = "btnTest"
+        Me.btnTest.Size = New System.Drawing.Size(75, 23)
+        Me.btnTest.TabIndex = 13
+        Me.btnTest.Text = "Test"
+        Me.btnTest.UseVisualStyleBackColor = True
         '
         'cbUnRegisLocker
         '
@@ -179,20 +190,28 @@ Partial Class frmSplashScreen
         Me.txtProgressStatus.Size = New System.Drawing.Size(647, 210)
         Me.txtProgressStatus.TabIndex = 12
         '
-        'btnTest
+        'txtSerialNumber
         '
-        Me.btnTest.Location = New System.Drawing.Point(468, 4)
-        Me.btnTest.Name = "btnTest"
-        Me.btnTest.Size = New System.Drawing.Size(75, 23)
-        Me.btnTest.TabIndex = 13
-        Me.btnTest.Text = "Test"
-        Me.btnTest.UseVisualStyleBackColor = True
+        Me.txtSerialNumber.Location = New System.Drawing.Point(126, 55)
+        Me.txtSerialNumber.Name = "txtSerialNumber"
+        Me.txtSerialNumber.Size = New System.Drawing.Size(538, 20)
+        Me.txtSerialNumber.TabIndex = 14
+        '
+        'Label2
+        '
+        Me.Label2.AutoSize = True
+        Me.Label2.Location = New System.Drawing.Point(23, 58)
+        Me.Label2.Name = "Label2"
+        Me.Label2.Size = New System.Drawing.Size(73, 13)
+        Me.Label2.TabIndex = 13
+        Me.Label2.Text = "Serial Number"
         '
         'frmSplashScreen
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(682, 344)
+        Me.Controls.Add(Me.Label2)
         Me.Controls.Add(Me.txtProgressStatus)
         Me.Controls.Add(Me.pnlDBLogin)
         Me.Controls.Add(Me.txtProcessorID)
@@ -202,6 +221,7 @@ Partial Class frmSplashScreen
         Me.Controls.Add(Me.btnNext)
         Me.Controls.Add(Me.txtCPUID)
         Me.Controls.Add(Me.Label1)
+        Me.Controls.Add(Me.txtSerialNumber)
         Me.Name = "frmSplashScreen"
         Me.Text = "Setup New Minibox Locker"
         Me.pnlDBLogin.ResumeLayout(False)
@@ -227,4 +247,6 @@ Partial Class frmSplashScreen
     Friend WithEvents Label8 As Label
     Friend WithEvents cbUnRegisLocker As ComboBox
     Friend WithEvents btnTest As Button
+    Friend WithEvents txtSerialNumber As TextBox
+    Friend WithEvents Label2 As Label
 End Class
