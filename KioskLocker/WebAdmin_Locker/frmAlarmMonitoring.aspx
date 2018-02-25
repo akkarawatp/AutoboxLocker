@@ -61,6 +61,7 @@
                                             <h5><asp:Label ID="lblLocation" runat="server"></asp:Label></h5>
                                             <h5>IP : <asp:Label ID="lblIP" runat="server"></asp:Label></h5>
                                             <h5>Mac : <asp:Label ID="lblMac" runat="server"></asp:Label></h5>                                            
+                                            <h5>Last Sync : <asp:Label ID="lblLastSyncTime" runat="server"></asp:Label></h5>   
                                         </div>
                                     </a>
                                   </div>

@@ -71,6 +71,7 @@ Public Class frmAlarmMonitoring
         Dim lblLocation As Label = e.Item.FindControl("lblLocation")
         Dim lblIP As Label = e.Item.FindControl("lblIP")
         Dim lblMac As Label = e.Item.FindControl("lblMac")
+        Dim lblLastSyncTime As Label = e.Item.FindControl("lblLastSyncTime")
 
         Dim h3 As HtmlGenericControl = e.Item.FindControl("h3")
         Dim lnkHardware As LinkButton = e.Item.FindControl("lnkHardware")
@@ -82,6 +83,7 @@ Public Class frmAlarmMonitoring
         lblLocation.Text = e.Item.DataItem("location_name").ToString
         lblIP.Text = e.Item.DataItem("ip_address").ToString
         lblMac.Text = e.Item.DataItem("mac_address").ToString
+        If Convert.IsDBNull(e.Item.DataItem("last_sync_time")) = False Then lblLastSyncTime.Text = Convert.ToDateTime(e.Item.DataItem("last_sync_time")).ToString("dd MMM yyyy HH:mm:ss")
         aInfo.HRef = "frmAlarmMonitoringView.aspx?K=" & e.Item.DataItem("id")
 
         If e.Item.DataItem("hw_isproblem") = "Y" Or e.Item.DataItem("peripheral_condition") = "Y" Or
