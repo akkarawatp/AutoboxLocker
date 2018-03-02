@@ -26,9 +26,24 @@ Partial Class frmDashboardDetail
         End If
         ufDt.Dispose()
 
-        BindChart()
+        SetHeaderInfo()
+        'BindChart()
         barifram.Src = "frmBarChart.aspx?LocationID=" & Request("LocationID")
 
+    End Sub
+
+    Private Sub SetHeaderInfo()
+        Dim UserName As String = Session("UserName")
+        Dim LocationID As String = Request("LocationID")
+
+        Dim lnq As New ServerLinqDB.TABLE.MsLocationServerLinqDB
+        lnq.GetDataByPK(LocationID, Nothing)
+        If lnq.ID > 0 Then
+            lblLocationName.Text = lnq.LOCATION_NAME
+        End If
+        lnq = Nothing
+
+        BindLine(UserName, LocationID)
     End Sub
 
     Private Sub BindChart()
@@ -100,7 +115,7 @@ Partial Class frmDashboardDetail
 
     Private Sub BindLine(UserName As String, LocationID As Long)
         Dim sql As String = "select s.ms_kiosk_id, convert(date, p.pickup_time) TXN_DATE, convert(varchar(8),p.pickup_time,112) wh_date," & vbNewLine
-        sql += " sum(p.service_amt) net_income" & vbNewLine
+        sql += " sum(p.service_amt+p.fine_amt) net_income" & vbNewLine
         sql += " from TB_DEPOSIT_TRANSACTION s" & vbNewLine
         sql += " inner join tb_pickup_transaction p On s.trans_no=p.deposit_trans_no" & vbNewLine
         sql += " inner join MS_KIOSK k on k.id=s.ms_kiosk_id" & vbNewLine
@@ -524,14 +539,6 @@ Partial Class frmDashboardDetail
     End Sub
 
     Private Sub btnRefreshData_Click(sender As Object, e As EventArgs) Handles btnRefreshData.Click
-        'If Session("UserName") IsNot Nothing Then
-        '    Dim UserName As String = Session("UserName")
-        '    Dim LocationID As Long = Convert.ToInt64(Request("LocationID"))
-        '    BindLine(UserName, LocationID)
-        '    BindBar(UserName, LocationID)
-        '    BindRadar(UserName, LocationID)
-        '    BindNotification(UserName, LocationID)
-        'End If
 
     End Sub
 End Class

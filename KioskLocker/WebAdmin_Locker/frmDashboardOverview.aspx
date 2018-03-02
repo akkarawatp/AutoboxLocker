@@ -19,6 +19,70 @@
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" Runat="Server">
     <div class="row">
+        <div class="col-sm-8">
+            <div class="row">
+                <div class="col-sm-6">
+                    <div class="col-sm-7">
+                        <div class="card card-block no-border bg-orange row-equal align-middle">
+                            <h4 class="m-a-0 text-white">Day income</h4>
+                        </div>
+                    </div>
+                    <div class="col-sm-5">
+                        <div class="card card-block no-border bg-white row-equal align-middle">
+                            <h4 class="m-a-0">
+                                <asp:Label ID="lblDayIncome" runat="server" ></asp:Label>
+                            </h4>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="col-sm-7">
+                        <div class="card card-block no-border bg-orange row-equal align-middle">
+                            <h4 class="m-a-0 text-white">Week income</h4>
+                        </div>
+                    </div>
+                    <div class="col-sm-5">
+                        <div class="card card-block no-border bg-white row-equal align-middle">
+                            <h4 class="m-a-0">
+                                <asp:Label ID="lblWeeIncome" runat="server" ></asp:Label>
+                            </h4>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-6">
+                    <div class="col-sm-7">
+                        <div class="card card-block no-border bg-orange row-equal align-middle">
+                            <h4 class="m-a-0 text-white">Month income</h4>
+                        </div>
+                    </div>
+                    <div class="col-sm-5">
+                        <div class="card card-block no-border bg-white row-equal align-middle">
+                            <h4 class="m-a-0">
+                                <asp:Label ID="lblMonthIncome" runat="server" ></asp:Label>
+                            </h4>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="col-sm-7">
+                        <div class="card card-block no-border bg-orange row-equal align-middle">
+                            <h4 class="m-a-0 text-white">Year income</h4>
+                        </div>
+                    </div>
+                    <div class="col-sm-5">
+                        <div class="card card-block no-border bg-white row-equal align-middle">
+                            <h4 class="m-a-0">
+                                <asp:Label ID="lblYearIncome" runat="server"></asp:Label>
+                            </h4>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
         <div class="col-lg-12">
 
             <asp:Repeater ID="rptList" runat="server">

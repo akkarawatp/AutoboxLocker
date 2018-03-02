@@ -29,7 +29,7 @@
           <div class="card m-b-0 bg-success-white p-a-md no-border">
             <h5 class="m-t-0">
               <span class="pull-right"><asp:Label ID="lblSalesValues" runat="server"></asp:Label> This week</span>
-              <span>Sales Values</span>
+              <span><asp:Label ID="lblLocationName" runat="server"></asp:Label></span>
               </h5>
 
 

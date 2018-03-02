@@ -26,6 +26,7 @@ Partial Class frmDashboardOverview
         If Session("UserName") IsNot Nothing Then
             Dim UserName As String = Session("UserName")
             BindList(UserName)
+            BindSummaryIncome(UserName)
         End If
 
     End Sub
@@ -91,7 +92,7 @@ Partial Class frmDashboardOverview
     Private Function GetCollectToday(MsLocationID As Long) As Integer()
         'หาจำนวนรายการที่ฝากและรับคืนในวันนี้ และเงินที่ได้รับในวันนี้
         Dim ret() As Integer = {0, 0}
-        Dim sql As String = " Select sum(isnull(p.service_amt,0)) daily_sales," & vbNewLine
+        Dim sql As String = " Select sum(isnull(p.service_amt,0)+isnull(p.fine_amt,0)) daily_sales," & vbNewLine
         sql += " count(p.id) collect_success" & vbNewLine
         sql += " From TB_DEPOSIT_TRANSACTION s" & vbNewLine
         sql += " inner Join TB_PICKUP_TRANSACTION p On s.trans_no=p.deposit_trans_no And p.trans_status = 1" & vbNewLine
@@ -113,6 +114,63 @@ Partial Class frmDashboardOverview
         DT.Dispose()
         Return ret
     End Function
+
+    Private Sub BindSummaryIncome(UserName As String)
+        Dim sql As String = "select s.ms_kiosk_id, convert(date, p.pickup_time) TXN_DATE, convert(varchar(8),p.pickup_time,112) wh_date," & vbNewLine
+        sql += " sum(p.service_amt+p.fine_amt) net_income" & vbNewLine
+        sql += " from TB_DEPOSIT_TRANSACTION s" & vbNewLine
+        sql += " inner join tb_pickup_transaction p On s.trans_no=p.deposit_trans_no" & vbNewLine
+        sql += " inner join MS_KIOSK k on k.id=s.ms_kiosk_id" & vbNewLine
+        sql += " where s.trans_status=1 and p.trans_status=1 " & vbNewLine
+        sql += " And Convert(varchar(4), p.pickup_time, 112) = convert(varchar(4), getdate(),112)" & vbNewLine
+        sql += " and convert(varchar(8),getdate(),112) between convert(varchar(8),k.valid_start_date,112) and convert(varchar(8),k.valid_expire_date,112) " & vbNewLine
+        'sql += " and k.ms_location_id=@_LOCATION_ID " & vbNewLine
+        sql += " And k.ms_location_id In (Select ul.ms_location_id " & vbNewLine
+        sql += " 	from MS_USER_LOCATION ul  " & vbNewLine
+        sql += " 	inner join MS_LOCATION l On l.id=ul.ms_location_id " & vbNewLine
+        sql += " 	where l.active_status='Y' and ul.username=@_USERNAME) " & vbNewLine
+        sql += " group by s.ms_kiosk_id,  convert(date, p.pickup_time) , convert(varchar(8),p.pickup_time,112) " & vbNewLine
+        sql += " order by convert(date, p.pickup_time)  "
+
+        Dim p(1) As SqlParameter
+        p(0) = ServerLinqDB.ConnectDB.ServerDB.SetText("@_USERNAME", UserName)
+
+        Dim DT As DataTable = ServerLinqDB.ConnectDB.ServerDB.ExecuteTable(sql, p)
+        If DT.Rows.Count > 0 Then
+            Dim Obj As Object = DT.Compute("SUM(NET_INCOME)", "wh_date='" & Now.ToString("yyyyMMdd", New Globalization.CultureInfo("en-US")) & "'")
+            If Not IsDBNull(Obj) Then
+                lblDayIncome.Text = FormatNumber(Obj, 0) & " THB"
+            Else
+                lblDayIncome.Text = "-"
+            End If
+
+            Dim StartWeek As String = Engine.ReportENG.GetFirstDayOfWeek(Now).ToString("yyyyMMdd", New Globalization.CultureInfo("en-US"))
+            Dim EndWeek = Engine.ReportENG.GetLastDayOfWeek(Now).ToString("yyyyMMdd", New Globalization.CultureInfo("en-US"))
+            Obj = DT.Compute("SUM(NET_INCOME)", "wh_date>='" & StartWeek & "' AND wh_date<='" & EndWeek & "'")
+            If Not IsDBNull(Obj) Then
+                lblWeeIncome.Text = FormatNumber(Obj, 0) & " THB"
+            Else
+                lblWeeIncome.Text = " - "
+            End If
+
+            Dim StartMonth As String = Now.ToString("yyyyMM", New Globalization.CultureInfo("en-US")) & "01"
+            Dim EndMonth As String = Now.ToString("yyyyMM", New Globalization.CultureInfo("en-US")) & DateTime.DaysInMonth(Now.Year, Now.Month).ToString.PadLeft(2, "0")
+            Obj = DT.Compute("SUM(NET_INCOME)", "wh_date>='" & StartMonth & "' AND wh_date<='" & EndMonth & "'")
+            If Not IsDBNull(Obj) Then
+                lblMonthIncome.Text = FormatNumber(Obj, 0) & " THB"
+            Else
+                lblMonthIncome.Text = " - "
+            End If
+
+            Obj = DT.Compute("SUM(NET_INCOME)", "")
+            If Not IsDBNull(Obj) Then
+                lblYearIncome.Text = FormatNumber(Obj, 0) & " THB"
+            Else
+                lblYearIncome.Text = " - "
+            End If
+        End If
+        DT.Dispose()
+    End Sub
 
     Private Sub rptList_ItemDataBound(sender As Object, e As RepeaterItemEventArgs) Handles rptList.ItemDataBound
         If e.Item.ItemType <> ListItemType.Item And e.Item.ItemType <> ListItemType.AlternatingItem Then Exit Sub
