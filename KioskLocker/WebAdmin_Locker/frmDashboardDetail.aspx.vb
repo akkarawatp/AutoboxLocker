@@ -26,27 +26,38 @@ Partial Class frmDashboardDetail
         End If
         ufDt.Dispose()
 
-        SetHeaderInfo()
+        SetDashboardInfo()
         'BindChart()
         'barifram.Src = "frmBarChart.aspx?LocationID=" & Request("LocationID")
 
     End Sub
 
-    Private Sub SetHeaderInfo()
+    Private Sub SetDashboardInfo()
         Dim UserName As String = Session("UserName")
         Dim LocationID As String = Request("LocationID")
+        BindWeekSection(LocationID)
+        BindMonthIncome(LocationID)
+        BindIncomeSummary(LocationID)
 
         Dim lnq As New ServerLinqDB.TABLE.MsLocationServerLinqDB
         lnq.GetDataByPK(LocationID, Nothing)
         If lnq.ID > 0 Then
             lblLocationName.Text = lnq.LOCATION_NAME
+
+            lblGrossProfitRate.Text = lnq.GROSS_PROFIT_RATE
+            lblRenterRate.Text = (100 - lnq.GROSS_PROFIT_RATE)
+
+            Dim CompanyPercent As Double = (lblGrossProfitRate.Text / 100)
+            If lblDailySales.Text.Trim <> "-" Then lblCompanyDayIncome.Text = (lblDailySales.Text * CompanyPercent).ToString("#,##0")
+            If lblWeeklySales.Text.Trim <> "-" Then lblCompanyWeekIncome.Text = (lblWeeklySales.Text * CompanyPercent).ToString("#,##0")
+            If lblMonthlySales.Text.Trim <> "-" Then lblCompanyMonthIncome.Text = (lblMonthlySales.Text * CompanyPercent).ToString("#,##0")
+
+            Dim RenterPercent As Double = (lblRenterRate.Text / 100)
+            If lblDailySales.Text.Trim <> "-" Then lblRenterDayIncome.Text = (lblDailySales.Text * RenterPercent).ToString("#,##0")
+            If lblWeeklySales.Text.Trim <> "-" Then lblRenterWeekIncome.Text = (lblWeeklySales.Text * RenterPercent).ToString("#,##0")
+            If lblMonthlySales.Text.Trim <> "-" Then lblRenterMonthIncome.Text = (lblMonthlySales.Text * RenterPercent).ToString("#,##0")
         End If
         lnq = Nothing
-
-        BindWeekSection(LocationID)
-        BindMonthIncome(LocationID)
-
-        BindIncomeSummary(LocationID)
     End Sub
 
 #Region "Week Section"
@@ -225,7 +236,7 @@ Partial Class frmDashboardDetail
             Dim Obj As Object
             Obj = DT.Compute("SUM(NET_INCOME)", "wh_date='" & Now.ToString("yyyyMMdd", New Globalization.CultureInfo("en-US")) & "'")
             If Not IsDBNull(Obj) Then
-                lblDailySales.Text = FormatNumber(Obj, 0) & " ฿"
+                lblDailySales.Text = FormatNumber(Obj, 0)
             Else
                 lblDailySales.Text = "-"
             End If
@@ -234,8 +245,8 @@ Partial Class frmDashboardDetail
             Dim EndWeek = Engine.ReportENG.GetLastDayOfWeek(Now).ToString("yyyyMMdd", New Globalization.CultureInfo("en-US"))
             Obj = DT.Compute("SUM(NET_INCOME)", "wh_date>='" & StartWeek & "' AND wh_date<='" & EndWeek & "'")
             If Not IsDBNull(Obj) Then
-                lblWeeklySales.Text = FormatNumber(Obj, 0) & " ฿"
-                lblSalesValues.Text = FormatNumber(Obj, 0) & " ฿"
+                lblWeeklySales.Text = FormatNumber(Obj, 0)
+                lblSalesValues.Text = FormatNumber(Obj, 0)
             Else
                 lblWeeklySales.Text = " - "
                 lblSalesValues.Text = " - "
@@ -245,14 +256,14 @@ Partial Class frmDashboardDetail
             Dim EndMonth As String = Now.ToString("yyyyMM", New Globalization.CultureInfo("en-US")) & DateTime.DaysInMonth(Now.Year, Now.Month).ToString.PadLeft(2, "0")
             Obj = DT.Compute("SUM(NET_INCOME)", "wh_date>='" & StartMonth & "' AND wh_date<='" & EndMonth & "'")
             If Not IsDBNull(Obj) Then
-                lblMonthlySales.Text = FormatNumber(Obj, 0) & " ฿"
+                lblMonthlySales.Text = FormatNumber(Obj, 0)
             Else
                 lblMonthlySales.Text = " - "
             End If
 
             Obj = DT.Compute("SUM(NET_INCOME)", "")
             If Not IsDBNull(Obj) Then
-                lblYearlySales.Text = FormatNumber(Obj, 0) & " ฿"
+                lblYearlySales.Text = FormatNumber(Obj, 0)
             Else
                 lblYearlySales.Text = " - "
             End If

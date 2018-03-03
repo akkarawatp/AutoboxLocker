@@ -8,7 +8,7 @@ Imports ServerLinqDB.ConnectDB
 
 Namespace TABLE
     'Represents a transaction for MS_LOCATION table ServerLinqDB.
-    '[Create by  on November, 17 2017]
+    '[Create by  on March, 3 2018]
     Public Class MsLocationServerLinqDB
         Public sub MsLocationServerLinqDB()
 
@@ -46,6 +46,7 @@ Namespace TABLE
         Dim _UPDATED_DATE As  System.Nullable(Of DateTime)  = New DateTime(1,1,1)
         Dim _LOCATION_CODE As String = ""
         Dim _LOCATION_NAME As String = ""
+        Dim _GROSS_PROFIT_RATE As Long = 0
         Dim _ACTIVE_STATUS As Char = "Y"
 
         'Generate Field Property 
@@ -112,6 +113,15 @@ Namespace TABLE
                _LOCATION_NAME = value
             End Set
         End Property 
+        <Column(Storage:="_GROSS_PROFIT_RATE", DbType:="Int NOT NULL ",CanBeNull:=false)>  _
+        Public Property GROSS_PROFIT_RATE() As Long
+            Get
+                Return _GROSS_PROFIT_RATE
+            End Get
+            Set(ByVal value As Long)
+               _GROSS_PROFIT_RATE = value
+            End Set
+        End Property 
         <Column(Storage:="_ACTIVE_STATUS", DbType:="Char(1) NOT NULL ",CanBeNull:=false)>  _
         Public Property ACTIVE_STATUS() As Char
             Get
@@ -132,6 +142,7 @@ Namespace TABLE
             _UPDATED_DATE = New DateTime(1,1,1)
             _LOCATION_CODE = ""
             _LOCATION_NAME = ""
+            _GROSS_PROFIT_RATE = 0
             _ACTIVE_STATUS = "Y"
         End Sub
 
@@ -431,7 +442,7 @@ Namespace TABLE
         End Function
 
         Private Function SetParameterData() As SqlParameter()
-            Dim cmbParam(7) As SqlParameter
+            Dim cmbParam(8) As SqlParameter
             cmbParam(0) = New SqlParameter("@_ID", SqlDbType.BigInt)
             cmbParam(0).Value = _ID
 
@@ -461,8 +472,11 @@ Namespace TABLE
             cmbParam(6) = New SqlParameter("@_LOCATION_NAME", SqlDbType.VarChar)
             cmbParam(6).Value = _LOCATION_NAME
 
-            cmbParam(7) = New SqlParameter("@_ACTIVE_STATUS", SqlDbType.Char)
-            cmbParam(7).Value = _ACTIVE_STATUS
+            cmbParam(7) = New SqlParameter("@_GROSS_PROFIT_RATE", SqlDbType.Int)
+            cmbParam(7).Value = _GROSS_PROFIT_RATE
+
+            cmbParam(8) = New SqlParameter("@_ACTIVE_STATUS", SqlDbType.Char)
+            cmbParam(8).Value = _ACTIVE_STATUS
 
             Return cmbParam
         End Function
@@ -490,6 +504,7 @@ Namespace TABLE
                         If Convert.IsDBNull(Rdr("updated_date")) = False Then _updated_date = Convert.ToDateTime(Rdr("updated_date"))
                         If Convert.IsDBNull(Rdr("location_code")) = False Then _location_code = Rdr("location_code").ToString()
                         If Convert.IsDBNull(Rdr("location_name")) = False Then _location_name = Rdr("location_name").ToString()
+                        If Convert.IsDBNull(Rdr("gross_profit_rate")) = False Then _gross_profit_rate = Convert.ToInt32(Rdr("gross_profit_rate"))
                         If Convert.IsDBNull(Rdr("active_status")) = False Then _active_status = Rdr("active_status").ToString()
                     Else
                         ret = False
@@ -532,6 +547,7 @@ Namespace TABLE
                         If Convert.IsDBNull(Rdr("updated_date")) = False Then _updated_date = Convert.ToDateTime(Rdr("updated_date"))
                         If Convert.IsDBNull(Rdr("location_code")) = False Then _location_code = Rdr("location_code").ToString()
                         If Convert.IsDBNull(Rdr("location_name")) = False Then _location_name = Rdr("location_name").ToString()
+                        If Convert.IsDBNull(Rdr("gross_profit_rate")) = False Then _gross_profit_rate = Convert.ToInt32(Rdr("gross_profit_rate"))
                         If Convert.IsDBNull(Rdr("active_status")) = False Then _active_status = Rdr("active_status").ToString()
                     Else
                         _error = MessageResources.MSGEV002
@@ -557,13 +573,14 @@ Namespace TABLE
         Private ReadOnly Property SqlInsert() As String 
             Get
                 Dim Sql As String=""
-                Sql += "INSERT INTO " & tableName  & " (CREATED_BY, CREATED_DATE, LOCATION_CODE, LOCATION_NAME, ACTIVE_STATUS)"
-                Sql += " OUTPUT INSERTED.ID, INSERTED.CREATED_BY, INSERTED.CREATED_DATE, INSERTED.UPDATED_BY, INSERTED.UPDATED_DATE, INSERTED.LOCATION_CODE, INSERTED.LOCATION_NAME, INSERTED.ACTIVE_STATUS"
+                Sql += "INSERT INTO " & tableName  & " (CREATED_BY, CREATED_DATE, LOCATION_CODE, LOCATION_NAME, GROSS_PROFIT_RATE, ACTIVE_STATUS)"
+                Sql += " OUTPUT INSERTED.ID, INSERTED.CREATED_BY, INSERTED.CREATED_DATE, INSERTED.UPDATED_BY, INSERTED.UPDATED_DATE, INSERTED.LOCATION_CODE, INSERTED.LOCATION_NAME, INSERTED.GROSS_PROFIT_RATE, INSERTED.ACTIVE_STATUS"
                 Sql += " VALUES("
                 sql += "@_CREATED_BY" & ", "
                 sql += "@_CREATED_DATE" & ", "
                 sql += "@_LOCATION_CODE" & ", "
                 sql += "@_LOCATION_NAME" & ", "
+                sql += "@_GROSS_PROFIT_RATE" & ", "
                 sql += "@_ACTIVE_STATUS"
                 sql += ")"
                 Return sql
@@ -580,6 +597,7 @@ Namespace TABLE
                 Sql += "UPDATED_DATE = " & "@_UPDATED_DATE" & ", "
                 Sql += "LOCATION_CODE = " & "@_LOCATION_CODE" & ", "
                 Sql += "LOCATION_NAME = " & "@_LOCATION_NAME" & ", "
+                Sql += "GROSS_PROFIT_RATE = " & "@_GROSS_PROFIT_RATE" & ", "
                 Sql += "ACTIVE_STATUS = " & "@_ACTIVE_STATUS" + ""
                 Return Sql
             End Get
@@ -598,7 +616,7 @@ Namespace TABLE
         'Get Select Statement for table MS_LOCATION
         Private ReadOnly Property SqlSelect() As String
             Get
-                Dim Sql As String = "SELECT ID, CREATED_BY, CREATED_DATE, UPDATED_BY, UPDATED_DATE, LOCATION_CODE, LOCATION_NAME, ACTIVE_STATUS FROM " & tableName
+                Dim Sql As String = "SELECT ID, CREATED_BY, CREATED_DATE, UPDATED_BY, UPDATED_DATE, LOCATION_CODE, LOCATION_NAME, GROSS_PROFIT_RATE, ACTIVE_STATUS FROM " & tableName
                 Return Sql
             End Get
         End Property

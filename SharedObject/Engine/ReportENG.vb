@@ -404,20 +404,44 @@
     End Function
 
     Public Shared Function GetFirstDayOfWeek(ByVal TxnDate As Date) As Date
-        Dim CalDate As Date = DateAdd(DateInterval.Day, -1, TxnDate)
-        Dim FirstDay As Date = DateAdd(DateInterval.Day, 1 - CalDate.DayOfWeek, CalDate)
-        If FirstDay < New Date(TxnDate.Year, 1, 1) Then
-            FirstDay = New Date(TxnDate.Year, 1, 1)
-        End If
-        Return FirstDay
+        Dim FirstDayOfWeek As Date = New Date(DateTime.Now.Year, DateTime.Now.Month, 1)
+        Dim LastDayOfWeek As Date = DateAdd(DateInterval.Day, 7 - (FirstDayOfWeek.DayOfWeek + 1), FirstDayOfWeek)
+
+        For i As Integer = 1 To 5
+            If TxnDate >= FirstDayOfWeek And TxnDate <= LastDayOfWeek Then
+                Return FirstDayOfWeek
+            End If
+
+            FirstDayOfWeek = DateAdd(DateInterval.Day, 7, FirstDayOfWeek)
+            If FirstDayOfWeek.DayOfWeek <> DayOfWeek.Sunday Then
+                FirstDayOfWeek = DateAdd(DateInterval.Day, 1, LastDayOfWeek)
+            End If
+
+            LastDayOfWeek = DateAdd(DateInterval.Day, 7, LastDayOfWeek)
+            If LastDayOfWeek.Month <> DateTime.Now.Month Then
+                LastDayOfWeek = New Date(DateTime.Now.Year, DateTime.Now.Month, DateTime.DaysInMonth(DateTime.Now.Year, DateTime.Now.Month))
+            End If
+        Next
     End Function
 
     Public Shared Function GetLastDayOfWeek(ByVal TxnDate As Date) As Date
-        Dim CalDate As Date = DateAdd(DateInterval.Day, -1, TxnDate)
-        Dim LastDay As Date = DateAdd(DateInterval.Day, 7 - CalDate.DayOfWeek, CalDate)
-        If LastDay > New Date(TxnDate.Year, 12, 31) Then
-            LastDay = New Date(TxnDate.Year, 12, 31)
-        End If
-        Return LastDay
+        Dim FirstDayOfWeek As Date = New Date(DateTime.Now.Year, DateTime.Now.Month, 1)
+        Dim LastDayOfWeek As Date = DateAdd(DateInterval.Day, 7 - (FirstDayOfWeek.DayOfWeek + 1), FirstDayOfWeek)
+
+        For i As Integer = 1 To 5
+            If TxnDate >= FirstDayOfWeek And TxnDate <= LastDayOfWeek Then
+                Return LastDayOfWeek
+            End If
+
+            FirstDayOfWeek = DateAdd(DateInterval.Day, 7, FirstDayOfWeek)
+            If FirstDayOfWeek.DayOfWeek <> DayOfWeek.Sunday Then
+                FirstDayOfWeek = DateAdd(DateInterval.Day, 1, LastDayOfWeek)
+            End If
+
+            LastDayOfWeek = DateAdd(DateInterval.Day, 7, LastDayOfWeek)
+            If LastDayOfWeek.Month <> DateTime.Now.Month Then
+                LastDayOfWeek = New Date(DateTime.Now.Year, DateTime.Now.Month, DateTime.DaysInMonth(DateTime.Now.Year, DateTime.Now.Month))
+            End If
+        Next
     End Function
 End Class

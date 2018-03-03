@@ -116,6 +116,7 @@ Public Class frmMasterLocation
         EditLocationCode = ""
         txtLocationCode.Text = ""
         txtLocationName.Text = ""
+        txtGrossProfitRate.Text = ""
         chkActive.Checked = False
         lblEditMode.Text = "Add"
 
@@ -161,6 +162,10 @@ Public Class frmMasterLocation
         End If
         If txtLocationName.Text = "" Then
             ScriptManager.RegisterStartupScript(Me.Page, GetType(String), "Alert", "alert('Insert Location Name');", True)
+            Exit Sub
+        End If
+        If txtGrossProfitRate.Text = "" Then
+            ScriptManager.RegisterStartupScript(Me.Page, GetType(String), "Alert", "alert('Insert Gross Profit Rate');", True)
             Exit Sub
         End If
 
@@ -274,8 +279,9 @@ Public Class frmMasterLocation
         Dim lnqLoc As New MsLocationServerLinqDB
         lnqLoc.ChkDataByLOCATION_CODE(EditLocationCode, trans.Trans)
         With lnqLoc
-            .LOCATION_CODE = txtLocationCode.Text.Replace("'", "''")
-            .LOCATION_NAME = txtLocationName.Text.Replace("'", "''")
+            .LOCATION_CODE = txtLocationCode.Text
+            .LOCATION_NAME = txtLocationName.Text
+            .GROSS_PROFIT_RATE = txtGrossProfitRate.Text
             .ACTIVE_STATUS = IIf(chkActive.Checked, "Y", "N")
         End With
 
@@ -699,6 +705,7 @@ Public Class frmMasterLocation
 
                 txtLocationCode.Text = DT.Rows(0).Item("location_code").ToString
                 txtLocationName.Text = DT.Rows(0).Item("location_name").ToString
+                txtGrossProfitRate.Text = DT.Rows(0).Item("gross_profit_rate").ToString
 
                 'Get Service Rate Information 
                 Dim ServiceRateID As Long = Convert.ToInt64(DT.Rows(0).Item("ms_service_rate_id"))
@@ -731,57 +738,6 @@ Public Class frmMasterLocation
                     FillDataPromotion(0)
                 End If
 
-                'rptPromotionRate.DataSource = cmDt
-                'rptPromotionRate.DataBind()
-
-                'rptPromotionRateHour.DataSource = hourDt
-                'rptPromotionRateHour.DataBind()
-
-                'txtPromotionCode.Text = ""
-                'txtPromotionName.Text = ""
-                'txtPromotionStartDate.Text = ""
-                'txtPromotionEndDate.Text = ""
-                'likPublishPromotion.Visible = False
-                'lblIsActivePromotion.Text = "N"
-
-                ''Dim IsCurrentPromotion As Boolean = False
-                'If lphDt.Rows.Count > 0 Then
-                '    Dim lphDr As DataRow = lphDt.Rows(0)
-
-                '    lblLocationPromotionID.Text = lphDr("id")
-                '    txtPromotionCode.Text = lphDr("promotion_code")
-                '    txtPromotionName.Text = lphDr("promotion_name")
-                '    txtPromotionStartDate.Text = Convert.ToDateTime(lphDr("start_date")).ToString("MMM dd yyyy", New Globalization.CultureInfo("en-US"))
-                '    txtPromotionEndDate.Text = Convert.ToDateTime(lphDr("end_date")).ToString("MMM dd yyyy", New Globalization.CultureInfo("en-US"))
-
-
-                '    likPublishPromotion.Visible = True
-
-                '    'ถ้ามี Promotion ให้ Disable Textbox เกี่ยวกับ Promotion เพื่อไม่ให้แก้ไขข้อมูลได้
-                '    'ถ้ามีข้อมูลให้ตรวจสอบ Status = 1 หรือไม่
-                '    If lphDr("publish_status") = "1" Then
-
-                '        likPublishPromotion.Visible = False
-                '        lblIsActivePromotion.Text = "Y"
-                '    End If
-                'End If
-
-                'If lblIsActivePromotion.Text = "N" Then
-                '    'ถ้ายังไม่มี Promotion ที่ Active ก็เปิดช่องให้สามารถกรอก Promotion ใหม่ได้เลย
-                '    txtPromotionName.Enabled = True
-                '    txtPromotionStartDate.Enabled = True
-                '    txtPromotionEndDate.Enabled = True
-
-                '    For i As Integer = 0 To rptPromotionRateHour.Items.Count - 1
-                '        Dim rptPromotionRateHourModel As Repeater = rptPromotionRateHour.Items(i).FindControl("rptPromotionRateHourModel")
-
-                '        For j As Integer = 0 To rptPromotionRateHourModel.Items.Count - 1
-                '            Dim txtPromotionRate As TextBox = rptPromotionRateHourModel.Items(j).FindControl("txtPromotionRate")
-                '            txtPromotionRate.Enabled = True
-                '        Next
-                '    Next
-                'End If
-
                 ''Set Repeater Promotion History
                 rptPromotionHis.DataSource = GetDataLocationPromotion(Convert.ToInt64(DT.Rows(0)("id")))
                 rptPromotionHis.DataBind()
@@ -794,8 +750,6 @@ Public Class frmMasterLocation
                 pnlEdit.Visible = True
 
                 CurrentTab = Tab.ServiceRate
-
-
 #Region "ตรวจสอบสิทธิ์การแก้ไขข้อมูล"
                 'ตรวจสอบสิทธิ์การแก้ไขข้อมูล
                 Dim ufDt As DataTable = DirectCast(Session("List_User_Functional"), DataTable)
@@ -807,6 +761,7 @@ Public Class frmMasterLocation
                     If auDt.Rows.Count = 0 Then
                         txtLocationCode.Enabled = False
                         txtLocationName.Enabled = False
+                        txtGrossProfitRate.Enabled = False
 
                         'Disable Deposit Data
                         For i As Integer = 0 To rptDepositCabinetModel.Items.Count - 1

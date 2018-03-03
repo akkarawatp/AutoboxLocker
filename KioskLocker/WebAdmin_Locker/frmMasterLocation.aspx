@@ -74,16 +74,25 @@
                   <div class="col-lg-12 form-horizontal">
                       <h4 class="card-title">Location Info</h4>
                       <div class="form-group">
-                        <label class="col-sm-2 control-label">Location Code</label>
-                        <div class="col-sm-4">
-                          <asp:TextBox ID="txtLocationCode" runat="server" CssClass="form-control" MaxLength="20"></asp:TextBox>                      
-                        </div>
-                      </div>                  
+                          <label class="col-sm-2 control-label">Location Code</label>
+                          <div class="col-sm-4">
+                              <asp:TextBox ID="txtLocationCode" runat="server" CssClass="form-control" MaxLength="20"></asp:TextBox>
+                          </div>
+                      </div>
                       <div class="form-group">
-                        <label class="col-sm-2 control-label">Location Name</label>
-                        <div class="col-sm-10">
-                            <asp:TextBox ID="txtLocationName" runat="server" CssClass="form-control" MaxLength="200"></asp:TextBox>
-                        </div>                                       
+                          <label class="col-sm-2 control-label">Location Name</label>
+                          <div class="col-sm-10">
+                              <asp:TextBox ID="txtLocationName" runat="server" CssClass="form-control" MaxLength="200"></asp:TextBox>
+                          </div>
+                      </div>
+                      <div class="form-group">
+                          <label class="col-sm-2 control-label">Gross Profit Rate</label>
+                          <div class="col-sm-4">
+                              <asp:TextBox ID="txtGrossProfitRate" runat="server" CssClass="form-control" MaxLength="200"></asp:TextBox>
+                          </div>
+                          <div class="col-sm-1">
+                              %
+                          </div>
                       </div>
 
                       <div class="row">

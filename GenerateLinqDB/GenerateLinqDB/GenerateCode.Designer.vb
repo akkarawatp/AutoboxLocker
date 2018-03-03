@@ -142,7 +142,7 @@ Partial Class GenerateCode
         Me.txtDatabaseName.Name = "txtDatabaseName"
         Me.txtDatabaseName.Size = New System.Drawing.Size(158, 22)
         Me.txtDatabaseName.TabIndex = 14
-        Me.txtDatabaseName.Text = "AutoboxLockerServerDB"
+        Me.txtDatabaseName.Text = "MiniboxServerDB"
         '
         'txtUserID
         '

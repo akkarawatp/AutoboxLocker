@@ -19,7 +19,7 @@
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" Runat="Server">
     <div class="row">
-        <div class="col-sm-8">
+        <div class="col-sm-9">
             <div class="row">
                 <div class="col-sm-6">
                     <div class="col-sm-7">

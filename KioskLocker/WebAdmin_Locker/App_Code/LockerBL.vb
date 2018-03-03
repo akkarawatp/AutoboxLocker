@@ -369,7 +369,7 @@ Public Class LockerBL
 
 #Region "_Master Location"
     Public Function GetList_Location(location_code As String) As DataTable
-        Dim sql As String = " select l.id,location_code,location_name,l.active_status,count(k.id) total_kiosk, isnull(sr.id,0) ms_service_rate_id"
+        Dim sql As String = " select l.id,location_code,location_name, l.gross_profit_rate,l.active_status,count(k.id) total_kiosk, isnull(sr.id,0) ms_service_rate_id"
         sql &= " from ms_location l "
         sql &= " left join ms_kiosk k on l.id = k.ms_location_id "
         sql &= " left join MS_SERVICE_RATE sr on l.id=sr.ms_location_id"
@@ -377,7 +377,7 @@ Public Class LockerBL
         If location_code <> "" Then
             sql &= " And location_code = @_LOCATION_CODE"
         End If
-        sql &= " group by l.id,location_code,location_name,l.active_status, isnull(sr.id,0)"
+        sql &= " group by l.id,location_code,location_name,l.gross_profit_rate, l.active_status, isnull(sr.id,0)"
         sql &= " order by location_code,location_name "
 
         Dim p(1) As SqlParameter

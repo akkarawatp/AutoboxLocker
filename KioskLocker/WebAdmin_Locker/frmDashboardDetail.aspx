@@ -53,10 +53,10 @@
                                         <asp:Repeater ID="rptWeekDetail" runat="server">
                                             <ItemTemplate>
                                                 <tr>
-                                                    <td class="text-left">
+                                                    <td class="text-left" style="padding:0.625rem 0.5rem">
                                                         <asp:Label ID="lblPickupDate" runat="server"></asp:Label>
                                                     </td>
-                                                    <td class="text-right">
+                                                    <td class="text-right" style="padding:0.625rem 0.5rem">
                                                         <asp:Label ID="lblIncome" runat="server"></asp:Label>
                                                     </td>
                                                 </tr>
@@ -82,7 +82,7 @@
                             <ItemTemplate>
                                 <div class="col-sm-3">
                                     <div class="col-sm-7">
-                                        <div class="card card-block no-border bg-orange row-equal align-middle" style="padding-bottom:10px;">
+                                        <div class="card card-block no-border bg-orange row-equal align-middle" style="padding:5px;">
                                             <h6 class="m-a-0 text-white">Month Income</h6>
                                             <h4 class="m-a-0 text-white">
                                                 <asp:Label ID="lblMonthName" runat="server" ></asp:Label>
@@ -90,7 +90,7 @@
                                         </div>
                                     </div>
                                     <div class="col-sm-5">
-                                        <div class="card card-block bg-white row-equal align-middle">
+                                        <div class="card card-block bg-white row-equal align-middle" style="padding:10px;">
                                             <h4 class="m-a-0">
                                                 <asp:Label ID="lblMonthIncome" runat="server" ></asp:Label>
                                             </h4>
@@ -100,7 +100,6 @@
                             </ItemTemplate>
                         </asp:Repeater>
                     </div>
-
                     <div class="col-sm-1">
                         
                     </div>
@@ -111,23 +110,144 @@
                 <div class="row text-center">
                     <div class="col-sm-3 col-xs-6 p-t">
                         <h4 class="m-t-0 m-b-0">
-                            <asp:Label ID="lblDailySales" runat="server"></asp:Label></h4>
+                            <asp:Label ID="lblDailySales" runat="server"></asp:Label> ฿</h4>
                         <small class="text-muted bold">Daily Sales</small>
                     </div>
                     <div class="col-sm-3 col-xs-6 p-t">
                         <h4 class="m-t-0 m-b-0">
-                            <asp:Label ID="lblWeeklySales" runat="server"></asp:Label></h4>
+                            <asp:Label ID="lblWeeklySales" runat="server"></asp:Label> ฿</h4>
                         <small class="text-muted bold">Weekly Sales</small>
                     </div>
                     <div class="col-sm-3 col-xs-6 p-t">
                         <h4 class="m-t-0 m-b-0">
-                            <asp:Label ID="lblMonthlySales" runat="server"></asp:Label></h4>
+                            <asp:Label ID="lblMonthlySales" runat="server"></asp:Label> ฿</h4>
                         <small class="text-muted bold">Monthly Sales</small>
                     </div>
                     <div class="col-sm-3 col-xs-6 p-t">
                         <h4 class="m-t-0 m-b-0">
-                            <asp:Label ID="lblYearlySales" runat="server"></asp:Label></h4>
+                            <asp:Label ID="lblYearlySales" runat="server"></asp:Label> ฿</h4>
                         <small class="text-muted bold">Yearly Sales</small>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card bg-white no-border" style="padding:10px">
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <h5>Company Commission</h5>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <div class="card card-block bg-white row-equal align-middle text-center" style="padding:10px;">
+                                    <h1><asp:Label ID="lblGrossProfitRate" runat="server" ></asp:Label> %</h1>
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="row">
+                                    <div class="col-sm-6">
+                                        <div class="card card-block no-border bg-orange row-equal align-middle" style="padding:5px;margin-bottom:0.5rem">
+                                            <h6 class="m-a-0 text-white">Day Income</h6>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <div class="card card-block bg-white row-equal align-middle" style="padding:5px;margin-bottom:0.5rem">
+                                            <h6 class="m-a-0">
+                                                <asp:Label ID="lblCompanyDayIncome" runat="server"  ></asp:Label> THB
+                                            </h6>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-6">
+                                        <div class="card card-block no-border bg-orange row-equal align-middle" style="padding:5px;margin-bottom:0.5rem">
+                                            <h6 class="m-a-0 text-white">Week Income</h6>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <div class="card card-block bg-white row-equal align-middle" style="padding:5px;margin-bottom:0.5rem">
+                                            <h6 class="m-a-0">
+                                                <asp:Label ID="lblCompanyWeekIncome" runat="server"  ></asp:Label> THB
+                                            </h6>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-6">
+                                        <div class="card card-block no-border bg-orange row-equal align-middle" style="padding:5px;margin-bottom:0.5rem">
+                                            <h6 class="m-a-0 text-white">Month Income</h6>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <div class="card card-block bg-white row-equal align-middle" style="padding:5px;margin-bottom:0.5rem">
+                                            <h6 class="m-a-0">
+                                                <asp:Label ID="lblCompanyMonthIncome" runat="server"  ></asp:Label> THB
+                                            </h6>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <h5>Renter</h5>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <div class="card card-block bg-white row-equal align-middle text-center" style="padding:10px;">
+                                    <h1><asp:Label ID="lblRenterRate" runat="server" ></asp:Label> %</h1>
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="row">
+                                    <div class="col-sm-6">
+                                        <div class="card card-block no-border bg-orange row-equal align-middle" style="padding:5px;margin-bottom:0.5rem">
+                                            <h6 class="m-a-0 text-white">Day Income</h6>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <div class="card card-block bg-white row-equal align-middle" style="padding:5px;margin-bottom:0.5rem">
+                                            <h6 class="m-a-0">
+                                                <asp:Label ID="lblRenterDayIncome" runat="server"  ></asp:Label> THB
+                                            </h6>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-6">
+                                        <div class="card card-block no-border bg-orange row-equal align-middle" style="padding:5px;margin-bottom:0.5rem">
+                                            <h6 class="m-a-0 text-white">Week Income</h6>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <div class="card card-block bg-white row-equal align-middle" style="padding:5px;margin-bottom:0.5rem">
+                                            <h6 class="m-a-0">
+                                                <asp:Label ID="lblRenterWeekIncome" runat="server"  ></asp:Label> THB
+                                            </h6>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-6">
+                                        <div class="card card-block no-border bg-orange row-equal align-middle" style="padding:5px;margin-bottom:0.5rem">
+                                            <h6 class="m-a-0 text-white">Month Income</h6>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <div class="card card-block bg-white row-equal align-middle" style="padding:5px;margin-bottom:0.5rem">
+                                            <h6 class="m-a-0">
+                                                <asp:Label ID="lblRenterMonthIncome" runat="server"  ></asp:Label> THB
+                                            </h6>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
