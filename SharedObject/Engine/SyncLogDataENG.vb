@@ -3,8 +3,15 @@ Imports KioskLinqDB.TABLE
 Imports ServerLinqDB.ConnectDB
 Imports ServerLinqDB.TABLE
 Imports System.Data.SqlClient
+Imports log4net
 
 Public Class SyncLogDataENG
+    Shared _logMsg As New LogMessageBuilder()
+    Private Shared ReadOnly Property Logger As ILog
+        Get
+            Return LogManager.GetLogger(GetType(SyncLogDataENG))
+        End Get
+    End Property
     Private Shared _KioskID As Long = 0
 
     Public Shared Sub SyncAllLog(MsKioskID As Long)

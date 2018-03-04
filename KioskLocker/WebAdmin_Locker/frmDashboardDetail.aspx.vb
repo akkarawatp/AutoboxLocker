@@ -28,7 +28,7 @@ Partial Class frmDashboardDetail
 
         SetDashboardInfo()
         'BindChart()
-        'barifram.Src = "frmBarChart.aspx?LocationID=" & Request("LocationID")
+        barifram.Src = "frmBarChart.aspx?LocationID=" & Request("LocationID")
 
     End Sub
 

@@ -2,9 +2,15 @@
 Imports System.Data.SqlClient
 Imports ServerLinqDB.ConnectDB
 Imports ServerLinqDB.TABLE
+Imports log4net
 
 Public Class UserENG
-
+    Shared _logMsg As New LogMessageBuilder()
+    Private Shared ReadOnly Property Logger As ILog
+        Get
+            Return LogManager.GetLogger(GetType(UserENG))
+        End Get
+    End Property
     Public Shared Function LoginTIT(vUserName As String, vPassword As String, SystemCode As String, ModuleName As String, ClientIP As String, ClientBrowser As String, BrowserVersion As String, ServerURL As String) As LoginReturnData
         Dim ret As New LoginReturnData
         Try

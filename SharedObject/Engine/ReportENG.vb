@@ -9,11 +9,11 @@
         sql += " from ( " & Environment.NewLine
         sql += "	Select t.ms_location_id, t.location_name, convert(date, t.collect_time) collect_time, " & Environment.NewLine
         sql += " 	sum(case when t.ms_cabinet_model_id=1 then 1 else 0 end) sr_success,  " & Environment.NewLine
-        sql += "	sum(Case When t.ms_cabinet_model_id=1 Then t.service_amt Else 0 End) sr_amt, " & Environment.NewLine
+        sql += "	sum(Case When t.ms_cabinet_model_id=1 Then t.service_amt +isnull(t.fine_amt,0) Else 0 End) sr_amt, " & Environment.NewLine
         sql += "	sum(case when t.ms_cabinet_model_id=2 then 1 else 0 end) mr_success,  " & Environment.NewLine
-        sql += "	sum(Case When t.ms_cabinet_model_id=2 Then t.service_amt Else 0 End) mr_amt, " & Environment.NewLine
+        sql += "	sum(Case When t.ms_cabinet_model_id=2 Then t.service_amt +isnull(t.fine_amt,0) Else 0 End) mr_amt, " & Environment.NewLine
         sql += "	sum(case when t.ms_cabinet_model_id=3 then 1 else 0 end) lr_success,  " & Environment.NewLine
-        sql += "	sum(Case When t.ms_cabinet_model_id=3 Then t.service_amt Else 0 End) lr_amt " & Environment.NewLine
+        sql += "	sum(Case When t.ms_cabinet_model_id=3 Then t.service_amt +isnull(t.fine_amt,0) Else 0 End) lr_amt " & Environment.NewLine
         sql += "	from v_transaction_log t " & Environment.NewLine
         sql += "	where t.deposit_status=1 And t.collect_status=1 " & Environment.NewLine
         sql += wh

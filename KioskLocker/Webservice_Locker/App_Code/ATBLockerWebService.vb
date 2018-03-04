@@ -6,6 +6,7 @@ Imports System.Data.SqlClient
 Imports ServerLinqDB.ConnectDB
 Imports ServerLinqDB.TABLE
 Imports Engine
+Imports log4net
 
 ' To allow this Web Service to be called from script, using ASP.NET AJAX, uncomment the following line.
 ' <System.Web.Script.Services.ScriptService()> _
@@ -14,19 +15,22 @@ Imports Engine
 <Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
 Public Class ATBLockerWebService
     Inherits System.Web.Services.WebService
-
-    '<WebMethod()> _
-    'Public Function HelloWorld() As String
-    '    Return "Hello World"
-    'End Function
+    Shared _logMsg As New LogMessageBuilder()
+    Private Shared ReadOnly Property Logger As ILog
+        Get
+            Return LogManager.GetLogger(GetType(ATBLockerWebService))
+        End Get
+    End Property
 
     <WebMethod()>
     Public Function LoginTIT(vUserName As String, vPassword As String, ModuleName As String) As LoginReturnData
         Dim ret As New LoginReturnData
         Try
+            Logger.Info(_logMsg.Clear().Add("vUserName", vUserName).Add("ModuleName", ModuleName))
             ret = UserENG.LoginTIT(vUserName, vPassword, "ATB-Locker", ModuleName, HttpContext.Current.Request.UserHostAddress, HttpContext.Current.Request.Browser.Browser, HttpContext.Current.Request.Browser.Version, HttpContext.Current.Request.Url.AbsoluteUri)
         Catch ex As Exception
             ret = New LoginReturnData
+            Logger.ErrorFormat("Exception " & Environment.NewLine & "{0}" & Environment.NewLine & "{1}" & Environment.NewLine & "{2}" & Environment.NewLine & "{2}", "IP=" & HttpContext.Current.Request.UserHostAddress, ex.Message, ex.StackTrace)
         End Try
 
         Return ret
@@ -36,6 +40,7 @@ Public Class ATBLockerWebService
     Public Function SendKiskAlarm(MacAddress As String, LocationName As String, AlarmDt As DataTable) As String
         Dim ret As String = "false"
         Try
+            Logger.Info(_logMsg.Clear().Add("MacAddress", MacAddress).Add("LocationName", LocationName).Add("AlarmDt", AlarmDt.Rows.Count))
             Dim sLnq As New CfServerSysconfigServerLinqDB
             sLnq.GetDataByPK(1, Nothing)
 
@@ -50,6 +55,7 @@ Public Class ATBLockerWebService
             alDt.Dispose()
         Catch ex As Exception
             ret = "false|Exception SendKioskAlarm " & ex.Message
+            Logger.ErrorFormat("Exception " & Environment.NewLine & "{0}" & Environment.NewLine & "{1}" & Environment.NewLine & "{2}" & Environment.NewLine & "{2}", "IP=" & HttpContext.Current.Request.UserHostAddress, ex.Message, ex.StackTrace)
         End Try
         Return ret
     End Function
@@ -58,6 +64,7 @@ Public Class ATBLockerWebService
     Public Function KioskLoginStaffConsole(vUserName As String, vPassword As String, ModuleName As String, MsKioskID As String) As Engine.LoginReturnData
         Dim ret As New Engine.LoginReturnData
         Try
+            Logger.Info(_logMsg.Clear().Add("vUserName", vUserName).Add("ModuleName", ModuleName).Add("MsKioskID", MsKioskID))
             Dim sLnq As New CfServerSysconfigServerLinqDB
             sLnq.GetDataByPK(1, Nothing)
             ret = Engine.UserENG.LoginTIT(vUserName, vPassword, "ATB-Locker", ModuleName, HttpContext.Current.Request.UserHostAddress, HttpContext.Current.Request.Browser.Browser, HttpContext.Current.Request.Browser.Version, HttpContext.Current.Request.Url.AbsoluteUri)
@@ -98,6 +105,7 @@ Public Class ATBLockerWebService
             ret = New LoginReturnData
             ret.LoginStatus = False
             ret.ErrorMessage = "ATBLockerWebService.LoginTIT Exception " & ex.Message & vbNewLine & ex.StackTrace
+            Logger.ErrorFormat("Exception " & Environment.NewLine & "{0}" & Environment.NewLine & "{1}" & Environment.NewLine & "{2}" & Environment.NewLine & "{2}", "IP=" & HttpContext.Current.Request.UserHostAddress, ex.Message, ex.StackTrace)
         End Try
 
         Return ret
@@ -107,6 +115,7 @@ Public Class ATBLockerWebService
     Public Function GetKioskStaffConsoleAuthorize(Username As String, MsKioskID As Long) As DataTable
         Dim ret As New DataTable
         Try
+            Logger.Info(_logMsg.Clear().Add("Username", Username).Add("MsKioskID", MsKioskID))
             Dim sql As String = "select distinct rf.id,rf.ms_role_id,rf.ms_functional_id, rf.ms_authorization_id, f.ms_functional_zone_id, "
             sql += " r.role_name, f.functional_name, a.authorization_name"
             sql += " from ms_user_role ur "
@@ -127,6 +136,7 @@ Public Class ATBLockerWebService
             UpdateKioskLastSyncTime(MsKioskID)
         Catch ex As Exception
             ret = New DataTable
+            Logger.ErrorFormat("Exception " & Environment.NewLine & "{0}" & Environment.NewLine & "{1}" & Environment.NewLine & "{2}", "IP=" & HttpContext.Current.Request.UserHostAddress, ex.Message, ex.StackTrace)
         End Try
         ret.TableName = "GetKioskStaffConsoleAuthorize"
         Return ret
@@ -136,6 +146,7 @@ Public Class ATBLockerWebService
     Public Function ReportKioskCurrentQty(KioskComName As String, KioskID As Integer, DeviceID As Long, CurrentQty As Integer) As Boolean
         Dim ret As Boolean = False
         Try
+            Logger.Info(_logMsg.Clear().Add("KioskComName", KioskComName & " (" & HttpContext.Current.Request.UserHostAddress & ") ").Add("KioskID", KioskID).Add("DeviceID", DeviceID).Add("CurrentQty", CurrentQty))
             Dim lnq As New MsKioskDeviceServerLinqDB
             lnq.ChkDataByMS_DEVICE_ID_MS_KIOSK_ID(DeviceID, KioskID, Nothing)
             If lnq.ID > 0 Then
@@ -147,6 +158,7 @@ Public Class ATBLockerWebService
                     trans.CommitTransaction()
                 Else
                     trans.RollbackTransaction()
+                    Logger.Error(_logMsg.Clear().SetPrefixMsg(re.ErrorMessage))
                 End If
                 ret = re.IsSuccess
             End If
@@ -161,6 +173,7 @@ Public Class ATBLockerWebService
     Public Function CheckWebserviceConnection() As CheckConnectionData
         Dim ret As New CheckConnectionData
         Try
+            Logger.Info(_logMsg.Clear().Add("Request from", HttpContext.Current.Request.UserHostAddress))
             Dim conn As SqlConnection = ServerDB.GetConnection
             ret.IsSuccess = (conn.State = ConnectionState.Open)
             If ret.IsSuccess = True Then
@@ -177,6 +190,7 @@ Public Class ATBLockerWebService
         Catch ex As Exception
             ret.IsSuccess = False
             ret.ErrorMessage = "Exception " & ex.Message & vbNewLine & ex.StackTrace
+            Logger.ErrorFormat("Exception " & Environment.NewLine & "{0}" & Environment.NewLine & "{1}" & Environment.NewLine & "{2}", "IP=" & HttpContext.Current.Request.UserHostAddress, ex.Message, ex.StackTrace)
         End Try
         Return ret
     End Function
@@ -188,13 +202,15 @@ Public Class ATBLockerWebService
     Public Function GetMasterAppScreen() As DataTable
         Dim dt As DataTable
         Try
-            Engine.LogFileENG.CreateServerLogAgent("GetMasterAppScreen from " & HttpContext.Current.Request.UserHostAddress)
+            'Engine.LogFileENG.CreateServerLogAgent("GetMasterAppScreen from " & HttpContext.Current.Request.UserHostAddress)
+            Logger.Info(_logMsg.Clear().Add("Request from", HttpContext.Current.Request.UserHostAddress))
 
             Dim lnq As New MsAppScreenServerLinqDB
             dt = lnq.GetDataList("", "", Nothing, Nothing)
             lnq = Nothing
         Catch ex As Exception
             dt = New DataTable
+            Logger.ErrorFormat("Exception " & Environment.NewLine & "{0}" & Environment.NewLine & "{1}" & Environment.NewLine & "{2}", "IP=" & HttpContext.Current.Request.UserHostAddress, ex.Message, ex.StackTrace)
         End Try
 
         dt.TableName = "GetMasterAppScreen"
@@ -205,7 +221,8 @@ Public Class ATBLockerWebService
     Public Function GetMasterAppStep() As DataTable
         Dim dt As DataTable
         Try
-            Engine.LogFileENG.CreateServerLogAgent("GetMasterAppStep from " & HttpContext.Current.Request.UserHostAddress)
+            'Engine.LogFileENG.CreateServerLogAgent("GetMasterAppStep from " & HttpContext.Current.Request.UserHostAddress)
+            Logger.Info(_logMsg.Clear().Add("Request from", HttpContext.Current.Request.UserHostAddress))
 
             Dim lnq As New MsAppStepServerLinqDB
             dt = lnq.GetDataList("", "", Nothing, Nothing)
@@ -213,6 +230,7 @@ Public Class ATBLockerWebService
 
         Catch ex As Exception
             dt = New DataTable
+            Logger.ErrorFormat("Exception " & Environment.NewLine & "{0}" & Environment.NewLine & "{1}" & Environment.NewLine & "{2}", "IP=" & HttpContext.Current.Request.UserHostAddress, ex.Message, ex.StackTrace)
         End Try
         dt.TableName = "GetMasterAppStep"
         Return dt
@@ -222,13 +240,15 @@ Public Class ATBLockerWebService
     Public Function GetMasterCabinetModel() As DataTable
         Dim dt As DataTable
         Try
-            Engine.LogFileENG.CreateServerLogAgent("GetMasterCabinetModel from " & HttpContext.Current.Request.UserHostAddress)
+            'Engine.LogFileENG.CreateServerLogAgent("GetMasterCabinetModel from " & HttpContext.Current.Request.UserHostAddress)
+            Logger.Info(_logMsg.Clear().Add("Request from", HttpContext.Current.Request.UserHostAddress))
 
             Dim lnq As New MsCabinetModelServerLinqDB
             dt = lnq.GetDataList("", "", Nothing, Nothing)
             lnq = Nothing
         Catch ex As Exception
             dt = New DataTable
+            Logger.ErrorFormat("Exception " & Environment.NewLine & "{0}" & Environment.NewLine & "{1}" & Environment.NewLine & "{2}", "IP=" & HttpContext.Current.Request.UserHostAddress, ex.Message, ex.StackTrace)
         End Try
 
         dt.TableName = "GetMasterCabinetModel"
@@ -239,13 +259,15 @@ Public Class ATBLockerWebService
     Public Function GetMasterDeviceType() As DataTable
         Dim dt As DataTable
         Try
-            Engine.LogFileENG.CreateServerLogAgent("GetMasterDeviceType from " & HttpContext.Current.Request.UserHostAddress)
+            'Engine.LogFileENG.CreateServerLogAgent("GetMasterDeviceType from " & HttpContext.Current.Request.UserHostAddress)
+            Logger.Info(_logMsg.Clear().Add("Request from", HttpContext.Current.Request.UserHostAddress))
 
             Dim lnq As New MsDeviceTypeServerLinqDB
             dt = lnq.GetDataList("", "", Nothing, Nothing)
             lnq = Nothing
         Catch ex As Exception
             dt = New DataTable
+            Logger.ErrorFormat("Exception " & Environment.NewLine & "{0}" & Environment.NewLine & "{1}" & Environment.NewLine & "{2}", "IP=" & HttpContext.Current.Request.UserHostAddress, ex.Message, ex.StackTrace)
         End Try
 
         dt.TableName = "GetMasterDeviceType"
@@ -256,13 +278,15 @@ Public Class ATBLockerWebService
     Public Function GetMasterDeviceStatus() As DataTable
         Dim dt As DataTable
         Try
-            Engine.LogFileENG.CreateServerLogAgent("GetMasterDeviceStatus from " & HttpContext.Current.Request.UserHostAddress)
+            'Engine.LogFileENG.CreateServerLogAgent("GetMasterDeviceStatus from " & HttpContext.Current.Request.UserHostAddress)
+            Logger.Info(_logMsg.Clear().Add("Request from", HttpContext.Current.Request.UserHostAddress))
 
             Dim lnq As New MsDeviceStatusServerLinqDB
             dt = lnq.GetDataList("", "", Nothing, Nothing)
             lnq = Nothing
         Catch ex As Exception
             dt = New DataTable
+            Logger.ErrorFormat("Exception " & Environment.NewLine & "{0}" & Environment.NewLine & "{1}" & Environment.NewLine & "{2}", "IP=" & HttpContext.Current.Request.UserHostAddress, ex.Message, ex.StackTrace)
         End Try
 
         dt.TableName = "GetMasterDeviceStatus"
@@ -273,13 +297,15 @@ Public Class ATBLockerWebService
     Public Function GetMasterDevice() As DataTable
         Dim dt As DataTable
         Try
-            Engine.LogFileENG.CreateServerLogAgent("GetMasterDevice from " & HttpContext.Current.Request.UserHostAddress)
+            'Engine.LogFileENG.CreateServerLogAgent("GetMasterDevice from " & HttpContext.Current.Request.UserHostAddress)
+            Logger.Info(_logMsg.Clear().Add("Request from", HttpContext.Current.Request.UserHostAddress))
 
             Dim lnq As New MsDeviceServerLinqDB
             dt = lnq.GetDataList("", "", Nothing, Nothing)
             lnq = Nothing
         Catch ex As Exception
             dt = New DataTable
+            Logger.ErrorFormat("Exception " & Environment.NewLine & "{0}" & Environment.NewLine & "{1}" & Environment.NewLine & "{2}", "IP=" & HttpContext.Current.Request.UserHostAddress, ex.Message, ex.StackTrace)
         End Try
 
         dt.TableName = "GetMasterDevice"
@@ -290,13 +316,15 @@ Public Class ATBLockerWebService
     Public Function GetMasterMonitoringAlarm() As DataTable
         Dim dt As DataTable
         Try
-            Engine.LogFileENG.CreateServerLogAgent("GetMasterMonitoringAlarm from " & HttpContext.Current.Request.UserHostAddress)
+            'Engine.LogFileENG.CreateServerLogAgent("GetMasterMonitoringAlarm from " & HttpContext.Current.Request.UserHostAddress)
+            Logger.Info(_logMsg.Clear().Add("Request from", HttpContext.Current.Request.UserHostAddress))
 
             Dim lnq As New MsMasterMonitoringAlarmServerLinqDB
             dt = lnq.GetDataList("", "", Nothing, Nothing)
             lnq = Nothing
         Catch ex As Exception
             dt = New DataTable
+            Logger.ErrorFormat("Exception " & Environment.NewLine & "{0}" & Environment.NewLine & "{1}" & Environment.NewLine & "{2}", "IP=" & HttpContext.Current.Request.UserHostAddress, ex.Message, ex.StackTrace)
         End Try
 
         dt.TableName = "GetMasterMonitoringAlarm"
@@ -307,7 +335,8 @@ Public Class ATBLockerWebService
     Public Function GetLockerServiceRate(MsKioskID As Long) As MasterServiceRateData
         Dim sr As New MasterServiceRateData
         Try
-            Engine.LogFileENG.CreateServerLogAgent("GetLockerServiceRate from " & HttpContext.Current.Request.UserHostAddress)
+            'Engine.LogFileENG.CreateServerLogAgent("GetLockerServiceRate from " & HttpContext.Current.Request.UserHostAddress)
+            Logger.Info(_logMsg.Clear().Add("Request from", HttpContext.Current.Request.UserHostAddress))
 
             'Find MS_SERVICE_RATE data
             Dim sql As String = "Select sr.id "
@@ -361,6 +390,7 @@ Public Class ATBLockerWebService
             UpdateKioskLastSyncTime(MsKioskID)
         Catch ex As Exception
             sr = New MasterServiceRateData
+            Logger.ErrorFormat("Exception " & Environment.NewLine & "{0}" & Environment.NewLine & "{1}" & Environment.NewLine & "{2}", "IP=" & HttpContext.Current.Request.UserHostAddress, ex.Message, ex.StackTrace)
         End Try
 
         Return sr
@@ -389,7 +419,8 @@ Public Class ATBLockerWebService
     Public Function SyncKioskSysconfig(dt As DataTable, KioskName As String) As String
         Dim ret As String = "false"
         Try
-            Engine.LogFileENG.CreateServerLogAgent("SyncKioskSysconfig from " & KioskName & " " & dt.Rows.Count & " Records")
+            'Engine.LogFileENG.CreateServerLogAgent("SyncKioskSysconfig from " & KioskName & " " & dt.Rows.Count & " Records")
+            Logger.Info(_logMsg.Clear().Add("KioskName", KioskName).Add("IP", HttpContext.Current.Request.UserHostAddress).Add("Row Count", dt.Rows.Count & " Records"))
 
             If dt.Rows.Count > 0 Then
                 Dim sTrans As New ServerTransactionDB
@@ -453,20 +484,23 @@ Public Class ATBLockerWebService
                 If sRet.IsSuccess = True Then
                     sTrans.CommitTransaction()
                     ret = "true"
-                    Engine.LogFileENG.CreateServerLogAgent("SyncKioskSysconfig from " & KioskName & " Success " & dt.Rows.Count & " Records")
+                    'Engine.LogFileENG.CreateServerLogAgent("SyncKioskSysconfig from " & KioskName & " Success " & dt.Rows.Count & " Records")
+                    Logger.Info(_logMsg.Clear().Add("Success", dt.Rows.Count & " Records"))
                     If KioskId > 0 Then
                         UpdateKioskLastSyncTime(KioskId)
                     End If
                 Else
                     sTrans.RollbackTransaction()
                     ret = "false|" & sRet.ErrorMessage
-                    Engine.LogFileENG.CreateServerErrorLogAgent(ret)
+                    'Engine.LogFileENG.CreateServerErrorLogAgent(ret)
+                    Logger.Error(_logMsg.Clear().SetPrefixMsg(ret))
                 End If
             End If
             dt.Dispose()
         Catch ex As Exception
             ret = "false|" & ex.Message
-            Engine.LogFileENG.CreateServerExceptionLogAgent(ex.Message, ex.StackTrace)
+            'Engine.LogFileENG.CreateServerExceptionLogAgent(ex.Message, ex.StackTrace)
+            Logger.ErrorFormat("Exception " & Environment.NewLine & "{0}" & Environment.NewLine & "{1}" & Environment.NewLine & "{2}", "IP=" & HttpContext.Current.Request.UserHostAddress, ex.Message, ex.StackTrace)
         End Try
         Return ret
     End Function
@@ -476,7 +510,8 @@ Public Class ATBLockerWebService
     Public Function SyncMasterKioskCabinet(dt As DataTable, KioskName As String) As String
         Dim ret As String = "false"
         Try
-            Engine.LogFileENG.CreateServerLogAgent("SyncMasterKioskCabinet from " & KioskName & " " & dt.Rows.Count & " Records")
+            'Engine.LogFileENG.CreateServerLogAgent("SyncMasterKioskCabinet from " & KioskName & " " & dt.Rows.Count & " Records")
+            Logger.Info(_logMsg.Clear().Add("KioskName", KioskName).Add("IP", HttpContext.Current.Request.UserHostAddress).Add("Row Count", dt.Rows.Count & " Records"))
 
             If dt.Rows.Count > 0 Then
                 Dim sRet As New ExecuteDataInfo
@@ -512,20 +547,23 @@ Public Class ATBLockerWebService
                     sTrans.CommitTransaction()
                     ret = "true"
 
-                    Engine.LogFileENG.CreateServerLogAgent("SyncMasterKioskCabinet from " & KioskName & " Success " & dt.Rows.Count & " Records")
+                    'Engine.LogFileENG.CreateServerLogAgent("SyncMasterKioskCabinet from " & KioskName & " Success " & dt.Rows.Count & " Records")
+                    Logger.Info(_logMsg.Clear().Add("Success", dt.Rows.Count & " Records"))
                     If KioskId > 0 Then
                         UpdateKioskLastSyncTime(KioskId)
                     End If
                 Else
                     sTrans.RollbackTransaction()
                     ret = "false|" & sRet.ErrorMessage
-                    Engine.LogFileENG.CreateServerErrorLogAgent(ret)
+                    'Engine.LogFileENG.CreateServerErrorLogAgent(ret)
+                    Logger.Error(_logMsg.Clear().SetPrefixMsg(ret))
                 End If
             End If
             dt.Dispose()
         Catch ex As Exception
             ret = "false|" & ex.Message
-            Engine.LogFileENG.CreateServerExceptionLogAgent(ex.Message, ex.StackTrace)
+            'Engine.LogFileENG.CreateServerExceptionLogAgent(ex.Message, ex.StackTrace)
+            Logger.ErrorFormat("Exception " & Environment.NewLine & "{0}" & Environment.NewLine & "{1}" & Environment.NewLine & "{2}", "IP=" & HttpContext.Current.Request.UserHostAddress, ex.Message, ex.StackTrace)
         End Try
         Return ret
     End Function
@@ -534,7 +572,8 @@ Public Class ATBLockerWebService
     Public Function SyncMasterKioskDevice(dt As DataTable, KioskName As String) As String
         Dim ret As String = "false"
         Try
-            Engine.LogFileENG.CreateServerLogAgent("SyncMasterKioskDevice from " & KioskName & " " & dt.Rows.Count & " Records")
+            'Engine.LogFileENG.CreateServerLogAgent("SyncMasterKioskDevice from " & KioskName & " " & dt.Rows.Count & " Records")
+            Logger.Info(_logMsg.Clear().Add("KioskName", KioskName).Add("IP", HttpContext.Current.Request.UserHostAddress).Add("Row Count", dt.Rows.Count & " Records"))
 
             If dt.Rows.Count > 0 Then
                 Dim sRe As New ExecuteDataInfo
@@ -567,7 +606,8 @@ Public Class ATBLockerWebService
                 If sRe.IsSuccess = True Then
                     sTrans.CommitTransaction()
                     ret = "true"
-                    Engine.LogFileENG.CreateServerLogAgent("SyncMasterKioskDevice from " & KioskName & " Success " & dt.Rows.Count & " Records")
+                    'Engine.LogFileENG.CreateServerLogAgent("SyncMasterKioskDevice from " & KioskName & " Success " & dt.Rows.Count & " Records")
+                    Logger.Info(_logMsg.Clear().Add("Success", dt.Rows.Count & " Records"))
 
                     If KioskId > 0 Then
                         UpdateKioskLastSyncTime(KioskId)
@@ -575,13 +615,15 @@ Public Class ATBLockerWebService
                 Else
                     sTrans.RollbackTransaction()
                     ret = "false|" & sRe.ErrorMessage
-                    Engine.LogFileENG.CreateServerErrorLogAgent(ret)
+                    'Engine.LogFileENG.CreateServerErrorLogAgent(ret)
+                    Logger.Error(_logMsg.Clear().SetPrefixMsg(ret))
                 End If
             End If
             dt.Dispose()
         Catch ex As Exception
             ret = "false|" & ex.Message
-            Engine.LogFileENG.CreateServerExceptionLogAgent(ex.Message, ex.StackTrace)
+            'Engine.LogFileENG.CreateServerExceptionLogAgent(ex.Message, ex.StackTrace)
+            Logger.ErrorFormat("Exception " & Environment.NewLine & "{0}" & Environment.NewLine & "{1}" & Environment.NewLine & "{2}", "IP=" & HttpContext.Current.Request.UserHostAddress, ex.Message, ex.StackTrace)
         End Try
 
         Return ret
@@ -591,7 +633,8 @@ Public Class ATBLockerWebService
     Public Function SyncMasterKioskLocker(dt As DataTable, KioskName As String) As String
         Dim ret As String = "false"
         Try
-            Engine.LogFileENG.CreateServerLogAgent("SyncMasterKioskLocker from " & KioskName & " " & dt.Rows.Count & " Records")
+            'Engine.LogFileENG.CreateServerLogAgent("SyncMasterKioskLocker from " & KioskName & " " & dt.Rows.Count & " Records")
+            Logger.Info(_logMsg.Clear().Add("KioskName", KioskName).Add("IP", HttpContext.Current.Request.UserHostAddress).Add("Row Count", dt.Rows.Count & " Records"))
 
             If dt.Rows.Count Then
                 Dim sRet As New ExecuteDataInfo
@@ -628,22 +671,23 @@ Public Class ATBLockerWebService
                 If sRet.IsSuccess = True Then
                     sTrans.CommitTransaction()
                     ret = "true"
-
-                    Engine.LogFileENG.CreateServerLogAgent("SyncMasterKioskLocker from " & KioskName & " Success " & dt.Rows.Count & " Records")
-
+                    'Engine.LogFileENG.CreateServerLogAgent("SyncMasterKioskLocker from " & KioskName & " Success " & dt.Rows.Count & " Records")
+                    Logger.Info(_logMsg.Clear().Add("Success", dt.Rows.Count & " Records"))
                     If KioskId > 0 Then
                         UpdateKioskLastSyncTime(KioskId)
                     End If
                 Else
                     sTrans.RollbackTransaction()
                     ret = "false|" & sRet.ErrorMessage
-                    Engine.LogFileENG.CreateServerErrorLogAgent(ret)
+                    'Engine.LogFileENG.CreateServerErrorLogAgent(ret)
+                    Logger.Error(_logMsg.Clear().SetPrefixMsg(ret))
                 End If
             End If
             dt.Dispose()
         Catch ex As Exception
             ret = "false|" & ex.Message
-            Engine.LogFileENG.CreateServerExceptionLogAgent(ex.Message, ex.StackTrace)
+            'Engine.LogFileENG.CreateServerExceptionLogAgent(ex.Message, ex.StackTrace)
+            Logger.ErrorFormat("Exception " & Environment.NewLine & "{0}" & Environment.NewLine & "{1}" & Environment.NewLine & "{2}", "IP=" & HttpContext.Current.Request.UserHostAddress, ex.Message, ex.StackTrace)
         End Try
         Return ret
     End Function
@@ -663,10 +707,12 @@ Public Class ATBLockerWebService
             p(0) = ServerDB.SetBigInt("@_KIOSK_ID", MsKioskID)
 
             dt = ServerDB.ExecuteTable(sql, p)
-            Engine.LogFileENG.CreateServerLogAgent("GetServerKioskSysconfig from KioskID " & MsKioskID & " " & dt.Rows.Count & " Records")
+            'Engine.LogFileENG.CreateServerLogAgent("GetServerKioskSysconfig from KioskID " & MsKioskID & " " & dt.Rows.Count & " Records")
+            Logger.Info(_logMsg.Clear().Add("MsKioskID", MsKioskID).Add("IP", HttpContext.Current.Request.UserHostAddress).Add("Row Count", dt.Rows.Count & " Records"))
             UpdateKioskLastSyncTime(MsKioskID)
         Catch ex As Exception
             dt = New DataTable
+            Logger.ErrorFormat("Exception " & Environment.NewLine & "{0}" & Environment.NewLine & "{1}" & Environment.NewLine & "{2}", "IP=" & HttpContext.Current.Request.UserHostAddress, ex.Message, ex.StackTrace)
         End Try
 
         dt.TableName = "GetServerSyncKioskSysconfig"
@@ -685,10 +731,12 @@ Public Class ATBLockerWebService
             p(0) = ServerDB.SetBigInt("@_KIOSK_ID", MsKioskID)
 
             dt = ServerDB.ExecuteTable(sql, p)
-            Engine.LogFileENG.CreateServerLogAgent("GetServerKioskCabinet from KioskID " & MsKioskID & " " & dt.Rows.Count & " Records")
+            'Engine.LogFileENG.CreateServerLogAgent("GetServerKioskCabinet from KioskID " & MsKioskID & " " & dt.Rows.Count & " Records")
+            Logger.Info(_logMsg.Clear().Add("MsKioskID", MsKioskID).Add("IP", HttpContext.Current.Request.UserHostAddress).Add("Row Count", dt.Rows.Count & " Records"))
             UpdateKioskLastSyncTime(MsKioskID)
         Catch ex As Exception
             dt = New DataTable
+            Logger.ErrorFormat("Exception " & Environment.NewLine & "{0}" & Environment.NewLine & "{1}" & Environment.NewLine & "{2}", "IP=" & HttpContext.Current.Request.UserHostAddress, ex.Message, ex.StackTrace)
         End Try
         dt.TableName = "GetServerSyncKioskCabinet"
         Return dt
@@ -706,10 +754,12 @@ Public Class ATBLockerWebService
             p(0) = ServerDB.SetBigInt("@_KIOSK_ID", MsKioskID)
 
             dt = ServerDB.ExecuteTable(sql, p)
-            Engine.LogFileENG.CreateServerLogAgent("GetServeKioskDevice from KioskID " & MsKioskID & " " & dt.Rows.Count & " Records")
+            'Engine.LogFileENG.CreateServerLogAgent("GetServeKioskDevice from KioskID " & MsKioskID & " " & dt.Rows.Count & " Records")
+            Logger.Info(_logMsg.Clear().Add("MsKioskID", MsKioskID).Add("IP", HttpContext.Current.Request.UserHostAddress).Add("Row Count", dt.Rows.Count & " Records"))
             UpdateKioskLastSyncTime(MsKioskID)
         Catch ex As Exception
             dt = New DataTable
+            Logger.ErrorFormat("Exception " & Environment.NewLine & "{0}" & Environment.NewLine & "{1}" & Environment.NewLine & "{2}", "IP=" & HttpContext.Current.Request.UserHostAddress, ex.Message, ex.StackTrace)
         End Try
         dt.TableName = "GetServerSyncKioskDevice"
         Return dt
@@ -727,10 +777,12 @@ Public Class ATBLockerWebService
             Dim p(1) As SqlParameter
             p(0) = ServerDB.SetBigInt("@_KIOSK_ID", MsKioskID)
             dt = ServerDB.ExecuteTable(sql, p)
-            Engine.LogFileENG.CreateServerLogAgent("GetServerKioskLocker from KioskID " & MsKioskID & " " & dt.Rows.Count & " Records")
+            'Engine.LogFileENG.CreateServerLogAgent("GetServerKioskLocker from KioskID " & MsKioskID & " " & dt.Rows.Count & " Records")
+            Logger.Info(_logMsg.Clear().Add("MsKioskID", MsKioskID).Add("IP", HttpContext.Current.Request.UserHostAddress).Add("Row Count", dt.Rows.Count & " Records"))
             UpdateKioskLastSyncTime(MsKioskID)
         Catch ex As Exception
             dt = New DataTable
+            Logger.ErrorFormat("Exception " & Environment.NewLine & "{0}" & Environment.NewLine & "{1}" & Environment.NewLine & "{2}", "IP=" & HttpContext.Current.Request.UserHostAddress, ex.Message, ex.StackTrace)
         End Try
         dt.TableName = "GetServerSyncKioskLocker"
         Return dt
@@ -742,7 +794,8 @@ Public Class ATBLockerWebService
     Public Function UpdateServerSyncKioskSysconfig(dt As DataTable, KioskName As String) As String
         Dim ret As String = ""
         Try
-            Engine.LogFileENG.CreateServerLogAgent("UpdateServerSyncKioskSysconfig from " & KioskName & " " & dt.Rows.Count & " Records")
+            'Engine.LogFileENG.CreateServerLogAgent("UpdateServerSyncKioskSysconfig from " & KioskName & " " & dt.Rows.Count & " Records")
+            Logger.Info(_logMsg.Clear().Add("KioskName", KioskName).Add("IP", HttpContext.Current.Request.UserHostAddress).Add("Row Count", dt.Rows.Count & " Records"))
 
             If dt.Rows.Count > 0 Then
                 Dim sTrans As New ServerTransactionDB
@@ -764,8 +817,8 @@ Public Class ATBLockerWebService
                 If sRet.IsSuccess = True Then
                     sTrans.CommitTransaction()
                     ret = "true"
-
-                    Engine.LogFileENG.CreateServerLogAgent("UpdateServerSyncKioskSysconfig from " & KioskName & " Success " & dt.Rows.Count & " Records")
+                    'Engine.LogFileENG.CreateServerLogAgent("UpdateServerSyncKioskSysconfig from " & KioskName & " Success " & dt.Rows.Count & " Records")
+                    Logger.Info(_logMsg.Clear().Add("KioskName", KioskName).Add("IP", HttpContext.Current.Request.UserHostAddress).Add("Row Count", dt.Rows.Count & " Records"))
 
                     If KioskId > 0 Then
                         UpdateKioskLastSyncTime(KioskId)
@@ -773,12 +826,14 @@ Public Class ATBLockerWebService
                 Else
                     sTrans.RollbackTransaction()
                     ret = "false|" & sRet.ErrorMessage
-                    Engine.LogFileENG.CreateServerErrorLogAgent(ret)
+                    'Engine.LogFileENG.CreateServerErrorLogAgent(ret)
+                    Logger.Error(_logMsg.Clear().SetPrefixMsg(ret))
                 End If
             End If
         Catch ex As Exception
             ret = "false|" & ex.Message
-            Engine.LogFileENG.CreateServerExceptionLogAgent(ex.Message, ex.StackTrace)
+            'Engine.LogFileENG.CreateServerExceptionLogAgent(ex.Message, ex.StackTrace)
+            Logger.ErrorFormat("Exception " & Environment.NewLine & "{0}" & Environment.NewLine & "{1}" & Environment.NewLine & "{2}", "IP=" & HttpContext.Current.Request.UserHostAddress, ex.Message, ex.StackTrace)
         End Try
         Return ret
     End Function
@@ -787,7 +842,8 @@ Public Class ATBLockerWebService
     Public Function UpdateServerSyncKioskCabinet(dt As DataTable, KioskName As String) As String
         Dim ret As String = ""
         Try
-            Engine.LogFileENG.CreateServerLogAgent("UpdateServerSyncKioskCabinet from " & KioskName & " " & dt.Rows.Count & " Records")
+            'Engine.LogFileENG.CreateServerLogAgent("UpdateServerSyncKioskCabinet from " & KioskName & " " & dt.Rows.Count & " Records")
+            Logger.Info(_logMsg.Clear().Add("KioskName", KioskName).Add("IP", HttpContext.Current.Request.UserHostAddress).Add("Row Count", dt.Rows.Count & " Records"))
 
             If dt.Rows.Count > 0 Then
                 Dim sTrans As New ServerTransactionDB
@@ -811,7 +867,8 @@ Public Class ATBLockerWebService
                 If sRet.IsSuccess = True Then
                     sTrans.CommitTransaction()
                     ret = "true"
-                    Engine.LogFileENG.CreateServerLogAgent("UpdateServerSyncKioskCabinet from " & KioskName & " Success " & dt.Rows.Count & " Records")
+                    'Engine.LogFileENG.CreateServerLogAgent("UpdateServerSyncKioskCabinet from " & KioskName & " Success " & dt.Rows.Count & " Records")
+                    Logger.Info(_logMsg.Clear().Add("KioskName", KioskName).Add("IP", HttpContext.Current.Request.UserHostAddress).Add("Row Count", dt.Rows.Count & " Records"))
 
                     If KioskId > 0 Then
                         UpdateKioskLastSyncTime(KioskId)
@@ -819,12 +876,14 @@ Public Class ATBLockerWebService
                 Else
                     sTrans.RollbackTransaction()
                     ret = "false|" & sRet.ErrorMessage
-                    Engine.LogFileENG.CreateServerErrorLogAgent(ret)
+                    'Engine.LogFileENG.CreateServerErrorLogAgent(ret)
+                    Logger.Error(_logMsg.Clear().SetPrefixMsg(ret))
                 End If
             End If
         Catch ex As Exception
             ret = "false|" & ex.Message
-            Engine.LogFileENG.CreateServerExceptionLogAgent(ex.Message, ex.StackTrace)
+            'Engine.LogFileENG.CreateServerExceptionLogAgent(ex.Message, ex.StackTrace)
+            Logger.ErrorFormat("Exception " & Environment.NewLine & "{0}" & Environment.NewLine & "{1}" & Environment.NewLine & "{2}", "IP=" & HttpContext.Current.Request.UserHostAddress, ex.Message, ex.StackTrace)
         End Try
         Return ret
     End Function
@@ -833,7 +892,8 @@ Public Class ATBLockerWebService
     Public Function UpdateServerSyncKioskDevice(dt As DataTable, KioskName As String) As String
         Dim ret As String = ""
         Try
-            Engine.LogFileENG.CreateServerLogAgent("UpdateServerSyncKioskDevice from " & KioskName & " " & dt.Rows.Count & " Records")
+            'Engine.LogFileENG.CreateServerLogAgent("UpdateServerSyncKioskDevice from " & KioskName & " " & dt.Rows.Count & " Records")
+            Logger.Info(_logMsg.Clear().Add("KioskName", KioskName).Add("IP", HttpContext.Current.Request.UserHostAddress).Add("Row Count", dt.Rows.Count & " Records"))
 
             If dt.Rows.Count > 0 Then
                 Dim sTrans As New ServerTransactionDB
@@ -857,7 +917,8 @@ Public Class ATBLockerWebService
                 If sRet.IsSuccess = True Then
                     sTrans.CommitTransaction()
                     ret = "true"
-                    Engine.LogFileENG.CreateServerLogAgent("UpdateServerSyncKioskDevice from " & KioskName & " Success " & dt.Rows.Count & " Records")
+                    'Engine.LogFileENG.CreateServerLogAgent("UpdateServerSyncKioskDevice from " & KioskName & " Success " & dt.Rows.Count & " Records")
+                    Logger.Info(_logMsg.Clear().Add("KioskName", KioskName).Add("IP", HttpContext.Current.Request.UserHostAddress).Add("Row Count", dt.Rows.Count & " Records"))
 
                     If KioskId > 0 Then
                         UpdateKioskLastSyncTime(KioskId)
@@ -865,12 +926,14 @@ Public Class ATBLockerWebService
                 Else
                     sTrans.RollbackTransaction()
                     ret = "false|" & sRet.ErrorMessage
-                    Engine.LogFileENG.CreateServerErrorLogAgent(ret)
+                    'Engine.LogFileENG.CreateServerErrorLogAgent(ret)
+                    Logger.Error(_logMsg.Clear().SetPrefixMsg(ret))
                 End If
             End If
         Catch ex As Exception
             ret = "false|" & ex.Message
-            Engine.LogFileENG.CreateServerExceptionLogAgent(ex.Message, ex.StackTrace)
+            'Engine.LogFileENG.CreateServerExceptionLogAgent(ex.Message, ex.StackTrace)
+            Logger.ErrorFormat("Exception " & Environment.NewLine & "{0}" & Environment.NewLine & "{1}" & Environment.NewLine & "{2}", "IP=" & HttpContext.Current.Request.UserHostAddress, ex.Message, ex.StackTrace)
         End Try
         Return ret
     End Function
@@ -879,7 +942,8 @@ Public Class ATBLockerWebService
     Public Function UpdateSyncKioskLocker(dt As DataTable, KioskName As String) As String
         Dim ret As String = ""
         Try
-            Engine.LogFileENG.CreateServerLogAgent("UpdateSyncKioskLocker from " & KioskName & " " & dt.Rows.Count & " Records")
+            'Engine.LogFileENG.CreateServerLogAgent("UpdateSyncKioskLocker from " & KioskName & " " & dt.Rows.Count & " Records")
+            Logger.Info(_logMsg.Clear().Add("KioskName", KioskName).Add("IP", HttpContext.Current.Request.UserHostAddress).Add("Row Count", dt.Rows.Count & " Records"))
 
             If dt.Rows.Count > 0 Then
                 Dim sTrans As New ServerTransactionDB
@@ -903,21 +967,22 @@ Public Class ATBLockerWebService
                 If sRet.IsSuccess = True Then
                     sTrans.CommitTransaction()
                     ret = "true"
-
-                    Engine.LogFileENG.CreateServerLogAgent("UpdateSyncKioskLocker from " & KioskName & " Success " & dt.Rows.Count & " Records")
-
+                    'Engine.LogFileENG.CreateServerLogAgent("UpdateSyncKioskLocker from " & KioskName & " Success " & dt.Rows.Count & " Records")
+                    Logger.Info(_logMsg.Clear().Add("KioskName", KioskName).Add("IP", HttpContext.Current.Request.UserHostAddress).Add("Row Count", dt.Rows.Count & " Records"))
                     If KioskId > 0 Then
                         UpdateKioskLastSyncTime(KioskId)
                     End If
                 Else
                     sTrans.RollbackTransaction()
                     ret = "false|" & sRet.ErrorMessage
-                    Engine.LogFileENG.CreateServerErrorLogAgent(ret)
+                    'Engine.LogFileENG.CreateServerErrorLogAgent(ret)
+                    Logger.Error(_logMsg.Clear().SetPrefixMsg(ret))
                 End If
             End If
         Catch ex As Exception
             ret = "false|" & ex.Message
-            Engine.LogFileENG.CreateServerExceptionLogAgent(ex.Message, ex.StackTrace)
+            'Engine.LogFileENG.CreateServerExceptionLogAgent(ex.Message, ex.StackTrace)
+            Logger.ErrorFormat("Exception " & Environment.NewLine & "{0}" & Environment.NewLine & "{1}" & Environment.NewLine & "{2}", "IP=" & HttpContext.Current.Request.UserHostAddress, ex.Message, ex.StackTrace)
         End Try
         Return ret
     End Function
@@ -928,7 +993,8 @@ Public Class ATBLockerWebService
     Public Function SyncKioskDepositTransactionCustomerImage(KioskName As String, TransNo As String, CustImage As Byte()) As String
         Dim ret As String = "false"
         Try
-            Engine.LogFileENG.CreateServerLogAgent("SysnKioskDepositTransactionCustomerImage " & KioskName)
+            'Engine.LogFileENG.CreateServerLogAgent("SysnKioskDepositTransactionCustomerImage " & KioskName)
+            Logger.Info(_logMsg.Clear().Add("KioskName", KioskName).Add("IP", HttpContext.Current.Request.UserHostAddress).Add("TransactionNo", TransNo))
 
             Dim sTrans As New ServerTransactionDB
             Dim sRet As New ExecuteDataInfo
@@ -943,18 +1009,21 @@ Public Class ATBLockerWebService
             If sRet.IsSuccess = True Then
                 sTrans.CommitTransaction()
                 ret = "true"
-                Engine.LogFileENG.CreateServerLogAgent("SysnKioskDepositTransactionCustomerImage from " & KioskName & " TransactionNo " & TransNo)
+                'Engine.LogFileENG.CreateServerLogAgent("SysnKioskDepositTransactionCustomerImage from " & KioskName & " TransactionNo " & TransNo)
+                Logger.Info(_logMsg.Clear().Add("KioskName", KioskName).Add("IP", HttpContext.Current.Request.UserHostAddress).Add("TransactionNo", TransNo))
                 UpdateKioskLastSyncTime(sLnq.MS_KIOSK_ID)
             Else
                 sTrans.RollbackTransaction()
                 ret = "false|" & sRet.ErrorMessage
-                Engine.LogFileENG.CreateServerErrorLogAgent(ret)
+                'Engine.LogFileENG.CreateServerErrorLogAgent(ret)
+                Logger.Error(_logMsg.Clear().SetPrefixMsg(ret))
             End If
 
             sLnq = Nothing
         Catch ex As Exception
             ret = "false|" & ex.Message
-            Engine.LogFileENG.CreateServerExceptionLogAgent(ex.Message, ex.StackTrace)
+            'Engine.LogFileENG.CreateServerExceptionLogAgent(ex.Message, ex.StackTrace)
+            Logger.ErrorFormat("Exception " & Environment.NewLine & "{0}" & Environment.NewLine & "{1}" & Environment.NewLine & "{2}", "IP=" & HttpContext.Current.Request.UserHostAddress, ex.Message, ex.StackTrace)
         End Try
 
         Return ret
@@ -968,7 +1037,8 @@ Public Class ATBLockerWebService
                                                 TransStatus As String, MsAppScreenID As Long, MsAppStepID As Long) As String
         Dim ret As String = "false"
         Try
-            Engine.LogFileENG.CreateServerLogAgent("SyncKioskDepositTransactionByRecord By Record from " & KioskName)
+            'Engine.LogFileENG.CreateServerLogAgent("SyncKioskDepositTransactionByRecord By Record from " & KioskName)
+            Logger.Info(_logMsg.Clear().Add("KioskName", KioskName).Add("IP", HttpContext.Current.Request.UserHostAddress).Add("TransactionNo", TransNo))
 
             Dim sTrans As New ServerLinqDB.ConnectDB.ServerTransactionDB
             Dim sRet As New ExecuteDataInfo
@@ -1016,16 +1086,19 @@ Public Class ATBLockerWebService
             If sRet.IsSuccess = True Then
                 sTrans.CommitTransaction()
                 ret = "true"
-                Engine.LogFileENG.CreateServerLogAgent("SyncKioskDepositTransactionByRecord from " & KioskName & " TransactionNo " & TransNo)
+                'Engine.LogFileENG.CreateServerLogAgent("SyncKioskDepositTransactionByRecord from " & KioskName & " TransactionNo " & TransNo)
+                Logger.Info(_logMsg.Clear().Add("KioskName", KioskName).Add("TransactionNo", TransNo))
             Else
                 sTrans.RollbackTransaction()
                 ret = "false|" & sRet.ErrorMessage
-                Engine.LogFileENG.CreateServerErrorLogAgent(ret)
+                'Engine.LogFileENG.CreateServerErrorLogAgent(ret)
+                Logger.Error(_logMsg.Clear().SetPrefixMsg(ret))
             End If
             UpdateKioskLastSyncTime(MsKioskID)
         Catch ex As Exception
             ret = "false|" & ex.Message
-            Engine.LogFileENG.CreateServerExceptionLogAgent(ex.Message, ex.StackTrace)
+            'Engine.LogFileENG.CreateServerExceptionLogAgent(ex.Message, ex.StackTrace)
+            Logger.ErrorFormat("Exception " & Environment.NewLine & "{0}" & Environment.NewLine & "{1}" & Environment.NewLine & "{2}", "IP=" & HttpContext.Current.Request.UserHostAddress, ex.Message, ex.StackTrace)
         End Try
 
         Return ret
@@ -1124,7 +1197,8 @@ Public Class ATBLockerWebService
     Public Function SyncKioskCollectTransactionCustomerImage(KioskName As String, TransactionNo As String, CustImage As Byte()) As String
         Dim ret As String = "false"
         Try
-            Engine.LogFileENG.CreateServerLogAgent("SyncKioskCollectTransactionCustomerImage " & KioskName)
+            'Engine.LogFileENG.CreateServerLogAgent("SyncKioskCollectTransactionCustomerImage " & KioskName)
+            Logger.Info(_logMsg.Clear().Add("KioskName", KioskName).Add("IP", HttpContext.Current.Request.UserHostAddress).Add("TransactionNo", TransactionNo))
 
             Dim sTrans As New ServerTransactionDB
             Dim sRet As New ExecuteDataInfo
@@ -1142,11 +1216,13 @@ Public Class ATBLockerWebService
             If sRet.IsSuccess = True Then
                 sTrans.CommitTransaction()
                 ret = "true"
-                Engine.LogFileENG.CreateServerLogAgent("SyncKioskCollectTransactionCustomerImage from " & KioskName & " TransactionNo " & TransactionNo)
+                'Engine.LogFileENG.CreateServerLogAgent("SyncKioskCollectTransactionCustomerImage from " & KioskName & " TransactionNo " & TransactionNo)
+                Logger.Info(_logMsg.Clear().Add("KioskName", KioskName).Add("TransactionNo", TransactionNo))
             Else
                 sTrans.RollbackTransaction()
                 ret = "false|" & sRet.ErrorMessage
-                Engine.LogFileENG.CreateServerErrorLogAgent(ret)
+                'Engine.LogFileENG.CreateServerErrorLogAgent(ret)
+                Logger.Error(_logMsg.Clear().SetPrefixMsg(ret))
             End If
             If KioskId > 0 Then
                 UpdateKioskLastSyncTime(KioskId)
@@ -1155,7 +1231,8 @@ Public Class ATBLockerWebService
             sLnq = Nothing
         Catch ex As Exception
             ret = "false|" & ex.Message
-            Engine.LogFileENG.CreateServerExceptionLogAgent(ex.Message, ex.StackTrace)
+            'Engine.LogFileENG.CreateServerExceptionLogAgent(ex.Message, ex.StackTrace)
+            Logger.ErrorFormat("Exception " & Environment.NewLine & "{0}" & Environment.NewLine & "{1}" & Environment.NewLine & "{2}", "IP=" & HttpContext.Current.Request.UserHostAddress, ex.Message, ex.StackTrace)
         End Try
 
         Return ret
@@ -1165,7 +1242,8 @@ Public Class ATBLockerWebService
     Public Function SyncKioskCollectTransaction(dt As DataTable, KioskName As String) As String
         Dim ret As String = "false"
         Try
-            Engine.LogFileENG.CreateServerLogAgent("SyncKioskCollectTransaction from " & KioskName & " " & dt.Rows.Count & " Records")
+            'Engine.LogFileENG.CreateServerLogAgent("SyncKioskCollectTransaction from " & KioskName & " " & dt.Rows.Count & " Records")
+            Logger.Info(_logMsg.Clear().Add("KioskName", KioskName).Add("IP", HttpContext.Current.Request.UserHostAddress).Add("Row Count", dt.Rows.Count & " Records"))
             If dt.Rows.Count > 0 Then
                 Dim sTrans As New ServerLinqDB.ConnectDB.ServerTransactionDB
                 Dim sRet As New ExecuteDataInfo
@@ -1226,7 +1304,8 @@ Public Class ATBLockerWebService
                 If sRet.IsSuccess = True Then
                     sTrans.CommitTransaction()
                     ret = "true"
-                    Engine.LogFileENG.CreateServerLogAgent("SyncKioskCollectTransaction from " & KioskName & " Success " & dt.Rows.Count & " Records")
+                    'Engine.LogFileENG.CreateServerLogAgent("SyncKioskCollectTransaction from " & KioskName & " Success " & dt.Rows.Count & " Records")
+                    Logger.Info(_logMsg.Clear().Add("KioskName", KioskName).Add("IP", HttpContext.Current.Request.UserHostAddress).Add("Row Count", dt.Rows.Count & " Records"))
 
                     If KioskId > 0 Then
                         UpdateKioskLastSyncTime(KioskId)
@@ -1234,13 +1313,15 @@ Public Class ATBLockerWebService
                 Else
                     sTrans.RollbackTransaction()
                     ret = "false|" & sRet.ErrorMessage
-                    Engine.LogFileENG.CreateServerErrorLogAgent(ret)
+                    'Engine.LogFileENG.CreateServerErrorLogAgent(ret)
+                    Logger.Error(_logMsg.Clear().SetPrefixMsg(ret))
                 End If
             End If
             dt.Dispose()
         Catch ex As Exception
             ret = "false|" & ex.Message
-            Engine.LogFileENG.CreateServerExceptionLogAgent(ex.Message, ex.StackTrace)
+            'Engine.LogFileENG.CreateServerExceptionLogAgent(ex.Message, ex.StackTrace)
+            Logger.ErrorFormat("Exception " & Environment.NewLine & "{0}" & Environment.NewLine & "{1}" & Environment.NewLine & "{2}", "IP=" & HttpContext.Current.Request.UserHostAddress, ex.Message, ex.StackTrace)
         End Try
         Return ret
     End Function
@@ -1254,7 +1335,8 @@ Public Class ATBLockerWebService
             lnq = Nothing
         Catch ex As Exception
             ret = 0
-            Engine.LogFileENG.CreateServerExceptionLogAgent(ex.Message, ex.StackTrace)
+            'Engine.LogFileENG.CreateServerExceptionLogAgent(ex.Message, ex.StackTrace)
+            Logger.ErrorFormat("Exception " & Environment.NewLine & "{0}" & Environment.NewLine & "{1}" & Environment.NewLine & "{2}", "IP=" & HttpContext.Current.Request.UserHostAddress, ex.Message, ex.StackTrace)
         End Try
         Return ret
     End Function
@@ -1263,7 +1345,8 @@ Public Class ATBLockerWebService
     Public Function SyncKioskStaffConsoleTransaction(dt As DataTable, KioskName As String) As String
         Dim ret As String = "false"
         Try
-            Engine.LogFileENG.CreateServerLogAgent("SyncKioskStaffConsoleTransaction from " & KioskName & " " & dt.Rows.Count & " Records")
+            'Engine.LogFileENG.CreateServerLogAgent("SyncKioskStaffConsoleTransaction from " & KioskName & " " & dt.Rows.Count & " Records")
+            Logger.Info(_logMsg.Clear().Add("KioskName", KioskName).Add("IP", HttpContext.Current.Request.UserHostAddress).Add("Row Count", dt.Rows.Count & " Records"))
 
             If dt.Rows.Count > 0 Then
                 Dim sTrans As New ServerTransactionDB
@@ -1300,7 +1383,8 @@ Public Class ATBLockerWebService
                 If sRet.IsSuccess = True Then
                     sTrans.CommitTransaction()
                     ret = "true"
-                    Engine.LogFileENG.CreateServerLogAgent("SyncKioskStaffConsoleTransaction from " & KioskName & " Success " & dt.Rows.Count & " Records")
+                    'Engine.LogFileENG.CreateServerLogAgent("SyncKioskStaffConsoleTransaction from " & KioskName & " Success " & dt.Rows.Count & " Records")
+                    Logger.Info(_logMsg.Clear().Add("KioskName", KioskName).Add("IP", HttpContext.Current.Request.UserHostAddress).Add("Row Count", dt.Rows.Count & " Records"))
 
                     If KioskId > 0 Then
                         UpdateKioskLastSyncTime(KioskId)
@@ -1308,13 +1392,15 @@ Public Class ATBLockerWebService
                 Else
                     sTrans.RollbackTransaction()
                     ret = "false|" & sRet.ErrorMessage
-                    Engine.LogFileENG.CreateServerErrorLogAgent(ret)
+                    'Engine.LogFileENG.CreateServerErrorLogAgent(ret)
+                    Logger.Error(_logMsg.Clear().SetPrefixMsg(ret))
                 End If
             End If
             dt.Dispose()
         Catch ex As Exception
             ret = "false|" & ex.Message
-            Engine.LogFileENG.CreateServerExceptionLogAgent(ex.Message, ex.StackTrace)
+            'Engine.LogFileENG.CreateServerExceptionLogAgent(ex.Message, ex.StackTrace)
+            Logger.ErrorFormat("Exception " & Environment.NewLine & "{0}" & Environment.NewLine & "{1}" & Environment.NewLine & "{2}", "IP=" & HttpContext.Current.Request.UserHostAddress, ex.Message, ex.StackTrace)
         End Try
 
         Return ret
@@ -1325,8 +1411,8 @@ Public Class ATBLockerWebService
 #Region "Sync Kiosk Promotion Data"
     <WebMethod()>
     Public Function GetLockerPromotion(MsKioskID As Long) As MasterPromotionData
-        Engine.LogFileENG.CreateServerLogAgent("GetLockerPromotion from KioskID " & MsKioskID)
-
+        'Engine.LogFileENG.CreateServerLogAgent("GetLockerPromotion from KioskID " & MsKioskID)
+        Logger.Info(_logMsg.Clear().Add("MsKioskID", MsKioskID).Add("IP", HttpContext.Current.Request.UserHostAddress))
         Dim pd As New MasterPromotionData
         Try
             Dim vDate As String = DateTime.Now.ToString("yyyyMMdd", New System.Globalization.CultureInfo("en-US"))
@@ -1360,6 +1446,7 @@ Public Class ATBLockerWebService
             UpdateKioskLastSyncTime(MsKioskID)
         Catch ex As Exception
             pd = New MasterPromotionData
+            Logger.ErrorFormat("Exception " & Environment.NewLine & "{0}" & Environment.NewLine & "{1}" & Environment.NewLine & "{2}", "IP=" & HttpContext.Current.Request.UserHostAddress, ex.Message, ex.StackTrace)
         End Try
 
         Return pd
@@ -1367,7 +1454,8 @@ Public Class ATBLockerWebService
 
     <WebMethod()>
     Public Function InsertLocationPromotionSync(LocationPromotionID As Long, MsKioskID As Long, KioskName As String) As String
-        Engine.LogFileENG.CreateServerLogAgent("InsertLocationPromotionSync LocationPromotionID=" & LocationPromotionID & "&MsKioskID=" & MsKioskID & "&KioskName=" & KioskName)
+        'Engine.LogFileENG.CreateServerLogAgent("InsertLocationPromotionSync LocationPromotionID=" & LocationPromotionID & "&MsKioskID=" & MsKioskID & "&KioskName=" & KioskName)
+        Logger.Info(_logMsg.Clear().Add("LocationPromotionID", LocationPromotionID).Add("MsKioskID", MsKioskID).Add("KioskName", KioskName).Add("IP", HttpContext.Current.Request.UserHostAddress))
 
         Dim ret As String = "false"
         'Insert MS_LOCATION_PROMOTION_SYNC at Server
@@ -1383,7 +1471,8 @@ Public Class ATBLockerWebService
         Else
             sTrans.RollbackTransaction()
             ret = "false|" & sRet.ErrorMessage
-            Engine.LogFileENG.CreateServerErrorLogAgent(ret)
+            'Engine.LogFileENG.CreateServerErrorLogAgent(ret)
+            Logger.Error(_logMsg.Clear().SetPrefixMsg(ret))
         End If
 
         Return ret
@@ -1393,7 +1482,8 @@ Public Class ATBLockerWebService
 #Region "Sync Log Data"
     <WebMethod()>
     Public Function SyncLogTransactionActivity(dt As DataTable, KioskName As String) As String
-        Engine.LogFileENG.CreateServerLogAgent("SyncLogTransactionActivity from " & KioskName & " " & dt.Rows.Count & " Records")
+        'Engine.LogFileENG.CreateServerLogAgent("SyncLogTransactionActivity from " & KioskName & " " & dt.Rows.Count & " Records")
+        Logger.Info(_logMsg.Clear().Add("KioskName", KioskName).Add("IP", HttpContext.Current.Request.UserHostAddress).Add("Row Count", dt.Rows.Count & " Records"))
 
         Dim ret As String = "false"
         Try
@@ -1423,7 +1513,8 @@ Public Class ATBLockerWebService
                 If sRet.IsSuccess = True Then
                     sTrans.CommitTransaction()
                     ret = "true"
-                    Engine.LogFileENG.CreateServerLogAgent("SyncLogTransactionActivity from " & KioskName & " Success " & dt.Rows.Count & " Records")
+                    'Engine.LogFileENG.CreateServerLogAgent("SyncLogTransactionActivity from " & KioskName & " Success " & dt.Rows.Count & " Records")
+                    Logger.Info(_logMsg.Clear().Add("KioskName", KioskName).Add("IP", HttpContext.Current.Request.UserHostAddress).Add("Row Count", dt.Rows.Count & " Records"))
 
                     If KioskId > 0 Then
                         UpdateKioskLastSyncTime(KioskId)
@@ -1431,19 +1522,22 @@ Public Class ATBLockerWebService
                 Else
                     sTrans.RollbackTransaction()
                     ret = "false|" & sRet.ErrorMessage
-                    Engine.LogFileENG.CreateServerErrorLogAgent(ret)
+                    'Engine.LogFileENG.CreateServerErrorLogAgent(ret)
+                    Logger.Error(_logMsg.Clear().SetPrefixMsg(ret))
                 End If
             End If
         Catch ex As Exception
             ret = "false|Exception " & ex.Message
-            Engine.LogFileENG.CreateServerExceptionLogAgent(ex.Message, ex.StackTrace)
+            'Engine.LogFileENG.CreateServerExceptionLogAgent(ex.Message, ex.StackTrace)
+            Logger.ErrorFormat("Exception " & Environment.NewLine & "{0}" & Environment.NewLine & "{1}" & Environment.NewLine & "{2}", "IP=" & HttpContext.Current.Request.UserHostAddress, ex.Message, ex.StackTrace)
         End Try
         Return ret
     End Function
 
     <WebMethod()>
     Public Function SyncLogFillMoneyData(dt As DataTable, KioskName As String) As String
-        Engine.LogFileENG.CreateServerLogAgent("SyncLogFillMoneyData from " & KioskName & " " & dt.Rows.Count & " Records")
+        'Engine.LogFileENG.CreateServerLogAgent("SyncLogFillMoneyData from " & KioskName & " " & dt.Rows.Count & " Records")
+        Logger.Info(_logMsg.Clear().Add("KioskName", KioskName).Add("IP", HttpContext.Current.Request.UserHostAddress).Add("Row Count", dt.Rows.Count & " Records"))
 
         Dim ret As String = "false"
         Try
@@ -1484,7 +1578,8 @@ Public Class ATBLockerWebService
 
                     sRet = sLnq.InsertData(KioskName, sTrans.Trans)
                     If sRet.IsSuccess = False Then
-                        Engine.LogFileENG.CreateServerErrorLogAgent(sRet.ErrorMessage)
+                        'Engine.LogFileENG.CreateServerErrorLogAgent(sRet.ErrorMessage)
+                        Logger.Error(_logMsg.Clear.SetPrefixMsg(sRet.ErrorMessage))
                         Exit For
                     End If
                 Next
@@ -1492,7 +1587,8 @@ Public Class ATBLockerWebService
                 If sRet.IsSuccess = True Then
                     sTrans.CommitTransaction()
                     ret = "true"
-                    Engine.LogFileENG.CreateServerLogAgent("SyncLogFillMoneyData from " & KioskName & " Success " & dt.Rows.Count & " Records")
+                    'Engine.LogFileENG.CreateServerLogAgent("SyncLogFillMoneyData from " & KioskName & " Success " & dt.Rows.Count & " Records")
+                    Logger.Info(_logMsg.Clear().Add("KioskName", KioskName).Add("IP", HttpContext.Current.Request.UserHostAddress).Add("Row Count", dt.Rows.Count & " Records"))
 
                     If KioskId > 0 Then
                         UpdateKioskLastSyncTime(KioskId)
@@ -1500,13 +1596,15 @@ Public Class ATBLockerWebService
                 Else
                     sTrans.RollbackTransaction()
                     ret = "false|" & sRet.ErrorMessage
-                    Engine.LogFileENG.CreateServerErrorLogAgent(ret)
+                    'Engine.LogFileENG.CreateServerErrorLogAgent(ret)
+                    Logger.Error(_logMsg.Clear().SetPrefixMsg(ret))
                 End If
             End If
             dt.Dispose()
         Catch ex As Exception
             ret = "false|Exception " & ex.Message
-            Engine.LogFileENG.CreateServerExceptionLogAgent(ex.Message, ex.StackTrace)
+            'Engine.LogFileENG.CreateServerExceptionLogAgent(ex.Message, ex.StackTrace)
+            Logger.ErrorFormat("Exception " & Environment.NewLine & "{0}" & Environment.NewLine & "{1}" & Environment.NewLine & "{2}", "IP=" & HttpContext.Current.Request.UserHostAddress, ex.Message, ex.StackTrace)
         End Try
         Return ret
     End Function
@@ -1515,7 +1613,8 @@ Public Class ATBLockerWebService
     Public Function SyncLogErrorData(dt As DataTable, KioskName As String) As String
         Dim ret As String = "false"
         Try
-            Engine.LogFileENG.CreateServerLogAgent("SyncLogErrorData from " & KioskName & " " & dt.Rows.Count & " Records")
+            'Engine.LogFileENG.CreateServerLogAgent("SyncLogErrorData from " & KioskName & " " & dt.Rows.Count & " Records")
+            Logger.Info(_logMsg.Clear().Add("KioskName", KioskName).Add("IP", HttpContext.Current.Request.UserHostAddress).Add("Row Count", dt.Rows.Count & " Records"))
             If dt.Rows.Count > 0 Then
                 Dim sTrans As New ServerTransactionDB
                 Dim sRet As New ExecuteDataInfo
@@ -1543,7 +1642,8 @@ Public Class ATBLockerWebService
                 If sRet.IsSuccess = True Then
                     sTrans.CommitTransaction()
                     ret = "true"
-                    Engine.LogFileENG.CreateServerLogAgent("SyncLogErrorData from " & KioskName & " Success " & dt.Rows.Count & " Records")
+                    'Engine.LogFileENG.CreateServerLogAgent("SyncLogErrorData from " & KioskName & " Success " & dt.Rows.Count & " Records")
+                    Logger.Info(_logMsg.Clear().Add("KioskName", KioskName).Add("IP", HttpContext.Current.Request.UserHostAddress).Add("Row Count", dt.Rows.Count & " Records"))
 
                     If KioskId > 0 Then
                         UpdateKioskLastSyncTime(KioskId)
@@ -1551,13 +1651,15 @@ Public Class ATBLockerWebService
                 Else
                     sTrans.RollbackTransaction()
                     ret = "false|" & sRet.ErrorMessage
-                    Engine.LogFileENG.CreateServerErrorLogAgent(ret)
+                    'Engine.LogFileENG.CreateServerErrorLogAgent(ret)
+                    Logger.Error(_logMsg.Clear().SetPrefixMsg(ret))
                 End If
             End If
             dt.Dispose()
         Catch ex As Exception
             ret = "false|Exception " & ex.Message
-            Engine.LogFileENG.CreateServerExceptionLogAgent(ex.Message, ex.StackTrace)
+            'Engine.LogFileENG.CreateServerExceptionLogAgent(ex.Message, ex.StackTrace)
+            Logger.ErrorFormat("Exception " & Environment.NewLine & "{0}" & Environment.NewLine & "{1}" & Environment.NewLine & "{2}", "IP=" & HttpContext.Current.Request.UserHostAddress, ex.Message, ex.StackTrace)
         End Try
         Return ret
     End Function
@@ -1566,7 +1668,8 @@ Public Class ATBLockerWebService
     Public Function SyncLogKioskAgentData(dt As DataTable, KioskName As String) As String
         Dim ret As String = "false"
         Try
-            Engine.LogFileENG.CreateServerLogAgent("SyncLogKioskAgentData from " & KioskName & " " & dt.Rows.Count & " Records")
+            'Engine.LogFileENG.CreateServerLogAgent("SyncLogKioskAgentData from " & KioskName & " " & dt.Rows.Count & " Records")
+            Logger.Info(_logMsg.Clear().Add("KioskName", KioskName).Add("IP", HttpContext.Current.Request.UserHostAddress).Add("Row Count", dt.Rows.Count & " Records"))
             If dt.Rows.Count > 0 Then
                 Dim sTrans As New ServerTransactionDB
                 Dim sRet As New ExecuteDataInfo
@@ -1591,7 +1694,8 @@ Public Class ATBLockerWebService
                 If sRet.IsSuccess = True Then
                     sTrans.CommitTransaction()
                     ret = "true"
-                    Engine.LogFileENG.CreateServerLogAgent("SyncLogKioskAgentData from " & KioskName & " Success " & dt.Rows.Count & " Records")
+                    'Engine.LogFileENG.CreateServerLogAgent("SyncLogKioskAgentData from " & KioskName & " Success " & dt.Rows.Count & " Records")
+                    Logger.Info(_logMsg.Clear().Add("KioskName", KioskName).Add("IP", HttpContext.Current.Request.UserHostAddress).Add("Row Count", dt.Rows.Count & " Records"))
 
                     If KioskId > 0 Then
                         UpdateKioskLastSyncTime(KioskId)
@@ -1599,13 +1703,15 @@ Public Class ATBLockerWebService
                 Else
                     sTrans.RollbackTransaction()
                     ret = "false|" & sRet.ErrorMessage
-                    Engine.LogFileENG.CreateServerErrorLogAgent(ret)
+                    'Engine.LogFileENG.CreateServerErrorLogAgent(ret)
+                    Logger.Error(_logMsg.Clear().SetPrefixMsg(ret))
                 End If
             End If
             dt.Dispose()
         Catch ex As Exception
             ret = "false|Exception " & ex.Message
-            Engine.LogFileENG.CreateServerExceptionLogAgent(ex.Message, ex.StackTrace)
+            'Engine.LogFileENG.CreateServerExceptionLogAgent(ex.Message, ex.StackTrace)
+            Logger.ErrorFormat("Exception " & Environment.NewLine & "{0}" & Environment.NewLine & "{1}" & Environment.NewLine & "{2}", "IP=" & HttpContext.Current.Request.UserHostAddress, ex.Message, ex.StackTrace)
         End Try
         Return ret
     End Function
@@ -1628,11 +1734,13 @@ Public Class ATBLockerWebService
                 trans.CommitTransaction()
             Else
                 trans.RollbackTransaction()
-                Engine.LogFileENG.CreateServerErrorLogAgent(re.ErrorMessage)
+                'Engine.LogFileENG.CreateServerErrorLogAgent(re.ErrorMessage)
+                Logger.Error(_logMsg.Clear().SetPrefixMsg(re.ErrorMessage))
             End If
 
         Catch ex As Exception
-            Engine.LogFileENG.CreateServerExceptionLogAgent(ex.Message, ex.StackTrace)
+            'Engine.LogFileENG.CreateServerExceptionLogAgent(ex.Message, ex.StackTrace)
+            Logger.ErrorFormat("Exception " & Environment.NewLine & "{0}" & Environment.NewLine & "{1}" & Environment.NewLine & "{2}", "IP=" & HttpContext.Current.Request.UserHostAddress, ex.Message, ex.StackTrace)
         End Try
     End Sub
 
