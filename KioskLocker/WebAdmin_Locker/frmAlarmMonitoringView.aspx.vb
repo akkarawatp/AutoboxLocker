@@ -52,10 +52,10 @@ Public Class frmAlarmMonitoringView
 
         End If
         BindKiosk()
-        BindHardware()
         BindPeripheral()
         BindStock()
         BindLockerInformation()
+        BindComUsageInfo()
     End Sub
 
     Private Sub initFormPlugin()
@@ -78,7 +78,7 @@ Public Class frmAlarmMonitoringView
         End If
     End Sub
 
-    Private Sub BindHardware()
+    Private Sub BindComUsageInfo()
 
         Dim DT As DataTable = BL.Alarm_Overview(KO_ID, UserName) '= BL.vw_Hardware_Condition(KO_ID)
         Dim animate As Integer = 1
@@ -122,7 +122,7 @@ Public Class frmAlarmMonitoringView
 #Region "Peripheral"
     Private Sub BindPeripheral()
         Dim DT As DataTable = BL.GetList_Kiosk_Device_Existing(KO_ID, "Y")
-        DT.DefaultView.RowFilter = "ms_device_type_id in (1,2,3,4,5) AND (Max_Qty IS NOT NULL OR Warning_Qty IS NOT NULL OR Critical_Qty IS NOT NULL)"
+        DT.DefaultView.RowFilter = "ms_device_type_id in (1,2,3,4,5, 6, 8,9,10,11)"
         DT = DT.DefaultView.ToTable
         rptDevice.DataSource = DT
         rptDevice.DataBind()
@@ -193,31 +193,29 @@ Public Class frmAlarmMonitoringView
     Private Sub rpt_ItemDataBound(sender As Object, e As RepeaterItemEventArgs) Handles rptMoney.ItemDataBound, rptPrinter.ItemDataBound
         If e.Item.ItemType <> ListItemType.Item And e.Item.ItemType <> ListItemType.AlternatingItem Then Exit Sub
 
-        Dim divAll As HtmlGenericControl = e.Item.FindControl("divAll")
+        'Dim divAll As HtmlGenericControl = e.Item.FindControl("divAll")
         Dim divContainer As HtmlGenericControl = e.Item.FindControl("divContainer")
         Dim lblName As Label = e.Item.FindControl("lblName")
         Dim lblLevel As Label = e.Item.FindControl("lblLevel")
         Dim progress As HtmlGenericControl = e.Item.FindControl("progress")
 
-        Dim rpt As Repeater = sender
-        Dim DT As DataTable = rpt.DataSource
+        'Dim rpt As Repeater = sender
+        'Dim DT As DataTable = rpt.DataSource
 
-        Select Case True
-            Case DT.Rows.Count = 1
-                divAll.Attributes("class") = "col-sm-12"
-            Case DT.Rows.Count = 3
-                divAll.Attributes("class") = "col-sm-4"
-            Case Else
-                divAll.Attributes("class") = "col-sm-6"
-        End Select
+        'Select Case True
+        '    Case DT.Rows.Count = 1
+        '        divAll.Attributes("class") = "col-sm-12"
+        '    Case DT.Rows.Count = 3
+        '        divAll.Attributes("class") = "col-sm-4"
+        '    Case Else
+        '        divAll.Attributes("class") = "col-sm-6"
+        'End Select
         '---------------- Control Level----------------
         Dim Max_Qty As Integer = e.Item.DataItem("Max_Qty")
         Dim Warning_Qty As Integer = e.Item.DataItem("Warning_Qty")
         Dim Critical_Qty As Integer = e.Item.DataItem("Critical_Qty")
         Dim Current_Qty As Integer = 0
         If Not IsDBNull(e.Item.DataItem("Current_Qty")) Then Current_Qty = e.Item.DataItem("Current_Qty")
-
-
         lblName.Text = e.Item.DataItem("device_name_en").ToString
 
         '--------------- Set Control Level -----------------------

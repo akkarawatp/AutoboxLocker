@@ -87,7 +87,7 @@
                 <asp:Repeater ID="rptDevice" runat="server">
                     <ItemTemplate>
 
-                        <span class="btn-success col-sm-6 h7 text-left" title="Coin In" id="spanDevice" runat="Server">
+                        <span class="btn-success col-sm-6 h7 text-left" style="padding-top:2px;padding-bottom:2px" title="Coin In" id="spanDevice" runat="Server">
                             <asp:Image ID="iconDevice" runat="server" Width="30px" />
                             <asp:Label ID="lblDeviceName" runat="Server"></asp:Label>
                             <asp:Image ID="imgWarning" runat="server" CssClass="pull-right h-6" ImageUrl="~/images/warning.gif" Style="position: relative; width: 20px;" />
@@ -99,13 +99,13 @@
         </div>
 
         <div class="col-md-6 ">
-            <div class="row col-sm-6 m-a-0 text-uppercase bold mobile_group_head m-b h4" >
+            <div class="row col-sm-12 m-a-0 text-uppercase bold mobile_group_head m-b h4" >
                 Money Stock
             </div>
 
             <asp:Repeater ID="rptMoney" runat="server">
                 <ItemTemplate>
-                    <div class="col-sm-6" id="divAll" runat="server">
+                    <div class="col-sm-12" >
                         <div class="row m-a-0 text-success" id="divContainer" runat="server">
                             <i class="fa fa-circle"></i>
                             <asp:Label ID="lblName" runat="server"></asp:Label>
@@ -127,7 +127,7 @@
 
             <asp:Repeater ID="rptPrinter" runat="server">
                 <ItemTemplate>
-                    <div class="col-sm-6" id="divAll" runat="server">
+                    <div class="col-sm-12" >
                         <div class="row m-a-0 text-success" id="divContainer" runat="server">
                             <i class="fa fa-circle"></i>
                             <asp:Label ID="lblName" runat="server"></asp:Label>

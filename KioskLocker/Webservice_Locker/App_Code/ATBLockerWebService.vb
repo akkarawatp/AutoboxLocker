@@ -400,13 +400,15 @@ Public Class ATBLockerWebService
     Public Function GetMasterNotUsePincode() As DataTable
         Dim dt As DataTable
         Try
-            Engine.LogFileENG.CreateServerLogAgent("GetMasterNotUsePincode from " & HttpContext.Current.Request.UserHostAddress)
+            'Engine.LogFileENG.CreateServerLogAgent("GetMasterNotUsePincode from " & HttpContext.Current.Request.UserHostAddress)
+            Logger.Info(_logMsg.Clear().Add("Request from", HttpContext.Current.Request.UserHostAddress))
 
             Dim lnq As New MsNotUsePincodeServerLinqDB
             dt = lnq.GetDataList("", "", Nothing, Nothing)
             lnq = Nothing
         Catch ex As Exception
             dt = New DataTable
+            Logger.ErrorFormat("Exception " & Environment.NewLine & "{0}" & Environment.NewLine & "{1}" & Environment.NewLine & "{2}", "IP=" & HttpContext.Current.Request.UserHostAddress, ex.Message, ex.StackTrace)
         End Try
 
         dt.TableName = "GetMasterNotUsePincode"
