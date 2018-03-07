@@ -78,7 +78,6 @@ Public Class frmDepositPrintQRCode
 
             AddHandler p.PrintPage, AddressOf p_PrintPage
             p.DefaultPageSettings.Margins = New Margins(0, 0, 0, 0)
-
             p.Print()
 
             UpdateKioskCurrentQty(Data.ConstantsData.DeviceID.Printer, -1, 0, False)
@@ -97,138 +96,66 @@ Public Class frmDepositPrintQRCode
         Dim fn10b As New Font("Calibri", 9.5, FontStyle.Bold)
         Dim fn15b As New Font("Calibri", 15, FontStyle.Bold)
 
-        'Dim imgLogo As Image = Image.FromFile("SlipLogo.bmp")
         Dim imgLogo As Image = Image.FromFile("SlipLogo.png")
-        Dim txtLine As String = "----------------------------------------------------"
-
-        PrintImage(imgLogo, Align.Center, e)
-        PrintText(" ", fn5, Align.Left, e)
+        PrintImage(imgLogo, Align.Center, e, 0)
 
         Dim DepositTime As String = Deposit.PaidTime.ToString("dd-MMM-yy, HH:mm", New Globalization.CultureInfo("en-US"))
-        PrintText("Transaction No : " & Deposit.DepositTransNo, fn8, Align.Center, e)
-        'PrintText(Deposit.DepositTransNo & " ", fn8, Align.Right, e)
-
-        PrintText("Box Number : " & Deposit.LockerName, fn15b, Align.Center, e)
-        'PrintText(Deposit.LockerName & " ", fn15b, Align.Right, e)
-
-        PrintText("Location : " & KioskConfig.LocationName, fn8, Align.Center, e)
-        'PrintText(KioskConfig.LocationName & " ", fn8, Align.Right, e)
-
-        PrintText("Date & Time : " & DepositTime.ToUpper, fn8, Align.Center, e)
-        'PrintText(DepositTime.ToUpper & " ", fn8, Align.Right, e)
-
-        PrintText(txtLine, fn10b, Align.Center, e)
-
-        'Print Barcode
-        'Dim BarCodeImg As Image = GenerateBarcodeImage(Deposit.DepositTransactionID & Deposit.DepositTransNo & "ID" & Deposit.DepositTransactionID.ToString.Length)
-        'PrintImage(BarCodeImg, Align.Center, e)
-
-        'Dim BarcodeText As String = Deposit.DepositTransactionID & Deposit.DepositTransNo & "ID" & Deposit.DepositTransactionID.ToString.Length
-        'PrintText(BarcodeText, GetFrontIDAutomation3of9(6, FontStyle.Regular), Align.Center, e)
+        PrintText(DepositTime.ToUpper, fn8, Align.Center, e, 50)
+        PrintText(Deposit.LockerName, fn15b, Align.Center, e, 65)
+        PrintText(KioskConfig.LocationName, fn8, Align.Center, e, 90)
 
         Dim qrCode As String = GenerateQRCode()
         If qrCode.Trim <> "" Then
-            PrintImage(Image.FromFile(qrCode), Align.Center, e)
+            PrintImage(Image.FromFile(qrCode), Align.Center, e, 100)
         End If
-        PrintText(" ", fn5, Align.Left, e)
 
-        'วาดกรอบให้กับ 2 บรรทัดข้างล่างนี้
-        Dim borderTop As Integer = _lastPrintY - 2
-        PrintText("Use this slip to take back your luggage", fn7b, Align.Center, e)
-        PrintText("Warning : This barode can be used only 1 time", fn7b, Align.Center, e)
-        Dim borderH As Integer = (_lastPrintY + 2 - borderTop)
-        PrintRectankle(0, borderTop, borderH, e)
-        PrintText(" ", fn5, Align.Left, e)
+        PrintText("Use this slip to take back your luggage", fn7b, Align.Center, e, 290)
+        PrintText("Warning : This barode can be used only 1 time", fn7b, Align.Center, e, 300)
 
-        'PrintText("In case of lost QR code and cannot open your locker", fn8, Align.Center, e)
-        'PrintText("500 THB will be fined on top of your storage costs.", fn8, Align.Center, e)
-        'PrintText(txtLine, fn10b, Align.Center, e)
-
-        PrintText("For any help, please contact our service center", fn7, Align.Center, e)
-        PrintText("Tel. " & KioskConfig.ContactCenterTelno & " (in service time)", fn7, Align.Center, e)
-        PrintText("Thank you for using our service", fn8b, Align.Center, e)
+        PrintText("For any help, please contact our service center", fn7, Align.Center, e, 320)
+        PrintText("Tel. " & KioskConfig.ContactCenterTelno & " (in service time)", fn7, Align.Center, e, 330)
+        PrintText("Thank you for using our service", fn8b, Align.Center, e, 340)
         e.HasMorePages = False
     End Sub
 
-    Dim _lastPrintY As Integer = 0
-    Protected ReadOnly Property lastPrintY() As Integer
-        Get
-            Return _lastPrintY
-        End Get
-    End Property
-
-    Protected Sub PrintRectankle(PosX As Integer, PosY As Integer, h As Integer, ByRef e As System.Drawing.Printing.PrintPageEventArgs)
-
+    Protected Sub PrintText(ByVal txt As String, ByVal fnt As System.Drawing.Font, ByRef e As System.Drawing.Printing.PrintPageEventArgs, x As Integer, y As Integer)
+        Dim w As Integer = e.Graphics.MeasureString(txt, fnt).Width
+        Dim h As Integer = e.Graphics.MeasureString(txt, fnt).Height
         Dim brsh As New System.Drawing.SolidBrush(System.Drawing.Color.FromArgb(0, 0, 0))
-        Dim vPen As New Pen(brsh)
-        Dim vRect As New Rectangle(PosX, PosY, e.PageSettings.PrintableArea.Width - 1, h)
-
-        e.Graphics.DrawRectangle(vPen, vRect)
+        e.Graphics.DrawString(txt, fnt, brsh, x, y)
     End Sub
-
-    Protected Sub PrintText(ByVal txt As String, ByVal fnt As System.Drawing.Font, ByVal align As Align, ByRef e As System.Drawing.Printing.PrintPageEventArgs, Optional AddNewLine As Boolean = True)
+    Protected Sub PrintText(ByVal txt As String, ByVal fnt As System.Drawing.Font, ByVal align As Align, ByRef e As System.Drawing.Printing.PrintPageEventArgs, y As Integer)
         Dim w As Integer = e.Graphics.MeasureString(txt, fnt).Width
         Dim h As Integer = e.Graphics.MeasureString(txt, fnt).Height
         Dim x As Integer = 0
-        Dim y As Integer = 0
         Dim brsh As New System.Drawing.SolidBrush(System.Drawing.Color.FromArgb(0, 0, 0))
         Select Case align
             Case 0 'Default, LEFT
                 x = e.PageSettings.PrintableArea.Left
-                y = e.PageSettings.PrintableArea.Top + lastPrintY
             Case 1 'CENTER
                 x = e.PageSettings.PrintableArea.Width / 2 - w / 2
-                y = e.PageSettings.PrintableArea.Top + lastPrintY
             Case 2 'RIGHT
                 x = e.PageSettings.PrintableArea.Right - w
-                y = e.PageSettings.PrintableArea.Top + lastPrintY
         End Select
         e.Graphics.DrawString(txt, fnt, brsh, x, y)
-        If AddNewLine = True Then
-            _lastPrintY = y + h
-        End If
-
     End Sub
 
-    'Protected Sub PrintBarcodeText(ByVal BarcodeText As String, ByVal fnt As System.Drawing.Font, ByRef e As System.Drawing.Printing.PrintPageEventArgs, Optional AddNewLine As Boolean = True)
-    '    Dim w As Integer = e.Graphics.MeasureString(BarcodeText, fnt).Width
-    '    Dim h As Integer = e.Graphics.MeasureString(BarcodeText, fnt).Height
-    '    Dim x As Integer = 0
-    '    Dim y As Integer = 0
-    '    Dim brsh As New System.Drawing.SolidBrush(System.Drawing.Color.FromArgb(0, 0, 0))
-
-    '    Dim RotateDx As Integer = 80
-    '    x = e.PageSettings.PrintableArea.Width / 2 - w / 2
-    '    y = e.PageSettings.PrintableArea.Top + lastPrintY
-    '    e.Graphics.TranslateTransform(RotateDx, RotateDx)
-    '    e.Graphics.RotateTransform(90)
-    '    e.Graphics.DrawString(BarcodeText, fnt, brsh, x, y)
-    '    If AddNewLine = True Then
-    '        _lastPrintY = y + h + RotateDx
-    '    End If
-
-    'End Sub
-
-    Protected Sub PrintImage(ByVal img As System.Drawing.Image, ByVal align As Int16, ByRef e As System.Drawing.Printing.PrintPageEventArgs)
+    Protected Sub PrintImage(ByVal img As System.Drawing.Image, ByVal align As Align, ByRef e As System.Drawing.Printing.PrintPageEventArgs, y As Integer)
         Dim w As Integer = img.Width
         Dim h As Integer = img.Height
         Dim x As Integer = 0
-        Dim y As Integer = 0
         Select Case align
             Case 0 'Default, LEFT
                 x = e.PageSettings.PrintableArea.Left
-                y = e.PageSettings.PrintableArea.Top + lastPrintY
             Case 1 'CENTER
                 x = e.PageSettings.PrintableArea.Width / 2 - w / 2
-                y = e.PageSettings.PrintableArea.Top + lastPrintY
             Case 2 'RIGHT
                 x = e.PageSettings.PrintableArea.Right - w
-                y = e.PageSettings.PrintableArea.Top + lastPrintY
         End Select
         e.Graphics.DrawImage(img, x, y)
-        _lastPrintY = y + h
         img.Dispose()
     End Sub
+
 
     Protected Enum Align As Short
         Left = 0
@@ -236,24 +163,6 @@ Public Class frmDepositPrintQRCode
         Right = 2
     End Enum
 #End Region
-
-    '#Region "Generate Barcode Image"
-    '    Private Function GenerateBarcodeImage(BarcodeText As String, ByRef e As System.Drawing.Printing.PrintPageEventArgs) As Image
-    '        Dim font As Font = GetFrontIDAutomation3of9(8, FontStyle.Regular)
-    '        Dim width As Integer = CInt(e.Graphics.MeasureString(BarcodeText, font).Width)
-    '        Dim height As Integer = CInt(e.Graphics.MeasureString(BarcodeText, font).Height)
-    '        Dim bitmap = New Bitmap(width + 3, height)
-    '        Dim graphics As Graphics = Graphics.FromImage(bitmap)
-    '        graphics.Clear(Color.White)
-    '        graphics.SmoothingMode = SmoothingMode.HighQuality
-    '        graphics.TextRenderingHint = Drawing.Text.TextRenderingHint.AntiAlias
-    '        graphics.DrawString(BarcodeText, font, New SolidBrush(Color.FromArgb(255, 255, 255)), 0, 0)
-    '        graphics.Flush()
-    '        graphics.Dispose()
-    '        bitmap.RotateFlip(RotateFlipType.Rotate90FlipNone)
-    '        Return bitmap
-    '    End Function
-    '#End Region
 
 #Region "Generate QR Code"
     Private Function GenerateQRCode() As String

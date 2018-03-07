@@ -8,185 +8,89 @@ Imports System.Drawing.Text
 Public Class PrinterTestDevice
 
     Dim Printer As New PrinterClass
-    'Dim FontIDAutomation As System.Drawing.Text.PrivateFontCollection
 
     Private Sub CashInTestDevice_FormClosed(sender As Object, e As System.Windows.Forms.FormClosedEventArgs) Handles Me.FormClosed
         sp.Close()
         Me.DialogResult = DialogResult.OK
     End Sub
 
-    'Private Sub FormTestDevice_Shown(sender As Object, e As System.EventArgs) Handles Me.Shown
-    '    lblPrinterName.Focus()
-    '    CheckStatusPrinter()
-
-    '    FontIDAutomation = LoadFont(My.Resources.IDAutomationHC39M_Free, FontIDAutomation)
-    'End Sub
-
-    'Public Function LoadFont(FontResources() As Byte, _pfc As PrivateFontCollection) As PrivateFontCollection
-    '    Try
-    '        If _pfc Is Nothing Then _pfc = New PrivateFontCollection
-    '        ''INIT THE FONT COLLECTION
-    '        'LOAD MEMORY POINTER FOR FONT RESOURCE
-    '        Dim fontMemPointer As IntPtr = Marshal.AllocCoTaskMem(FontResources.Length)
-    '        'COPY THE DATA TO THE MEMORY LOCATION
-    '        Marshal.Copy(FontResources, 0, fontMemPointer, FontResources.Length)
-    '        'LOAD THE MEMORY FONT INTO THE PRIVATE FONT COLLECTION
-    '        _pfc.AddMemoryFont(fontMemPointer, FontResources.Length)
-    '        'FREE UNSAFE MEMORY
-    '        Marshal.FreeCoTaskMem(fontMemPointer)
-    '    Catch ex As Exception
-    '        'ERROR LOADING FONT. HANDLE EXCEPTION HERE
-    '        _pfc = New PrivateFontCollection
-    '    End Try
-    '    Return _pfc
-    'End Function
-
     Private Sub btnPrint_Click(sender As System.Object, e As System.EventArgs) Handles btnPrint.Click
-        ' Printer.PrintConfirmationSlipNewSim(lblPrinterName.Text, "AUTOBOX", "AUTOBOX", "49", "150", "100", "0897682500", "000", "001")
-
-        'PrintSlip(lblPrinterName.Text, "00120160521163218", "M01", "Airport Rail link Suvanabhumi Airport")
-        _lastPrintY = 0
         Dim p As New PrintDocument
         p.PrintController = New Printing.StandardPrintController
         p.PrinterSettings.PrinterName = lblPrinterName.Text
 
         Dim mgn As New Margins(0, 0, 0, 0)
         p.DefaultPageSettings.Margins = mgn
-        'Dim pkCustomSize1 As New PaperSize("Custom Paper Size", 100, 50)
-        'p.DefaultPageSettings.PaperSize = pkCustomSize1
         AddHandler p.PrintPage, AddressOf p_PrintPage
         p.Print()
     End Sub
 
-    'Private ReadOnly Property GetFrontIDAutomation3of9(ByVal Size As Single, ByVal style As FontStyle) As Font
-    '    Get
-    '        Return New Font(FontIDAutomation.Families(0), Size, style)
-    '    End Get
-
-    'End Property
-
     Private Sub p_PrintPage(sender As System.Object, e As System.Drawing.Printing.PrintPageEventArgs)
-        Dim fn10 As New Font("Calibri", 10, FontStyle.Regular)
-        Dim fn10B As New Font("Calibri", 10, FontStyle.Bold)
-        Dim fn11b As New Font("Calibri", 11, FontStyle.Bold)
-        Dim fn16b As New Font("Calibri", 16, FontStyle.Bold)
+        Dim fn5 As New Font("Calibri", 5, FontStyle.Regular)
+        Dim fn7 As New Font("Calibri", 7, FontStyle.Regular)
+        Dim fn7b As New Font("Calibri", 7, FontStyle.Bold)
+        Dim fn8 As New Font("Calibri", 8, FontStyle.Regular)
+        Dim fn8b As New Font("Calibri", 8, FontStyle.Bold)
+        Dim fn10b As New Font("Calibri", 9.5, FontStyle.Bold)
+        Dim fn15b As New Font("Calibri", 15, FontStyle.Bold)
 
-        'e.PageSettings.PaperSize.Width = 80
-        'e.PageSettings.Margins.Left = 0
-        'e.PageSettings.Margins.Right = 0
+        Dim imgLogo As Image = Image.FromFile("SlipLogo.png")
+        PrintImage(Image.FromFile("SlipLogo.png"), Align.Center, e, 0)
 
-
-        'Dim imgLogo As Image = Image.FromFile("SlipLogo.bmp")
-        PrintImage(Image.FromFile("SlipLogo.png"), Align.Center, e)
-        PrintText("Transaction No : 00120160521163218", fn10, Align.Left, e)
-        PrintText("Box Number : M01", fn16b, Align.Center, e)
-        PrintText("Location : Pattaya", fn10, Align.Left, e)
-
-        'Dim BarcodeText As String = "123400120160521163218ID4"
-        'PrintText(BarcodeText, GetFrontIDAutomation3of9(8, FontStyle.Regular), Align.Center, e)
-        'PrintBarcodeVertical(e.Graphics, 90, BarcodeText, GetFrontIDAutomation3of9(10, FontStyle.Regular), e)
-        'PrintImage(GenerateBarcodeImage(BarcodeText, e), Align.Center, e)
+        Dim DepositTime As String = DateTime.Now.ToString("dd-MMM-yy, HH:mm", New Globalization.CultureInfo("en-US"))
+        PrintText(DepositTime.ToUpper, fn8, Align.Center, e, 50)
+        PrintText("M01", fn15b, Align.Center, e, 65)
+        PrintText("West Bus 02", fn8, Align.Center, e, 90)
 
         Dim qrCode As String = GenerateQRCode()
         If qrCode.Trim <> "" Then
-            PrintImage(Image.FromFile(qrCode), Align.Center, e)
+            PrintImage(Image.FromFile(qrCode), Align.Center, e, 100)
         End If
+        PrintText("Use this slip to take back your luggage", fn7b, Align.Center, e, 290)
+        PrintText("Warning : This barode can be used only 1 time", fn7b, Align.Center, e, 300)
 
-        PrintText(" ", fn10, Align.Left, e)
-        Dim borderTop As Integer = _lastPrintY - 2
-        PrintText("Use this QR-code to collect your luggage", fn10B, Align.Center, e)
-        PrintText("Warning : This QR-Code can be used only 1 time", fn10B, Align.Center, e)
-
-        Dim borderH As Integer = (_lastPrintY + 2 - borderTop)
-        PrintRectankle(0, borderTop, borderH, e)
-
-        'PrintText("In case of lost QR code and cannot open your locker", fn10, Align.Center, e)
+        PrintText("For any help, please contact our service center", fn7, Align.Center, e, 320)
+        PrintText("Tel. 089XXXXXXX (in service time)", fn7, Align.Center, e, 330)
+        PrintText("Thank you for using our service", fn8b, Align.Center, e, 340)
         e.HasMorePages = False
     End Sub
 
-
-
-
 #Region "Print With PrintDocument"
-
-    Dim _lastPrintY As Integer = 0
-    Protected ReadOnly Property lastPrintY() As Integer
-        Get
-            Return _lastPrintY
-        End Get
-    End Property
-
-    Protected Sub PrintRectankle(PosX As Integer, PosY As Integer, h As Integer, ByRef e As System.Drawing.Printing.PrintPageEventArgs)
-
+    Protected Sub PrintText(ByVal txt As String, ByVal fnt As System.Drawing.Font, ByRef e As System.Drawing.Printing.PrintPageEventArgs, x As Integer, y As Integer)
+        Dim w As Integer = e.Graphics.MeasureString(txt, fnt).Width
+        Dim h As Integer = e.Graphics.MeasureString(txt, fnt).Height
         Dim brsh As New System.Drawing.SolidBrush(System.Drawing.Color.FromArgb(0, 0, 0))
-        Dim vPen As New Pen(brsh)
-        Dim vRect As New Rectangle(PosX, PosY, e.PageSettings.PrintableArea.Width - 1, h)
-
-        e.Graphics.DrawRectangle(vPen, vRect)
+        e.Graphics.DrawString(txt, fnt, brsh, x, y)
     End Sub
-
-    Protected Sub PrintBarcodeVertical(gr As Graphics, angle As Double, ByVal txt As String, ByVal fnt As System.Drawing.Font, ByRef e As System.Drawing.Printing.PrintPageEventArgs)
+    Protected Sub PrintText(ByVal txt As String, ByVal fnt As System.Drawing.Font, ByVal align As Align, ByRef e As System.Drawing.Printing.PrintPageEventArgs, y As Integer)
         Dim w As Integer = e.Graphics.MeasureString(txt, fnt).Width
         Dim h As Integer = e.Graphics.MeasureString(txt, fnt).Height
         Dim x As Integer = 0
-        Dim y As Integer = 0
-        x = e.PageSettings.PrintableArea.Width / 2 - h / 2
-        y = e.PageSettings.PrintableArea.Top + lastPrintY
-
-        Dim state As GraphicsState = gr.Save
-        gr.ResetTransform()
-
-        gr.RotateTransform(angle)
-
-        gr.TranslateTransform(x, y, MatrixOrder.Append)
-
-        Dim brsh As New System.Drawing.SolidBrush(System.Drawing.Color.FromArgb(0, 0, 0))
-        gr.DrawString(txt, fnt, brsh, 0, 0)
-
-        gr.Restore(state)
-        _lastPrintY = y + w + 5
-    End Sub
-
-    Protected Sub PrintText(ByVal txt As String, ByVal fnt As System.Drawing.Font, ByVal align As Align, ByRef e As System.Drawing.Printing.PrintPageEventArgs)
-        Dim w As Integer = e.Graphics.MeasureString(txt, fnt).Width
-        Dim h As Integer = e.Graphics.MeasureString(txt, fnt).Height
-        Dim x As Integer = 0
-        Dim y As Integer = 0
         Dim brsh As New System.Drawing.SolidBrush(System.Drawing.Color.FromArgb(0, 0, 0))
         Select Case align
             Case 0 'Default, LEFT
                 x = e.PageSettings.PrintableArea.Left
-                y = e.PageSettings.PrintableArea.Top + lastPrintY
             Case 1 'CENTER
                 x = e.PageSettings.PrintableArea.Width / 2 - w / 2
-                y = e.PageSettings.PrintableArea.Top + lastPrintY
             Case 2 'RIGHT
                 x = e.PageSettings.PrintableArea.Right - w
-                y = e.PageSettings.PrintableArea.Top + lastPrintY
         End Select
         e.Graphics.DrawString(txt, fnt, brsh, x, y)
-        'TextRenderer.DrawText(e.Graphics, txt, fnt, New Point(x, y), SystemColors.ControlText)
-        _lastPrintY = y + h
     End Sub
 
-    Protected Sub PrintImage(ByVal img As System.Drawing.Image, ByVal align As Int16, ByRef e As System.Drawing.Printing.PrintPageEventArgs)
+    Protected Sub PrintImage(ByVal img As System.Drawing.Image, ByVal align As Align, ByRef e As System.Drawing.Printing.PrintPageEventArgs, y As Integer)
         Dim w As Integer = img.Width
         Dim h As Integer = img.Height
         Dim x As Integer = 0
-        Dim y As Integer = 0
         Select Case align
             Case 0 'Default, LEFT
                 x = e.PageSettings.PrintableArea.Left
-                y = e.PageSettings.PrintableArea.Top + lastPrintY
             Case 1 'CENTER
                 x = e.PageSettings.PrintableArea.Width / 2 - w / 2
-                y = e.PageSettings.PrintableArea.Top + lastPrintY
             Case 2 'RIGHT
                 x = e.PageSettings.PrintableArea.Right - w
-                y = e.PageSettings.PrintableArea.Top + lastPrintY
         End Select
         e.Graphics.DrawImage(img, x, y)
-        _lastPrintY = y + h
         img.Dispose()
     End Sub
 
@@ -242,7 +146,7 @@ Public Class PrinterTestDevice
             grp.DrawImage(OriginalImage, New Rectangle(0, 0, CropRect.Width, CropRect.Height), CropRect, GraphicsUnit.Pixel)
             OriginalImage.Dispose()
 
-            crpImg = ResizeImage(crpImg, New Drawing.Size(200, 200))
+            crpImg = ResizeImage(crpImg, New Drawing.Size(180, 180))
             crpImg.Save(ret, Imaging.ImageFormat.Bmp)
         End Using
 
