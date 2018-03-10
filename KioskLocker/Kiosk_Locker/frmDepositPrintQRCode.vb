@@ -110,7 +110,7 @@ Public Class frmDepositPrintQRCode
         End If
 
         PrintText("Use this slip to take back your luggage", fn7b, Align.Center, e, 290)
-        PrintText("Warning : This barode can be used only 1 time", fn7b, Align.Center, e, 300)
+        PrintText("Warning : This QR Code can be used only 1 time", fn7b, Align.Center, e, 300)
 
         PrintText("For any help, please contact our service center", fn7, Align.Center, e, 320)
         PrintText("Tel. " & KioskConfig.ContactCenterTelno & " (in service time)", fn7, Align.Center, e, 330)
