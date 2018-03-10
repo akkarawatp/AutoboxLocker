@@ -408,18 +408,18 @@
         Dim LastDayOfWeek As Date = DateAdd(DateInterval.Day, 7 - (FirstDayOfWeek.DayOfWeek + 1), FirstDayOfWeek)
 
         For i As Integer = 1 To 5
-            If TxnDate >= FirstDayOfWeek And TxnDate <= LastDayOfWeek Then
+            If TxnDate.Date >= FirstDayOfWeek.Date And TxnDate.Date <= LastDayOfWeek.Date Then
                 Return FirstDayOfWeek
             End If
 
-            FirstDayOfWeek = DateAdd(DateInterval.Day, 7, FirstDayOfWeek)
+            FirstDayOfWeek = DateAdd(DateInterval.Day, 7, FirstDayOfWeek).Date
             If FirstDayOfWeek.DayOfWeek <> DayOfWeek.Sunday Then
-                FirstDayOfWeek = DateAdd(DateInterval.Day, 1, LastDayOfWeek)
+                FirstDayOfWeek = DateAdd(DateInterval.Day, 1, LastDayOfWeek).Date
             End If
 
-            LastDayOfWeek = DateAdd(DateInterval.Day, 7, LastDayOfWeek)
+            LastDayOfWeek = DateAdd(DateInterval.Day, 7, LastDayOfWeek).Date
             If LastDayOfWeek.Month <> DateTime.Now.Month Then
-                LastDayOfWeek = New Date(DateTime.Now.Year, DateTime.Now.Month, DateTime.DaysInMonth(DateTime.Now.Year, DateTime.Now.Month))
+                LastDayOfWeek = New Date(DateTime.Now.Year, DateTime.Now.Month, DateTime.DaysInMonth(DateTime.Now.Year, DateTime.Now.Month)).Date
             End If
         Next
     End Function
@@ -429,18 +429,18 @@
         Dim LastDayOfWeek As Date = DateAdd(DateInterval.Day, 7 - (FirstDayOfWeek.DayOfWeek + 1), FirstDayOfWeek)
 
         For i As Integer = 1 To 5
-            If TxnDate >= FirstDayOfWeek And TxnDate <= LastDayOfWeek Then
+            If TxnDate.Date >= FirstDayOfWeek.Date And TxnDate.Date <= LastDayOfWeek.Date Then
                 Return LastDayOfWeek
             End If
 
-            FirstDayOfWeek = DateAdd(DateInterval.Day, 7, FirstDayOfWeek)
+            FirstDayOfWeek = DateAdd(DateInterval.Day, 7, FirstDayOfWeek).Date
             If FirstDayOfWeek.DayOfWeek <> DayOfWeek.Sunday Then
-                FirstDayOfWeek = DateAdd(DateInterval.Day, 1, LastDayOfWeek)
+                FirstDayOfWeek = DateAdd(DateInterval.Day, 1, LastDayOfWeek).Date
             End If
 
-            LastDayOfWeek = DateAdd(DateInterval.Day, 7, LastDayOfWeek)
+            LastDayOfWeek = DateAdd(DateInterval.Day, 7, LastDayOfWeek).Date
             If LastDayOfWeek.Month <> DateTime.Now.Month Then
-                LastDayOfWeek = New Date(DateTime.Now.Year, DateTime.Now.Month, DateTime.DaysInMonth(DateTime.Now.Year, DateTime.Now.Month))
+                LastDayOfWeek = New Date(DateTime.Now.Year, DateTime.Now.Month, DateTime.DaysInMonth(DateTime.Now.Year, DateTime.Now.Month)).Date
             End If
         Next
     End Function
