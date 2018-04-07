@@ -230,6 +230,12 @@ Partial Class frmDashboardDetail
         p(0) = ServerLinqDB.ConnectDB.ServerDB.SetBigInt("@_LOCATION_ID", LocationID)
         'p(1) = ServerLinqDB.ConnectDB.ServerDB.SetText("@_USERNAME", UserName)
 
+        lblDailySales.Text = "-"
+        lblWeeklySales.Text = " - "
+        lblSalesValues.Text = " - "
+        lblMonthlySales.Text = " - "
+        lblYearlySales.Text = " - "
+
         Dim DT As DataTable = ServerLinqDB.ConnectDB.ServerDB.ExecuteTable(sql, p)
         If DT.Rows.Count > 0 Then
 
@@ -237,8 +243,6 @@ Partial Class frmDashboardDetail
             Obj = DT.Compute("SUM(NET_INCOME)", "wh_date='" & Now.ToString("yyyyMMdd", New Globalization.CultureInfo("en-US")) & "'")
             If Not IsDBNull(Obj) Then
                 lblDailySales.Text = FormatNumber(Obj, 0)
-            Else
-                lblDailySales.Text = "-"
             End If
 
             Dim StartWeek As String = Engine.ReportENG.GetFirstDayOfWeek(Now).ToString("yyyyMMdd", New Globalization.CultureInfo("en-US"))
@@ -247,9 +251,6 @@ Partial Class frmDashboardDetail
             If Not IsDBNull(Obj) Then
                 lblWeeklySales.Text = FormatNumber(Obj, 0)
                 lblSalesValues.Text = FormatNumber(Obj, 0)
-            Else
-                lblWeeklySales.Text = " - "
-                lblSalesValues.Text = " - "
             End If
 
             Dim StartMonth As String = Now.ToString("yyyyMM", New Globalization.CultureInfo("en-US")) & "01"
@@ -257,15 +258,11 @@ Partial Class frmDashboardDetail
             Obj = DT.Compute("SUM(NET_INCOME)", "wh_date>='" & StartMonth & "' AND wh_date<='" & EndMonth & "'")
             If Not IsDBNull(Obj) Then
                 lblMonthlySales.Text = FormatNumber(Obj, 0)
-            Else
-                lblMonthlySales.Text = " - "
             End If
 
             Obj = DT.Compute("SUM(NET_INCOME)", "")
             If Not IsDBNull(Obj) Then
                 lblYearlySales.Text = FormatNumber(Obj, 0)
-            Else
-                lblYearlySales.Text = " - "
             End If
         End If
         DT.Dispose()
